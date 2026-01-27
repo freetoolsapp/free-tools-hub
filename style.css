@@ -1,0 +1,174 @@
+/* QuickToolsHub Custom Styles */
+
+/* Category Button Styles */
+.category-btn.active {
+    background: linear-gradient(to right, #2563eb, #9333ea);
+    color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.category-btn:not(.active) {
+    background-color: #f3f4f6;
+    color: #374151;
+    transition: all 0.3s ease;
+}
+
+.category-btn:not(.active):hover {
+    background-color: #e5e7eb;
+    transform: translateY(-1px);
+}
+
+/* Tool Card Animations */
+.tool-card {
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-5px);
+}
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(to bottom, #2563eb, #9333ea);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(to bottom, #1d4ed8, #7e22ce);
+}
+
+/* Loading Animation */
+.loading {
+    animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Badge Styles */
+.badge-hot {
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.badge-new {
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.badge-popular {
+    background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .tool-card {
+        font-size: 0.875rem;
+    }
+    
+    .category-btn {
+        font-size: 0.75rem;
+        padding: 0.5rem 0.75rem;
+    }
+}
+
+/* Focus Styles for Accessibility */
+a:focus, button:focus, input:focus {
+    outline: 2px solid #2563eb;
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    header, footer, .category-btn {
+        display: none;
+    }
+}
+
+/* Hero Section Animation */
+.hero-gradient {
+    background: linear-gradient(-45deg, #2563eb, #9333ea, #ec4899, #2563eb);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* Card Hover Glow Effect */
+.tool-card:hover {
+    box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
+}
+
+/* Search Input Focus Effect */
+#searchTools:focus {
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+}
+
+/* Mobile Menu Animation */
+#mobileMenu {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Footer Link Hover Effect */
+footer a {
+    position: relative;
+}
+
+footer a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, #2563eb, #9333ea);
+    transition: width 0.3s ease;
+}
+
+footer a:hover::after {
+    width: 100%;
+}
+
+/* Performance Optimization */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Lazy Loading Support */
+img[loading="lazy"] {
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+img[loading="lazy"].loaded {
+    opacity: 1;
+}
