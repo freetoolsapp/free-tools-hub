@@ -1,11 +1,8 @@
-/* ===================================
-   Free Tools Hub - Complete Script
-   Version: 2.0
-   =================================== */
+// QuickToolsHub - Main JavaScript File
 
 // Global variables
 let allTools = [];
-let currentFilter = 'all';
+let currentCategory = 'all';
 
 // Load tools from JSON file
 async function loadTools() {
@@ -14,265 +11,214 @@ async function loadTools() {
         const data = await response.json();
         allTools = data.tools;
         renderTools();
-        console.log('✅ Tools loaded successfully:', allTools.length, 'tools');
     } catch (error) {
-        console.error('❌ Error loading tools:', error);
-        showError();
+        console.error('Error loading tools:', error);
+        // Fallback: show error message
+        document.getElementById('toolsGrid').innerHTML = `
+            <div class="col-span-full text-center py-12">
+                <i class="fas fa-exclamation-triangle text-red-500 text-4xl mb-4"></i>
+                <p class="text-gray-600 text-lg">Error loading tools. Please refresh the page.</p>
+            </div>
+        `;
     }
 }
 
 // Render tools to the grid
-function renderTools(toolsToRender = allTools) {
+function renderTools(tools = allTools) {
     const grid = document.getElementById('toolsGrid');
     
-    if (!grid) {
-        console.error('❌ toolsGrid element not found');
-        return;
-    }
-    
-    if (toolsToRender.length === 0) {
+    if (tools.length === 0) {
         grid.innerHTML = `
             <div class="col-span-full text-center py-12">
-                <i class="fas fa-search text-gray-400 text-6xl mb-4"></i>
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">No tools found</h3>
-                <p class="text-gray-500">Try a different search or category</p>
+                <i class="fas fa-search text-gray-400 text-4xl mb-4"></i>
+                <p class="text-gray-600 text-lg">No tools found matching your search.</p>
             </div>
         `;
         return;
     }
     
-    grid.innerHTML = toolsToRender.map(tool => {
-        const isComingSoon = tool.status === 'coming_soon';
-        const badgeColor = tool.badge === 'HOT' ? 'red' : 
-                          tool.badge === 'NEW' ? 'green' : 
-                          tool.badge === 'POPULAR' ? 'yellow' :
-                          tool.badge === 'COMING SOON' ? 'gray' : 'blue';
-        
-        return `
-            <div class="tool-card bg-white rounded-lg shadow hover:shadow-xl transition-all duration-300 p-6 border border-gray-200 ${isComingSoon ? 'opacity-75' : ''}" data-category="${tool.category}">
-                <div class="flex items-start justify-between mb-4">
-                    <div class="flex-1">
-                        <div class="flex items-center mb-2">
-                            <div class="w-12 h-12 bg-${tool.color}-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="${tool.fab ? 'fab' : 'fas'} ${tool.icon} text-${tool.color}-600 text-2xl"></i>
-                            </div>
-                            <h3 class="text-lg font-bold text-gray-800">${tool.name}</h3>
-                        </div>
-                        ${tool.description ? `<p class="text-sm text-gray-600 mb-3">${tool.description}</p>` : ''}
-                    </div>
-                    ${tool.badge ? `<span class="bg-${badgeColor}-500 text-white text-xs font-bold px-2 py-1 rounded whitespace-nowrap ml-2">${tool.badge}</span>` : ''}
-                </div>
-                
-                ${isComingSoon ? `
-                    <button disabled class="w-full bg-gray-400 text-white px-4 py-2 rounded-lg font-semibold cursor-not-allowed">
-                        <i class="fas fa-clock mr-2"></i>Coming Soon
-                    </button>
-                ` : `
-                    <a href="${tool.file || tool.url}" class="block w-full bg-gradient-to-r from-${tool.color}-600 to-${tool.color}-700 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition-all text-center">
-                        <i class="fas fa-arrow-right mr-2"></i>Use Tool
-                    </a>
-                `}
+    grid.innerHTML = tools.map(tool => `
+        <article class="tool-card bg-white rounded-lg shadow hover:shadow-xl transition p-4 border" data-category="${tool.category}">
+            <div class="flex items-start justify-between mb-3">
+                <h3 class="text-base font-bold text-gray-800 flex-1">
+                    <i class="${tool.fab ? 'fab' : 'fas'} ${tool.icon} text-${tool.color}-600 mr-2"></i>${tool.name}
+                </h3>
+                ${tool.badge ? `<span class="badge-${tool.badge.toLowerCase()} text-white text-xs font-bold px-2 py-1 rounded">${tool.badge}</span>` : ''}
             </div>
-        `;
-    }).join('');
-    
-    console.log('✅ Rendered', toolsToRender.length, 'tools');
+            ${tool.description ? `<p class="text-sm text-gray-600 mb-3">${tool.description}</p>` : ''}
+            <a href="${tool.url}" class="block bg-${tool.color}-600 text-white px-4 py-2 rounded-lg hover:bg-${tool.color}-700 transition text-center text-sm">
+                <i class="fas fa-arrow-right mr-1"></i>Use Tool
+            </a>
+        </article>
+    `).join('');
 }
 
 // Filter tools by category
 function filterTools(category) {
-    currentFilter = category;
+    currentCategory = category;
     
-    // Update button states
+    // Update active button
     const buttons = document.querySelectorAll('.category-btn');
     buttons.forEach(btn => {
         btn.classList.remove('active', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
         btn.classList.add('bg-gray-100', 'text-gray-700');
     });
     
-    // Add active class to clicked button
     event.target.classList.add('active', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
     event.target.classList.remove('bg-gray-100', 'text-gray-700');
     
     // Filter and render tools
-    const filtered = category === 'all' 
-        ? allTools 
-        : allTools.filter(tool => tool.category === category);
-    
-    renderTools(filtered);
+    if (category === 'all') {
+        renderTools(allTools);
+    } else {
+        const filtered = allTools.filter(tool => tool.category === category);
+        renderTools(filtered);
+    }
     
     // Scroll to tools section
-    document.getElementById('tools')?.scrollIntoView({ behavior: 'smooth' });
-    
-    console.log('✅ Filtered to category:', category, '-', filtered.length, 'tools');
+    document.getElementById('tools').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // Search functionality
-function initializeSearch() {
+function setupSearch() {
     const searchInput = document.getElementById('searchTools');
-    if (!searchInput) return;
     
     searchInput.addEventListener('input', function(e) {
         const searchTerm = e.target.value.toLowerCase().trim();
         
         if (searchTerm === '') {
-            // If search is empty, show filtered tools by current category
-            filterToolsByCategory(currentFilter);
+            // If search is empty, show current category
+            if (currentCategory === 'all') {
+                renderTools(allTools);
+            } else {
+                const filtered = allTools.filter(tool => tool.category === currentCategory);
+                renderTools(filtered);
+            }
             return;
         }
         
-        // Search in all tools
+        // Search in tool name, description, and category
         const searchResults = allTools.filter(tool => {
-            return tool.name.toLowerCase().includes(searchTerm) ||
-                   (tool.description && tool.description.toLowerCase().includes(searchTerm)) ||
-                   tool.category.toLowerCase().includes(searchTerm);
+            const name = tool.name.toLowerCase();
+            const description = tool.description ? tool.description.toLowerCase() : '';
+            const category = tool.category.toLowerCase();
+            
+            return name.includes(searchTerm) || 
+                   description.includes(searchTerm) || 
+                   category.includes(searchTerm);
         });
         
         renderTools(searchResults);
-        console.log('🔍 Search results for "' + searchTerm + '":', searchResults.length, 'tools');
     });
-}
-
-// Helper function to filter by category without updating UI
-function filterToolsByCategory(category) {
-    const filtered = category === 'all' 
-        ? allTools 
-        : allTools.filter(tool => tool.category === category);
-    renderTools(filtered);
 }
 
 // Mobile menu toggle
-function initializeMobileMenu() {
+function setupMobileMenu() {
     const mobileMenuBtn = document.getElementById('mobileMenuBtn');
     const mobileMenu = document.getElementById('mobileMenu');
     
-    if (mobileMenuBtn && mobileMenu) {
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            
-            // Change icon
-            const icon = mobileMenuBtn.querySelector('i');
-            if (mobileMenu.classList.contains('hidden')) {
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            } else {
-                icon.classList.remove('fa-bars');
-                icon.classList.add('fa-times');
-            }
-        });
-        
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
-    }
-}
-
-// Show error message
-function showError() {
-    const grid = document.getElementById('toolsGrid');
-    if (grid) {
-        grid.innerHTML = `
-            <div class="col-span-full text-center py-12">
-                <i class="fas fa-exclamation-triangle text-red-500 text-6xl mb-4"></i>
-                <h3 class="text-xl font-semibold text-gray-700 mb-2">Error Loading Tools</h3>
-                <p class="text-gray-500 mb-4">Unable to load tools. Please refresh the page.</p>
-                <button onclick="location.reload()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
-                    <i class="fas fa-redo mr-2"></i>Refresh Page
-                </button>
-            </div>
-        `;
-    }
-}
-
-// Smooth scrolling for anchor links
-function initializeSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
     });
-}
-
-// Add active class to navigation on scroll
-function initializeScrollSpy() {
-    window.addEventListener('scroll', () => {
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('nav a[href^="#"]');
-        
-        let current = '';
-        sections.forEach(section => {
-            const sectionTop = section.offsetTop;
-            const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - 200)) {
-                current = section.getAttribute('id');
-            }
-        });
-        
-        navLinks.forEach(link => {
-            link.classList.remove('text-blue-600');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('text-blue-600');
-            }
-        });
-    });
-}
-
-// Initialize everything when DOM is loaded
-document.addEventListener('DOMContentLoaded', function() {
-    console.log('🚀 Free Tools Hub initializing...');
     
-    // Load and display tools
-    loadTools();
-    
-    // Initialize features
-    initializeSearch();
-    initializeMobileMenu();
-    initializeSmoothScroll();
-    initializeScrollSpy();
-    
-    console.log('✅ Free Tools Hub loaded successfully!');
-});
-
-// Export functions for use in HTML onclick attributes
-window.filterTools = filterTools;
-
-// Add to top button (bonus feature)
-function addBackToTop() {
-    // Create button
-    const backToTop = document.createElement('button');
-    backToTop.innerHTML = '<i class="fas fa-arrow-up"></i>';
-    backToTop.className = 'fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50';
-    backToTop.id = 'backToTop';
-    backToTop.setAttribute('aria-label', 'Back to top');
-    document.body.appendChild(backToTop);
-    
-    // Show/hide based on scroll
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 300) {
-            backToTop.classList.remove('hidden');
-        } else {
-            backToTop.classList.add('hidden');
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+            mobileMenu.classList.add('hidden');
         }
     });
+}
+
+// Analytics tracking (optional - add your tracking code)
+function trackToolClick(toolName) {
+    // Add your analytics tracking code here
+    console.log('Tool clicked:', toolName);
     
-    // Scroll to top on click
-    backToTop.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+    // Example: Google Analytics
+    // if (typeof gtag !== 'undefined') {
+    //     gtag('event', 'tool_click', {
+    //         'event_category': 'Tools',
+    //         'event_label': toolName
+    //     });
+    // }
+}
+
+// Add click tracking to all tool links
+function setupAnalytics() {
+    document.addEventListener('click', (e) => {
+        const toolLink = e.target.closest('.tool-card a');
+        if (toolLink) {
+            const toolName = toolLink.closest('.tool-card').querySelector('h3').textContent.trim();
+            trackToolClick(toolName);
+        }
     });
 }
 
-// Initialize back to top button
-addBackToTop();
+// Lazy loading for images (if you add images later)
+function setupLazyLoading() {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.classList.add('loaded');
+                    observer.unobserve(img);
+                }
+            });
+        });
+        
+        images.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        images.forEach(img => {
+            img.src = img.dataset.src;
+            img.classList.add('loaded');
+        });
+    }
+}
+
+// Initialize performance monitoring
+function initPerformance() {
+    // Log page load time
+    window.addEventListener('load', () => {
+        const loadTime = window.performance.timing.domContentLoadedEventEnd - 
+                        window.performance.timing.navigationStart;
+        console.log('Page load time:', loadTime + 'ms');
+    });
+}
+
+// Service Worker registration (for PWA support)
+function registerServiceWorker() {
+    if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/sw.js')
+            .then(registration => {
+                console.log('Service Worker registered:', registration);
+            })
+            .catch(error => {
+                console.log('Service Worker registration failed:', error);
+            });
+    }
+}
+
+// Initialize all functionality when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadTools();
+    setupSearch();
+    setupMobileMenu();
+    setupAnalytics();
+    setupLazyLoading();
+    initPerformance();
+    // registerServiceWorker(); // Uncomment when you create sw.js
+});
+
+// Export functions for use in other scripts (if needed)
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = {
+        filterTools,
+        renderTools,
+        loadTools
+    };
+}
