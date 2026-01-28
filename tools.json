@@ -1,22 +1,7 @@
+
 {
   "tools": [
-    {
-      "name": "AI Content Writer",
-      "icon": "fa-pen-fancy",
-      "color": "blue",
-      "category": "ai",
-      "badge": "HOT",
-      "file": "tools/ai/content-writer.html",
-      "description": "Generate high-quality AI-powered content for blogs, articles, and social media posts"
-    },
-    {
-      "name": "Grammar Checker",
-      "icon": "fa-check-circle",
-      "color": "green",
-      "category": "ai",
-      "file": "tools/ai/grammar-checker.html",
-      "description": "Check and fix grammar, spelling, and punctuation errors instantly with AI"
-    },
+    
     {
       "name": "GPA Calculator",
       "icon": "fa-calculator",
