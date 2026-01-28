@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter - Free Online Character & Word Count Tool | Free Tools Hub</title>
+    <meta name="description" content="Free word counter tool. Count words, characters, sentences, paragraphs, and reading time. Perfect for essays, articles, and content writing. No signup required!">
+    <meta name="keywords" content="word counter, character counter, text counter, word count tool, character count, essay word counter, free word counter">
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-counter.html">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../style.css">
+</head>
+<body class="bg-gray-50">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>All Tools</a>
+                </nav>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block bg-white/20 px-4 py-1 rounded-full mb-4">
+                <i class="fas fa-fire text-yellow-300 mr-1"></i>
+                <span class="text-sm font-semibold">Most Popular Utility Tool</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-3">Word Counter</h1>
+            <p class="text-lg opacity-90">Count words, characters, sentences, paragraphs, and reading time instantly</p>
+        </div>
+    </section>
+
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-calculator text-blue-600 mr-2"></i>
+                        Count Your Text
+                    </h2>
+                    
+                    <textarea id="textInput" rows="12" 
+                        placeholder="Type or paste your text here to count words, characters, sentences..."
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"></textarea>
+                    
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-4 rounded-lg border-2 border-blue-200">
+                            <div class="text-3xl font-bold text-blue-600" id="wordCount">0</div>
+                            <div class="text-sm text-gray-600 mt-1"><i class="fas fa-font mr-1"></i>Words</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-4 rounded-lg border-2 border-purple-200">
+                            <div class="text-3xl font-bold text-purple-600" id="charCount">0</div>
+                            <div class="text-sm text-gray-600 mt-1"><i class="fas fa-text-width mr-1"></i>Characters</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-4 rounded-lg border-2 border-pink-200">
+                            <div class="text-3xl font-bold text-pink-600" id="sentenceCount">0</div>
+                            <div class="text-sm text-gray-600 mt-1"><i class="fas fa-align-left mr-1"></i>Sentences</div>
+                        </div>
+                        <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-4 rounded-lg border-2 border-teal-200">
+                            <div class="text-3xl font-bold text-teal-600" id="paragraphCount">0</div>
+                            <div class="text-sm text-gray-600 mt-1"><i class="fas fa-paragraph mr-1"></i>Paragraphs</div>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                            <div class="text-xl font-bold text-gray-700" id="readingTime">0 min</div>
+                            <div class="text-xs text-gray-600"><i class="fas fa-clock mr-1"></i>Reading Time</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                            <div class="text-xl font-bold text-gray-700" id="speakingTime">0 min</div>
+                            <div class="text-xs text-gray-600"><i class="fas fa-microphone mr-1"></i>Speaking Time</div>
+                        </div>
+                        <div class="bg-gray-50 p-3 rounded-lg border border-gray-200">
+                            <div class="text-xl font-bold text-gray-700" id="charNoSpace">0</div>
+                            <div class="text-xs text-gray-600"><i class="fas fa-eraser mr-1"></i>Chars (no spaces)</div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 mt-6">
+                        <button onclick="clearText()" class="flex-1 bg-red-600 text-white py-3 px-6 rounded-lg hover:bg-red-700 transition font-semibold">
+                            <i class="fas fa-trash mr-2"></i>Clear
+                        </button>
+                        <button onclick="copyText()" class="flex-1 bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition font-semibold">
+                            <i class="fas fa-copy mr-2"></i>Copy Text
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                        About Word Counter Tool
+                    </h3>
+                    <p class="text-gray-600 mb-4">Our free word counter tool helps you count words, characters, sentences, and paragraphs in real-time. Perfect for essays, articles, blog posts, academic papers, and any text content that requires word count tracking.</p>
+                    
+                    <h4 class="font-semibold text-gray-800 mb-2">Key Features:</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1 mb-4">
+                        <li>Real-time word and character counting</li>
+                        <li>Sentence and paragraph counter</li>
+                        <li>Reading time estimation</li>
+                        <li>Speaking time calculation</li>
+                        <li>Character count without spaces</li>
+                        <li>100% free, no signup required</li>
+                    </ul>
+
+                    <h4 class="font-semibold text-gray-800 mb-2">Who Can Use This Tool?</h4>
+                    <ul class="list-disc list-inside text-gray-600 space-y-1">
+                        <li><strong>Students:</strong> Track essay and assignment word counts</li>
+                        <li><strong>Writers:</strong> Monitor article and blog post lengths</li>
+                        <li><strong>Content Creators:</strong> Optimize content for SEO</li>
+                        <li><strong>Professionals:</strong> Count words in reports and documents</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">&copy; 2025 Free Tools Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+        
+        textInput.addEventListener('input', updateCounts);
+
+        function updateCounts() {
+            const text = textInput.value;
+            
+            // Word count
+            const words = text.trim().split(/\s+/).filter(word => word.length > 0);
+            document.getElementById('wordCount').textContent = words.length;
+            
+            // Character count
+            document.getElementById('charCount').textContent = text.length;
+            
+            // Character count without spaces
+            document.getElementById('charNoSpace').textContent = text.replace(/\s/g, '').length;
+            
+            // Sentence count
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            document.getElementById('sentenceCount').textContent = sentences.length;
+            
+            // Paragraph count
+            const paragraphs = text.split(/\n+/).filter(p => p.trim().length > 0);
+            document.getElementById('paragraphCount').textContent = paragraphs.length;
+            
+            // Reading time (average 200 words per minute)
+            const readingTime = Math.ceil(words.length / 200);
+            document.getElementById('readingTime').textContent = readingTime + ' min';
+            
+            // Speaking time (average 130 words per minute)
+            const speakingTime = Math.ceil(words.length / 130);
+            document.getElementById('speakingTime').textContent = speakingTime + ' min';
+        }
+
+        function clearText() {
+            textInput.value = '';
+            updateCounts();
+        }
+
+        function copyText() {
+            textInput.select();
+            document.execCommand('copy');
+            alert('✅ Text copied to clipboard!');
+        }
+
+        document.getElementById('mobileMenuBtn')?.addEventListener('click', () => {
+            document.getElementById('mobileMenu')?.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
