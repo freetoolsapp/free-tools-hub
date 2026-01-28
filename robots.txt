@@ -1,0 +1,11 @@
+# robots.txt for Free Tools Hub
+
+User-agent: *
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://freetoolsapp.github.io/free-tools-hub/sitemap.xml
+
+Crawl-delay: 10
