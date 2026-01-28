@@ -1,142 +1,275 @@
-# Free Tools Hub - Updated Version
+/* General Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-## 📋 Changes Made
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #333;
+    background-color: #f4f4f4;
+}
 
-### ✅ **What's New:**
-- ❌ **Removed AI Tools** (Required API - Not working without backend)
-- ❌ **Removed API-dependent tools**
-- ✅ **Added Offline/Client-side Working Tools**
-- ✅ **All tools are SEO optimized**
-- ✅ **Updated navigation and categories**
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
 
-### 📁 **New Tools Added (24 Tools Total):**
+/* Header Styles */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 1rem 0;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
 
-#### **Utility Tools (4 tools):**
-1. ✅ Word Counter - Count words, characters, sentences (WORKING)
-2. ✅ Case Converter - Convert text case formats (WORKING)
-3. ✅ Password Generator - Generate secure passwords (WORKING)
-4. ⚠️ QR Code Generator - (Need to add)
+.header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-#### **Student Tools (4 tools):**
-1. ⚠️ GPA Calculator - (Need to add)
-2. ⚠️ CGPA Calculator - (Need to add)
-3. ⚠️ Percentage Calculator - (Need to add)
-4. ⚠️ Age Calculator - (Need to add)
+.logo h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
 
-#### **Design Tools (4 tools):**
-1. ⚠️ Color Picker - (Need to add)
-2. ⚠️ Gradient Generator - (Need to add)
-3. ⚠️ Lorem Ipsum Generator - (Need to add)
-4. ⚠️ Box Shadow Generator - (Need to add)
+.nav ul {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
 
-#### **Web Dev Tools (4 tools):**
-1. ⚠️ HTML Minifier - (Need to add)
-2. ⚠️ CSS Minifier - (Need to add)
-3. ⚠️ JavaScript Minifier - (Need to add)
-4. ⚠️ Base64 Encoder/Decoder - (Need to add)
+.nav a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.3s;
+}
 
-#### **SEO Tools (4 tools):**
-1. ⚠️ Hash Generator - (Need to add)
-2. ⚠️ Meta Tag Generator - (Need to add)
-3. ⚠️ Slug Generator - (Need to add)
-4. ⚠️ Open Graph Generator - (Need to add)
+.nav a:hover {
+    opacity: 0.8;
+}
 
-#### **Social Media Tools (4 tools):**
-1. ⚠️ Instagram Caption Generator - (Need to add)
-2. ⚠️ Hashtag Generator - (Need to add)
-3. ⚠️ Bio Generator - (Need to add)
-4. ⚠️ Username Generator - (Need to add)
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+}
 
-## 🚀 **Files Ready for GitHub Upload:**
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
 
-### **Core Files:**
-- ✅ `index.html` - Updated homepage (AI category removed)
-- ✅ `tools.json` - New tools data (24 tools, no API dependencies)
-- ✅ `script.js` - JavaScript file
-- ✅ `style.css` - CSS styles
-- ✅ `package.json` - Package configuration
-- ✅ `.gitignore` - Git ignore file
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
 
-### **Tool Files Created:**
-- ✅ `tools/utility/word-counter.html` - **WORKING & SEO OPTIMIZED**
-- ✅ `tools/utility/case-converter.html` - **WORKING & SEO OPTIMIZED**
-- ✅ `tools/utility/password-generator.html` - **WORKING & SEO OPTIMIZED**
+/* Tools Section */
+.tools-section {
+    padding: 4rem 0;
+    background: white;
+    min-height: 400px;
+}
 
-## 📝 **Next Steps:**
+.tools-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: #333;
+}
 
-You have 3 options:
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+}
 
-### **Option 1: Upload Current Files** (Recommended for testing)
-Upload the current files to GitHub. You'll have:
-- Working homepage with updated categories
-- 3 fully functional tools
-- Other tools will show in the list but pages need to be created
+.loading {
+    text-align: center;
+    color: #667eea;
+    font-size: 1.2rem;
+    grid-column: 1 / -1;
+    padding: 3rem;
+}
 
-### **Option 2: Create Remaining Tools**
-I can create all remaining 21 tool HTML files for you. This will take some time but you'll have a complete website.
+.tool-card {
+    background: white;
+    border-radius: 10px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
 
-### **Option 3: Gradual Addition**
-Upload current files now, and I'll create remaining tools in batches as you need them.
+.tool-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+}
 
-## 🎯 **SEO Optimization:**
+.tool-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
 
-All created tools include:
-- ✅ Proper meta titles with keywords
-- ✅ Meta descriptions (under 160 characters)
-- ✅ Relevant keywords
-- ✅ Canonical URLs
-- ✅ Semantic HTML structure
-- ✅ Mobile responsive design
-- ✅ Fast loading (no external dependencies except CDN)
+.tool-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+}
 
-## 📦 **How to Upload to GitHub:**
+.tool-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+}
 
-1. Copy all files from the outputs folder
-2. Go to your GitHub repository
-3. Upload/replace these files:
-   - `index.html`
-   - `tools.json`
-   - `script.js`
-   - `style.css`
-   - `package.json`
-   - `.gitignore`
-   - `tools/` folder (with all tool files)
+.btn {
+    display: inline-block;
+    padding: 0.8rem 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: opacity 0.3s;
+    font-weight: 500;
+}
 
-4. Commit changes with message: "Updated: Removed AI tools, added working offline tools"
+.btn:hover {
+    opacity: 0.9;
+}
 
-## ⚠️ **Important Notes:**
+/* About Section */
+.about-section {
+    padding: 4rem 0;
+    background: #f9f9f9;
+}
 
-- AI tools removed because they require API keys and backend
-- All new tools work 100% offline/client-side
-- No signup or authentication needed
-- Fast, lightweight, and SEO-friendly
-- Mobile responsive
+.about-section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+}
 
-## 🔗 **Website Structure:**
+.about-section p {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    color: #666;
+    line-height: 1.8;
+}
 
-```
-free-tools-hub/
-├── index.html (updated - no AI category)
-├── tools.json (24 new tools)
-├── script.js
-├── style.css
-├── package.json
-├── .gitignore
-└── tools/
-    ├── utility/
-    │   ├── word-counter.html ✅
-    │   ├── case-converter.html ✅
-    │   ├── password-generator.html ✅
-    │   └── qr-generator.html (to be created)
-    ├── student/ (4 tools to be created)
-    ├── design/ (4 tools to be created)
-    ├── webdev/ (4 tools to be created)
-    ├── seo/ (4 tools to be created)
-    └── social/ (4 tools to be created)
-```
+/* Footer Styles */
+.footer {
+    background: #2c3e50;
+    color: white;
+    padding: 3rem 0 1rem;
+}
 
----
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
 
-**Created by:** Claude AI  
-**Date:** January 28, 2025  
-**Version:** 2.0 (API-free version)
+.footer-section h3 {
+    margin-bottom: 1rem;
+    color: #667eea;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: #ecf0f1;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.footer-section a:hover {
+    color: #667eea;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid #34495e;
+    color: #95a5a6;
+}
+
+/* Tool Page Styles */
+.tool-page {
+    min-height: 100vh;
+    padding: 2rem 0;
+    background: white;
+}
+
+.tool-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 2rem;
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.back-link:hover {
+    opacity: 0.8;
+}
+
+.tool-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.tool-header h1 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .header .container {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .nav ul {
+        gap: 1rem;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .tools-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        text-align: center;
+    }
+}
