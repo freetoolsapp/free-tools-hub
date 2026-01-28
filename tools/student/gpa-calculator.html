@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>GPA Calculator - Free Online Grade Point Average Calculator | Free Tools Hub</title>
+    <meta name="title" content="GPA Calculator - Calculate Your Grade Point Average Free">
+    <meta name="description" content="Free GPA calculator. Calculate your semester and cumulative GPA instantly. Supports 4.0 and 5.0 scale. No signup required!">
+    <meta name="keywords" content="GPA calculator, grade point average, calculate GPA, free GPA calculator, student tools, grade calculator">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Free Tools Hub">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/student/gpa-calculator.html">
+    <meta property="og:title" content="GPA Calculator - Free Online Tool">
+    <meta property="og:description" content="Calculate your GPA instantly. Free, accurate, and easy to use.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/student/gpa-calculator.html">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../style.css">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "GPA Calculator",
+        "url": "https://freetoolsapp.github.io/free-tools-hub/tools/student/gpa-calculator.html",
+        "description": "Calculate your GPA accurately and easily",
+        "applicationCategory": "EducationApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>All Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>All Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <section class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <nav class="flex text-sm">
+                <a href="../../index.html" class="text-blue-600 hover:text-blue-800"><i class="fas fa-home mr-1"></i>Home</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <a href="../../index.html#tools" class="text-blue-600 hover:text-blue-800">Tools</a>
+                <span class="mx-2 text-gray-400">/</span>
+                <span class="text-gray-600">GPA Calculator</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Tool Header -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block bg-white/20 px-4 py-1 rounded-full mb-4">
+                <i class="fas fa-graduation-cap text-yellow-300 mr-1"></i>
+                <span class="text-sm font-semibold">Most Popular Student Tool</span>
+            </div>
+            <h1 class="text-3xl md:text-4xl font-bold mb-3">GPA Calculator</h1>
+            <p class="text-lg opacity-90">Calculate your Grade Point Average accurately and easily</p>
+        </div>
+    </section>
+
+    <!-- Main Tool Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                
+                <!-- Tool Interface -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <h2 class="text-2xl font-bold mb-6 text-gray-800">
+                        <i class="fas fa-calculator text-blue-600 mr-2"></i>
+                        Calculate Your GPA
+                    </h2>
+                    
+                    <!-- GPA Scale Selection -->
+                    <div class="mb-6">
+                        <label class="block text-gray-700 font-semibold mb-2">GPA Scale</label>
+                        <select id="gpaScale" class="w-full px-4 py-3 border border-gray-300 rounded-lg">
+                            <option value="4.0">4.0 Scale</option>
+                            <option value="5.0">5.0 Scale</option>
+                        </select>
+                    </div>
+
+                    <!-- Courses Input -->
+                    <div id="coursesContainer" class="space-y-4 mb-6">
+                        <div class="course-row grid grid-cols-3 gap-3">
+                            <div>
+                                <label class="text-sm text-gray-600">Course Name</label>
+                                <input type="text" placeholder="e.g., Mathematics" class="course-name w-full px-3 py-2 border rounded-lg">
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-600">Grade</label>
+                                <select class="course-grade w-full px-3 py-2 border rounded-lg">
+                                    <option value="4.0">A (4.0)</option>
+                                    <option value="3.7">A- (3.7)</option>
+                                    <option value="3.3">B+ (3.3)</option>
+                                    <option value="3.0">B (3.0)</option>
+                                    <option value="2.7">B- (2.7)</option>
+                                    <option value="2.3">C+ (2.3)</option>
+                                    <option value="2.0">C (2.0)</option>
+                                    <option value="1.7">C- (1.7)</option>
+                                    <option value="1.3">D+ (1.3)</option>
+                                    <option value="1.0">D (1.0)</option>
+                                    <option value="0.0">F (0.0)</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-600">Credit Hours</label>
+                                <input type="number" value="3" min="1" max="6" class="course-credits w-full px-3 py-2 border rounded-lg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Add Course Button -->
+                    <button onclick="addCourse()" class="mb-6 text-blue-600 hover:text-blue-800 font-semibold">
+                        <i class="fas fa-plus-circle mr-1"></i>Add Another Course
+                    </button>
+
+                    <!-- Calculate Button -->
+                    <button onclick="calculateGPA()" 
+                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 px-6 rounded-lg font-bold text-lg hover:shadow-xl transition">
+                        <i class="fas fa-calculator mr-2"></i>Calculate GPA
+                    </button>
+
+                    <!-- Result Area -->
+                    <div id="resultArea" class="mt-6 hidden">
+                        <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-6 rounded-lg border-2 border-blue-200">
+                            <div class="text-center">
+                                <p class="text-gray-600 mb-2">Your GPA</p>
+                                <p class="text-5xl font-bold text-blue-600" id="gpaResult">0.00</p>
+                                <p class="text-sm text-gray-500 mt-2">
+                                    Total Credits: <span id="totalCredits">0</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Use -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-question-circle text-blue-600 mr-2"></i>
+                        How to Use GPA Calculator
+                    </h3>
+                    <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                        <li>Select your GPA scale (4.0 or 5.0)</li>
+                        <li>Enter course name (optional)</li>
+                        <li>Select the grade you received</li>
+                        <li>Enter credit hours for each course</li>
+                        <li>Click "Add Another Course" to add more courses</li>
+                        <li>Click "Calculate GPA" to see your result</li>
+                    </ol>
+                </div>
+
+                <!-- GPA Scale Guide -->
+                <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-list text-blue-600 mr-2"></i>
+                        Grade Scale (4.0)
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="flex justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-semibold">A</span>
+                            <span class="text-gray-600">4.0</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-semibold">A-</span>
+                            <span class="text-gray-600">3.7</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-semibold">B+</span>
+                            <span class="text-gray-600">3.3</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-semibold">B</span>
+                            <span class="text-gray-600">3.0</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-semibold">C</span>
+                            <span class="text-gray-600">2.0</span>
+                        </div>
+                        <div class="flex justify-between p-3 bg-gray-50 rounded">
+                            <span class="font-semibold">D</span>
+                            <span class="text-gray-600">1.0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ -->
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4 text-gray-800">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>
+                        Frequently Asked Questions
+                    </h3>
+                    <div class="space-y-4">
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">What is GPA?</h4>
+                            <p class="text-gray-600">GPA stands for Grade Point Average. It's a numerical representation of your academic performance.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Is this calculator accurate?</h4>
+                            <p class="text-gray-600">Yes! Our calculator uses standard GPA calculation methods used by most institutions.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold text-gray-800 mb-2">Can I calculate cumulative GPA?</h4>
+                            <p class="text-gray-600">Yes, simply enter all your courses from all semesters to calculate your cumulative GPA.</p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- Related Tools -->
+    <section class="bg-gray-100 py-12">
+        <div class="container mx-auto px-4">
+            <h3 class="text-2xl font-bold text-center mb-8 text-gray-800">
+                <i class="fas fa-tools text-blue-600 mr-2"></i>
+                More Student Tools
+            </h3>
+            <div class="grid md:grid-cols-4 gap-4 max-w-4xl mx-auto">
+                <a href="citation-generator.html" class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+                    <i class="fas fa-quote-right text-indigo-600 text-2xl mb-2"></i>
+                    <h4 class="font-semibold">Citation Generator</h4>
+                </a>
+                <a href="../../index.html#tools" class="bg-white p-4 rounded-lg shadow hover:shadow-lg transition">
+                    <i class="fas fa-tools text-blue-600 text-2xl mb-2"></i>
+                    <h4 class="font-semibold">All Tools</h4>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html" class="hover:text-white transition">Home</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition">All Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Student Tools</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="gpa-calculator.html" class="hover:text-white transition">GPA Calculator</a></li>
+                        <li><a href="citation-generator.html" class="hover:text-white transition">Citation Generator</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <p class="text-gray-400 text-xs">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile Menu
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Add Course Function
+        function addCourse() {
+            const container = document.getElementById('coursesContainer');
+            const courseRow = document.createElement('div');
+            courseRow.className = 'course-row grid grid-cols-3 gap-3';
+            courseRow.innerHTML = `
+                <div>
+                    <input type="text" placeholder="Course name" class="course-name w-full px-3 py-2 border rounded-lg">
+                </div>
+                <div>
+                    <select class="course-grade w-full px-3 py-2 border rounded-lg">
+                        <option value="4.0">A (4.0)</option>
+                        <option value="3.7">A- (3.7)</option>
+                        <option value="3.3">B+ (3.3)</option>
+                        <option value="3.0">B (3.0)</option>
+                        <option value="2.7">B- (2.7)</option>
+                        <option value="2.3">C+ (2.3)</option>
+                        <option value="2.0">C (2.0)</option>
+                        <option value="1.7">C- (1.7)</option>
+                        <option value="1.3">D+ (1.3)</option>
+                        <option value="1.0">D (1.0)</option>
+                        <option value="0.0">F (0.0)</option>
+                    </select>
+                </div>
+                <div>
+                    <input type="number" value="3" min="1" max="6" class="course-credits w-full px-3 py-2 border rounded-lg">
+                </div>
+            `;
+            container.appendChild(courseRow);
+        }
+
+        // Calculate GPA Function
+        function calculateGPA() {
+            const courses = document.querySelectorAll('.course-row');
+            let totalPoints = 0;
+            let totalCredits = 0;
+
+            courses.forEach(course => {
+                const grade = parseFloat(course.querySelector('.course-grade').value);
+                const credits = parseFloat(course.querySelector('.course-credits').value);
+                
+                totalPoints += grade * credits;
+                totalCredits += credits;
+            });
+
+            const gpa = totalCredits > 0 ? (totalPoints / totalCredits).toFixed(2) : 0;
+
+            // Display result
+            document.getElementById('resultArea').classList.remove('hidden');
+            document.getElementById('gpaResult').textContent = gpa;
+            document.getElementById('totalCredits').textContent = totalCredits;
+
+            // Scroll to result
+            document.getElementById('resultArea').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+    </script>
+</body>
+</html>
