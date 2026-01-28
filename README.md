@@ -5,9 +5,10 @@
 ## 🌟 Features
 
 - 14+ Free Online Tools
-- AI Content Writer
 - GPA Calculator
-- Grammar Checker
+- utility
+- student
+- web dev
 - SEO Tools
 - 100% Free
 
@@ -28,25 +29,3 @@ Made with ❤️ by Free Tools Hub
 
 ✅ **Done!**
 
----
-
-## 🎯 **Total Time: 6 minutes**
-
-- robots.txt: 2 min
-- sitemap.xml: 2 min
-- README.md: 2 min
-
----
-
-## ✅ **Verification:**
-
-### Check these URLs:
-
-1. **robots.txt:**
-```
-   https://freetoolsapp.github.io/free-tools-hub/robots.txt
-```
-
-2. **sitemap.xml:**
-```
-   https://freetoolsapp.github.io/free-tools-hub/sitemap.xml
