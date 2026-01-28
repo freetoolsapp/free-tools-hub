@@ -1,83 +1,31 @@
-# Dependencies
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
+# Operating System Files
+.DS_Store
+Thumbs.db
+desktop.ini
 
-# Environment Variables
-.env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-
-# IDE and Editor Files
+# Editor Files
 .vscode/
 .idea/
 *.swp
 *.swo
-*.swn
 *~
-.DS_Store
-Thumbs.db
+
+# Temporary Files
+*.tmp
+*.temp
+*.log
+
+# Upload Scripts (local use only)
+upload-to-github.bat
+upload-to-github.sh
+UPLOAD_TO_GITHUB.sh
+GITHUB_UPLOAD_GUIDE.md
+*.zip
+
+# Node Modules (if you add any later)
+node_modules/
+package-lock.json
 
 # Build Files
 dist/
 build/
-*.min.js
-*.min.css
-
-# Log Files
-logs/
-*.log
-
-# Temporary Files
-tmp/
-temp/
-*.tmp
-
-# Cache Files
-.cache/
-.parcel-cache/
-.sass-cache/
-
-# Testing
-coverage/
-.nyc_output/
-*.test.js
-*.spec.js
-
-# Database
-*.db
-*.sqlite
-*.sqlite3
-
-# Backup Files
-*.backup
-*.bak
-*.old
-
-# System Files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Desktop.ini
-
-# Optional Files (comment out if needed)
-# tools.json.backup
-# style.css.backup
-
-# Git Files
-.git/
-.gitattributes
-
-# Documentation (if you want to keep docs private)
-# docs/private/
-
-# Analytics and Tracking
-# analytics-config.js
