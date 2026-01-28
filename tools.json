@@ -6,119 +6,208 @@
       "color": "blue",
       "category": "ai",
       "badge": "HOT",
-      "url": "tools/ai/content-writer.html",
-      "description": "Generate high-quality AI content for blogs, articles, and social media"
+      "file": "tools/ai/content-writer.html",
+      "description": "Generate high-quality AI-powered content for blogs, articles, and social media posts"
     },
     {
       "name": "Grammar Checker",
-      "icon": "fa-spell-check",
-      "color": "red",
+      "icon": "fa-check-circle",
+      "color": "green",
       "category": "ai",
-      "badge": "POPULAR",
-      "url": "tools/ai/grammar-checker.html",
-      "description": "Check and fix grammar errors in your text"
+      "file": "tools/ai/grammar-checker.html",
+      "description": "Check and fix grammar, spelling, and punctuation errors instantly with AI"
     },
     {
-      "name": "SEO Analyzer",
+      "name": "GPA Calculator",
+      "icon": "fa-calculator",
+      "color": "teal",
+      "category": "student",
+      "badge": "POPULAR",
+      "file": "tools/student/gpa-calculator.html",
+      "description": "Calculate your GPA instantly with our easy-to-use calculator"
+    },
+    {
+      "name": "AI Image Generator",
+      "icon": "fa-image",
+      "color": "purple",
+      "category": "ai",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Create stunning AI-generated images from text descriptions"
+    },
+    {
+      "name": "Paraphraser",
+      "icon": "fa-sync-alt",
+      "color": "indigo",
+      "category": "ai",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Rewrite text in different words while keeping the same meaning"
+    },
+    {
+      "name": "Plagiarism Checker",
+      "icon": "fa-search",
+      "color": "red",
+      "category": "ai",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Check for plagiarism and ensure your content is original"
+    },
+    {
+      "name": "Meta Description Generator",
+      "icon": "fa-code",
+      "color": "indigo",
+      "category": "seo",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Create compelling meta descriptions for better SEO rankings"
+    },
+    {
+      "name": "Keyword Density Checker",
       "icon": "fa-chart-bar",
       "color": "blue",
       "category": "seo",
-      "badge": "HOT",
-      "url": "tools/seo/seo-analyzer.html",
-      "description": "Analyze and optimize your website for SEO"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Analyze keyword density and optimize your content for SEO"
     },
     {
       "name": "Backlink Checker",
       "icon": "fa-link",
-      "color": "green",
+      "color": "teal",
       "category": "seo",
-      "url": "tools/seo/backlink-checker.html",
-      "description": "Check backlinks and domain authority"
-    },
-    {
-      "name": "Thumbnail Maker",
-      "icon": "fa-image",
-      "color": "red",
-      "category": "social",
-      "badge": "HOT",
-      "url": "tools/social/thumbnail-maker.html",
-      "description": "Create eye-catching YouTube thumbnails"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Check backlinks and analyze your website's link profile"
     },
     {
       "name": "Instagram Caption Generator",
       "icon": "fa-instagram",
       "color": "pink",
       "category": "social",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
       "fab": true,
-      "url": "tools/social/instagram-caption.html",
-      "description": "Create engaging Instagram captions"
+      "description": "Generate engaging Instagram captions with hashtags"
     },
     {
-      "name": "GPA Calculator",
-      "icon": "fa-calculator",
+      "name": "YouTube Title Generator",
+      "icon": "fa-youtube",
+      "color": "red",
+      "category": "social",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "fab": true,
+      "description": "Create catchy YouTube video titles that get more clicks"
+    },
+    {
+      "name": "Tweet Generator",
+      "icon": "fa-twitter",
+      "color": "blue",
+      "category": "social",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "fab": true,
+      "description": "Generate engaging tweets for your Twitter audience"
+    },
+    {
+      "name": "Essay Outline Generator",
+      "icon": "fa-file-alt",
       "color": "blue",
       "category": "student",
-      "badge": "POPULAR",
-      "url": "tools/student/gpa-calculator.html",
-      "description": "Calculate your GPA accurately"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Create structured essay outlines in minutes"
     },
     {
       "name": "Citation Generator",
       "icon": "fa-quote-right",
       "color": "indigo",
       "category": "student",
-      "url": "tools/student/citation-generator.html",
-      "description": "Generate citations in multiple formats"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Generate citations in APA, MLA, Chicago, and more formats"
+    },
+    {
+      "name": "Study Planner",
+      "icon": "fa-calendar-check",
+      "color": "green",
+      "category": "student",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Plan your study schedule and manage your time effectively"
     },
     {
       "name": "QR Code Generator",
       "icon": "fa-qrcode",
       "color": "blue",
       "category": "utility",
-      "badge": "POPULAR",
-      "url": "tools/utility/qr-generator.html",
-      "description": "Generate QR codes for URLs and text"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Create QR codes for URLs, text, WiFi, and more"
     },
     {
       "name": "Password Generator",
       "icon": "fa-key",
       "color": "red",
       "category": "utility",
-      "url": "tools/utility/password-generator.html",
-      "description": "Create strong, secure passwords"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Generate strong and secure passwords instantly"
+    },
+    {
+      "name": "PDF to Word Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Convert PDF files to editable Word documents"
     },
     {
       "name": "Background Remover",
       "icon": "fa-cut",
       "color": "purple",
       "category": "design",
-      "badge": "HOT",
-      "url": "tools/design/background-remover.html",
-      "description": "Remove backgrounds from images"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Remove backgrounds from images automatically with AI"
     },
     {
       "name": "Image Resizer",
       "icon": "fa-expand",
       "color": "blue",
       "category": "design",
-      "url": "tools/design/image-resizer.html",
-      "description": "Resize images to any dimension"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Resize images to any dimension while maintaining quality"
     },
     {
       "name": "HTML Minifier",
       "icon": "fa-compress-arrows-alt",
       "color": "orange",
       "category": "webdev",
-      "url": "tools/webdev/html-minifier.html",
-      "description": "Minify HTML code for faster loading"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Minify HTML code to reduce file size and improve performance"
     },
     {
       "name": "CSS Minifier",
       "icon": "fa-file-code",
       "color": "blue",
       "category": "webdev",
-      "url": "tools/webdev/css-minifier.html",
-      "description": "Compress CSS files"
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Compress CSS code for faster website loading"
+    },
+    {
+      "name": "JSON Formatter",
+      "icon": "fa-code",
+      "color": "green",
+      "category": "webdev",
+      "badge": "COMING SOON",
+      "status": "coming_soon",
+      "description": "Format and validate JSON data with syntax highlighting"
     }
   ]
 }
