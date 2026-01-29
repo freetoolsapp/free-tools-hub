@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Minifier - Free Online HTML Code Compression Tool | Free Tools Hub</title>
+    <meta name="description" content="Free HTML minifier tool. Compress and minify HTML code instantly to reduce file size and improve website speed. No signup required!">
+    <meta name="keywords" content="HTML minifier, HTML compressor, minify HTML, compress HTML code, free HTML minifier">
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>All Tools</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Tool Header -->
+    <section class="bg-gradient-to-r from-orange-600 to-red-600 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl font-bold mb-3">⚡ HTML Minifier</h1>
+            <p class="text-lg">Compress HTML code instantly - Lightning Fast!</p>
+        </div>
+    </section>
+
+    <!-- Main Tool -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <div class="bg-white rounded-lg shadow-xl p-6">
+                
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Input -->
+                    <div>
+                        <label class="block font-bold mb-2 text-lg">
+                            <i class="fas fa-code text-orange-600 mr-2"></i>Input HTML
+                        </label>
+                        <textarea id="input" rows="20" 
+                            placeholder="Paste your HTML code here..."
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg font-mono text-sm"></textarea>
+                        <p class="text-sm text-gray-600 mt-2">
+                            Size: <span id="inputSize" class="font-bold">0</span> bytes
+                        </p>
+                    </div>
+
+                    <!-- Output -->
+                    <div>
+                        <label class="block font-bold mb-2 text-lg">
+                            <i class="fas fa-check-circle text-green-600 mr-2"></i>Minified HTML
+                        </label>
+                        <textarea id="output" rows="20" readonly
+                            placeholder="Minified code will appear here..."
+                            class="w-full px-4 py-3 border-2 border-green-300 rounded-lg bg-green-50 font-mono text-sm"></textarea>
+                        <p class="text-sm text-gray-600 mt-2">
+                            Size: <span id="outputSize" class="font-bold text-green-600">0</span> bytes
+                            <span id="saved" class="ml-2"></span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Options -->
+                <div class="mt-6 p-4 bg-gray-100 rounded-lg">
+                    <h3 class="font-bold mb-3">Options:</h3>
+                    <div class="flex gap-6">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="opt1" checked class="w-5 h-5 mr-2">
+                            <span>Remove Comments</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="opt2" checked class="w-5 h-5 mr-2">
+                            <span>Remove Whitespace</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Buttons -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
+                    <button onclick="minify()" class="bg-gradient-to-r from-orange-600 to-red-600 text-white py-4 rounded-lg font-bold text-lg hover:shadow-xl">
+                        <i class="fas fa-compress mr-2"></i>MINIFY
+                    </button>
+                    <button onclick="clear()" class="bg-gray-600 text-white py-4 rounded-lg font-bold hover:bg-gray-700">
+                        <i class="fas fa-trash mr-2"></i>Clear
+                    </button>
+                    <button onclick="copy()" class="bg-green-600 text-white py-4 rounded-lg font-bold hover:bg-green-700">
+                        <i class="fas fa-copy mr-2"></i>Copy
+                    </button>
+                    <button onclick="download()" class="bg-blue-600 text-white py-4 rounded-lg font-bold hover:bg-blue-700">
+                        <i class="fas fa-download mr-2"></i>Download
+                    </button>
+                </div>
+
+                <!-- Sample -->
+                <div class="text-center mt-4">
+                    <button onclick="loadSample()" class="text-blue-600 hover:text-blue-800 font-semibold">
+                        <i class="fas fa-file-code mr-1"></i>Load Sample HTML
+                    </button>
+                </div>
+            </div>
+
+            <!-- Info -->
+            <div class="grid md:grid-cols-2 gap-6 mt-8">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-star text-yellow-500 mr-2"></i>Benefits
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Faster page loading</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Better SEO ranking</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Reduced bandwidth</li>
+                        <li><i class="fas fa-check text-green-600 mr-2"></i>Smaller file size</li>
+                    </ul>
+                </div>
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h3 class="text-xl font-bold mb-4">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>How It Works
+                    </h3>
+                    <ul class="space-y-2 text-gray-700">
+                        <li><i class="fas fa-arrow-right text-blue-600 mr-2"></i>Removes HTML comments</li>
+                        <li><i class="fas fa-arrow-right text-blue-600 mr-2"></i>Strips extra whitespace</li>
+                        <li><i class="fas fa-arrow-right text-blue-600 mr-2"></i>Keeps code working 100%</li>
+                        <li><i class="fas fa-arrow-right text-blue-600 mr-2"></i>Works instantly</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Free Tools Hub. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const input = document.getElementById('input');
+        const output = document.getElementById('output');
+
+        // Update size instantly
+        input.addEventListener('input', () => {
+            document.getElementById('inputSize').textContent = input.value.length;
+        });
+
+        // MINIFY FUNCTION - SUPER FAST
+        function minify() {
+            let html = input.value;
+            
+            if (!html) {
+                alert('⚠️ Please enter HTML code!');
+                return;
+            }
+
+            let result = html;
+
+            // Remove comments if checked
+            if (document.getElementById('opt1').checked) {
+                result = result.replace(/<!--[\s\S]*?-->/g, '');
+            }
+
+            // Remove whitespace if checked
+            if (document.getElementById('opt2').checked) {
+                result = result.replace(/>\s+</g, '><');
+                result = result.replace(/\s{2,}/g, ' ');
+            }
+
+            result = result.trim();
+
+            // Show result INSTANTLY
+            output.value = result;
+
+            // Calculate sizes
+            const inSize = html.length;
+            const outSize = result.length;
+            const saved = inSize - outSize;
+            const percent = ((saved / inSize) * 100).toFixed(1);
+
+            document.getElementById('inputSize').textContent = inSize;
+            document.getElementById('outputSize').textContent = outSize;
+            
+            if (saved > 0) {
+                document.getElementById('saved').innerHTML = `<span class="text-green-600 font-bold">(-${saved} bytes, ${percent}%)</span>`;
+            }
+
+            alert('✅ Minified!');
+        }
+
+        // COPY FUNCTION
+        function copy() {
+            if (!output.value) {
+                alert('⚠️ Nothing to copy!');
+                return;
+            }
+            output.select();
+            document.execCommand('copy');
+            alert('✅ Copied!');
+        }
+
+        // CLEAR FUNCTION
+        function clear() {
+            input.value = '';
+            output.value = '';
+            document.getElementById('inputSize').textContent = '0';
+            document.getElementById('outputSize').textContent = '0';
+            document.getElementById('saved').innerHTML = '';
+        }
+
+        // DOWNLOAD FUNCTION
+        function download() {
+            if (!output.value) {
+                alert('⚠️ Nothing to download!');
+                return;
+            }
+            const blob = new Blob([output.value], { type: 'text/html' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'minified.html';
+            a.click();
+            URL.revokeObjectURL(url);
+            alert('✅ Downloaded!');
+        }
+
+        // LOAD SAMPLE
+        function loadSample() {
+            input.value = `<!DOCTYPE html>
+<html>
+<head>
+    <title>Sample Page</title>
+    <!-- This comment will be removed -->
+    <style>
+        body { margin: 0; }
+    </style>
+</head>
+<body>
+    <h1>Hello World</h1>
+    
+    <p>This is a sample paragraph.</p>
+    
+    <!-- Another comment -->
+    <div class="content">
+        <p>More text here.</p>
+    </div>
+</body>
+</html>`;
+            input.dispatchEvent(new Event('input'));
+        }
+    </script>
+</body>
+</html>
