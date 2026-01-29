@@ -199,7 +199,7 @@
       "color": "orange",
       "category": "webdev",
       "badge": "HOT",
-      "status": "coming_soon",
+        "file": "tools/webdev/html-minifier.html",
       "description": "Minify HTML code to reduce file size and improve performance"
     },
     {
