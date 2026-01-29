@@ -4,7 +4,7 @@
       "name": "Word Counter",
       "icon": "fa-hashtag",
       "color": "blue",
-      "category": "ai",
+      "category": "utility",
       "badge": "NEW",
       "file": "tools/ai/word-counter.html",
       "description": "Count words, characters, sentences instantly. Calculate reading time and speaking time for your content."
