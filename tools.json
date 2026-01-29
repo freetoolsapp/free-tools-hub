@@ -1,7 +1,32 @@
-
 {
   "tools": [
-    
+    {
+      "name": "Word Counter",
+      "icon": "fa-hashtag",
+      "color": "blue",
+      "category": "ai",
+      "badge": "NEW",
+      "file": "tools/ai/word-counter.html",
+      "description": "Count words, characters, sentences instantly. Calculate reading time and speaking time for your content."
+    },
+    {
+      "name": "Age Calculator",
+      "icon": "fa-birthday-cake",
+      "color": "pink",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/age-calculator.html",
+      "description": "Calculate your exact age in years, months, days, hours, and minutes. Find your next birthday!"
+    },
+    {
+      "name": "BMI Calculator",
+      "icon": "fa-weight",
+      "color": "green",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/bmi-calculator.html",
+      "description": "Calculate your Body Mass Index (BMI) and get instant health recommendations"
+    },
     {
       "name": "GPA Calculator",
       "icon": "fa-calculator",
