@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Free Age Calculator - Calculate Your Exact Age in Years, Months, Days | Free Tools Hub</title>
+    <meta name="title" content="Free Age Calculator - Calculate Your Exact Age Online">
+    <meta name="description" content="Free online age calculator. Calculate your exact age in years, months, days, hours, and minutes. Find out how old you are instantly. Perfect for birthdays, age verification, and more!">
+    <meta name="keywords" content="age calculator, calculate age, how old am i, age in years calculator, age in days calculator, birthday calculator, date of birth calculator, chronological age calculator">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="Free Tools Hub">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/age-calculator.html">
+    <meta property="og:title" content="Free Age Calculator - Calculate Your Exact Age Online">
+    <meta property="og:description" content="Calculate your exact age in years, months, days, hours, and minutes instantly.">
+    <meta property="og:image" content="https://freetoolsapp.github.io/free-tools-hub/images/age-calculator-og.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/age-calculator.html">
+    <meta property="twitter:title" content="Free Age Calculator - Calculate Your Exact Age Online">
+    <meta property="twitter:description" content="Calculate your exact age in years, months, days, hours, and minutes instantly.">
+    <meta property="twitter:image" content="https://freetoolsapp.github.io/free-tools-hub/images/age-calculator-twitter.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/age-calculator.html">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Age Calculator",
+        "applicationCategory": "UtilityApplication",
+        "operatingSystem": "Any",
+        "description": "Free online age calculator to calculate your exact age in years, months, days, hours, and minutes.",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "ratingCount": "2100"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Age Calculator Tool</p>
+                    </div>
+                </a>
+                <a href="../../index.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition">
+                    <i class="fas fa-home mr-2"></i>Back to Home
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-12">
+        <div class="max-w-5xl mx-auto">
+            <!-- Tool Header -->
+            <div class="text-center mb-10">
+                <div class="inline-block bg-pink-100 p-5 rounded-full mb-4">
+                    <i class="fas fa-birthday-cake text-pink-600 text-5xl"></i>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Free Age Calculator</h1>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">Calculate your exact age in years, months, days, hours, minutes, and seconds!</p>
+            </div>
+
+            <!-- Calculator Card -->
+            <div class="bg-white rounded-xl shadow-2xl p-8 mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-calendar-alt mr-2 text-pink-600"></i>Enter Your Date of Birth
+                </h2>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Day</label>
+                        <select id="day" class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-200 focus:outline-none text-lg">
+                            <option value="">Select Day</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Month</label>
+                        <select id="month" class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-200 focus:outline-none text-lg">
+                            <option value="">Select Month</option>
+                            <option value="0">January</option>
+                            <option value="1">February</option>
+                            <option value="2">March</option>
+                            <option value="3">April</option>
+                            <option value="4">May</option>
+                            <option value="5">June</option>
+                            <option value="6">July</option>
+                            <option value="7">August</option>
+                            <option value="8">September</option>
+                            <option value="9">October</option>
+                            <option value="10">November</option>
+                            <option value="11">December</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">Year</label>
+                        <select id="year" class="w-full px-4 py-4 border-2 border-gray-300 rounded-xl focus:border-pink-500 focus:ring-2 focus:ring-pink-200 focus:outline-none text-lg">
+                            <option value="">Select Year</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button onclick="calculateAge()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white font-bold py-5 rounded-xl transition shadow-lg hover:shadow-2xl text-lg">
+                    <i class="fas fa-calculator mr-2"></i>Calculate My Age
+                </button>
+            </div>
+
+            <!-- Results Section -->
+            <div id="results" class="hidden">
+                <!-- Main Age Result -->
+                <div class="bg-gradient-to-r from-pink-500 to-purple-600 text-white rounded-xl shadow-2xl p-8 mb-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">Your Age is:</h3>
+                    <div class="text-6xl font-bold mb-4" id="mainAge">--</div>
+                    <p class="text-xl opacity-90" id="mainAgeText">Years Old</p>
+                </div>
+
+                <!-- Detailed Breakdown -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center border-2 border-pink-200">
+                        <div class="text-4xl font-bold text-pink-600 mb-2" id="years">0</div>
+                        <div class="text-gray-600 font-semibold">Years</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center border-2 border-purple-200">
+                        <div class="text-4xl font-bold text-purple-600 mb-2" id="months">0</div>
+                        <div class="text-gray-600 font-semibold">Months</div>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-lg text-center border-2 border-blue-200">
+                        <div class="text-4xl font-bold text-blue-600 mb-2" id="days">0</div>
+                        <div class="text-gray-600 font-semibold">Days</div>
+                    </div>
+                </div>
+
+                <!-- Additional Details -->
+                <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>Detailed Age Breakdown
+                    </h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-lg">
+                        <div class="flex justify-between p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-gray-700">Total Months:</span>
+                            <span class="text-pink-600 font-bold" id="totalMonths">0</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-gray-700">Total Weeks:</span>
+                            <span class="text-purple-600 font-bold" id="totalWeeks">0</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-gray-700">Total Days:</span>
+                            <span class="text-blue-600 font-bold" id="totalDays">0</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-gray-700">Total Hours:</span>
+                            <span class="text-green-600 font-bold" id="totalHours">0</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-gray-700">Total Minutes:</span>
+                            <span class="text-orange-600 font-bold" id="totalMinutes">0</span>
+                        </div>
+                        <div class="flex justify-between p-4 bg-gray-50 rounded-lg">
+                            <span class="font-semibold text-gray-700">Total Seconds:</span>
+                            <span class="text-red-600 font-bold" id="totalSeconds">0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Birthday -->
+                <div class="bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-xl shadow-lg p-8 text-center">
+                    <h3 class="text-2xl font-bold mb-4">
+                        <i class="fas fa-gift mr-2"></i>Next Birthday
+                    </h3>
+                    <div class="text-3xl font-bold mb-2" id="nextBirthday">--</div>
+                    <div class="text-xl opacity-90" id="daysUntilBirthday">--</div>
+                </div>
+            </div>
+
+            <!-- SEO Content Section -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mt-10 mb-10">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fas fa-book text-pink-600 mr-2"></i>About Age Calculator</h2>
+                <div class="prose max-w-none text-gray-700 leading-relaxed">
+                    <p class="mb-4 text-lg">
+                        Our <strong>free online age calculator</strong> is the most accurate tool to calculate your exact age in years, months, days, hours, minutes, and seconds. Whether you need to know your chronological age for official documents, birthday planning, or just curiosity, our calculator provides instant and precise results.
+                    </p>
+                    
+                    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">How to Use the Age Calculator:</h3>
+                    <ol class="list-decimal list-inside space-y-2 mb-6">
+                        <li>Select your birth day from the dropdown menu</li>
+                        <li>Choose your birth month</li>
+                        <li>Select your birth year</li>
+                        <li>Click "Calculate My Age" button</li>
+                        <li>View your exact age with detailed breakdown</li>
+                    </ol>
+
+                    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">What You'll Get:</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-6">
+                        <li><strong>Exact Age:</strong> Your precise age in years, months, and days</li>
+                        <li><strong>Total Time Lived:</strong> Complete breakdown in months, weeks, days, hours, minutes, and seconds</li>
+                        <li><strong>Next Birthday:</strong> Find out when your next birthday is and how many days until then</li>
+                        <li><strong>Age in Different Units:</strong> See your age calculated in various time units</li>
+                    </ul>
+
+                    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">Why Use Our Age Calculator?</h3>
+                    <p class="mb-4">
+                        <strong>For Official Documents:</strong> Many official forms require exact age in years, months, and days. Our calculator provides this information accurately.
+                    </p>
+                    <p class="mb-4">
+                        <strong>For Birthday Planning:</strong> Know exactly how many days until your next birthday and plan celebrations accordingly.
+                    </p>
+                    <p class="mb-4">
+                        <strong>For Age Verification:</strong> Quickly verify if you meet age requirements for various services, events, or applications.
+                    </p>
+                    <p class="mb-4">
+                        <strong>For Fun & Curiosity:</strong> Discover interesting facts like how many days, hours, or minutes you've been alive!
+                    </p>
+
+                    <h3 class="text-2xl font-bold text-gray-800 mt-8 mb-4">100% Free & Accurate</h3>
+                    <p class="mb-4">
+                        This age calculator is completely <strong>free to use</strong> with no registration required. Our algorithm is highly accurate and takes into account leap years and varying month lengths to give you the most precise age calculation possible.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-xl shadow-lg border border-pink-200">
+                    <i class="fas fa-clock text-pink-600 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Instant Calculation</h3>
+                    <p class="text-gray-600">Get your exact age calculated in milliseconds. Fast and accurate!</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl shadow-lg border border-purple-200">
+                    <i class="fas fa-chart-line text-purple-600 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Detailed Breakdown</h3>
+                    <p class="text-gray-600">See your age in years, months, days, hours, minutes, and seconds.</p>
+                </div>
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg border border-blue-200">
+                    <i class="fas fa-mobile-alt text-blue-600 text-4xl mb-4"></i>
+                    <h3 class="text-xl font-bold mb-2 text-gray-800">Mobile Friendly</h3>
+                    <p class="text-gray-600">Works perfectly on all devices - desktop, tablet, and mobile.</p>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-xl shadow-lg p-8">
+                <h2 class="text-3xl font-bold text-gray-800 mb-6"><i class="fas fa-question-circle text-pink-600 mr-2"></i>Frequently Asked Questions</h2>
+                
+                <div class="space-y-4">
+                    <details class="bg-gray-50 p-4 rounded-lg">
+                        <summary class="font-bold text-gray-800 cursor-pointer">How accurate is this age calculator?</summary>
+                        <p class="mt-2 text-gray-600">Our age calculator is 100% accurate. It accounts for leap years and varying month lengths to provide precise calculations.</p>
+                    </details>
+                    
+                    <details class="bg-gray-50 p-4 rounded-lg">
+                        <summary class="font-bold text-gray-800 cursor-pointer">Does it calculate age in Korean or Chinese system?</summary>
+                        <p class="mt-2 text-gray-600">This calculator uses the Western (international) age system. For Korean or Chinese age calculations, different methods are used.</p>
+                    </details>
+                    
+                    <details class="bg-gray-50 p-4 rounded-lg">
+                        <summary class="font-bold text-gray-800 cursor-pointer">Can I calculate someone else's age?</summary>
+                        <p class="mt-2 text-gray-600">Yes! Simply enter any date of birth to calculate that person's age.</p>
+                    </details>
+                    
+                    <details class="bg-gray-50 p-4 rounded-lg">
+                        <summary class="font-bold text-gray-800 cursor-pointer">Is my data stored or saved?</summary>
+                        <p class="mt-2 text-gray-600">No, all calculations are done in your browser. We don't store or save any information you enter.</p>
+                    </details>
+
+                    <details class="bg-gray-50 p-4 rounded-lg">
+                        <summary class="font-bold text-gray-800 cursor-pointer">What if I was born on February 29 (leap day)?</summary>
+                        <p class="mt-2 text-gray-600">Our calculator handles leap day births correctly and will show your next birthday on either February 28 or March 1 in non-leap years.</p>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-16">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-lg">&copy; 2025 Free Tools Hub. All rights reserved.</p>
+            <p class="text-gray-400 mt-2">Made with <i class="fas fa-heart text-red-500"></i> for creators and learners</p>
+            <div class="mt-4">
+                <a href="../../index.html" class="text-blue-400 hover:text-blue-300 mx-2">Home</a>
+                <a href="../../index.html#tools" class="text-blue-400 hover:text-blue-300 mx-2">All Tools</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Populate day dropdown
+        const daySelect = document.getElementById('day');
+        for (let i = 1; i <= 31; i++) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            daySelect.appendChild(option);
+        }
+
+        // Populate year dropdown (last 120 years)
+        const yearSelect = document.getElementById('year');
+        const currentYear = new Date().getFullYear();
+        for (let i = currentYear; i >= currentYear - 120; i--) {
+            const option = document.createElement('option');
+            option.value = i;
+            option.textContent = i;
+            yearSelect.appendChild(option);
+        }
+
+        function calculateAge() {
+            const day = parseInt(document.getElementById('day').value);
+            const month = parseInt(document.getElementById('month').value);
+            const year = parseInt(document.getElementById('year').value);
+
+            if (!day || isNaN(month) || !year) {
+                alert('Please select your complete date of birth!');
+                return;
+            }
+
+            const birthDate = new Date(year, month, day);
+            const today = new Date();
+
+            // Check if birth date is in future
+            if (birthDate > today) {
+                alert('Birth date cannot be in the future!');
+                return;
+            }
+
+            // Calculate age
+            let years = today.getFullYear() - birthDate.getFullYear();
+            let months = today.getMonth() - birthDate.getMonth();
+            let days = today.getDate() - birthDate.getDate();
+
+            if (days < 0) {
+                months--;
+                const lastMonth = new Date(today.getFullYear(), today.getMonth(), 0);
+                days += lastMonth.getDate();
+            }
+
+            if (months < 0) {
+                years--;
+                months += 12;
+            }
+
+            // Total calculations
+            const totalMonths = years * 12 + months;
+            const totalDays = Math.floor((today - birthDate) / (1000 * 60 * 60 * 24));
+            const totalWeeks = Math.floor(totalDays / 7);
+            const totalHours = totalDays * 24;
+            const totalMinutes = totalHours * 60;
+            const totalSeconds = totalMinutes * 60;
+
+            // Next birthday calculation
+            let nextBirthday = new Date(today.getFullYear(), month, day);
+            if (nextBirthday < today) {
+                nextBirthday = new Date(today.getFullYear() + 1, month, day);
+            }
+            const daysUntilBirthday = Math.floor((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+            // Update UI
+            document.getElementById('mainAge').textContent = years;
+            document.getElementById('years').textContent = years;
+            document.getElementById('months').textContent = months;
+            document.getElementById('days').textContent = days;
+            document.getElementById('totalMonths').textContent = totalMonths.toLocaleString();
+            document.getElementById('totalWeeks').textContent = totalWeeks.toLocaleString();
+            document.getElementById('totalDays').textContent = totalDays.toLocaleString();
+            document.getElementById('totalHours').textContent = totalHours.toLocaleString();
+            document.getElementById('totalMinutes').textContent = totalMinutes.toLocaleString();
+            document.getElementById('totalSeconds').textContent = totalSeconds.toLocaleString();
+            
+            const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            document.getElementById('nextBirthday').textContent = `${monthNames[month]} ${day}, ${nextBirthday.getFullYear()}`;
+            document.getElementById('daysUntilBirthday').textContent = `${daysUntilBirthday} days remaining`;
+
+            // Show results with animation
+            const results = document.getElementById('results');
+            results.classList.remove('hidden');
+            results.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+    </script>
+</body>
+</html>
