@@ -6,7 +6,7 @@
       "color": "blue",
       "category": "utility",
       "badge": "NEW",
-      "file": "tools/ai/word-counter.html",
+      "file": "tools/utility/word-counter.html",
       "description": "Count words, characters, sentences instantly. Calculate reading time and speaking time for your content."
     },
     {
