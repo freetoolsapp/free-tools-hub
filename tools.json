@@ -161,9 +161,9 @@
       "icon": "fa-key",
       "color": "red",
       "category": "utility",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
-      "description": "Generate strong and secure passwords instantly"
+  "badge": "NEW",
+  "file": "tools/utility/password-generator.html",
+      "description":   "Generate strong and secure passwords instantly"
     },
     {
       "name": "PDF to Word Converter",
