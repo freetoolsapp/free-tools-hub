@@ -50,18 +50,17 @@
       "name": "AI Image Generator",
       "icon": "fa-image",
       "color": "purple",
-      "category": "ai",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "category": "utility",
+      "badge": "POPULAR",
+      "file": "ai-image-generator.html",
       "description": "Create stunning AI-generated images from text descriptions"
     },
     {
       "name": "Paraphraser",
       "icon": "fa-sync-alt",
       "color": "indigo",
-      "category": "ai",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "category": "student",
+      "file": "tools/student/paraphraser.html",
       "description": "Rewrite text in different words while keeping the same meaning"
     },
     {
