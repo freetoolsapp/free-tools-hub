@@ -9,6 +9,16 @@
       "file": "tools/utility/pdf-to-word.html",
       "description": "Convert PDF files and IMAGES to editable Word documents"
     },
+
+    {
+      "name": "Word to PDF Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "HOT",
+      "file": "tools/utility/word-to-pdf-converter.html",
+      "description": "Convert PDF files and IMAGES to editable Word documents"
+    },
     
     {
       "name": "Word Counter",
