@@ -206,8 +206,8 @@
       "icon": "fa-file-code",
       "color": "blue",
       "category": "webdev",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "UPDATED",
+      "file": "tools/webdev/css-minifier.html",
       "description": "Compress CSS code for faster website loading"
     },
     {
@@ -215,8 +215,8 @@
       "icon": "fa-code",
       "color": "green",
       "category": "webdev",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "UPDATED",
+      "status": "tools/webdev/json-formatter.html",
       "description": "Format and validate JSON data with syntax highlighting"
     }
   ]
