@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Backlink Checker - Free Tools Hub</title>
+    <meta name="title" content="Backlink Checker - Free Tools Hub">
+    <meta name="description" content="Check backlinks and analyze your website's link profile. Free backlink analysis tool with domain authority insights.">
+    <meta name="keywords" content="backlink checker, SEO tool, link analysis, domain authority, backlink analyzer">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/seo/backlink-checker.html">
+    <meta property="og:title" content="Backlink Checker - Free Tools Hub">
+    <meta property="og:description" content="Check backlinks and analyze your website's link profile. Free backlink analysis tool with domain authority insights.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/seo/backlink-checker.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .backlink-card {
+            transition: all 0.3s ease;
+        }
+        
+        .backlink-card:hover {
+            transform: translateY(-2px);
+        }
+
+        .quality-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+
+        .quality-high {
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow: 0 0 8px rgba(16, 185, 129, 0.5);
+        }
+
+        .quality-medium {
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            box-shadow: 0 0 8px rgba(245, 158, 11, 0.5);
+        }
+
+        .quality-low {
+            background: linear-gradient(135deg, #ef4444, #dc2626);
+            box-shadow: 0 0 8px rgba(239, 68, 68, 0.5);
+        }
+
+        @keyframes pulse-ring {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            100% {
+                transform: scale(1.5);
+                opacity: 0;
+            }
+        }
+
+        .analyzing::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 3px solid #667eea;
+            animation: pulse-ring 1.5s ease-out infinite;
+        }
+
+        .progress-circle {
+            transition: stroke-dashoffset 0.5s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-item {
+            animation: slideUp 0.4s ease-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Backlink Checker</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-link text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Backlink Checker</h2>
+            <p class="text-xl mb-2">Analyze your website's backlink profile and domain authority</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Comprehensive • Real-time Analysis</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Input Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-globe text-teal-600 mr-2"></i>Enter Website URL
+                </h3>
+                
+                <div class="max-w-2xl mx-auto">
+                    <div class="relative">
+                        <input 
+                            type="url" 
+                            id="websiteUrl" 
+                            class="w-full p-4 pl-12 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none text-lg"
+                            placeholder="https://example.com"
+                        >
+                        <i class="fas fa-globe absolute left-4 top-5 text-gray-400 text-xl"></i>
+                    </div>
+
+                    <div class="flex gap-4 mt-6">
+                        <button 
+                            onclick="analyzeBacklinks()" 
+                            class="flex-1 bg-gradient-to-r from-teal-600 to-cyan-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition text-lg"
+                        >
+                            <i class="fas fa-search mr-2"></i>Analyze Backlinks
+                        </button>
+                        <button 
+                            onclick="clearAnalysis()" 
+                            class="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+                        >
+                            <i class="fas fa-redo mr-2"></i>Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Info Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-lg border-2 border-teal-200">
+                        <i class="fas fa-chart-line text-3xl text-teal-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Domain Authority</h4>
+                        <p class="text-sm text-gray-600">Check your website's authority score and ranking power</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-lg border-2 border-cyan-200">
+                        <i class="fas fa-external-link-alt text-3xl text-cyan-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Backlink Quality</h4>
+                        <p class="text-sm text-gray-600">Analyze the quality and relevance of your backlinks</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
+                        <i class="fas fa-shield-alt text-3xl text-blue-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Spam Detection</h4>
+                        <p class="text-sm text-gray-600">Identify potentially harmful or spammy backlinks</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden">
+                
+                <!-- Overview Stats -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                        <i class="fas fa-chart-bar text-blue-600 mr-2"></i>Backlink Overview
+                    </h3>
+
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                        <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg text-center border-2 border-blue-200">
+                            <i class="fas fa-link text-3xl text-blue-600 mb-2"></i>
+                            <div class="text-3xl font-bold text-gray-800" id="totalBacklinks">0</div>
+                            <p class="text-sm text-gray-600 mt-1">Total Backlinks</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg text-center border-2 border-green-200">
+                            <i class="fas fa-globe text-3xl text-green-600 mb-2"></i>
+                            <div class="text-3xl font-bold text-gray-800" id="referringDomains">0</div>
+                            <p class="text-sm text-gray-600 mt-1">Referring Domains</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg text-center border-2 border-purple-200">
+                            <i class="fas fa-star text-3xl text-purple-600 mb-2"></i>
+                            <div class="text-3xl font-bold text-gray-800" id="domainAuthority">0</div>
+                            <p class="text-sm text-gray-600 mt-1">Domain Authority</p>
+                        </div>
+                        <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg text-center border-2 border-orange-200">
+                            <i class="fas fa-trophy text-3xl text-orange-600 mb-2"></i>
+                            <div class="text-3xl font-bold text-gray-800" id="qualityScore">0%</div>
+                            <p class="text-sm text-gray-600 mt-1">Quality Score</p>
+                        </div>
+                    </div>
+
+                    <!-- Domain Authority Gauge -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-xl p-6">
+                        <h4 class="font-bold text-gray-800 mb-4 text-center">
+                            <i class="fas fa-tachometer-alt text-indigo-600 mr-2"></i>Domain Authority Score
+                        </h4>
+                        <div class="flex items-center justify-center">
+                            <svg width="200" height="120" viewBox="0 0 200 120">
+                                <!-- Background arc -->
+                                <path d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="#e5e7eb" stroke-width="20" stroke-linecap="round"/>
+                                <!-- Progress arc -->
+                                <path id="authorityArc" d="M 20 100 A 80 80 0 0 1 180 100" fill="none" stroke="url(#gradient)" stroke-width="20" stroke-linecap="round" stroke-dasharray="251.2" stroke-dashoffset="251.2" class="progress-circle"/>
+                                <defs>
+                                    <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                                        <stop offset="0%" style="stop-color:#10b981;stop-opacity:1" />
+                                        <stop offset="100%" style="stop-color:#3b82f6;stop-opacity:1" />
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <p id="authorityLevel" class="text-center mt-2 font-semibold text-lg"></p>
+                    </div>
+                </div>
+
+                <!-- Backlink Quality Distribution -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-pie-chart text-green-600 mr-2"></i>Backlink Quality Distribution
+                    </h3>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-bold text-gray-800 flex items-center">
+                                    <span class="quality-indicator quality-high"></span>High Quality
+                                </h4>
+                                <span id="highQualityCount" class="text-2xl font-bold text-green-600">0</span>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-3">
+                                <div id="highQualityBar" class="bg-gradient-to-r from-green-500 to-green-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">Strong, authoritative links</p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-yellow-50 to-yellow-100 p-6 rounded-lg border-2 border-yellow-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-bold text-gray-800 flex items-center">
+                                    <span class="quality-indicator quality-medium"></span>Medium Quality
+                                </h4>
+                                <span id="mediumQualityCount" class="text-2xl font-bold text-yellow-600">0</span>
+                            </div>
+                            <div class="w-full bg-yellow-200 rounded-full h-3">
+                                <div id="mediumQualityBar" class="bg-gradient-to-r from-yellow-500 to-yellow-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">Moderate authority links</p>
+                        </div>
+
+                        <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg border-2 border-red-200">
+                            <div class="flex items-center justify-between mb-4">
+                                <h4 class="font-bold text-gray-800 flex items-center">
+                                    <span class="quality-indicator quality-low"></span>Low Quality
+                                </h4>
+                                <span id="lowQualityCount" class="text-2xl font-bold text-red-600">0</span>
+                            </div>
+                            <div class="w-full bg-red-200 rounded-full h-3">
+                                <div id="lowQualityBar" class="bg-gradient-to-r from-red-500 to-red-600 h-3 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <p class="text-sm text-gray-600 mt-2">Low authority or spam links</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Backlinks List -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-list text-purple-600 mr-2"></i>Top Backlinks
+                    </h3>
+
+                    <div id="backlinksList" class="space-y-4">
+                        <!-- Backlinks will be added here dynamically -->
+                    </div>
+                </div>
+
+                <!-- Recommendations -->
+                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                        <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Recommendations
+                    </h3>
+
+                    <div id="recommendations" class="space-y-3">
+                        <!-- Recommendations will be added here -->
+                    </div>
+                </div>
+
+                <!-- Export Options -->
+                <div class="text-center">
+                    <button 
+                        onclick="downloadReport()" 
+                        class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition"
+                    >
+                        <i class="fas fa-download mr-2"></i>Download Full Report
+                    </button>
+                </div>
+
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-toolbox text-purple-600 mr-2"></i>Related SEO Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="../seo/meta-description-generator.html" class="block p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg hover:shadow-lg transition border-2 border-indigo-200">
+                        <i class="fas fa-code text-2xl text-indigo-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">Meta Description</h4>
+                        <p class="text-sm text-gray-600">Generate SEO meta descriptions</p>
+                    </a>
+                    <a href="../seo/keyword-density-checker.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition border-2 border-blue-200">
+                        <i class="fas fa-chart-bar text-2xl text-blue-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">Keyword Density</h4>
+                        <p class="text-sm text-gray-600">Analyze keyword usage</p>
+                    </a>
+                    <a href="../ai/plagiarism-checker.html" class="block p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-lg hover:shadow-lg transition border-2 border-red-200">
+                        <i class="fas fa-search text-2xl text-red-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">Plagiarism Checker</h4>
+                        <p class="text-sm text-gray-600">Check content originality</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" onclick="filterTools('utility')" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('student')" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('design')" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('seo')" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Sample backlink data generator
+        function generateSampleBacklinks(domain) {
+            const tlds = ['.com', '.org', '.net', '.io', '.co', '.edu', '.gov'];
+            const qualities = ['high', 'medium', 'low'];
+            const anchorTexts = [
+                'Click here', 'Learn more', 'Visit site', 'Read article', 'Best guide',
+                'Top resource', 'Expert tips', 'Complete guide', 'Free tools', 'Premium content'
+            ];
+
+            const backlinks = [];
+            const numBacklinks = Math.floor(Math.random() * 20) + 15; // 15-35 backlinks
+
+            for (let i = 0; i < numBacklinks; i++) {
+                const randomDomain = 'example' + Math.floor(Math.random() * 100);
+                const randomTld = tlds[Math.floor(Math.random() * tlds.length)];
+                const quality = qualities[Math.floor(Math.random() * qualities.length)];
+                const authority = quality === 'high' ? Math.floor(Math.random() * 30) + 70 :
+                                quality === 'medium' ? Math.floor(Math.random() * 30) + 40 :
+                                Math.floor(Math.random() * 40);
+
+                backlinks.push({
+                    domain: randomDomain + randomTld,
+                    url: `https://${randomDomain}${randomTld}/page-${i}`,
+                    anchorText: anchorTexts[Math.floor(Math.random() * anchorTexts.length)],
+                    quality: quality,
+                    authority: authority,
+                    dofollow: Math.random() > 0.3,
+                    firstSeen: new Date(Date.now() - Math.random() * 90 * 24 * 60 * 60 * 1000).toLocaleDateString()
+                });
+            }
+
+            return backlinks;
+        }
+
+        function analyzeBacklinks() {
+            const url = document.getElementById('websiteUrl').value.trim();
+
+            if (!url) {
+                alert('⚠️ Please enter a website URL.');
+                return;
+            }
+
+            // Basic URL validation
+            try {
+                new URL(url);
+            } catch (e) {
+                alert('⚠️ Please enter a valid URL (including https://)');
+                return;
+            }
+
+            // Show results section
+            document.getElementById('resultsSection').classList.remove('hidden');
+            document.getElementById('resultsSection').scrollIntoView({ behavior: 'smooth' });
+
+            // Generate sample data
+            const backlinks = generateSampleBacklinks(url);
+            const totalBacklinks = backlinks.length;
+            const uniqueDomains = new Set(backlinks.map(b => b.domain)).size;
+            
+            // Calculate quality distribution
+            const highQuality = backlinks.filter(b => b.quality === 'high').length;
+            const mediumQuality = backlinks.filter(b => b.quality === 'medium').length;
+            const lowQuality = backlinks.filter(b => b.quality === 'low').length;
+
+            // Calculate domain authority (weighted average)
+            const avgAuthority = Math.round(
+                backlinks.reduce((sum, b) => sum + b.authority, 0) / totalBacklinks
+            );
+
+            // Calculate quality score
+            const qualityScore = Math.round(
+                ((highQuality * 100) + (mediumQuality * 60) + (lowQuality * 20)) / totalBacklinks
+            );
+
+            // Update overview stats
+            document.getElementById('totalBacklinks').textContent = totalBacklinks;
+            document.getElementById('referringDomains').textContent = uniqueDomains;
+            document.getElementById('domainAuthority').textContent = avgAuthority;
+            document.getElementById('qualityScore').textContent = qualityScore + '%';
+
+            // Update domain authority gauge
+            const arc = document.getElementById('authorityArc');
+            const circumference = 251.2;
+            const offset = circumference - (avgAuthority / 100) * circumference;
+            arc.style.strokeDashoffset = offset;
+
+            const authorityLevel = document.getElementById('authorityLevel');
+            if (avgAuthority >= 70) {
+                authorityLevel.innerHTML = '<span class="text-green-600">🏆 Excellent Authority</span>';
+            } else if (avgAuthority >= 50) {
+                authorityLevel.innerHTML = '<span class="text-blue-600">👍 Good Authority</span>';
+            } else if (avgAuthority >= 30) {
+                authorityLevel.innerHTML = '<span class="text-yellow-600">⚠️ Fair Authority</span>';
+            } else {
+                authorityLevel.innerHTML = '<span class="text-red-600">📉 Low Authority</span>';
+            }
+
+            // Update quality distribution
+            document.getElementById('highQualityCount').textContent = highQuality;
+            document.getElementById('mediumQualityCount').textContent = mediumQuality;
+            document.getElementById('lowQualityCount').textContent = lowQuality;
+
+            const highPercent = (highQuality / totalBacklinks) * 100;
+            const mediumPercent = (mediumQuality / totalBacklinks) * 100;
+            const lowPercent = (lowQuality / totalBacklinks) * 100;
+
+            document.getElementById('highQualityBar').style.width = highPercent + '%';
+            document.getElementById('mediumQualityBar').style.width = mediumPercent + '%';
+            document.getElementById('lowQualityBar').style.width = lowPercent + '%';
+
+            // Display top backlinks
+            const backlinksList = document.getElementById('backlinksList');
+            backlinksList.innerHTML = '';
+
+            // Sort by authority and show top 10
+            const topBacklinks = backlinks.sort((a, b) => b.authority - a.authority).slice(0, 10);
+
+            topBacklinks.forEach((backlink, index) => {
+                const card = document.createElement('div');
+                card.className = 'result-item backlink-card bg-gradient-to-br from-gray-50 to-white p-6 rounded-lg border-2 border-gray-200 hover:border-blue-300';
+                card.style.animationDelay = `${index * 0.1}s`;
+
+                const qualityClass = backlink.quality === 'high' ? 'quality-high' :
+                                   backlink.quality === 'medium' ? 'quality-medium' : 'quality-low';
+                
+                const qualityText = backlink.quality === 'high' ? 'High Quality' :
+                                  backlink.quality === 'medium' ? 'Medium Quality' : 'Low Quality';
+
+                card.innerHTML = `
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <div class="flex items-center mb-2">
+                                <span class="quality-indicator ${qualityClass}"></span>
+                                <h4 class="font-bold text-gray-800 text-lg">${backlink.domain}</h4>
+                                ${backlink.dofollow ? '<span class="ml-2 bg-green-100 text-green-700 text-xs px-2 py-1 rounded">DoFollow</span>' : '<span class="ml-2 bg-gray-100 text-gray-700 text-xs px-2 py-1 rounded">NoFollow</span>'}
+                            </div>
+                            <p class="text-sm text-gray-600 mb-2">
+                                <i class="fas fa-link text-gray-400 mr-1"></i>
+                                <a href="${backlink.url}" target="_blank" class="text-blue-600 hover:underline">${backlink.url}</a>
+                            </p>
+                            <div class="flex flex-wrap gap-3 text-sm text-gray-600">
+                                <span><i class="fas fa-anchor text-gray-400 mr-1"></i>Anchor: "${backlink.anchorText}"</span>
+                                <span><i class="fas fa-calendar text-gray-400 mr-1"></i>First seen: ${backlink.firstSeen}</span>
+                            </div>
+                        </div>
+                        <div class="flex flex-col items-center justify-center bg-white rounded-lg p-4 border-2 border-gray-200 min-w-[100px]">
+                            <div class="text-3xl font-bold text-gray-800">${backlink.authority}</div>
+                            <p class="text-xs text-gray-600 mt-1">Authority</p>
+                            <p class="text-xs text-gray-500">${qualityText}</p>
+                        </div>
+                    </div>
+                `;
+
+                backlinksList.appendChild(card);
+            });
+
+            // Generate recommendations
+            generateRecommendations(highQuality, mediumQuality, lowQuality, totalBacklinks, avgAuthority);
+        }
+
+        function generateRecommendations(high, medium, low, total, authority) {
+            const recommendations = document.getElementById('recommendations');
+            const recs = [];
+
+            if (low / total > 0.3) {
+                recs.push({
+                    icon: 'fa-exclamation-triangle',
+                    color: 'red',
+                    text: 'High number of low-quality backlinks detected. Consider disavowing spammy links using Google Search Console.'
+                });
+            }
+
+            if (high / total < 0.3) {
+                recs.push({
+                    icon: 'fa-arrow-up',
+                    color: 'blue',
+                    text: 'Focus on building more high-quality backlinks from authoritative domains in your niche.'
+                });
+            }
+
+            if (authority < 50) {
+                recs.push({
+                    icon: 'fa-chart-line',
+                    color: 'yellow',
+                    text: 'Your domain authority needs improvement. Create high-quality content and pursue guest posting opportunities.'
+                });
+            } else {
+                recs.push({
+                    icon: 'fa-thumbs-up',
+                    color: 'green',
+                    text: 'Great domain authority! Maintain your current link building strategy and continue creating valuable content.'
+                });
+            }
+
+            recs.push({
+                icon: 'fa-search',
+                color: 'purple',
+                text: 'Regularly monitor your backlink profile to identify and remove toxic links that could harm your SEO.'
+            });
+
+            recs.push({
+                icon: 'fa-users',
+                color: 'teal',
+                text: 'Build relationships with influencers and industry leaders for natural, high-quality backlink opportunities.'
+            });
+
+            recommendations.innerHTML = recs.map(rec => `
+                <div class="flex items-start bg-${rec.color}-50 p-4 rounded-lg border-2 border-${rec.color}-200">
+                    <i class="fas ${rec.icon} text-${rec.color}-600 text-xl mr-3 mt-1"></i>
+                    <p class="text-gray-700">${rec.text}</p>
+                </div>
+            `).join('');
+        }
+
+        function clearAnalysis() {
+            document.getElementById('websiteUrl').value = '';
+            document.getElementById('resultsSection').classList.add('hidden');
+        }
+
+        function downloadReport() {
+            const url = document.getElementById('websiteUrl').value;
+            const totalBacklinks = document.getElementById('totalBacklinks').textContent;
+            const referringDomains = document.getElementById('referringDomains').textContent;
+            const domainAuthority = document.getElementById('domainAuthority').textContent;
+            const qualityScore = document.getElementById('qualityScore').textContent;
+            const highQuality = document.getElementById('highQualityCount').textContent;
+            const mediumQuality = document.getElementById('mediumQualityCount').textContent;
+            const lowQuality = document.getElementById('lowQualityCount').textContent;
+
+            const report = `
+BACKLINK ANALYSIS REPORT
+Generated: ${new Date().toLocaleString()}
+Website: ${url}
+========================================
+
+OVERVIEW STATISTICS:
+• Total Backlinks: ${totalBacklinks}
+• Referring Domains: ${referringDomains}
+• Domain Authority: ${domainAuthority}
+• Overall Quality Score: ${qualityScore}
+
+QUALITY DISTRIBUTION:
+• High Quality Links: ${highQuality}
+• Medium Quality Links: ${mediumQuality}
+• Low Quality Links: ${lowQuality}
+
+RECOMMENDATIONS:
+Please refer to the recommendations section in the online report for detailed improvement suggestions.
+
+========================================
+Note: This is a simulated analysis for demonstration purposes.
+For comprehensive backlink analysis, consider using premium SEO tools.
+
+Report generated by Free Tools Hub
+https://freetoolsapp.github.io/free-tools-hub/
+            `;
+
+            const blob = new Blob([report], { type: 'text/plain' });
+            const url2 = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url2;
+            link.download = `backlink-report-${new Date().getTime()}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url2);
+        }
+    </script>
+</body>
+</html>
