@@ -95,8 +95,8 @@
       "icon": "fa-link",
       "color": "teal",
       "category": "seo",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "POPULAR",
+      "file": "tools/seo/backlink-checker.html",
       "description": "Check backlinks and analyze your website's link profile"
     },
     {
