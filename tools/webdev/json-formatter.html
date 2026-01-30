@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>JSON Formatter & Validator - Free Online JSON Tool | Free Tools Hub</title>
+    <meta name="title" content="JSON Formatter & Validator - Free Online JSON Tool | Free Tools Hub">
+    <meta name="description" content="Format, validate, and beautify JSON data instantly. Detect errors, minify JSON, and view formatted output. Free, fast, and no signup required!">
+    <meta name="keywords" content="JSON formatter, JSON validator, JSON beautifier, format JSON, validate JSON, JSON parser, JSON minifier, online JSON tool">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/webdev/json-formatter.html">
+    <meta property="og:title" content="JSON Formatter & Validator - Free Online JSON Tool">
+    <meta property="og:description" content="Format, validate, and beautify JSON data instantly. Detect errors, minify JSON, and view formatted output. Free, fast, and no signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/webdev/json-formatter.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .code-editor {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 300px;
+            overflow: auto;
+        }
+        
+        .code-editor:focus {
+            outline: 2px solid #667eea;
+        }
+        
+        .json-key {
+            color: #9cdcfe;
+        }
+        
+        .json-string {
+            color: #ce9178;
+        }
+        
+        .json-number {
+            color: #b5cea8;
+        }
+        
+        .json-boolean {
+            color: #569cd6;
+        }
+        
+        .json-null {
+            color: #569cd6;
+        }
+        
+        .error-highlight {
+            border: 2px solid #f44336;
+            background: #ffebee;
+        }
+        
+        .success-highlight {
+            border: 2px solid #4caf50;
+            background: #e8f5e9;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .animate-slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .tree-view {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 16px;
+            border-radius: 8px;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .tree-node {
+            margin-left: 20px;
+        }
+
+        .tree-toggle {
+            cursor: pointer;
+            user-select: none;
+            color: #569cd6;
+        }
+
+        .tree-toggle:hover {
+            opacity: 0.8;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">JSON Formatter</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-code text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">JSON Formatter & Validator</h2>
+            <p class="text-xl mb-2">Format, validate, and beautify JSON data with syntax highlighting</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • No Signup • Instant Results</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Input Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        <i class="fas fa-edit text-blue-600 mr-2"></i>Input JSON
+                    </h3>
+                    <div class="flex gap-2">
+                        <button onclick="clearInput()" class="bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600 transition">
+                            <i class="fas fa-eraser mr-2"></i>Clear
+                        </button>
+                        <button onclick="loadSample()" class="bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 transition">
+                            <i class="fas fa-file-code mr-2"></i>Load Sample
+                        </button>
+                    </div>
+                </div>
+                
+                <textarea 
+                    id="jsonInput" 
+                    class="code-editor w-full" 
+                    placeholder='{"name":"John","age":30,"city":"New York"}'
+                    spellcheck="false"
+                ></textarea>
+
+                <!-- Action Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
+                    <button onclick="formatJSON()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-bold hover:shadow-xl transition">
+                        <i class="fas fa-magic mr-2"></i>Format & Validate
+                    </button>
+                    <button onclick="minifyJSON()" class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-6 py-3 rounded-lg font-bold hover:shadow-xl transition">
+                        <i class="fas fa-compress mr-2"></i>Minify JSON
+                    </button>
+                    <button onclick="showTreeView()" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-3 rounded-lg font-bold hover:shadow-xl transition">
+                        <i class="fas fa-sitemap mr-2"></i>Tree View
+                    </button>
+                </div>
+            </div>
+
+            <!-- Validation Status -->
+            <div id="validationStatus" class="hidden mb-8">
+                <div id="validationMessage" class="p-4 rounded-lg"></div>
+            </div>
+
+            <!-- Output Section -->
+            <div id="outputSection" class="bg-white rounded-lg shadow-lg p-8 mb-8 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        <i class="fas fa-check-circle text-green-600 mr-2"></i><span id="outputTitle">Formatted JSON</span>
+                    </h3>
+                    <div class="flex gap-2">
+                        <button onclick="copyOutput()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-copy mr-2"></i>Copy
+                        </button>
+                        <button onclick="downloadJSON()" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition">
+                            <i class="fas fa-download mr-2"></i>Download
+                        </button>
+                    </div>
+                </div>
+                
+                <div id="jsonOutput"></div>
+            </div>
+
+            <!-- Stats -->
+            <div id="statsSection" class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 hidden">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
+                    <i class="fas fa-layer-group text-3xl text-blue-600 mb-2"></i>
+                    <div class="text-2xl font-bold text-gray-800" id="objectCount">0</div>
+                    <div class="text-sm text-gray-600">Objects</div>
+                </div>
+                <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200">
+                    <i class="fas fa-list text-3xl text-green-600 mb-2"></i>
+                    <div class="text-2xl font-bold text-gray-800" id="arrayCount">0</div>
+                    <div class="text-sm text-gray-600">Arrays</div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border-2 border-purple-200">
+                    <i class="fas fa-key text-3xl text-purple-600 mb-2"></i>
+                    <div class="text-2xl font-bold text-gray-800" id="keyCount">0</div>
+                    <div class="text-sm text-gray-600">Keys</div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border-2 border-orange-200">
+                    <i class="fas fa-file-code text-3xl text-orange-600 mb-2"></i>
+                    <div class="text-2xl font-bold text-gray-800" id="sizeInfo">0 B</div>
+                    <div class="text-sm text-gray-600">Size</div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
+                    <i class="fas fa-check-double text-3xl text-blue-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Instant Validation</h4>
+                    <p class="text-sm text-gray-600">Automatically detect and highlight JSON syntax errors with detailed error messages</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border-2 border-purple-200">
+                    <i class="fas fa-paint-brush text-3xl text-purple-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Beautiful Formatting</h4>
+                    <p class="text-sm text-gray-600">Format JSON with proper indentation and syntax highlighting for better readability</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
+                    <i class="fas fa-sitemap text-3xl text-pink-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Tree View</h4>
+                    <p class="text-sm text-gray-600">Visualize complex JSON structures in an expandable tree format</p>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use JSON Formatter
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Paste Your JSON Data</h4>
+                            <p class="text-gray-600 text-sm">Copy and paste your JSON data into the input area, or click "Load Sample" to see an example</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Choose Action</h4>
+                            <p class="text-gray-600 text-sm">Click "Format & Validate" to beautify, "Minify" to compress, or "Tree View" to visualize</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Copy or Download</h4>
+                            <p class="text-gray-600 text-sm">Copy the formatted JSON to your clipboard or download it as a .json file</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Common Use Cases
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="flex items-start">
+                        <i class="fas fa-bug text-red-600 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Debug API Responses</h4>
+                            <p class="text-gray-600 text-sm">Format and validate JSON responses from APIs to identify errors quickly</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-file-export text-blue-600 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Configuration Files</h4>
+                            <p class="text-gray-600 text-sm">Format configuration files for better readability and maintenance</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-database text-green-600 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Data Analysis</h4>
+                            <p class="text-gray-600 text-sm">View and analyze complex data structures in tree format</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="fas fa-code text-purple-600 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Code Development</h4>
+                            <p class="text-gray-600 text-sm">Test and validate JSON data structures during development</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-toolbox text-blue-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="css-minifier.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg border-2 border-blue-200 hover:shadow-lg transition">
+                        <i class="fas fa-file-code text-2xl text-blue-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">CSS Minifier</h4>
+                        <p class="text-sm text-gray-600">Compress CSS code</p>
+                    </a>
+                    <a href="html-minifier.html" class="block p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg border-2 border-orange-200 hover:shadow-lg transition">
+                        <i class="fas fa-compress-arrows-alt text-2xl text-orange-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">HTML Minifier</h4>
+                        <p class="text-sm text-gray-600">Minify HTML code</p>
+                    </a>
+                    <a href="../../index.html#tools" class="block p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg border-2 border-purple-200 hover:shadow-lg transition">
+                        <i class="fas fa-tools text-2xl text-purple-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">More Tools</h4>
+                        <p class="text-sm text-gray-600">Explore all our free tools</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Global variables
+        let currentJSON = null;
+
+        // JSON Formatter Functions
+        function formatJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            
+            if (!input) {
+                showValidation(false, 'Please enter JSON data to format!');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                currentJSON = parsed;
+                const formatted = JSON.stringify(parsed, null, 2);
+                
+                // Display formatted JSON with syntax highlighting
+                document.getElementById('jsonOutput').innerHTML = `<pre class="code-editor">${syntaxHighlight(formatted)}</pre>`;
+                document.getElementById('outputTitle').textContent = 'Formatted JSON';
+                
+                // Show statistics
+                updateStats(parsed, formatted);
+                
+                // Show success
+                showValidation(true, 'JSON is valid and formatted successfully!');
+                
+                // Show sections
+                document.getElementById('outputSection').classList.remove('hidden');
+                document.getElementById('statsSection').classList.remove('hidden');
+                document.getElementById('outputSection').classList.add('animate-slide-in');
+                
+                // Scroll to results
+                document.getElementById('validationStatus').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+            } catch (error) {
+                showValidation(false, 'Invalid JSON: ' + error.message);
+                document.getElementById('outputSection').classList.add('hidden');
+                document.getElementById('statsSection').classList.add('hidden');
+            }
+        }
+
+        function minifyJSON() {
+            const input = document.getElementById('jsonInput').value.trim();
+            
+            if (!input) {
+                showValidation(false, 'Please enter JSON data to minify!');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                currentJSON = parsed;
+                const minified = JSON.stringify(parsed);
+                
+                document.getElementById('jsonOutput').innerHTML = `<pre class="code-editor">${escapeHtml(minified)}</pre>`;
+                document.getElementById('outputTitle').textContent = 'Minified JSON';
+                
+                updateStats(parsed, minified);
+                showValidation(true, 'JSON minified successfully!');
+                
+                document.getElementById('outputSection').classList.remove('hidden');
+                document.getElementById('statsSection').classList.remove('hidden');
+                document.getElementById('outputSection').classList.add('animate-slide-in');
+                
+                document.getElementById('validationStatus').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+            } catch (error) {
+                showValidation(false, 'Invalid JSON: ' + error.message);
+                document.getElementById('outputSection').classList.add('hidden');
+                document.getElementById('statsSection').classList.add('hidden');
+            }
+        }
+
+        function showTreeView() {
+            const input = document.getElementById('jsonInput').value.trim();
+            
+            if (!input) {
+                showValidation(false, 'Please enter JSON data to view!');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                currentJSON = parsed;
+                
+                const treeHTML = buildTreeView(parsed);
+                document.getElementById('jsonOutput').innerHTML = `<div class="tree-view">${treeHTML}</div>`;
+                document.getElementById('outputTitle').textContent = 'Tree View';
+                
+                updateStats(parsed, JSON.stringify(parsed, null, 2));
+                showValidation(true, 'JSON tree view generated successfully!');
+                
+                document.getElementById('outputSection').classList.remove('hidden');
+                document.getElementById('statsSection').classList.remove('hidden');
+                document.getElementById('outputSection').classList.add('animate-slide-in');
+                
+                document.getElementById('validationStatus').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                
+            } catch (error) {
+                showValidation(false, 'Invalid JSON: ' + error.message);
+                document.getElementById('outputSection').classList.add('hidden');
+                document.getElementById('statsSection').classList.add('hidden');
+            }
+        }
+
+        function buildTreeView(obj, depth = 0) {
+            let html = '';
+            const indent = '&nbsp;'.repeat(depth * 2);
+            
+            if (Array.isArray(obj)) {
+                html += `<span class="json-key">[</span><br>`;
+                obj.forEach((item, index) => {
+                    html += indent + '&nbsp;&nbsp;';
+                    if (typeof item === 'object' && item !== null) {
+                        html += buildTreeView(item, depth + 1);
+                    } else {
+                        html += formatValue(item);
+                    }
+                    if (index < obj.length - 1) html += ',';
+                    html += '<br>';
+                });
+                html += indent + `<span class="json-key">]</span>`;
+            } else if (typeof obj === 'object' && obj !== null) {
+                html += `<span class="json-key">{</span><br>`;
+                const keys = Object.keys(obj);
+                keys.forEach((key, index) => {
+                    html += indent + '&nbsp;&nbsp;';
+                    html += `<span class="json-key">"${escapeHtml(key)}"</span>: `;
+                    if (typeof obj[key] === 'object' && obj[key] !== null) {
+                        html += buildTreeView(obj[key], depth + 1);
+                    } else {
+                        html += formatValue(obj[key]);
+                    }
+                    if (index < keys.length - 1) html += ',';
+                    html += '<br>';
+                });
+                html += indent + `<span class="json-key">}</span>`;
+            } else {
+                html += formatValue(obj);
+            }
+            
+            return html;
+        }
+
+        function formatValue(value) {
+            if (typeof value === 'string') {
+                return `<span class="json-string">"${escapeHtml(value)}"</span>`;
+            } else if (typeof value === 'number') {
+                return `<span class="json-number">${value}</span>`;
+            } else if (typeof value === 'boolean') {
+                return `<span class="json-boolean">${value}</span>`;
+            } else if (value === null) {
+                return `<span class="json-null">null</span>`;
+            }
+            return value;
+        }
+
+        function syntaxHighlight(json) {
+            json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-number';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    } else {
+                        cls = 'json-string';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+        }
+
+        function updateStats(parsed, formatted) {
+            const stats = analyzeJSON(parsed);
+            document.getElementById('objectCount').textContent = stats.objects;
+            document.getElementById('arrayCount').textContent = stats.arrays;
+            document.getElementById('keyCount').textContent = stats.keys;
+            document.getElementById('sizeInfo').textContent = formatBytes(new Blob([formatted]).size);
+        }
+
+        function analyzeJSON(obj) {
+            let objects = 0;
+            let arrays = 0;
+            let keys = 0;
+            
+            function traverse(item) {
+                if (Array.isArray(item)) {
+                    arrays++;
+                    item.forEach(traverse);
+                } else if (typeof item === 'object' && item !== null) {
+                    objects++;
+                    keys += Object.keys(item).length;
+                    Object.values(item).forEach(traverse);
+                }
+            }
+            
+            traverse(obj);
+            return { objects, arrays, keys };
+        }
+
+        function showValidation(isValid, message) {
+            const status = document.getElementById('validationStatus');
+            const messageDiv = document.getElementById('validationMessage');
+            
+            status.classList.remove('hidden');
+            
+            if (isValid) {
+                messageDiv.className = 'p-4 rounded-lg success-highlight flex items-center';
+                messageDiv.innerHTML = `<i class="fas fa-check-circle text-green-600 text-2xl mr-3"></i><span class="text-green-800 font-semibold">${message}</span>`;
+            } else {
+                messageDiv.className = 'p-4 rounded-lg error-highlight flex items-center';
+                messageDiv.innerHTML = `<i class="fas fa-exclamation-triangle text-red-600 text-2xl mr-3"></i><span class="text-red-800 font-semibold">${message}</span>`;
+            }
+        }
+
+        function copyOutput() {
+            const output = document.getElementById('jsonOutput').textContent;
+            navigator.clipboard.writeText(output).then(() => {
+                alert('✅ JSON copied to clipboard!');
+            });
+        }
+
+        function downloadJSON() {
+            if (!currentJSON) {
+                alert('❌ No JSON data to download!');
+                return;
+            }
+            
+            const formatted = JSON.stringify(currentJSON, null, 2);
+            const blob = new Blob([formatted], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'formatted-' + Date.now() + '.json';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+            alert('✅ JSON downloaded successfully!');
+        }
+
+        function clearInput() {
+            document.getElementById('jsonInput').value = '';
+            document.getElementById('jsonOutput').innerHTML = '';
+            document.getElementById('outputSection').classList.add('hidden');
+            document.getElementById('statsSection').classList.add('hidden');
+            document.getElementById('validationStatus').classList.add('hidden');
+            currentJSON = null;
+        }
+
+        function loadSample() {
+            const sample = `{
+  "user": {
+    "id": 12345,
+    "name": "John Doe",
+    "email": "john.doe@example.com",
+    "isActive": true,
+    "roles": ["admin", "user"],
+    "profile": {
+      "age": 30,
+      "country": "USA",
+      "preferences": {
+        "theme": "dark",
+        "notifications": true
+      }
+    }
+  },
+  "data": [
+    {
+      "id": 1,
+      "title": "First Item",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Second Item",
+      "completed": true
+    }
+  ]
+}`;
+            document.getElementById('jsonInput').value = sample;
+        }
+
+        function formatBytes(bytes) {
+            if (bytes === 0) return '0 B';
+            const k = 1024;
+            const sizes = ['B', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Keyboard shortcuts
+        document.getElementById('jsonInput').addEventListener('keydown', function(e) {
+            if (e.ctrlKey && e.key === 'Enter') {
+                formatJSON();
+            }
+        });
+    </script>
+</body>
+</html>
