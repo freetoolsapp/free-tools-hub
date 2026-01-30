@@ -67,9 +67,9 @@
       "name": "Plagiarism Checker",
       "icon": "fa-search",
       "color": "red",
-      "category": "ai",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "category": "student",
+      "badge": "HOT",
+      "file": "tools/student/plagiarism-checker.html",
       "description": "Check for plagiarism and ensure your content is original"
     },
     {
@@ -77,8 +77,8 @@
       "icon": "fa-code",
       "color": "indigo",
       "category": "seo",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "POPULAR",
+      "file": "tools/seo/meta-description-generator.html",
       "description": "Create compelling meta descriptions for better SEO rankings"
     },
     {
