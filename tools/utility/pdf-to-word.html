@@ -13,11 +13,6 @@
     <meta name="keywords" content="PDF to Word, image to Word, OCR, text extraction, document converter, free tools">
     <meta name="robots" content="index, follow">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="PDF/Image to Word Converter - Free Tools Hub">
-    <meta property="og:description" content="Convert PDF and images to Word documents with OCR. Free and secure.">
-    
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     
@@ -63,9 +58,50 @@
             transform: translateY(-5px);
             box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         }
+
+        .method-card {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
+        }
+
+        .paste-indicator {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(76, 175, 80, 0.95);
+            color: white;
+            padding: 30px 50px;
+            border-radius: 20px;
+            font-size: 24px;
+            font-weight: bold;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+
+        .paste-indicator.show {
+            display: block;
+            animation: fadeInOut 1.5s;
+        }
+
+        @keyframes fadeInOut {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
     </style>
 </head>
 <body class="bg-gray-50">
+    <!-- Paste Indicator -->
+    <div id="pasteIndicator" class="paste-indicator">
+        <i class="fas fa-paste mr-2"></i>Image Pasted! Processing...
+    </div>
+
     <!-- Header -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
@@ -129,7 +165,7 @@
                     </div>
                     <div>
                         <h1 class="text-3xl font-bold text-gray-800">PDF/Image to Word Converter</h1>
-                        <p class="text-gray-600 mt-1">Extract text from PDFs and images with OCR technology</p>
+                        <p class="text-gray-600 mt-1">Extract text from PDFs and images with OCR technology - Perfect formatting preserved!</p>
                     </div>
                 </div>
                 <div class="flex flex-wrap gap-2 mt-4">
@@ -143,7 +179,8 @@
             <div class="bg-white rounded-lg shadow-md p-8 mb-6">
                 <!-- Upload Section -->
                 <div id="uploadSection" class="mb-6">
-                    <div class="drop-zone border-3 border-dashed border-blue-400 rounded-lg p-12 text-center cursor-pointer hover:border-green-500 hover:bg-blue-50" id="dropZone">
+                    <!-- Main Drop Zone -->
+                    <div class="drop-zone border-3 border-dashed border-blue-400 rounded-lg p-12 text-center cursor-pointer hover:border-green-500 hover:bg-blue-50 mb-6" id="dropZone">
                         <i class="fas fa-cloud-upload-alt text-6xl text-blue-500 mb-4"></i>
                         <h3 class="text-2xl font-bold text-gray-800 mb-2">Drop your file here</h3>
                         <p class="text-gray-600 mb-4">or click to browse</p>
@@ -153,6 +190,45 @@
                         <p class="text-sm text-gray-500 mt-4">Supports PDF, JPG, PNG, WEBP (Max 10MB)</p>
                     </div>
                     <input type="file" id="fileInput" accept=".pdf,image/*" class="hidden">
+
+                    <!-- Three Upload Methods -->
+                    <div class="grid md:grid-cols-3 gap-4 mb-6">
+                        <div class="method-card bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-xl shadow-lg border-2 border-blue-200" onclick="document.getElementById('fileInput').click()">
+                            <i class="fas fa-folder-open text-4xl text-blue-600 mb-3"></i>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">📁 Upload File</h3>
+                            <p class="text-sm text-gray-600">Click to select from your computer</p>
+                        </div>
+                        
+                        <div class="method-card bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-xl shadow-lg border-2 border-green-200">
+                            <i class="fas fa-hand-pointer text-4xl text-green-600 mb-3"></i>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">🖱️ Drag & Drop</h3>
+                            <p class="text-sm text-gray-600">Drop file anywhere on the page</p>
+                        </div>
+                        
+                        <div class="method-card bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-xl shadow-lg border-2 border-purple-200">
+                            <i class="fas fa-paste text-4xl text-purple-600 mb-3"></i>
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">📋 Paste Image</h3>
+                            <p class="text-sm text-gray-600">Press Ctrl+V to paste screenshot</p>
+                        </div>
+                    </div>
+
+                    <!-- Features Info -->
+                    <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-4">
+                        <p class="font-bold text-yellow-800 mb-2"><i class="fas fa-lightbulb mr-2"></i>Features:</p>
+                        <div class="grid md:grid-cols-2 gap-2 text-sm text-yellow-800">
+                            <div>✅ Preserves paragraphs & line breaks</div>
+                            <div>✅ Maintains numbers & formatting</div>
+                            <div>✅ PDF text extraction with structure</div>
+                            <div>✅ Image OCR for English text</div>
+                            <div>✅ Download as proper .doc file</div>
+                            <div>✅ Copy from PDF & paste directly</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- File Info -->
+                <div id="fileInfo" class="hidden bg-blue-50 border-2 border-blue-300 rounded-lg p-4 mb-6">
+                    <p class="font-bold text-blue-800">📎 File: <span id="fileName">--</span></p>
                 </div>
 
                 <!-- Processing Section -->
@@ -177,20 +253,24 @@
 
                         <!-- Extracted Text -->
                         <div class="bg-gray-50 rounded-lg p-6 border-2 border-gray-200">
-                            <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-file-alt mr-2"></i>Extracted Text</h3>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4"><i class="fas fa-file-alt mr-2"></i>Extracted Text (Formatted)</h3>
                             <textarea id="extractedText" class="w-full h-96 p-4 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none resize-vertical" placeholder="Extracted text will appear here..."></textarea>
                             
                             <!-- Action Buttons -->
                             <div class="flex flex-col gap-3 mt-4">
-                                <button onclick="copyText()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                                <button onclick="downloadWordDoc()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition flex items-center justify-center">
+                                    <i class="fas fa-download mr-2"></i>Download Word Document (.doc)
+                                </button>
+                                <button onclick="copyText()" class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition flex items-center justify-center">
                                     <i class="fas fa-copy mr-2"></i>Copy Text
                                 </button>
-                                <button onclick="downloadWordDoc()" class="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-700 transition">
-                                    <i class="fas fa-download mr-2"></i>Download Word Document
-                                </button>
-                                <button onclick="location.reload()" class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition">
+                                <button onclick="location.reload()" class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition flex items-center justify-center">
                                     <i class="fas fa-redo mr-2"></i>Convert Another
                                 </button>
+                            </div>
+
+                            <div class="mt-4 p-3 bg-green-50 rounded-lg text-center text-sm text-green-800">
+                                ✅ Formatting preserved - Opens perfectly in Microsoft Word
                             </div>
                         </div>
                     </div>
@@ -222,9 +302,7 @@
             <!-- Related Tools -->
             <div class="bg-white rounded-lg shadow-md p-8">
                 <h2 class="text-2xl font-bold text-gray-800 mb-6"><i class="fas fa-tools mr-2"></i>Related Tools</h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="relatedTools">
-                    <!-- Related tools will be loaded here -->
-                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4" id="relatedTools"></div>
             </div>
         </div>
     </main>
@@ -252,10 +330,10 @@
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Popular Tools</h4>
-                    <ul class="space-y-2 text-sm text-gray-400" id="footerPopularTools">
-                        <li><a href="#" class="hover:text-white transition"><i class="fas fa-file-word mr-2"></i>PDF to Word</a></li>
+                    <ul class="space-y-2 text-sm text-gray-400">
                         <li><a href="#" class="hover:text-white transition"><i class="fas fa-text-height mr-2"></i>Case Converter</a></li>
-                        <li><a href="#" class="hover:text-white transition"><i class="fas fa-calculator mr-2"></i>Age Calculator</a></li>
+                        <li><a href="#" class="hover:text-white transition"><i class="fas fa-font mr-2"></i>Word Counter</a></li>
+                        <li><a href="age-calculator.html" class="hover:text-white transition"><i class="fas fa-birthday-cake mr-2"></i>Age Calculator</a></li>
                         <li><a href="#" class="hover:text-white transition"><i class="fas fa-qrcode mr-2"></i>QR Generator</a></li>
                     </ul>
                 </div>
@@ -286,13 +364,14 @@
                     <a href="#" class="text-2xl hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                 </div>
                 <p class="text-sm text-gray-400">&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
-                <p class="text-gray-400 text-xs mt-2">by freetoolsapp</p>
+                <p class="text-xs text-gray-400 mt-2">by freetoolsapp</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
         // Mobile Menu Toggle
         document.getElementById('mobileMenuBtn').addEventListener('click', function() {
             const menu = document.getElementById('mobileMenu');
@@ -301,17 +380,16 @@
 
         // Related Tools Data
         const relatedTools = [
-            { name: 'Case Converter', icon: 'fa-text-height', link: 'case-converter.html', category: 'utility' },
-            { name: 'Word Counter', icon: 'fa-font', link: 'word-counter.html', category: 'utility' },
-            { name: 'Image Compressor', icon: 'fa-compress', link: 'image-compressor.html', category: 'design' },
-            { name: 'QR Code Generator', icon: 'fa-qrcode', link: 'qr-generator.html', category: 'utility' }
+            { name: 'Case Converter', icon: 'fa-text-height', link: 'case-converter.html' },
+            { name: 'Word Counter', icon: 'fa-font', link: 'word-counter.html' },
+            { name: 'Image Compressor', icon: 'fa-compress', link: 'image-compressor.html' },
+            { name: 'QR Code Generator', icon: 'fa-qrcode', link: 'qr-generator.html' }
         ];
 
-        // Load Related Tools
         function loadRelatedTools() {
             const container = document.getElementById('relatedTools');
             relatedTools.forEach(tool => {
-                const toolCard = `
+                container.innerHTML += `
                     <a href="${tool.link}" class="tool-card block bg-gradient-to-br from-blue-50 to-purple-50 p-6 rounded-lg hover:shadow-lg transition">
                         <div class="flex items-center mb-3">
                             <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mr-3">
@@ -319,13 +397,10 @@
                             </div>
                             <h3 class="font-bold text-gray-800">${tool.name}</h3>
                         </div>
-                        <p class="text-sm text-gray-600">Click to use this tool</p>
                     </a>
                 `;
-                container.innerHTML += toolCard;
             });
         }
-
         loadRelatedTools();
 
         // File handling variables
@@ -337,6 +412,7 @@
 
         ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
             dropZone.addEventListener(eventName, preventDefaults, false);
+            document.body.addEventListener(eventName, preventDefaults, false);
         });
 
         function preventDefaults(e) {
@@ -346,20 +422,44 @@
 
         ['dragenter', 'dragover'].forEach(eventName => {
             dropZone.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
+            document.body.addEventListener(eventName, () => dropZone.classList.add('dragover'), false);
         });
 
         ['dragleave', 'drop'].forEach(eventName => {
             dropZone.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
+            document.body.addEventListener(eventName, () => dropZone.classList.remove('dragover'), false);
         });
 
         dropZone.addEventListener('drop', handleDrop, false);
-        dropZone.addEventListener('click', () => fileInput.click());
+        document.body.addEventListener('drop', handleDrop, false);
         fileInput.addEventListener('change', handleFiles, false);
+
+        // PASTE FUNCTIONALITY - Copy image from PDF and paste
+        window.addEventListener('paste', function(e) {
+            const items = e.clipboardData.items;
+            for (let i = 0; i < items.length; i++) {
+                if (items[i].type.indexOf('image') !== -1) {
+                    e.preventDefault();
+                    const blob = items[i].getAsFile();
+                    
+                    // Show paste indicator
+                    const indicator = document.getElementById('pasteIndicator');
+                    indicator.classList.add('show');
+                    setTimeout(() => indicator.classList.remove('show'), 1500);
+                    
+                    const fileName = 'Pasted_Image_' + new Date().toLocaleTimeString().replace(/:/g, '-') + '.png';
+                    processFile(blob, fileName);
+                    return;
+                }
+            }
+        });
 
         function handleDrop(e) {
             const dt = e.dataTransfer;
             const files = dt.files;
-            handleFiles({target: {files: files}});
+            if (files.length > 0) {
+                handleFiles({target: {files: files}});
+            }
         }
 
         async function handleFiles(e) {
@@ -378,17 +478,23 @@
                 return;
             }
 
+            processFile(file, file.name);
+        }
+
+        async function processFile(file, fileName) {
+            // Show file info
+            document.getElementById('fileName').textContent = fileName;
+            document.getElementById('fileInfo').classList.remove('hidden');
+
             // Show preview
-            if (file.type.startsWith('image/')) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    document.getElementById('previewImg').src = e.target.result;
-                };
-                reader.readAsDataURL(file);
-            }
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('previewImg').src = e.target.result;
+            };
+            reader.readAsDataURL(file);
 
             // Show processing
-            document.getElementById('uploadSection').classList.add('hidden');
+            document.getElementById('uploadSection').style.display = 'none';
             document.getElementById('processing').classList.remove('hidden');
 
             try {
@@ -410,7 +516,7 @@
             } catch (error) {
                 alert('Error: ' + error.message);
                 document.getElementById('processing').classList.add('hidden');
-                document.getElementById('uploadSection').classList.remove('hidden');
+                document.getElementById('uploadSection').style.display = 'block';
             }
         }
 
