@@ -52,7 +52,7 @@
       "color": "purple",
       "category": "utility",
       "badge": "POPULAR",
-      "file": "ai-image-generator.html",
+      "file": "tools/utility/ai-image-generator.html",
       "description": "Create stunning AI-generated images from text descriptions"
     },
     {
