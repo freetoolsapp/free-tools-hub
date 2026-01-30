@@ -226,7 +226,7 @@
       "color": "green",
       "category": "webdev",
       "badge": "UPDATED",
-      "status": "tools/webdev/json-formatter.html",
+      "file": "tools/webdev/json-formatter.html",
       "description": "Format and validate JSON data with syntax highlighting"
     }
   ]
