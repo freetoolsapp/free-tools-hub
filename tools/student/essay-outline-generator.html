@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Essay Outline Generator - Create Structured Outlines | Free Tools Hub</title>
+    <meta name="title" content="Essay Outline Generator - Create Structured Outlines | Free Tools Hub">
+    <meta name="description" content="Generate professional essay outlines instantly. Create structured outlines for argumentative, persuasive, and expository essays. Free, fast, and no signup required!">
+    <meta name="keywords" content="essay outline generator, essay outline, essay structure, academic writing, outline maker, essay planner, free outline generator">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/student/essay-outline-generator.html">
+    <meta property="og:title" content="Essay Outline Generator - Create Structured Outlines | Free Tools Hub">
+    <meta property="og:description" content="Generate professional essay outlines instantly. Create structured outlines for argumentative, persuasive, and expository essays. Free, fast, and no signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/student/essay-outline-generator.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .outline-section {
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+        }
+        
+        .outline-section:hover {
+            border-left-color: #4c51bf;
+            transform: translateX(5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Essay Outline Generator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-file-alt text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Essay Outline Generator</h2>
+            <p class="text-xl mb-2">Create structured essay outlines in minutes</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • No Signup • Instant Results</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Generator Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-edit text-blue-600 mr-2"></i>Generate Your Essay Outline
+                </h3>
+                
+                <div class="space-y-6">
+                    <!-- Essay Topic -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-lightbulb text-yellow-500 mr-1"></i>Essay Topic *
+                        </label>
+                        <input 
+                            type="text" 
+                            id="essayTopic" 
+                            placeholder="e.g., The Impact of Social Media on Modern Communication"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                        >
+                    </div>
+
+                    <!-- Essay Type -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-list text-blue-500 mr-1"></i>Essay Type *
+                        </label>
+                        <select 
+                            id="essayType" 
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                        >
+                            <option value="">-- Select Essay Type --</option>
+                            <option value="argumentative">Argumentative Essay</option>
+                            <option value="persuasive">Persuasive Essay</option>
+                            <option value="expository">Expository Essay</option>
+                            <option value="narrative">Narrative Essay</option>
+                            <option value="descriptive">Descriptive Essay</option>
+                            <option value="compare">Compare and Contrast Essay</option>
+                            <option value="cause">Cause and Effect Essay</option>
+                            <option value="analytical">Analytical Essay</option>
+                        </select>
+                    </div>
+
+                    <!-- Number of Body Paragraphs -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-paragraph text-green-500 mr-1"></i>Number of Body Paragraphs
+                        </label>
+                        <select 
+                            id="numParagraphs" 
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                        >
+                            <option value="3">3 Paragraphs (Standard)</option>
+                            <option value="4">4 Paragraphs</option>
+                            <option value="5">5 Paragraphs (Extended)</option>
+                        </select>
+                    </div>
+
+                    <!-- Main Points (Optional) -->
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-list-ul text-purple-500 mr-1"></i>Main Points (Optional - One per line)
+                        </label>
+                        <textarea 
+                            id="mainPoints" 
+                            rows="4"
+                            placeholder="Point 1: Increased connectivity&#10;Point 2: Impact on mental health&#10;Point 3: Changes in communication patterns"
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                        ></textarea>
+                    </div>
+
+                    <!-- Generate Button -->
+                    <button 
+                        onclick="generateOutline()" 
+                        class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all"
+                    >
+                        <i class="fas fa-magic mr-2"></i>Generate Outline
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Section -->
+            <div id="resultSection" class="bg-white rounded-lg shadow-lg p-8 mb-8 hidden fade-in">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        <i class="fas fa-file-alt text-green-600 mr-2"></i>Your Essay Outline
+                    </h3>
+                    <div class="flex gap-3">
+                        <button onclick="copyOutline()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-copy mr-2"></i>Copy
+                        </button>
+                        <button onclick="downloadOutline()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                            <i class="fas fa-download mr-2"></i>Download
+                        </button>
+                        <button onclick="printOutline()" class="bg-purple-600 text-white px-6 py-2 rounded-lg hover:bg-purple-700 transition">
+                            <i class="fas fa-print mr-2"></i>Print
+                        </button>
+                    </div>
+                </div>
+
+                <div id="outlineContent" class="bg-gray-50 p-6 rounded-lg border-2 border-gray-200 font-mono text-sm whitespace-pre-wrap"></div>
+            </div>
+
+            <!-- Features -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                    <i class="fas fa-bolt text-3xl text-blue-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Instant Generation</h4>
+                    <p class="text-sm text-gray-600">Get your essay outline in seconds with structured format</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                    <i class="fas fa-graduation-cap text-3xl text-purple-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Academic Standard</h4>
+                    <p class="text-sm text-gray-600">Follows proper academic essay structure and formatting</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg">
+                    <i class="fas fa-list-check text-3xl text-pink-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Multiple Types</h4>
+                    <p class="text-sm text-gray-600">Support for 8+ essay types with custom structures</p>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Enter Your Topic</h4>
+                            <p class="text-gray-600">Type in your essay topic or research question</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Select Essay Type</h4>
+                            <p class="text-gray-600">Choose from argumentative, persuasive, expository, and more</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Customize Structure</h4>
+                            <p class="text-gray-600">Choose number of paragraphs and add optional main points</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Generate & Download</h4>
+                            <p class="text-gray-600">Get your outline instantly and download or copy it</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Essay Types Explained -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-book-open text-blue-600 mr-2"></i>Essay Types Explained
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="outline-section pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-gavel mr-2 text-blue-600"></i>Argumentative Essay</h4>
+                        <p class="text-sm text-gray-600">Present a clear argument with evidence and counter-arguments</p>
+                    </div>
+                    <div class="outline-section pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-bullhorn mr-2 text-purple-600"></i>Persuasive Essay</h4>
+                        <p class="text-sm text-gray-600">Convince readers to adopt your viewpoint or take action</p>
+                    </div>
+                    <div class="outline-section pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-info-circle mr-2 text-green-600"></i>Expository Essay</h4>
+                        <p class="text-sm text-gray-600">Explain a topic clearly with facts and examples</p>
+                    </div>
+                    <div class="outline-section pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-book mr-2 text-pink-600"></i>Narrative Essay</h4>
+                        <p class="text-sm text-gray-600">Tell a story with a clear beginning, middle, and end</p>
+                    </div>
+                    <div class="outline-section pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-balance-scale mr-2 text-indigo-600"></i>Compare & Contrast</h4>
+                        <p class="text-sm text-gray-600">Analyze similarities and differences between subjects</p>
+                    </div>
+                    <div class="outline-section pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-project-diagram mr-2 text-yellow-600"></i>Cause & Effect</h4>
+                        <p class="text-sm text-gray-600">Explore relationships between events, causes, and consequences</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="citation-generator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-quote-right text-4xl text-indigo-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Citation Generator</h4>
+                        <p class="text-sm text-gray-600">Generate citations in APA, MLA, Chicago formats</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                    <a href="word-counter.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-hashtag text-4xl text-blue-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Word Counter</h4>
+                        <p class="text-sm text-gray-600">Count words, characters, and reading time</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                    <a href="gpa-calculator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-calculator text-4xl text-teal-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">GPA Calculator</h4>
+                        <p class="text-sm text-gray-600">Calculate your GPA instantly and accurately</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>Frequently Asked Questions
+                </h3>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Is this essay outline generator free?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Our essay outline generator is completely free with no signup required. Generate unlimited outlines.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>What essay types are supported?</h4>
+                        <p class="text-gray-600 pl-7">We support 8+ essay types including argumentative, persuasive, expository, narrative, descriptive, compare/contrast, cause/effect, and analytical essays.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Can I customize the outline structure?</h4>
+                        <p class="text-gray-600 pl-7">Yes! You can choose the number of body paragraphs (3-5) and add your own main points to customize the outline structure.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>How do I use the generated outline?</h4>
+                        <p class="text-gray-600 pl-7">You can copy the outline to your clipboard, download it as a text file, or print it directly. Use it as a framework for writing your essay.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Is the outline academically acceptable?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Our outlines follow standard academic essay structure with proper introduction, body paragraphs, and conclusion formats.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Essay Templates
+        const essayTemplates = {
+            argumentative: {
+                intro: [
+                    "Hook: Start with a compelling question, statistic, or quote",
+                    "Background: Provide context about the topic",
+                    "Thesis Statement: State your position/argument clearly"
+                ],
+                body: [
+                    "Topic Sentence: Main argument point",
+                    "Evidence: Support with facts, statistics, or examples",
+                    "Analysis: Explain how evidence supports your argument",
+                    "Counter-argument: Address opposing views",
+                    "Rebuttal: Refute counter-arguments",
+                    "Transition: Connect to next paragraph"
+                ],
+                conclusion: [
+                    "Restate Thesis: Summarize main argument",
+                    "Summary: Recap key supporting points",
+                    "Final Thoughts: End with call to action or broader implications"
+                ]
+            },
+            persuasive: {
+                intro: [
+                    "Hook: Capture reader's attention with emotional appeal",
+                    "Background: Introduce the issue",
+                    "Thesis Statement: State your position and persuasive goal"
+                ],
+                body: [
+                    "Topic Sentence: Main persuasive point",
+                    "Evidence: Use emotional and logical appeals",
+                    "Examples: Real-world scenarios",
+                    "Impact: Show consequences/benefits",
+                    "Transition: Lead to next argument"
+                ],
+                conclusion: [
+                    "Restate Position: Reinforce your stance",
+                    "Emotional Appeal: Connect with reader's values",
+                    "Call to Action: Tell readers what to do"
+                ]
+            },
+            expository: {
+                intro: [
+                    "Hook: Engaging opening about the topic",
+                    "Background: Define key terms and concepts",
+                    "Thesis Statement: Present main idea to explain"
+                ],
+                body: [
+                    "Topic Sentence: Main point to explain",
+                    "Definition: Clarify key concepts",
+                    "Examples: Provide concrete illustrations",
+                    "Evidence: Support with facts and data",
+                    "Explanation: Break down complex ideas",
+                    "Transition: Connect ideas smoothly"
+                ],
+                conclusion: [
+                    "Summary: Review main points explained",
+                    "Synthesis: Show how points connect",
+                    "Significance: Explain importance of understanding"
+                ]
+            },
+            narrative: {
+                intro: [
+                    "Hook: Start with engaging scene or dialogue",
+                    "Setting: Establish time, place, characters",
+                    "Thesis/Purpose: Hint at the story's lesson/meaning"
+                ],
+                body: [
+                    "Rising Action: Build tension and develop plot",
+                    "Conflict: Present main challenge or problem",
+                    "Character Development: Show growth/change",
+                    "Dialogue: Include meaningful conversations",
+                    "Descriptive Details: Paint vivid pictures",
+                    "Climax: Reach the story's peak moment"
+                ],
+                conclusion: [
+                    "Resolution: Wrap up the story",
+                    "Reflection: Explain lesson learned",
+                    "Impact: Show lasting significance"
+                ]
+            },
+            descriptive: {
+                intro: [
+                    "Hook: Create vivid sensory impression",
+                    "Context: Introduce subject being described",
+                    "Thesis: State dominant impression"
+                ],
+                body: [
+                    "Topic Sentence: Focus on specific aspect",
+                    "Sensory Details: Use all five senses",
+                    "Figurative Language: Metaphors, similes",
+                    "Spatial Organization: Describe systematically",
+                    "Specific Examples: Concrete details",
+                    "Mood/Atmosphere: Create emotional tone"
+                ],
+                conclusion: [
+                    "Reinforce Impression: Strengthen main image",
+                    "Emotional Impact: Leave lasting feeling",
+                    "Significance: Explain why description matters"
+                ]
+            },
+            compare: {
+                intro: [
+                    "Hook: Present interesting comparison",
+                    "Background: Introduce subjects being compared",
+                    "Thesis Statement: State comparison purpose and focus"
+                ],
+                body: [
+                    "Topic Sentence: State comparison point",
+                    "Subject A: Discuss first subject's characteristics",
+                    "Subject B: Discuss second subject's characteristics",
+                    "Similarities: Highlight common features",
+                    "Differences: Explain contrasting aspects",
+                    "Analysis: Interpret significance of comparison"
+                ],
+                conclusion: [
+                    "Summary: Review main comparisons",
+                    "Synthesis: Show overall relationship",
+                    "Significance: Explain what comparison reveals"
+                ]
+            },
+            cause: {
+                intro: [
+                    "Hook: Present intriguing cause or effect",
+                    "Background: Explain the phenomenon",
+                    "Thesis Statement: Identify causal relationship"
+                ],
+                body: [
+                    "Topic Sentence: State cause or effect",
+                    "Primary Cause: Explain main factor",
+                    "Supporting Causes: Discuss contributing factors",
+                    "Effects: Show resulting outcomes",
+                    "Evidence: Support causal links",
+                    "Analysis: Explain why relationship exists"
+                ],
+                conclusion: [
+                    "Summary: Review cause-effect chain",
+                    "Implications: Discuss broader consequences",
+                    "Future Outlook: Predict potential outcomes"
+                ]
+            },
+            analytical: {
+                intro: [
+                    "Hook: Present analytical question",
+                    "Background: Introduce subject of analysis",
+                    "Thesis Statement: State analytical claim"
+                ],
+                body: [
+                    "Topic Sentence: Present analytical point",
+                    "Evidence: Quote or reference source material",
+                    "Close Reading: Examine details carefully",
+                    "Interpretation: Explain meaning",
+                    "Context: Connect to broader themes",
+                    "Transition: Build analytical argument"
+                ],
+                conclusion: [
+                    "Synthesis: Pull together analysis",
+                    "Larger Significance: Broader implications",
+                    "Final Insight: Conclusive interpretation"
+                ]
+            }
+        };
+
+        function generateOutline() {
+            const topic = document.getElementById('essayTopic').value.trim();
+            const type = document.getElementById('essayType').value;
+            const numParagraphs = parseInt(document.getElementById('numParagraphs').value);
+            const mainPoints = document.getElementById('mainPoints').value.trim();
+
+            if (!topic) {
+                alert('Please enter an essay topic!');
+                return;
+            }
+
+            if (!type) {
+                alert('Please select an essay type!');
+                return;
+            }
+
+            const template = essayTemplates[type];
+            let outline = `ESSAY OUTLINE\n`;
+            outline += `${'='.repeat(60)}\n\n`;
+            outline += `Topic: ${topic}\n`;
+            outline += `Type: ${type.charAt(0).toUpperCase() + type.slice(1)} Essay\n`;
+            outline += `Date: ${new Date().toLocaleDateString()}\n`;
+            outline += `\n${'='.repeat(60)}\n\n`;
+
+            // Parse custom main points
+            const customPoints = mainPoints ? mainPoints.split('\n').filter(p => p.trim()) : [];
+
+            // I. Introduction
+            outline += `I. INTRODUCTION\n`;
+            outline += `${'-'.repeat(60)}\n`;
+            template.intro.forEach((point, idx) => {
+                outline += `   ${String.fromCharCode(65 + idx)}. ${point}\n`;
+            });
+            outline += `\n`;
+
+            // II-IV. Body Paragraphs
+            for (let i = 0; i < numParagraphs; i++) {
+                const romanNumeral = String.fromCharCode(73 + i + 1); // II, III, IV, V
+                const customPoint = customPoints[i] ? ` - ${customPoints[i]}` : '';
+                outline += `${romanNumeral}. BODY PARAGRAPH ${i + 1}${customPoint}\n`;
+                outline += `${'-'.repeat(60)}\n`;
+                template.body.forEach((point, idx) => {
+                    outline += `   ${String.fromCharCode(65 + idx)}. ${point}\n`;
+                });
+                outline += `\n`;
+            }
+
+            // Final. Conclusion
+            const conclusionNumeral = String.fromCharCode(73 + numParagraphs + 1);
+            outline += `${conclusionNumeral}. CONCLUSION\n`;
+            outline += `${'-'.repeat(60)}\n`;
+            template.conclusion.forEach((point, idx) => {
+                outline += `   ${String.fromCharCode(65 + idx)}. ${point}\n`;
+            });
+            outline += `\n${'='.repeat(60)}\n`;
+            outline += `\nEND OF OUTLINE\n`;
+
+            // Display result
+            document.getElementById('outlineContent').textContent = outline;
+            document.getElementById('resultSection').classList.remove('hidden');
+            
+            // Scroll to result
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function copyOutline() {
+            const text = document.getElementById('outlineContent').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Outline copied to clipboard!');
+            });
+        }
+
+        function downloadOutline() {
+            const text = document.getElementById('outlineContent').textContent;
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `essay-outline-${new Date().getTime()}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function printOutline() {
+            const content = document.getElementById('outlineContent').textContent;
+            const printWindow = window.open('', '', 'height=600,width=800');
+            printWindow.document.write('<html><head><title>Essay Outline</title>');
+            printWindow.document.write('<style>body{font-family:monospace;padding:20px;}</style>');
+            printWindow.document.write('</head><body>');
+            printWindow.document.write('<pre>' + content + '</pre>');
+            printWindow.document.write('</body></html>');
+            printWindow.document.close();
+            printWindow.print();
+        }
+    </script>
+</body>
+</html>
