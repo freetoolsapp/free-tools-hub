@@ -1,43 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3CEQJ2D9WY'); </script>
+<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3CEQJ2D9WY'); </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Primary Meta Tags -->
-    <title>Free Resources - Learning Materials & Guides | Free Tools Hub</title>
-    <meta name="title" content="Free Resources - Learning Materials & Guides">
-    <meta name="description" content="Free learning resources, tutorials, guides, and educational materials for students, developers, and content creators. Improve your skills with our curated resources.">
-    <meta name="keywords" content="free resources, learning materials, tutorials, guides, educational content, student resources">
+    <title>Free Learning Resources - Educational Materials & Study Guides | Free Tools Hub</title>
+    <meta name="title" content="Free Learning Resources - Educational Materials & Study Guides">
+    <meta name="description" content="Access comprehensive educational resources including study guides, templates, worksheets, and learning materials. Free resources for students, teachers, and professionals.">
+    <meta name="keywords" content="free resources, educational materials, study guides, templates, worksheets, learning resources, student resources">
     <meta name="robots" content="index, follow">
-    <meta name="author" content="Free Tools Hub">
     
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/resources.html">
-    <meta property="og:title" content="Free Resources - Free Tools Hub">
-    <meta property="og:description" content="Free learning resources, tutorials, and guides">
+    <meta property="og:title" content="Free Learning Resources - Educational Materials & Study Guides">
+    <meta property="og:description" content="Access comprehensive educational resources including study guides, templates, worksheets, and learning materials.">
     
     <!-- Canonical URL -->
     <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/resources.html">
     
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
     <!-- Stylesheets -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
     
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebPage",
-        "name": "Resources",
-        "description": "Free learning resources and educational materials",
-        "url": "https://freetoolsapp.github.io/free-tools-hub/resources.html"
-    }
-    </script>
+    <style>
+        .category-card {
+            transition: all 0.3s ease;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .resource-item {
+            transition: all 0.3s ease;
+        }
+        .resource-item:hover {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .resource-item:hover .resource-icon {
+            background: white;
+            color: #667eea;
+        }
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .featured-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        .featured-card:hover {
+            border-color: #667eea;
+            transform: scale(1.02);
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -54,374 +78,659 @@
                     </div>
                 </a>
                 
-                <nav class="hidden md:flex items-center space-x-6">
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
                     <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
                     <a href="index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
                     <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="resources.html" class="text-blue-600 font-bold"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="resources.html" class="text-blue-600 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
                     <a href="tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
                     <a href="contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
                 </nav>
                 
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
             </div>
             
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
                 <a href="index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
                 <a href="index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
                 <a href="blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="resources.html" class="block py-2 font-bold text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="resources.html" class="block py-2 text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
                 <a href="tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
                 <a href="contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
             </nav>
         </div>
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16">
+    <section class="gradient-bg text-white py-20">
         <div class="container mx-auto px-4 text-center">
             <div class="mb-6">
                 <div class="inline-block bg-white/20 px-6 py-2 rounded-full backdrop-blur">
-                    <i class="fas fa-book-open text-yellow-300 mr-2"></i>
-                    <span class="font-bold">Free Learning Resources</span>
+                    <i class="fas fa-star text-yellow-300 mr-2"></i>
+                    <span class="font-bold">1000+ Free Resources • Updated Daily</span>
                 </div>
             </div>
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Resources & Learning Materials</h1>
-            <p class="text-xl mb-8">Curated resources to help you learn, grow, and succeed</p>
-        </div>
-    </section>
-
-    <!-- Resources Categories -->
-    <section class="py-12">
-        <div class="container mx-auto px-4">
+            <h1 class="text-5xl md:text-6xl font-bold mb-6">Learning Resources Hub</h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Discover comprehensive educational materials, study guides, templates, and tools to accelerate your learning journey</p>
             
-            <!-- For Students -->
-            <div class="mb-12">
-                <div class="flex items-center mb-6">
-                    <i class="fas fa-graduation-cap text-4xl text-blue-600 mr-4"></i>
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-800">For Students</h2>
-                        <p class="text-gray-600">Academic resources and study materials</p>
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-3 gap-6">
-                    <!-- Resource Card 1 -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-book text-blue-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Study Guides</h3>
-                        <p class="text-gray-600 mb-4">Comprehensive study guides for various subjects and topics</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Mathematics guides</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Science resources</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Language learning</li>
-                        </ul>
-                    </div>
-
-                    <!-- Resource Card 2 -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-green-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-file-alt text-green-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Essay Templates</h3>
-                        <p class="text-gray-600 mb-4">Professional essay templates and writing guides</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Argumentative essays</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Research papers</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Report writing</li>
-                        </ul>
-                    </div>
-
-                    <!-- Resource Card 3 -->
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-purple-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-calendar-check text-purple-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Study Planners</h3>
-                        <p class="text-gray-600 mb-4">Organize your studies with effective planners</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Weekly schedules</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Exam preparation</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Time management</li>
-                        </ul>
-                    </div>
+            <div class="max-w-2xl mx-auto mb-8">
+                <div class="relative">
+                    <input type="text" id="searchResources" placeholder="Search resources, guides, templates..." class="w-full px-6 py-4 rounded-full text-gray-800 text-lg focus:outline-none pr-12" aria-label="Search resources">
+                    <button class="absolute right-2 top-1/2 transform -translate-y-1/2 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700">
+                        <i class="fas fa-search"></i>
+                    </button>
                 </div>
             </div>
 
-            <!-- For Developers -->
-            <div class="mb-12">
-                <div class="flex items-center mb-6">
-                    <i class="fas fa-code text-4xl text-purple-600 mr-4"></i>
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-800">For Developers</h2>
-                        <p class="text-gray-600">Programming resources and development tools</p>
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-indigo-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-laptop-code text-indigo-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Code Snippets</h3>
-                        <p class="text-gray-600 mb-4">Ready-to-use code snippets for various languages</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>JavaScript examples</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Python scripts</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>HTML/CSS templates</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-yellow-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-book-reader text-yellow-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Documentation</h3>
-                        <p class="text-gray-600 mb-4">Comprehensive guides and documentation</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>API references</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Framework guides</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Best practices</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-red-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-tools text-red-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Dev Tools</h3>
-                        <p class="text-gray-600 mb-4">Essential development tools and utilities</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Testing tools</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Debug helpers</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Performance tips</li>
-                        </ul>
-                    </div>
-                </div>
+            <div class="flex flex-wrap justify-center gap-4 mt-8">
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-check-circle mr-2"></i>100% Free</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-download mr-2"></i>Instant Download</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-user-shield mr-2"></i>No Registration</span>
+                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-sync mr-2"></i>Updated Weekly</span>
             </div>
-
-            <!-- For Content Creators -->
-            <div class="mb-12">
-                <div class="flex items-center mb-6">
-                    <i class="fas fa-palette text-4xl text-pink-600 mr-4"></i>
-                    <div>
-                        <h2 class="text-3xl font-bold text-gray-800">For Content Creators</h2>
-                        <p class="text-gray-600">Resources for bloggers, YouTubers, and creators</p>
-                    </div>
-                </div>
-                
-                <div class="grid md:grid-cols-3 gap-6">
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-pink-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-video text-pink-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Content Ideas</h3>
-                        <p class="text-gray-600 mb-4">Fresh content ideas for your channel or blog</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Video topics</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Blog post ideas</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Social media content</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-orange-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-chart-line text-orange-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Growth Strategies</h3>
-                        <p class="text-gray-600 mb-4">Grow your audience and engagement</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>SEO strategies</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Social media tips</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Audience building</li>
-                        </ul>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition">
-                        <div class="bg-teal-100 w-12 h-12 rounded-lg flex items-center justify-center mb-4">
-                            <i class="fas fa-images text-teal-600 text-xl"></i>
-                        </div>
-                        <h3 class="text-xl font-bold text-gray-800 mb-2">Design Resources</h3>
-                        <p class="text-gray-600 mb-4">Graphics, templates, and design assets</p>
-                        <ul class="space-y-2 text-sm text-gray-700">
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Thumbnail templates</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Banner designs</li>
-                            <li><i class="fas fa-check-circle text-green-500 mr-2"></i>Color palettes</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Learning Paths -->
-            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-route text-blue-600 mr-2"></i>
-                    Recommended Learning Paths
-                </h2>
-                
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="bg-white rounded-lg p-6 shadow">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">
-                            <i class="fas fa-graduation-cap text-blue-600 mr-2"></i>
-                            Complete Beginner Path
-                        </h3>
-                        <ol class="space-y-3 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">1</span>
-                                <span>Start with basics - Learn fundamentals</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">2</span>
-                                <span>Practice with our tools - Hands-on experience</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">3</span>
-                                <span>Build projects - Apply your knowledge</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-blue-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">4</span>
-                                <span>Join community - Learn from others</span>
-                            </li>
-                        </ol>
-                    </div>
-
-                    <div class="bg-white rounded-lg p-6 shadow">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4">
-                            <i class="fas fa-rocket text-purple-600 mr-2"></i>
-                            Advanced Growth Path
-                        </h3>
-                        <ol class="space-y-3 text-gray-700">
-                            <li class="flex items-start">
-                                <span class="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">1</span>
-                                <span>Master advanced techniques - Deep dive</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">2</span>
-                                <span>Create complex projects - Challenge yourself</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">3</span>
-                                <span>Contribute to community - Share knowledge</span>
-                            </li>
-                            <li class="flex items-start">
-                                <span class="bg-purple-600 text-white rounded-full w-6 h-6 flex items-center justify-center mr-3 text-sm">4</span>
-                                <span>Stay updated - Continuous learning</span>
-                            </li>
-                        </ol>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Free eBooks & Guides -->
-            <div class="mb-12">
-                <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-book text-green-600 mr-2"></i>
-                    Free eBooks & Guides
-                </h2>
-                
-                <div class="grid md:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
-                        <i class="fas fa-file-pdf text-red-600 text-4xl mb-3"></i>
-                        <h3 class="font-bold text-gray-800 mb-2">SEO Guide 2025</h3>
-                        <p class="text-sm text-gray-600 mb-4">Complete SEO handbook</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                            <i class="fas fa-download mr-1"></i>Download
-                        </button>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
-                        <i class="fas fa-file-pdf text-red-600 text-4xl mb-3"></i>
-                        <h3 class="font-bold text-gray-800 mb-2">Content Marketing</h3>
-                        <p class="text-sm text-gray-600 mb-4">Strategies that work</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                            <i class="fas fa-download mr-1"></i>Download
-                        </button>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
-                        <i class="fas fa-file-pdf text-red-600 text-4xl mb-3"></i>
-                        <h3 class="font-bold text-gray-800 mb-2">Productivity Hacks</h3>
-                        <p class="text-sm text-gray-600 mb-4">Get more done</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                            <i class="fas fa-download mr-1"></i>Download
-                        </button>
-                    </div>
-
-                    <div class="bg-white rounded-lg shadow-lg p-6 text-center hover:shadow-xl transition">
-                        <i class="fas fa-file-pdf text-red-600 text-4xl mb-3"></i>
-                        <h3 class="font-bold text-gray-800 mb-2">Study Techniques</h3>
-                        <p class="text-sm text-gray-600 mb-4">Learn effectively</p>
-                        <button class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-blue-700">
-                            <i class="fas fa-download mr-1"></i>Download
-                        </button>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl font-bold mb-4">Need More Resources?</h2>
-            <p class="text-lg mb-8">We're constantly adding new resources. Check back regularly!</p>
-            <a href="index.html#tools" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:shadow-xl transition inline-block">
-                <i class="fas fa-tools mr-2"></i>Explore Our Tools
-            </a>
+    <!-- Quick Category Navigation -->
+    <section class="bg-white shadow-sm py-6 sticky top-20 z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <a href="#academic" class="px-4 py-2 bg-blue-100 text-blue-600 rounded-lg hover:bg-blue-600 hover:text-white transition font-medium">
+                    <i class="fas fa-graduation-cap mr-2"></i>Academic
+                </a>
+                <a href="#professional" class="px-4 py-2 bg-purple-100 text-purple-600 rounded-lg hover:bg-purple-600 hover:text-white transition font-medium">
+                    <i class="fas fa-briefcase mr-2"></i>Professional
+                </a>
+                <a href="#creative" class="px-4 py-2 bg-pink-100 text-pink-600 rounded-lg hover:bg-pink-600 hover:text-white transition font-medium">
+                    <i class="fas fa-paint-brush mr-2"></i>Creative
+                </a>
+                <a href="#technical" class="px-4 py-2 bg-green-100 text-green-600 rounded-lg hover:bg-green-600 hover:text-white transition font-medium">
+                    <i class="fas fa-code mr-2"></i>Technical
+                </a>
+                <a href="#business" class="px-4 py-2 bg-yellow-100 text-yellow-700 rounded-lg hover:bg-yellow-600 hover:text-white transition font-medium">
+                    <i class="fas fa-chart-line mr-2"></i>Business
+                </a>
+                <a href="#templates" class="px-4 py-2 bg-red-100 text-red-600 rounded-lg hover:bg-red-600 hover:text-white transition font-medium">
+                    <i class="fas fa-file-alt mr-2"></i>Templates
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Resources -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold text-gray-800 mb-3">
+                    <i class="fas fa-fire text-orange-500 mr-2"></i>Featured Resources
+                </h2>
+                <p class="text-gray-600 text-lg">Our most popular and highly-rated educational materials</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Featured Card 1 -->
+                <div class="featured-card rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-book-open text-white text-2xl"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold">NEW</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Complete Study Guide 2025</h3>
+                    <p class="text-gray-600 mb-4">Comprehensive study materials for all major subjects with practice tests and revision notes.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span><i class="fas fa-download mr-1"></i>15.2K</span>
+                            <span><i class="fas fa-star text-yellow-500 mr-1"></i>4.9</span>
+                        </div>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                            Download <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Featured Card 2 -->
+                <div class="featured-card rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-file-pdf text-white text-2xl"></i>
+                        </div>
+                        <span class="bg-orange-100 text-orange-700 px-3 py-1 rounded-full text-xs font-bold">POPULAR</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Resume Templates Bundle</h3>
+                    <p class="text-gray-600 mb-4">Professional resume templates for all industries. ATS-friendly and fully customizable.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span><i class="fas fa-download mr-1"></i>28.5K</span>
+                            <span><i class="fas fa-star text-yellow-500 mr-1"></i>4.8</span>
+                        </div>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                            Download <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Featured Card 3 -->
+                <div class="featured-card rounded-xl p-6">
+                    <div class="flex items-start justify-between mb-4">
+                        <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-teal-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-laptop-code text-white text-2xl"></i>
+                        </div>
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold">TRENDING</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Web Development Cheatsheets</h3>
+                    <p class="text-gray-600 mb-4">Quick reference guides for HTML, CSS, JavaScript, React, and more.</p>
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-4 text-sm text-gray-500">
+                            <span><i class="fas fa-download mr-1"></i>22.1K</span>
+                            <span><i class="fas fa-star text-yellow-500 mr-1"></i>5.0</span>
+                        </div>
+                        <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                            Download <i class="fas fa-arrow-right ml-1"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Academic Resources -->
+    <section id="academic" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-graduation-cap text-blue-600 mr-2"></i>Academic Resources
+                    </h2>
+                    <p class="text-gray-600">Study materials, notes, and guides for students</p>
+                </div>
+                <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="resource-item bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer">
+                    <div class="resource-icon w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-calculator text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Mathematics</h3>
+                    <p class="text-sm text-gray-600 mb-3">Formulas, solved examples, practice worksheets</p>
+                    <span class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>450+ Resources</span>
+                </div>
+
+                <div class="resource-item bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer">
+                    <div class="resource-icon w-12 h-12 bg-purple-100 text-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-flask text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Science</h3>
+                    <p class="text-sm text-gray-600 mb-3">Physics, Chemistry, Biology notes & experiments</p>
+                    <span class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>380+ Resources</span>
+                </div>
+
+                <div class="resource-item bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer">
+                    <div class="resource-icon w-12 h-12 bg-green-100 text-green-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-language text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Languages</h3>
+                    <p class="text-sm text-gray-600 mb-3">Grammar guides, vocabulary lists, exercises</p>
+                    <span class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>290+ Resources</span>
+                </div>
+
+                <div class="resource-item bg-white border-2 border-gray-200 rounded-xl p-6 cursor-pointer">
+                    <div class="resource-icon w-12 h-12 bg-yellow-100 text-yellow-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-globe text-xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Social Studies</h3>
+                    <p class="text-sm text-gray-600 mb-3">History, Geography, Civics study materials</p>
+                    <span class="text-xs text-gray-500"><i class="fas fa-file-alt mr-1"></i>320+ Resources</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Professional Resources -->
+    <section id="professional" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-briefcase text-purple-600 mr-2"></i>Professional Resources
+                    </h2>
+                    <p class="text-gray-600">Career development and workplace materials</p>
+                </div>
+                <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-file-alt text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Resume Templates</h3>
+                            <span class="text-sm text-gray-500">50+ Templates</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Professional resume templates for all career levels and industries.</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
+                        <i class="fas fa-download mr-2"></i>Download Now
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-envelope text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Cover Letters</h3>
+                            <span class="text-sm text-gray-500">35+ Templates</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Compelling cover letter templates and writing guides.</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
+                        <i class="fas fa-download mr-2"></i>Download Now
+                    </a>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center mr-4">
+                            <i class="fas fa-handshake text-white text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-lg">Interview Prep</h3>
+                            <span class="text-sm text-gray-500">100+ Questions</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 mb-4">Common interview questions and expert answers.</p>
+                    <a href="#" class="text-blue-600 font-semibold hover:text-blue-700 inline-flex items-center">
+                        <i class="fas fa-download mr-2"></i>Download Now
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Creative Resources -->
+    <section id="creative" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-paint-brush text-pink-600 mr-2"></i>Creative Resources
+                    </h2>
+                    <p class="text-gray-600">Design assets, templates, and creative tools</p>
+                </div>
+                <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="text-center p-4 bg-gradient-to-br from-pink-50 to-rose-50 rounded-xl hover:shadow-lg transition cursor-pointer">
+                    <div class="w-16 h-16 bg-pink-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-image text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Graphics</h4>
+                    <p class="text-xs text-gray-600">500+ Files</p>
+                </div>
+
+                <div class="text-center p-4 bg-gradient-to-br from-purple-50 to-indigo-50 rounded-xl hover:shadow-lg transition cursor-pointer">
+                    <div class="w-16 h-16 bg-purple-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-icons text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Icons</h4>
+                    <p class="text-xs text-gray-600">1000+ Icons</p>
+                </div>
+
+                <div class="text-center p-4 bg-gradient-to-br from-blue-50 to-cyan-50 rounded-xl hover:shadow-lg transition cursor-pointer">
+                    <div class="w-16 h-16 bg-blue-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-font text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Fonts</h4>
+                    <p class="text-xs text-gray-600">200+ Fonts</p>
+                </div>
+
+                <div class="text-center p-4 bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl hover:shadow-lg transition cursor-pointer">
+                    <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-palette text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Colors</h4>
+                    <p class="text-xs text-gray-600">300+ Palettes</p>
+                </div>
+
+                <div class="text-center p-4 bg-gradient-to-br from-yellow-50 to-orange-50 rounded-xl hover:shadow-lg transition cursor-pointer">
+                    <div class="w-16 h-16 bg-yellow-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-pencil-ruler text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Mockups</h4>
+                    <p class="text-xs text-gray-600">150+ Files</p>
+                </div>
+
+                <div class="text-center p-4 bg-gradient-to-br from-red-50 to-pink-50 rounded-xl hover:shadow-lg transition cursor-pointer">
+                    <div class="w-16 h-16 bg-red-500 rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="fas fa-video text-white text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm mb-1">Videos</h4>
+                    <p class="text-xs text-gray-600">250+ Clips</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Resources -->
+    <section id="technical" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-code text-green-600 mr-2"></i>Technical Resources
+                    </h2>
+                    <p class="text-gray-600">Programming guides, code snippets, and developer tools</p>
+                </div>
+                <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+                    <div class="gradient-bg p-4">
+                        <i class="fas fa-code text-white text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Programming Cheatsheets</h3>
+                        <p class="text-gray-600 mb-4">Quick reference guides for popular programming languages including Python, JavaScript, Java, C++, and more.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="fas fa-file-code mr-1"></i>25 Languages</span>
+                            <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+                    <div class="bg-gradient-to-r from-purple-500 to-pink-500 p-4">
+                        <i class="fas fa-laptop-code text-white text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Web Development</h3>
+                        <p class="text-gray-600 mb-4">HTML, CSS, JavaScript tutorials, frameworks guides, and responsive design resources.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="fas fa-book mr-1"></i>150+ Guides</span>
+                            <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">Download</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+                    <div class="bg-gradient-to-r from-green-500 to-teal-500 p-4">
+                        <i class="fas fa-database text-white text-3xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-bold text-xl mb-2">Database & SQL</h3>
+                        <p class="text-gray-600 mb-4">SQL queries, database design patterns, normalization guides, and optimization tips.</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm text-gray-500"><i class="fas fa-table mr-1"></i>80+ Resources</span>
+                            <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">Download</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Business Resources -->
+    <section id="business" class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h2 class="text-3xl font-bold text-gray-800 mb-2">
+                        <i class="fas fa-chart-line text-yellow-600 mr-2"></i>Business Resources
+                    </h2>
+                    <p class="text-gray-600">Templates, guides, and tools for entrepreneurs</p>
+                </div>
+                <a href="#" class="text-blue-600 font-semibold hover:text-blue-700">
+                    View All <i class="fas fa-arrow-right ml-1"></i>
+                </a>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl p-8 text-white">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Business Plan Templates</h3>
+                            <p class="text-blue-100">Complete business plan templates with financial projections</p>
+                        </div>
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur">
+                            <i class="fas fa-briefcase text-3xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm"><i class="fas fa-download mr-2"></i>12,500+ Downloads</span>
+                        <a href="#" class="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+                            Download
+                        </a>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-green-500 to-teal-600 rounded-xl p-8 text-white">
+                    <div class="flex items-start justify-between mb-6">
+                        <div>
+                            <h3 class="text-2xl font-bold mb-2">Marketing Templates</h3>
+                            <p class="text-green-100">Social media calendars, email templates, and campaign planners</p>
+                        </div>
+                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center backdrop-blur">
+                            <i class="fas fa-bullhorn text-3xl"></i>
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <span class="text-sm"><i class="fas fa-download mr-2"></i>18,300+ Downloads</span>
+                        <a href="#" class="bg-white text-green-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition">
+                            Download
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Templates Section -->
+    <section id="templates" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-10">
+                <h2 class="text-4xl font-bold text-gray-800 mb-3">
+                    <i class="fas fa-file-alt text-red-600 mr-2"></i>Document Templates
+                </h2>
+                <p class="text-gray-600 text-lg">Professional templates for every occasion</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-blue-500 transition cursor-pointer">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-file-word text-blue-600 text-2xl mr-3"></i>
+                        <div>
+                            <h4 class="font-bold">Word Templates</h4>
+                            <span class="text-xs text-gray-500">120+ Files</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Reports, letters, proposals</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-green-500 transition cursor-pointer">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-file-excel text-green-600 text-2xl mr-3"></i>
+                        <div>
+                            <h4 class="font-bold">Excel Templates</h4>
+                            <span class="text-xs text-gray-500">95+ Files</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Budgets, trackers, calculators</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-orange-500 transition cursor-pointer">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-file-powerpoint text-orange-600 text-2xl mr-3"></i>
+                        <div>
+                            <h4 class="font-bold">PowerPoint</h4>
+                            <span class="text-xs text-gray-500">80+ Files</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Presentations, pitch decks</p>
+                </div>
+
+                <div class="bg-white rounded-lg p-4 border-2 border-gray-200 hover:border-red-500 transition cursor-pointer">
+                    <div class="flex items-center mb-3">
+                        <i class="fas fa-file-pdf text-red-600 text-2xl mr-3"></i>
+                        <div>
+                            <h4 class="font-bold">PDF Forms</h4>
+                            <span class="text-xs text-gray-500">65+ Files</span>
+                        </div>
+                    </div>
+                    <p class="text-sm text-gray-600">Contracts, agreements, forms</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section class="py-16 gradient-bg text-white">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">1000+</div>
+                    <p class="text-blue-100">Free Resources</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">500K+</div>
+                    <p class="text-blue-100">Downloads</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">50K+</div>
+                    <p class="text-blue-100">Happy Users</p>
+                </div>
+                <div>
+                    <div class="text-4xl md:text-5xl font-bold mb-2">4.9</div>
+                    <p class="text-blue-100">Average Rating</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12">
+                <i class="fas fa-bell text-5xl text-blue-600 mb-4"></i>
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Get New Resources Weekly</h2>
+                <p class="text-gray-600 mb-6">Subscribe to our newsletter and never miss new educational materials, templates, and study guides.</p>
+                <div class="flex flex-col md:flex-row gap-3 max-w-md mx-auto">
+                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        Subscribe <i class="fas fa-paper-plane ml-2"></i>
+                    </button>
+                </div>
+                <p class="text-xs text-gray-500 mt-4">
+                    <i class="fas fa-lock mr-1"></i>We respect your privacy. Unsubscribe anytime.
+                </p>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white py-12">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
                 <div>
                     <h3 class="font-bold text-lg mb-4">
                         <i class="fas fa-tools mr-2"></i>Free Tools Hub
                     </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools and resources.</p>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <h4 class="font-bold mb-4">Categories</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="index.html" class="hover:text-white transition">Home</a></li>
-                        <li><a href="index.html#tools" class="hover:text-white transition">All Tools</a></li>
-                        <li><a href="blog.html" class="hover:text-white transition">Blog</a></li>
-                        <li><a href="resources.html" class="hover:text-white transition">Resources</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Resources</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="#" class="hover:text-white transition">Study Guides</a></li>
-                        <li><a href="#" class="hover:text-white transition">Code Snippets</a></li>
-                        <li><a href="#" class="hover:text-white transition">Templates</a></li>
-                        <li><a href="#" class="hover:text-white transition">eBooks</a></li>
+                        <li><a href="blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4 text-2xl mb-4">
-                        <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-blue-600 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
-                    <p class="text-gray-400 text-xs">by freetoolsapp</p>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2025 Free Tools Hub. All rights reserved.</p>
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
             </div>
         </div>
     </footer>
 
     <!-- Scripts -->
     <script>
-        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+        }
+
+        // Search functionality
+        const searchInput = document.getElementById('searchResources');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                // Add search logic here
+                console.log('Searching for:', searchTerm);
+            });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
