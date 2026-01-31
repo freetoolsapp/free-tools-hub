@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Citation Generator - APA, MLA, Chicago Format | Free Tools Hub</title>
+    <meta name="title" content="Citation Generator - APA, MLA, Chicago Format | Free Tools Hub">
+    <meta name="description" content="Generate citations in APA, MLA, Chicago, Harvard formats instantly. Free citation maker for books, websites, journals, and more. No signup required!">
+    <meta name="keywords" content="citation generator, APA citation, MLA citation, Chicago citation, Harvard citation, reference generator, bibliography maker, free citation tool">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/student/citation-generator.html">
+    <meta property="og:title" content="Citation Generator - APA, MLA, Chicago Format | Free Tools Hub">
+    <meta property="og:description" content="Generate citations in APA, MLA, Chicago, Harvard formats instantly. Free citation maker for books, websites, journals, and more. No signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/student/citation-generator.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        .slide-in {
+            animation: slideIn 0.5s ease-out;
+        }
+        
+        .citation-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-left: 5px solid #ffd700;
+        }
+        
+        .format-tab {
+            transition: all 0.3s;
+        }
+        
+        .format-tab.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Citation Generator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-quote-right text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Citation Generator</h2>
+            <p class="text-xl mb-2">Generate citations in APA, MLA, Chicago, Harvard formats</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • No Signup • Instant Results</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Citation Format Tabs -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-book text-blue-600 mr-2"></i>Select Citation Format
+                </h3>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <button onclick="selectFormat('apa')" class="format-tab active bg-white p-4 rounded-lg border-2 border-gray-300 font-bold">
+                        <i class="fas fa-graduation-cap text-2xl mb-2 text-blue-600"></i>
+                        <div>APA 7th</div>
+                    </button>
+                    <button onclick="selectFormat('mla')" class="format-tab bg-white p-4 rounded-lg border-2 border-gray-300 font-bold">
+                        <i class="fas fa-book-open text-2xl mb-2 text-purple-600"></i>
+                        <div>MLA 9th</div>
+                    </button>
+                    <button onclick="selectFormat('chicago')" class="format-tab bg-white p-4 rounded-lg border-2 border-gray-300 font-bold">
+                        <i class="fas fa-university text-2xl mb-2 text-pink-600"></i>
+                        <div>Chicago</div>
+                    </button>
+                    <button onclick="selectFormat('harvard')" class="format-tab bg-white p-4 rounded-lg border-2 border-gray-300 font-bold">
+                        <i class="fas fa-scroll text-2xl mb-2 text-green-600"></i>
+                        <div>Harvard</div>
+                    </button>
+                </div>
+
+                <!-- Source Type Selection -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-3">
+                        <i class="fas fa-list text-blue-500 mr-2"></i>Select Source Type
+                    </label>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                        <button onclick="selectSource('book')" class="source-btn active bg-blue-100 text-blue-800 px-4 py-3 rounded-lg font-semibold hover:bg-blue-200 transition">
+                            <i class="fas fa-book mr-2"></i>Book
+                        </button>
+                        <button onclick="selectSource('website')" class="source-btn bg-gray-100 text-gray-800 px-4 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                            <i class="fas fa-globe mr-2"></i>Website
+                        </button>
+                        <button onclick="selectSource('journal')" class="source-btn bg-gray-100 text-gray-800 px-4 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                            <i class="fas fa-file-alt mr-2"></i>Journal
+                        </button>
+                        <button onclick="selectSource('newspaper')" class="source-btn bg-gray-100 text-gray-800 px-4 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
+                            <i class="fas fa-newspaper mr-2"></i>Newspaper
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Citation Form -->
+                <div id="citationForm" class="space-y-4">
+                    <!-- Dynamic form fields will be inserted here -->
+                </div>
+
+                <!-- Generate Button -->
+                <button onclick="generateCitation()" class="w-full mt-6 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all">
+                    <i class="fas fa-magic mr-2"></i>Generate Citation
+                </button>
+            </div>
+
+            <!-- Result Section -->
+            <div id="resultSection" class="bg-white rounded-lg shadow-lg p-8 mb-8 hidden slide-in">
+                <div class="flex justify-between items-center mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800">
+                        <i class="fas fa-check-circle text-green-600 mr-2"></i>Your Citation
+                    </h3>
+                    <div class="flex gap-3">
+                        <button onclick="copyCitation()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-copy mr-2"></i>Copy
+                        </button>
+                        <button onclick="downloadCitation()" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition">
+                            <i class="fas fa-download mr-2"></i>Download
+                        </button>
+                    </div>
+                </div>
+
+                <div class="citation-box text-white p-6 rounded-lg mb-4">
+                    <div class="flex items-start">
+                        <i class="fas fa-quote-left text-3xl opacity-50 mr-4 mt-1"></i>
+                        <p id="citationText" class="text-lg leading-relaxed flex-1"></p>
+                        <i class="fas fa-quote-right text-3xl opacity-50 ml-4 mt-1"></i>
+                    </div>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
+                    <p class="text-sm text-gray-700">
+                        <i class="fas fa-info-circle text-yellow-500 mr-2"></i>
+                        <strong>Pro Tip:</strong> Always double-check citations with your institution's style guide. Different variations may exist.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Citation History -->
+            <div id="historySection" class="bg-white rounded-lg shadow-lg p-8 mb-8 hidden">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-history text-blue-600 mr-2"></i>Recent Citations
+                </h3>
+                <div id="historyList" class="space-y-3"></div>
+                <button onclick="clearHistory()" class="mt-4 text-red-600 hover:text-red-800 font-semibold">
+                    <i class="fas fa-trash mr-2"></i>Clear History
+                </button>
+            </div>
+
+            <!-- Features -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                    <i class="fas fa-bolt text-3xl text-blue-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Instant Citations</h4>
+                    <p class="text-sm text-gray-600">Generate perfect citations in seconds with auto-formatting</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                    <i class="fas fa-book-open text-3xl text-purple-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Multiple Formats</h4>
+                    <p class="text-sm text-gray-600">Support for APA, MLA, Chicago, Harvard citation styles</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg">
+                    <i class="fas fa-check-double text-3xl text-pink-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Accurate & Updated</h4>
+                    <p class="text-sm text-gray-600">Follow latest edition guidelines (APA 7th, MLA 9th)</p>
+                </div>
+            </div>
+
+            <!-- Citation Format Guide -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-info-circle text-blue-600 mr-2"></i>Citation Format Guide
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-graduation-cap text-blue-600 mr-2"></i>APA Format (7th Edition)
+                        </h4>
+                        <p class="text-sm text-gray-600 mb-2">American Psychological Association style. Common in psychology, education, and social sciences.</p>
+                        <p class="text-xs text-gray-500 font-mono bg-gray-50 p-2 rounded">
+                            Author, A. A. (Year). Title of work. Publisher.
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-purple-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-book-open text-purple-600 mr-2"></i>MLA Format (9th Edition)
+                        </h4>
+                        <p class="text-sm text-gray-600 mb-2">Modern Language Association style. Common in humanities and liberal arts.</p>
+                        <p class="text-xs text-gray-500 font-mono bg-gray-50 p-2 rounded">
+                            Author. Title. Publisher, Year.
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-pink-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-university text-pink-600 mr-2"></i>Chicago Style
+                        </h4>
+                        <p class="text-sm text-gray-600 mb-2">Chicago Manual of Style. Common in history, business, and fine arts.</p>
+                        <p class="text-xs text-gray-500 font-mono bg-gray-50 p-2 rounded">
+                            Author. Title. Place: Publisher, Year.
+                        </p>
+                    </div>
+                    <div class="border-l-4 border-green-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-scroll text-green-600 mr-2"></i>Harvard Style
+                        </h4>
+                        <p class="text-sm text-gray-600 mb-2">Harvard referencing system. Common in UK universities and sciences.</p>
+                        <p class="text-xs text-gray-500 font-mono bg-gray-50 p-2 rounded">
+                            Author, A. (Year) Title. Place: Publisher.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Choose Citation Format</h4>
+                            <p class="text-gray-600">Select APA, MLA, Chicago, or Harvard format</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Select Source Type</h4>
+                            <p class="text-gray-600">Choose book, website, journal, or newspaper</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Fill in Details</h4>
+                            <p class="text-gray-600">Enter author, title, year, and other required information</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Generate & Copy</h4>
+                            <p class="text-gray-600">Get your formatted citation and copy it to your document</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="essay-outline-generator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-file-alt text-4xl text-blue-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Essay Outline Generator</h4>
+                        <p class="text-sm text-gray-600">Create structured essay outlines instantly</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                    <a href="word-counter.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-hashtag text-4xl text-green-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Word Counter</h4>
+                        <p class="text-sm text-gray-600">Count words, characters, and reading time</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                    <a href="gpa-calculator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-calculator text-4xl text-teal-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">GPA Calculator</h4>
+                        <p class="text-sm text-gray-600">Calculate your GPA instantly and accurately</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>Frequently Asked Questions
+                </h3>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Is this citation generator free?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Our citation generator is completely free with no signup required. Generate unlimited citations.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Which citation formats are supported?</h4>
+                        <p class="text-gray-600 pl-7">We support APA 7th edition, MLA 9th edition, Chicago style, and Harvard referencing system.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Can I cite different source types?</h4>
+                        <p class="text-gray-600 pl-7">Yes! You can cite books, websites, journal articles, newspapers, and more sources with proper formatting.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Are the citations accurate?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Our generator follows the latest edition guidelines. However, always verify with your institution's style guide as variations may exist.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Can I save my citations?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Your recent citations are saved in the history section. You can copy, download, or clear them anytime.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let currentFormat = 'apa';
+        let currentSource = 'book';
+        let citationHistory = JSON.parse(localStorage.getItem('citationHistory')) || [];
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Form fields for different source types
+        const formFields = {
+            book: [
+                { name: 'author', label: 'Author(s)', placeholder: 'Last, First M.', icon: 'fa-user' },
+                { name: 'year', label: 'Year', placeholder: '2024', icon: 'fa-calendar', type: 'number' },
+                { name: 'title', label: 'Book Title', placeholder: 'The Complete Guide', icon: 'fa-book' },
+                { name: 'publisher', label: 'Publisher', placeholder: 'Publisher Name', icon: 'fa-building' },
+                { name: 'city', label: 'City', placeholder: 'New York', icon: 'fa-city' }
+            ],
+            website: [
+                { name: 'author', label: 'Author(s)', placeholder: 'Last, First M. (or Organization)', icon: 'fa-user' },
+                { name: 'year', label: 'Year', placeholder: '2024', icon: 'fa-calendar', type: 'number' },
+                { name: 'title', label: 'Page Title', placeholder: 'Article or Page Title', icon: 'fa-heading' },
+                { name: 'siteName', label: 'Website Name', placeholder: 'Website Name', icon: 'fa-globe' },
+                { name: 'url', label: 'URL', placeholder: 'https://example.com', icon: 'fa-link' },
+                { name: 'accessDate', label: 'Access Date', placeholder: 'January 30, 2025', icon: 'fa-calendar-check' }
+            ],
+            journal: [
+                { name: 'author', label: 'Author(s)', placeholder: 'Last, First M.', icon: 'fa-user' },
+                { name: 'year', label: 'Year', placeholder: '2024', icon: 'fa-calendar', type: 'number' },
+                { name: 'title', label: 'Article Title', placeholder: 'Article Title', icon: 'fa-file-alt' },
+                { name: 'journal', label: 'Journal Name', placeholder: 'Journal Name', icon: 'fa-book-open' },
+                { name: 'volume', label: 'Volume', placeholder: '10', icon: 'fa-hashtag' },
+                { name: 'issue', label: 'Issue', placeholder: '2', icon: 'fa-hashtag' },
+                { name: 'pages', label: 'Pages', placeholder: '45-67', icon: 'fa-file' }
+            ],
+            newspaper: [
+                { name: 'author', label: 'Author(s)', placeholder: 'Last, First M.', icon: 'fa-user' },
+                { name: 'year', label: 'Year', placeholder: '2024', icon: 'fa-calendar', type: 'number' },
+                { name: 'month', label: 'Month', placeholder: 'January', icon: 'fa-calendar' },
+                { name: 'day', label: 'Day', placeholder: '30', icon: 'fa-calendar-day', type: 'number' },
+                { name: 'title', label: 'Article Title', placeholder: 'Article Title', icon: 'fa-newspaper' },
+                { name: 'newspaper', label: 'Newspaper Name', placeholder: 'The New York Times', icon: 'fa-newspaper' },
+                { name: 'pages', label: 'Pages', placeholder: 'A1, A12', icon: 'fa-file' }
+            ]
+        };
+
+        // Initialize
+        updateFormFields();
+        if (citationHistory.length > 0) {
+            updateHistory();
+        }
+
+        function selectFormat(format) {
+            currentFormat = format;
+            document.querySelectorAll('.format-tab').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.format-tab').classList.add('active');
+        }
+
+        function selectSource(source) {
+            currentSource = source;
+            document.querySelectorAll('.source-btn').forEach(btn => {
+                btn.classList.remove('active', 'bg-blue-100', 'text-blue-800');
+                btn.classList.add('bg-gray-100', 'text-gray-800');
+            });
+            event.target.classList.remove('bg-gray-100', 'text-gray-800');
+            event.target.classList.add('active', 'bg-blue-100', 'text-blue-800');
+            updateFormFields();
+        }
+
+        function updateFormFields() {
+            const form = document.getElementById('citationForm');
+            const fields = formFields[currentSource];
+            
+            form.innerHTML = fields.map(field => `
+                <div>
+                    <label class="block text-gray-700 font-semibold mb-2">
+                        <i class="fas ${field.icon} text-blue-500 mr-1"></i>${field.label}
+                    </label>
+                    <input 
+                        type="${field.type || 'text'}" 
+                        id="${field.name}" 
+                        placeholder="${field.placeholder}"
+                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                    >
+                </div>
+            `).join('');
+        }
+
+        function generateCitation() {
+            const fields = formFields[currentSource];
+            const data = {};
+            let hasError = false;
+
+            // Collect data
+            fields.forEach(field => {
+                const value = document.getElementById(field.name).value.trim();
+                if (!value && ['author', 'year', 'title'].includes(field.name)) {
+                    hasError = true;
+                }
+                data[field.name] = value;
+            });
+
+            if (hasError) {
+                alert('Please fill in all required fields (Author, Year, Title)');
+                return;
+            }
+
+            let citation = '';
+
+            // Generate citation based on format and source
+            if (currentFormat === 'apa') {
+                citation = generateAPA(data);
+            } else if (currentFormat === 'mla') {
+                citation = generateMLA(data);
+            } else if (currentFormat === 'chicago') {
+                citation = generateChicago(data);
+            } else if (currentFormat === 'harvard') {
+                citation = generateHarvard(data);
+            }
+
+            // Display result
+            document.getElementById('citationText').textContent = citation;
+            document.getElementById('resultSection').classList.remove('hidden');
+            document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth' });
+
+            // Save to history
+            citationHistory.unshift({
+                citation: citation,
+                format: currentFormat.toUpperCase(),
+                source: currentSource,
+                date: new Date().toLocaleDateString()
+            });
+            if (citationHistory.length > 10) citationHistory.pop();
+            localStorage.setItem('citationHistory', JSON.stringify(citationHistory));
+            updateHistory();
+        }
+
+        function generateAPA(data) {
+            if (currentSource === 'book') {
+                return `${data.author} (${data.year}). <i>${data.title}</i>. ${data.publisher}.`;
+            } else if (currentSource === 'website') {
+                return `${data.author} (${data.year}). ${data.title}. <i>${data.siteName}</i>. Retrieved ${data.accessDate}, from ${data.url}`;
+            } else if (currentSource === 'journal') {
+                return `${data.author} (${data.year}). ${data.title}. <i>${data.journal}</i>, <i>${data.volume}</i>(${data.issue}), ${data.pages}.`;
+            } else if (currentSource === 'newspaper') {
+                return `${data.author} (${data.year}, ${data.month} ${data.day}). ${data.title}. <i>${data.newspaper}</i>, pp. ${data.pages}.`;
+            }
+        }
+
+        function generateMLA(data) {
+            if (currentSource === 'book') {
+                return `${data.author}. <i>${data.title}</i>. ${data.publisher}, ${data.year}.`;
+            } else if (currentSource === 'website') {
+                return `${data.author}. "${data.title}." <i>${data.siteName}</i>, ${data.year}, ${data.url}. Accessed ${data.accessDate}.`;
+            } else if (currentSource === 'journal') {
+                return `${data.author}. "${data.title}." <i>${data.journal}</i>, vol. ${data.volume}, no. ${data.issue}, ${data.year}, pp. ${data.pages}.`;
+            } else if (currentSource === 'newspaper') {
+                return `${data.author}. "${data.title}." <i>${data.newspaper}</i>, ${data.day} ${data.month} ${data.year}, pp. ${data.pages}.`;
+            }
+        }
+
+        function generateChicago(data) {
+            if (currentSource === 'book') {
+                return `${data.author}. <i>${data.title}</i>. ${data.city}: ${data.publisher}, ${data.year}.`;
+            } else if (currentSource === 'website') {
+                return `${data.author}. "${data.title}." <i>${data.siteName}</i>. ${data.year}. ${data.url} (accessed ${data.accessDate}).`;
+            } else if (currentSource === 'journal') {
+                return `${data.author}. "${data.title}." <i>${data.journal}</i> ${data.volume}, no. ${data.issue} (${data.year}): ${data.pages}.`;
+            } else if (currentSource === 'newspaper') {
+                return `${data.author}. "${data.title}." <i>${data.newspaper}</i>, ${data.month} ${data.day}, ${data.year}.`;
+            }
+        }
+
+        function generateHarvard(data) {
+            if (currentSource === 'book') {
+                return `${data.author} (${data.year}) <i>${data.title}</i>. ${data.city}: ${data.publisher}.`;
+            } else if (currentSource === 'website') {
+                return `${data.author} (${data.year}) ${data.title}, <i>${data.siteName}</i>. Available at: ${data.url} (Accessed: ${data.accessDate}).`;
+            } else if (currentSource === 'journal') {
+                return `${data.author} (${data.year}) '${data.title}', <i>${data.journal}</i>, ${data.volume}(${data.issue}), pp. ${data.pages}.`;
+            } else if (currentSource === 'newspaper') {
+                return `${data.author} (${data.year}) '${data.title}', <i>${data.newspaper}</i>, ${data.day} ${data.month}, p. ${data.pages}.`;
+            }
+        }
+
+        function copyCitation() {
+            const text = document.getElementById('citationText').innerHTML.replace(/<\/?i>/g, '');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Citation copied to clipboard!');
+            });
+        }
+
+        function downloadCitation() {
+            const text = document.getElementById('citationText').innerHTML.replace(/<\/?i>/g, '');
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `citation-${currentFormat}-${new Date().getTime()}.txt`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+
+        function updateHistory() {
+            const historyList = document.getElementById('historyList');
+            const historySection = document.getElementById('historySection');
+            
+            if (citationHistory.length === 0) {
+                historySection.classList.add('hidden');
+                return;
+            }
+
+            historySection.classList.remove('hidden');
+            historyList.innerHTML = citationHistory.map((item, index) => `
+                <div class="bg-gray-50 p-4 rounded-lg border border-gray-200">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold text-blue-600">${item.format} - ${item.source.toUpperCase()}</span>
+                        <span class="text-xs text-gray-500">${item.date}</span>
+                    </div>
+                    <p class="text-sm text-gray-700">${item.citation}</p>
+                    <button onclick="copyCitationFromHistory(${index})" class="text-xs text-blue-600 hover:text-blue-800 mt-2">
+                        <i class="fas fa-copy mr-1"></i>Copy
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function copyCitationFromHistory(index) {
+            const text = citationHistory[index].citation.replace(/<\/?i>/g, '');
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Citation copied!');
+            });
+        }
+
+        function clearHistory() {
+            if (confirm('Are you sure you want to clear citation history?')) {
+                citationHistory = [];
+                localStorage.removeItem('citationHistory');
+                document.getElementById('historySection').classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
