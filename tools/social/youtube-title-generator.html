@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>YouTube Title Generator - Free AI Video Title Creator with SEO | Free Tools Hub</title>
+    <meta name="title" content="YouTube Title Generator - Free AI Video Title Creator with SEO | Free Tools Hub">
+    <meta name="description" content="Generate catchy, SEO-optimized YouTube video titles instantly with AI. Get more clicks and views with compelling titles. Free, no signup required!">
+    <meta name="keywords" content="youtube title generator, video title creator, catchy titles, youtube SEO, clickbait titles, viral video titles, AI title generator, youtube optimization">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/social/youtube-title-generator.html">
+    <meta property="og:title" content="YouTube Title Generator - Free AI Video Title Creator with SEO">
+    <meta property="og:description" content="Generate catchy, SEO-optimized YouTube video titles instantly with AI. Get more clicks and views with compelling titles. Free, no signup required!">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/social/youtube-title-generator.html">
+    <meta property="twitter:title" content="YouTube Title Generator - Free AI Video Title Creator with SEO">
+    <meta property="twitter:description" content="Generate catchy, SEO-optimized YouTube video titles instantly with AI. Get more clicks and views with compelling titles. Free, no signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/social/youtube-title-generator.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .title-card {
+            transition: all 0.3s;
+        }
+        
+        .title-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .character-count {
+            transition: color 0.3s;
+        }
+        
+        .character-count.warning {
+            color: #f59e0b;
+        }
+        
+        .character-count.danger {
+            color: #ef4444;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">YouTube Title Generator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-red-600 via-red-500 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fab fa-youtube text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">YouTube Title Generator</h2>
+            <p class="text-xl mb-2">Create catchy, SEO-optimized titles that get more clicks and views</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • AI-Powered • SEO Optimized</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Generator Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-video text-red-600 mr-2"></i>Create Your Video Title
+                </h3>
+                
+                <!-- Input Form -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-pen mr-2"></i>What's your video about?
+                        </label>
+                        <textarea id="videoTopic" rows="3" 
+                            placeholder="e.g., How to bake perfect chocolate chip cookies, iPhone 15 review, Morning routine tips, Gaming tutorial..."
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none"
+                        ></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-tag mr-2"></i>Video Category
+                            </label>
+                            <select id="videoCategory" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                <option value="general">🎬 General</option>
+                                <option value="howto">🔧 How-To / Tutorial</option>
+                                <option value="review">⭐ Review / Unboxing</option>
+                                <option value="vlog">📹 Vlog / Lifestyle</option>
+                                <option value="gaming">🎮 Gaming</option>
+                                <option value="tech">💻 Tech</option>
+                                <option value="cooking">🍳 Cooking</option>
+                                <option value="fitness">💪 Fitness</option>
+                                <option value="beauty">💄 Beauty</option>
+                                <option value="education">📚 Education</option>
+                                <option value="entertainment">🎭 Entertainment</option>
+                                <option value="music">🎵 Music</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-bullseye mr-2"></i>Title Style
+                            </label>
+                            <select id="titleStyle" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                <option value="clickbait">🔥 Clickbait / Viral</option>
+                                <option value="professional">💼 Professional</option>
+                                <option value="educational">📖 Educational</option>
+                                <option value="emotional">❤️ Emotional</option>
+                                <option value="listicle">📋 List-Based</option>
+                                <option value="question">❓ Question-Based</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-text-width mr-2"></i>Title Length
+                            </label>
+                            <select id="titleLength" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none">
+                                <option value="short">Short (30-50 chars)</option>
+                                <option value="medium" selected>Medium (50-70 chars)</option>
+                                <option value="long">Long (70-100 chars)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="includeYear" checked class="w-5 h-5 text-red-600 rounded">
+                            <span class="ml-2 text-gray-700 font-medium">Include Year (2025) 📅</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="includeEmojis" checked class="w-5 h-5 text-red-600 rounded">
+                            <span class="ml-2 text-gray-700 font-medium">Add Emojis 😍</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="includeNumbers" class="w-5 h-5 text-red-600 rounded">
+                            <span class="ml-2 text-gray-700 font-medium">Use Numbers 🔢</span>
+                        </label>
+                    </div>
+
+                    <button onclick="generateTitles()" class="w-full bg-gradient-to-r from-red-600 to-pink-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition">
+                        <i class="fas fa-magic mr-2"></i>Generate Titles
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden space-y-6">
+                <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">
+                    <i class="fas fa-trophy text-yellow-500 mr-2"></i>Your YouTube Titles
+                </h3>
+                <div id="titlesContainer" class="space-y-4"></div>
+            </div>
+
+            <!-- Title Tips Section -->
+            <div class="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg shadow-lg p-8 mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>YouTube Title Best Practices
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white rounded-lg p-6 shadow">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-check text-green-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">✅ DO</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Keep titles under 60 characters</li>
+                                    <li>• Include main keywords at the beginning</li>
+                                    <li>• Use numbers (e.g., "7 Tips", "Top 10")</li>
+                                    <li>• Create curiosity and emotion</li>
+                                    <li>• Be specific and clear</li>
+                                    <li>• Use power words (Amazing, Ultimate, Secret)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="bg-white rounded-lg p-6 shadow">
+                        <div class="flex items-start">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-4 flex-shrink-0">
+                                <i class="fas fa-times text-red-600 text-xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-gray-800 mb-2">❌ DON'T</h4>
+                                <ul class="text-sm text-gray-600 space-y-1">
+                                    <li>• Use ALL CAPS excessively</li>
+                                    <li>• Make misleading promises</li>
+                                    <li>• Stuff keywords unnaturally</li>
+                                    <li>• Use too many emojis</li>
+                                    <li>• Be vague or generic</li>
+                                    <li>• Copy competitors exactly</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg border-2 border-red-200">
+                    <i class="fas fa-chart-line text-3xl text-red-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">SEO Optimized</h4>
+                    <p class="text-sm text-gray-600">Titles designed to rank higher in YouTube search and suggested videos</p>
+                </div>
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border-2 border-orange-200">
+                    <i class="fas fa-mouse-pointer text-3xl text-orange-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Click-Worthy</h4>
+                    <p class="text-sm text-gray-600">Crafted to maximize click-through rates and viewer engagement</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
+                    <i class="fas fa-bolt text-3xl text-pink-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Instant Results</h4>
+                    <p class="text-sm text-gray-600">Get 5 unique title variations in seconds with character count</p>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-blue-600">1</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Describe Video</h4>
+                        <p class="text-sm text-gray-600">Enter what your video is about in detail</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-red-600">2</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Select Options</h4>
+                        <p class="text-sm text-gray-600">Choose category, style, and preferences</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-orange-600">3</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Generate</h4>
+                        <p class="text-sm text-gray-600">Get 5 optimized title variations instantly</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-pink-600">4</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Copy & Upload</h4>
+                        <p class="text-sm text-gray-600">Copy your favorite and use it on YouTube</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-tools text-red-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="instagram-caption-generator.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-pink-400">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fab fa-instagram text-2xl text-pink-600"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Instagram Caption Generator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Generate engaging Instagram captions with hashtags</p>
+                    </a>
+                    
+                    <a href="tweet-generator.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-blue-400">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fab fa-twitter text-2xl text-blue-600"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Tweet Generator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Generate engaging tweets for your Twitter audience</p>
+                    </a>
+                    
+                    <a href="../utility/word-counter.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-blue-400">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-hashtag text-2xl text-blue-600"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Word Counter</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Count characters to perfect your title length</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Title generation templates
+        const titleTemplates = {
+            clickbait: {
+                general: [
+                    "You WON'T BELIEVE What Happened When I Tried {topic}! 😱",
+                    "This {topic} Changed EVERYTHING! (Must Watch) 🔥",
+                    "{topic} - The TRUTH Nobody Wants You To Know! 🤯",
+                    "I Tried {topic} For 30 Days... The Results Are INSANE! 😮",
+                    "WARNING: Don't {topic} Until You Watch This! ⚠️"
+                ],
+                numbers: [
+                    "7 SHOCKING Secrets About {topic} That Will Blow Your Mind! 🤯",
+                    "Top 10 {topic} Hacks That Actually Work! (2025) 🔥",
+                    "5 Mistakes Everyone Makes With {topic} (Don't Do This!) ❌",
+                    "15 {topic} Tips That Changed My Life Forever! ✨",
+                    "The Ultimate {topic} Guide: 20 Pro Tips You NEED! 💎"
+                ]
+            },
+            professional: {
+                general: [
+                    "Complete Guide to {topic} (2025 Edition)",
+                    "{topic}: Everything You Need to Know",
+                    "Mastering {topic} - Professional Tutorial",
+                    "{topic} Explained: A Comprehensive Overview",
+                    "The Ultimate {topic} Resource for Beginners"
+                ],
+                numbers: [
+                    "7 Essential {topic} Techniques for Success",
+                    "Top 10 {topic} Strategies That Actually Work",
+                    "5 Key Principles of {topic} You Should Know",
+                    "The 15 Best {topic} Methods (Tested & Proven)",
+                    "10 Advanced {topic} Tips for Professionals"
+                ]
+            },
+            educational: {
+                general: [
+                    "How {topic} Actually Works - Detailed Explanation",
+                    "Understanding {topic}: A Step-by-Step Tutorial",
+                    "Learn {topic} From Scratch - Complete Course",
+                    "{topic} Fundamentals: Everything Explained Simply",
+                    "The Science Behind {topic} - Educational Guide"
+                ],
+                numbers: [
+                    "5 Core Concepts of {topic} Everyone Should Learn",
+                    "10 Important Facts About {topic} (Research-Based)",
+                    "7 Steps to Master {topic} Completely",
+                    "The 12 Essential Lessons in {topic}",
+                    "3 Proven Methods to Understand {topic} Better"
+                ]
+            },
+            emotional: {
+                general: [
+                    "How {topic} Changed My Life Forever ❤️",
+                    "The Emotional Journey of {topic} - My Story",
+                    "Why {topic} Made Me Cry (Heartfelt) 😭",
+                    "{topic}: A Life-Changing Experience I'll Never Forget",
+                    "The Beautiful Truth About {topic} That Touched My Heart"
+                ],
+                numbers: [
+                    "7 Powerful {topic} Moments That Made Me Emotional",
+                    "5 Touching Stories About {topic} You Need To Hear",
+                    "10 Inspiring {topic} Experiences That Changed Lives",
+                    "3 {topic} Lessons That Brought Me To Tears",
+                    "The 15 Most Beautiful {topic} Moments Ever"
+                ]
+            },
+            listicle: {
+                general: [
+                    "The Complete {topic} Checklist for 2025",
+                    "Every Type of {topic} Ranked From Worst to Best",
+                    "{topic}: The Good, The Bad, and The Ugly",
+                    "All {topic} Options Compared - Which is Best?",
+                    "The Definitive {topic} Tier List - Ranked!"
+                ],
+                numbers: [
+                    "Top 10 {topic} Ranked (2025 Update)",
+                    "7 Best {topic} Options You Can Try Today",
+                    "15 Amazing {topic} Ideas You Haven't Thought Of",
+                    "5 Worst {topic} Mistakes (Avoid These!)",
+                    "The Ultimate Top 20 {topic} List"
+                ]
+            },
+            question: {
+                general: [
+                    "What is {topic}? (Finally Explained!)",
+                    "Should You Try {topic}? - Honest Answer",
+                    "Is {topic} Worth It? My Unbiased Review",
+                    "Why Does {topic} Work So Well?",
+                    "How Can {topic} Help You? (Surprising Benefits!)"
+                ],
+                numbers: [
+                    "What Are The Top 5 {topic} Methods?",
+                    "Why Do 90% of People Fail At {topic}?",
+                    "How Many {topic} Types Are There? (All 12 Explained)",
+                    "Which {topic} Is Best? (Tested All 10 Options)",
+                    "Can You Really Master {topic} In 7 Days?"
+                ]
+            }
+        };
+
+        const categoryEmojis = {
+            howto: '🔧',
+            review: '⭐',
+            vlog: '📹',
+            gaming: '🎮',
+            tech: '💻',
+            cooking: '🍳',
+            fitness: '💪',
+            beauty: '💄',
+            education: '📚',
+            entertainment: '🎭',
+            music: '🎵',
+            general: '🎬'
+        };
+
+        function generateTitles() {
+            const topic = document.getElementById('videoTopic').value.trim();
+            const category = document.getElementById('videoCategory').value;
+            const style = document.getElementById('titleStyle').value;
+            const length = document.getElementById('titleLength').value;
+            const includeYear = document.getElementById('includeYear').checked;
+            const includeEmojis = document.getElementById('includeEmojis').checked;
+            const includeNumbers = document.getElementById('includeNumbers').checked;
+
+            if (!topic) {
+                alert('Please describe what your video is about! 🎬');
+                return;
+            }
+
+            const titles = [];
+            const templateType = includeNumbers ? 'numbers' : 'general';
+            const templates = titleTemplates[style][templateType];
+
+            // Generate 5 different titles
+            for (let i = 0; i < 5; i++) {
+                let title = templates[i % templates.length].replace(/{topic}/g, topic);
+                
+                // Add year if requested
+                if (includeYear && !title.includes('2025')) {
+                    title = title.replace('!', ' (2025)!');
+                }
+
+                // Add category emoji if enabled
+                if (includeEmojis && categoryEmojis[category]) {
+                    if (!title.includes('😱') && !title.includes('🔥') && !title.includes('✨')) {
+                        title = categoryEmojis[category] + ' ' + title;
+                    }
+                }
+
+                // Adjust length
+                title = adjustTitleLength(title, length);
+
+                titles.push(title);
+            }
+
+            displayTitles(titles);
+        }
+
+        function adjustTitleLength(title, targetLength) {
+            const maxLengths = {
+                short: 50,
+                medium: 70,
+                long: 100
+            };
+
+            const maxLength = maxLengths[targetLength];
+            
+            if (title.length > maxLength) {
+                // Trim and add ellipsis
+                title = title.substring(0, maxLength - 3) + '...';
+            }
+
+            return title;
+        }
+
+        function displayTitles(titles) {
+            const container = document.getElementById('titlesContainer');
+            const resultsSection = document.getElementById('resultsSection');
+
+            container.innerHTML = '';
+            
+            titles.forEach((title, index) => {
+                const charCount = title.length;
+                const charClass = charCount > 70 ? 'danger' : charCount > 60 ? 'warning' : '';
+                
+                const card = document.createElement('div');
+                card.className = 'title-card bg-white rounded-lg shadow-lg p-6 border-2 border-red-200 fade-in';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="flex items-center flex-1">
+                            <div class="w-10 h-10 bg-red-100 rounded-lg flex items-center justify-center mr-3 flex-shrink-0">
+                                <span class="text-lg font-bold text-red-600">${index + 1}</span>
+                            </div>
+                            <div class="flex-1">
+                                <p class="text-gray-800 font-semibold" id="title-${index}">${title}</p>
+                            </div>
+                        </div>
+                        <button onclick="copyTitle(${index})" class="bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition ml-4 flex-shrink-0">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="flex items-center justify-between text-sm">
+                        <span class="character-count ${charClass}">
+                            <i class="fas fa-ruler mr-1"></i>${charCount} characters
+                            ${charCount > 70 ? '<span class="text-red-600 ml-2">⚠️ Too long</span>' : 
+                              charCount > 60 ? '<span class="text-orange-500 ml-2">⚠️ Consider shortening</span>' : 
+                              '<span class="text-green-600 ml-2">✓ Perfect length</span>'}
+                        </span>
+                        ${(title.match(/\d+/g) || []).length > 0 ? '<span class="text-purple-600"><i class="fas fa-hashtag mr-1"></i>Number-based</span>' : ''}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyTitle(index) {
+            const title = document.getElementById(`title-${index}`).textContent;
+            navigator.clipboard.writeText(title).then(() => {
+                alert('✅ Title copied to clipboard!\n\nPaste it into your YouTube video! 🎬');
+            });
+        }
+    </script>
+</body>
+</html>
