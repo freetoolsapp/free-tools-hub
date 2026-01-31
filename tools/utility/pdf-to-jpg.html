@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>PDF to JPG Converter - Free Tools Hub</title>
+    <meta name="title" content="PDF to JPG Converter - Free Tools Hub">
+    <meta name="description" content="Convert PDF pages to JPG images instantly. Free online PDF to JPG converter with high-quality output. No signup required!">
+    <meta name="keywords" content="PDF to JPG, PDF to image, convert PDF, image converter, free converter">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-jpg.html">
+    <meta property="og:title" content="PDF to JPG Converter - Free Tools Hub">
+    <meta property="og:description" content="Convert PDF pages to JPG images instantly. Free online PDF to JPG converter with high-quality output. No signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-jpg.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- PDF.js Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <style>
+        .drop-zone {
+            border: 3px dashed #667eea;
+            transition: all 0.3s;
+        }
+        
+        .drop-zone.dragover {
+            border-color: #4caf50;
+            background: #e8f5e9;
+            transform: scale(1.02);
+        }
+
+        .page-preview {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-preview canvas {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        .download-btn {
+            position: absolute;
+            bottom: 12px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .page-preview:hover .download-btn {
+            opacity: 1;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">PDF to JPG Converter</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-file-image text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">PDF to JPG Converter</h2>
+            <p class="text-xl mb-2">Convert PDF pages to high-quality JPG images</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • All Pages • High Resolution</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Upload Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-upload text-orange-600 mr-2"></i>Upload Your PDF
+                </h3>
+                
+                <div id="dropZone" class="drop-zone bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-12 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-6xl text-orange-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
+                    <p class="text-gray-600 mb-4">Supports: PDF files</p>
+                    <button class="bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-folder-open mr-2"></i>Choose PDF File
+                    </button>
+                    <input type="file" id="fileInput" accept=".pdf" class="hidden">
+                </div>
+
+                <!-- Processing -->
+                <div id="processingSection" class="hidden mt-8 text-center">
+                    <div class="spinner mb-4"></div>
+                    <p class="text-gray-600 font-medium">Converting PDF to images...</p>
+                    <div class="mt-4">
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div id="progressBar" class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full transition-all" style="width: 0%"></div>
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2"><span id="progressText">0%</span></p>
+                    </div>
+                </div>
+
+                <!-- Results -->
+                <div id="resultsSection" class="hidden mt-8">
+                    <div class="flex justify-between items-center mb-6">
+                        <h4 class="font-bold text-gray-800 text-xl">
+                            <i class="fas fa-images text-orange-600 mr-2"></i>
+                            Converted Images (<span id="pageCount">0</span> pages)
+                        </h4>
+                        <button onclick="downloadAllImages()" class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            <i class="fas fa-download mr-2"></i>Download All as ZIP
+                        </button>
+                    </div>
+                    <div id="pagesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                </div>
+
+                <!-- Feature Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border-2 border-orange-200">
+                        <i class="fas fa-file-pdf text-3xl text-orange-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">All Pages</h4>
+                        <p class="text-sm text-gray-600">Convert all PDF pages to separate images</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg border-2 border-red-200">
+                        <i class="fas fa-hd text-3xl text-red-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">High Quality</h4>
+                        <p class="text-sm text-gray-600">Maximum resolution and quality preserved</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
+                        <i class="fas fa-bolt text-3xl text-pink-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Fast Processing</h4>
+                        <p class="text-sm text-gray-600">Instant conversion in your browser</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-toolbox text-purple-600 mr-2"></i>Related PDF Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="../utility/jpg-to-pdf.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition border-2 border-blue-200">
+                        <i class="fas fa-file-pdf text-2xl text-blue-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">JPG to PDF</h4>
+                        <p class="text-sm text-gray-600">Convert images to PDF</p>
+                    </a>
+                    <a href="../utility/pdf-to-word.html" class="block p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg hover:shadow-lg transition border-2 border-indigo-200">
+                        <i class="fas fa-file-word text-2xl text-indigo-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">PDF to Word</h4>
+                        <p class="text-sm text-gray-600">Convert PDF to editable Word</p>
+                    </a>
+                    <a href="../utility/website-to-pdf.html" class="block p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg hover:shadow-lg transition border-2 border-purple-200">
+                        <i class="fas fa-globe text-2xl text-purple-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">Website to PDF</h4>
+                        <p class="text-sm text-gray-600">Convert web pages to PDF</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" onclick="filterTools('utility')" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('student')" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('design')" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('seo')" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // File handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        let convertedImages = [];
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type === 'application/pdf') {
+                convertPDFToImages(file);
+            } else {
+                alert('⚠️ Please upload a PDF file.');
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                convertPDFToImages(file);
+            }
+        });
+
+        async function convertPDFToImages(file) {
+            const processingSection = document.getElementById('processingSection');
+            const resultsSection = document.getElementById('resultsSection');
+            const pagesContainer = document.getElementById('pagesContainer');
+            
+            processingSection.classList.remove('hidden');
+            resultsSection.classList.add('hidden');
+            convertedImages = [];
+            pagesContainer.innerHTML = '';
+
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                const numPages = pdf.numPages;
+                
+                document.getElementById('pageCount').textContent = numPages;
+
+                for (let pageNum = 1; pageNum <= numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    const scale = 2.0;
+                    const viewport = page.getViewport({ scale });
+
+                    const canvas = document.createElement('canvas');
+                    const context = canvas.getContext('2d');
+                    canvas.width = viewport.width;
+                    canvas.height = viewport.height;
+
+                    await page.render({
+                        canvasContext: context,
+                        viewport: viewport
+                    }).promise;
+
+                    const imageData = canvas.toDataURL('image/jpeg', 0.95);
+                    convertedImages.push({
+                        pageNum: pageNum,
+                        data: imageData,
+                        canvas: canvas
+                    });
+
+                    // Update progress
+                    const progress = (pageNum / numPages) * 100;
+                    document.getElementById('progressBar').style.width = progress + '%';
+                    document.getElementById('progressText').textContent = Math.round(progress) + '%';
+
+                    // Add to display
+                    const pageDiv = document.createElement('div');
+                    pageDiv.className = 'page-preview bg-white rounded-lg shadow-lg p-4 border-2 border-gray-200';
+                    pageDiv.innerHTML = `
+                        <div class="relative">
+                            <canvas></canvas>
+                            <button onclick="downloadImage(${pageNum - 1})" class="download-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition">
+                                <i class="fas fa-download mr-2"></i>Download
+                            </button>
+                        </div>
+                        <p class="text-center text-sm text-gray-600 mt-3 font-medium">Page ${pageNum}</p>
+                    `;
+
+                    const displayCanvas = pageDiv.querySelector('canvas');
+                    displayCanvas.width = canvas.width;
+                    displayCanvas.height = canvas.height;
+                    const displayContext = displayCanvas.getContext('2d');
+                    displayContext.drawImage(canvas, 0, 0);
+
+                    pagesContainer.appendChild(pageDiv);
+                }
+
+                processingSection.classList.add('hidden');
+                resultsSection.classList.remove('hidden');
+                resultsSection.scrollIntoView({ behavior: 'smooth' });
+
+            } catch (error) {
+                console.error('Conversion error:', error);
+                alert('❌ Error converting PDF. Please try again.');
+                processingSection.classList.add('hidden');
+            }
+        }
+
+        function downloadImage(index) {
+            const image = convertedImages[index];
+            const link = document.createElement('a');
+            link.href = image.data;
+            link.download = `page-${image.pageNum}.jpg`;
+            link.click();
+        }
+
+        function downloadAllImages() {
+            if (convertedImages.length === 0) {
+                alert('⚠️ No images to download.');
+                return;
+            }
+
+            // Download images one by one
+            convertedImages.forEach((image, index) => {
+                setTimeout(() => {
+                    downloadImage(index);
+                }, index * 200);
+            });
+
+            setTimeout(() => {
+                alert(`✅ Downloading ${convertedImages.length} images!\n\nPlease check your downloads folder.`);
+            }, 500);
+        }
+    </script>
+</body>
+</html>
