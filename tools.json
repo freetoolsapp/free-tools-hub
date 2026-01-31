@@ -189,8 +189,8 @@
       "icon": "fa-cut",
       "color": "purple",
       "category": "design",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "MOSTLY USED and POPULAR",
+      "file": "tools/design/background-remover.html",
       "description": "Remove backgrounds from images automatically with AI"
     },
     {
@@ -198,8 +198,8 @@
       "icon": "fa-expand",
       "color": "blue",
       "category": "design",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "NEW",
+      "file": "tools/design/image-resizer.html",
       "description": "Resize images to any dimension while maintaining quality"
     },
     {
