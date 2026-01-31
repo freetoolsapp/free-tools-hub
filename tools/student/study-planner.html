@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Study Planner - Plan Your Study Schedule & Manage Time | Free Tools Hub</title>
+    <meta name="title" content="Study Planner - Plan Your Study Schedule & Manage Time | Free Tools Hub">
+    <meta name="description" content="Create effective study schedules, manage tasks, track progress, and achieve academic goals. Free study planner with calendar, reminders, and productivity tools. No signup required!">
+    <meta name="keywords" content="study planner, study schedule, time management, academic planner, exam planner, study organizer, student planner, free study planner">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/student/study-planner.html">
+    <meta property="og:title" content="Study Planner - Plan Your Study Schedule & Manage Time | Free Tools Hub">
+    <meta property="og:description" content="Create effective study schedules, manage tasks, track progress, and achieve academic goals. Free study planner with calendar, reminders, and productivity tools. No signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/student/study-planner.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .task-item {
+            transition: all 0.3s;
+        }
+        
+        .task-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        
+        .task-completed {
+            opacity: 0.6;
+            text-decoration: line-through;
+        }
+        
+        .priority-high {
+            border-left: 4px solid #ef4444;
+        }
+        
+        .priority-medium {
+            border-left: 4px solid #f59e0b;
+        }
+        
+        .priority-low {
+            border-left: 4px solid #10b981;
+        }
+        
+        .calendar-day {
+            transition: all 0.2s;
+        }
+        
+        .calendar-day:hover {
+            background: #dbeafe;
+            transform: scale(1.05);
+        }
+        
+        .calendar-day.has-tasks {
+            background: #dbeafe;
+            font-weight: bold;
+        }
+        
+        .calendar-day.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        .progress-bar {
+            transition: width 0.5s ease;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Study Planner</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-calendar-check text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Study Planner</h2>
+            <p class="text-xl mb-2">Plan your study schedule and manage time effectively</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • No Signup • Track Your Progress</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <!-- Quick Stats -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                <div class="bg-gradient-to-br from-blue-500 to-blue-600 text-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">Total Tasks</p>
+                            <p id="totalTasks" class="text-3xl font-bold">0</p>
+                        </div>
+                        <i class="fas fa-tasks text-4xl opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-green-500 to-green-600 text-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">Completed</p>
+                            <p id="completedTasks" class="text-3xl font-bold">0</p>
+                        </div>
+                        <i class="fas fa-check-circle text-4xl opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-orange-500 to-orange-600 text-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">In Progress</p>
+                            <p id="pendingTasks" class="text-3xl font-bold">0</p>
+                        </div>
+                        <i class="fas fa-spinner text-4xl opacity-50"></i>
+                    </div>
+                </div>
+                <div class="bg-gradient-to-br from-purple-500 to-purple-600 text-white p-6 rounded-lg shadow-lg">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <p class="text-sm opacity-90">Study Hours</p>
+                            <p id="studyHours" class="text-3xl font-bold">0h</p>
+                        </div>
+                        <i class="fas fa-clock text-4xl opacity-50"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Left Column - Task Management -->
+                <div class="lg:col-span-2 space-y-8">
+                    
+                    <!-- Add Task Section -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                            <i class="fas fa-plus-circle text-blue-600 mr-2"></i>Add New Task
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">
+                                    <i class="fas fa-heading text-blue-500 mr-1"></i>Task Title *
+                                </label>
+                                <input 
+                                    type="text" 
+                                    id="taskTitle" 
+                                    placeholder="e.g., Study Chapter 5 - Physics"
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                >
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">
+                                        <i class="fas fa-calendar text-green-500 mr-1"></i>Due Date *
+                                    </label>
+                                    <input 
+                                        type="date" 
+                                        id="taskDate" 
+                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                    >
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">
+                                        <i class="fas fa-clock text-purple-500 mr-1"></i>Duration (hours)
+                                    </label>
+                                    <input 
+                                        type="number" 
+                                        id="taskDuration" 
+                                        placeholder="2"
+                                        min="0.5"
+                                        step="0.5"
+                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">
+                                        <i class="fas fa-flag text-red-500 mr-1"></i>Priority
+                                    </label>
+                                    <select 
+                                        id="taskPriority" 
+                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                    >
+                                        <option value="low">Low Priority</option>
+                                        <option value="medium" selected>Medium Priority</option>
+                                        <option value="high">High Priority</option>
+                                    </select>
+                                </div>
+
+                                <div>
+                                    <label class="block text-gray-700 font-semibold mb-2">
+                                        <i class="fas fa-tag text-indigo-500 mr-1"></i>Category
+                                    </label>
+                                    <select 
+                                        id="taskCategory" 
+                                        class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                    >
+                                        <option value="exam">Exam Prep</option>
+                                        <option value="assignment">Assignment</option>
+                                        <option value="project">Project</option>
+                                        <option value="reading">Reading</option>
+                                        <option value="practice">Practice</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div>
+                                <label class="block text-gray-700 font-semibold mb-2">
+                                    <i class="fas fa-align-left text-gray-500 mr-1"></i>Notes (Optional)
+                                </label>
+                                <textarea 
+                                    id="taskNotes" 
+                                    rows="3"
+                                    placeholder="Add any additional notes or details..."
+                                    class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                                ></textarea>
+                            </div>
+
+                            <button 
+                                onclick="addTask()" 
+                                class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all"
+                            >
+                                <i class="fas fa-plus mr-2"></i>Add Task
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Task List Section -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-2xl font-bold text-gray-800">
+                                <i class="fas fa-list text-green-600 mr-2"></i>Your Tasks
+                            </h3>
+                            <div class="flex gap-2">
+                                <select 
+                                    id="filterTasks" 
+                                    onchange="filterTasks()"
+                                    class="px-4 py-2 border-2 border-gray-300 rounded-lg text-sm focus:border-blue-500 focus:outline-none"
+                                >
+                                    <option value="all">All Tasks</option>
+                                    <option value="pending">Pending</option>
+                                    <option value="completed">Completed</option>
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div id="tasksList" class="space-y-3">
+                            <div class="text-center py-12 text-gray-500">
+                                <i class="fas fa-inbox text-6xl mb-4"></i>
+                                <p class="text-lg">No tasks yet. Add your first task above!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Calendar & Progress -->
+                <div class="space-y-8">
+                    
+                    <!-- Mini Calendar -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-calendar text-blue-600 mr-2"></i>Calendar
+                        </h3>
+                        
+                        <div class="flex justify-between items-center mb-4">
+                            <button onclick="previousMonth()" class="text-gray-600 hover:text-blue-600 p-2">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <span id="currentMonth" class="font-bold text-gray-800"></span>
+                            <button onclick="nextMonth()" class="text-gray-600 hover:text-blue-600 p-2">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-7 gap-1 mb-2">
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Sun</div>
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Mon</div>
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Tue</div>
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Wed</div>
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Thu</div>
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Fri</div>
+                            <div class="text-center text-xs font-bold text-gray-600 py-2">Sat</div>
+                        </div>
+
+                        <div id="calendarDays" class="grid grid-cols-7 gap-1"></div>
+                    </div>
+
+                    <!-- Progress Section -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">
+                            <i class="fas fa-chart-line text-purple-600 mr-2"></i>Progress Overview
+                        </h3>
+                        
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-2">
+                                    <span class="text-gray-600">Overall Completion</span>
+                                    <span id="overallProgress" class="font-bold text-blue-600">0%</span>
+                                </div>
+                                <div class="w-full bg-gray-200 rounded-full h-3">
+                                    <div id="progressBar" class="progress-bar bg-gradient-to-r from-blue-500 to-purple-500 h-3 rounded-full" style="width: 0%"></div>
+                                </div>
+                            </div>
+
+                            <div class="pt-4 border-t">
+                                <h4 class="font-bold text-gray-800 mb-3">Tasks by Category</h4>
+                                <div id="categoryBreakdown" class="space-y-2 text-sm">
+                                    <p class="text-gray-500 text-center py-4">No tasks to display</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Study Tips -->
+                    <div class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg p-6 border-2 border-blue-200">
+                        <h3 class="text-lg font-bold text-gray-800 mb-3">
+                            <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Study Tips
+                        </h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Take 10-minute breaks every hour</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Study hardest subjects when fresh</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Review notes within 24 hours</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Use active recall techniques</li>
+                            <li><i class="fas fa-check text-green-500 mr-2"></i>Stay hydrated and well-rested</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 my-8">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg">
+                    <i class="fas fa-tasks text-3xl text-blue-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Task Management</h4>
+                    <p class="text-sm text-gray-600">Organize study tasks with priorities, deadlines, and categories</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg">
+                    <i class="fas fa-calendar-alt text-3xl text-purple-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Calendar View</h4>
+                    <p class="text-sm text-gray-600">Visual calendar showing all your upcoming tasks and deadlines</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg">
+                    <i class="fas fa-chart-pie text-3xl text-pink-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Progress Tracking</h4>
+                    <p class="text-sm text-gray-600">Monitor completion rates and study hours with statistics</p>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use Study Planner
+                </h3>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">1</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Add Your Tasks</h4>
+                            <p class="text-gray-600">Enter task details including title, due date, duration, priority, and category</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">2</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Organize & Prioritize</h4>
+                            <p class="text-gray-600">Set priorities (high, medium, low) and categorize tasks for better organization</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-pink-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">3</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">Track Progress</h4>
+                            <p class="text-gray-600">Mark tasks as complete and monitor your study progress with statistics</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center font-bold mr-4 flex-shrink-0">4</div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 mb-1">View Calendar</h4>
+                            <p class="text-gray-600">Use the calendar to see all upcoming tasks and plan your study schedule</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Study Techniques -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-brain text-blue-600 mr-2"></i>Effective Study Techniques
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="border-l-4 border-blue-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-stopwatch text-blue-600 mr-2"></i>Pomodoro Technique
+                        </h4>
+                        <p class="text-sm text-gray-600">Study for 25 minutes, then take a 5-minute break. After 4 sessions, take a longer 15-30 minute break.</p>
+                    </div>
+                    <div class="border-l-4 border-purple-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-redo text-purple-600 mr-2"></i>Spaced Repetition
+                        </h4>
+                        <p class="text-sm text-gray-600">Review material at increasing intervals to improve long-term retention and understanding.</p>
+                    </div>
+                    <div class="border-l-4 border-pink-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-brain text-pink-600 mr-2"></i>Active Recall
+                        </h4>
+                        <p class="text-sm text-gray-600">Test yourself on material instead of passively re-reading. This strengthens memory formation.</p>
+                    </div>
+                    <div class="border-l-4 border-green-600 pl-4">
+                        <h4 class="font-bold text-gray-800 mb-2">
+                            <i class="fas fa-map-signs text-green-600 mr-2"></i>Mind Mapping
+                        </h4>
+                        <p class="text-sm text-gray-600">Create visual diagrams to connect concepts and see relationships between different topics.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="essay-outline-generator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-file-alt text-4xl text-blue-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Essay Outline Generator</h4>
+                        <p class="text-sm text-gray-600">Create structured essay outlines instantly</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                    <a href="citation-generator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-quote-right text-4xl text-indigo-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Citation Generator</h4>
+                        <p class="text-sm text-gray-600">Generate citations in APA, MLA, Chicago formats</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                    <a href="gpa-calculator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all">
+                        <i class="fas fa-calculator text-4xl text-teal-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">GPA Calculator</h4>
+                        <p class="text-sm text-gray-600">Calculate your GPA instantly and accurately</p>
+                        <div class="mt-4 text-blue-600 font-semibold">
+                            Use Tool <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>Frequently Asked Questions
+                </h3>
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Is the study planner free to use?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Our study planner is completely free with no signup required. All data is stored locally on your device.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Will my tasks be saved?</h4>
+                        <p class="text-gray-600 pl-7">Yes! Your tasks are automatically saved in your browser's local storage. They will persist even after closing the browser.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Can I track multiple subjects?</h4>
+                        <p class="text-gray-600 pl-7">Absolutely! You can categorize tasks by subject using the category feature and track progress for each one.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>How do I prioritize my tasks?</h4>
+                        <p class="text-gray-600 pl-7">When adding a task, select from High, Medium, or Low priority. High priority tasks are marked with a red indicator for quick identification.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-check-circle text-green-500 mr-2"></i>Can I export my study plan?</h4>
+                        <p class="text-gray-600 pl-7">Currently, tasks are stored locally. We recommend taking screenshots or manually copying important tasks for backup.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Global variables
+        let tasks = JSON.parse(localStorage.getItem('studyTasks')) || [];
+        let currentDate = new Date();
+        let selectedDate = null;
+
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Initialize
+        document.getElementById('taskDate').valueAsDate = new Date();
+        renderTasks();
+        renderCalendar();
+        updateStats();
+        updateProgress();
+
+        function addTask() {
+            const title = document.getElementById('taskTitle').value.trim();
+            const date = document.getElementById('taskDate').value;
+            const duration = parseFloat(document.getElementById('taskDuration').value) || 1;
+            const priority = document.getElementById('taskPriority').value;
+            const category = document.getElementById('taskCategory').value;
+            const notes = document.getElementById('taskNotes').value.trim();
+
+            if (!title || !date) {
+                alert('Please fill in task title and due date!');
+                return;
+            }
+
+            const task = {
+                id: Date.now(),
+                title,
+                date,
+                duration,
+                priority,
+                category,
+                notes,
+                completed: false,
+                createdAt: new Date().toISOString()
+            };
+
+            tasks.push(task);
+            saveTasks();
+            renderTasks();
+            updateStats();
+            updateProgress();
+            renderCalendar();
+
+            // Clear form
+            document.getElementById('taskTitle').value = '';
+            document.getElementById('taskDuration').value = '';
+            document.getElementById('taskNotes').value = '';
+            document.getElementById('taskDate').valueAsDate = new Date();
+
+            alert('✅ Task added successfully!');
+        }
+
+        function saveTasks() {
+            localStorage.setItem('studyTasks', JSON.stringify(tasks));
+        }
+
+        function renderTasks(filter = 'all') {
+            const tasksList = document.getElementById('tasksList');
+            let filteredTasks = tasks;
+
+            // Apply filter
+            if (filter === 'pending') {
+                filteredTasks = tasks.filter(t => !t.completed);
+            } else if (filter === 'completed') {
+                filteredTasks = tasks.filter(t => t.completed);
+            } else if (filter === 'today') {
+                const today = new Date().toISOString().split('T')[0];
+                filteredTasks = tasks.filter(t => t.date === today);
+            } else if (filter === 'week') {
+                const today = new Date();
+                const weekLater = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+                filteredTasks = tasks.filter(t => {
+                    const taskDate = new Date(t.date);
+                    return taskDate >= today && taskDate <= weekLater;
+                });
+            }
+
+            if (filteredTasks.length === 0) {
+                tasksList.innerHTML = `
+                    <div class="text-center py-12 text-gray-500">
+                        <i class="fas fa-inbox text-6xl mb-4"></i>
+                        <p class="text-lg">No tasks found for this filter.</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Sort by date and priority
+            filteredTasks.sort((a, b) => {
+                if (a.completed !== b.completed) return a.completed ? 1 : -1;
+                if (a.date !== b.date) return new Date(a.date) - new Date(b.date);
+                const priorityOrder = { high: 0, medium: 1, low: 2 };
+                return priorityOrder[a.priority] - priorityOrder[b.priority];
+            });
+
+            tasksList.innerHTML = filteredTasks.map(task => {
+                const priorityColors = {
+                    high: 'red',
+                    medium: 'yellow',
+                    low: 'green'
+                };
+                const categoryIcons = {
+                    exam: 'fa-graduation-cap',
+                    assignment: 'fa-file-alt',
+                    project: 'fa-project-diagram',
+                    reading: 'fa-book',
+                    practice: 'fa-pen',
+                    other: 'fa-tasks'
+                };
+                
+                return `
+                    <div class="task-item priority-${task.priority} bg-white p-4 rounded-lg border-2 border-gray-200 ${task.completed ? 'task-completed' : ''}">
+                        <div class="flex items-start justify-between">
+                            <div class="flex items-start flex-1">
+                                <input 
+                                    type="checkbox" 
+                                    ${task.completed ? 'checked' : ''} 
+                                    onchange="toggleTask(${task.id})"
+                                    class="mt-1 mr-3 w-5 h-5 cursor-pointer"
+                                >
+                                <div class="flex-1">
+                                    <h4 class="font-bold text-gray-800 mb-1">${task.title}</h4>
+                                    <div class="flex flex-wrap gap-2 text-xs mb-2">
+                                        <span class="bg-blue-100 text-blue-800 px-2 py-1 rounded">
+                                            <i class="fas fa-calendar mr-1"></i>${new Date(task.date).toLocaleDateString()}
+                                        </span>
+                                        <span class="bg-purple-100 text-purple-800 px-2 py-1 rounded">
+                                            <i class="fas fa-clock mr-1"></i>${task.duration}h
+                                        </span>
+                                        <span class="bg-${priorityColors[task.priority]}-100 text-${priorityColors[task.priority]}-800 px-2 py-1 rounded">
+                                            <i class="fas fa-flag mr-1"></i>${task.priority}
+                                        </span>
+                                        <span class="bg-indigo-100 text-indigo-800 px-2 py-1 rounded">
+                                            <i class="fas ${categoryIcons[task.category]} mr-1"></i>${task.category}
+                                        </span>
+                                    </div>
+                                    ${task.notes ? `<p class="text-sm text-gray-600 italic">${task.notes}</p>` : ''}
+                                </div>
+                            </div>
+                            <button onclick="deleteTask(${task.id})" class="text-red-500 hover:text-red-700 ml-2">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function toggleTask(id) {
+            const task = tasks.find(t => t.id === id);
+            if (task) {
+                task.completed = !task.completed;
+                saveTasks();
+                renderTasks(document.getElementById('filterTasks').value);
+                updateStats();
+                updateProgress();
+            }
+        }
+
+        function deleteTask(id) {
+            if (confirm('Are you sure you want to delete this task?')) {
+                tasks = tasks.filter(t => t.id !== id);
+                saveTasks();
+                renderTasks(document.getElementById('filterTasks').value);
+                updateStats();
+                updateProgress();
+                renderCalendar();
+            }
+        }
+
+        function filterTasks() {
+            const filter = document.getElementById('filterTasks').value;
+            renderTasks(filter);
+        }
+
+        function updateStats() {
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const pending = total - completed;
+            const hours = tasks.reduce((sum, t) => sum + (t.completed ? t.duration : 0), 0);
+
+            document.getElementById('totalTasks').textContent = total;
+            document.getElementById('completedTasks').textContent = completed;
+            document.getElementById('pendingTasks').textContent = pending;
+            document.getElementById('studyHours').textContent = hours.toFixed(1) + 'h';
+        }
+
+        function updateProgress() {
+            const total = tasks.length;
+            const completed = tasks.filter(t => t.completed).length;
+            const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+            document.getElementById('overallProgress').textContent = percentage + '%';
+            document.getElementById('progressBar').style.width = percentage + '%';
+
+            // Category breakdown
+            const categories = {};
+            tasks.forEach(task => {
+                if (!categories[task.category]) {
+                    categories[task.category] = { total: 0, completed: 0 };
+                }
+                categories[task.category].total++;
+                if (task.completed) categories[task.category].completed++;
+            });
+
+            const categoryHTML = Object.entries(categories).map(([category, data]) => {
+                const percent = Math.round((data.completed / data.total) * 100);
+                return `
+                    <div>
+                        <div class="flex justify-between mb-1">
+                            <span class="capitalize">${category}</span>
+                            <span>${data.completed}/${data.total}</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: ${percent}%"></div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('categoryBreakdown').innerHTML = categoryHTML || '<p class="text-gray-500 text-center py-4">No tasks to display</p>';
+        }
+
+        function renderCalendar() {
+            const year = currentDate.getFullYear();
+            const month = currentDate.getMonth();
+            
+            document.getElementById('currentMonth').textContent = 
+                currentDate.toLocaleDateString('en-US', { month: 'long', year: 'numeric' });
+
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            
+            let calendarHTML = '';
+            
+            // Empty cells before first day
+            for (let i = 0; i < firstDay; i++) {
+                calendarHTML += '<div></div>';
+            }
+            
+            // Calendar days
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
+                const hasTasks = tasks.some(t => t.date === dateStr);
+                const isToday = dateStr === new Date().toISOString().split('T')[0];
+                
+                calendarHTML += `
+                    <div class="calendar-day text-center p-2 rounded cursor-pointer ${hasTasks ? 'has-tasks' : ''} ${isToday ? 'border-2 border-blue-500' : ''}"
+                         onclick="selectDate('${dateStr}')">
+                        ${day}
+                    </div>
+                `;
+            }
+            
+            document.getElementById('calendarDays').innerHTML = calendarHTML;
+        }
+
+        function selectDate(dateStr) {
+            selectedDate = dateStr;
+            const tasksForDate = tasks.filter(t => t.date === dateStr);
+            
+            if (tasksForDate.length > 0) {
+                const taskList = tasksForDate.map(t => `• ${t.title}`).join('\n');
+                alert(`Tasks for ${new Date(dateStr).toLocaleDateString()}:\n\n${taskList}`);
+            } else {
+                alert(`No tasks for ${new Date(dateStr).toLocaleDateString()}`);
+            }
+        }
+
+        function previousMonth() {
+            currentDate.setMonth(currentDate.getMonth() - 1);
+            renderCalendar();
+        }
+
+        function nextMonth() {
+            currentDate.setMonth(currentDate.getMonth() + 1);
+            renderCalendar();
+        }
+    </script>
+</body>
+</html>
