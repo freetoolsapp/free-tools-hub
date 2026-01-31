@@ -114,8 +114,8 @@
       "icon": "fa-instagram",
       "color": "pink",
       "category": "social",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "YOUR CHOICE",
+      "file": "tools/social/instagram-caption-generator.html",
       "fab": true,
       "description": "Generate engaging Instagram captions with hashtags"
     },
@@ -125,7 +125,7 @@
       "color": "red",
       "category": "social",
       "badge": "COMING SOON",
-      "status": "coming_soon",
+      "status": "tools/social/youtube-title--generator.html",
       "fab": true,
       "description": "Create catchy YouTube video titles that get more clicks"
     },
@@ -134,8 +134,8 @@
       "icon": "fa-twitter",
       "color": "blue",
       "category": "social",
-      "badge": "COMING SOON",
-      "status": "coming_soon",
+      "badge": "Lets Tweet",
+      "status": "tools/social/tweet-generator.html",
       "fab": true,
       "description": "Generate engaging tweets for your Twitter audience"
     },
