@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Excel to PDF Converter - Free Tools Hub</title>
+    <meta name="title" content="Excel to PDF Converter - Free Tools Hub">
+    <meta name="description" content="Convert Excel spreadsheets to PDF instantly. Free online XLSX/XLS to PDF converter with formatting preserved. No signup required!">
+    <meta name="keywords" content="Excel to PDF, XLSX to PDF, spreadsheet converter, XLS to PDF, free converter">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/excel-to-pdf.html">
+    <meta property="og:title" content="Excel to PDF Converter - Free Tools Hub">
+    <meta property="og:description" content="Convert Excel spreadsheets to PDF instantly. Free online XLSX/XLS to PDF converter with formatting preserved. No signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/excel-to-pdf.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    
+    <style>
+        .drop-zone {
+            border: 3px dashed #667eea;
+            transition: all 0.3s;
+        }
+        
+        .drop-zone.dragover {
+            border-color: #4caf50;
+            background: #e8f5e9;
+            transform: scale(1.02);
+        }
+
+        .sheet-tab {
+            transition: all 0.3s;
+        }
+
+        .sheet-tab.active {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+        }
+
+        .excel-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .excel-preview-table th,
+        .excel-preview-table td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        .excel-preview-table th {
+            background: #f3f4f6;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Excel to PDF Converter</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-file-excel text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Excel to PDF Converter</h2>
+            <p class="text-xl mb-2">Convert Excel spreadsheets (XLSX, XLS) to PDF format</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • All Sheets • Formatting Preserved</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Upload Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-upload text-green-600 mr-2"></i>Upload Your Excel File
+                </h3>
+                
+                <div id="dropZone" class="drop-zone bg-gradient-to-br from-green-50 to-teal-50 rounded-xl p-12 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-6xl text-green-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
+                    <p class="text-gray-600 mb-4">Supports: XLSX, XLS, CSV</p>
+                    <button class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-folder-open mr-2"></i>Choose Excel File
+                    </button>
+                    <input type="file" id="fileInput" accept=".xlsx,.xls,.csv" class="hidden">
+                </div>
+
+                <!-- Preview Section -->
+                <div id="previewSection" class="hidden mt-8">
+                    <h4 class="font-bold text-gray-800 mb-4 text-xl">
+                        <i class="fas fa-eye text-blue-600 mr-2"></i>
+                        Preview
+                    </h4>
+
+                    <!-- Sheet Tabs -->
+                    <div id="sheetTabs" class="flex flex-wrap gap-2 mb-4"></div>
+
+                    <!-- Preview Table -->
+                    <div class="bg-white border-2 border-gray-200 rounded-lg p-4 overflow-auto max-h-96">
+                        <div id="previewContent"></div>
+                    </div>
+
+                    <!-- Conversion Options -->
+                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-6 mt-6 mb-6">
+                        <h4 class="font-bold text-gray-800 mb-4">
+                            <i class="fas fa-cog text-indigo-600 mr-2"></i>Conversion Options
+                        </h4>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Page Orientation</label>
+                                <select id="orientation" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                                    <option value="landscape">Landscape (Recommended)</option>
+                                    <option value="portrait">Portrait</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-2">Convert</label>
+                                <select id="sheetsToConvert" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                                    <option value="all">All Sheets</option>
+                                    <option value="current">Current Sheet Only</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4">
+                        <button 
+                            onclick="convertToPDF()" 
+                            class="flex-1 bg-gradient-to-r from-green-600 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition text-lg"
+                        >
+                            <i class="fas fa-file-pdf mr-2"></i>Convert to PDF
+                        </button>
+                        <button 
+                            onclick="clearFile()" 
+                            class="px-8 py-4 border-2 border-gray-300 text-gray-700 rounded-lg font-semibold hover:bg-gray-50 transition"
+                        >
+                            <i class="fas fa-redo mr-2"></i>Clear
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Feature Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-gradient-to-br from-green-50 to-green-100 p-6 rounded-lg border-2 border-green-200">
+                        <i class="fas fa-table text-3xl text-green-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Multiple Sheets</h4>
+                        <p class="text-sm text-gray-600">Convert all sheets or select specific ones</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-teal-50 to-teal-100 p-6 rounded-lg border-2 border-teal-200">
+                        <i class="fas fa-paint-brush text-3xl text-teal-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Preserve Formatting</h4>
+                        <p class="text-sm text-gray-600">Maintains tables, borders, and styles</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-lg border-2 border-cyan-200">
+                        <i class="fas fa-shield-alt text-3xl text-cyan-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">100% Private</h4>
+                        <p class="text-sm text-gray-600">All processing happens in your browser</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-toolbox text-purple-600 mr-2"></i>Related PDF Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="../utility/powerpoint-to-pdf.html" class="block p-4 bg-gradient-to-br from-red-50 to-red-100 rounded-lg hover:shadow-lg transition border-2 border-red-200">
+                        <i class="fas fa-file-powerpoint text-2xl text-red-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">PowerPoint to PDF</h4>
+                        <p class="text-sm text-gray-600">Convert presentations to PDF</p>
+                    </a>
+                    <a href="../utility/jpg-to-pdf.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition border-2 border-blue-200">
+                        <i class="fas fa-file-pdf text-2xl text-blue-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">JPG to PDF</h4>
+                        <p class="text-sm text-gray-600">Convert images to PDF</p>
+                    </a>
+                    <a href="../utility/pdf-to-word.html" class="block p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg hover:shadow-lg transition border-2 border-indigo-200">
+                        <i class="fas fa-file-word text-2xl text-indigo-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">PDF to Word</h4>
+                        <p class="text-sm text-gray-600">Convert PDF to editable Word</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" onclick="filterTools('utility')" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('student')" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('design')" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('seo')" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const { jsPDF } = window.jspdf;
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // File handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+        let workbook = null;
+        let currentSheet = 0;
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            handleFile(e.dataTransfer.files[0]);
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            handleFile(e.target.files[0]);
+        });
+
+        function handleFile(file) {
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                try {
+                    const data = new Uint8Array(e.target.result);
+                    workbook = XLSX.read(data, { type: 'array' });
+                    displayPreview();
+                } catch (error) {
+                    console.error('Error reading file:', error);
+                    alert('❌ Error reading Excel file. Please try again.');
+                }
+            };
+            reader.readAsArrayBuffer(file);
+        }
+
+        function displayPreview() {
+            document.getElementById('previewSection').classList.remove('hidden');
+            
+            // Create sheet tabs
+            const tabsContainer = document.getElementById('sheetTabs');
+            tabsContainer.innerHTML = workbook.SheetNames.map((name, index) => `
+                <button 
+                    onclick="switchSheet(${index})" 
+                    class="sheet-tab px-4 py-2 rounded-lg font-semibold border-2 border-gray-300 ${index === 0 ? 'active' : 'hover:bg-gray-100'}"
+                    id="tab-${index}"
+                >
+                    <i class="fas fa-file-excel mr-2"></i>${name}
+                </button>
+            `).join('');
+
+            showSheet(0);
+            document.getElementById('previewSection').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function switchSheet(index) {
+            // Update tab styles
+            document.querySelectorAll('.sheet-tab').forEach((tab, i) => {
+                if (i === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+
+            currentSheet = index;
+            showSheet(index);
+        }
+
+        function showSheet(index) {
+            const sheetName = workbook.SheetNames[index];
+            const worksheet = workbook.Sheets[sheetName];
+            const html = XLSX.utils.sheet_to_html(worksheet, { header: '', footer: '' });
+            
+            // Add custom styling
+            const styledHtml = html.replace('<table>', '<table class="excel-preview-table">');
+            document.getElementById('previewContent').innerHTML = styledHtml;
+        }
+
+        function convertToPDF() {
+            if (!workbook) {
+                alert('⚠️ Please upload an Excel file first.');
+                return;
+            }
+
+            const orientation = document.getElementById('orientation').value;
+            const sheetsOption = document.getElementById('sheetsToConvert').value;
+
+            try {
+                const pdf = new jsPDF({
+                    orientation: orientation,
+                    unit: 'mm',
+                    format: 'a4'
+                });
+
+                const sheetsToProcess = sheetsOption === 'all' 
+                    ? workbook.SheetNames 
+                    : [workbook.SheetNames[currentSheet]];
+
+                sheetsToProcess.forEach((sheetName, index) => {
+                    if (index > 0) {
+                        pdf.addPage();
+                    }
+
+                    const worksheet = workbook.Sheets[sheetName];
+                    const jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1 });
+
+                    // Add sheet name as title
+                    pdf.setFontSize(16);
+                    pdf.setFont(undefined, 'bold');
+                    pdf.text(sheetName, 14, 15);
+
+                    // Add table
+                    if (jsonData.length > 0) {
+                        const headers = jsonData[0];
+                        const body = jsonData.slice(1);
+
+                        pdf.autoTable({
+                            head: [headers],
+                            body: body,
+                            startY: 25,
+                            theme: 'grid',
+                            styles: {
+                                fontSize: 8,
+                                cellPadding: 2
+                            },
+                            headStyles: {
+                                fillColor: [34, 197, 94],
+                                fontStyle: 'bold'
+                            }
+                        });
+                    }
+                });
+
+                pdf.save('excel-converted.pdf');
+
+                setTimeout(() => {
+                    alert('✅ Excel converted to PDF successfully!\n\nYour file has been downloaded.');
+                }, 500);
+
+            } catch (error) {
+                console.error('Conversion error:', error);
+                alert('❌ Error converting to PDF. Please try again.');
+            }
+        }
+
+        function clearFile() {
+            workbook = null;
+            currentSheet = 0;
+            fileInput.value = '';
+            document.getElementById('previewSection').classList.add('hidden');
+        }
+    </script>
+</body>
+</html>
