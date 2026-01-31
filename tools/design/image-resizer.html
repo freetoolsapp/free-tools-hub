@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Free Image Resizer - Resize Images Online Instantly | Free Tools Hub</title>
+    <meta name="title" content="Free Image Resizer - Resize Images Online Instantly">
+    <meta name="description" content="Resize images to any dimension while maintaining quality. Free, fast, and easy to use. Perfect for web, social media, and print. No signup required!">
+    <meta name="keywords" content="image resizer, resize image, image optimizer, compress image, resize photo, photo resizer, free image resizer, online image resizer">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/design/image-resizer.html">
+    <meta property="og:title" content="Free Image Resizer - Resize Images Online Instantly">
+    <meta property="og:description" content="Resize images to any dimension while maintaining quality. Free, fast, and easy to use. No signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/design/image-resizer.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .drop-zone {
+            border: 3px dashed #3b82f6;
+            transition: all 0.3s;
+        }
+        
+        .drop-zone.dragover {
+            border-color: #4caf50;
+            background: #e8f5e9;
+            transform: scale(1.02);
+        }
+        
+        .preset-btn {
+            transition: all 0.3s;
+        }
+        
+        .preset-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .preset-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        .slider-container {
+            position: relative;
+            padding: 10px 0;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #3b82f6 0%, #3b82f6 50%, #e5e7eb 50%, #e5e7eb 100%);
+            outline: none;
+            -webkit-appearance: none;
+        }
+        
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        input[type="range"]::-moz-range-thumb {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #3b82f6;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .comparison-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+        
+        @media (max-width: 768px) {
+            .comparison-container {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Image Resizer",
+        "description": "Resize images to any dimension while maintaining quality. Free and instant.",
+        "url": "https://freetoolsapp.github.io/free-tools-hub/tools/design/image-resizer.html",
+        "applicationCategory": "DesignApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Image Resizer</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-expand text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Free Image Resizer</h2>
+            <p class="text-xl mb-2">Resize images to any dimension while maintaining quality</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Fast • High Quality • No Signup Required</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Upload Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-upload text-blue-600 mr-2"></i>Upload Your Image
+                </h3>
+                
+                <div id="dropZone" class="drop-zone bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-12 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-6xl text-blue-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
+                    <p class="text-gray-600 mb-4">Supports: JPG, PNG, JPEG, GIF, WebP</p>
+                    <button class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-folder-open mr-2"></i>Choose Image
+                    </button>
+                    <input type="file" id="fileInput" accept="image/*" class="hidden">
+                </div>
+
+                <!-- Quick Info Cards -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
+                        <i class="fas fa-magic text-3xl text-blue-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Smart Resize</h4>
+                        <p class="text-sm text-gray-600">Automatically maintain aspect ratio for perfect results</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg border-2 border-indigo-200">
+                        <i class="fas fa-compress-arrows-alt text-3xl text-indigo-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Multiple Formats</h4>
+                        <p class="text-sm text-gray-600">Export in JPG, PNG, or WebP format</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border-2 border-purple-200">
+                        <i class="fas fa-award text-3xl text-purple-600 mb-3"></i>
+                        <h4 class="font-bold text-gray-800 mb-2">Quality Control</h4>
+                        <p class="text-sm text-gray-600">Adjust quality settings for optimal file size</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resize Controls -->
+            <div id="resizeControls" class="hidden bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-sliders-h text-blue-600 mr-2"></i>Resize Settings
+                </h3>
+                
+                <!-- Preset Sizes -->
+                <div class="mb-8">
+                    <h4 class="font-bold text-gray-800 mb-4 text-center">
+                        <i class="fas fa-star mr-2 text-yellow-500"></i>Popular Presets
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                        <button onclick="applyPreset(1920, 1080, 'Full HD')" class="preset-btn bg-white border-2 border-gray-300 p-4 rounded-lg font-semibold hover:border-blue-500">
+                            <i class="fas fa-desktop text-blue-600 text-2xl mb-2 block"></i>
+                            <div class="text-sm">Full HD</div>
+                            <div class="text-xs text-gray-500">1920×1080</div>
+                        </button>
+                        <button onclick="applyPreset(1280, 720, 'HD')" class="preset-btn bg-white border-2 border-gray-300 p-4 rounded-lg font-semibold hover:border-blue-500">
+                            <i class="fas fa-tv text-indigo-600 text-2xl mb-2 block"></i>
+                            <div class="text-sm">HD</div>
+                            <div class="text-xs text-gray-500">1280×720</div>
+                        </button>
+                        <button onclick="applyPreset(1080, 1080, 'Instagram')" class="preset-btn bg-white border-2 border-gray-300 p-4 rounded-lg font-semibold hover:border-blue-500">
+                            <i class="fab fa-instagram text-pink-600 text-2xl mb-2 block"></i>
+                            <div class="text-sm">Instagram</div>
+                            <div class="text-xs text-gray-500">1080×1080</div>
+                        </button>
+                        <button onclick="applyPreset(1200, 630, 'Facebook')" class="preset-btn bg-white border-2 border-gray-300 p-4 rounded-lg font-semibold hover:border-blue-500">
+                            <i class="fab fa-facebook text-blue-700 text-2xl mb-2 block"></i>
+                            <div class="text-sm">Facebook</div>
+                            <div class="text-xs text-gray-500">1200×630</div>
+                        </button>
+                        <button onclick="applyPreset(1200, 675, 'YouTube')" class="preset-btn bg-white border-2 border-gray-300 p-4 rounded-lg font-semibold hover:border-blue-500">
+                            <i class="fab fa-youtube text-red-600 text-2xl mb-2 block"></i>
+                            <div class="text-sm">YouTube</div>
+                            <div class="text-xs text-gray-500">1200×675</div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Custom Dimensions -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            <i class="fas fa-arrows-alt-h mr-2 text-blue-600"></i>Width (pixels)
+                        </label>
+                        <input type="number" id="widthInput" placeholder="Enter width" 
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
+                               oninput="updateDimensions('width')">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-3">
+                            <i class="fas fa-arrows-alt-v mr-2 text-indigo-600"></i>Height (pixels)
+                        </label>
+                        <input type="number" id="heightInput" placeholder="Enter height" 
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-indigo-500 focus:outline-none"
+                               oninput="updateDimensions('height')">
+                    </div>
+                </div>
+
+                <!-- Lock Aspect Ratio -->
+                <div class="flex items-center justify-center mb-6">
+                    <label class="flex items-center cursor-pointer">
+                        <input type="checkbox" id="lockAspectRatio" checked class="mr-3 w-5 h-5 text-blue-600">
+                        <span class="font-semibold text-gray-700">
+                            <i class="fas fa-lock mr-2 text-blue-600"></i>Lock Aspect Ratio
+                        </span>
+                    </label>
+                </div>
+
+                <!-- Percentage Resize -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-3 text-center">
+                        <i class="fas fa-percentage mr-2 text-purple-600"></i>Resize by Percentage: <span id="percentageValue">100</span>%
+                    </label>
+                    <div class="slider-container max-w-md mx-auto">
+                        <input type="range" id="percentageSlider" min="10" max="200" value="100" 
+                               oninput="updateByPercentage(this.value)">
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>10%</span>
+                            <span>100%</span>
+                            <span>200%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quality Control -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-3 text-center">
+                        <i class="fas fa-sliders-h mr-2 text-green-600"></i>Image Quality: <span id="qualityValue">90</span>%
+                    </label>
+                    <div class="slider-container max-w-md mx-auto">
+                        <input type="range" id="qualitySlider" min="1" max="100" value="90" 
+                               oninput="updateQuality(this.value)">
+                        <div class="flex justify-between text-xs text-gray-500 mt-2">
+                            <span>Low</span>
+                            <span>Medium</span>
+                            <span>High</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Output Format -->
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-semibold mb-3 text-center">
+                        <i class="fas fa-file-image mr-2 text-orange-600"></i>Output Format
+                    </label>
+                    <div class="flex gap-3 justify-center">
+                        <button onclick="selectFormat('jpeg')" id="formatJPEG" class="format-btn bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            JPG
+                        </button>
+                        <button onclick="selectFormat('png')" id="formatPNG" class="format-btn bg-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            PNG
+                        </button>
+                        <button onclick="selectFormat('webp')" id="formatWEBP" class="format-btn bg-gray-300 text-gray-700 px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                            WebP
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Resize Button -->
+                <div class="text-center">
+                    <button onclick="resizeImage()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105">
+                        <i class="fas fa-compress-arrows-alt mr-2"></i>Resize Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Section -->
+            <div id="resultSection" class="hidden bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-check-circle text-green-500 mr-2"></i>Image Resized Successfully!
+                </h3>
+                
+                <!-- Image Info -->
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-6 mb-6">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                        <div>
+                            <div class="text-2xl font-bold text-blue-600" id="newDimensions">0 × 0</div>
+                            <div class="text-sm text-gray-600">New Dimensions</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-indigo-600" id="newFileSize">0 KB</div>
+                            <div class="text-sm text-gray-600">File Size</div>
+                        </div>
+                        <div>
+                            <div class="text-2xl font-bold text-purple-600" id="compressionRatio">0%</div>
+                            <div class="text-sm text-gray-600">Size Reduction</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Before/After Comparison -->
+                <div class="comparison-container mb-6">
+                    <div class="text-center">
+                        <h4 class="font-bold text-gray-800 mb-3">
+                            <i class="fas fa-image mr-2 text-blue-600"></i>Original Image
+                        </h4>
+                        <div class="border-2 border-gray-200 rounded-lg p-4 bg-gray-50">
+                            <canvas id="originalCanvas" class="image-preview mx-auto"></canvas>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <div><strong>Size:</strong> <span id="originalDimensions">0 × 0</span></div>
+                                <div><strong>File Size:</strong> <span id="originalFileSize">0 KB</span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center">
+                        <h4 class="font-bold text-gray-800 mb-3">
+                            <i class="fas fa-image mr-2 text-green-600"></i>Resized Image
+                        </h4>
+                        <div class="border-2 border-green-200 rounded-lg p-4 bg-green-50">
+                            <canvas id="resizedCanvas" class="image-preview mx-auto"></canvas>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <div><strong>Size:</strong> <span id="resizedDimensions">0 × 0</span></div>
+                                <div><strong>File Size:</strong> <span id="resizedFileSize">0 KB</span></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Download Buttons -->
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button onclick="downloadImage()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-download mr-2"></i>Download Resized Image
+                    </button>
+                    <button onclick="resetTool()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-redo mr-2"></i>Resize Another Image
+                    </button>
+                </div>
+            </div>
+
+            <!-- Use Cases -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Perfect For
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-globe text-blue-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Web Optimization</h4>
+                        <p class="text-sm text-gray-600">Reduce image size for faster loading</p>
+                    </div>
+                    
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-share-alt text-pink-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Social Media</h4>
+                        <p class="text-sm text-gray-600">Perfect dimensions for all platforms</p>
+                    </div>
+                    
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-envelope text-green-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Email Attachments</h4>
+                        <p class="text-sm text-gray-600">Reduce size for email compatibility</p>
+                    </div>
+                    
+                    <div class="text-center p-4">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <i class="fas fa-print text-purple-600 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Print Ready</h4>
+                        <p class="text-sm text-gray-600">Prepare images for printing</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tips Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-star text-yellow-500 mr-2"></i>Pro Tips
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Keep Aspect Ratio Locked</p>
+                                <p class="text-sm text-gray-600">Prevent distortion by maintaining original proportions</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Use WebP for Web</p>
+                                <p class="text-sm text-gray-600">WebP provides better compression than JPG/PNG</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Quality Sweet Spot</p>
+                                <p class="text-sm text-gray-600">85-90% quality offers best size vs quality balance</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Don't Upscale Too Much</p>
+                                <p class="text-sm text-gray-600">Enlarging images can reduce quality significantly</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Use Presets</p>
+                                <p class="text-sm text-gray-600">Quick access to optimal sizes for popular platforms</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-check-circle text-green-500 mt-1"></i>
+                            <div>
+                                <p class="font-semibold text-gray-800">Always Preview</p>
+                                <p class="text-sm text-gray-600">Check the resized image before downloading</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>About Image Resizing
+                </h3>
+                
+                <div class="prose max-w-none text-gray-600 space-y-4">
+                    <p>Image resizing is the process of changing the dimensions of an image while maintaining or optimizing its quality. Our tool uses advanced algorithms to ensure your images look great at any size.</p>
+                    
+                    <h4 class="font-bold text-gray-800 mt-6 mb-3">Common Image Sizes:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="bg-blue-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-blue-800 mb-2">Social Media</h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Instagram Post: 1080×1080 px</li>
+                                <li>• Instagram Story: 1080×1920 px</li>
+                                <li>• Facebook Post: 1200×630 px</li>
+                                <li>• Twitter Post: 1200×675 px</li>
+                                <li>• YouTube Thumbnail: 1280×720 px</li>
+                            </ul>
+                        </div>
+                        <div class="bg-indigo-50 p-4 rounded-lg">
+                            <h5 class="font-bold text-indigo-800 mb-2">Web & Print</h5>
+                            <ul class="text-sm space-y-1">
+                                <li>• Web Banner: 728×90 px</li>
+                                <li>• Blog Featured Image: 1200×630 px</li>
+                                <li>• Email Header: 600×200 px</li>
+                                <li>• Print (300 DPI): 3000×2000 px</li>
+                                <li>• Business Card: 1050×600 px</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <h4 class="font-bold text-gray-800 mt-6 mb-3">Understanding Image Quality:</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>High Quality (90-100%):</strong> Best for print and professional use, larger file size</li>
+                        <li><strong>Medium Quality (70-89%):</strong> Great for web use, balanced size and quality</li>
+                        <li><strong>Low Quality (1-69%):</strong> Smallest file size, suitable for thumbnails</li>
+                    </ul>
+                    
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 border-2 border-blue-200 rounded-lg p-6 mt-6">
+                        <h4 class="font-bold text-gray-800 mb-3">
+                            <i class="fas fa-info-circle mr-2 text-blue-600"></i>Format Guide
+                        </h4>
+                        <div class="space-y-3 text-sm">
+                            <p><strong>JPG/JPEG:</strong> Best for photographs and images with many colors. Good compression, smaller file size.</p>
+                            <p><strong>PNG:</strong> Best for images with transparency, logos, and graphics. Lossless compression, larger file size.</p>
+                            <p><strong>WebP:</strong> Modern format with excellent compression. Best for web use, smaller than JPG with better quality.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="background-remover.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-cut text-purple-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Background Remover</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Remove backgrounds from images with AI</p>
+                    </a>
+                    
+                    <a href="../utility/qr-code-generator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-qrcode text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">QR Code Generator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Create custom QR codes instantly</p>
+                    </a>
+                    
+                    <a href="../utility/pdf-to-word.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-file-word text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">PDF to Word</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Convert PDF files to Word documents</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            mobileMenu.classList.toggle('hidden');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Global variables
+        let originalImage = null;
+        let originalWidth = 0;
+        let originalHeight = 0;
+        let aspectRatio = 1;
+        let currentFormat = 'jpeg';
+        let currentQuality = 0.9;
+        let originalFileSize = 0;
+
+        // File input handling
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+
+        dropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            dropZone.classList.add('dragover');
+        });
+
+        dropZone.addEventListener('dragleave', () => {
+            dropZone.classList.remove('dragover');
+        });
+
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                loadImage(file);
+            }
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (file) {
+                loadImage(file);
+            }
+        });
+
+        // Load image
+        function loadImage(file) {
+            originalFileSize = file.size;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                originalImage = new Image();
+                originalImage.onload = function() {
+                    originalWidth = originalImage.width;
+                    originalHeight = originalImage.height;
+                    aspectRatio = originalWidth / originalHeight;
+                    
+                    // Set initial values
+                    document.getElementById('widthInput').value = originalWidth;
+                    document.getElementById('heightInput').value = originalHeight;
+                    
+                    // Show controls
+                    document.getElementById('resizeControls').classList.remove('hidden');
+                    document.getElementById('resizeControls').scrollIntoView({ behavior: 'smooth', block: 'start' });
+                };
+                originalImage.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Update dimensions
+        function updateDimensions(changedField) {
+            const lockAspectRatio = document.getElementById('lockAspectRatio').checked;
+            const widthInput = document.getElementById('widthInput');
+            const heightInput = document.getElementById('heightInput');
+            
+            if (!lockAspectRatio) return;
+            
+            if (changedField === 'width') {
+                const newWidth = parseInt(widthInput.value) || 0;
+                const newHeight = Math.round(newWidth / aspectRatio);
+                heightInput.value = newHeight;
+            } else {
+                const newHeight = parseInt(heightInput.value) || 0;
+                const newWidth = Math.round(newHeight * aspectRatio);
+                widthInput.value = newWidth;
+            }
+        }
+
+        // Update by percentage
+        function updateByPercentage(value) {
+            document.getElementById('percentageValue').textContent = value;
+            const percentage = value / 100;
+            
+            const newWidth = Math.round(originalWidth * percentage);
+            const newHeight = Math.round(originalHeight * percentage);
+            
+            document.getElementById('widthInput').value = newWidth;
+            document.getElementById('heightInput').value = newHeight;
+        }
+
+        // Update quality
+        function updateQuality(value) {
+            document.getElementById('qualityValue').textContent = value;
+            currentQuality = value / 100;
+        }
+
+        // Apply preset
+        function applyPreset(width, height, name) {
+            document.getElementById('widthInput').value = width;
+            document.getElementById('heightInput').value = height;
+            document.getElementById('lockAspectRatio').checked = false;
+            
+            // Update active preset button
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.preset-btn').classList.add('active');
+        }
+
+        // Select format
+        function selectFormat(format) {
+            currentFormat = format;
+            
+            // Update button styles
+            document.querySelectorAll('.format-btn').forEach(btn => {
+                btn.classList.remove('bg-blue-600', 'text-white');
+                btn.classList.add('bg-gray-300', 'text-gray-700');
+            });
+            
+            const btnId = 'format' + format.toUpperCase();
+            const btn = document.getElementById(btnId);
+            btn.classList.remove('bg-gray-300', 'text-gray-700');
+            btn.classList.add('bg-blue-600', 'text-white');
+        }
+
+        // Resize image
+        function resizeImage() {
+            if (!originalImage) {
+                alert('⚠️ Please upload an image first');
+                return;
+            }
+            
+            const newWidth = parseInt(document.getElementById('widthInput').value) || originalWidth;
+            const newHeight = parseInt(document.getElementById('heightInput').value) || originalHeight;
+            
+            if (newWidth <= 0 || newHeight <= 0) {
+                alert('⚠️ Please enter valid dimensions');
+                return;
+            }
+            
+            // Create original canvas
+            const originalCanvas = document.getElementById('originalCanvas');
+            const originalCtx = originalCanvas.getContext('2d');
+            originalCanvas.width = originalWidth;
+            originalCanvas.height = originalHeight;
+            originalCtx.drawImage(originalImage, 0, 0);
+            
+            // Create resized canvas
+            const resizedCanvas = document.getElementById('resizedCanvas');
+            const resizedCtx = resizedCanvas.getContext('2d');
+            resizedCanvas.width = newWidth;
+            resizedCanvas.height = newHeight;
+            resizedCtx.drawImage(originalImage, 0, 0, newWidth, newHeight);
+            
+            // Calculate file sizes
+            const mimeType = currentFormat === 'png' ? 'image/png' : 
+                           currentFormat === 'webp' ? 'image/webp' : 'image/jpeg';
+            
+            resizedCanvas.toBlob((blob) => {
+                const newFileSize = blob.size;
+                const reduction = Math.round((1 - newFileSize / originalFileSize) * 100);
+                
+                // Update UI
+                document.getElementById('newDimensions').textContent = `${newWidth} × ${newHeight}`;
+                document.getElementById('newFileSize').textContent = formatFileSize(newFileSize);
+                document.getElementById('compressionRatio').textContent = reduction > 0 ? `-${reduction}%` : `+${Math.abs(reduction)}%`;
+                
+                document.getElementById('originalDimensions').textContent = `${originalWidth} × ${originalHeight}`;
+                document.getElementById('originalFileSize').textContent = formatFileSize(originalFileSize);
+                document.getElementById('resizedDimensions').textContent = `${newWidth} × ${newHeight}`;
+                document.getElementById('resizedFileSize').textContent = formatFileSize(newFileSize);
+                
+                // Show results
+                document.getElementById('resultSection').classList.remove('hidden');
+                document.getElementById('resultSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, mimeType, currentQuality);
+        }
+
+        // Format file size
+        function formatFileSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(2) + ' KB';
+            return (bytes / (1024 * 1024)).toFixed(2) + ' MB';
+        }
+
+        // Download image
+        function downloadImage() {
+            const canvas = document.getElementById('resizedCanvas');
+            const mimeType = currentFormat === 'png' ? 'image/png' : 
+                           currentFormat === 'webp' ? 'image/webp' : 'image/jpeg';
+            const extension = currentFormat === 'png' ? '.png' : 
+                            currentFormat === 'webp' ? '.webp' : '.jpg';
+            
+            canvas.toBlob((blob) => {
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.download = `resized_image_${Date.now()}${extension}`;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                setTimeout(() => {
+                    alert('✅ Image downloaded successfully!\n\n💡 Tip: Check the file size and quality to ensure it meets your needs.');
+                }, 300);
+            }, mimeType, currentQuality);
+        }
+
+        // Reset tool
+        function resetTool() {
+            originalImage = null;
+            originalWidth = 0;
+            originalHeight = 0;
+            aspectRatio = 1;
+            originalFileSize = 0;
+            
+            document.getElementById('resizeControls').classList.add('hidden');
+            document.getElementById('resultSection').classList.add('hidden');
+            document.getElementById('fileInput').value = '';
+            document.getElementById('widthInput').value = '';
+            document.getElementById('heightInput').value = '';
+            document.getElementById('percentageSlider').value = 100;
+            document.getElementById('percentageValue').textContent = 100;
+            document.getElementById('qualitySlider').value = 90;
+            document.getElementById('qualityValue').textContent = 90;
+            document.getElementById('lockAspectRatio').checked = true;
+            
+            // Reset format to JPEG
+            selectFormat('jpeg');
+            
+            // Reset preset buttons
+            document.querySelectorAll('.preset-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>
