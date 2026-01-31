@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Free QR Code Generator - Create QR Codes Instantly | Free Tools Hub</title>
+    <meta name="title" content="Free QR Code Generator - Create QR Codes Instantly | Free Tools Hub">
+    <meta name="description" content="Generate QR codes for URLs, text, WiFi, contact info, and more. Free, fast, and customizable. Download high-quality QR codes instantly. No signup required!">
+    <meta name="keywords" content="QR code generator, free QR code, create QR code, custom QR code, WiFi QR code, URL QR code, QR code maker">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/qr-code-generator.html">
+    <meta property="og:title" content="Free QR Code Generator - Create QR Codes Instantly">
+    <meta property="og:description" content="Generate QR codes for URLs, text, WiFi, contact info, and more. Free, fast, and customizable. No signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/qr-code-generator.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- QR Code Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    
+    <style>
+        .tab-button {
+            transition: all 0.3s;
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        
+        #qrcode {
+            display: inline-block;
+            padding: 20px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .color-option {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+        
+        .color-option:hover {
+            transform: scale(1.1);
+        }
+        
+        .color-option.selected {
+            border-color: #667eea;
+            box-shadow: 0 0 0 2px rgba(102, 126, 234, 0.3);
+        }
+    </style>
+    
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "QR Code Generator",
+        "description": "Generate QR codes for URLs, text, WiFi, contact info, and more. Free and instant.",
+        "url": "https://freetoolsapp.github.io/free-tools-hub/tools/utility/qr-code-generator.html",
+        "applicationCategory": "UtilityApplication",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "USD"
+        }
+    }
+    </script>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">QR Code Generator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-qrcode text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Free QR Code Generator</h2>
+            <p class="text-xl mb-2">Create custom QR codes for URLs, WiFi, text, and more in seconds</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Customizable • High Quality • Instant Download</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- QR Code Type Tabs -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-layer-group text-blue-600 mr-2"></i>Select QR Code Type
+                </h3>
+                
+                <div class="flex flex-wrap gap-3 justify-center mb-8">
+                    <button onclick="switchTab('url')" class="tab-button active px-6 py-3 rounded-lg font-semibold transition">
+                        <i class="fas fa-link mr-2"></i>URL
+                    </button>
+                    <button onclick="switchTab('text')" class="tab-button px-6 py-3 rounded-lg font-semibold transition bg-gray-100">
+                        <i class="fas fa-align-left mr-2"></i>Text
+                    </button>
+                    <button onclick="switchTab('wifi')" class="tab-button px-6 py-3 rounded-lg font-semibold transition bg-gray-100">
+                        <i class="fas fa-wifi mr-2"></i>WiFi
+                    </button>
+                    <button onclick="switchTab('email')" class="tab-button px-6 py-3 rounded-lg font-semibold transition bg-gray-100">
+                        <i class="fas fa-envelope mr-2"></i>Email
+                    </button>
+                    <button onclick="switchTab('phone')" class="tab-button px-6 py-3 rounded-lg font-semibold transition bg-gray-100">
+                        <i class="fas fa-phone mr-2"></i>Phone
+                    </button>
+                </div>
+
+                <!-- URL Tab -->
+                <div id="urlTab" class="tab-content">
+                    <div class="max-w-2xl mx-auto">
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-link mr-2 text-blue-600"></i>Enter URL
+                        </label>
+                        <input type="url" id="urlInput" placeholder="https://example.com" 
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                    </div>
+                </div>
+
+                <!-- Text Tab -->
+                <div id="textTab" class="tab-content hidden">
+                    <div class="max-w-2xl mx-auto">
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-align-left mr-2 text-purple-600"></i>Enter Text
+                        </label>
+                        <textarea id="textInput" rows="4" placeholder="Enter any text you want to encode..." 
+                                  class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"></textarea>
+                    </div>
+                </div>
+
+                <!-- WiFi Tab -->
+                <div id="wifiTab" class="tab-content hidden">
+                    <div class="max-w-2xl mx-auto space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-network-wired mr-2 text-blue-600"></i>Network Name (SSID)
+                            </label>
+                            <input type="text" id="wifiSSID" placeholder="My WiFi Network" 
+                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-lock mr-2 text-blue-600"></i>Password
+                            </label>
+                            <input type="text" id="wifiPassword" placeholder="Enter WiFi password" 
+                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-shield-alt mr-2 text-blue-600"></i>Security Type
+                            </label>
+                            <select id="wifiEncryption" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                                <option value="WPA">WPA/WPA2</option>
+                                <option value="WEP">WEP</option>
+                                <option value="">None</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Email Tab -->
+                <div id="emailTab" class="tab-content hidden">
+                    <div class="max-w-2xl mx-auto space-y-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-at mr-2 text-red-600"></i>Email Address
+                            </label>
+                            <input type="email" id="emailAddress" placeholder="email@example.com" 
+                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-heading mr-2 text-red-600"></i>Subject (Optional)
+                            </label>
+                            <input type="text" id="emailSubject" placeholder="Email subject" 
+                                   class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-comment mr-2 text-red-600"></i>Message (Optional)
+                            </label>
+                            <textarea id="emailBody" rows="3" placeholder="Email message" 
+                                      class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-red-500 focus:outline-none"></textarea>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Phone Tab -->
+                <div id="phoneTab" class="tab-content hidden">
+                    <div class="max-w-2xl mx-auto">
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-phone-alt mr-2 text-green-600"></i>Phone Number
+                        </label>
+                        <input type="tel" id="phoneNumber" placeholder="+1234567890" 
+                               class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-green-500 focus:outline-none">
+                        <p class="text-sm text-gray-500 mt-2">
+                            <i class="fas fa-info-circle mr-1"></i>Include country code (e.g., +1 for US)
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Customization Options -->
+                <div class="mt-8 border-t pt-8">
+                    <h4 class="text-lg font-bold text-gray-800 mb-4 text-center">
+                        <i class="fas fa-palette mr-2 text-purple-600"></i>Customize Your QR Code
+                    </h4>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                        <!-- Size Selection -->
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">
+                                <i class="fas fa-expand-arrows-alt mr-2"></i>Size
+                            </label>
+                            <select id="qrSize" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
+                                <option value="128">Small (128x128)</option>
+                                <option value="256" selected>Medium (256x256)</option>
+                                <option value="512">Large (512x512)</option>
+                                <option value="1024">Extra Large (1024x1024)</option>
+                            </select>
+                        </div>
+                        
+                        <!-- Color Selection -->
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-3">
+                                <i class="fas fa-fill-drip mr-2"></i>Color
+                            </label>
+                            <div class="flex gap-2">
+                                <div class="color-option selected bg-black" onclick="selectColor('#000000')" data-color="#000000"></div>
+                                <div class="color-option bg-blue-600" onclick="selectColor('#2563eb')" data-color="#2563eb"></div>
+                                <div class="color-option bg-purple-600" onclick="selectColor('#9333ea')" data-color="#9333ea"></div>
+                                <div class="color-option bg-red-600" onclick="selectColor('#dc2626')" data-color="#dc2626"></div>
+                                <div class="color-option bg-green-600" onclick="selectColor('#16a34a')" data-color="#16a34a"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="text-center mt-8">
+                    <button onclick="generateQR()" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-12 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all transform hover:scale-105">
+                        <i class="fas fa-magic mr-2"></i>Generate QR Code
+                    </button>
+                </div>
+            </div>
+
+            <!-- QR Code Display -->
+            <div id="qrResult" class="hidden bg-white rounded-lg shadow-lg p-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-check-circle text-green-500 mr-2"></i>Your QR Code is Ready!
+                </h3>
+                
+                <div class="text-center mb-6">
+                    <div id="qrcode" class="inline-block"></div>
+                </div>
+                
+                <div class="flex flex-wrap gap-4 justify-center">
+                    <button onclick="downloadQR()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-download mr-2"></i>Download PNG
+                    </button>
+                    <button onclick="generateQR()" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-redo mr-2"></i>Generate New
+                    </button>
+                </div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
+                    <div class="w-12 h-12 bg-blue-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-white text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Instant Generation</h4>
+                    <p class="text-sm text-gray-600">Create QR codes in seconds with our lightning-fast generator</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border-2 border-purple-200">
+                    <div class="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-palette text-white text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">Fully Customizable</h4>
+                    <p class="text-sm text-gray-600">Choose colors, sizes, and multiple QR code types</p>
+                </div>
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
+                    <div class="w-12 h-12 bg-pink-600 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-white text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 mb-2">100% Free & Secure</h4>
+                    <p class="text-sm text-gray-600">No signup required. Your data stays private</p>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>About QR Codes
+                </h3>
+                
+                <div class="prose max-w-none text-gray-600 space-y-4">
+                    <p>QR codes (Quick Response codes) are two-dimensional barcodes that can store various types of information including URLs, text, WiFi credentials, contact information, and more. They can be scanned using smartphone cameras to quickly access the encoded data.</p>
+                    
+                    <h4 class="font-bold text-gray-800 mt-6 mb-3">Popular Use Cases:</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li><strong>Website URLs:</strong> Direct customers to your website or landing pages</li>
+                        <li><strong>WiFi Sharing:</strong> Let guests connect to your WiFi instantly</li>
+                        <li><strong>Contact Information:</strong> Share vCards with your contact details</li>
+                        <li><strong>Marketing:</strong> Add to business cards, flyers, and promotional materials</li>
+                        <li><strong>Payment:</strong> Enable quick mobile payments</li>
+                        <li><strong>Product Information:</strong> Link to product details and manuals</li>
+                    </ul>
+                    
+                    <h4 class="font-bold text-gray-800 mt-6 mb-3">Tips for Best Results:</h4>
+                    <ul class="list-disc list-inside space-y-2">
+                        <li>Use high contrast colors for better scanning</li>
+                        <li>Test your QR code before printing</li>
+                        <li>Ensure adequate size - minimum 2cm x 2cm for print</li>
+                        <li>Add a call-to-action near your QR code</li>
+                        <li>Keep URLs short for simpler QR codes</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="password-generator.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-key text-red-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Password Generator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Generate strong and secure passwords</p>
+                    </a>
+                    
+                    <a href="pdf-to-word.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-file-word text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">PDF to Word</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Convert PDF files to Word documents</p>
+                    </a>
+                    
+                    <a href="word-counter.html" class="bg-white p-6 rounded-lg shadow hover:shadow-xl transition-all border-2 border-transparent hover:border-blue-500">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-hashtag text-blue-600 text-xl"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Word Counter</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Count words and characters instantly</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            mobileMenu.classList.toggle('hidden');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            } else {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            }
+        });
+
+        // Global variables
+        let currentTab = 'url';
+        let qrCodeInstance = null;
+        let selectedColor = '#000000';
+
+        // Switch between tabs
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.add('hidden');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tab + 'Tab').classList.remove('hidden');
+            
+            // Update button styles
+            document.querySelectorAll('.tab-button').forEach(btn => {
+                btn.classList.remove('active', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+                btn.classList.add('bg-gray-100', 'text-gray-700');
+            });
+            
+            event.target.classList.add('active', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+            event.target.classList.remove('bg-gray-100', 'text-gray-700');
+        }
+
+        // Select color
+        function selectColor(color) {
+            selectedColor = color;
+            
+            document.querySelectorAll('.color-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            
+            event.target.classList.add('selected');
+        }
+
+        // Generate QR Code
+        function generateQR() {
+            let data = '';
+            
+            // Get data based on current tab
+            switch(currentTab) {
+                case 'url':
+                    data = document.getElementById('urlInput').value.trim();
+                    if (!data) {
+                        alert('⚠️ Please enter a URL');
+                        return;
+                    }
+                    // Add https:// if not present
+                    if (!data.match(/^https?:\/\//)) {
+                        data = 'https://' + data;
+                    }
+                    break;
+                    
+                case 'text':
+                    data = document.getElementById('textInput').value.trim();
+                    if (!data) {
+                        alert('⚠️ Please enter some text');
+                        return;
+                    }
+                    break;
+                    
+                case 'wifi':
+                    const ssid = document.getElementById('wifiSSID').value.trim();
+                    const password = document.getElementById('wifiPassword').value.trim();
+                    const encryption = document.getElementById('wifiEncryption').value;
+                    
+                    if (!ssid) {
+                        alert('⚠️ Please enter WiFi network name');
+                        return;
+                    }
+                    
+                    data = `WIFI:T:${encryption};S:${ssid};P:${password};;`;
+                    break;
+                    
+                case 'email':
+                    const email = document.getElementById('emailAddress').value.trim();
+                    const subject = document.getElementById('emailSubject').value.trim();
+                    const body = document.getElementById('emailBody').value.trim();
+                    
+                    if (!email) {
+                        alert('⚠️ Please enter an email address');
+                        return;
+                    }
+                    
+                    data = `mailto:${email}`;
+                    if (subject || body) {
+                        data += '?';
+                        if (subject) data += `subject=${encodeURIComponent(subject)}`;
+                        if (subject && body) data += '&';
+                        if (body) data += `body=${encodeURIComponent(body)}`;
+                    }
+                    break;
+                    
+                case 'phone':
+                    const phone = document.getElementById('phoneNumber').value.trim();
+                    if (!phone) {
+                        alert('⚠️ Please enter a phone number');
+                        return;
+                    }
+                    data = `tel:${phone}`;
+                    break;
+            }
+            
+            // Clear previous QR code
+            document.getElementById('qrcode').innerHTML = '';
+            
+            // Get size
+            const size = parseInt(document.getElementById('qrSize').value);
+            
+            // Generate new QR code
+            qrCodeInstance = new QRCode(document.getElementById('qrcode'), {
+                text: data,
+                width: size,
+                height: size,
+                colorDark: selectedColor,
+                colorLight: '#ffffff',
+                correctLevel: QRCode.CorrectLevel.H
+            });
+            
+            // Show result section
+            document.getElementById('qrResult').classList.remove('hidden');
+            
+            // Scroll to result
+            document.getElementById('qrResult').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        // Download QR Code
+        function downloadQR() {
+            const canvas = document.querySelector('#qrcode canvas');
+            if (!canvas) {
+                alert('⚠️ Please generate a QR code first');
+                return;
+            }
+            
+            // Create download link
+            const url = canvas.toDataURL('image/png');
+            const link = document.createElement('a');
+            link.download = `qrcode_${Date.now()}.png`;
+            link.href = url;
+            link.click();
+            
+            // Show success message
+            setTimeout(() => {
+                alert('✅ QR Code downloaded successfully!\n\n💡 Tip: Test your QR code before printing to ensure it scans correctly.');
+            }, 300);
+        }
+
+        // Add enter key support for inputs
+        document.addEventListener('DOMContentLoaded', function() {
+            const inputs = document.querySelectorAll('input[type="text"], input[type="url"], input[type="email"], input[type="tel"], textarea');
+            inputs.forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        generateQR();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
