@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Instagram Caption Generator - Free AI-Powered Captions & Hashtags | Free Tools Hub</title>
+    <meta name="title" content="Instagram Caption Generator - Free AI-Powered Captions & Hashtags | Free Tools Hub">
+    <meta name="description" content="Generate engaging Instagram captions instantly with AI. Get creative captions, relevant hashtags, and emojis for your posts. Free, no signup required!">
+    <meta name="keywords" content="instagram caption generator, AI caption writer, instagram hashtags, social media captions, free caption tool, instagram post ideas, caption generator with hashtags">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/social/instagram-caption-generator.html">
+    <meta property="og:title" content="Instagram Caption Generator - Free AI-Powered Captions & Hashtags">
+    <meta property="og:description" content="Generate engaging Instagram captions instantly with AI. Get creative captions, relevant hashtags, and emojis for your posts. Free, no signup required!">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/social/instagram-caption-generator.html">
+    <meta property="twitter:title" content="Instagram Caption Generator - Free AI-Powered Captions & Hashtags">
+    <meta property="twitter:description" content="Generate engaging Instagram captions instantly with AI. Get creative captions, relevant hashtags, and emojis for your posts. Free, no signup required!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/social/instagram-caption-generator.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        .caption-card {
+            transition: all 0.3s;
+        }
+        
+        .caption-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Instagram Caption Generator</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fab fa-instagram text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Instagram Caption Generator</h2>
+            <p class="text-xl mb-2">Generate engaging captions with AI - Perfect hashtags & emojis included</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • AI-Powered • Instant Results</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-6xl">
+            
+            <!-- Generator Section -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-magic text-purple-600 mr-2"></i>Create Your Caption
+                </h3>
+                
+                <!-- Input Form -->
+                <div class="space-y-6">
+                    <div>
+                        <label class="block text-gray-700 font-semibold mb-2">
+                            <i class="fas fa-pen mr-2"></i>What's your post about?
+                        </label>
+                        <textarea id="postTopic" rows="3" 
+                            placeholder="e.g., Beach vacation, Coffee morning, Fitness journey, New product launch..."
+                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none"
+                        ></textarea>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-smile mr-2"></i>Tone
+                            </label>
+                            <select id="captionTone" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
+                                <option value="casual">😊 Casual & Friendly</option>
+                                <option value="professional">💼 Professional</option>
+                                <option value="funny">😂 Funny & Humorous</option>
+                                <option value="inspirational">✨ Inspirational</option>
+                                <option value="creative">🎨 Creative & Artistic</option>
+                                <option value="promotional">🚀 Promotional</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-text-height mr-2"></i>Length
+                            </label>
+                            <select id="captionLength" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
+                                <option value="short">Short (1-2 lines)</option>
+                                <option value="medium" selected>Medium (3-5 lines)</option>
+                                <option value="long">Long (6+ lines)</option>
+                            </select>
+                        </div>
+
+                        <div>
+                            <label class="block text-gray-700 font-semibold mb-2">
+                                <i class="fas fa-hashtag mr-2"></i>Hashtags
+                            </label>
+                            <select id="hashtagCount" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-purple-500 focus:outline-none">
+                                <option value="5">5 Hashtags</option>
+                                <option value="10">10 Hashtags</option>
+                                <option value="15" selected>15 Hashtags</option>
+                                <option value="20">20 Hashtags</option>
+                                <option value="30">30 Hashtags</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-4">
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="includeEmojis" checked class="w-5 h-5 text-purple-600 rounded">
+                            <span class="ml-2 text-gray-700 font-medium">Include Emojis 😍</span>
+                        </label>
+                        <label class="flex items-center cursor-pointer">
+                            <input type="checkbox" id="includeCTA" class="w-5 h-5 text-purple-600 rounded">
+                            <span class="ml-2 text-gray-700 font-medium">Add Call-to-Action 👆</span>
+                        </label>
+                    </div>
+
+                    <button onclick="generateCaptions()" class="w-full bg-gradient-to-r from-pink-500 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition">
+                        <i class="fas fa-sparkles mr-2"></i>Generate Captions
+                    </button>
+                </div>
+            </div>
+
+            <!-- Results Section -->
+            <div id="resultsSection" class="hidden space-y-6">
+                <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">
+                    <i class="fas fa-fire text-orange-500 mr-2"></i>Your Generated Captions
+                </h3>
+                <div id="captionsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            </div>
+
+            <!-- Features Section -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+                <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
+                    <i class="fas fa-robot text-3xl text-pink-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">AI-Powered</h4>
+                    <p class="text-sm text-gray-600">Smart algorithms generate engaging, unique captions tailored to your content</p>
+                </div>
+                <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border-2 border-purple-200">
+                    <i class="fas fa-hashtag text-3xl text-purple-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">Trending Hashtags</h4>
+                    <p class="text-sm text-gray-600">Get relevant, trending hashtags to boost your post's discoverability</p>
+                </div>
+                <div class="bg-gradient-to-br from-indigo-50 to-indigo-100 p-6 rounded-lg border-2 border-indigo-200">
+                    <i class="fas fa-copy text-3xl text-indigo-600 mb-3"></i>
+                    <h4 class="font-bold text-gray-800 mb-2">One-Click Copy</h4>
+                    <p class="text-sm text-gray-600">Copy captions instantly and paste directly into Instagram</p>
+                </div>
+            </div>
+
+            <!-- How to Use -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-blue-600">1</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Describe Your Post</h4>
+                        <p class="text-sm text-gray-600">Tell us what your Instagram post is about</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-purple-600">2</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Choose Style</h4>
+                        <p class="text-sm text-gray-600">Select tone, length, and hashtag preferences</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-pink-600">3</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Generate</h4>
+                        <p class="text-sm text-gray-600">Click generate to get 4 unique caption options</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-2xl font-bold text-indigo-600">4</span>
+                        </div>
+                        <h4 class="font-bold text-gray-800 mb-2">Copy & Post</h4>
+                        <p class="text-sm text-gray-600">Copy your favorite and post to Instagram</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Related Tools -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-tools text-purple-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <a href="youtube-title-generator.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-red-400">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fab fa-youtube text-2xl text-red-600"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">YouTube Title Generator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Create catchy YouTube video titles that get more clicks</p>
+                    </a>
+                    
+                    <a href="tweet-generator.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-blue-400">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fab fa-twitter text-2xl text-blue-600"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Tweet Generator</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Generate engaging tweets for your Twitter audience</p>
+                    </a>
+                    
+                    <a href="../utility/word-counter.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-blue-400">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fas fa-hashtag text-2xl text-blue-600"></i>
+                            </div>
+                            <h4 class="font-bold text-gray-800">Word Counter</h4>
+                        </div>
+                        <p class="text-sm text-gray-600">Count words and characters for perfect captions</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        // Caption generation templates
+        const captionTemplates = {
+            casual: {
+                short: [
+                    "Just {topic} vibes ✨",
+                    "{topic} mode: activated 🚀",
+                    "Living for {topic} moments 💫"
+                ],
+                medium: [
+                    "Sometimes you just need a little {topic} in your life ✨\n\nTaking time to appreciate these moments 🌟",
+                    "Here's to {topic} and all the good vibes that come with it 🌈\n\nFeeling grateful for days like these 💕",
+                    "{topic} has been on my mind lately 💭\n\nSwipe to see what I've been up to! ➡️"
+                ],
+                long: [
+                    "Can we talk about {topic} for a second? 🗣️\n\nI've been absolutely loving this journey and wanted to share some thoughts with you all. There's something special about {topic} that just hits different, you know? 💫\n\nDrop a comment if you feel the same! 👇",
+                    "Story time! ✨\n\nSo I've been really into {topic} lately, and honestly, it's been such a game-changer. From the moment I started, I knew this was something special. 🌟\n\nHave you tried {topic}? Let me know your experience in the comments! 💬"
+                ]
+            },
+            professional: {
+                short: [
+                    "Elevating {topic} to new heights 📈",
+                    "Professional {topic} insights 💼",
+                    "Mastering the art of {topic} ⚡"
+                ],
+                medium: [
+                    "Excited to share my latest work on {topic} 🎯\n\nThis project has been incredibly rewarding and I'm proud of the results we've achieved.",
+                    "Key insights from today's {topic} session 📊\n\nSwipe through to see what we've accomplished and the impact we're making.",
+                    "Reflecting on our {topic} journey 💼\n\nGrateful for the opportunity to work with such talented professionals."
+                ],
+                long: [
+                    "Thrilled to announce our latest milestone in {topic} 🚀\n\nThis achievement represents months of dedication, innovation, and collaboration. Our team has worked tirelessly to bring this vision to life, and I couldn't be more proud of what we've accomplished.\n\nThank you to everyone who made this possible! 🙏",
+                    "Sharing some professional insights on {topic} 📈\n\nThroughout my career, I've learned that success in {topic} requires dedication, continuous learning, and the right mindset. Today, I want to share some key takeaways that have helped me along the way.\n\nWhat's your biggest lesson learned? Share below! 💭"
+                ]
+            },
+            funny: {
+                short: [
+                    "{topic} got me like 😂",
+                    "Me vs {topic}: an eternal struggle 🤷",
+                    "Plot twist: {topic} wins again 😅"
+                ],
+                medium: [
+                    "Nobody:\nAbsolutely nobody:\nMe: Let's talk about {topic} 😂\n\nWhy am I like this? 🤦",
+                    "Expectation: Professional {topic} 💼\nReality: Complete chaos 😂\n\nAt least I'm trying, right? 🤷",
+                    "Breaking news: Local person still obsessed with {topic} 📰\n\nIn other news, water is wet 😂"
+                ],
+                long: [
+                    "So here's a funny story about {topic} 😂\n\nPicture this: Me, thinking I've got everything under control with {topic}. Spoiler alert: I absolutely did not. What followed was a series of hilarious events that I'm still laughing about.\n\nTag someone who would totally do this! 👇",
+                    "Let me tell you about my relationship with {topic} 🎭\n\nIt's complicated. One minute we're best friends, the next minute we're sworn enemies. But somehow, we always end up back together. It's a love-hate thing that nobody quite understands 😂\n\nCan anyone relate? 🙋"
+                ]
+            },
+            inspirational: {
+                short: [
+                    "Dream big with {topic} ✨",
+                    "Your {topic} journey starts now 🌟",
+                    "Believe in your {topic} vision 💫"
+                ],
+                medium: [
+                    "Every journey begins with a single step 👣\n\nToday, I'm taking that step with {topic}. Remember, your dreams are valid and achievable. ✨",
+                    "Success in {topic} isn't about perfection 🌟\n\nIt's about progress, dedication, and never giving up on yourself. Keep pushing forward! 💪",
+                    "Grateful for this {topic} journey 🙏\n\nEvery challenge has made me stronger, every setback has taught me something valuable. ✨"
+                ],
+                long: [
+                    "Let me share something that changed my perspective on {topic} 💭\n\nFor the longest time, I thought success meant having it all figured out. But I've learned that true growth comes from embracing the journey, celebrating small wins, and never giving up on your dreams. 🌟\n\nIf you're working on your {topic} goals, remember: you've got this! 💪",
+                    "Your {topic} journey is uniquely yours ✨\n\nDon't compare your chapter 1 to someone else's chapter 20. Every expert was once a beginner, and every master was once a student. The path may be challenging, but every step forward is a victory worth celebrating. 🎉\n\nBelieve in yourself and trust the process. You're capable of amazing things! 🌟"
+                ]
+            },
+            creative: {
+                short: [
+                    "Creating magic with {topic} ✨🎨",
+                    "{topic}: where art meets soul 💫",
+                    "Expressing through {topic} 🌈"
+                ],
+                medium: [
+                    "Lost in the creative process of {topic} 🎨\n\nThere's something magical about bringing ideas to life. Every brushstroke, every detail matters. ✨",
+                    "Art is not what you see, but what you make others see 👁️\n\nExploring {topic} through a creative lens today. Swipe to see the journey! ➡️",
+                    "Creativity is intelligence having fun 💡\n\nToday's {topic} adventure has been absolutely inspiring! 🌟"
+                ],
+                long: [
+                    "The creative process behind {topic} is absolutely fascinating 🎨\n\nFrom the initial spark of inspiration to the final masterpiece, every moment is filled with discovery and wonder. I love how {topic} allows me to express myself in ways words simply cannot.\n\nWhat inspires your creativity? I'd love to hear your stories! 💭✨",
+                    "Art and {topic} have always been my sanctuary 🌈\n\nIn a world that moves so fast, taking time to create, to express, to simply be in the moment with {topic} is pure magic. Each piece tells a story, captures an emotion, freezes a fleeting moment in time.\n\nThank you for being part of this creative journey! 🙏💫"
+                ]
+            },
+            promotional: {
+                short: [
+                    "New {topic} alert! 🚀",
+                    "You don't want to miss this {topic}! 🔥",
+                    "Game-changing {topic} incoming! ⚡"
+                ],
+                medium: [
+                    "🎉 Exciting announcement about {topic}! 🎉\n\nWe've been working hard to bring you something special. Click the link in bio to learn more! 🔗",
+                    "Ready for {topic}? We are! 🚀\n\nLimited time offer - Don't miss out on this incredible opportunity! Swipe for details ➡️",
+                    "Introducing our latest {topic} innovation! 💡\n\nThis is what you've been waiting for. Tag someone who needs to see this! 👇"
+                ],
+                long: [
+                    "🎉 BIG NEWS about {topic}! 🎉\n\nAfter months of development and countless hours of hard work, we're thrilled to finally share this with you. This {topic} is designed to make your life easier, better, and more efficient.\n\n✨ Special launch offer available now!\n🔗 Link in bio for more details\n💬 DM us with any questions\n\nDon't wait - this offer won't last long! ⏰",
+                    "We're so excited to announce our new {topic}! 🚀\n\nThis has been a labor of love, and we can't wait for you to experience it. Whether you're new to {topic} or a seasoned pro, this is designed with you in mind.\n\n🎁 Early bird special: First 100 customers get exclusive bonuses!\n📱 Click the link in bio to get started\n❤️ Share with friends who would love this\n\nYour support means everything to us! 🙏"
+                ]
+            }
+        };
+
+        const hashtagDatabase = {
+            general: ['#instagood', '#photooftheday', '#instagram', '#instadaily', '#picoftheday', '#love', '#beautiful', '#happy', '#like4like', '#follow'],
+            lifestyle: ['#lifestyle', '#lifestyleblogger', '#dailylife', '#liveauthentic', '#thehappynow', '#livethelittlethings', '#nothingisordinary', '#pursuepretty'],
+            fitness: ['#fitness', '#fitnessmotivation', '#gym', '#workout', '#fit', '#bodybuilding', '#training', '#health', '#healthy', '#fitnessjourney'],
+            food: ['#foodie', '#foodporn', '#instafood', '#foodstagram', '#yummy', '#delicious', '#foodblogger', '#foodphotography', '#foodlover'],
+            travel: ['#travel', '#travelphotography', '#wanderlust', '#instatravel', '#travelgram', '#adventure', '#explore', '#vacation', '#trip'],
+            fashion: ['#fashion', '#style', '#ootd', '#fashionblogger', '#fashionista', '#instafashion', '#outfitoftheday', '#styleblogger', '#fashionstyle'],
+            business: ['#business', '#entrepreneur', '#success', '#motivation', '#businessowner', '#startup', '#marketing', '#entrepreneurship', '#hustle'],
+            photography: ['#photography', '#photo', '#photographer', '#photooftheday', '#nature', '#instagood', '#art', '#beautiful', '#picoftheday'],
+            beauty: ['#beauty', '#makeup', '#beautyblogger', '#skincare', '#makeuptutorial', '#cosmetics', '#beautytips', '#makeupartist'],
+            motivation: ['#motivation', '#inspiration', '#motivationalquotes', '#success', '#mindset', '#goals', '#positivevibes', '#nevergiveup']
+        };
+
+        function generateCaptions() {
+            const topic = document.getElementById('postTopic').value.trim();
+            const tone = document.getElementById('captionTone').value;
+            const length = document.getElementById('captionLength').value;
+            const hashtagCount = parseInt(document.getElementById('hashtagCount').value);
+            const includeEmojis = document.getElementById('includeEmojis').checked;
+            const includeCTA = document.getElementById('includeCTA').checked;
+
+            if (!topic) {
+                alert('Please describe what your post is about! 📝');
+                return;
+            }
+
+            const templates = captionTemplates[tone][length];
+            const captions = [];
+
+            // Generate 4 different captions
+            for (let i = 0; i < Math.min(4, templates.length); i++) {
+                let caption = templates[i].replace(/{topic}/g, topic);
+                
+                // Add CTA if requested
+                if (includeCTA) {
+                    const ctas = [
+                        '\n\n👉 Double tap if you agree!',
+                        '\n\n💬 Comment below with your thoughts!',
+                        '\n\n👇 Tag someone who needs to see this!',
+                        '\n\n❤️ Save this for later!'
+                    ];
+                    caption += ctas[i % ctas.length];
+                }
+
+                // Add hashtags
+                const hashtags = generateHashtags(topic, hashtagCount);
+                caption += '\n\n' + hashtags;
+
+                captions.push(caption);
+            }
+
+            displayCaptions(captions);
+        }
+
+        function generateHashtags(topic, count) {
+            const topicWords = topic.toLowerCase().split(' ');
+            let hashtags = new Set();
+
+            // Add topic-based hashtags
+            topicWords.forEach(word => {
+                if (word.length > 3) {
+                    hashtags.add('#' + word.replace(/[^a-z0-9]/g, ''));
+                }
+            });
+
+            // Add relevant category hashtags
+            const categories = ['general', 'lifestyle'];
+            if (topic.match(/fit|gym|workout|health/i)) categories.push('fitness');
+            if (topic.match(/food|cook|recipe|eat/i)) categories.push('food');
+            if (topic.match(/travel|vacation|trip|adventure/i)) categories.push('travel');
+            if (topic.match(/fashion|style|outfit|clothes/i)) categories.push('fashion');
+            if (topic.match(/business|work|entrepreneur/i)) categories.push('business');
+            if (topic.match(/photo|picture|image/i)) categories.push('photography');
+            if (topic.match(/beauty|makeup|skincare/i)) categories.push('beauty');
+            if (topic.match(/motivat|inspir|success/i)) categories.push('motivation');
+
+            categories.forEach(cat => {
+                const catHashtags = hashtagDatabase[cat] || [];
+                catHashtags.forEach(tag => hashtags.add(tag));
+            });
+
+            // Convert to array and limit to requested count
+            const hashtagArray = Array.from(hashtags).slice(0, count);
+            return hashtagArray.join(' ');
+        }
+
+        function displayCaptions(captions) {
+            const container = document.getElementById('captionsContainer');
+            const resultsSection = document.getElementById('resultsSection');
+
+            container.innerHTML = '';
+            
+            captions.forEach((caption, index) => {
+                const card = document.createElement('div');
+                card.className = 'caption-card bg-white rounded-lg shadow-lg p-6 border-2 border-purple-200 fade-in';
+                card.style.animationDelay = `${index * 0.1}s`;
+                
+                card.innerHTML = `
+                    <div class="flex justify-between items-center mb-4">
+                        <h4 class="font-bold text-gray-800">
+                            <i class="fas fa-star text-yellow-500 mr-2"></i>Caption ${index + 1}
+                        </h4>
+                        <button onclick="copyCaption(${index})" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                            <i class="fas fa-copy mr-1"></i>Copy
+                        </button>
+                    </div>
+                    <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                        <p class="text-gray-700 whitespace-pre-line" id="caption-${index}">${caption}</p>
+                    </div>
+                    <div class="flex items-center justify-between text-sm text-gray-600">
+                        <span><i class="fas fa-text-height mr-1"></i>${caption.split('\n').length} lines</span>
+                        <span><i class="fas fa-hashtag mr-1"></i>${(caption.match(/#/g) || []).length} hashtags</span>
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+
+            resultsSection.classList.remove('hidden');
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        function copyCaption(index) {
+            const caption = document.getElementById(`caption-${index}`).textContent;
+            navigator.clipboard.writeText(caption).then(() => {
+                alert('✅ Caption copied to clipboard!\n\nPaste it directly into Instagram! 📱');
+            });
+        }
+    </script>
+</body>
+</html>
