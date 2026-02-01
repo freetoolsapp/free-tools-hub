@@ -9,15 +9,106 @@
       "file": "tools/utility/pdf-to-word.html",
       "description": "Convert PDF files and IMAGES to editable Word documents"
     },
-
-    {
-      "name": "Word to PDF Converter",
+  {
+      "name": "WORD TO PDF Converter",
       "icon": "fa-file-word",
       "color": "blue",
       "category": "utility",
       "badge": "HOT",
-      "file": "tools/utility/word-to-pdf-converter.html",
-      "description": "Convert PDF files and IMAGES to editable Word documents"
+      "file": "tools/utility/word-to-pdf.html",
+      "description": "Convert WORD files and  Documents to PDF documents"
+    },
+    
+  {
+      "name": "DUPLICATE PDF PAGES",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/pdf-duplicate.html",
+      "description": "MAKE DUPLICATE OF YOUR PDF PAGES"
+    },
+      {
+      "name": "DELETE ANY PAGE IN YOUR PDF FILE",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/pdf-pages-delete.html",
+      "description": " You can delete any page in your PDF documents"
+    },
+      {
+      "name": "PDF Crop",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/crop-pdf-pages.html",
+      "description": "Crop any part or page of your PDF documents"
+    },
+      {
+      "name": "RE-ARRANGE PDF DOCUMENTS",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/reorder-pdf-pages.html",
+      "description": "Re-arrange or reorder pages in your PDF documents"
+    },
+     {
+      "name": "ROTATE PDF PAGES",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "HOT",
+      "file": "tools/utility/rotate-pdf-pages.html",
+      "description": "ROTATE pages in Your PDF documents"
+    }, 
+      {
+      "name": "JPG/JPEG/ PNG IMAGES to PDF Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "HOT",
+      "file": "tools/utility/jpg-to-pdf.html",
+      "description": "Convert ANY IMAGES to PDF documents"
+    },
+      {
+      "name": "PDF to JPG Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "HOT",
+      "file": "tools/utility/pdf-to-jpg.html",
+      "description": "Convert PDF Documents and files Any kind of IMAGES "
+    },
+      {
+      "name": "Website to PDF Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW ",
+      "file": "tools/utility/website-to-pdf-converter.html",
+      "description": "Convert any website pages to PDF documents"
+    },
+    
+    { 
+      "name": "EXCEL to PDF Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "HOT",
+      "file": "tools/utility/excel-to-pdf-converter.html",
+      "description": "Convert EXCEL files to PDF documents"
+    },
+    {
+      "name": "POWERPOINT TO PDF Converter",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "HOT",
+      "file": "tools/utility/powerpoint-to-pdf-converter.html",
+      "description": "Convert POWEPOINT files and IMAGES to PDF documents"
     },
     
     {
