@@ -1,10 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3CEQJ2D9WY'); </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Primary Meta Tags -->
@@ -58,6 +57,27 @@
         }
     }
     </script>
+    
+    <style>
+        /* Fix for sticky header scroll offset */
+        html {
+            scroll-padding-top: 180px; /* Header (80px) + Category Tabs (60px) + extra space (40px) */
+        }
+        
+        #tools {
+            scroll-margin-top: 180px; /* Same offset for anchor links */
+        }
+        
+        @media (max-width: 768px) {
+            html {
+                scroll-padding-top: 200px; /* More space for mobile */
+            }
+            
+            #tools {
+                scroll-margin-top: 200px;
+            }
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
