@@ -1,1 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>Blog - Free Online Tools Tips & Guides | Free Tools Hub 2026</title>
+    <meta name="title" content="Blog - Free Online Tools Tips & Guides | Free Tools Hub 2026">
+    <meta name="description" content="Expert guides, tutorials, and insights on AI tools, productivity, SEO, web development, and student resources. Learn tips and tricks to work smarter in 2026.">
+    <meta name="keywords" content="tools blog, AI tools guide, productivity tips, SEO tutorials, web development blog, student resources, free tools tips, 2026 guides">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
+    <meta name="language" content="English">
+    <meta name="author" content="Free Tools Hub">
+    <meta name="revisit-after" content="3 days">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/blog.html">
+    <meta property="og:site_name" content="Free Tools Hub">
+    <meta property="og:title" content="Blog - Free Online Tools Tips & Guides | Free Tools Hub">
+    <meta property="og:description" content="Expert guides, tutorials, and insights on AI tools, productivity, SEO, web development, and student resources.">
+    <meta property="og:image" content="https://freetoolsapp.github.io/free-tools-hub/blog-og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/blog.html">
+    <meta property="twitter:title" content="Blog - Free Online Tools Tips & Guides">
+    <meta property="twitter:description" content="Expert guides on AI tools, productivity, SEO, and more.">
+    <meta property="twitter:image" content="https://freetoolsapp.github.io/free-tools-hub/blog-twitter.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/blog.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Schema Markup - Blog -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Blog",
+        "name": "Free Tools Hub Blog",
+        "description": "Expert guides, tutorials, and insights on tools, productivity, and technology",
+        "url": "https://freetoolsapp.github.io/free-tools-hub/blog.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Free Tools Hub",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://freetoolsapp.github.io/free-tools-hub/logo.png"
+            }
+        }
+    }
+    </script>
+    
+    <!-- Breadcrumb Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "https://freetoolsapp.github.io/free-tools-hub/"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "Blog",
+                "item": "https://freetoolsapp.github.io/free-tools-hub/blog.html"
+            }
+        ]
+    }
+    </script>
+    
+    <style>
+        .blog-card {
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .category-badge {
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .category-badge:hover {
+            transform: scale(1.05);
+        }
+        
+        .category-badge.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+        }
+        
+        .featured-badge {
+            background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50" role="banner">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-3" aria-label="Free Tools Hub Home">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl" aria-hidden="true"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        <i class="fas fa-home mr-1" aria-hidden="true"></i>Home
+                    </a>
+                    <a href="index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        <i class="fas fa-tools mr-1" aria-hidden="true"></i>Tools
+                    </a>
+                    <a href="blog.html" class="text-blue-600 font-medium" aria-current="page">
+                        <i class="fas fa-blog mr-1" aria-hidden="true"></i>Blog
+                    </a>
+                    <a href="resources.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        <i class="fas fa-book mr-1" aria-hidden="true"></i>Resources
+                    </a>
+                    <a href="tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        <i class="fas fa-chalkboard-teacher mr-1" aria-hidden="true"></i>Tutorials
+                    </a>
+                    <a href="comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium transition-colors duration-200">
+                        <i class="fas fa-balance-scale mr-1" aria-hidden="true"></i>Compare
+                    </a>
+                    <a href="contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition-shadow duration-200">
+                        <i class="fas fa-envelope mr-1" aria-hidden="true"></i>Contact
+                    </a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu" aria-expanded="false">
+                    <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
+                </button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="index.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
+                    <i class="fas fa-home mr-2" aria-hidden="true"></i>Home
+                </a>
+                <a href="index.html#tools" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
+                    <i class="fas fa-tools mr-2" aria-hidden="true"></i>Tools
+                </a>
+                <a href="blog.html" class="block py-2 bg-blue-50 px-2 rounded">
+                    <i class="fas fa-blog mr-2" aria-hidden="true"></i>Blog
+                </a>
+                <a href="resources.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
+                    <i class="fas fa-book mr-2" aria-hidden="true"></i>Resources
+                </a>
+                <a href="tutorials.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
+                    <i class="fas fa-chalkboard-teacher mr-2" aria-hidden="true"></i>Tutorials
+                </a>
+                <a href="comparisons.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
+                    <i class="fas fa-balance-scale mr-2" aria-hidden="true"></i>Compare
+                </a>
+                <a href="contact.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
+                    <i class="fas fa-envelope mr-2" aria-hidden="true"></i>Contact
+                </a>
+            </nav>
+        </div>
+    </header>
 
+    <!-- Breadcrumb -->
+    <nav class="bg-white border-b" aria-label="Breadcrumb">
+        <div class="container mx-auto px-4 py-3">
+            <ol class="flex items-center text-sm text-gray-600" itemscope itemtype="https://schema.org/BreadcrumbList">
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <a href="index.html" class="hover:text-blue-600 transition-colors duration-200" itemprop="item">
+                        <i class="fas fa-home mr-1" aria-hidden="true"></i>
+                        <span itemprop="name">Home</span>
+                    </a>
+                    <meta itemprop="position" content="1" />
+                </li>
+                <i class="fas fa-chevron-right mx-2 text-gray-400" aria-hidden="true"></i>
+                <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                    <span class="text-gray-800 font-medium" itemprop="name">Blog</span>
+                    <meta itemprop="position" content="2" />
+                </li>
+            </ol>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16" role="region" aria-label="Hero section">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-6">
+                <div class="inline-block bg-white/20 px-6 py-2 rounded-full backdrop-blur">
+                    <i class="fas fa-blog text-yellow-300 mr-2" aria-hidden="true"></i>
+                    <span class="font-bold">Expert Guides • Tutorials • Insights</span>
+                </div>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">Free Tools Hub Blog</h2>
+            <p class="text-xl mb-8">Learn tips, tricks, and best practices for productivity and success</p>
+            <div class="max-w-2xl mx-auto">
+                <label for="searchBlogs" class="sr-only">Search articles</label>
+                <input 
+                    type="search" 
+                    id="searchBlogs" 
+                    placeholder="Search articles..." 
+                    class="w-full px-6 py-4 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300 transition-shadow duration-200" 
+                    aria-label="Search blog articles"
+                    autocomplete="off"
+                />
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filter -->
+    <section class="bg-white shadow-sm py-6 sticky top-20 z-40" role="region" aria-label="Category filter">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <button onclick="filterCategory('all')" class="category-badge active bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-full font-semibold" aria-label="Show all posts">
+                    <i class="fas fa-globe mr-2" aria-hidden="true"></i>All Posts
+                </button>
+                <button onclick="filterCategory('ai')" class="category-badge bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-blue-100" aria-label="Filter AI posts">
+                    <i class="fas fa-robot mr-2" aria-hidden="true"></i>AI & Technology
+                </button>
+                <button onclick="filterCategory('productivity')" class="category-badge bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-green-100" aria-label="Filter productivity posts">
+                    <i class="fas fa-chart-line mr-2" aria-hidden="true"></i>Productivity
+                </button>
+                <button onclick="filterCategory('seo')" class="category-badge bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-purple-100" aria-label="Filter SEO posts">
+                    <i class="fas fa-search mr-2" aria-hidden="true"></i>SEO & Marketing
+                </button>
+                <button onclick="filterCategory('student')" class="category-badge bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-yellow-100" aria-label="Filter student posts">
+                    <i class="fas fa-graduation-cap mr-2" aria-hidden="true"></i>Student Tips
+                </button>
+                <button onclick="filterCategory('webdev')" class="category-badge bg-gray-200 text-gray-700 px-6 py-2 rounded-full font-semibold hover:bg-indigo-100" aria-label="Filter web development posts">
+                    <i class="fas fa-code mr-2" aria-hidden="true"></i>Web Development
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12" role="main">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <!-- Featured Post -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-star text-yellow-500 mr-3" aria-hidden="true"></i>Featured Article
+                </h3>
+                
+                <a href="blog/ai-tools-2026.html" class="block bg-white rounded-lg shadow-lg overflow-hidden hover:shadow-2xl transition-all">
+                    <div class="md:flex">
+                        <div class="md:w-1/2 bg-gradient-to-br from-blue-500 to-purple-600 p-12 flex items-center justify-center">
+                            <div class="text-white text-center">
+                                <i class="fas fa-robot text-8xl mb-4 opacity-50" aria-hidden="true"></i>
+                                <div class="featured-badge text-gray-800 px-4 py-2 rounded-full inline-block font-bold text-sm mb-4">
+                                    <i class="fas fa-fire mr-1" aria-hidden="true"></i>FEATURED
+                                </div>
+                            </div>
+                        </div>
+                        <div class="md:w-1/2 p-8">
+                            <div class="flex items-center gap-3 mb-4">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-semibold">
+                                    <i class="fas fa-robot mr-1" aria-hidden="true"></i>AI & Technology
+                                </span>
+                                <span class="text-gray-500 text-sm">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>January 15, 2026
+                                </span>
+                            </div>
+                            <h2 class="text-3xl font-bold text-gray-800 mb-4 hover:text-blue-600 transition">
+                                10 AI Tools That Will Transform Your Workflow in 2026
+                            </h2>
+                            <p class="text-gray-600 mb-6 leading-relaxed">
+                                Discover the most powerful AI tools of 2026 that will revolutionize how you work. From ChatGPT to GitHub Copilot, learn which tools can boost your productivity and automate repetitive tasks.
+                            </p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center gap-4 text-sm text-gray-500">
+                                    <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>8 min read</span>
+                                    <span><i class="fas fa-eye mr-1" aria-hidden="true"></i>2.5K views</span>
+                                </div>
+                                <span class="text-blue-600 font-semibold">
+                                    Read More <i class="fas fa-arrow-right ml-1" aria-hidden="true"></i>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Latest Articles Grid -->
+            <div class="mb-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    <i class="fas fa-newspaper text-blue-600 mr-3" aria-hidden="true"></i>Latest Articles
+                </h3>
+                
+                <div id="blogGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    
+                    <!-- Blog Post 1 - AI Tools -->
+                    <article class="blog-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="ai">
+                        <div class="h-48 bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+                            <i class="fas fa-robot text-white text-6xl opacity-50" aria-hidden="true"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-robot mr-1" aria-hidden="true"></i>AI
+                                </span>
+                                <span class="text-gray-500 text-xs">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>Jan 15, 2026
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
+                                <a href="blog/ai-tools-2026.html">10 AI Tools That Will Transform Your Workflow in 2026</a>
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Discover the top 10 AI tools that will boost productivity and automate your workflow in 2026.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>8 min</span>
+                                <a href="blog/ai-tools-2026.html" class="text-blue-600 font-semibold hover:text-blue-800">
+                                    Read More <i class="fas fa-arrow-right ml-1" aria-hidden="true"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 2 - Productivity -->
+                    <article class="blog-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="productivity">
+                        <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
+                            <i class="fas fa-chart-line text-white text-6xl opacity-50" aria-hidden="true"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-chart-line mr-1" aria-hidden="true"></i>Productivity
+                                </span>
+                                <span class="text-gray-500 text-xs">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>Coming Soon
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">
+                                10 Time Management Techniques That Actually Work
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Master your time with proven techniques like Pomodoro, time blocking, and the 2-minute rule.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>6 min</span>
+                                <span class="text-gray-400 font-semibold">
+                                    Coming Soon
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 3 - SEO -->
+                    <article class="blog-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="seo">
+                        <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
+                            <i class="fas fa-search text-white text-6xl opacity-50" aria-hidden="true"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-search mr-1" aria-hidden="true"></i>SEO
+                                </span>
+                                <span class="text-gray-500 text-xs">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>Coming Soon
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">
+                                SEO in 2026: Complete Guide for Beginners
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Learn the latest SEO strategies, from keyword research to link building and technical optimization.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>12 min</span>
+                                <span class="text-gray-400 font-semibold">
+                                    Coming Soon
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 4 - Student Tips -->
+                    <article class="blog-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="student">
+                        <div class="h-48 bg-gradient-to-br from-yellow-500 to-orange-600 flex items-center justify-center">
+                            <i class="fas fa-graduation-cap text-white text-6xl opacity-50" aria-hidden="true"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-graduation-cap mr-1" aria-hidden="true"></i>Student
+                                </span>
+                                <span class="text-gray-500 text-xs">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>Coming Soon
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">
+                                Study Smarter: Science-Backed Learning Techniques
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Discover proven study methods like spaced repetition, active recall, and mind mapping.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>10 min</span>
+                                <span class="text-gray-400 font-semibold">
+                                    Coming Soon
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 5 - Web Dev -->
+                    <article class="blog-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="webdev">
+                        <div class="h-48 bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center">
+                            <i class="fas fa-code text-white text-6xl opacity-50" aria-hidden="true"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-indigo-100 text-indigo-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-code mr-1" aria-hidden="true"></i>Web Dev
+                                </span>
+                                <span class="text-gray-500 text-xs">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>Coming Soon
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">
+                                Modern JavaScript: ES2026 Features Explained
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Explore the latest JavaScript features and how to use them in your projects.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>15 min</span>
+                                <span class="text-gray-400 font-semibold">
+                                    Coming Soon
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <!-- Blog Post 6 - Productivity -->
+                    <article class="blog-card bg-white rounded-lg shadow-lg overflow-hidden" data-category="productivity">
+                        <div class="h-48 bg-gradient-to-br from-pink-500 to-red-600 flex items-center justify-center">
+                            <i class="fas fa-tasks text-white text-6xl opacity-50" aria-hidden="true"></i>
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="bg-pink-100 text-pink-800 px-3 py-1 rounded-full text-xs font-semibold">
+                                    <i class="fas fa-tasks mr-1" aria-hidden="true"></i>Productivity
+                                </span>
+                                <span class="text-gray-500 text-xs">
+                                    <i class="fas fa-calendar mr-1" aria-hidden="true"></i>Coming Soon
+                                </span>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-3">
+                                Building Better Habits: A Practical Guide
+                            </h3>
+                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+                                Learn how to build lasting habits using the atomic habits framework and habit stacking.
+                            </p>
+                            <div class="flex items-center justify-between text-xs text-gray-500">
+                                <span><i class="fas fa-clock mr-1" aria-hidden="true"></i>9 min</span>
+                                <span class="text-gray-400 font-semibold">
+                                    Coming Soon
+                                </span>
+                            </div>
+                        </div>
+                    </article>
+
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg p-8 md:p-12 text-white text-center">
+                <i class="fas fa-envelope text-5xl mb-4 opacity-80" aria-hidden="true"></i>
+                <h3 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h3>
+                <p class="text-lg mb-6 opacity-90">Get the latest articles, tips, and tools delivered directly to your inbox. No spam, ever.</p>
+                <div class="max-w-md mx-auto flex gap-3">
+                    <label for="newsletter-email" class="sr-only">Email address</label>
+                    <input 
+                        type="email" 
+                        id="newsletter-email"
+                        placeholder="Enter your email..." 
+                        class="flex-1 px-6 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-4 focus:ring-yellow-300"
+                        aria-label="Email for newsletter"
+                    />
+                    <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:shadow-xl transition">
+                        Subscribe
+                    </button>
+                </div>
+                <p class="text-sm mt-4 opacity-75">
+                    <i class="fas fa-lock mr-1" aria-hidden="true"></i>We respect your privacy. Unsubscribe anytime.
+                </p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12 mt-12" role="contentinfo">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2" aria-hidden="true"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm mb-4">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                    <p class="text-gray-400 text-xs">© 2026 Free Tools Hub. All rights reserved.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Tool Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="index.html#tools" class="hover:text-white transition-colors duration-200"><i class="fas fa-wrench mr-2" aria-hidden="true"></i>Utility Tools</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition-colors duration-200"><i class="fas fa-graduation-cap mr-2" aria-hidden="true"></i>Student Tools</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition-colors duration-200"><i class="fas fa-palette mr-2" aria-hidden="true"></i>Design Tools</a></li>
+                        <li><a href="index.html#tools" class="hover:text-white transition-colors duration-200"><i class="fas fa-chart-line mr-2" aria-hidden="true"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="blog.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-blog mr-2" aria-hidden="true"></i>Blog</a></li>
+                        <li><a href="tutorials.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-chalkboard-teacher mr-2" aria-hidden="true"></i>Tutorials</a></li>
+                        <li><a href="resources.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-book mr-2" aria-hidden="true"></i>Resources</a></li>
+                        <li><a href="comparisons.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-balance-scale mr-2" aria-hidden="true"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="about.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-info-circle mr-2" aria-hidden="true"></i>About Us</a></li>
+                        <li><a href="contact.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-envelope mr-2" aria-hidden="true"></i>Contact</a></li>
+                        <li><a href="privacy.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-shield-alt mr-2" aria-hidden="true"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html" class="hover:text-white transition-colors duration-200"><i class="fas fa-file-contract mr-2" aria-hidden="true"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook" aria-hidden="true"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>Made with <i class="fas fa-heart text-red-500" aria-hidden="true"></i> for creators, students, and professionals worldwide</p>
+                <p class="mt-2">
+                    <a href="privacy.html" class="hover:text-white transition-colors duration-200">Privacy</a> • 
+                    <a href="terms.html" class="hover:text-white transition-colors duration-200">Terms</a> • 
+                    <a href="sitemap.xml" class="hover:text-white transition-colors duration-200">Sitemap</a> • 
+                    <a href="contact.html" class="hover:text-white transition-colors duration-200">Contact</a>
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = this.querySelector('i');
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            menu.classList.toggle('hidden');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+            this.setAttribute('aria-expanded', !isExpanded);
+        });
+
+        // Category Filter
+        function filterCategory(category) {
+            const posts = document.querySelectorAll('.blog-card');
+            const buttons = document.querySelectorAll('.category-badge');
+            
+            // Update button states
+            buttons.forEach(btn => {
+                btn.classList.remove('active', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+                btn.classList.add('bg-gray-200', 'text-gray-700');
+            });
+            event.target.classList.remove('bg-gray-200', 'text-gray-700');
+            event.target.classList.add('active', 'bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
+            
+            // Filter posts
+            posts.forEach(post => {
+                if (category === 'all' || post.dataset.category === category) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        }
+
+        // Search Functionality
+        document.getElementById('searchBlogs').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const posts = document.querySelectorAll('.blog-card');
+            
+            posts.forEach(post => {
+                const title = post.querySelector('h3').textContent.toLowerCase();
+                const description = post.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    post.style.display = 'block';
+                } else {
+                    post.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
