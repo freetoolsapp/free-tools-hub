@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Primary Meta Tags -->
+    <title>AI Resume Builder - Free Tools Hub</title>
+    <meta name="title" content="AI Resume Builder - Free Tools Hub">
+    <meta name="description" content="Create professional resumes instantly with AI assistance. Free resume builder with ATS-friendly templates. Download as PDF or Word!">
+    <meta name="keywords" content="resume builder, CV maker, AI resume, ATS resume, free resume builder">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="English">
+    <meta name="author" content="freetoolsapp">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/resume-builder.html">
+    <meta property="og:title" content="AI Resume Builder - Free Tools Hub">
+    <meta property="og:description" content="Create professional resumes instantly with AI assistance. Free resume builder with ATS-friendly templates. Download as PDF or Word!">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/resume-builder.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- jsPDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    
+    <style>
+        .resume-preview {
+            background: white;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            min-height: 800px;
+        }
+
+        .template-card {
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 3px solid transparent;
+        }
+
+        .template-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .template-card.selected {
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+
+        .section-input {
+            background: #f9fafb;
+            border: 2px solid #e5e7eb;
+            transition: all 0.3s;
+        }
+
+        .section-input:focus {
+            background: white;
+            border-color: #3b82f6;
+        }
+
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .resume-preview, .resume-preview * {
+                visibility: visible;
+            }
+            .resume-preview {
+                position: absolute;
+                left: 0;
+                top: 0;
+            }
+        }
+
+        .ai-suggestion {
+            animation: fadeIn 0.3s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .skill-tag {
+            display: inline-block;
+            background: #dbeafe;
+            color: #1e40af;
+            padding: 4px 12px;
+            border-radius: 9999px;
+            margin: 2px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Resume Builder</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
+        <div class="container mx-auto px-4 text-center">
+            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
+                <i class="fas fa-file-alt text-5xl"></i>
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">AI Resume Builder</h2>
+            <p class="text-xl mb-2">Create professional ATS-friendly resumes in minutes</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • AI-Powered • Multiple Templates • Download PDF/Word</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <!-- Template Selection -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-palette text-purple-600 mr-2"></i>Choose Your Template
+                </h3>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                    <!-- Professional Template -->
+                    <div class="template-card selected bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg p-6 border-2" onclick="selectTemplate('professional')" id="template-professional">
+                        <div class="bg-white rounded-lg p-4 mb-4 h-48 overflow-hidden">
+                            <div class="border-b-2 border-blue-600 pb-2 mb-2">
+                                <div class="h-3 bg-blue-600 w-32 mb-1"></div>
+                                <div class="h-2 bg-gray-300 w-24"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="h-2 bg-gray-200 w-full"></div>
+                                <div class="h-2 bg-gray-200 w-5/6"></div>
+                                <div class="h-2 bg-gray-200 w-4/6"></div>
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-center">
+                            <i class="fas fa-briefcase text-blue-600 mr-2"></i>Professional
+                        </h4>
+                        <p class="text-sm text-gray-600 text-center mt-2">Clean and modern layout</p>
+                    </div>
+
+                    <!-- Creative Template -->
+                    <div class="template-card bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg p-6 border-2" onclick="selectTemplate('creative')" id="template-creative">
+                        <div class="bg-white rounded-lg p-4 mb-4 h-48 overflow-hidden">
+                            <div class="flex items-start gap-2 mb-2">
+                                <div class="w-12 h-12 bg-purple-600 rounded-full"></div>
+                                <div>
+                                    <div class="h-3 bg-purple-600 w-24 mb-1"></div>
+                                    <div class="h-2 bg-gray-300 w-20"></div>
+                                </div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="h-2 bg-gray-200 w-full"></div>
+                                <div class="h-2 bg-gray-200 w-5/6"></div>
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-center">
+                            <i class="fas fa-paint-brush text-purple-600 mr-2"></i>Creative
+                        </h4>
+                        <p class="text-sm text-gray-600 text-center mt-2">Stand out with style</p>
+                    </div>
+
+                    <!-- Minimal Template -->
+                    <div class="template-card bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg p-6 border-2" onclick="selectTemplate('minimal')" id="template-minimal">
+                        <div class="bg-white rounded-lg p-4 mb-4 h-48 overflow-hidden">
+                            <div class="mb-3">
+                                <div class="h-4 bg-gray-800 w-32 mb-1"></div>
+                                <div class="h-2 bg-gray-400 w-24"></div>
+                            </div>
+                            <div class="space-y-1">
+                                <div class="h-2 bg-gray-200 w-full"></div>
+                                <div class="h-2 bg-gray-200 w-5/6"></div>
+                                <div class="h-2 bg-gray-200 w-4/6"></div>
+                            </div>
+                        </div>
+                        <h4 class="font-bold text-gray-800 text-center">
+                            <i class="fas fa-minimize text-gray-600 mr-2"></i>Minimal
+                        </h4>
+                        <p class="text-sm text-gray-600 text-center mt-2">Simple and elegant</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resume Builder -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Left Side - Input Form -->
+                <div class="space-y-6">
+                    
+                    <!-- Personal Info -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-user text-blue-600 mr-2"></i>Personal Information
+                        </h3>
+                        <div class="space-y-4">
+                            <input type="text" id="fullName" class="section-input w-full p-3 rounded-lg" placeholder="Full Name *" oninput="updatePreview()">
+                            <input type="text" id="jobTitle" class="section-input w-full p-3 rounded-lg" placeholder="Job Title / Position *" oninput="updatePreview()">
+                            <input type="email" id="email" class="section-input w-full p-3 rounded-lg" placeholder="Email Address *" oninput="updatePreview()">
+                            <input type="tel" id="phone" class="section-input w-full p-3 rounded-lg" placeholder="Phone Number" oninput="updatePreview()">
+                            <input type="text" id="location" class="section-input w-full p-3 rounded-lg" placeholder="Location (City, Country)" oninput="updatePreview()">
+                            <input type="url" id="linkedin" class="section-input w-full p-3 rounded-lg" placeholder="LinkedIn Profile (optional)" oninput="updatePreview()">
+                        </div>
+                    </div>
+
+                    <!-- Professional Summary -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-file-alt text-green-600 mr-2"></i>Professional Summary
+                            </h3>
+                            <button onclick="generateSummary()" class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                                <i class="fas fa-magic mr-2"></i>AI Generate
+                            </button>
+                        </div>
+                        <textarea id="summary" class="section-input w-full p-3 rounded-lg h-32 resize-none" placeholder="Write a brief professional summary about yourself..." oninput="updatePreview()"></textarea>
+                        <p class="text-xs text-gray-500 mt-2">Tip: 2-3 sentences highlighting your experience and skills</p>
+                    </div>
+
+                    <!-- Experience -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-briefcase text-purple-600 mr-2"></i>Work Experience
+                            </h3>
+                            <button onclick="addExperience()" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                                <i class="fas fa-plus mr-2"></i>Add More
+                            </button>
+                        </div>
+                        <div id="experienceContainer">
+                            <div class="experience-item space-y-3 mb-4 p-4 bg-gray-50 rounded-lg">
+                                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Job Title" oninput="updatePreview()">
+                                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Company Name" oninput="updatePreview()">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Start Date (e.g., Jan 2020)" oninput="updatePreview()">
+                                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="End Date (or 'Present')" oninput="updatePreview()">
+                                </div>
+                                <textarea class="section-input w-full p-2 rounded-lg text-sm h-20 resize-none" placeholder="Key responsibilities and achievements..." oninput="updatePreview()"></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Education -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                                <i class="fas fa-graduation-cap text-indigo-600 mr-2"></i>Education
+                            </h3>
+                            <button onclick="addEducation()" class="bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                                <i class="fas fa-plus mr-2"></i>Add More
+                            </button>
+                        </div>
+                        <div id="educationContainer">
+                            <div class="education-item space-y-3 mb-4 p-4 bg-gray-50 rounded-lg">
+                                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Degree / Certification" oninput="updatePreview()">
+                                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Institution Name" oninput="updatePreview()">
+                                <div class="grid grid-cols-2 gap-2">
+                                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Year (e.g., 2020)" oninput="updatePreview()">
+                                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="GPA (optional)" oninput="updatePreview()">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Skills -->
+                    <div class="bg-white rounded-lg shadow-lg p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                            <i class="fas fa-cogs text-orange-600 mr-2"></i>Skills
+                        </h3>
+                        <textarea id="skills" class="section-input w-full p-3 rounded-lg h-24 resize-none" placeholder="Enter skills separated by commas (e.g., JavaScript, Python, Project Management)" oninput="updatePreview()"></textarea>
+                        <p class="text-xs text-gray-500 mt-2">Add 8-12 relevant skills for best results</p>
+                    </div>
+
+                </div>
+
+                <!-- Right Side - Resume Preview -->
+                <div class="sticky top-24">
+                    <div class="bg-white rounded-lg shadow-lg p-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3 class="text-xl font-bold text-gray-800">
+                                <i class="fas fa-eye text-blue-600 mr-2"></i>Live Preview
+                            </h3>
+                            <div class="flex gap-2">
+                                <button onclick="downloadPDF()" class="bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                                    <i class="fas fa-file-pdf mr-2"></i>PDF
+                                </button>
+                                <button onclick="downloadWord()" class="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:shadow-lg transition">
+                                    <i class="fas fa-file-word mr-2"></i>Word
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div id="resumePreview" class="resume-preview p-8 rounded-lg">
+                            <!-- Preview will be generated here -->
+                            <div class="text-center text-gray-400 py-20">
+                                <i class="fas fa-file-alt text-6xl mb-4"></i>
+                                <p class="text-lg">Start filling the form to see your resume</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Related Tools -->
+            <div class="bg-white rounded-lg shadow-lg p-8 mt-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-toolbox text-purple-600 mr-2"></i>Related Tools
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <a href="../student/citation-generator.html" class="block p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg hover:shadow-lg transition border-2 border-indigo-200">
+                        <i class="fas fa-quote-right text-2xl text-indigo-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">Citation Generator</h4>
+                        <p class="text-sm text-gray-600">Generate academic citations</p>
+                    </a>
+                    <a href="../utility/word-counter.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition border-2 border-blue-200">
+                        <i class="fas fa-hashtag text-2xl text-blue-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">Word Counter</h4>
+                        <p class="text-sm text-gray-600">Count words and characters</p>
+                    </a>
+                    <a href="../utility/pdf-to-word.html" class="block p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg hover:shadow-lg transition border-2 border-green-200">
+                        <i class="fas fa-file-word text-2xl text-green-600 mb-2"></i>
+                        <h4 class="font-bold text-gray-800 mb-1">PDF to Word</h4>
+                        <p class="text-sm text-gray-600">Convert PDF to editable Word</p>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+                <div>
+                    <h3 class="font-bold text-lg mb-4">
+                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html#tools" onclick="filterTools('utility')" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('student')" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('design')" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
+                        <li><a href="../../index.html#tools" onclick="filterTools('seo')" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Resources</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Company</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4 text-2xl">
+                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        const { jsPDF } = window.jspdf;
+        
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+
+        let selectedTemplate = 'professional';
+
+        function selectTemplate(template) {
+            selectedTemplate = template;
+            
+            // Update UI
+            document.querySelectorAll('.template-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            document.getElementById(`template-${template}`).classList.add('selected');
+            
+            updatePreview();
+        }
+
+        function updatePreview() {
+            const preview = document.getElementById('resumePreview');
+            
+            const fullName = document.getElementById('fullName').value;
+            const jobTitle = document.getElementById('jobTitle').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const location = document.getElementById('location').value;
+            const linkedin = document.getElementById('linkedin').value;
+            const summary = document.getElementById('summary').value;
+            const skills = document.getElementById('skills').value;
+
+            // Get all experiences
+            const experiences = Array.from(document.querySelectorAll('.experience-item')).map(item => {
+                const inputs = item.querySelectorAll('input');
+                const textarea = item.querySelector('textarea');
+                return {
+                    title: inputs[0]?.value || '',
+                    company: inputs[1]?.value || '',
+                    start: inputs[2]?.value || '',
+                    end: inputs[3]?.value || '',
+                    description: textarea?.value || ''
+                };
+            }).filter(exp => exp.title || exp.company);
+
+            // Get all education
+            const education = Array.from(document.querySelectorAll('.education-item')).map(item => {
+                const inputs = item.querySelectorAll('input');
+                return {
+                    degree: inputs[0]?.value || '',
+                    institution: inputs[1]?.value || '',
+                    year: inputs[2]?.value || '',
+                    gpa: inputs[3]?.value || ''
+                };
+            }).filter(edu => edu.degree || edu.institution);
+
+            if (!fullName && !jobTitle) {
+                preview.innerHTML = `
+                    <div class="text-center text-gray-400 py-20">
+                        <i class="fas fa-file-alt text-6xl mb-4"></i>
+                        <p class="text-lg">Start filling the form to see your resume</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Generate resume based on template
+            if (selectedTemplate === 'professional') {
+                preview.innerHTML = generateProfessionalTemplate(fullName, jobTitle, email, phone, location, linkedin, summary, experiences, education, skills);
+            } else if (selectedTemplate === 'creative') {
+                preview.innerHTML = generateCreativeTemplate(fullName, jobTitle, email, phone, location, linkedin, summary, experiences, education, skills);
+            } else {
+                preview.innerHTML = generateMinimalTemplate(fullName, jobTitle, email, phone, location, linkedin, summary, experiences, education, skills);
+            }
+        }
+
+        function generateProfessionalTemplate(name, title, email, phone, location, linkedin, summary, experiences, education, skills) {
+            return `
+                <div style="font-family: Arial, sans-serif; color: #333;">
+                    <!-- Header -->
+                    <div style="border-bottom: 3px solid #2563eb; padding-bottom: 16px; margin-bottom: 24px;">
+                        <h1 style="font-size: 32px; font-weight: bold; margin: 0; color: #1e40af;">${name || 'Your Name'}</h1>
+                        <p style="font-size: 18px; color: #6b7280; margin: 8px 0 0 0;">${title || 'Your Job Title'}</p>
+                    </div>
+
+                    <!-- Contact Info -->
+                    <div style="margin-bottom: 24px; font-size: 14px; color: #4b5563;">
+                        ${email ? `<p style="margin: 4px 0;"><i class="fas fa-envelope" style="width: 20px;"></i> ${email}</p>` : ''}
+                        ${phone ? `<p style="margin: 4px 0;"><i class="fas fa-phone" style="width: 20px;"></i> ${phone}</p>` : ''}
+                        ${location ? `<p style="margin: 4px 0;"><i class="fas fa-map-marker-alt" style="width: 20px;"></i> ${location}</p>` : ''}
+                        ${linkedin ? `<p style="margin: 4px 0;"><i class="fab fa-linkedin" style="width: 20px;"></i> ${linkedin}</p>` : ''}
+                    </div>
+
+                    ${summary ? `
+                    <!-- Summary -->
+                    <div style="margin-bottom: 24px;">
+                        <h2 style="font-size: 18px; font-weight: bold; color: #1e40af; border-bottom: 2px solid #dbeafe; padding-bottom: 8px; margin-bottom: 12px;">PROFESSIONAL SUMMARY</h2>
+                        <p style="line-height: 1.6; text-align: justify;">${summary}</p>
+                    </div>
+                    ` : ''}
+
+                    ${experiences.length > 0 ? `
+                    <!-- Experience -->
+                    <div style="margin-bottom: 24px;">
+                        <h2 style="font-size: 18px; font-weight: bold; color: #1e40af; border-bottom: 2px solid #dbeafe; padding-bottom: 8px; margin-bottom: 12px;">WORK EXPERIENCE</h2>
+                        ${experiences.map(exp => `
+                            <div style="margin-bottom: 16px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <h3 style="font-size: 16px; font-weight: bold; margin: 0;">${exp.title}</h3>
+                                        <p style="color: #6b7280; margin: 4px 0;">${exp.company}</p>
+                                    </div>
+                                    <p style="color: #6b7280; font-size: 14px;">${exp.start} - ${exp.end}</p>
+                                </div>
+                                ${exp.description ? `<p style="margin-top: 8px; line-height: 1.6;">${exp.description}</p>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+
+                    ${education.length > 0 ? `
+                    <!-- Education -->
+                    <div style="margin-bottom: 24px;">
+                        <h2 style="font-size: 18px; font-weight: bold; color: #1e40af; border-bottom: 2px solid #dbeafe; padding-bottom: 8px; margin-bottom: 12px;">EDUCATION</h2>
+                        ${education.map(edu => `
+                            <div style="margin-bottom: 12px;">
+                                <div style="display: flex; justify-content: space-between; align-items: start;">
+                                    <div>
+                                        <h3 style="font-size: 16px; font-weight: bold; margin: 0;">${edu.degree}</h3>
+                                        <p style="color: #6b7280; margin: 4px 0;">${edu.institution}</p>
+                                    </div>
+                                    <p style="color: #6b7280; font-size: 14px;">${edu.year}${edu.gpa ? ` | GPA: ${edu.gpa}` : ''}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+
+                    ${skills ? `
+                    <!-- Skills -->
+                    <div>
+                        <h2 style="font-size: 18px; font-weight: bold; color: #1e40af; border-bottom: 2px solid #dbeafe; padding-bottom: 8px; margin-bottom: 12px;">SKILLS</h2>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            ${skills.split(',').map(skill => `<span class="skill-tag">${skill.trim()}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function generateCreativeTemplate(name, title, email, phone, location, linkedin, summary, experiences, education, skills) {
+            return `
+                <div style="font-family: 'Georgia', serif; color: #333;">
+                    <!-- Header with Profile Picture Placeholder -->
+                    <div style="display: flex; gap: 24px; margin-bottom: 24px;">
+                        <div style="width: 80px; height: 80px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 32px; font-weight: bold;">
+                            ${name ? name.charAt(0).toUpperCase() : 'A'}
+                        </div>
+                        <div style="flex: 1;">
+                            <h1 style="font-size: 28px; font-weight: bold; margin: 0; color: #764ba2;">${name || 'Your Name'}</h1>
+                            <p style="font-size: 16px; color: #667eea; margin: 8px 0;">${title || 'Your Job Title'}</p>
+                            <div style="font-size: 13px; color: #6b7280; margin-top: 8px;">
+                                ${email ? `${email} ` : ''}${phone ? `• ${phone} ` : ''}${location ? `• ${location}` : ''}
+                            </div>
+                        </div>
+                    </div>
+
+                    ${summary ? `
+                    <div style="background: linear-gradient(135deg, #f3f4f6 0%, #e5e7eb 100%); padding: 16px; border-radius: 8px; margin-bottom: 20px;">
+                        <p style="line-height: 1.7; margin: 0; font-style: italic;">${summary}</p>
+                    </div>
+                    ` : ''}
+
+                    ${experiences.length > 0 ? `
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 20px; font-weight: bold; color: #764ba2; margin-bottom: 12px;">Experience</h2>
+                        ${experiences.map(exp => `
+                            <div style="margin-bottom: 16px; padding-left: 16px; border-left: 3px solid #667eea;">
+                                <h3 style="font-size: 16px; font-weight: bold; margin: 0; color: #333;">${exp.title}</h3>
+                                <p style="color: #667eea; margin: 4px 0; font-weight: 600;">${exp.company}</p>
+                                <p style="color: #9ca3af; font-size: 13px; margin: 4px 0;">${exp.start} - ${exp.end}</p>
+                                ${exp.description ? `<p style="margin-top: 8px; line-height: 1.6; color: #4b5563;">${exp.description}</p>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+
+                    ${education.length > 0 ? `
+                    <div style="margin-bottom: 20px;">
+                        <h2 style="font-size: 20px; font-weight: bold; color: #764ba2; margin-bottom: 12px;">Education</h2>
+                        ${education.map(edu => `
+                            <div style="margin-bottom: 12px; padding-left: 16px; border-left: 3px solid #667eea;">
+                                <h3 style="font-size: 16px; font-weight: bold; margin: 0;">${edu.degree}</h3>
+                                <p style="color: #6b7280; margin: 4px 0;">${edu.institution} - ${edu.year}${edu.gpa ? ` (GPA: ${edu.gpa})` : ''}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+
+                    ${skills ? `
+                    <div>
+                        <h2 style="font-size: 20px; font-weight: bold; color: #764ba2; margin-bottom: 12px;">Skills</h2>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            ${skills.split(',').map(skill => `<span style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 6px 14px; border-radius: 20px; font-size: 13px;">${skill.trim()}</span>`).join('')}
+                        </div>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function generateMinimalTemplate(name, title, email, phone, location, linkedin, summary, experiences, education, skills) {
+            return `
+                <div style="font-family: 'Helvetica Neue', Arial, sans-serif; color: #1f2937; max-width: 700px;">
+                    <!-- Header -->
+                    <div style="margin-bottom: 32px;">
+                        <h1 style="font-size: 36px; font-weight: 300; margin: 0; letter-spacing: -1px;">${name || 'Your Name'}</h1>
+                        <p style="font-size: 16px; color: #6b7280; margin: 8px 0; font-weight: 300;">${title || 'Your Job Title'}</p>
+                        <div style="font-size: 13px; color: #9ca3af; margin-top: 12px; font-weight: 300;">
+                            ${[email, phone, location, linkedin].filter(Boolean).join(' • ')}
+                        </div>
+                    </div>
+
+                    ${summary ? `
+                    <div style="margin-bottom: 28px;">
+                        <p style="line-height: 1.8; color: #4b5563; font-weight: 300;">${summary}</p>
+                    </div>
+                    ` : ''}
+
+                    ${experiences.length > 0 ? `
+                    <div style="margin-bottom: 28px;">
+                        <h2 style="font-size: 14px; font-weight: 600; color: #111827; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Experience</h2>
+                        ${experiences.map(exp => `
+                            <div style="margin-bottom: 20px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+                                    <h3 style="font-size: 15px; font-weight: 500; margin: 0;">${exp.title}</h3>
+                                    <span style="color: #9ca3af; font-size: 13px; font-weight: 300;">${exp.start} - ${exp.end}</span>
+                                </div>
+                                <p style="color: #6b7280; margin: 2px 0; font-size: 14px; font-weight: 300;">${exp.company}</p>
+                                ${exp.description ? `<p style="margin-top: 8px; line-height: 1.7; color: #4b5563; font-size: 14px; font-weight: 300;">${exp.description}</p>` : ''}
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+
+                    ${education.length > 0 ? `
+                    <div style="margin-bottom: 28px;">
+                        <h2 style="font-size: 14px; font-weight: 600; color: #111827; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px;">Education</h2>
+                        ${education.map(edu => `
+                            <div style="margin-bottom: 12px;">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <div>
+                                        <h3 style="font-size: 15px; font-weight: 500; margin: 0;">${edu.degree}</h3>
+                                        <p style="color: #6b7280; margin: 2px 0; font-size: 14px; font-weight: 300;">${edu.institution}</p>
+                                    </div>
+                                    <span style="color: #9ca3af; font-size: 13px; font-weight: 300;">${edu.year}${edu.gpa ? ` • ${edu.gpa}` : ''}</span>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    ` : ''}
+
+                    ${skills ? `
+                    <div>
+                        <h2 style="font-size: 14px; font-weight: 600; color: #111827; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;">Skills</h2>
+                        <p style="line-height: 1.8; color: #4b5563; font-weight: 300;">${skills}</p>
+                    </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function addExperience() {
+            const container = document.getElementById('experienceContainer');
+            const newItem = document.createElement('div');
+            newItem.className = 'experience-item space-y-3 mb-4 p-4 bg-gray-50 rounded-lg';
+            newItem.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-semibold text-gray-700">Experience ${container.children.length + 1}</span>
+                    <button onclick="this.parentElement.parentElement.remove(); updatePreview();" class="text-red-600 hover:text-red-700">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Job Title" oninput="updatePreview()">
+                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Company Name" oninput="updatePreview()">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Start Date" oninput="updatePreview()">
+                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="End Date" oninput="updatePreview()">
+                </div>
+                <textarea class="section-input w-full p-2 rounded-lg text-sm h-20 resize-none" placeholder="Key responsibilities..." oninput="updatePreview()"></textarea>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function addEducation() {
+            const container = document.getElementById('educationContainer');
+            const newItem = document.createElement('div');
+            newItem.className = 'education-item space-y-3 mb-4 p-4 bg-gray-50 rounded-lg';
+            newItem.innerHTML = `
+                <div class="flex justify-between items-center">
+                    <span class="text-sm font-semibold text-gray-700">Education ${container.children.length + 1}</span>
+                    <button onclick="this.parentElement.parentElement.remove(); updatePreview();" class="text-red-600 hover:text-red-700">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                </div>
+                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Degree" oninput="updatePreview()">
+                <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Institution" oninput="updatePreview()">
+                <div class="grid grid-cols-2 gap-2">
+                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="Year" oninput="updatePreview()">
+                    <input type="text" class="section-input w-full p-2 rounded-lg text-sm" placeholder="GPA (optional)" oninput="updatePreview()">
+                </div>
+            `;
+            container.appendChild(newItem);
+        }
+
+        function generateSummary() {
+            const jobTitle = document.getElementById('jobTitle').value;
+            
+            if (!jobTitle) {
+                alert('⚠️ Please enter your job title first to generate a summary.');
+                return;
+            }
+
+            // Sample AI-generated summaries (in production, this would call an API)
+            const summaries = [
+                `Results-driven ${jobTitle} with proven experience in delivering high-quality solutions and exceeding organizational goals. Strong analytical and problem-solving skills combined with excellent communication abilities.`,
+                `Dedicated ${jobTitle} with a track record of success in fast-paced environments. Skilled in project management, team collaboration, and strategic planning. Committed to continuous learning and professional development.`,
+                `Experienced ${jobTitle} specializing in innovative approaches and customer-focused solutions. Known for attention to detail, technical expertise, and ability to work effectively in cross-functional teams.`
+            ];
+
+            const randomSummary = summaries[Math.floor(Math.random() * summaries.length)];
+            document.getElementById('summary').value = randomSummary;
+            updatePreview();
+
+            // Show AI suggestion notification
+            const notification = document.createElement('div');
+            notification.className = 'ai-suggestion fixed top-24 right-8 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg z-50';
+            notification.innerHTML = '<i class="fas fa-check-circle mr-2"></i>AI Summary Generated!';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        function downloadPDF() {
+            const preview = document.getElementById('resumePreview');
+            const fullName = document.getElementById('fullName').value || 'Resume';
+
+            if (!document.getElementById('fullName').value) {
+                alert('⚠️ Please fill in your name and basic information first.');
+                return;
+            }
+
+            const pdf = new jsPDF('p', 'mm', 'a4');
+            
+            pdf.html(preview, {
+                callback: function(doc) {
+                    doc.save(`${fullName.replace(/\s+/g, '_')}_Resume.pdf`);
+                },
+                x: 10,
+                y: 10,
+                width: 190,
+                windowWidth: 800
+            });
+        }
+
+        function downloadWord() {
+            const preview = document.getElementById('resumePreview').innerHTML;
+            const fullName = document.getElementById('fullName').value || 'Resume';
+
+            if (!document.getElementById('fullName').value) {
+                alert('⚠️ Please fill in your name and basic information first.');
+                return;
+            }
+
+            const htmlContent = `
+<html xmlns:o='urn:schemas-microsoft-com:office:office' 
+      xmlns:w='urn:schemas-microsoft-com:office:word' 
+      xmlns='http://www.w3.org/TR/REC-html40'>
+<head>
+    <meta charset='utf-8'>
+    <title>Resume</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.5;
+            margin: 1in;
+        }
+    </style>
+</head>
+<body>
+${preview}
+</body>
+</html>`;
+
+            const blob = new Blob(['\ufeff', htmlContent], {
+                type: 'application/msword'
+            });
+
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `${fullName.replace(/\s+/g, '_')}_Resume.doc`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>
