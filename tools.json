@@ -110,12 +110,13 @@
     },
     {
       "name": "RESUME BUILDER",
-      "icon": "fa-hashtag",
+      "icon": "fa-file-alt",
       "color": "blue",
       "category": "utility",
-      "badge": "NEW and POPULAR",
+      "badge": "POPULAR",
       "file": "tools/utility/resume-builder.html",
-      "description": "Create professional ATS-friendly resumes in minutes."
+      "description": "Create professional ATS-friendly resumes in minutes"
+    },
     {
       "name": "Word Counter",
       "icon": "fa-hashtag",
@@ -123,7 +124,7 @@
       "category": "utility",
       "badge": "NEW",
       "file": "tools/utility/word-counter.html",
-      "description": "Count words, characters, sentences instantly. Calculate reading time and speaking time for your content."
+      "description": "Count words, characters, sentences instantly. Calculate reading time and speaking time for your content"
     },
     {
       "name": "Age Calculator",
@@ -132,7 +133,7 @@
       "category": "utility",
       "badge": "NEW",
       "file": "tools/utility/age-calculator.html",
-      "description": "Calculate your exact age in years, months, days, hours, and minutes. Find your next birthday!"
+      "description": "Calculate your exact age in years, months, days, hours, and minutes. Find your next birthday"
     },
     {
       "name": "BMI Calculator",
@@ -175,7 +176,7 @@
       "icon": "fa-chart-bar",
       "color": "blue",
       "category": "seo",
-      "badge": "CHECK IT",
+      "badge": "HOT",
       "file": "tools/seo/keyword-density-checker.html",
       "description": "Analyze keyword density and optimize your content for SEO"
     },
@@ -193,7 +194,7 @@
       "icon": "fa-quote-right",
       "color": "indigo",
       "category": "student",
-      "badge": "REFERENCE IT",
+      "badge": "NEW",
       "file": "tools/student/citation-generator.html",
       "description": "Generate citations in APA, MLA, Chicago, and more formats"
     },
@@ -202,7 +203,7 @@
       "icon": "fa-calendar-check",
       "color": "green",
       "category": "student",
-      "badge": "PLAN YOUR STUDY",
+      "badge": "NEW",
       "file": "tools/student/study-planner.html",
       "description": "Plan your study schedule and manage your time effectively"
     },
@@ -211,7 +212,7 @@
       "icon": "fa-qrcode",
       "color": "blue",
       "category": "utility",
-      "badge": "CODE IT",
+      "badge": "HOT",
       "file": "tools/utility/qrcode-generator.html",
       "description": "Create QR codes for URLs, text, WiFi, and more"
     },
@@ -247,7 +248,7 @@
       "icon": "fa-file-code",
       "color": "blue",
       "category": "webdev",
-      "badge": "UPDATED",
+      "badge": "NEW",
       "file": "tools/webdev/css-minifier.html",
       "description": "Compress CSS code for faster website loading"
     },
@@ -256,7 +257,7 @@
       "icon": "fa-code",
       "color": "green",
       "category": "webdev",
-      "badge": "UPDATED",
+      "badge": "NEW",
       "file": "tools/webdev/json-formatter.html",
       "description": "Format and validate JSON data with syntax highlighting"
     }
