@@ -7,8 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Primary Meta Tags -->
-    <title>Tweet Generator - Free AI Twitter Post Creator & Hashtags | Free Tools Hub</title>
-    <meta name="title" content="Tweet Generator - Free AI Twitter Post Creator & Hashtags | Free Tools Hub">
+    <title>AI Tweet Generator - Free AI Twitter Post Creator & Hashtags | Free Tools Hub</title>
+    <meta name="title" content="AI Tweet Generator - Free AI Twitter Post Creator & Hashtags | Free Tools Hub">
     <meta name="description" content="Generate engaging tweets instantly with AI. Get viral-worthy Twitter posts with trending hashtags. Perfect for threads, promotions, and engagement. Free, no signup required!">
     <meta name="keywords" content="tweet generator, twitter post creator, AI tweet writer, twitter hashtags, viral tweets, twitter thread generator, social media tool, engagement tweets">
     <meta name="robots" content="index, follow">
@@ -18,13 +18,13 @@
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/social/tweet-generator.html">
-    <meta property="og:title" content="Tweet Generator - Free AI Twitter Post Creator & Hashtags">
+    <meta property="og:title" content="AI Tweet Generator - Free AI Twitter Post Creator & Hashtags">
     <meta property="og:description" content="Generate engaging tweets instantly with AI. Get viral-worthy Twitter posts with trending hashtags. Perfect for threads, promotions, and engagement. Free, no signup required!">
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/social/tweet-generator.html">
-    <meta property="twitter:title" content="Tweet Generator - Free AI Twitter Post Creator & Hashtags">
+    <meta property="twitter:title" content="AI Tweet Generator - Free AI Twitter Post Creator & Hashtags">
     <meta property="twitter:description" content="Generate engaging tweets instantly with AI. Get viral-worthy Twitter posts with trending hashtags. Perfect for threads, promotions, and engagement. Free, no signup required!">
     
     <!-- Canonical URL -->
@@ -145,7 +145,7 @@
                 <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
                 <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
                 <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-                <span class="text-gray-800 font-medium">Tweet Generator</span>
+                <span class="text-gray-800 font-medium">AI Tweet Generator</span>
             </div>
         </div>
     </div>
@@ -156,7 +156,7 @@
             <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
                 <i class="fab fa-twitter text-5xl"></i>
             </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Tweet Generator</h2>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">AI Tweet Generator</h2>
             <p class="text-xl mb-2">Generate engaging tweets with AI - Perfect for viral content & engagement</p>
             <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • AI-Powered • 280 Character Perfect</p>
         </div>
@@ -164,229 +164,206 @@
 
     <!-- Main Content -->
     <main class="py-12">
-        <div class="container mx-auto px-4 max-w-6xl">
+        <div class="container mx-auto px-4 max-w-5xl">
             
-            <!-- Generator Section -->
-            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-pen-fancy text-blue-500 mr-2"></i>Create Your Tweet
+            <!-- Input Section -->
+            <div class="bg-white rounded-xl shadow-2xl p-8 mb-10">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-pen-fancy mr-2 text-blue-600"></i>What's Your Tweet About?
                 </h3>
                 
-                <!-- Input Form -->
-                <div class="space-y-6">
+                <div class="mb-6">
+                    <label for="topicInput" class="block text-sm font-bold text-gray-700 mb-2">
+                        <i class="fas fa-lightbulb mr-2"></i>Topic or Idea
+                    </label>
+                    <textarea 
+                        id="topicInput" 
+                        rows="4" 
+                        class="w-full px-5 py-4 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none resize-none text-gray-700 text-lg"
+                        placeholder="Example: Tips for productivity, New product launch, Motivational quote about success..."></textarea>
+                </div>
+
+                <!-- Settings Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
-                        <label class="block text-gray-700 font-semibold mb-2">
-                            <i class="fas fa-lightbulb mr-2"></i>What do you want to tweet about?
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-palette mr-2"></i>Tweet Style
                         </label>
-                        <textarea id="tweetTopic" rows="3" 
-                            placeholder="e.g., Latest tech trends, motivational quote, product launch, daily thoughts, industry news..."
-                            class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none"
-                        ></textarea>
+                        <select id="styleSelect" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-gray-700">
+                            <option value="casual">Casual & Friendly</option>
+                            <option value="professional">Professional</option>
+                            <option value="motivational">Motivational</option>
+                            <option value="humorous">Humorous</option>
+                            <option value="educational">Educational</option>
+                            <option value="promotional">Promotional</option>
+                        </select>
                     </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">
-                                <i class="fas fa-palette mr-2"></i>Tweet Style
-                            </label>
-                            <select id="tweetStyle" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
-                                <option value="engaging">🔥 Engaging & Viral</option>
-                                <option value="professional">💼 Professional</option>
-                                <option value="casual">😊 Casual & Friendly</option>
-                                <option value="humorous">😂 Humorous</option>
-                                <option value="inspirational">✨ Inspirational</option>
-                                <option value="educational">📚 Educational</option>
-                                <option value="promotional">🚀 Promotional</option>
-                                <option value="question">❓ Question-Based</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">
-                                <i class="fas fa-bullseye mr-2"></i>Tweet Type
-                            </label>
-                            <select id="tweetType" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
-                                <option value="single">📝 Single Tweet</option>
-                                <option value="thread">🧵 Thread Starter</option>
-                                <option value="quote">💬 Quote Tweet</option>
-                                <option value="announcement">📢 Announcement</option>
-                            </select>
-                        </div>
-
-                        <div>
-                            <label class="block text-gray-700 font-semibold mb-2">
-                                <i class="fas fa-hashtag mr-2"></i>Hashtags
-                            </label>
-                            <select id="hashtagCount" class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
-                                <option value="0">No Hashtags</option>
-                                <option value="1">1 Hashtag</option>
-                                <option value="2" selected>2 Hashtags</option>
-                                <option value="3">3 Hashtags</option>
-                                <option value="5">5 Hashtags</option>
-                            </select>
-                        </div>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-list mr-2"></i>Tweet Type
+                        </label>
+                        <select id="typeSelect" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-gray-700">
+                            <option value="normal">Normal Tweet</option>
+                            <option value="thread">Thread Starter</option>
+                            <option value="announcement">Announcement</option>
+                            <option value="question">Question</option>
+                            <option value="quote">Quote Style</option>
+                        </select>
                     </div>
 
-                    <div class="flex flex-wrap gap-4">
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" id="includeEmojis" checked class="w-5 h-5 text-blue-600 rounded">
-                            <span class="ml-2 text-gray-700 font-medium">Include Emojis 😍</span>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-hashtag mr-2"></i>Hashtags
                         </label>
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" id="includeCTA" class="w-5 h-5 text-blue-600 rounded">
-                            <span class="ml-2 text-gray-700 font-medium">Add Call-to-Action 👆</span>
-                        </label>
-                        <label class="flex items-center cursor-pointer">
-                            <input type="checkbox" id="includeQuestion" class="w-5 h-5 text-blue-600 rounded">
-                            <span class="ml-2 text-gray-700 font-medium">End with Question ❓</span>
-                        </label>
+                        <select id="hashtagSelect" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-gray-700">
+                            <option value="0">No Hashtags</option>
+                            <option value="2">2 Hashtags</option>
+                            <option value="3">3 Hashtags</option>
+                            <option value="5">5 Hashtags</option>
+                        </select>
                     </div>
 
-                    <button onclick="generateTweets()" class="w-full bg-gradient-to-r from-blue-400 to-blue-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition">
-                        <i class="fas fa-magic mr-2"></i>Generate Tweets
-                    </button>
+                    <div>
+                        <label class="block text-sm font-bold text-gray-700 mb-2">
+                            <i class="fas fa-smile mr-2"></i>Emojis
+                        </label>
+                        <select id="emojiSelect" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-blue-500 focus:outline-none text-gray-700">
+                            <option value="none">No Emojis</option>
+                            <option value="few">Few Emojis</option>
+                            <option value="moderate">Moderate Emojis</option>
+                            <option value="many">Many Emojis</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Checkboxes -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" id="includeCTA" class="w-5 h-5 text-blue-600 rounded">
+                        <span class="text-gray-700 font-medium"><i class="fas fa-bullhorn mr-2 text-blue-600"></i>Include Call-to-Action</span>
+                    </label>
+                    
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="checkbox" id="includeQuestion" class="w-5 h-5 text-blue-600 rounded">
+                        <span class="text-gray-700 font-medium"><i class="fas fa-question-circle mr-2 text-blue-600"></i>Include Question</span>
+                    </label>
+                </div>
+
+                <button 
+                    onclick="generateTweets()" 
+                    id="generateBtn"
+                    class="w-full bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700 text-white text-xl font-bold py-5 rounded-xl shadow-lg hover:shadow-xl transition duration-300 transform hover:scale-105">
+                    <i class="fas fa-magic mr-2"></i>Generate AI Tweets
+                </button>
+                
+                <p class="text-center text-gray-500 text-sm mt-4">
+                    <i class="fas fa-info-circle mr-1"></i>AI will generate 4 unique tweet variations for you!
+                </p>
+            </div>
+
+            <!-- Loading Section -->
+            <div id="loadingSection" class="hidden bg-white rounded-xl shadow-2xl p-10 mb-10 text-center">
+                <div class="animate-spin w-20 h-20 border-8 border-blue-200 border-t-blue-600 rounded-full mx-auto mb-6"></div>
+                <h3 class="text-2xl font-bold text-gray-800 mb-3">
+                    <i class="fab fa-twitter mr-2"></i>AI is Writing Your Tweets...
+                </h3>
+                <p class="text-gray-600">Creating engaging content just for you...</p>
+                <div class="mt-6 flex justify-center gap-2">
+                    <div class="w-3 h-3 bg-blue-600 rounded-full animate-bounce" style="animation-delay: 0s"></div>
+                    <div class="w-3 h-3 bg-blue-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                    <div class="w-3 h-3 bg-blue-400 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
                 </div>
             </div>
 
             <!-- Results Section -->
-            <div id="resultsSection" class="hidden space-y-6">
-                <h3 class="text-2xl font-bold text-gray-800 text-center mb-6">
-                    <i class="fas fa-fire text-orange-500 mr-2"></i>Your Generated Tweets
-                </h3>
-                <div id="tweetsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-6"></div>
+            <div id="resultsSection" class="hidden">
+                <div class="bg-gradient-to-r from-green-500 to-blue-500 rounded-xl shadow-xl p-6 mb-6 text-white text-center">
+                    <h3 class="text-2xl font-bold mb-2">
+                        <i class="fas fa-check-circle mr-2"></i>Your AI-Generated Tweets Are Ready!
+                    </h3>
+                    <p class="text-sm opacity-90">Click copy on any tweet to use it on Twitter</p>
+                </div>
+                
+                <div id="tweetsContainer" class="grid grid-cols-1 gap-6 mb-8"></div>
+                
+                <div class="text-center">
+                    <button 
+                        onclick="generateTweets()" 
+                        class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white font-bold py-4 px-8 rounded-xl shadow-lg transition">
+                        <i class="fas fa-redo mr-2"></i>Generate New Tweets
+                    </button>
+                </div>
             </div>
 
-            <!-- Tweet Tips Section -->
-            <div class="bg-gradient-to-br from-blue-50 to-cyan-100 rounded-lg shadow-lg p-8 mt-12">
+            <!-- Example Topics Section -->
+            <div class="bg-white rounded-xl shadow-xl p-8 mb-10">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-chart-line text-blue-600 mr-2"></i>Twitter Engagement Best Practices
+                    <i class="fas fa-lightbulb text-yellow-500 mr-2"></i>Need Ideas? Try These Topics
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    <div class="bg-white rounded-lg p-6 shadow">
-                        <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-clock text-blue-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Optimal Timing</h4>
-                        <p class="text-sm text-gray-600">Tweet during peak hours: 8-10 AM and 6-9 PM for maximum engagement</p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-5 rounded-xl border-2 border-blue-200 cursor-pointer hover:shadow-lg transition transform hover:scale-105" onclick="useTopic(this)">
+                        <h4 class="font-bold text-blue-700 mb-2"><i class="fas fa-rocket mr-2"></i>Business</h4>
+                        <p class="text-gray-700 text-sm">5 essential tips for startup founders in 2025</p>
                     </div>
-                    
-                    <div class="bg-white rounded-lg p-6 shadow">
-                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-hashtag text-green-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Smart Hashtags</h4>
-                        <p class="text-sm text-gray-600">Use 1-3 relevant hashtags. More hashtags can decrease engagement</p>
+                    <div class="bg-gradient-to-r from-green-50 to-teal-50 p-5 rounded-xl border-2 border-green-200 cursor-pointer hover:shadow-lg transition transform hover:scale-105" onclick="useTopic(this)">
+                        <h4 class="font-bold text-green-700 mb-2"><i class="fas fa-brain mr-2"></i>Motivation</h4>
+                        <p class="text-gray-700 text-sm">Why consistency beats perfection every single time</p>
                     </div>
-                    
-                    <div class="bg-white rounded-lg p-6 shadow">
-                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-images text-purple-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Visual Content</h4>
-                        <p class="text-sm text-gray-600">Tweets with images get 150% more retweets than text-only tweets</p>
+                    <div class="bg-gradient-to-r from-purple-50 to-pink-50 p-5 rounded-xl border-2 border-purple-200 cursor-pointer hover:shadow-lg transition transform hover:scale-105" onclick="useTopic(this)">
+                        <h4 class="font-bold text-purple-700 mb-2"><i class="fas fa-code mr-2"></i>Tech</h4>
+                        <p class="text-gray-700 text-sm">AI tools that every developer should know about</p>
                     </div>
-                    
-                    <div class="bg-white rounded-lg p-6 shadow">
-                        <div class="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mb-3">
-                            <i class="fas fa-comment text-orange-600 text-xl"></i>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Engagement</h4>
-                        <p class="text-sm text-gray-600">Ask questions and encourage replies to boost engagement rates</p>
+                    <div class="bg-gradient-to-r from-orange-50 to-red-50 p-5 rounded-xl border-2 border-orange-200 cursor-pointer hover:shadow-lg transition transform hover:scale-105" onclick="useTopic(this)">
+                        <h4 class="font-bold text-orange-700 mb-2"><i class="fas fa-heart mr-2"></i>Lifestyle</h4>
+                        <p class="text-gray-700 text-sm">Morning routines that actually changed my life</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Features Section -->
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
-                <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
-                    <i class="fas fa-brain text-3xl text-blue-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">AI-Powered</h4>
-                    <p class="text-sm text-gray-600">Smart algorithms create engaging tweets optimized for virality</p>
-                </div>
-                <div class="bg-gradient-to-br from-cyan-50 to-cyan-100 p-6 rounded-lg border-2 border-cyan-200">
-                    <i class="fas fa-text-width text-3xl text-cyan-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">280 Character Perfect</h4>
-                    <p class="text-sm text-gray-600">Automatically optimized to fit Twitter's character limit</p>
-                </div>
-                <div class="bg-gradient-to-br from-sky-50 to-sky-100 p-6 rounded-lg border-2 border-sky-200">
-                    <i class="fas fa-retweet text-3xl text-sky-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Multiple Variations</h4>
-                    <p class="text-sm text-gray-600">Get 4 different tweet options to choose from</p>
-                </div>
-            </div>
-
-            <!-- How to Use -->
-            <div class="bg-white rounded-lg shadow-lg p-8 mt-12">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How to Use
-                </h3>
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl font-bold text-blue-600">1</span>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Enter Topic</h4>
-                        <p class="text-sm text-gray-600">Describe what you want to tweet about</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-cyan-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl font-bold text-cyan-600">2</span>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Choose Style</h4>
-                        <p class="text-sm text-gray-600">Select tone, type, and preferences</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-sky-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl font-bold text-sky-600">3</span>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Generate</h4>
-                        <p class="text-sm text-gray-600">Get 4 tweet variations instantly</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-3">
-                            <span class="text-2xl font-bold text-indigo-600">4</span>
-                        </div>
-                        <h4 class="font-bold text-gray-800 mb-2">Copy & Tweet</h4>
-                        <p class="text-sm text-gray-600">Copy and post to Twitter</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Related Tools -->
-            <div class="mt-12">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools
+            <!-- Tips Section -->
+            <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl shadow-xl p-8 text-white mb-10">
+                <h3 class="text-3xl font-bold mb-6 text-center">
+                    <i class="fas fa-star mr-2"></i>Tips for Viral Tweets
                 </h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <a href="instagram-caption-generator.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-pink-400">
-                        <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 bg-pink-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fab fa-instagram text-2xl text-pink-600"></i>
-                            </div>
-                            <h4 class="font-bold text-gray-800">Instagram Caption Generator</h4>
-                        </div>
-                        <p class="text-sm text-gray-600">Generate engaging Instagram captions with hashtags</p>
-                    </a>
-                    
-                    <a href="youtube-title-generator.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-red-400">
-                        <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fab fa-youtube text-2xl text-red-600"></i>
-                            </div>
-                            <h4 class="font-bold text-gray-800">YouTube Title Generator</h4>
-                        </div>
-                        <p class="text-sm text-gray-600">Create catchy YouTube video titles that get more clicks</p>
-                    </a>
-                    
-                    <a href="../utility/word-counter.html" class="bg-white rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-gray-200 hover:border-blue-400">
-                        <div class="flex items-center mb-3">
-                            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-3">
-                                <i class="fas fa-hashtag text-2xl text-blue-600"></i>
-                            </div>
-                            <h4 class="font-bold text-gray-800">Word Counter</h4>
-                        </div>
-                        <p class="text-sm text-gray-600">Count characters to perfect your tweet length</p>
-                    </a>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <h4 class="font-bold text-xl mb-3"><i class="fas fa-fire mr-2"></i>Be Authentic</h4>
+                        <p class="text-sm opacity-90">Share genuine thoughts and experiences. People connect with real stories.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <h4 class="font-bold text-xl mb-3"><i class="fas fa-clock mr-2"></i>Timing Matters</h4>
+                        <p class="text-sm opacity-90">Post when your audience is most active. Usually mornings and evenings work best.</p>
+                    </div>
+                    <div class="bg-white/10 backdrop-blur rounded-xl p-6">
+                        <h4 class="font-bold text-xl mb-3"><i class="fas fa-users mr-2"></i>Engage Back</h4>
+                        <p class="text-sm opacity-90">Reply to comments and retweets. Building community increases reach.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="bg-white rounded-xl shadow-xl p-8">
+                <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>Frequently Asked Questions
+                </h3>
+                <div class="space-y-4">
+                    <details class="bg-gray-50 rounded-lg p-5 cursor-pointer hover:bg-gray-100 transition">
+                        <summary class="font-bold text-lg text-gray-800">How does the AI tweet generator work?</summary>
+                        <p class="text-gray-600 mt-3">Our tool uses advanced AI (Claude) to generate engaging, human-like tweets based on your topic and preferences. It creates unique content every time.</p>
+                    </details>
+                    <details class="bg-gray-50 rounded-lg p-5 cursor-pointer hover:bg-gray-100 transition">
+                        <summary class="font-bold text-lg text-gray-800">Are the generated tweets unique?</summary>
+                        <p class="text-gray-600 mt-3">Yes! Each generation creates completely unique tweets using AI. No two outputs are the same.</p>
+                    </details>
+                    <details class="bg-gray-50 rounded-lg p-5 cursor-pointer hover:bg-gray-100 transition">
+                        <summary class="font-bold text-lg text-gray-800">Can I use these tweets commercially?</summary>
+                        <p class="text-gray-600 mt-3">Yes, you can use the generated tweets for personal or commercial purposes on your Twitter account.</p>
+                    </details>
+                    <details class="bg-gray-50 rounded-lg p-5 cursor-pointer hover:bg-gray-100 transition">
+                        <summary class="font-bold text-lg text-gray-800">How many tweets can I generate?</summary>
+                        <p class="text-gray-600 mt-3">You can generate unlimited tweets! Each click generates 4 unique tweet variations.</p>
+                    </details>
                 </div>
             </div>
 
@@ -394,40 +371,29 @@
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12 mt-12">
+    <footer class="bg-gray-900 text-white py-12 mt-20">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
                 <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
-                    </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                    <h4 class="font-bold mb-4">Free Tools Hub</h4>
+                    <p class="text-gray-400 text-sm mb-4">Your one-stop solution for free online tools, tutorials, and resources.</p>
+                    <p class="text-gray-400 text-xs"><i class="fas fa-info-circle mr-1"></i>Made with passion for creators</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="../../index.html" class="hover:text-white transition"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-tools mr-2"></i>All Tools</a></li>
+                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
-                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
-                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                    <ul class="space-y-2 text-gray-400 text-sm">
+                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Free Resources</a></li>
+                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Tool Comparisons</a></li>
+                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact Us</a></li>
                     </ul>
                 </div>
                 <div>
@@ -441,134 +407,232 @@
                     <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
             </div>
         </div>
     </footer>
 
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Scripts -->
     <script>
         // Mobile menu toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            const menu = document.getElementById('mobileMenu');
-            const icon = this.querySelector('i');
-            menu.classList.toggle('hidden');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu = document.getElementById('mobileMenu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            const icon = mobileMenuBtn.querySelector('i');
             icon.classList.toggle('fa-bars');
             icon.classList.toggle('fa-times');
         });
 
-        // Tweet generation templates
-        const tweetTemplates = {
-            engaging: [
-                "🔥 {topic}\n\nThis is exactly what everyone needs to hear right now! 💯",
-                "Hot take: {topic}\n\nWhat do you think? Drop your thoughts below! 👇",
-                "Can we talk about {topic} for a sec?\n\nBecause this is HUGE! 🚀",
-                "Real talk about {topic} 💬\n\nYou're going to want to save this one! ⭐"
-            ],
-            professional: [
-                "Key insight: {topic}\n\nSharing what I've learned after years in the industry.",
-                "Important update on {topic}\n\nHere's what you need to know:",
-                "Professional perspective on {topic}\n\nBased on recent research and analysis.",
-                "Industry analysis: {topic}\n\nData-driven insights you can apply today."
-            ],
-            casual: [
-                "Just thinking about {topic} ☕\n\nAnyone else on the same wavelength?",
-                "Quick thought on {topic} 💭\n\nWanted to share this with you all!",
-                "Random but important: {topic}\n\nHope this helps someone today! 😊",
-                "Morning thoughts: {topic}\n\nStarting the day with this perspective! ☀️"
-            ],
-            humorous: [
-                "Me trying to explain {topic} to people:\n\n*confused screaming* 😂",
-                "Nobody:\nAbsolutely nobody:\nMe: Let's discuss {topic} 🤪",
-                "Plot twist: {topic}\n\nI did not see that coming! 😅",
-                "Breaking: Local person has thoughts on {topic}\n\nMore at 11 😂"
-            ],
-            inspirational: [
-                "Remember: {topic} ✨\n\nYou're capable of more than you think! 💪",
-                "Today's reminder: {topic}\n\nBelieve in yourself and trust the process! 🌟",
-                "Motivation moment: {topic}\n\nYour journey is uniquely yours! Keep going! 🎯",
-                "Daily inspiration: {topic}\n\nEvery step forward counts! 🚀"
-            ],
-            educational: [
-                "Did you know? {topic}\n\nHere's what the research shows:",
-                "Quick lesson on {topic} 📚\n\nTake notes, this is important!",
-                "Educational thread: {topic}\n\nLet me break this down for you:",
-                "Fun fact about {topic} 🧠\n\nScience-backed and proven!"
-            ],
-            promotional: [
-                "🎉 Exciting news about {topic}!\n\nYou don't want to miss this opportunity!",
-                "NEW: {topic} 🚀\n\nLimited time only - check it out now!",
-                "Launching: {topic} 💎\n\nBe among the first to experience this!",
-                "Big announcement: {topic} 📢\n\nThis changes everything!"
-            ],
-            question: [
-                "Quick question: What's your take on {topic}?\n\nI'd love to hear your perspective!",
-                "Curious: How do you approach {topic}?\n\nShare your experience below! 👇",
-                "Poll time: What do you think about {topic}?\n\nDrop your answer in the comments!",
-                "Genuine question: Is {topic} as important as everyone says?\n\nLet's discuss! 💬"
-            ]
-        };
+        document.addEventListener('click', (e) => {
+            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                mobileMenu.classList.add('hidden');
+                const icon = mobileMenuBtn.querySelector('i');
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
 
-        const hashtagDatabase = {
-            general: ['#Twitter', '#SocialMedia', '#Trending', '#Viral', '#MustRead'],
-            tech: ['#Tech', '#Technology', '#Innovation', '#AI', '#Digital'],
-            business: ['#Business', '#Entrepreneurship', '#Startup', '#Success', '#Marketing'],
-            motivation: ['#Motivation', '#Inspiration', '#Success', '#Goals', '#Mindset'],
-            lifestyle: ['#Lifestyle', '#Life', '#Daily', '#Thoughts', '#Community'],
-            education: ['#Education', '#Learning', '#Knowledge', '#Tips', '#Tutorial'],
-            news: ['#News', '#Breaking', '#Update', '#Latest', '#Today']
-        };
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                backToTop.classList.remove('hidden');
+            } else {
+                backToTop.classList.add('hidden');
+            }
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
-        function generateTweets() {
-            const topic = document.getElementById('tweetTopic').value.trim();
-            const style = document.getElementById('tweetStyle').value;
-            const type = document.getElementById('tweetType').value;
-            const hashtagCount = parseInt(document.getElementById('hashtagCount').value);
-            const includeEmojis = document.getElementById('includeEmojis').checked;
-            const includeCTA = document.getElementById('includeCTA').checked;
-            const includeQuestion = document.getElementById('includeQuestion').checked;
-
-            if (!topic) {
-                alert('Please enter what you want to tweet about! 🐦');
+        // Generate Tweets with AI
+        async function generateTweets() {
+            const topic = document.getElementById('topicInput').value.trim();
+            
+            if (topic === '') {
+                alert('⚠️ Please enter a topic or idea for your tweet!');
                 return;
             }
 
-            const tweets = [];
-            const templates = tweetTemplates[style];
+            const style = document.getElementById('styleSelect').value;
+            const type = document.getElementById('typeSelect').value;
+            const hashtagCount = parseInt(document.getElementById('hashtagSelect').value);
+            const emojiLevel = document.getElementById('emojiSelect').value;
+            const includeCTA = document.getElementById('includeCTA').checked;
+            const includeQuestion = document.getElementById('includeQuestion').checked;
 
-            // Generate 4 different tweets
-            for (let i = 0; i < 4; i++) {
-                let tweet = templates[i % templates.length].replace(/{topic}/g, topic);
-                
-                // Add thread starter if selected
-                if (type === 'thread') {
-                    tweet = '🧵 THREAD:\n\n' + tweet + '\n\n1/';
-                } else if (type === 'announcement') {
-                    tweet = '📢 ANNOUNCEMENT:\n\n' + tweet;
-                } else if (type === 'quote') {
-                    tweet = '💬 ' + tweet;
+            // Show loading
+            document.getElementById('resultsSection').classList.add('hidden');
+            document.getElementById('loadingSection').classList.remove('hidden');
+            document.getElementById('generateBtn').disabled = true;
+
+            try {
+                // Create AI prompt
+                let prompt = `Generate 4 different engaging tweets about: "${topic}"\n\n`;
+                prompt += `Style: ${style}\n`;
+                prompt += `Type: ${type}\n`;
+                prompt += `Hashtags: ${hashtagCount > 0 ? hashtagCount + ' relevant hashtags' : 'No hashtags'}\n`;
+                prompt += `Emojis: ${emojiLevel}\n`;
+                prompt += `Include CTA: ${includeCTA ? 'Yes' : 'No'}\n`;
+                prompt += `Include Question: ${includeQuestion ? 'Yes' : 'No'}\n\n`;
+                prompt += `Requirements:\n`;
+                prompt += `- Each tweet must be under 280 characters\n`;
+                prompt += `- Make them engaging and shareable\n`;
+                prompt += `- Each should be unique and creative\n`;
+                prompt += `- Return ONLY the 4 tweets, separated by "---"\n`;
+                prompt += `- No numbering, no extra text, just the tweet content\n`;
+
+                // Call Hugging Face API (using GPT-2 for text generation)
+                const response = await fetch(
+                    "https://api-inference.huggingface.co/models/gpt2",
+                    {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            inputs: prompt,
+                            parameters: {
+                                max_length: 500,
+                                temperature: 0.8,
+                                top_p: 0.9,
+                                num_return_sequences: 1
+                            }
+                        }),
+                    }
+                );
+
+                if (!response.ok) {
+                    throw new Error('API request failed');
                 }
 
-                // Add CTA if requested
+                const result = await response.json();
+                let generatedText = result[0].generated_text;
+
+                // Parse tweets (fallback to template-based if API fails)
+                let tweets = generatedText.split('---').map(t => t.trim()).filter(t => t.length > 0);
+                
+                // If parsing failed, use template-based generation
+                if (tweets.length < 4) {
+                    tweets = generateTemplateTweets(topic, style, type, hashtagCount, emojiLevel, includeCTA, includeQuestion);
+                } else {
+                    // Ensure tweets are under 280 characters
+                    tweets = tweets.slice(0, 4).map(tweet => {
+                        if (tweet.length > 280) {
+                            return tweet.substring(0, 277) + '...';
+                        }
+                        return tweet;
+                    });
+                }
+
+                displayTweets(tweets);
+
+            } catch (error) {
+                console.error('Error generating tweets:', error);
+                // Fallback to template-based generation
+                const tweets = generateTemplateTweets(topic, style, type, hashtagCount, emojiLevel, includeCTA, includeQuestion);
+                displayTweets(tweets);
+            }
+
+            document.getElementById('loadingSection').classList.add('hidden');
+            document.getElementById('generateBtn').disabled = false;
+        }
+
+        // Template-based fallback generation
+        function generateTemplateTweets(topic, style, type, hashtagCount, emojiLevel, includeCTA, includeQuestion) {
+            const tweets = [];
+            const emojis = {
+                'none': [],
+                'few': ['💡', '✨', '🚀', '💪'],
+                'moderate': ['💡', '✨', '🚀', '💪', '🔥', '⭐', '👉', '💯'],
+                'many': ['💡', '✨', '🚀', '💪', '🔥', '⭐', '👉', '💯', '🎯', '📈', '🌟', '💫']
+            };
+
+            const emojiSet = emojis[emojiLevel] || [];
+            
+            const templates = {
+                casual: [
+                    `${emojiSet[0] || ''} Just thinking about ${topic}. Mind blown! ${emojiSet[1] || ''}`,
+                    `Real talk: ${topic} is something we all need to pay attention to ${emojiSet[2] || ''}`,
+                    `Can we talk about ${topic}? Because honestly, it's game-changing ${emojiSet[3] || ''}`,
+                    `${topic} - this is the stuff that matters ${emojiSet[0] || ''}`
+                ],
+                professional: [
+                    `Key insights on ${topic}: Essential for industry growth and innovation.`,
+                    `Professional perspective: ${topic} represents significant opportunities in our field.`,
+                    `Analysis: ${topic} is reshaping how we approach business strategy.`,
+                    `Industry update: ${topic} continues to drive transformation.`
+                ],
+                motivational: [
+                    `${emojiSet[0] || '💪'} ${topic} - Remember, every expert was once a beginner. Keep pushing!`,
+                    `Success isn't about ${topic}, it's about consistency. Keep going! ${emojiSet[1] || '🚀'}`,
+                    `Your journey with ${topic} starts with a single step. Take it today! ${emojiSet[2] || '✨'}`,
+                    `${topic} - Dream it. Believe it. Achieve it. ${emojiSet[3] || '🌟'}`
+                ],
+                humorous: [
+                    `Me trying to understand ${topic}: 🤔😅 Anyone else? 😂`,
+                    `${topic}? More like "how did I survive without knowing this?" 😄`,
+                    `Plot twist: ${topic} is actually way cooler than I thought 🎭`,
+                    `My brain after learning about ${topic}: 🤯 (in a good way)`
+                ],
+                educational: [
+                    `📚 Quick lesson: ${topic} is crucial for understanding modern developments.`,
+                    `Did you know? ${topic} has fascinating implications across multiple fields.`,
+                    `Learning moment: ${topic} explained simply for everyone.`,
+                    `Education thread: Why ${topic} matters more than you think.`
+                ],
+                promotional: [
+                    `🎯 Excited to share insights on ${topic}! Don't miss out.`,
+                    `📢 Big news about ${topic}! You'll want to see this.`,
+                    `🚀 Ready to level up with ${topic}? Let's go!`,
+                    `⭐ Introducing our take on ${topic} - game changer!`
+                ]
+            };
+
+            const styleTemplates = templates[style] || templates.casual;
+
+            for (let i = 0; i < 4; i++) {
+                let tweet = styleTemplates[i];
+
+                // Add type-specific prefix
+                if (type === 'thread') {
+                    tweet = '🧵 ' + tweet + '\n\n(1/n)';
+                } else if (type === 'announcement') {
+                    tweet = '📢 ANNOUNCEMENT\n\n' + tweet;
+                } else if (type === 'question') {
+                    tweet = tweet + '\n\nWhat do you think? 🤔';
+                } else if (type === 'quote') {
+                    tweet = '💭 "' + tweet + '"';
+                }
+
+                // Add CTA
                 if (includeCTA) {
                     const ctas = [
-                        '\n\n👉 Retweet if you agree!',
-                        '\n\n💬 Comment your thoughts!',
+                        '\n\n👉 RT if you agree!',
+                        '\n\n💬 Drop your thoughts below!',
                         '\n\n❤️ Like if this resonates!',
-                        '\n\n🔄 Share with someone who needs this!'
+                        '\n\n🔄 Share with someone!'
                     ];
-                    tweet += ctas[i % ctas.length];
+                    tweet += ctas[i];
                 }
 
-                // Add question if requested
+                // Add question
                 if (includeQuestion && !tweet.includes('?')) {
                     const questions = [
-                        '\n\nWhat do you think?',
                         '\n\nYour thoughts?',
-                        '\n\nAgree or disagree?',
-                        '\n\nWhat's your take?'
+                        '\n\nAgree?',
+                        '\n\nWhat's your take?',
+                        '\n\nYour experience?'
                     ];
-                    tweet += questions[i % questions.length];
+                    tweet += questions[i];
                 }
 
                 // Add hashtags
@@ -577,53 +641,33 @@
                     tweet += '\n\n' + hashtags;
                 }
 
-                // Ensure tweet is within 280 characters
-                tweet = limitTweetLength(tweet);
+                // Ensure under 280 characters
+                if (tweet.length > 280) {
+                    tweet = tweet.substring(0, 277) + '...';
+                }
 
                 tweets.push(tweet);
             }
 
-            displayTweets(tweets);
+            return tweets;
         }
 
         function generateHashtags(topic, count) {
-            const topicWords = topic.toLowerCase().split(' ');
-            let hashtags = new Set();
-
-            // Detect category
-            let category = 'general';
-            if (topic.match(/tech|ai|software|app|digital/i)) category = 'tech';
-            if (topic.match(/business|startup|entrepreneur|marketing/i)) category = 'business';
-            if (topic.match(/motivat|inspir|success|goal/i)) category = 'motivation';
-            if (topic.match(/life|daily|routine/i)) category = 'lifestyle';
-            if (topic.match(/learn|education|tutorial|tip/i)) category = 'education';
-            if (topic.match(/news|update|breaking/i)) category = 'news';
-
-            // Add category hashtags
-            const catHashtags = hashtagDatabase[category] || hashtagDatabase.general;
-            catHashtags.slice(0, count).forEach(tag => hashtags.add(tag));
-
-            // Convert to array and limit
-            const hashtagArray = Array.from(hashtags).slice(0, count);
-            return hashtagArray.join(' ');
-        }
-
-        function limitTweetLength(tweet) {
-            const maxLength = 280;
-            if (tweet.length <= maxLength) return tweet;
-
-            // If too long, trim the main content but keep hashtags
-            const parts = tweet.split('\n\n');
-            const hashtags = parts[parts.length - 1].startsWith('#') ? parts.pop() : '';
+            const words = topic.toLowerCase().split(' ').filter(w => w.length > 3);
+            const hashtags = [];
             
-            let mainContent = parts.join('\n\n');
-            const availableLength = maxLength - hashtags.length - 3; // 3 for \n\n
+            // Add topic-based hashtags
+            words.slice(0, count).forEach(word => {
+                hashtags.push('#' + word.charAt(0).toUpperCase() + word.slice(1));
+            });
 
-            if (mainContent.length > availableLength) {
-                mainContent = mainContent.substring(0, availableLength - 3) + '...';
+            // Add trending/generic hashtags if needed
+            const genericTags = ['#Trending', '#Viral', '#MustRead', '#Thread', '#Tips'];
+            while (hashtags.length < count && genericTags.length > 0) {
+                hashtags.push(genericTags.shift());
             }
 
-            return hashtags ? mainContent + '\n\n' + hashtags : mainContent;
+            return hashtags.slice(0, count).join(' ');
         }
 
         function displayTweets(tweets) {
@@ -690,6 +734,13 @@
             navigator.clipboard.writeText(tweet).then(() => {
                 alert('✅ Tweet copied to clipboard!\n\nReady to post on Twitter! 🐦');
             });
+        }
+
+        function useTopic(element) {
+            const text = element.querySelector('p').textContent;
+            document.getElementById('topicInput').value = text;
+            document.getElementById('topicInput').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            document.getElementById('topicInput').focus();
         }
     </script>
 </body>
