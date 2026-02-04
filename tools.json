@@ -225,8 +225,8 @@
       "icon": "fa-twitter",
       "color": "blue",
       "category": "social",
-      "badge": "Lets Tweet",
-      "status": "tools/social/tweet-generator.html",
+      "badge": "NEW",
+      "file": "tools/social/tweet-generator.html",
       "fab": true,
       "description": "Generate engaging tweets for your Twitter audience"
     },
