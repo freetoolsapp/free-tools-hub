@@ -109,6 +109,14 @@
       "description": "Convert POWERPOINT files to PDF documents"
     },
     {
+      "name": "RESUME BUILDER",
+      "icon": "fa-hashtag",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW and POPULAR",
+      "file": "tools/utility/resume-builder.html",
+      "description": "Create professional ATS-friendly resumes in minutes."
+    {
       "name": "Word Counter",
       "icon": "fa-hashtag",
       "color": "blue",
