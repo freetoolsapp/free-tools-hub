@@ -74,10 +74,10 @@
     
     <!-- Custom Styles for Mobile Menu Animation -->
     <style>
-        /* Smooth Scroll with Padding for Sticky Header */
+        /* Smooth Scroll with Padding for Sticky Header - FIXED */
         html {
             scroll-behavior: smooth;
-            scroll-padding-top: 140px; /* Header (72px) + Category tabs (68px) height */
+            scroll-padding-top: 180px; /* Header (80px) + Category tabs (68px) + extra padding */
         }
         
         /* Mobile Menu Slide Down Animation - ENHANCED */
@@ -172,9 +172,9 @@
             animation: pulse 1.5s ease-in-out infinite;
         }
         
-        /* Fix for sections to appear below sticky header */
-        section[id], main[id] {
-            scroll-margin-top: 140px;
+        /* Fix for sections to appear below sticky header - FIXED */
+        section[id], main[id], #tools {
+            scroll-margin-top: 180px; /* Increased for better visibility */
         }
     </style>
     
@@ -820,6 +820,312 @@
                     this.setAttribute('aria-selected', 'true');
                 });
             });
+
+            // ============================================
+            // TOOLS LOADING AND FILTERING - COMPLETE FIX
+            // ============================================
+            
+            let allTools = [];
+            
+            // Load tools from JSON
+            async function loadTools() {
+                try {
+                    console.log('📦 Loading tools from tools.json...');
+                    const response = await fetch('tools.json');
+                    if (!response.ok) {
+                        throw new Error('Failed to load tools.json');
+                    }
+                    const data = await response.json();
+                    allTools = data.tools;
+                    console.log(`✅ Loaded ${allTools.length} tools`);
+                    displayTools(allTools);
+                } catch (error) {
+                    console.error('❌ Error loading tools:', error);
+                    // Fallback to inline tools data
+                    loadInlineTools();
+                }
+            }
+            
+            // Fallback inline tools data (from uploaded JSON)
+            function loadInlineTools() {
+                console.log('⚠️ Using inline tools data...');
+                allTools = [
+                    {
+                        "name": "PDF to Word Converter",
+                        "icon": "fa-file-word",
+                        "color": "blue",
+                        "category": "utility",
+                        "badge": "HOT",
+                        "file": "tools/utility/pdf-to-word.html",
+                        "description": "Convert PDF files and IMAGES to editable Word documents"
+                    },
+                    {
+                        "name": "WORD TO PDF Converter",
+                        "icon": "fa-file-word",
+                        "color": "blue",
+                        "category": "utility",
+                        "badge": "HOT",
+                        "file": "tools/utility/word-to-pdf.html",
+                        "description": "Convert WORD files and Documents to PDF documents"
+                    },
+                    {
+                        "name": "DUPLICATE PDF PAGES",
+                        "icon": "fa-copy",
+                        "color": "green",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/pdf-duplicate.html",
+                        "description": "MAKE DUPLICATE OF YOUR PDF PAGES"
+                    },
+                    {
+                        "name": "DELETE PDF PAGES",
+                        "icon": "fa-trash-alt",
+                        "color": "red",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/pdf-pages-delete.html",
+                        "description": "You can delete any page in your PDF documents"
+                    },
+                    {
+                        "name": "PDF Crop",
+                        "icon": "fa-crop",
+                        "color": "orange",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/crop-pdf-pages.html",
+                        "description": "Crop any part or page of your PDF documents"
+                    },
+                    {
+                        "name": "ROTATE PDF PAGES",
+                        "icon": "fa-sync-alt",
+                        "color": "blue",
+                        "category": "utility",
+                        "badge": "HOT",
+                        "file": "tools/utility/rotate-pdf-pages.html",
+                        "description": "ROTATE pages in Your PDF documents"
+                    },
+                    {
+                        "name": "JPG/PNG to PDF",
+                        "icon": "fa-file-pdf",
+                        "color": "blue",
+                        "category": "utility",
+                        "badge": "HOT",
+                        "file": "tools/utility/jpg-to-pdf.html",
+                        "description": "Convert ANY IMAGES to PDF documents"
+                    },
+                    {
+                        "name": "PDF to JPG Converter",
+                        "icon": "fa-file-image",
+                        "color": "orange",
+                        "category": "utility",
+                        "badge": "HOT",
+                        "file": "tools/utility/pdf-to-jpg.html",
+                        "description": "Convert PDF Documents to Images"
+                    },
+                    {
+                        "name": "QR Code Generator",
+                        "icon": "fa-qrcode",
+                        "color": "blue",
+                        "category": "utility",
+                        "badge": "HOT",
+                        "file": "tools/utility/qrcode-generator.html",
+                        "description": "Create QR codes for URLs, text, WiFi, and more"
+                    },
+                    {
+                        "name": "Password Generator",
+                        "icon": "fa-key",
+                        "color": "red",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/password-generator.html",
+                        "description": "Generate strong and secure passwords instantly"
+                    },
+                    {
+                        "name": "Word Counter",
+                        "icon": "fa-hashtag",
+                        "color": "blue",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/word-counter.html",
+                        "description": "Count words, characters, sentences instantly"
+                    },
+                    {
+                        "name": "Age Calculator",
+                        "icon": "fa-birthday-cake",
+                        "color": "pink",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/age-calculator.html",
+                        "description": "Calculate your exact age"
+                    },
+                    {
+                        "name": "BMI Calculator",
+                        "icon": "fa-weight",
+                        "color": "green",
+                        "category": "utility",
+                        "badge": "NEW",
+                        "file": "tools/utility/bmi-calculator.html",
+                        "description": "Calculate your Body Mass Index"
+                    },
+                    {
+                        "name": "GPA Calculator",
+                        "icon": "fa-calculator",
+                        "color": "teal",
+                        "category": "student",
+                        "badge": "POPULAR",
+                        "file": "tools/student/gpa-calculator.html",
+                        "description": "Calculate your GPA instantly"
+                    },
+                    {
+                        "name": "Plagiarism Checker",
+                        "icon": "fa-search",
+                        "color": "red",
+                        "category": "student",
+                        "badge": "HOT",
+                        "file": "tools/student/plagiarism-checker.html",
+                        "description": "Check for plagiarism"
+                    },
+                    {
+                        "name": "Citation Generator",
+                        "icon": "fa-quote-right",
+                        "color": "indigo",
+                        "category": "student",
+                        "badge": "NEW",
+                        "file": "tools/student/citation-generator.html",
+                        "description": "Generate citations in APA, MLA, Chicago"
+                    },
+                    {
+                        "name": "Meta Description Generator",
+                        "icon": "fa-code",
+                        "color": "indigo",
+                        "category": "seo",
+                        "badge": "POPULAR",
+                        "file": "tools/seo/meta-description-generator.html",
+                        "description": "Create compelling meta descriptions"
+                    },
+                    {
+                        "name": "Keyword Density Checker",
+                        "icon": "fa-chart-bar",
+                        "color": "blue",
+                        "category": "seo",
+                        "badge": "HOT",
+                        "file": "tools/seo/keyword-density-checker.html",
+                        "description": "Analyze keyword density"
+                    },
+                    {
+                        "name": "Image Resizer",
+                        "icon": "fa-expand",
+                        "color": "blue",
+                        "category": "design",
+                        "badge": "NEW",
+                        "file": "tools/design/image-resizer.html",
+                        "description": "Resize images"
+                    },
+                    {
+                        "name": "HTML Minifier",
+                        "icon": "fa-compress-arrows-alt",
+                        "color": "orange",
+                        "category": "webdev",
+                        "badge": "HOT",
+                        "file": "tools/webdev/html-minifier.html",
+                        "description": "Minify HTML code"
+                    },
+                    {
+                        "name": "CSS Minifier",
+                        "icon": "fa-file-code",
+                        "color": "blue",
+                        "category": "webdev",
+                        "badge": "NEW",
+                        "file": "tools/webdev/css-minifier.html",
+                        "description": "Compress CSS code"
+                    },
+                    {
+                        "name": "JSON Formatter",
+                        "icon": "fa-code",
+                        "color": "green",
+                        "category": "webdev",
+                        "badge": "NEW",
+                        "file": "tools/webdev/json-formatter.html",
+                        "description": "Format and validate JSON"
+                    }
+                ];
+                displayTools(allTools);
+            }
+            
+            // Display tools in grid
+            function displayTools(tools) {
+                const grid = document.getElementById('toolsGrid');
+                if (!grid) return;
+                
+                grid.innerHTML = '';
+                
+                tools.forEach(tool => {
+                    const colorClasses = {
+                        'blue': 'from-blue-600 to-blue-700',
+                        'green': 'from-green-600 to-green-700',
+                        'red': 'from-red-600 to-red-700',
+                        'orange': 'from-orange-600 to-orange-700',
+                        'purple': 'from-purple-600 to-purple-700',
+                        'pink': 'from-pink-600 to-pink-700',
+                        'indigo': 'from-indigo-600 to-indigo-700',
+                        'teal': 'from-teal-600 to-teal-700'
+                    };
+                    
+                    const badgeClasses = {
+                        'HOT': 'bg-red-500',
+                        'NEW': 'bg-green-500',
+                        'POPULAR': 'bg-blue-500'
+                    };
+                    
+                    const gradient = colorClasses[tool.color] || 'from-blue-600 to-blue-700';
+                    const badgeColor = badgeClasses[tool.badge] || 'bg-blue-500';
+                    
+                    const card = document.createElement('a');
+                    card.href = tool.file;
+                    card.className = 'tool-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 p-6 relative overflow-hidden group';
+                    card.dataset.category = tool.category;
+                    
+                    card.innerHTML = `
+                        ${tool.badge ? `<span class="${badgeColor} text-white text-xs px-2 py-1 rounded-full absolute top-4 right-4 font-bold">${tool.badge}</span>` : ''}
+                        <div class="bg-gradient-to-r ${gradient} w-16 h-16 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <i class="fas ${tool.icon} text-white text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-lg text-gray-800 mb-2 group-hover:text-blue-600 transition-colors duration-200">${tool.name}</h3>
+                        <p class="text-gray-600 text-sm">${tool.description}</p>
+                        <div class="mt-4 flex items-center text-blue-600 font-medium text-sm">
+                            <span>Try Now</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform duration-200"></i>
+                        </div>
+                    `;
+                    
+                    grid.appendChild(card);
+                });
+                
+                console.log(`✅ Displayed ${tools.length} tools`);
+            }
+            
+            // Filter tools by category - GLOBAL FUNCTION
+            window.filterTools = function(category) {
+                console.log('🔍 Filtering tools:', category);
+                
+                // Update active button
+                document.querySelectorAll('.category-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                event.target.closest('.category-btn').classList.add('active');
+                
+                // Filter and display
+                if (category === 'all') {
+                    displayTools(allTools);
+                } else {
+                    const filtered = allTools.filter(tool => tool.category === category);
+                    displayTools(filtered);
+                }
+            };
+            
+            // Initialize - Load tools on page load
+            loadTools();
+            
         });
     </script>
 </body>
