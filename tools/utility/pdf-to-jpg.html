@@ -46,28 +46,78 @@
             transform: scale(1.02);
         }
 
-        .page-preview {
+        /* Visual PDF Style - Page Thumbnails */
+        .page-thumbnail {
             position: relative;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
             overflow: hidden;
         }
 
-        .page-preview canvas {
+        .page-thumbnail:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+        }
+
+        .page-thumbnail canvas {
             width: 100%;
             height: auto;
-            border-radius: 8px;
+            display: block;
         }
 
-        .download-btn {
+        .page-checkbox {
             position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%);
-            opacity: 0;
-            transition: opacity 0.3s;
+            top: 12px;
+            left: 12px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            z-index: 10;
         }
 
-        .page-preview:hover .download-btn {
+        .page-number {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+            color: white;
+            padding: 8px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+        .page-thumbnail.selected {
+            outline: 3px solid #667eea;
+            outline-offset: 2px;
+        }
+
+        .download-btn-overlay {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(16, 185, 129, 0.9);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+        }
+
+        .page-thumbnail:hover .download-btn-overlay {
             opacity: 1;
+        }
+
+        .download-btn-overlay:hover {
+            background: rgba(5, 150, 105, 1);
+            transform: scale(1.1);
         }
 
         @keyframes spin {
@@ -83,6 +133,22 @@
             height: 60px;
             animation: spin 1s linear infinite;
             margin: 0 auto;
+        }
+
+        .quality-slider {
+            width: 100%;
+            height: 6px;
+            border-radius: 3px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            outline: none;
+        }
+
+        .action-bar {
+            position: sticky;
+            top: 80px;
+            background: white;
+            z-index: 40;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
     </style>
 </head>
@@ -147,138 +213,126 @@
             </div>
             <h2 class="text-4xl md:text-5xl font-bold mb-4">PDF to JPG Converter</h2>
             <p class="text-xl mb-2">Convert PDF pages to high-quality JPG images</p>
-            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • All Pages • High Resolution</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Select Pages • High Quality</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="py-12">
-        <div class="container mx-auto px-4 max-w-6xl">
+        <div class="container mx-auto px-4 max-w-7xl">
             
             <!-- Upload Section -->
             <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-upload text-orange-600 mr-2"></i>Upload Your PDF
+                    <i class="fas fa-upload text-blue-600 mr-2"></i>Upload Your PDF Document
                 </h3>
                 
-                <div id="dropZone" class="drop-zone bg-gradient-to-br from-orange-50 to-red-50 rounded-xl p-12 text-center cursor-pointer">
-                    <i class="fas fa-cloud-upload-alt text-6xl text-orange-600 mb-4"></i>
+                <div id="dropZone" class="drop-zone bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-12 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-6xl text-blue-600 mb-4"></i>
                     <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
                     <p class="text-gray-600 mb-4">Supports: PDF files</p>
-                    <button class="bg-gradient-to-r from-orange-600 to-red-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
                         <i class="fas fa-folder-open mr-2"></i>Choose PDF File
                     </button>
                     <input type="file" id="fileInput" accept=".pdf" class="hidden">
                 </div>
+            </div>
 
-                <!-- Processing -->
-                <div id="processingSection" class="hidden mt-8 text-center">
+            <!-- Processing Indicator -->
+            <div id="processingSection" class="bg-white rounded-lg shadow-lg p-8 mb-8 hidden">
+                <div class="text-center">
                     <div class="spinner mb-4"></div>
-                    <p class="text-gray-600 font-medium">Converting PDF to images...</p>
-                    <div class="mt-4">
-                        <div class="w-full bg-gray-200 rounded-full h-3">
-                            <div id="progressBar" class="bg-gradient-to-r from-orange-500 to-red-500 h-3 rounded-full transition-all" style="width: 0%"></div>
-                        </div>
-                        <p class="text-sm text-gray-600 mt-2"><span id="progressText">0%</span></p>
-                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Processing PDF...</h3>
+                    <p class="text-gray-600">Please wait while we extract pages</p>
                 </div>
+            </div>
 
-                <!-- Results -->
-                <div id="resultsSection" class="hidden mt-8">
-                    <div class="flex justify-between items-center mb-6">
-                        <h4 class="font-bold text-gray-800 text-xl">
-                            <i class="fas fa-images text-orange-600 mr-2"></i>
-                            Converted Images (<span id="pageCount">0</span> pages)
-                        </h4>
-                        <button onclick="downloadAllImages()" class="bg-gradient-to-r from-green-600 to-teal-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                            <i class="fas fa-download mr-2"></i>Download All as ZIP
+            <!-- Action Bar (Sticky) -->
+            <div id="actionBar" class="action-bar rounded-lg p-4 mb-8 hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="text-gray-700">
+                            <i class="fas fa-file-pdf text-blue-600 mr-2"></i>
+                            <span id="totalPages" class="font-bold">0</span> pages •
+                            <span id="selectedCount" class="font-bold text-blue-600">0</span> selected
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="selectAllPages()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-check-double mr-2"></i>Select All
+                        </button>
+                        <button onclick="deselectAllPages()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-times mr-2"></i>Deselect All
+                        </button>
+                        <button onclick="downloadSelected()" class="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition font-semibold">
+                            <i class="fas fa-download mr-2"></i>Download Selected (<span id="downloadCount">0</span>)
+                        </button>
+                        <button onclick="downloadAllAsZip()" class="bg-gradient-to-r from-purple-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition font-semibold">
+                            <i class="fas fa-file-archive mr-2"></i>Download All as ZIP
                         </button>
                     </div>
-                    <div id="pagesContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
                 </div>
 
-                <!-- Feature Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                    <div class="bg-gradient-to-br from-orange-50 to-orange-100 p-6 rounded-lg border-2 border-orange-200">
-                        <i class="fas fa-file-pdf text-3xl text-orange-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">All Pages</h4>
-                        <p class="text-sm text-gray-600">Convert all PDF pages to separate images</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-red-50 to-red-100 p-6 rounded-lg border-2 border-red-200">
-                        <i class="fas fa-hd text-3xl text-red-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">High Quality</h4>
-                        <p class="text-sm text-gray-600">Maximum resolution and quality preserved</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
-                        <i class="fas fa-bolt text-3xl text-pink-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">Fast Processing</h4>
-                        <p class="text-sm text-gray-600">Instant conversion in your browser</p>
+                <!-- Quality Settings -->
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <label class="text-gray-700 font-medium flex items-center gap-2">
+                            <i class="fas fa-sliders-h text-blue-600"></i>
+                            Image Quality:
+                        </label>
+                        <input type="range" id="qualitySlider" min="50" max="100" value="92" step="1" class="quality-slider flex-1">
+                        <span id="qualityValue" class="text-blue-600 font-bold">92%</span>
+                        <select id="formatSelect" class="border border-gray-300 rounded-lg px-4 py-2">
+                            <option value="jpeg">JPEG</option>
+                            <option value="png">PNG</option>
+                        </select>
                     </div>
                 </div>
             </div>
 
-            <!-- Related Tools -->
-            <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Pages Grid -->
+            <div id="pagesGrid" class="hidden">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6">
-                    <i class="fas fa-toolbox text-purple-600 mr-2"></i>Related PDF Tools
+                    <i class="fas fa-images text-blue-600 mr-2"></i>Select Pages to Convert
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <a href="../utility/jpg-to-pdf.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition border-2 border-blue-200">
-                        <i class="fas fa-file-pdf text-2xl text-blue-600 mb-2"></i>
-                        <h4 class="font-bold text-gray-800 mb-1">JPG to PDF</h4>
-                        <p class="text-sm text-gray-600">Convert images to PDF</p>
-                    </a>
-                    <a href="../utility/pdf-to-word.html" class="block p-4 bg-gradient-to-br from-indigo-50 to-indigo-100 rounded-lg hover:shadow-lg transition border-2 border-indigo-200">
-                        <i class="fas fa-file-word text-2xl text-indigo-600 mb-2"></i>
-                        <h4 class="font-bold text-gray-800 mb-1">PDF to Word</h4>
-                        <p class="text-sm text-gray-600">Convert PDF to editable Word</p>
-                    </a>
-                    <a href="../utility/website-to-pdf.html" class="block p-4 bg-gradient-to-br from-purple-50 to-purple-100 rounded-lg hover:shadow-lg transition border-2 border-purple-200">
-                        <i class="fas fa-globe text-2xl text-purple-600 mb-2"></i>
-                        <h4 class="font-bold text-gray-800 mb-1">Website to PDF</h4>
-                        <p class="text-sm text-gray-600">Convert web pages to PDF</p>
-                    </a>
+                <div id="pagesContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <!-- Pages will be inserted here -->
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
+    <!-- Footer (Same as original) -->
+    <footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 mt-16">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
-                    </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools, helpful blogs, and learning resources.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../index.html#tools" onclick="filterTools('utility')" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                        <li><a href="../../index.html#tools" onclick="filterTools('student')" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                        <li><a href="../../index.html#tools" onclick="filterTools('design')" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
-                        <li><a href="../../index.html#tools" onclick="filterTools('seo')" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html" class="hover:text-white transition"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-tools mr-2"></i>Tools</a></li>
                         <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
                         <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Company</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About</a></li>
                         <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
-                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms</a></li>
                     </ul>
                 </div>
                 <div>
@@ -292,20 +346,27 @@
                     <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
                 </div>
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center">
                 <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Back to Top -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- JSZip for creating ZIP files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+
     <script>
+        // Configure PDF.js worker
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        
-        // Mobile menu toggle
+
+        // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
-        
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
             const icon = mobileMenuBtn.querySelector('i');
@@ -313,10 +374,30 @@
             icon.classList.toggle('fa-times');
         });
 
-        // File handling
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('hidden', window.scrollY <= 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Quality slider
+        const qualitySlider = document.getElementById('qualitySlider');
+        const qualityValue = document.getElementById('qualityValue');
+        qualitySlider.addEventListener('input', (e) => {
+            qualityValue.textContent = e.target.value + '%';
+        });
+
+        // Global variables
+        let pdfDocument = null;
+        let pageImages = new Map(); // Store page number -> canvas mapping
+        let selectedPages = new Set();
+
+        // File upload handling
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
-        let convertedImages = [];
 
         dropZone.addEventListener('click', () => fileInput.click());
         
@@ -324,130 +405,229 @@
             e.preventDefault();
             dropZone.classList.add('dragover');
         });
-
+        
         dropZone.addEventListener('dragleave', () => {
             dropZone.classList.remove('dragover');
         });
-
+        
         dropZone.addEventListener('drop', (e) => {
             e.preventDefault();
             dropZone.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type === 'application/pdf') {
-                convertPDFToImages(file);
-            } else {
-                alert('⚠️ Please upload a PDF file.');
-            }
+            const files = e.dataTransfer.files;
+            if (files.length > 0) handleFile(files[0]);
         });
 
         fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                convertPDFToImages(file);
-            }
+            if (e.target.files.length > 0) handleFile(e.target.files[0]);
         });
 
-        async function convertPDFToImages(file) {
-            const processingSection = document.getElementById('processingSection');
-            const resultsSection = document.getElementById('resultsSection');
-            const pagesContainer = document.getElementById('pagesContainer');
-            
-            processingSection.classList.remove('hidden');
-            resultsSection.classList.add('hidden');
-            convertedImages = [];
-            pagesContainer.innerHTML = '';
-
-            try {
-                const arrayBuffer = await file.arrayBuffer();
-                const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
-                const numPages = pdf.numPages;
-                
-                document.getElementById('pageCount').textContent = numPages;
-
-                for (let pageNum = 1; pageNum <= numPages; pageNum++) {
-                    const page = await pdf.getPage(pageNum);
-                    const scale = 2.0;
-                    const viewport = page.getViewport({ scale });
-
-                    const canvas = document.createElement('canvas');
-                    const context = canvas.getContext('2d');
-                    canvas.width = viewport.width;
-                    canvas.height = viewport.height;
-
-                    await page.render({
-                        canvasContext: context,
-                        viewport: viewport
-                    }).promise;
-
-                    const imageData = canvas.toDataURL('image/jpeg', 0.95);
-                    convertedImages.push({
-                        pageNum: pageNum,
-                        data: imageData,
-                        canvas: canvas
-                    });
-
-                    // Update progress
-                    const progress = (pageNum / numPages) * 100;
-                    document.getElementById('progressBar').style.width = progress + '%';
-                    document.getElementById('progressText').textContent = Math.round(progress) + '%';
-
-                    // Add to display
-                    const pageDiv = document.createElement('div');
-                    pageDiv.className = 'page-preview bg-white rounded-lg shadow-lg p-4 border-2 border-gray-200';
-                    pageDiv.innerHTML = `
-                        <div class="relative">
-                            <canvas></canvas>
-                            <button onclick="downloadImage(${pageNum - 1})" class="download-btn bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-semibold hover:shadow-lg transition">
-                                <i class="fas fa-download mr-2"></i>Download
-                            </button>
-                        </div>
-                        <p class="text-center text-sm text-gray-600 mt-3 font-medium">Page ${pageNum}</p>
-                    `;
-
-                    const displayCanvas = pageDiv.querySelector('canvas');
-                    displayCanvas.width = canvas.width;
-                    displayCanvas.height = canvas.height;
-                    const displayContext = displayCanvas.getContext('2d');
-                    displayContext.drawImage(canvas, 0, 0);
-
-                    pagesContainer.appendChild(pageDiv);
-                }
-
-                processingSection.classList.add('hidden');
-                resultsSection.classList.remove('hidden');
-                resultsSection.scrollIntoView({ behavior: 'smooth' });
-
-            } catch (error) {
-                console.error('Conversion error:', error);
-                alert('❌ Error converting PDF. Please try again.');
-                processingSection.classList.add('hidden');
-            }
-        }
-
-        function downloadImage(index) {
-            const image = convertedImages[index];
-            const link = document.createElement('a');
-            link.href = image.data;
-            link.download = `page-${image.pageNum}.jpg`;
-            link.click();
-        }
-
-        function downloadAllImages() {
-            if (convertedImages.length === 0) {
-                alert('⚠️ No images to download.');
+        async function handleFile(file) {
+            if (!file.type.includes('pdf')) {
+                alert('❌ Please upload a PDF file');
                 return;
             }
 
-            // Download images one by one
-            convertedImages.forEach((image, index) => {
-                setTimeout(() => {
-                    downloadImage(index);
-                }, index * 200);
-            });
+            // Show processing
+            document.getElementById('processingSection').classList.remove('hidden');
+            document.getElementById('pagesGrid').classList.add('hidden');
+            document.getElementById('actionBar').classList.add('hidden');
 
-            setTimeout(() => {
-                alert(`✅ Downloading ${convertedImages.length} images!\n\nPlease check your downloads folder.`);
-            }, 500);
+            try {
+                const arrayBuffer = await file.arrayBuffer();
+                pdfDocument = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                
+                const numPages = pdfDocument.numPages;
+                document.getElementById('totalPages').textContent = numPages;
+                
+                // Clear previous data
+                pageImages.clear();
+                selectedPages.clear();
+                document.getElementById('pagesContainer').innerHTML = '';
+                
+                // Render all pages
+                for (let i = 1; i <= numPages; i++) {
+                    await renderPage(i);
+                }
+                
+                // Hide processing, show results
+                document.getElementById('processingSection').classList.add('hidden');
+                document.getElementById('pagesGrid').classList.remove('hidden');
+                document.getElementById('actionBar').classList.remove('hidden');
+                
+                updateSelectedCount();
+                
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                alert('❌ Error loading PDF: ' + error.message);
+                document.getElementById('processingSection').classList.add('hidden');
+            }
+        }
+
+        async function renderPage(pageNum) {
+            const page = await pdfDocument.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1.5 });
+            
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            
+            await page.render({
+                canvasContext: context,
+                viewport: viewport
+            }).promise;
+            
+            // Store canvas
+            pageImages.set(pageNum, canvas);
+            
+            // Create thumbnail element
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'page-thumbnail';
+            pageDiv.dataset.page = pageNum;
+            
+            pageDiv.innerHTML = `
+                <input type="checkbox" class="page-checkbox" data-page="${pageNum}" onchange="togglePage(${pageNum})">
+                <canvas></canvas>
+                <div class="page-number">Page ${pageNum}</div>
+                <div class="download-btn-overlay" onclick="downloadSinglePage(${pageNum})" title="Download this page">
+                    <i class="fas fa-download"></i>
+                </div>
+            `;
+            
+            // Copy canvas to thumbnail
+            const thumbnailCanvas = pageDiv.querySelector('canvas');
+            const thumbnailContext = thumbnailCanvas.getContext('2d');
+            thumbnailCanvas.width = canvas.width;
+            thumbnailCanvas.height = canvas.height;
+            thumbnailContext.drawImage(canvas, 0, 0);
+            
+            document.getElementById('pagesContainer').appendChild(pageDiv);
+        }
+
+        function togglePage(pageNum) {
+            const checkbox = document.querySelector(`input[data-page="${pageNum}"]`);
+            const pageDiv = document.querySelector(`.page-thumbnail[data-page="${pageNum}"]`);
+            
+            if (checkbox.checked) {
+                selectedPages.add(pageNum);
+                pageDiv.classList.add('selected');
+            } else {
+                selectedPages.delete(pageNum);
+                pageDiv.classList.remove('selected');
+            }
+            
+            updateSelectedCount();
+        }
+
+        function selectAllPages() {
+            document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+                checkbox.checked = true;
+                const pageNum = parseInt(checkbox.dataset.page);
+                selectedPages.add(pageNum);
+                document.querySelector(`.page-thumbnail[data-page="${pageNum}"]`).classList.add('selected');
+            });
+            updateSelectedCount();
+        }
+
+        function deselectAllPages() {
+            document.querySelectorAll('.page-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+                const pageNum = parseInt(checkbox.dataset.page);
+                selectedPages.delete(pageNum);
+                document.querySelector(`.page-thumbnail[data-page="${pageNum}"]`).classList.remove('selected');
+            });
+            updateSelectedCount();
+        }
+
+        function updateSelectedCount() {
+            const count = selectedPages.size;
+            document.getElementById('selectedCount').textContent = count;
+            document.getElementById('downloadCount').textContent = count;
+        }
+
+        function canvasToBlob(canvas, format, quality) {
+            return new Promise((resolve) => {
+                const mimeType = format === 'png' ? 'image/png' : 'image/jpeg';
+                canvas.toBlob(resolve, mimeType, quality / 100);
+            });
+        }
+
+        async function downloadSinglePage(pageNum) {
+            const canvas = pageImages.get(pageNum);
+            if (!canvas) return;
+            
+            const quality = parseInt(qualitySlider.value);
+            const format = document.getElementById('formatSelect').value;
+            
+            const blob = await canvasToBlob(canvas, format, quality);
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `page-${pageNum}.${format === 'png' ? 'png' : 'jpg'}`;
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function downloadSelected() {
+            if (selectedPages.size === 0) {
+                alert('❌ Please select at least one page');
+                return;
+            }
+
+            const quality = parseInt(qualitySlider.value);
+            const format = document.getElementById('formatSelect').value;
+
+            if (selectedPages.size === 1) {
+                const pageNum = Array.from(selectedPages)[0];
+                await downloadSinglePage(pageNum);
+                return;
+            }
+
+            // Multiple pages - create ZIP
+            const zip = new JSZip();
+            
+            for (const pageNum of Array.from(selectedPages).sort((a, b) => a - b)) {
+                const canvas = pageImages.get(pageNum);
+                if (canvas) {
+                    const blob = await canvasToBlob(canvas, format, quality);
+                    zip.file(`page-${pageNum}.${format === 'png' ? 'png' : 'jpg'}`, blob);
+                }
+            }
+
+            const zipBlob = await zip.generateAsync({ type: 'blob' });
+            const url = URL.createObjectURL(zipBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'selected-pages.zip';
+            link.click();
+            URL.revokeObjectURL(url);
+        }
+
+        async function downloadAllAsZip() {
+            if (!pdfDocument) {
+                alert('❌ No PDF loaded');
+                return;
+            }
+
+            const quality = parseInt(qualitySlider.value);
+            const format = document.getElementById('formatSelect').value;
+            const zip = new JSZip();
+            
+            for (let pageNum = 1; pageNum <= pdfDocument.numPages; pageNum++) {
+                const canvas = pageImages.get(pageNum);
+                if (canvas) {
+                    const blob = await canvasToBlob(canvas, format, quality);
+                    zip.file(`page-${pageNum}.${format === 'png' ? 'png' : 'jpg'}`, blob);
+                }
+            }
+
+            const zipBlob = await zip.generateAsync({ type: 'blob' });
+            const url = URL.createObjectURL(zipBlob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = 'all-pages.zip';
+            link.click();
+            URL.revokeObjectURL(url);
         }
     </script>
 </body>
