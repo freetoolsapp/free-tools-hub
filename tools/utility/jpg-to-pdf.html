@@ -46,9 +46,30 @@
             transform: scale(1.02);
         }
 
+        /* Visual PDF Style - Draggable Images */
         .image-preview {
             position: relative;
             overflow: hidden;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: move;
+        }
+
+        .image-preview:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+        }
+
+        .image-preview.dragging {
+            opacity: 0.5;
+            transform: rotate(5deg);
+        }
+
+        .image-preview.drag-over {
+            border: 2px dashed #667eea;
+            transform: scale(1.05);
         }
 
         .image-preview img {
@@ -71,16 +92,53 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
+            z-index: 10;
         }
 
         .remove-btn:hover {
             background: rgba(220, 38, 38, 1);
             transform: scale(1.1);
         }
+
+        .drag-handle {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: move;
+            z-index: 10;
+        }
+
+        .image-number {
+            position: absolute;
+            bottom: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .action-bar {
+            position: sticky;
+            top: 80px;
+            background: white;
+            z-index: 40;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body class="bg-gray-50">
-    <!-- Header -->
+    <!-- Header (Same as original) -->
     <header class="bg-white shadow-md sticky top-0 z-50">
         <div class="container mx-auto px-4 py-4">
             <div class="flex justify-between items-center">
@@ -139,14 +197,14 @@
                 <i class="fas fa-file-pdf text-5xl"></i>
             </div>
             <h2 class="text-4xl md:text-5xl font-bold mb-4">JPG to PDF Converter</h2>
-            <p class="text-xl mb-2">Convert JPG, PNG, and other images to PDF instantly</p>
-            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Batch Conversion • High Quality</p>
+            <p class="text-xl mb-2">Convert multiple images to PDF with custom layout</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Drag to Reorder • Batch Convert</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="py-12">
-        <div class="container mx-auto px-4 max-w-6xl">
+        <div class="container mx-auto px-4 max-w-7xl">
             
             <!-- Upload Section -->
             <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
@@ -157,140 +215,120 @@
                 <div id="dropZone" class="drop-zone bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-12 text-center cursor-pointer">
                     <i class="fas fa-cloud-upload-alt text-6xl text-blue-600 mb-4"></i>
                     <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
-                    <p class="text-gray-600 mb-4">Supports: JPG, PNG, JPEG, GIF, BMP</p>
+                    <p class="text-gray-600 mb-4">Supports: JPG, PNG, GIF, BMP</p>
                     <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
                         <i class="fas fa-folder-open mr-2"></i>Choose Images
                     </button>
                     <input type="file" id="fileInput" accept="image/*" multiple class="hidden">
                 </div>
+            </div>
 
-                <!-- Image Previews -->
-                <div id="imagePreviewContainer" class="hidden mt-8">
-                    <div class="flex justify-between items-center mb-4">
-                        <h4 class="font-bold text-gray-800">
-                            <i class="fas fa-images text-purple-600 mr-2"></i>
-                            Selected Images (<span id="imageCount">0</span>)
-                        </h4>
-                        <button onclick="clearImages()" class="text-red-600 hover:text-red-700 font-semibold">
-                            <i class="fas fa-trash mr-1"></i>Clear All
-                        </button>
-                    </div>
-                    <div id="imagePreviews" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6"></div>
-                    
-                    <!-- Conversion Options -->
-                    <div class="bg-gradient-to-br from-indigo-50 to-purple-50 rounded-lg p-6 mb-6">
-                        <h4 class="font-bold text-gray-800 mb-4">
-                            <i class="fas fa-cog text-indigo-600 mr-2"></i>Conversion Options
-                        </h4>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Page Orientation</label>
-                                <select id="orientation" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
-                                    <option value="portrait">Portrait</option>
-                                    <option value="landscape">Landscape</option>
-                                </select>
-                            </div>
-                            <div>
-                                <label class="block text-sm font-bold text-gray-700 mb-2">Page Size</label>
-                                <select id="pageSize" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-blue-500 focus:outline-none">
-                                    <option value="a4">A4</option>
-                                    <option value="letter">Letter</option>
-                                    <option value="legal">Legal</option>
-                                </select>
-                            </div>
+            <!-- Action Bar -->
+            <div id="actionBar" class="action-bar rounded-lg p-4 mb-8 hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="text-gray-700">
+                            <i class="fas fa-images text-blue-600 mr-2"></i>
+                            <span id="imageCount" class="font-bold">0</span> images
+                        </div>
+                        <div class="text-xs text-gray-500">
+                            <i class="fas fa-info-circle mr-1"></i>Drag images to reorder
                         </div>
                     </div>
-
-                    <button 
-                        onclick="convertToPDF()" 
-                        class="w-full bg-gradient-to-r from-green-600 to-teal-600 text-white px-8 py-4 rounded-lg font-semibold hover:shadow-lg transition text-lg"
-                    >
-                        <i class="fas fa-file-pdf mr-2"></i>Convert to PDF
-                    </button>
+                    
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="clearImages()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition">
+                            <i class="fas fa-trash mr-2"></i>Clear All
+                        </button>
+                        <button onclick="convertToPDF()" class="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition font-semibold">
+                            <i class="fas fa-file-pdf mr-2"></i>Create PDF
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Feature Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                    <div class="bg-gradient-to-br from-blue-50 to-blue-100 p-6 rounded-lg border-2 border-blue-200">
-                        <i class="fas fa-images text-3xl text-blue-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">Batch Conversion</h4>
-                        <p class="text-sm text-gray-600">Convert multiple images to PDF at once</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-purple-50 to-purple-100 p-6 rounded-lg border-2 border-purple-200">
-                        <i class="fas fa-magic text-3xl text-purple-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">High Quality</h4>
-                        <p class="text-sm text-gray-600">Preserve image quality in PDF output</p>
-                    </div>
-                    <div class="bg-gradient-to-br from-pink-50 to-pink-100 p-6 rounded-lg border-2 border-pink-200">
-                        <i class="fas fa-lock text-3xl text-pink-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">100% Secure</h4>
-                        <p class="text-sm text-gray-600">All conversions happen in your browser</p>
+                <!-- PDF Settings -->
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="text-gray-700 font-medium flex items-center gap-2 mb-2">
+                                <i class="fas fa-arrows-alt-h text-blue-600"></i>
+                                Page Size:
+                            </label>
+                            <select id="pageSize" class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                                <option value="a4">A4</option>
+                                <option value="letter">Letter</option>
+                                <option value="legal">Legal</option>
+                                <option value="a3">A3</option>
+                                <option value="a5">A5</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-gray-700 font-medium flex items-center gap-2 mb-2">
+                                <i class="fas fa-compass text-blue-600"></i>
+                                Orientation:
+                            </label>
+                            <select id="orientation" class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                                <option value="portrait">Portrait</option>
+                                <option value="landscape">Landscape</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="text-gray-700 font-medium flex items-center gap-2 mb-2">
+                                <i class="fas fa-expand text-blue-600"></i>
+                                Image Fit:
+                            </label>
+                            <select id="imageFit" class="w-full border border-gray-300 rounded-lg px-4 py-2">
+                                <option value="contain">Fit to page</option>
+                                <option value="cover">Fill page</option>
+                                <option value="original">Original size</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Related Tools -->
-            <div class="bg-white rounded-lg shadow-lg p-8">
+            <!-- Images Grid -->
+            <div id="imagePreviewContainer" class="hidden">
                 <h3 class="text-2xl font-bold text-gray-800 mb-6">
-                    <i class="fas fa-toolbox text-purple-600 mr-2"></i>Related PDF Tools
+                    <i class="fas fa-images text-blue-600 mr-2"></i>Your Images (Drag to Reorder)
                 </h3>
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <a href="../utility/pdf-to-jpg.html" class="block p-4 bg-gradient-to-br from-orange-50 to-orange-100 rounded-lg hover:shadow-lg transition border-2 border-orange-200">
-                        <i class="fas fa-file-image text-2xl text-orange-600 mb-2"></i>
-                        <h4 class="font-bold text-gray-800 mb-1">PDF to JPG</h4>
-                        <p class="text-sm text-gray-600">Convert PDF pages to images</p>
-                    </a>
-                    <a href="../utility/pdf-to-word.html" class="block p-4 bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg hover:shadow-lg transition border-2 border-blue-200">
-                        <i class="fas fa-file-word text-2xl text-blue-600 mb-2"></i>
-                        <h4 class="font-bold text-gray-800 mb-1">PDF to Word</h4>
-                        <p class="text-sm text-gray-600">Convert PDF to editable Word</p>
-                    </a>
-                    <a href="../utility/excel-to-pdf.html" class="block p-4 bg-gradient-to-br from-green-50 to-green-100 rounded-lg hover:shadow-lg transition border-2 border-green-200">
-                        <i class="fas fa-file-excel text-2xl text-green-600 mb-2"></i>
-                        <h4 class="font-bold text-gray-800 mb-1">Excel to PDF</h4>
-                        <p class="text-sm text-gray-600">Convert spreadsheets to PDF</p>
-                    </a>
+                <div id="imagePreviews" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <!-- Images will be inserted here -->
                 </div>
             </div>
 
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
+    <!-- Footer (Same as original) -->
+    <footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 mt-16">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
-                    </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools, helpful blogs, and learning resources.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../index.html#tools" onclick="filterTools('utility')" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                        <li><a href="../../index.html#tools" onclick="filterTools('student')" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                        <li><a href="../../index.html#tools" onclick="filterTools('design')" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
-                        <li><a href="../../index.html#tools" onclick="filterTools('seo')" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html" class="hover:text-white transition"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-tools mr-2"></i>Tools</a></li>
                         <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
                         <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Company</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
+                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About</a></li>
                         <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
-                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
+                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy</a></li>
+                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms</a></li>
                     </ul>
                 </div>
                 <div>
@@ -310,7 +348,11 @@
         </div>
     </footer>
 
-    <!-- Scripts -->
+    <!-- Back to Top -->
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50" aria-label="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
     <script>
         const { jsPDF } = window.jspdf;
         
@@ -325,10 +367,20 @@
             icon.classList.toggle('fa-times');
         });
 
-        // File handling
+        // Back to top
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            backToTop.classList.toggle('hidden', window.scrollY <= 300);
+        });
+        backToTop.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // File handling with drag-and-drop support
         const dropZone = document.getElementById('dropZone');
         const fileInput = document.getElementById('fileInput');
         let selectedImages = [];
+        let draggedElement = null;
 
         dropZone.addEventListener('click', () => fileInput.click());
         
@@ -373,26 +425,98 @@
         function displayImages() {
             const container = document.getElementById('imagePreviews');
             const previewContainer = document.getElementById('imagePreviewContainer');
+            const actionBar = document.getElementById('actionBar');
             const imageCount = document.getElementById('imageCount');
 
             if (selectedImages.length > 0) {
                 previewContainer.classList.remove('hidden');
+                actionBar.classList.remove('hidden');
                 imageCount.textContent = selectedImages.length;
 
                 container.innerHTML = selectedImages.map((img, index) => `
-                    <div class="image-preview bg-white rounded-lg shadow border-2 border-gray-200">
+                    <div class="image-preview" draggable="true" data-index="${index}">
+                        <div class="drag-handle" title="Drag to reorder">
+                            <i class="fas fa-grip-vertical"></i>
+                        </div>
                         <img src="${img.data}" alt="${img.name}">
                         <div class="remove-btn" onclick="removeImage(${index})">
                             <i class="fas fa-times"></i>
                         </div>
+                        <div class="image-number">${index + 1}</div>
                         <div class="p-2 text-center">
                             <p class="text-xs text-gray-600 truncate">${img.name}</p>
                         </div>
                     </div>
                 `).join('');
+
+                // Add drag and drop event listeners
+                addDragListeners();
             } else {
                 previewContainer.classList.add('hidden');
+                actionBar.classList.add('hidden');
             }
+        }
+
+        function addDragListeners() {
+            const items = document.querySelectorAll('.image-preview');
+            
+            items.forEach(item => {
+                item.addEventListener('dragstart', handleDragStart);
+                item.addEventListener('dragend', handleDragEnd);
+                item.addEventListener('dragover', handleDragOver);
+                item.addEventListener('drop', handleDrop);
+                item.addEventListener('dragenter', handleDragEnter);
+                item.addEventListener('dragleave', handleDragLeave);
+            });
+        }
+
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.classList.add('dragging');
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/html', this.innerHTML);
+        }
+
+        function handleDragEnd(e) {
+            this.classList.remove('dragging');
+            document.querySelectorAll('.image-preview').forEach(item => {
+                item.classList.remove('drag-over');
+            });
+        }
+
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+            return false;
+        }
+
+        function handleDragEnter(e) {
+            if (this !== draggedElement) {
+                this.classList.add('drag-over');
+            }
+        }
+
+        function handleDragLeave(e) {
+            this.classList.remove('drag-over');
+        }
+
+        function handleDrop(e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            if (draggedElement !== this) {
+                const draggedIndex = parseInt(draggedElement.dataset.index);
+                const targetIndex = parseInt(this.dataset.index);
+
+                // Reorder array
+                const draggedImage = selectedImages[draggedIndex];
+                selectedImages.splice(draggedIndex, 1);
+                selectedImages.splice(targetIndex, 0, draggedImage);
+
+                displayImages();
+            }
+
+            return false;
         }
 
         function removeImage(index) {
@@ -401,9 +525,11 @@
         }
 
         function clearImages() {
-            selectedImages = [];
-            fileInput.value = '';
-            displayImages();
+            if (confirm('Are you sure you want to remove all images?')) {
+                selectedImages = [];
+                fileInput.value = '';
+                displayImages();
+            }
         }
 
         async function convertToPDF() {
@@ -414,6 +540,7 @@
 
             const orientation = document.getElementById('orientation').value;
             const pageSize = document.getElementById('pageSize').value;
+            const imageFit = document.getElementById('imageFit').value;
 
             try {
                 const pdf = new jsPDF({
@@ -424,6 +551,7 @@
 
                 const pageWidth = pdf.internal.pageSize.getWidth();
                 const pageHeight = pdf.internal.pageSize.getHeight();
+                const margin = 10;
 
                 for (let i = 0; i < selectedImages.length; i++) {
                     if (i > 0) {
@@ -439,18 +567,29 @@
                             const imgHeight = imgElement.height;
                             const ratio = imgWidth / imgHeight;
 
-                            let finalWidth, finalHeight;
+                            let finalWidth, finalHeight, x, y;
                             
-                            if (ratio > pageWidth / pageHeight) {
-                                finalWidth = pageWidth - 20;
-                                finalHeight = finalWidth / ratio;
-                            } else {
-                                finalHeight = pageHeight - 20;
-                                finalWidth = finalHeight * ratio;
+                            if (imageFit === 'cover') {
+                                finalWidth = pageWidth;
+                                finalHeight = pageHeight;
+                                x = 0;
+                                y = 0;
+                            } else if (imageFit === 'original') {
+                                finalWidth = Math.min(imgWidth * 0.264583, pageWidth - 2 * margin);
+                                finalHeight = Math.min(imgHeight * 0.264583, pageHeight - 2 * margin);
+                                x = (pageWidth - finalWidth) / 2;
+                                y = (pageHeight - finalHeight) / 2;
+                            } else { // contain (fit to page)
+                                if (ratio > (pageWidth - 2 * margin) / (pageHeight - 2 * margin)) {
+                                    finalWidth = pageWidth - 2 * margin;
+                                    finalHeight = finalWidth / ratio;
+                                } else {
+                                    finalHeight = pageHeight - 2 * margin;
+                                    finalWidth = finalHeight * ratio;
+                                }
+                                x = (pageWidth - finalWidth) / 2;
+                                y = (pageHeight - finalHeight) / 2;
                             }
-
-                            const x = (pageWidth - finalWidth) / 2;
-                            const y = (pageHeight - finalHeight) / 2;
 
                             pdf.addImage(img.data, 'JPEG', x, y, finalWidth, finalHeight);
                             resolve();
