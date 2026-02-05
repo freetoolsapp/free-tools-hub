@@ -214,26 +214,26 @@
                     </a>
                 </nav>
                 
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu" aria-expanded="false">
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700 p-2 hover:bg-gray-100 rounded-lg transition-colors" aria-label="Toggle mobile menu" aria-expanded="false">
                     <i class="fas fa-bars text-2xl" aria-hidden="true"></i>
                 </button>
             </div>
             
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
-                <a href="index.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
-                    <i class="fas fa-home mr-2" aria-hidden="true"></i>Home
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 pb-4 space-y-1 border-t border-gray-200 pt-4" aria-label="Mobile Navigation">
+                <a href="index.html" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+                    <i class="fas fa-home mr-3 w-5" aria-hidden="true"></i>Home
                 </a>
-                <a href="#tools" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
-                    <i class="fas fa-tools mr-2" aria-hidden="true"></i>Tools
+                <a href="#tools" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+                    <i class="fas fa-tools mr-3 w-5" aria-hidden="true"></i>Tools
                 </a>
-                <a href="blog.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
-                    <i class="fas fa-blog mr-2" aria-hidden="true"></i>Blog
+                <a href="blog.html" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+                    <i class="fas fa-blog mr-3 w-5" aria-hidden="true"></i>Blog
                 </a>
-                <a href="resources.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
-                    <i class="fas fa-book mr-2" aria-hidden="true"></i>Resources
+                <a href="resources.html" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+                    <i class="fas fa-book mr-3 w-5" aria-hidden="true"></i>Resources
                 </a>
-                <a href="contact.html" class="block py-2 hover:bg-gray-100 px-2 rounded transition-colors duration-200">
-                    <i class="fas fa-envelope mr-2" aria-hidden="true"></i>Contact
+                <a href="contact.html" class="block py-3 px-4 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg transition-colors font-medium">
+                    <i class="fas fa-envelope mr-3 w-5" aria-hidden="true"></i>Contact
                 </a>
             </nav>
         </div>
@@ -602,33 +602,59 @@
     <script src="script.js"></script>
     <script>
         // Mobile Menu Toggle with aria attributes
-        document.getElementById('mobileMenuBtn').addEventListener('click', function() {
-            const menu = document.getElementById('mobileMenu');
-            const icon = this.querySelector('i');
-            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
             
-            menu.classList.toggle('hidden');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-            this.setAttribute('aria-expanded', !isExpanded);
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    const icon = this.querySelector('i');
+                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    
+                    mobileMenu.classList.toggle('hidden');
+                    
+                    if (icon) {
+                        icon.classList.toggle('fa-bars');
+                        icon.classList.toggle('fa-times');
+                    }
+                    
+                    this.setAttribute('aria-expanded', !isExpanded);
+                });
+                
+                // Close menu when clicking on a link
+                const menuLinks = mobileMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                        const icon = mobileMenuBtn.querySelector('i');
+                        if (icon) {
+                            icon.classList.add('fa-bars');
+                            icon.classList.remove('fa-times');
+                        }
+                    });
+                });
+            }
         });
 
         // Back to Top Button
         const backToTopBtn = document.getElementById('backToTop');
-        window.addEventListener('scroll', function() {
-            if (window.pageYOffset > 300) {
-                backToTopBtn.classList.remove('hidden');
-            } else {
-                backToTopBtn.classList.add('hidden');
-            }
-        });
-
-        backToTopBtn.addEventListener('click', function() {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
+        if (backToTopBtn) {
+            window.addEventListener('scroll', function() {
+                if (window.pageYOffset > 300) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
             });
-        });
+
+            backToTopBtn.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        }
 
         // Update aria-selected on tab clicks
         document.querySelectorAll('.category-btn').forEach(btn => {
