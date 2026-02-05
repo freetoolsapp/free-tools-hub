@@ -719,47 +719,49 @@
     </button>
 
     <!-- Scripts -->
-    <script src="script.js"></script>
     <script>
         // Wait for DOM to fully load
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle with SMOOTH SLIDE ANIMATION
+            console.log('🚀 DOM loaded, initializing mobile menu...');
+            
+            // Mobile Menu Toggle - FIXED VERSION
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             
             if (mobileMenuBtn && mobileMenu) {
+                console.log('✅ Mobile menu elements found!');
+                
+                // Click handler for menu button
                 mobileMenuBtn.addEventListener('click', function(e) {
                     e.preventDefault();
                     e.stopPropagation();
                     
+                    console.log('🔘 Menu button clicked!');
+                    
                     const icon = this.querySelector('i');
-                    const isHidden = mobileMenu.classList.contains('hidden');
                     
-                    if (isHidden) {
-                        // Show menu with slide down animation
-                        mobileMenu.classList.remove('hidden');
-                        // Force reflow for animation
-                        void mobileMenu.offsetWidth;
-                        this.setAttribute('aria-expanded', 'true');
-                    } else {
-                        // Hide menu with slide up animation
-                        mobileMenu.classList.add('hidden');
-                        this.setAttribute('aria-expanded', 'false');
-                    }
+                    // Simply toggle the hidden class
+                    mobileMenu.classList.toggle('hidden');
                     
-                    // Toggle icon
+                    // Update aria-expanded
+                    const isNowVisible = !mobileMenu.classList.contains('hidden');
+                    this.setAttribute('aria-expanded', isNowVisible);
+                    
+                    // Toggle hamburger/close icon
                     if (icon) {
                         icon.classList.toggle('fa-bars');
                         icon.classList.toggle('fa-times');
                     }
                     
-                    console.log('Menu toggled:', !mobileMenu.classList.contains('hidden'));
+                    console.log('📱 Menu is now:', isNowVisible ? 'OPEN' : 'CLOSED');
                 });
                 
                 // Close menu when clicking on links
                 const menuLinks = mobileMenu.querySelectorAll('a');
+                console.log(`📋 Found ${menuLinks.length} menu links`);
                 menuLinks.forEach(link => {
                     link.addEventListener('click', function() {
+                        console.log('🔗 Link clicked, closing menu...');
                         setTimeout(() => {
                             mobileMenu.classList.add('hidden');
                             mobileMenuBtn.setAttribute('aria-expanded', 'false');
@@ -787,7 +789,9 @@
                     }
                 });
             } else {
-                console.error('Mobile menu elements not found');
+                console.error('❌ Mobile menu elements not found!');
+                console.log('mobileMenuBtn:', mobileMenuBtn);
+                console.log('mobileMenu:', mobileMenu);
             }
 
             // Back to Top Button
