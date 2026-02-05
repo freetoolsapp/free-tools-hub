@@ -74,34 +74,63 @@
     
     <!-- Custom Styles for Mobile Menu Animation -->
     <style>
-        /* Mobile Menu Slide Animation */
+        /* Smooth Scroll with Padding for Sticky Header */
+        html {
+            scroll-behavior: smooth;
+            scroll-padding-top: 140px; /* Header (72px) + Category tabs (68px) height */
+        }
+        
+        /* Mobile Menu Slide Down Animation - ENHANCED */
         @keyframes slideDown {
             from {
                 opacity: 0;
-                transform: translateY(-10px);
+                max-height: 0;
+                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
+                max-height: 500px;
                 transform: translateY(0);
             }
         }
         
-        #mobileMenu:not(.hidden) {
-            animation: slideDown 0.3s ease-out;
+        @keyframes slideUp {
+            from {
+                opacity: 1;
+                max-height: 500px;
+                transform: translateY(0);
+            }
+            to {
+                opacity: 0;
+                max-height: 0;
+                transform: translateY(-20px);
+            }
         }
         
-        /* Smooth transitions */
+        /* Mobile Menu States */
         #mobileMenu {
-            transition: all 0.3s ease;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
-        /* Make sure mobile button is visible */
+        #mobileMenu:not(.hidden) {
+            animation: slideDown 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+        
+        #mobileMenu.hidden {
+            animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            max-height: 0;
+            opacity: 0;
+        }
+        
+        /* Make sure mobile button is visible and clickable */
         #mobileMenuBtn {
             display: flex;
             align-items: center;
             justify-content: center;
             min-width: 44px;
             min-height: 44px;
+            z-index: 100;
         }
         
         /* Category Buttons */
@@ -110,6 +139,7 @@
             color: #374151;
             cursor: pointer;
             border: 2px solid transparent;
+            transition: all 0.3s ease;
         }
         
         .category-btn:hover {
@@ -140,6 +170,11 @@
         
         .loading {
             animation: pulse 1.5s ease-in-out infinite;
+        }
+        
+        /* Fix for sections to appear below sticky header */
+        section[id], main[id] {
+            scroll-margin-top: 140px;
         }
     </style>
     
@@ -688,18 +723,29 @@
     <script>
         // Wait for DOM to fully load
         document.addEventListener('DOMContentLoaded', function() {
-            // Mobile Menu Toggle with aria attributes
+            // Mobile Menu Toggle with SMOOTH SLIDE ANIMATION
             const mobileMenuBtn = document.getElementById('mobileMenuBtn');
             const mobileMenu = document.getElementById('mobileMenu');
             
             if (mobileMenuBtn && mobileMenu) {
                 mobileMenuBtn.addEventListener('click', function(e) {
                     e.preventDefault();
-                    const icon = this.querySelector('i');
-                    const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                    e.stopPropagation();
                     
-                    // Toggle menu visibility
-                    mobileMenu.classList.toggle('hidden');
+                    const icon = this.querySelector('i');
+                    const isHidden = mobileMenu.classList.contains('hidden');
+                    
+                    if (isHidden) {
+                        // Show menu with slide down animation
+                        mobileMenu.classList.remove('hidden');
+                        // Force reflow for animation
+                        void mobileMenu.offsetWidth;
+                        this.setAttribute('aria-expanded', 'true');
+                    } else {
+                        // Hide menu with slide up animation
+                        mobileMenu.classList.add('hidden');
+                        this.setAttribute('aria-expanded', 'false');
+                    }
                     
                     // Toggle icon
                     if (icon) {
@@ -707,10 +753,38 @@
                         icon.classList.toggle('fa-times');
                     }
                     
-                    // Update aria attribute
-                    this.setAttribute('aria-expanded', !isExpanded);
-                    
                     console.log('Menu toggled:', !mobileMenu.classList.contains('hidden'));
+                });
+                
+                // Close menu when clicking on links
+                const menuLinks = mobileMenu.querySelectorAll('a');
+                menuLinks.forEach(link => {
+                    link.addEventListener('click', function() {
+                        setTimeout(() => {
+                            mobileMenu.classList.add('hidden');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                            const icon = mobileMenuBtn.querySelector('i');
+                            if (icon) {
+                                icon.classList.add('fa-bars');
+                                icon.classList.remove('fa-times');
+                            }
+                        }, 200);
+                    });
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(e) {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        if (!mobileMenu.classList.contains('hidden')) {
+                            mobileMenu.classList.add('hidden');
+                            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                            const icon = mobileMenuBtn.querySelector('i');
+                            if (icon) {
+                                icon.classList.add('fa-bars');
+                                icon.classList.remove('fa-times');
+                            }
+                        }
+                    }
                 });
             } else {
                 console.error('Mobile menu elements not found');
