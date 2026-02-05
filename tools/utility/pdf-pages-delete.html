@@ -1,68 +1,161 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- Primary Meta Tags -->
-    <title>Delete PDF Pages Online Free - Remove PDF Pages | Free Tools Hub</title>
-    <meta name="title" content="Delete PDF Pages Online Free - Remove Unwanted PDF Pages">
-    <meta name="description" content="Free online tool to delete PDF pages. Remove unwanted pages from your PDF documents instantly. No software installation required. Fast, secure, and easy to use!">
-    <meta name="keywords" content="delete PDF pages, remove PDF pages, delete pages from PDF, PDF page remover, remove pages in PDF, delete PDF pages online, PDF editor, free PDF tool">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="author" content="freetoolsapp">
+    <title>Delete PDF Pages - Free Tools Hub</title>
+    <meta name="description" content="Delete unwanted pages from PDF files online. Free, fast, and secure PDF page remover.">
+    <meta name="keywords" content="delete PDF pages, remove PDF pages, PDF editor, free PDF tool">
     
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/pdf/delete-pdf-pages.html">
-    <meta property="og:title" content="Delete PDF Pages Online Free - Remove PDF Pages">
-    <meta property="og:description" content="Remove unwanted pages from your PDF documents instantly. Free and secure!">
-    <meta property="og:image" content="https://freetoolsapp.github.io/free-tools-hub/images/delete-pdf-og.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/pdf/delete-pdf-pages.html">
-    <meta property="twitter:title" content="Delete PDF Pages Online Free">
-    <meta property="twitter:description" content="Remove unwanted pages from your PDF documents instantly.">
-    <meta property="twitter:image" content="https://freetoolsapp.github.io/free-tools-hub/images/delete-pdf-twitter.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/pdf/delete-pdf-pages.html">
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- Stylesheets -->
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
     
-    <!-- Schema Markup -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebApplication",
-        "name": "Delete PDF Pages",
-        "url": "https://freetoolsapp.github.io/free-tools-hub/tools/pdf/delete-pdf-pages.html",
-        "applicationCategory": "UtilityApplication",
-        "operatingSystem": "Any",
-        "description": "Free online tool to delete and remove specific pages from PDF documents.",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "ratingCount": "1850",
-            "bestRating": "5"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+    
+    <style>
+        .drop-zone {
+            border: 3px dashed #667eea;
+            transition: all 0.3s;
         }
-    }
-    </script>
+        
+        .drop-zone.dragover {
+            border-color: #4caf50;
+            background: #e8f5e9;
+            transform: scale(1.02);
+        }
+
+        .page-thumbnail {
+            position: relative;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            overflow: hidden;
+        }
+
+        .page-thumbnail:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+            transform: translateY(-4px);
+        }
+
+        .page-thumbnail canvas {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .page-thumbnail.marked-for-delete {
+            outline: 3px solid #ef4444;
+            outline-offset: 2px;
+            opacity: 0.6;
+        }
+
+        .page-thumbnail.marked-for-delete::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(239, 68, 68, 0.2);
+        }
+
+        .page-checkbox {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .delete-status {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(239, 68, 68, 0.95);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 5;
+        }
+
+        .page-thumbnail.marked-for-delete .delete-status {
+            opacity: 1;
+        }
+
+        .delete-btn-overlay {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(239, 68, 68, 0.9);
+            color: white;
+            padding: 6px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            opacity: 0;
+            z-index: 10;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .page-thumbnail:hover .delete-btn-overlay {
+            opacity: 1;
+        }
+
+        .delete-btn-overlay:hover {
+            background: rgba(220, 38, 38, 1);
+            transform: translateX(-50%) scale(1.05);
+        }
+
+        .action-bar {
+            position: sticky;
+            top: 80px;
+            background: white;
+            z-index: 40;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 <body class="bg-gray-50">
     <!-- Header -->
@@ -79,7 +172,7 @@
                     </div>
                 </a>
                 
-                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
+                <nav class="hidden md:flex items-center space-x-6">
                     <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
                     <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
                     <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
@@ -89,17 +182,17 @@
                     <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
                 </nav>
                 
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
             </div>
             
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
-                <a href="../../index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="../../index.html#tools" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-tools mr-2"></i>Tools</a>
-                <a href="../../blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="../../resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-                <a href="../../tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
-                <a href="../../comparisons.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
-                <a href="../../contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="../../index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
+                <a href="../../blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../resources.html" class="block py-2"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../tutorials.html" class="block py-2"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="../../comparisons.html" class="block py-2"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
+                <a href="../../contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
             </nav>
         </div>
     </header>
@@ -118,201 +211,113 @@
     </div>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-red-600 via-red-700 to-red-600 text-white py-12">
+    <section class="bg-gradient-to-r from-red-600 via-pink-600 to-purple-600 text-white py-12">
         <div class="container mx-auto px-4 text-center">
             <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
-                <i class="fas fa-trash text-5xl"></i>
+                <i class="fas fa-trash-alt text-5xl"></i>
             </div>
             <h2 class="text-4xl md:text-5xl font-bold mb-4">Delete PDF Pages</h2>
-            <p class="text-xl mb-2">Remove unwanted pages from your PDF documents instantly!</p>
-            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Secure • No Registration Required</p>
+            <p class="text-xl mb-2">Remove unwanted pages from your PDF documents</p>
+            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • Visual Selection • Instant Preview</p>
         </div>
     </section>
 
     <!-- Main Content -->
     <main class="py-12">
-        <div class="container mx-auto px-4 max-w-5xl">
+        <div class="container mx-auto px-4 max-w-7xl">
             
             <!-- Upload Section -->
-            <div class="bg-white rounded-xl shadow-2xl p-8 mb-10">
-                <h3 class="text-3xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-file-pdf mr-2 text-red-600"></i>Upload Your PDF
+            <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+                    <i class="fas fa-upload text-blue-600 mr-2"></i>Upload Your PDF
                 </h3>
                 
-                <div class="border-4 border-dashed border-gray-300 rounded-xl p-12 text-center hover:border-red-500 transition">
-                    <input type="file" id="pdfFile" accept=".pdf" class="hidden" onchange="handleFileUpload(event)">
-                    <label for="pdfFile" class="cursor-pointer">
-                        <i class="fas fa-cloud-upload-alt text-6xl text-gray-400 mb-4 block"></i>
-                        <p class="text-xl font-bold text-gray-700 mb-2">Click to upload or drag and drop</p>
-                        <p class="text-sm text-gray-500">PDF files only (Max 50MB)</p>
-                    </label>
-                </div>
-
-                <div id="fileInfo" class="hidden mt-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center">
-                            <i class="fas fa-file-pdf text-red-600 text-3xl mr-4"></i>
-                            <div>
-                                <p class="font-bold text-gray-800" id="fileName"></p>
-                                <p class="text-sm text-gray-600"><span id="pageCount"></span> pages</p>
-                            </div>
-                        </div>
-                        <span class="text-green-600 font-bold"><i class="fas fa-check-circle mr-2"></i>Uploaded</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Page Selection Section -->
-            <div id="pageSelection" class="hidden bg-white rounded-xl shadow-2xl p-8 mb-10">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6">
-                    <i class="fas fa-trash-alt mr-2 text-red-600"></i>Select Pages to Delete
-                </h3>
-
-                <div class="mb-6">
-                    <label class="block text-sm font-bold text-gray-700 mb-2">Page Numbers to Delete</label>
-                    <input type="text" id="pagesToDelete" placeholder="e.g., 1, 3, 5-7" class="w-full px-4 py-3 border-2 border-gray-300 rounded-xl focus:border-red-500 focus:outline-none">
-                    <p class="text-xs text-gray-500 mt-2">Enter page numbers separated by commas. Use dash for ranges.</p>
-                </div>
-
-                <button onclick="deletePages()" class="w-full bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-white px-8 py-4 rounded-xl transition font-bold text-lg shadow-lg hover:shadow-xl">
-                    <i class="fas fa-trash mr-2"></i>Delete Pages
-                </button>
-            </div>
-
-            <!-- Processing Section -->
-            <div id="processing" class="hidden bg-white rounded-xl shadow-xl p-8 mb-10">
-                <div class="text-center">
-                    <div class="inline-block animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-red-600 mb-4"></div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Processing Your PDF...</h3>
-                    <p class="text-gray-600">Please wait while we remove the pages.</p>
-                </div>
-            </div>
-
-            <!-- Download Section -->
-            <div id="downloadSection" class="hidden bg-white rounded-xl shadow-xl p-8 mb-10">
-                <div class="text-center">
-                    <i class="fas fa-check-circle text-green-500 text-6xl mb-4"></i>
-                    <h3 class="text-3xl font-bold text-gray-800 mb-4">Pages Deleted Successfully!</h3>
-                    <p class="text-gray-600 mb-6">Your PDF is ready to download.</p>
-                    <button onclick="downloadPDF()" class="bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-xl transition">
-                        <i class="fas fa-download mr-2"></i>Download PDF
+                <div id="dropZone" class="drop-zone bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-12 text-center cursor-pointer">
+                    <i class="fas fa-cloud-upload-alt text-6xl text-blue-600 mb-4"></i>
+                    <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
+                    <p class="text-gray-600 mb-4">Supports: PDF files</p>
+                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
+                        <i class="fas fa-folder-open mr-2"></i>Choose PDF File
                     </button>
+                    <input type="file" id="fileInput" accept=".pdf" class="hidden">
                 </div>
             </div>
 
-            <!-- Features -->
-            <div class="bg-gradient-to-br from-red-50 to-orange-50 rounded-xl p-8 mb-10">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-star text-yellow-500 mr-2"></i>Why Use Our PDF Page Remover?
-                </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <div class="bg-white p-6 rounded-xl shadow text-center">
-                        <i class="fas fa-lock text-4xl text-green-600 mb-4"></i>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">100% Secure</h4>
-                        <p class="text-sm text-gray-600">All files are processed locally in your browser. No uploads to servers.</p>
+            <!-- Processing -->
+            <div id="processingSection" class="bg-white rounded-lg shadow-lg p-8 mb-8 hidden">
+                <div class="text-center">
+                    <div class="spinner mb-4"></div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">Loading PDF...</h3>
+                    <p class="text-gray-600">Please wait</p>
+                </div>
+            </div>
+
+            <!-- Action Bar -->
+            <div id="actionBar" class="action-bar rounded-lg p-4 mb-8 hidden">
+                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="text-gray-700">
+                            <i class="fas fa-file-pdf text-blue-600 mr-2"></i>
+                            <span id="totalPages" class="font-bold">0</span> pages total •
+                            <span id="deleteCount" class="font-bold text-red-600">0</span> to delete •
+                            <span id="keepCount" class="font-bold text-green-600">0</span> to keep
+                        </div>
                     </div>
                     
-                    <div class="bg-white p-6 rounded-xl shadow text-center">
-                        <i class="fas fa-bolt text-4xl text-yellow-600 mb-4"></i>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">Lightning Fast</h4>
-                        <p class="text-sm text-gray-600">Delete pages instantly without waiting for uploads or processing.</p>
+                    <div class="flex flex-wrap gap-3">
+                        <button onclick="invertSelection()" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition">
+                            <i class="fas fa-exchange-alt mr-2"></i>Invert Selection
+                        </button>
+                        <button onclick="clearSelection()" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-undo mr-2"></i>Clear Selection
+                        </button>
+                        <button onclick="deleteAndDownload()" class="bg-gradient-to-r from-red-600 to-pink-600 text-white px-6 py-2 rounded-lg hover:shadow-lg transition font-semibold">
+                            <i class="fas fa-trash-alt mr-2"></i>Delete & Download
+                        </button>
                     </div>
-                    
-                    <div class="bg-white p-6 rounded-xl shadow text-center">
-                        <i class="fas fa-dollar-sign text-4xl text-blue-600 mb-4"></i>
-                        <h4 class="font-bold text-lg text-gray-800 mb-2">Completely Free</h4>
-                        <p class="text-sm text-gray-600">No hidden fees, no subscriptions. Use unlimited times for free.</p>
+                </div>
+
+                <!-- Warning -->
+                <div class="mt-4 pt-4 border-t border-gray-200">
+                    <div class="flex items-center gap-2 text-amber-700 bg-amber-50 p-3 rounded-lg">
+                        <i class="fas fa-exclamation-triangle text-xl"></i>
+                        <p class="text-sm"><strong>Note:</strong> Pages marked in red will be deleted. Only unmarked pages will remain in the final PDF.</p>
                     </div>
                 </div>
             </div>
 
-            <!-- Related Tools -->
-            <div class="bg-white rounded-xl shadow-lg p-8 mb-10">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-tools mr-2 text-blue-600"></i>Related PDF Tools
+            <!-- Pages Grid -->
+            <div id="pagesGrid" class="hidden">
+                <h3 class="text-2xl font-bold text-gray-800 mb-6">
+                    <i class="fas fa-images text-blue-600 mr-2"></i>Select Pages to Delete (Click to Mark)
                 </h3>
-                
-                <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                    <a href="duplicate-pdf-pages.html" class="block p-4 border-2 border-gray-200 rounded-xl hover:border-orange-500 hover:shadow-lg transition text-center group">
-                        <i class="fas fa-copy text-3xl text-orange-600 mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-gray-800 text-sm">Duplicate Pages</h4>
-                    </a>
-                    
-                    <a href="rotate-pdf-pages.html" class="block p-4 border-2 border-gray-200 rounded-xl hover:border-blue-500 hover:shadow-lg transition text-center group">
-                        <i class="fas fa-sync text-3xl text-blue-600 mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-gray-800 text-sm">Rotate Pages</h4>
-                    </a>
-                    
-                    <a href="order-pdf-pages.html" class="block p-4 border-2 border-gray-200 rounded-xl hover:border-purple-500 hover:shadow-lg transition text-center group">
-                        <i class="fas fa-sort text-3xl text-purple-600 mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-gray-800 text-sm">Reorder Pages</h4>
-                    </a>
-                    
-                    <a href="crop-pdf.html" class="block p-4 border-2 border-gray-200 rounded-xl hover:border-green-500 hover:shadow-lg transition text-center group">
-                        <i class="fas fa-crop text-3xl text-green-600 mb-3 group-hover:scale-110 transition"></i>
-                        <h4 class="font-bold text-gray-800 text-sm">Crop PDF</h4>
-                    </a>
+                <div id="pagesContainer" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
+                    <!-- Pages will be inserted here -->
                 </div>
             </div>
 
-            <!-- FAQ -->
-            <div class="bg-white rounded-xl shadow-lg p-8">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-question-circle text-red-600 mr-2"></i>Frequently Asked Questions
-                </h3>
-                
-                <div class="space-y-4">
-                    <details class="bg-gray-50 p-4 rounded-lg">
-                        <summary class="font-bold text-gray-800 cursor-pointer">How do I delete pages from a PDF?</summary>
-                        <p class="mt-2 text-gray-600">Upload your PDF, enter the page numbers you want to delete (e.g., 1,3,5-7), and click the delete button. Your new PDF will be ready to download.</p>
-                    </details>
-                    
-                    <details class="bg-gray-50 p-4 rounded-lg">
-                        <summary class="font-bold text-gray-800 cursor-pointer">Is my PDF safe?</summary>
-                        <p class="mt-2 text-gray-600">Yes! All processing happens locally in your browser. Your files are never uploaded to any server, ensuring complete privacy and security.</p>
-                    </details>
-                    
-                    <details class="bg-gray-50 p-4 rounded-lg">
-                        <summary class="font-bold text-gray-800 cursor-pointer">Can I delete multiple pages at once?</summary>
-                        <p class="mt-2 text-gray-600">Yes! You can enter multiple page numbers separated by commas (e.g., 1,3,5) or use ranges (e.g., 1-5) to delete multiple pages at once.</p>
-                    </details>
-                    
-                    <details class="bg-gray-50 p-4 rounded-lg">
-                        <summary class="font-bold text-gray-800 cursor-pointer">What is the maximum file size?</summary>
-                        <p class="mt-2 text-gray-600">You can upload PDF files up to 50MB in size. This is sufficient for most documents.</p>
-                    </details>
-                </div>
-            </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12 mt-16">
+    <footer class="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white py-12 mt-16">
         <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
                 <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
-                    </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources.</p>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools.</p>
                 </div>
                 <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
                     <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-file-pdf mr-2"></i>PDF Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="../../index.html" class="hover:text-white transition"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-tools mr-2"></i>Tools</a></li>
                         <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare</a></li>
                     </ul>
                 </div>
                 <div>
@@ -321,141 +326,225 @@
                         <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About</a></li>
                         <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
                         <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy</a></li>
-                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms</a></li>
                     </ul>
                 </div>
                 <div>
                     <h4 class="font-bold mb-4">Connect</h4>
                     <div class="flex space-x-4 text-2xl">
-                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-blue-400 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-600 transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-red-500 transition"><i class="fab fa-youtube"></i></a>
                     </div>
                     <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
                 </div>
             </div>
             <div class="border-t border-gray-700 mt-8 pt-8 text-center">
-                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+                <p>&copy; 2025 Free Tools Hub. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Back to Top -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50" aria-label="Back to top">
+    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50">
         <i class="fas fa-arrow-up"></i>
     </button>
 
     <script>
-        // Mobile menu
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
         const mobileMenu = document.getElementById('mobileMenu');
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+        mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-        // Back to top
         const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            backToTop.classList.toggle('hidden', window.scrollY <= 300);
+        window.addEventListener('scroll', () => backToTop.classList.toggle('hidden', window.scrollY <= 300));
+        backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        let pdfDocument = null;
+        let pdfDocLib = null;
+        let pagesToDelete = new Set();
+
+        const dropZone = document.getElementById('dropZone');
+        const fileInput = document.getElementById('fileInput');
+
+        dropZone.addEventListener('click', () => fileInput.click());
+        dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+        dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
+        dropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            dropZone.classList.remove('dragover');
+            if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
         });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+        fileInput.addEventListener('change', (e) => {
+            if (e.target.files.length > 0) handleFile(e.target.files[0]);
         });
 
-        let pdfDoc = null;
-        let pdfBytes = null;
-
-        async function handleFileUpload(event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            document.getElementById('fileName').textContent = file.name;
-            document.getElementById('fileInfo').classList.remove('hidden');
-            document.getElementById('pageSelection').classList.remove('hidden');
-
-            pdfBytes = await file.arrayBuffer();
-            pdfDoc = await PDFLib.PDFDocument.load(pdfBytes);
-            document.getElementById('pageCount').textContent = pdfDoc.getPageCount();
-        }
-
-        async function deletePages() {
-            if (!pdfDoc) {
-                alert('Please upload a PDF first!');
+        async function handleFile(file) {
+            if (!file.type.includes('pdf')) {
+                alert('❌ Please upload a PDF file');
                 return;
             }
 
-            const pagesToDelete = document.getElementById('pagesToDelete').value.trim();
-
-            if (!pagesToDelete) {
-                alert('Please enter page numbers to delete!');
-                return;
-            }
-
-            document.getElementById('processing').classList.remove('hidden');
-            document.getElementById('pageSelection').classList.add('hidden');
+            document.getElementById('processingSection').classList.remove('hidden');
+            document.getElementById('pagesGrid').classList.add('hidden');
+            document.getElementById('actionBar').classList.add('hidden');
 
             try {
-                const newPdfDoc = await PDFLib.PDFDocument.create();
-                const totalPages = pdfDoc.getPageCount();
-                const pageNumbers = parsePageNumbers(pagesToDelete, totalPages);
-
-                for (let i = 0; i < totalPages; i++) {
-                    if (!pageNumbers.includes(i + 1)) {
-                        const [copiedPage] = await newPdfDoc.copyPages(pdfDoc, [i]);
-                        newPdfDoc.addPage(copiedPage);
-                    }
-                }
-
-                pdfBytes = await newPdfDoc.save();
+                const arrayBuffer = await file.arrayBuffer();
+                pdfDocument = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
+                pdfDocLib = await PDFLib.PDFDocument.load(arrayBuffer);
                 
-                document.getElementById('processing').classList.add('hidden');
-                document.getElementById('downloadSection').classList.remove('hidden');
+                const numPages = pdfDocument.numPages;
+                document.getElementById('totalPages').textContent = numPages;
+                
+                pagesToDelete.clear();
+                document.getElementById('pagesContainer').innerHTML = '';
+                
+                for (let i = 1; i <= numPages; i++) {
+                    await renderPage(i);
+                }
+                
+                document.getElementById('processingSection').classList.add('hidden');
+                document.getElementById('pagesGrid').classList.remove('hidden');
+                document.getElementById('actionBar').classList.remove('hidden');
+                
+                updateCounts();
+                
             } catch (error) {
-                alert('Error processing PDF: ' + error.message);
-                document.getElementById('processing').classList.add('hidden');
+                console.error('Error loading PDF:', error);
+                alert('❌ Error loading PDF: ' + error.message);
+                document.getElementById('processingSection').classList.add('hidden');
             }
         }
 
-        function parsePageNumbers(input, totalPages) {
-            const pages = new Set();
-            const parts = input.split(',');
+        async function renderPage(pageNum) {
+            const page = await pdfDocument.getPage(pageNum);
+            const viewport = page.getViewport({ scale: 1.5 });
             
-            parts.forEach(part => {
-                part = part.trim();
-                if (part.includes('-')) {
-                    const [start, end] = part.split('-').map(n => parseInt(n.trim()));
-                    for (let i = start; i <= end && i <= totalPages; i++) {
-                        pages.add(i);
-                    }
+            const canvas = document.createElement('canvas');
+            const context = canvas.getContext('2d');
+            canvas.width = viewport.width;
+            canvas.height = viewport.height;
+            
+            await page.render({ canvasContext: context, viewport: viewport }).promise;
+            
+            const pageDiv = document.createElement('div');
+            pageDiv.className = 'page-thumbnail';
+            pageDiv.dataset.page = pageNum;
+            pageDiv.onclick = () => toggleDelete(pageNum);
+            
+            pageDiv.innerHTML = `
+                <canvas></canvas>
+                <div class="page-number">Page ${pageNum}</div>
+                <div class="delete-status"><i class="fas fa-trash-alt mr-1"></i>DELETE</div>
+                <div class="delete-btn-overlay" onclick="toggleDelete(${pageNum}); event.stopPropagation();">
+                    <i class="fas fa-trash-alt mr-1"></i>Mark for Delete
+                </div>
+            `;
+            
+            const thumbnailCanvas = pageDiv.querySelector('canvas');
+            thumbnailCanvas.width = canvas.width;
+            thumbnailCanvas.height = canvas.height;
+            thumbnailCanvas.getContext('2d').drawImage(canvas, 0, 0);
+            
+            document.getElementById('pagesContainer').appendChild(pageDiv);
+        }
+
+        function toggleDelete(pageNum) {
+            const pageDiv = document.querySelector(`.page-thumbnail[data-page="${pageNum}"]`);
+            
+            if (pagesToDelete.has(pageNum)) {
+                pagesToDelete.delete(pageNum);
+                pageDiv.classList.remove('marked-for-delete');
+            } else {
+                pagesToDelete.add(pageNum);
+                pageDiv.classList.add('marked-for-delete');
+            }
+            
+            updateCounts();
+        }
+
+        function updateCounts() {
+            const total = pdfDocument.numPages;
+            const deleteCount = pagesToDelete.size;
+            const keepCount = total - deleteCount;
+            
+            document.getElementById('deleteCount').textContent = deleteCount;
+            document.getElementById('keepCount').textContent = keepCount;
+        }
+
+        function invertSelection() {
+            const total = pdfDocument.numPages;
+            const newSet = new Set();
+            
+            for (let i = 1; i <= total; i++) {
+                if (!pagesToDelete.has(i)) newSet.add(i);
+            }
+            
+            pagesToDelete = newSet;
+            
+            document.querySelectorAll('.page-thumbnail').forEach(div => {
+                const pageNum = parseInt(div.dataset.page);
+                if (pagesToDelete.has(pageNum)) {
+                    div.classList.add('marked-for-delete');
                 } else {
-                    const pageNum = parseInt(part);
-                    if (pageNum <= totalPages) pages.add(pageNum);
+                    div.classList.remove('marked-for-delete');
                 }
             });
             
-            return Array.from(pages);
+            updateCounts();
         }
 
-        function downloadPDF() {
-            const blob = new Blob([pdfBytes], { type: 'application/pdf' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'deleted-pages.pdf';
-            a.click();
-            URL.revokeObjectURL(url);
+        function clearSelection() {
+            pagesToDelete.clear();
+            document.querySelectorAll('.page-thumbnail').forEach(div => {
+                div.classList.remove('marked-for-delete');
+            });
+            updateCounts();
+        }
+
+        async function deleteAndDownload() {
+            if (pagesToDelete.size === 0) {
+                alert('⚠️ No pages marked for deletion. The original PDF will be downloaded.');
+            }
+
+            if (pagesToDelete.size === pdfDocument.numPages) {
+                alert('❌ Cannot delete all pages! At least one page must remain.');
+                return;
+            }
+
+            const keepCount = pdfDocument.numPages - pagesToDelete.size;
+            if (!confirm(`You are about to delete ${pagesToDelete.size} page(s).\n${keepCount} page(s) will remain.\n\nContinue?`)) {
+                return;
+            }
+
+            try {
+                const newPdf = await PDFLib.PDFDocument.create();
+                const pages = pdfDocLib.getPages();
+                
+                for (let i = 0; i < pages.length; i++) {
+                    if (!pagesToDelete.has(i + 1)) {
+                        const [copiedPage] = await newPdf.copyPages(pdfDocLib, [i]);
+                        newPdf.addPage(copiedPage);
+                    }
+                }
+                
+                const pdfBytes = await newPdf.save();
+                const blob = new Blob([pdfBytes], { type: 'application/pdf' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = 'deleted-pages.pdf';
+                link.click();
+                URL.revokeObjectURL(url);
+                
+                setTimeout(() => {
+                    alert(`✅ Success!\n\n${pagesToDelete.size} page(s) deleted.\n${keepCount} page(s) saved.`);
+                }, 500);
+                
+            } catch (error) {
+                console.error('Error:', error);
+                alert('❌ Error processing PDF: ' + error.message);
+            }
         }
     </script>
 </body>
