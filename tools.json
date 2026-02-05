@@ -15,7 +15,7 @@
       "color": "blue",
       "category": "utility",
       "badge": "HOT",
-      "file": "tools/utility/word-to-pdf.html",
+      "file": "tools/utility/word-to-pdf-converter.html",
       "description": "Convert WORD files and Documents to PDF documents"
     },
     {
