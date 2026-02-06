@@ -9,104 +9,240 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Custom styles for blog content */
-        .prose {
-            max-width: none;
-        }
-        .prose h2 {
-            color: #1f2937;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-        .prose h3 {
-            color: #374151;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-        }
-        .prose p {
-            color: #4b5563;
-            line-height: 1.8;
-        }
-        .prose ul {
-            color: #4b5563;
-        }
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
+        .prose h2 { color: #1f2937; margin-top: 2rem; margin-bottom: 1rem; }
+        .prose h3 { color: #374151; margin-top: 1.5rem; margin-bottom: 0.75rem; }
+        .prose p { color: #4b5563; line-height: 1.8; }
+        .prose ul { color: #4b5563; }
+        .line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
     </style>
 </head>
 <body class="bg-gray-50">
     
-    <!-- Navigation -->
-    <nav class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html" class="text-2xl font-bold text-blue-600 flex items-center">
-                    <i class="fas fa-tools mr-2"></i>
-                    Free Tools Hub
-                </a>
-                <a href="blog.html" class="text-blue-600 hover:text-blue-800 transition flex items-center">
-                    <i class="fas fa-arrow-left mr-2"></i> Back to Blog
-                </a>
+    <!-- Header - Same as Main Page -->
+    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
+        <div class="bg-blue-700 py-2">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center text-sm">
+                    <div class="flex items-center space-x-4">
+                        <a href="mailto:support@freetoolshub.com" class="hover:text-blue-200 transition">
+                            <i class="fas fa-envelope mr-1"></i> support@freetoolshub.com
+                        </a>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
             </div>
         </div>
-    </nav>
+
+        <nav class="bg-white shadow-md sticky top-0 z-50">
+            <div class="container mx-auto px-4">
+                <div class="flex justify-between items-center py-4">
+                    <a href="index.html" class="text-2xl font-bold text-blue-600 flex items-center">
+                        <i class="fas fa-tools mr-2"></i>
+                        Free Tools Hub
+                    </a>
+
+                    <div class="hidden lg:flex items-center space-x-8">
+                        <a href="index.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
+                            <i class="fas fa-home mr-1"></i> Home
+                        </a>
+                        <div class="relative group">
+                            <a href="index.html#tools" class="text-gray-700 hover:text-blue-600 transition font-medium flex items-center">
+                                <i class="fas fa-toolbox mr-1"></i> Tools
+                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
+                            </a>
+                            <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 py-2 w-48">
+                                <a href="index.html#tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">All Tools</a>
+                                <a href="index.html#ai-tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">AI Tools</a>
+                                <a href="index.html#seo-tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">SEO Tools</a>
+                                <a href="index.html#student-tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Student Tools</a>
+                            </div>
+                        </div>
+                        <a href="blog.html" class="text-blue-600 font-bold transition">
+                            <i class="fas fa-blog mr-1"></i> Blog
+                        </a>
+                        <a href="resources.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
+                            <i class="fas fa-book mr-1"></i> Resources
+                        </a>
+                        <a href="about.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
+                            <i class="fas fa-info-circle mr-1"></i> About
+                        </a>
+                        <a href="contact.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
+                            <i class="fas fa-envelope mr-1"></i> Contact
+                        </a>
+                    </div>
+
+                    <button class="lg:hidden text-gray-700" onclick="toggleMobileMenu()">
+                        <i class="fas fa-bars text-2xl"></i>
+                    </button>
+                </div>
+
+                <div id="mobile-menu" class="hidden lg:hidden pb-4">
+                    <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-home mr-2"></i> Home
+                    </a>
+                    <a href="index.html#tools" class="block py-2 text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-toolbox mr-2"></i> Tools
+                    </a>
+                    <a href="blog.html" class="block py-2 text-blue-600 font-bold">
+                        <i class="fas fa-blog mr-2"></i> Blog
+                    </a>
+                    <a href="resources.html" class="block py-2 text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-book mr-2"></i> Resources
+                    </a>
+                    <a href="about.html" class="block py-2 text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-info-circle mr-2"></i> About
+                    </a>
+                    <a href="contact.html" class="block py-2 text-gray-700 hover:text-blue-600">
+                        <i class="fas fa-envelope mr-2"></i> Contact
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gray-100 py-3">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="index.html" class="hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2"></i>
+                <a href="blog.html" class="hover:text-blue-600">Blog</a>
+                <i class="fas fa-chevron-right mx-2"></i>
+                <span class="text-blue-600" id="breadcrumb-title">Article</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Blog Post Content -->
     <article class="container mx-auto px-4 py-12 max-w-4xl">
         
         <div id="post-content">
-            <!-- Loading State -->
             <div class="text-center py-16">
                 <i class="fas fa-spinner fa-spin text-6xl text-blue-600 mb-4"></i>
                 <p class="text-xl text-gray-600">Loading article...</p>
             </div>
         </div>
 
-        <!-- Related Posts Section -->
+        <!-- Related Posts -->
         <div class="mt-16 pt-8 border-t">
             <h2 class="text-3xl font-bold mb-6">Related Articles</h2>
-            <div id="related-posts" class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <!-- Related posts will load here -->
-            </div>
+            <div id="related-posts" class="grid grid-cols-1 md:grid-cols-3 gap-6"></div>
         </div>
 
     </article>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-8 mt-16">
-        <div class="container mx-auto px-4 text-center">
-            <p class="mb-2">&copy; 2024 Free Tools Hub. All rights reserved.</p>
-            <div class="flex justify-center space-x-6 mt-4">
-                <a href="privacy.html" class="hover:text-blue-400 transition">Privacy Policy</a>
-                <a href="terms.html" class="hover:text-blue-400 transition">Terms of Service</a>
-                <a href="contact.html" class="hover:text-blue-400 transition">Contact Us</a>
+    <!-- Footer - Same as Main Page -->
+    <footer class="bg-gray-900 text-white pt-12 pb-6">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center">
+                        <i class="fas fa-tools mr-2 text-blue-400"></i>
+                        Free Tools Hub
+                    </h3>
+                    <p class="text-gray-400 mb-4">
+                        Your complete hub for free online tools, expert blogs, and curated resources.
+                    </p>
+                    <div class="flex space-x-3">
+                        <a href="#" class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center hover:bg-blue-700 transition">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-blue-400 rounded-full flex items-center justify-center hover:bg-blue-500 transition">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-pink-600 rounded-full flex items-center justify-center hover:bg-pink-700 transition">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="w-10 h-10 bg-red-600 rounded-full flex items-center justify-center hover:bg-red-700 transition">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chevron-right mr-2 text-blue-400"></i>Home</a></li>
+                        <li><a href="index.html#tools" class="text-gray-400 hover:text-white transition"><i class="fas fa-chevron-right mr-2 text-blue-400"></i>All Tools</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chevron-right mr-2 text-blue-400"></i>Blog</a></li>
+                        <li><a href="resources.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chevron-right mr-2 text-blue-400"></i>Resources</a></li>
+                        <li><a href="about.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chevron-right mr-2 text-blue-400"></i>About Us</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-chevron-right mr-2 text-blue-400"></i>Contact</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Popular Tools</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html#ai-tools" class="text-gray-400 hover:text-white transition"><i class="fas fa-robot mr-2 text-blue-400"></i>AI Content Writer</a></li>
+                        <li><a href="index.html#seo-tools" class="text-gray-400 hover:text-white transition"><i class="fas fa-search mr-2 text-blue-400"></i>SEO Analyzer</a></li>
+                        <li><a href="index.html#student-tools" class="text-gray-400 hover:text-white transition"><i class="fas fa-calculator mr-2 text-blue-400"></i>GPA Calculator</a></li>
+                        <li><a href="index.html#design-tools" class="text-gray-400 hover:text-white transition"><i class="fas fa-palette mr-2 text-blue-400"></i>Background Remover</a></li>
+                        <li><a href="index.html#utility-tools" class="text-gray-400 hover:text-white transition"><i class="fas fa-qrcode mr-2 text-blue-400"></i>QR Code Generator</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="text-xl font-bold mb-4">Legal & Support</h3>
+                    <ul class="space-y-2">
+                        <li><a href="privacy.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-shield-alt mr-2 text-blue-400"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-file-contract mr-2 text-blue-400"></i>Terms of Service</a></li>
+                        <li><a href="disclaimer.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-exclamation-triangle mr-2 text-blue-400"></i>Disclaimer</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white transition"><i class="fas fa-headset mr-2 text-blue-400"></i>Support</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 pt-6 mt-6 text-center text-gray-400">
+                <p>&copy; 2024 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators worldwide.</p>
             </div>
         </div>
     </footer>
 
-    <!-- Blog Data -->
     <script src="js/blog-data.js"></script>
 
-    <!-- Post Loading Script -->
     <script>
-        // Get post ID from URL
         const urlParams = new URLSearchParams(window.location.search);
         const postId = parseInt(urlParams.get('id'));
 
-        // Load and display the blog post
+        function calculateReadTime(content) {
+            const wordsPerMinute = 200;
+            const wordCount = content.split(/\s+/).length;
+            return Math.ceil(wordCount / wordsPerMinute);
+        }
+
+        function getViewCount(postId) {
+            let views = localStorage.getItem(`blog_views_${postId}`);
+            if (!views) {
+                views = Math.floor(Math.random() * 500) + 50;
+                localStorage.setItem(`blog_views_${postId}`, views);
+            }
+            return parseInt(views);
+        }
+
+        function incrementViewCount(postId) {
+            let views = getViewCount(postId);
+            views++;
+            localStorage.setItem(`blog_views_${postId}`, views);
+            return views;
+        }
+
         function loadBlogPost() {
             const post = blogPostsData.find(p => p.id === postId);
             
             if (post) {
-                // Update page title and meta
+                const readTime = calculateReadTime(post.content);
+                const viewCount = incrementViewCount(post.id);
+                
                 document.getElementById('post-title').textContent = post.title + ' - Free Tools Hub';
                 document.getElementById('post-description').setAttribute('content', post.excerpt);
+                document.getElementById('breadcrumb-title').textContent = post.title.substring(0, 50) + '...';
                 
-                // Display post content
                 document.getElementById('post-content').innerHTML = `
                     <div class="mb-6">
                         <span class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">
@@ -127,9 +263,13 @@
                             <i class="far fa-calendar mr-2"></i>
                             ${post.date}
                         </span>
-                        <span class="flex items-center">
+                        <span class="flex items-center text-blue-600 font-semibold">
                             <i class="far fa-clock mr-2"></i>
-                            5 min read
+                            ${readTime} min read
+                        </span>
+                        <span class="flex items-center text-green-600 font-semibold">
+                            <i class="far fa-eye mr-2"></i>
+                            ${viewCount.toLocaleString()} views
                         </span>
                     </div>
                     
@@ -141,10 +281,9 @@
                         ${post.content}
                     </div>
                     
-                    <!-- Share Buttons -->
                     <div class="mt-12 pt-6 border-t">
                         <p class="text-lg font-semibold mb-4">Share this article:</p>
-                        <div class="flex space-x-4">
+                        <div class="flex flex-wrap gap-4">
                             <a href="https://twitter.com/intent/tweet?text=${encodeURIComponent(post.title)}&url=${encodeURIComponent(window.location.href)}" 
                                target="_blank"
                                class="bg-blue-400 hover:bg-blue-500 text-white px-6 py-3 rounded-lg transition">
@@ -160,15 +299,16 @@
                                class="bg-blue-700 hover:bg-blue-800 text-white px-6 py-3 rounded-lg transition">
                                 <i class="fab fa-linkedin mr-2"></i> LinkedIn
                             </a>
+                            <button onclick="copyLink()" class="bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg transition">
+                                <i class="fas fa-link mr-2"></i> Copy Link
+                            </button>
                         </div>
                     </div>
                 `;
                 
-                // Load related posts
                 loadRelatedPosts(post.category, post.id);
                 
             } else {
-                // Post not found
                 document.getElementById('post-content').innerHTML = `
                     <div class="text-center py-16">
                         <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
@@ -182,7 +322,6 @@
             }
         }
 
-        // Load related posts from same category
         function loadRelatedPosts(category, currentPostId) {
             const related = blogPostsData
                 .filter(p => p.category === category && p.id !== currentPostId)
@@ -197,6 +336,9 @@
             
             let html = '';
             related.forEach(post => {
+                const readTime = calculateReadTime(post.content);
+                const viewCount = getViewCount(post.id);
+                
                 html += `
                     <article class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-xl transition">
                         <img src="${post.image}" alt="${post.title}" class="w-full h-40 object-cover">
@@ -207,7 +349,10 @@
                                     ${post.title}
                                 </a>
                             </h3>
-                            <p class="text-sm text-gray-600 mb-3 line-clamp-2">${post.excerpt}</p>
+                            <div class="flex items-center space-x-3 text-xs text-gray-500 mb-3">
+                                <span><i class="far fa-clock mr-1"></i>${readTime} min</span>
+                                <span><i class="far fa-eye mr-1"></i>${viewCount}</span>
+                            </div>
                             <a href="blog-post.html?id=${post.id}" class="text-blue-600 text-sm font-semibold hover:text-blue-800">
                                 Read More →
                             </a>
@@ -219,7 +364,15 @@
             container.innerHTML = html;
         }
 
-        // Load post when page is ready
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied to clipboard!');
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById('mobile-menu').classList.toggle('hidden');
+        }
+
         window.addEventListener('DOMContentLoaded', loadBlogPost);
     </script>
 
