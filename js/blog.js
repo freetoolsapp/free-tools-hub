@@ -9,13 +9,31 @@ let currentCategory = 'all';
 // Load blogs from JSON file
 async function loadBlogs() {
     try {
-        const response = await fetch('../data/blogs.json');
+        // Try different paths based on your folder structure
+        let response;
+        
+        // Try path 1: data/blogs.json (if blog.html is in root)
+        try {
+            response = await fetch('data/blogs.json');
+            if (!response.ok) throw new Error('Path 1 failed');
+        } catch (e) {
+            // Try path 2: ../data/blogs.json (if blog.html is in blog folder)
+            try {
+                response = await fetch('../data/blogs.json');
+                if (!response.ok) throw new Error('Path 2 failed');
+            } catch (e2) {
+                // Try path 3: ./blogs.json (if blogs.json is in same folder)
+                response = await fetch('./blogs.json');
+            }
+        }
+        
         const data = await response.json();
         allBlogs = data.blogs;
         renderBlogs();
         console.log('✅ Blogs loaded successfully:', allBlogs.length, 'blogs');
     } catch (error) {
         console.error('❌ Error loading blogs:', error);
+        console.error('Make sure blogs.json is in the correct location!');
         showError();
     }
 }
@@ -63,7 +81,8 @@ function renderBlogs(blogsToRender = allBlogs) {
                     <img src="${blog.image}" 
                          alt="${blog.title}" 
                          class="w-full h-full object-cover transition-transform duration-300 hover:scale-110"
-                         loading="lazy">
+                         loading="lazy"
+                         onerror="this.src='https://via.placeholder.com/800x500?text=Blog+Image'">
                     <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
                 </div>
                 
@@ -176,7 +195,13 @@ function showError() {
             <div class="col-span-full text-center py-12">
                 <i class="fas fa-exclamation-triangle text-red-500 text-6xl mb-4"></i>
                 <h3 class="text-xl font-semibold text-gray-700 mb-2">Error Loading Blogs</h3>
-                <p class="text-gray-500 mb-4">Unable to load blogs. Please check if blogs.json exists.</p>
+                <p class="text-gray-500 mb-4">Unable to load blogs. Please check:</p>
+                <ul class="text-left max-w-md mx-auto text-gray-600 mb-6">
+                    <li class="mb-2">✓ blogs.json file exists in data/ folder</li>
+                    <li class="mb-2">✓ File path is correct</li>
+                    <li class="mb-2">✓ JSON syntax is valid</li>
+                    <li class="mb-2">✓ Open browser console (F12) for details</li>
+                </ul>
                 <button onclick="location.reload()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
                     <i class="fas fa-redo mr-2"></i>Refresh Page
                 </button>
