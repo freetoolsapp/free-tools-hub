@@ -257,21 +257,6 @@ const blogPostsData = [
                 <li>Never share passwords or write them down in plain text</li>
             </ol>
         `
-    },
-
-    {
-    id: 5, // Next ID number
-    title: " Hacks for students and Professionals",
-    slug: "Students-important-tips",
-    excerpt: "Short description...",
-    author: "Your Name",
-    date: "Feb 8, 2024",
-    category: "Student", // SEO, Social Media, Ststuudent Tips, etc.
-    image: "",
-    content: `
-        <h2>Heading</h2>
-        <p>Your content here...</p>
-    `
 }
 ];
 
