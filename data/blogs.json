@@ -1,0 +1,69 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "10 Best AI Tools for Students in 2026",
+      "description": "Discover the top AI-powered tools that can help students boost productivity, improve learning, and ace their assignments.",
+      "category": "ai",
+      "author": "Free Tools Hub",
+      "date": "Feb 5, 2026",
+      "readTime": "8 min",
+      "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&auto=format&fit=crop",
+      "featured": true,
+      "status": "published",
+      "url": "blog-posts/ai-tools-for-students.html"
+    },
+    {
+      "id": 2,
+      "title": "How to Boost Your Productivity with Free Online Tools",
+      "description": "Learn how to maximize your efficiency using powerful free tools for time management, automation, and workflow optimization.",
+      "category": "productivity",
+      "author": "Free Tools Hub",
+      "date": "Feb 3, 2026",
+      "readTime": "6 min",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&auto=format&fit=crop",
+      "featured": false,
+      "status": "published",
+      "url": "blog-posts/boost-productivity.html"
+    },
+    {
+      "id": 3,
+      "title": "Complete SEO Guide for Beginners in 2026",
+      "description": "Master the fundamentals of SEO with this comprehensive guide. Learn keyword research, on-page optimization, and link building strategies.",
+      "category": "seo",
+      "author": "Free Tools Hub",
+      "date": "Jan 28, 2026",
+      "readTime": "12 min",
+      "image": "https://images.unsplash.com/photo-1562577309-4932fdd64cd1?w=800&auto=format&fit=crop",
+      "featured": true,
+      "status": "published",
+      "url": "blog-posts/seo-guide-beginners.html"
+    },
+    {
+      "id": 4,
+      "title": "Top 15 Free Design Tools for Web Developers",
+      "description": "Explore the best free design tools that every web developer should know. From prototyping to color schemes and icons.",
+      "category": "design",
+      "author": "Free Tools Hub",
+      "date": "Jan 25, 2026",
+      "readTime": "10 min",
+      "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&auto=format&fit=crop",
+      "featured": false,
+      "status": "published",
+      "url": "blog-posts/free-design-tools.html"
+    },
+    {
+      "id": 5,
+      "title": "Student Study Hacks: Essential Tools & Techniques",
+      "description": "Revolutionary study methods and tools that can help students learn faster, retain more, and achieve better grades.",
+      "category": "student",
+      "author": "Free Tools Hub",
+      "date": "Jan 20, 2026",
+      "readTime": "7 min",
+      "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&auto=format&fit=crop",
+      "featured": false,
+      "status": "published",
+      "url": "blog-posts/student-study-hacks.html"
+    }
+  ]
+}
