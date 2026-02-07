@@ -8,9 +8,6 @@
       "badge": "HOT",
       "file": "tools/utility/pdf-to-word.html",
       "description": "Convert PDF files and IMAGES to editable Word documents"
-      "tags": ["pdf", "word", "converter", "document"],
-      "rating": "4.7",
-      "users": "5.2K"
     },
     {
       "name": "WORD TO PDF Converter",
@@ -20,9 +17,6 @@
       "badge": "HOT",
       "file": "tools/utility/word-to-pdf-converter.html",
       "description": "Convert WORD files and Documents to PDF documents"
-     "tags": ["pdf", "word", "converter", "document"],
-      "rating": "4.7",
-      "users": "5.2K" 
     },
     {
       "name": "DAILY TASK PLANNER ",
@@ -33,7 +27,6 @@
       "file": "tools/utility/daily-task-planner.html",
       "description": "Organize your day with priority management, smart filters, and real-time statistics  "
     },
-    
     {
       "name": "DUPLICATE PDF PAGES",
       "icon": "fa-file-word",
