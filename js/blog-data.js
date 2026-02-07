@@ -234,7 +234,7 @@ const blogPostsData = [
             <p class="mb-4">Even with a strong password, add an extra layer of security with 2FA. Options include:</p>
             <ul class="list-disc list-inside mb-4 space-y-2">
                 <li>Authenticator apps (Google Authenticator, Authy)</li>
-                <li>Hardware security keys (YubiKey)</li>
+                <li>Hardware security kys (YubiKey)</li>
                 <li>SMS codes (less secure but better than nothing)</li>
             </ul>
             
@@ -258,8 +258,7 @@ const blogPostsData = [
             </ol>
         `
 },
-
-    {
+{
     id: 5,
     title: "15 Productivity Hacks Every Professional Should Know in 2026",
     slug: "productivity-hacks-professionals-2026",
@@ -283,6 +282,25 @@ const blogPostsData = [
                 <div class="text-center">
                     <div class="text-3xl font-bold text-green-600 mb-1">2026</div>
                     <div class="text-sm text-gray-600">Latest Methods</div>
+                </div>
+            </div>
+
+            <!-- Free Tools Banner -->
+            <div class="bg-gradient-to-r from-blue-500 to-purple-600 text-white p-6 rounded-lg mb-8 text-center">
+                <h3 class="text-2xl font-bold mb-3">
+                    <i class="fas fa-tools mr-2"></i>Free Productivity Tools
+                </h3>
+                <p class="mb-4">Supercharge your workflow with our free productivity tools!</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <a href="../tools/pomodoro-timer.html" class="bg-white text-blue-600 px-4 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center">
+                        <i class="fas fa-clock mr-2"></i>Pomodoro Timer
+                    </a>
+                    <a href="../tools/daily-task-planner.html" class="bg-white text-purple-600 px-4 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center">
+                        <i class="fas fa-tasks mr-2"></i>Task Planner
+                    </a>
+                    <a href="../tools/weekly-goal-tracker.html" class="bg-white text-green-600 px-4 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center">
+                        <i class="fas fa-calendar-check mr-2"></i>Goal Tracker
+                    </a>
                 </div>
             </div>
 
@@ -337,6 +355,18 @@ const blogPostsData = [
                     <li>Protect your blocks—treat them as unmissable meetings</li>
                 </ul>
             </div>
+            
+            <!-- TOOL LINK: Daily Task Planner -->
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 border-l-4 border-purple-500 p-4 my-4 rounded">
+                <p class="font-semibold text-purple-800 mb-2">
+                    <i class="fas fa-tools text-purple-600 mr-2"></i>Free Tool:
+                </p>
+                <p class="text-gray-700 mb-2">Use our <strong>Daily Task Planner</strong> to organize your time blocks and prioritize tasks effectively!</p>
+                <a href="../tools/daily-task-planner.html" class="inline-block bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition-colors text-sm font-semibold">
+                    <i class="fas fa-tasks mr-2"></i>Try Daily Task Planner →
+                </a>
+            </div>
+
             <div class="bg-green-50 border-l-4 border-green-500 p-4 my-4 rounded">
                 <p class="font-semibold text-green-800">💡 Pro Tip:</p>
                 <p class="text-gray-700">Elon Musk uses <strong>5-minute time blocks</strong>. While extreme, even 30-minute blocks can double your productivity.</p>
@@ -373,64 +403,69 @@ const blogPostsData = [
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">4</span>
                 The Pomodoro Technique
             </h3>
-            <p class="mb-4">The <strong>Pomodoro Technique</strong> is a time management method where you work in focused 25-minute intervals (called "pomodoros") followed by 5-minute breaks.</p>
-            <div class="bg-orange-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-stopwatch text-orange-600 mr-2"></i>How It Works:</p>
-                <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                    <li>Choose a task to work on</li>
-                    <li>Set a timer for 25 minutes</li>
-                    <li>Work with full focus until the timer rings</li>
-                    <li>Take a 5-minute break</li>
-                    <li>After 4 pomodoros, take a longer 15-30 minute break</li>
+            <p class="mb-4">The <strong>Pomodoro Technique</strong> involves working in focused <strong>25-minute intervals</strong> (called "pomodoros") followed by 5-minute breaks.</p>
+            <div class="bg-gradient-to-r from-red-50 to-orange-50 p-4 rounded-lg my-4">
+                <p class="font-semibold mb-2"><i class="fas fa-clock text-red-600 mr-2"></i>The Process:</p>
+                <ol class="list-decimal list-inside space-y-2 text-gray-700">
+                    <li><strong>Set a timer for 25 minutes</strong> - Focus on one task only</li>
+                    <li><strong>Work without interruption</strong> - No phone, email, or distractions</li>
+                    <li><strong>Take a 5-minute break</strong> - Stretch, walk, or grab water</li>
+                    <li><strong>Repeat 4 times</strong> - After 4 pomodoros, take a longer 15-30 minute break</li>
                 </ol>
             </div>
-            <p class="mb-4"><strong>Why it works:</strong> The technique leverages urgency (beating the timer) and prevents burnout through regular breaks.</p>
+            
+            <!-- TOOL LINK: Pomodoro Timer -->
+            <div class="bg-gradient-to-r from-red-50 to-orange-50 border-l-4 border-red-500 p-4 my-4 rounded">
+                <p class="font-semibold text-red-800 mb-2">
+                    <i class="fas fa-tools text-red-600 mr-2"></i>Free Tool:
+                </p>
+                <p class="text-gray-700 mb-2">Try our <strong>Pomodoro Timer</strong> with task management built-in. Perfect for implementing this technique!</p>
+                <a href="../tools/pomodoro-timer.html" class="inline-block bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition-colors text-sm font-semibold">
+                    <i class="fas fa-clock mr-2"></i>Launch Pomodoro Timer →
+                </a>
+            </div>
+
+            <p class="mb-4">This technique leverages your brain's natural attention span and prevents burnout. Start using it today!</p>
 
             <h3 id="hack5" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">5</span>
                 Batch Similar Tasks Together
             </h3>
-            <p class="mb-4"><strong>Task batching</strong> means grouping similar activities and completing them in one dedicated session.</p>
-            <p class="mb-4"><strong>Examples:</strong></p>
-            <ul class="list-disc list-inside mb-4 space-y-2">
-                <li>Check and respond to all emails in 2-3 designated time slots instead of constantly checking</li>
-                <li>Record all video content for the week in one afternoon</li>
-                <li>Make all phone calls back-to-back</li>
-                <li>Schedule all meetings on specific days (e.g., Tuesdays and Thursdays)</li>
-            </ul>
-            <p class="mb-4"><strong>Benefit:</strong> Reduces context switching, which can waste up to <strong>40% of productive time</strong>.</p>
+            <p class="mb-4"><strong>Task batching</strong> means grouping similar activities and completing them in one dedicated session. This reduces context-switching, which can drain up to <strong>40% of your productive time</strong>.</p>
+            <div class="bg-indigo-50 p-4 rounded-lg my-4">
+                <p class="font-semibold mb-2">Examples of Batching:</p>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li><strong>Email batching:</strong> Check emails 2-3 times daily instead of constantly</li>
+                    <li><strong>Content creation:</strong> Write 5 blog posts in one sitting</li>
+                    <li><strong>Meetings:</strong> Schedule all meetings on specific days</li>
+                    <li><strong>Admin work:</strong> Handle invoicing, expenses weekly</li>
+                </ul>
+            </div>
 
             <h3 id="hack6" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">6</span>
                 The 2-Minute Rule
             </h3>
-            <p class="mb-4">Popularized by productivity expert David Allen, the <strong>2-minute rule</strong> states: <em>If a task takes less than 2 minutes, do it immediately.</em></p>
-            <p class="mb-4"><strong>Examples:</strong></p>
-            <ul class="list-disc list-inside mb-4 space-y-2">
-                <li>Replying to a quick email</li>
-                <li>Filing a document</li>
-                <li>Making a brief phone call</li>
-                <li>Adding an event to your calendar</li>
-            </ul>
-            <div class="bg-indigo-50 border-l-4 border-indigo-500 p-4 my-4 rounded">
-                <p class="font-semibold text-indigo-800">💡 Why It Works:</p>
-                <p class="text-gray-700">Small tasks pile up and create mental clutter. Clearing them instantly keeps your to-do list manageable and your mind clear.</p>
+            <p class="mb-4">If a task takes <strong>less than 2 minutes, do it immediately</strong>. Don't add it to your to-do list—just complete it.</p>
+            <p class="mb-4">This prevents small tasks from accumulating and creating mental clutter. Examples include responding to quick emails, filing documents, or making brief phone calls.</p>
+            <div class="bg-teal-50 border-l-4 border-teal-500 p-4 my-4 rounded">
+                <p class="font-semibold text-teal-800">💡 Quick Win:</p>
+                <p class="text-gray-700">Studies show completing small tasks instantly creates <strong>momentum</strong> and boosts motivation for larger projects.</p>
             </div>
 
             <h3 id="hack7" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">7</span>
                 Eliminate Distractions Ruthlessly
             </h3>
-            <p class="mb-4">Distractions are productivity killers. The average worker is interrupted every <strong>11 minutes</strong>, and it takes <strong>23 minutes</strong> to refocus.</p>
-            <div class="bg-red-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-shield-alt text-red-600 mr-2"></i>How to Eliminate Distractions:</p>
+            <p class="mb-4">The average person checks their phone <strong>96 times daily</strong>—that's once every 10 minutes! Distractions are productivity killers.</p>
+            <div class="bg-gray-50 p-4 rounded-lg my-4">
+                <p class="font-semibold mb-2"><i class="fas fa-shield-alt text-gray-700 mr-2"></i>Distraction-Busting Strategies:</p>
                 <ul class="list-disc list-inside space-y-1 text-gray-700">
-                    <li>Turn off non-essential notifications</li>
-                    <li>Use website blockers (Freedom, Cold Turkey)</li>
-                    <li>Put your phone in another room or on "Do Not Disturb"</li>
-                    <li>Use noise-canceling headphones</li>
-                    <li>Set "focus hours" where colleagues know not to interrupt</li>
-                    <li>Close unnecessary browser tabs and apps</li>
+                    <li>Put phone on Do Not Disturb mode</li>
+                    <li>Turn off all non-essential notifications</li>
+                    <li>Use noise-canceling headphones or white noise</li>
+                    <li>Work in a dedicated, clutter-free space</li>
+                    <li>Use website blockers (Freedom, Cold Turkey) during focus time</li>
                 </ul>
             </div>
 
@@ -438,50 +473,46 @@ const blogPostsData = [
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">8</span>
                 Plan Tomorrow Today
             </h3>
-            <p class="mb-4">Spend <strong>10-15 minutes at the end of each workday</strong> planning the next day. This simple habit eliminates morning decision fatigue.</p>
-            <div class="bg-teal-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-clipboard-list text-teal-600 mr-2"></i>Evening Planning Routine:</p>
-                <ol class="list-decimal list-inside space-y-1 text-gray-700">
-                    <li>Review what you accomplished today</li>
-                    <li>List tomorrow's 3-5 most important tasks (MITs)</li>
-                    <li>Time-block them into your calendar</li>
-                    <li>Prepare materials or files you'll need</li>
-                    <li>Clear your desk and close all apps</li>
-                </ol>
+            <p class="mb-4">Spend <strong>10 minutes</strong> at the end of each workday planning the next. This clears your mind for restful sleep and helps you hit the ground running in the morning.</p>
+            <div class="bg-violet-50 p-4 rounded-lg my-4">
+                <p class="font-semibold mb-2">Evening Planning Checklist:</p>
+                <ul class="list-disc list-inside space-y-1 text-gray-700">
+                    <li>List 3-5 priority tasks for tomorrow</li>
+                    <li>Schedule them in your calendar</li>
+                    <li>Prepare materials/files needed</li>
+                    <li>Review upcoming deadlines</li>
+                    <li>Close all open loops (pending decisions, unanswered questions)</li>
+                </ul>
             </div>
-            <p class="mb-4">When you wake up, you'll know exactly what to do instead of wasting energy deciding.</p>
 
             <h3 id="hack9" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">9</span>
                 Use the "No" Strategy
             </h3>
-            <p class="mb-4">Saying <strong>"no"</strong> to low-value commitments is essential for protecting your time and energy.</p>
             <p class="mb-4">Warren Buffett once said, <em>"The difference between successful people and really successful people is that really successful people say no to almost everything."</em></p>
-            <div class="bg-yellow-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-hand-paper text-yellow-600 mr-2"></i>When to Say No:</p>
-                <ul class="list-disc list-inside space-y-1 text-gray-700">
-                    <li>Meetings without a clear agenda or purpose</li>
-                    <li>Projects that don't align with your goals</li>
-                    <li>Social commitments that drain your energy</li>
-                    <li>Requests that could be delegated</li>
+            <p class="mb-4">Every "yes" to a low-priority task is a "no" to something more important. <strong>Protect your time fiercely.</strong></p>
+            <div class="bg-amber-50 border-l-4 border-amber-500 p-4 my-4 rounded">
+                <p class="font-semibold text-amber-800 mb-2">Polite Ways to Say No:</p>
+                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                    <li>"I'm at capacity right now, but I can help next month."</li>
+                    <li>"That's not aligned with my current priorities."</li>
+                    <li>"I need to focus on X to meet my goals."</li>
                 </ul>
             </div>
-            <p class="mb-4"><strong>Remember:</strong> Every "yes" to something unimportant is a "no" to something that matters.</p>
 
             <h3 id="hack10" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">10</span>
                 Automate Repetitive Tasks
             </h3>
-            <p class="mb-4">If you do something more than twice, automate it. Technology can save you hours every week.</p>
+            <p class="mb-4">In 2026, <strong>AI and automation tools</strong> can handle countless mundane tasks. Free up your brain for high-value work.</p>
             <div class="bg-cyan-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-robot text-cyan-600 mr-2"></i>Automation Examples:</p>
+                <p class="font-semibold mb-2"><i class="fas fa-robot text-cyan-600 mr-2"></i>Tools to Automate:</p>
                 <ul class="list-disc list-inside space-y-1 text-gray-700">
-                    <li><strong>Email:</strong> Use filters, templates, and auto-responders</li>
-                    <li><strong>Social Media:</strong> Schedule posts in advance with Buffer or Hootsuite</li>
-                    <li><strong>Data Entry:</strong> Use Zapier to connect apps and automate workflows</li>
-                    <li><strong>Invoicing:</strong> Automate billing with FreshBooks or QuickBooks</li>
-                    <li><strong>Reports:</strong> Create templates and scripts to auto-generate reports</li>
-                    <li><strong>Study Planning:</strong> Use our <a href="tools/student/study-planner.html" class="text-blue-600 hover:underline">Study Planner</a> for automated scheduling</li>
+                    <li><strong>Zapier/IFTTT:</strong> Connect apps and automate workflows</li>
+                    <li><strong>Email filters:</strong> Auto-sort and prioritize messages</li>
+                    <li><strong>AI assistants:</strong> ChatGPT, Claude for drafting, research</li>
+                    <li><strong>Calendly:</strong> Automate meeting scheduling</li>
+                    <li><strong>Buffer/Hootsuite:</strong> Schedule social media posts</li>
                 </ul>
             </div>
 
@@ -489,49 +520,46 @@ const blogPostsData = [
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">11</span>
                 Master Your Morning Routine
             </h3>
-            <p class="mb-4">How you start your day sets the tone for everything that follows. Top performers have <strong>intentional morning rituals</strong>.</p>
-            <div class="bg-amber-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-sun text-amber-600 mr-2"></i>Ideal Morning Routine Elements:</p>
-                <ul class="list-disc list-inside space-y-1 text-gray-700">
-                    <li><strong>Wake up early</strong> (before distractions start)</li>
-                    <li><strong>Hydrate</strong> (drink water first thing)</li>
-                    <li><strong>Move</strong> (exercise, yoga, or stretching)</li>
-                    <li><strong>Meditate or journal</strong> (5-10 minutes)</li>
-                    <li><strong>Review your goals and daily plan</strong></li>
-                    <li><strong>Eat a healthy breakfast</strong></li>
-                    <li><strong>Tackle your most important task first</strong> (eat the frog)</li>
-                </ul>
+            <p class="mb-4">How you start your day sets the tone for everything that follows. <strong>Top performers swear by structured morning routines.</strong></p>
+            <div class="bg-orange-50 p-4 rounded-lg my-4">
+                <p class="font-semibold mb-2"><i class="fas fa-sun text-orange-600 mr-2"></i>Ideal Morning Routine (60-90 minutes):</p>
+                <ol class="list-decimal list-inside space-y-1 text-gray-700">
+                    <li><strong>Hydrate:</strong> Drink 16 oz of water immediately</li>
+                    <li><strong>Move:</strong> 10-30 minutes of exercise or stretching</li>
+                    <li><strong>Mindfulness:</strong> 5-10 minutes of meditation or journaling</li>
+                    <li><strong>Learn:</strong> Read or listen to a podcast (20 minutes)</li>
+                    <li><strong>Plan:</strong> Review your top 3 tasks for the day</li>
+                    <li><strong>Eat well:</strong> Protein-rich breakfast for sustained energy</li>
+                </ol>
             </div>
-            <p class="mb-4">The goal: Start your day <strong>in control</strong>, not reactive to others' demands.</p>
+            <p class="mb-4">Avoid checking email or social media until after your morning routine—don't let others dictate your day's priorities.</p>
 
             <h3 id="hack12" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">12</span>
                 Single-Tasking Over Multitasking
             </h3>
-            <p class="mb-4">Multitasking is a myth. Research shows it <strong>reduces focus by up to 40%</strong> and increases errors.</p>
-            <p class="mb-4">Instead, practice <strong>single-tasking</strong>: Focus on one task at a time until it's complete or you hit a natural stopping point.</p>
+            <p class="mb-4"><strong>Multitasking is a myth.</strong> Research shows it reduces productivity by <strong>40%</strong>, increases errors, and stresses the brain.</p>
             <div class="bg-rose-50 border-l-4 border-rose-500 p-4 my-4 rounded">
-                <p class="font-semibold text-rose-800">⚠️ The Cost of Multitasking:</p>
-                <p class="text-gray-700">Switching between tasks wastes time, increases mistakes, and creates stress. Your brain needs time to "load" each new task into working memory.</p>
+                <p class="font-semibold text-rose-800 mb-2"><i class="fas fa-brain text-rose-600 mr-2"></i>The Science:</p>
+                <p class="text-gray-700">Your brain can't truly multitask—it rapidly switches between tasks, which creates "switching costs" that drain energy and reduce quality.</p>
             </div>
-            <p class="mb-4"><strong>Solution:</strong> Close all tabs, apps, and distractions related to other tasks. Focus on ONE thing.</p>
+            <p class="mb-4">Instead, practice <strong>deep work</strong>: single-task on one important activity for extended periods. Close all tabs except what you're working on.</p>
 
             <h3 id="hack13" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">13</span>
                 Manage Energy, Not Just Time
             </h3>
-            <p class="mb-4">You can't be productive if you're exhausted. <strong>Energy management</strong> is as important as time management.</p>
+            <p class="mb-4">Time management is important, but <strong>energy management is crucial</strong>. You can have 8 hours in a day, but if you're exhausted, they're wasted.</p>
             <div class="bg-lime-50 p-4 rounded-lg my-4">
-                <p class="font-semibold mb-2"><i class="fas fa-battery-full text-lime-600 mr-2"></i>How to Manage Energy:</p>
+                <p class="font-semibold mb-2"><i class="fas fa-battery-full text-lime-600 mr-2"></i>Energy Optimization Tips:</p>
                 <ul class="list-disc list-inside space-y-1 text-gray-700">
-                    <li><strong>Sleep:</strong> Aim for 7-9 hours nightly</li>
-                    <li><strong>Nutrition:</strong> Eat balanced meals; avoid sugar crashes</li>
-                    <li><strong>Exercise:</strong> Move daily to boost mental clarity</li>
-                    <li><strong>Breaks:</strong> Step away every 90 minutes</li>
-                    <li><strong>Track your energy:</strong> Notice when you're most alert and schedule demanding tasks then</li>
+                    <li>Schedule high-focus work during your peak energy hours (often 9-11 AM)</li>
+                    <li>Prioritize 7-9 hours of quality sleep</li>
+                    <li>Eat balanced meals—avoid sugar crashes</li>
+                    <li>Take short walks or movement breaks every 90 minutes</li>
+                    <li>Protect against energy vampires (toxic people, negative news)</li>
                 </ul>
             </div>
-            <p class="mb-4"><strong>Example:</strong> If you're a morning person, do deep work from 8-11 AM and save administrative tasks for the afternoon slump.</p>
 
             <h3 id="hack14" class="text-xl font-bold mt-8 mb-3 flex items-center">
                 <span class="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center mr-2">14</span>
@@ -549,6 +577,18 @@ const blogPostsData = [
                     <li>Schedule all important tasks into my calendar</li>
                 </ol>
             </div>
+            
+            <!-- TOOL LINK: Weekly Goal Tracker -->
+            <div class="bg-gradient-to-r from-green-50 to-teal-50 border-l-4 border-green-500 p-4 my-4 rounded">
+                <p class="font-semibold text-green-800 mb-2">
+                    <i class="fas fa-tools text-green-600 mr-2"></i>Free Tool:
+                </p>
+                <p class="text-gray-700 mb-2">Use our <strong>Weekly Goal Tracker</strong> to organize your weekly reviews and track progress across 7 days!</p>
+                <a href="../tools/weekly-goal-tracker.html" class="inline-block bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition-colors text-sm font-semibold">
+                    <i class="fas fa-calendar-check mr-2"></i>Try Weekly Goal Tracker →
+                </a>
+            </div>
+
             <p class="mb-4">This prevents tasks from falling through the cracks and ensures continuous alignment with your goals.</p>
 
             <h3 id="hack15" class="text-xl font-bold mt-8 mb-3 flex items-center">
@@ -568,6 +608,25 @@ const blogPostsData = [
                 </ul>
             </div>
             <p class="mb-4">Even a <strong>1% improvement every week</strong> compounds into extraordinary results over a year.</p>
+
+            <!-- All Tools CTA -->
+            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg my-8 text-center">
+                <h3 class="text-2xl font-bold mb-3">
+                    <i class="fas fa-rocket mr-2"></i>Ready to Supercharge Your Productivity?
+                </h3>
+                <p class="mb-4">Use our free productivity tools to implement these hacks today!</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <a href="../tools/pomodoro-timer.html" class="bg-white text-red-600 px-4 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-clock mr-2"></i>Pomodoro Timer
+                    </a>
+                    <a href="../tools/daily-task-planner.html" class="bg-white text-purple-600 px-4 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-tasks mr-2"></i>Daily Task Planner
+                    </a>
+                    <a href="../tools/weekly-goal-tracker.html" class="bg-white text-green-600 px-4 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
+                        <i class="fas fa-calendar-check mr-2"></i>Weekly Goal Tracker
+                    </a>
+                </div>
+            </div>
 
             <h2 class="text-2xl font-bold mt-8 mb-4 flex items-center">
                 <i class="fas fa-question-circle text-blue-600 mr-2"></i>
@@ -614,7 +673,7 @@ const blogPostsData = [
                 </h3>
                 <ol class="list-decimal list-inside space-y-2 text-gray-700 text-lg">
                     <li>Choose 3 hacks from this list to implement this week</li>
-                    <li>Set up your tools (Pomodoro timer, time blocking calendar, etc.)</li>
+                    <li>Set up your tools (use our free Pomodoro Timer, Task Planner & Goal Tracker)</li>
                     <li>Track your progress daily</li>
                     <li>Review weekly and adjust</li>
                     <li>Add more hacks as you master each one</li>
@@ -626,17 +685,6 @@ const blogPostsData = [
             <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mt-6">
                 <p class="font-semibold">💡 Pro Tip:</p>
                 <p>Don't try to implement all 15 hacks at once. Start with <strong>time blocking, the Pomodoro Technique, and the 2-minute rule</strong>. Master these first, then gradually add others to your toolkit.</p>
-            </div>
-
-            <!-- Call to Action -->
-            <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white p-6 rounded-lg my-8 text-center">
-                <h3 class="text-2xl font-bold mb-3">
-                    <i class="fas fa-tools mr-2"></i>Need More Productivity Tools?
-                </h3>
-                <p class="mb-4">Explore 100+ free tools to supercharge your workflow!</p>
-                <a href="../index.html#tools" class="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors inline-block">
-                    Browse Free Tools →
-                </a>
             </div>
         </div>
     `
