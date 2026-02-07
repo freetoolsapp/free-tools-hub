@@ -19,6 +19,16 @@
       "description": "Convert WORD files and Documents to PDF documents"
     },
     {
+      "name": "DAILY TASK PLANNER ",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/daily-task-planner.html",
+      "description": "Organize your day with priority management, smart filters, and real-time statistics  "
+    },
+    
+    {
       "name": "DUPLICATE PDF PAGES",
       "icon": "fa-file-word",
       "color": "blue",
@@ -26,6 +36,25 @@
       "badge": "NEW",
       "file": "tools/utility/pdf-duplicate.html",
       "description": "MAKE DUPLICATE OF YOUR PDF PAGES"
+    },
+
+     {
+      "name": "POMODORO FOCUS TIMER",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/pomodoro-timer.html",
+      "description": "25-minute focus sessions with task tracking and break reminders for maximum productivity    "
+    },
+     {
+      "name": "WEEKLY GOAL TRACKER",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/weekly-goal-tracker.html",
+      "description": "Plan your entire week with visual progress tracking and category organization     "
     },
     {
       "name": "DELETE ANY PAGE IN YOUR PDF FILE",
