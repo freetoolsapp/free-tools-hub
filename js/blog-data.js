@@ -1179,7 +1179,7 @@ const blogPostsData = [
     `
 },
 {
-    id: 3,
+    id: 6,
     title: "Content Marketing Strategy 2026: Complete Guide to 10X Your Traffic",
     slug: "content-marketing-strategy-2026",
     excerpt: "Master content marketing in 2026 with this complete guide. Learn AI-powered content creation, SEO optimization, distribution strategies & conversion tactics. Boost traffic by 1000%!",
