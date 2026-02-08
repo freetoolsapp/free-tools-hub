@@ -21,32 +21,6 @@
       "file": "tools/utility/word-to-pdf-converter.html",
       "description": "Convert WORD files and Documents to PDF documents"
     },
-        
-    {
-      "name": " SEO ANALYZER",
-      "icon": "fa-file-word",
-      "color": "blue",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/seo-analyzer.html",
-      "description": "Analyze your webpage SEO score instantly & get actionable tips "
-      "tags": ["seo", "webpage", "analyzer"],
-      "rating": "4.7",
-      "users": "5.2K"
-    },
-    {
-      "name": "DAILY TASK PLANNER ",
-      "icon": "fa-file-word",
-      "color": "blue",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/daily-task-planner.html",
-      "description": "Organize your day with priority management, smart filters, and real-time statistics  "
-      "tags": ["pdf", "word", "converter", "document"],
-      "rating": "4.7",
-      "users": "5.2K"
-    },
-    
     {
       "name": "DUPLICATE PDF PAGES",
       "icon": "fa-file-word",
@@ -58,25 +32,6 @@
       "tags": ["pdf", "word", "converter", "document"],
       "rating": "4.7",
       "users": "5.2K"
-    },
-
-     {
-      "name": "POMODORO FOCUS TIMER",
-      "icon": "fa-file-word",
-      "color": "blue",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/pomodoro-timer.html",
-      "description": "25-minute focus sessions with task tracking and break reminders for maximum productivity    "
-    },
-     {
-      "name": "WEEKLY GOAL TRACKER",
-      "icon": "fa-file-word",
-      "color": "blue",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/weekly-goal-tracker.html",
-      "description": "Plan your entire week with visual progress tracking and category organization     "
     },
     {
       "name": "DELETE ANY PAGE IN YOUR PDF FILE",
