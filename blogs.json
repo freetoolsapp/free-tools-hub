@@ -1,0 +1,59 @@
+{
+  "blogs": [
+    {
+      "id": 1,
+      "title": "10 Best Free SEO Tools to Skyrocket Your Website Ranking in 2026",
+      "slug": "best-free-seo-tools-2026",
+      "excerpt": "Discover the 10 most powerful free SEO tools in 2026 that can boost your rankings by 500%. Complete guide with proven tools, competitor analysis, and ranking strategies.",
+      "author": "Free Tools Hub Team",
+      "date": "Feb 7, 2026",
+      "category": "SEO",
+      "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+      "contentFile": "blogs/seo-tools-2026.html"
+    },
+    {
+      "id": 2,
+      "title": "Instagram Marketing Strategy 2026: Grow to 100K Followers",
+      "slug": "instagram-marketing-strategy-2026",
+      "excerpt": "Complete Instagram growth guide with proven strategies to reach 100K followers. Learn content creation, hashtags, reels, and engagement tactics.",
+      "author": "Free Tools Hub Team",
+      "date": "Feb 6, 2026",
+      "category": "Social Media",
+      "image": "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=800&h=400&fit=crop",
+      "contentFile": "blogs/instagram-marketing-2026.html"
+    },
+    {
+      "id": 3,
+      "title": "Study Techniques That Actually Work: Science-Backed Methods",
+      "slug": "study-techniques-science-backed",
+      "excerpt": "Proven study techniques backed by neuroscience research. Learn how to retain more information and ace your exams.",
+      "author": "Free Tools Hub Team",
+      "date": "Feb 5, 2026",
+      "category": "Student",
+      "image": "https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=800&h=400&fit=crop",
+      "contentFile": "blogs/study-techniques-2026.html"
+    },
+    {
+      "id": 4,
+      "title": "Web Development Trends 2026: What's Hot and What's Not",
+      "slug": "web-development-trends-2026",
+      "excerpt": "Stay ahead with the latest web development trends. From AI integration to new frameworks, discover what's shaping the web in 2026.",
+      "author": "Free Tools Hub Team",
+      "date": "Feb 4, 2026",
+      "category": "Web Dev",
+      "image": "https://images.unsplash.com/photo-1547658719-da2b51169166?w=800&h=400&fit=crop",
+      "contentFile": "blogs/web-dev-trends-2026.html"
+    },
+    {
+      "id": 5,
+      "title": "15 Productivity Hacks Every Professional Should Know in 2026",
+      "slug": "productivity-hacks-professionals-2026",
+      "excerpt": "Boost your work efficiency by 300% with these 15 proven productivity hacks. Learn time management tips and workflow automation strategies.",
+      "author": "Free Tools Hub Team",
+      "date": "Feb 7, 2026",
+      "category": "Productivity",
+      "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop",
+      "contentFile": "blogs/productivity-hacks-2026.html"
+    }
+  ]
+}
