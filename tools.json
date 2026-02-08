@@ -21,6 +21,19 @@
       "file": "tools/utility/word-to-pdf-converter.html",
       "description": "Convert WORD files and Documents to PDF documents"
     },
+        
+    {
+      "name": " SEO ANALYZER",
+      "icon": "fa-file-word",
+      "color": "blue",
+      "category": "utility",
+      "badge": "NEW",
+      "file": "tools/utility/seo-analyzer.html",
+      "description": "Analyze your webpage SEO score instantly & get actionable tips "
+      "tags": ["seo", "webpage", "analyzer"],
+      "rating": "4.7",
+      "users": "5.2K"
+    },
     {
       "name": "DAILY TASK PLANNER ",
       "icon": "fa-file-word",
