@@ -8,7 +8,7 @@
         "date": "Feb 7, 2026",
         "category": "SEO",
         "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
-        "file": "seo-tools-2026.html"
+        "file": "best-free-seo-tools-2026.html"
     },
     {
         "id": 2,
@@ -23,14 +23,14 @@
     },
     {
         "id": 3,
-        "title": "Content Marketing Strategy 2026: Complete Guide to 10X Your Traffic",
-        "slug": "content-marketing-strategy-2026",
-        "excerpt": "Master content marketing in 2026 with this complete guide. Learn AI-powered content creation, SEO optimization, distribution strategies & conversion tactics. Boost traffic by 1000%!",
+        "title": "The Ultimate Guide to Password Security in 2026: Protect Your Digital Life",
+        "slug": "password-security-guide-2026",
+        "excerpt": "Master password security with this comprehensive 2026 guide. Learn to create unbreakable passwords, use password managers, enable 2FA, and protect yourself from cyber threats. Your complete security checklist!",
         "author": "Free Tools Hub Team",
         "date": "Feb 8, 2026",
-        "category": "Content Marketing",
-        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=400&fit=crop",
-        "file": "content-marketing-2026.html"
+        "category": "Security",
+        "image": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&h=400&fit=crop",
+        "file": "password-security-guide.html"
     },
     {
         "id": 4,
@@ -41,7 +41,7 @@
         "date": "Feb 9, 2026",
         "category": "Email Marketing",
         "image": "https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=800&h=400&fit=crop",
-        "file": "email-marketing-2026.html"
+        "file": "email-marketing-strategy-2026.html"
     },
     {
         "id": 5,
@@ -52,6 +52,17 @@
         "date": "Feb 10, 2026",
         "category": "YouTube & Video Marketing",
         "image": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800&h=400&fit=crop",
-        "file": "youtube-thumbnails-2026.html"
+        "file": "youtube-thumbnail-design-tips.html"
+    },
+    {
+        "id": 6,
+        "title": "Social Media Marketing Strategy 2026: 12 Proven Tactics to Grow Your Following by 500%",
+        "slug": "social-media-marketing-strategy-2026",
+        "excerpt": "Master social media marketing in 2026 with these 12 proven strategies. Learn AI content creation, viral marketing, influencer partnerships & analytics. Grow your following by 500%!",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 11, 2026",
+        "category": "Social Media Marketing",
+        "image": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=400&fit=crop",
+        "file": "social-media-marketing-strategy-2026.html"
     }
 ]
