@@ -266,6 +266,33 @@
       "badge": "NEW",
       "file": "tools/webdev/json-formatter.html",
       "description": "Format and validate JSON data with syntax highlighting"
+    },
+    {
+      "name": "Weekly Goal Tracker",
+      "icon": "fa-calendar-check",
+      "color": "purple",
+      "category": "productivity",
+      "badge": "NEW",
+      "file": "tools/productivity/weekly-goal-tracker.html",
+      "description": "Track and achieve your weekly goals with visual progress"
+    },
+    {
+      "name": "Daily Task Planner",
+      "icon": "fa-tasks",
+      "color": "blue",
+      "category": "productivity",
+      "badge": "NEW",
+      "file": "tools/productivity/daily-task-planner.html",
+      "description": "Plan and organize your daily tasks efficiently"
+    },
+    {
+      "name": "Pomodoro Timer",
+      "icon": "fa-clock",
+      "color": "red",
+      "category": "productivity",
+      "badge": "HOT",
+      "file": "tools/productivity/pomodoro-timer.html",
+      "description": "Focus with 25-minute Pomodoro technique timer"
     }
   ]
 }
