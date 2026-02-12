@@ -3,126 +3,422 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Free Tools Hub – Tools, Blogs & Resources</title>
-  <meta name="description" content="Access 100+ free online tools, tutorials, guides, blogs, and resources for students, developers, and professionals. No signup required.">
-  <meta name="keywords" content="free online tools, word counter, BMI calculator, QR code generator, image compressor, free calculators, text utilities, tutorials, guides, resources, blogs">
-  <link rel="stylesheet" href="style.css">
+  <title>Free Tools Hub – 100+ Free Tools, Blogs & Resources</title>
+  <meta name="description" content="Access 100+ free online tools, expert blogs, downloadable resources, and tutorials for students, developers, and professionals. No signup required.">
+  <meta name="keywords" content="free online tools, SEO tools, student tools, productivity tools, design tools, free resources, free blogs, tutorials">
+  
   <style>
     /* Base */
-    * { margin:0; padding:0; box-sizing:border-box; font-family: Arial, sans-serif; }
-    body { line-height:1.6; color:#333; }
+    * { margin:0; padding:0; box-sizing:border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+    body { line-height:1.6; color:#333; background:#fff; }
     a { text-decoration:none; color:#333; }
     h1,h2,h3 { margin-bottom:10px; }
     img { max-width:100%; display:block; }
 
-    /* Hero */
-    .hero-section { background:#4a90e2; color:#fff; padding:60px 20px; text-align:center; }
-    .hero-section h1 { font-size:2.5rem; margin-bottom:20px; }
-    .hero-section p { font-size:1.2rem; margin-bottom:20px; }
-    .cta-button { background:#ffcc00; color:#333; padding:15px 25px; border-radius:10px; font-weight:bold; transition:0.3s; }
-    .cta-button:hover { background:#e6b800; }
-    .search-bar { padding:12px; width:80%; max-width:500px; border-radius:8px; border:none; margin-top:20px; }
+    /* Hero Section */
+    .hero-section { 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color:#fff; 
+      padding:80px 20px; 
+      text-align:center; 
+    }
+    .hero-section h1 { 
+      font-size:3rem; 
+      margin-bottom:20px; 
+      font-weight:700;
+    }
+    .hero-section p { 
+      font-size:1.3rem; 
+      margin-bottom:30px; 
+      max-width:800px;
+      margin-left:auto;
+      margin-right:auto;
+    }
+    .cta-button { 
+      background:#ffcc00; 
+      color:#333; 
+      padding:18px 35px; 
+      border-radius:50px; 
+      font-weight:bold; 
+      font-size:1.1rem;
+      transition:0.3s; 
+      display:inline-block;
+      margin:10px;
+    }
+    .cta-button:hover { 
+      background:#e6b800; 
+      transform:translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .search-bar { 
+      padding:15px 20px; 
+      width:80%; 
+      max-width:600px; 
+      border-radius:50px; 
+      border:none; 
+      margin-top:30px; 
+      font-size:1rem;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    /* Stats Bar */
+    .stats-bar {
+      background:#f7f7f7;
+      padding:40px 20px;
+      text-align:center;
+      display:flex;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:40px;
+    }
+    .stat-item {
+      text-align:center;
+    }
+    .stat-number {
+      font-size:2.5rem;
+      font-weight:700;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      font-size:1rem;
+      color:#666;
+      margin-top:5px;
+    }
 
     /* Sections */
-    section { padding:60px 20px; text-align:center; }
-    section h2 { font-size:2rem; margin-bottom:40px; }
+    section { 
+      padding:60px 20px; 
+      text-align:center;
+      max-width:1200px;
+      margin:0 auto;
+    }
+    section h2 { 
+      font-size:2.5rem; 
+      margin-bottom:40px; 
+      color:#333;
+      font-weight:700;
+    }
 
     /* Grids */
     .tools-grid, .blog-grid, .resources-grid, .categories-grid {
-      display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:20px;
+      display:grid; 
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); 
+      gap:25px;
+      margin-top:30px;
     }
+    
     .tool-card, .blog-card, .resource-card, .category-card {
-      padding:20px; border-radius:12px; background:#f7f7f7; box-shadow:0 4px 8px rgba(0,0,0,0.1); transition:0.3s;
+      padding:25px; 
+      border-radius:15px; 
+      background:#fff; 
+      box-shadow:0 5px 15px rgba(0,0,0,0.08); 
+      transition:0.3s;
+      border:2px solid transparent;
     }
+    
     .tool-card:hover, .blog-card:hover, .resource-card:hover, .category-card:hover {
-      transform: translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.2);
+      transform: translateY(-8px); 
+      box-shadow:0 12px 30px rgba(0,0,0,0.15);
+      border-color:#667eea;
     }
-    .tool-card a, .blog-card a, .resource-card a, .category-card a { font-size:1.1rem; font-weight:bold; display:block; margin-bottom:10px; }
+    
+    .tool-card a, .blog-card a, .resource-card a, .category-card a { 
+      font-size:1.2rem; 
+      font-weight:600; 
+      display:block; 
+      margin-bottom:10px;
+      color:#333;
+    }
+    
+    .tool-card p, .blog-card p, .resource-card p {
+      color:#666;
+      font-size:0.95rem;
+      line-height:1.5;
+    }
+
+    .tool-icon, .resource-icon, .blog-icon {
+      font-size:2.5rem;
+      margin-bottom:15px;
+    }
+
+    /* Categories Section */
+    #categories {
+      background:#f9f9f9;
+    }
 
     /* Newsletter */
-    #newsletter { background:#f2f2f2; padding:40px 20px; text-align:center; }
-    #newsletter input { padding:12px; width:60%; max-width:300px; border:none; border-radius:6px; margin-top:10px; margin-right:10px; }
-    #newsletter button { padding:12px 20px; border:none; border-radius:6px; background:#ffcc00; color:#333; font-weight:bold; cursor:pointer; }
-    #newsletter button:hover { background:#e6b800; }
+    #newsletter { 
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color:#fff;
+      padding:60px 20px; 
+      text-align:center; 
+    }
+    #newsletter h2 {
+      color:#fff;
+      margin-bottom:20px;
+    }
+    #newsletter input { 
+      padding:15px 20px; 
+      width:60%; 
+      max-width:400px; 
+      border:none; 
+      border-radius:50px; 
+      margin-top:10px; 
+      margin-right:10px; 
+      font-size:1rem;
+    }
+    #newsletter button { 
+      padding:15px 30px; 
+      border:none; 
+      border-radius:50px; 
+      background:#ffcc00; 
+      color:#333; 
+      font-weight:bold; 
+      cursor:pointer; 
+      font-size:1rem;
+      transition:0.3s;
+    }
+    #newsletter button:hover { 
+      background:#e6b800; 
+      transform:scale(1.05);
+    }
 
     /* Footer */
-    footer { background:#333; color:#fff; padding:40px 20px; text-align:center; }
-    .footer-links a { margin:0 15px; color:#fff; font-size:0.9rem; }
-    footer p { margin-top:20px; font-size:0.9rem; }
+    footer { 
+      background:#1a202c; 
+      color:#fff; 
+      padding:50px 20px; 
+      text-align:center; 
+    }
+    .footer-links {
+      margin-bottom:20px;
+    }
+    .footer-links a { 
+      margin:0 20px; 
+      color:#a0aec0; 
+      font-size:1rem;
+      transition:0.3s;
+    }
+    .footer-links a:hover {
+      color:#fff;
+    }
+    footer p { 
+      margin-top:20px; 
+      font-size:0.9rem; 
+      color:#a0aec0;
+    }
+
+    /* View All Button */
+    .view-all-btn {
+      display:inline-block;
+      margin-top:30px;
+      padding:12px 30px;
+      background:#667eea;
+      color:#fff;
+      border-radius:50px;
+      font-weight:600;
+      transition:0.3s;
+    }
+    .view-all-btn:hover {
+      background:#764ba2;
+      transform:translateY(-2px);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero-section h1 { font-size:2rem; }
+      .hero-section p { font-size:1.1rem; }
+      section h2 { font-size:2rem; }
+      .stats-bar { flex-direction:column; gap:20px; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- Hero -->
+  <!-- Hero Section -->
   <header class="hero-section">
-    <h1>100+ Free Online Tools, Blogs & Resources</h1>
-    <p>Access calculators, converters, text & image tools, blogs, tutorials & resources — completely free, no signup required!</p>
+    <h1>🚀 100+ Free Online Tools, Blogs & Resources</h1>
+    <p>Access powerful calculators, converters, SEO tools, student resources, expert blogs & downloadable guides — completely free, no signup required!</p>
     <a href="#popular-tools" class="cta-button">Explore Tools</a>
-    <input type="search" placeholder="Search tools, blogs, tutorials..." class="search-bar">
+    <a href="#resources" class="cta-button">Get Resources</a>
+    <br>
+    <input type="search" id="searchBar" placeholder="Search tools, blogs, resources..." class="search-bar">
   </header>
+
+  <!-- Stats Bar -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number">100+</div>
+      <div class="stat-label">Free Tools</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">50+</div>
+      <div class="stat-label">Expert Blogs</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">8+</div>
+      <div class="stat-label">Resources & Guides</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Free Forever</div>
+    </div>
+  </div>
 
   <!-- Popular Tools -->
   <section id="popular-tools">
-    <h2>Most Popular Tools</h2>
+    <h2>⭐ Most Popular Tools</h2>
     <div class="tools-grid">
-      <div class="tool-card"><a href="word-counter.html">Word Counter</a></div>
-      <div class="tool-card"><a href="bmi-calculator.html">BMI Calculator</a></div>
-      <div class="tool-card"><a href="percentage-calculator.html">Percentage Calculator</a></div>
-      <div class="tool-card"><a href="image-compressor.html">Image Compressor</a></div>
-      <div class="tool-card"><a href="qr-generator.html">QR Code Generator</a></div>
+      <div class="tool-card">
+        <div class="tool-icon">📝</div>
+        <a href="tools/seo-analyzer.html">SEO Analyzer</a>
+        <p>Analyze your website's SEO performance</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">⏰</div>
+        <a href="tools/pomodoro-timer.html">Pomodoro Timer</a>
+        <p>Stay focused with timed work sessions</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">📊</div>
+        <a href="tools/gpa-calculator.html">GPA Calculator</a>
+        <p>Calculate your Grade Point Average</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">✅</div>
+        <a href="tools/daily-task-planner.html">Task Planner</a>
+        <p>Organize your daily tasks efficiently</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🎯</div>
+        <a href="tools/weekly-goal-tracker.html">Goal Tracker</a>
+        <p>Track and achieve your weekly goals</p>
+      </div>
+      <div class="tool-card">
+        <div class="tool-icon">🔗</div>
+        <a href="tools/backlink-checker.html">Backlink Checker</a>
+        <p>Check backlinks to your website</p>
+      </div>
     </div>
+    <a href="tools.html" class="view-all-btn">View All Tools →</a>
   </section>
 
   <!-- Categories -->
   <section id="categories">
-    <h2>Explore Tools by Category</h2>
+    <h2>🔍 Explore Tools by Category</h2>
     <div class="categories-grid">
-      <div class="category-card"><a href="category/text-tools.html">Text Tools</a></div>
-      <div class="category-card"><a href="category/finance-tools.html">Finance Tools</a></div>
-      <div class="category-card"><a href="category/image-tools.html">Image Tools</a></div>
-      <div class="category-card"><a href="category/developer-tools.html">Developer Tools</a></div>
-      <div class="category-card"><a href="category/utility-tools.html">Utility Tools</a></div>
+      <div class="category-card">
+        <a href="#seo-tools">🚀 SEO Tools</a>
+        <p>Boost your website rankings</p>
+      </div>
+      <div class="category-card">
+        <a href="#student-tools">🎓 Student Tools</a>
+        <p>Academic calculators & planners</p>
+      </div>
+      <div class="category-card">
+        <a href="#productivity-tools">⚡ Productivity Tools</a>
+        <p>Maximize your efficiency</p>
+      </div>
+      <div class="category-card">
+        <a href="#design-tools">🎨 Design Tools</a>
+        <p>Create stunning graphics</p>
+      </div>
+      <div class="category-card">
+        <a href="#utility-tools">🔧 Utility Tools</a>
+        <p>Everyday helpful tools</p>
+      </div>
     </div>
   </section>
 
   <!-- Latest Blogs -->
   <section id="blogs">
-    <h2>Latest Blogs</h2>
+    <h2>📰 Latest Expert Blogs</h2>
     <div class="blog-grid">
-      <div class="blog-card"><a href="blog/how-to-use-word-counter.html">How to Use Word Counter Effectively</a></div>
-      <div class="blog-card"><a href="blog/best-online-image-compressor.html">Best Free Online Image Compressor</a></div>
-      <div class="blog-card"><a href="blog/percentage-calculator-guide.html">Step-by-Step Percentage Calculator Guide</a></div>
-      <div class="blog-card"><a href="blog/bmi-calculator-tips.html">BMI Calculator: Health Tips & Guide</a></div>
+      <div class="blog-card">
+        <div class="blog-icon">🔍</div>
+        <a href="blog-posts/best-free-seo-tools-2026.html">10 Best Free SEO Tools 2026</a>
+        <p>Boost your rankings with these powerful free tools</p>
+      </div>
+      <div class="blog-card">
+        <div class="blog-icon">⏱️</div>
+        <a href="blog-posts/time-management-tools-2026.html">Time Management Tools & Techniques</a>
+        <p>Increase productivity by 300% with proven methods</p>
+      </div>
+      <div class="blog-card">
+        <div class="blog-icon">📈</div>
+        <a href="blog-posts/productivity-hacks-professionals-2026.html">15 Productivity Hacks 2026</a>
+        <p>Transform your work efficiency today</p>
+      </div>
+      <div class="blog-card">
+        <div class="blog-icon">🎓</div>
+        <a href="blog-posts/student-productivity-tips.html">Student Productivity Hacks</a>
+        <p>Ace your exams with better study strategies</p>
+      </div>
     </div>
+    <a href="blog.html" class="view-all-btn">Read All Blogs →</a>
   </section>
 
-  <!-- Resources -->
+  <!-- Resources & Guides -->
   <section id="resources">
-    <h2>Resources & Tutorials</h2>
+    <h2>📚 Free Resources & Downloadable Guides</h2>
     <div class="resources-grid">
-      <div class="resource-card"><a href="resources/excel-tutorial.html">Excel Formulas & Tutorials</a></div>
-      <div class="resource-card"><a href="resources/javascript-guide.html">JavaScript Beginner Guide</a></div>
-      <div class="resource-card"><a href="resources/html-css-tutorial.html">HTML & CSS Tutorial</a></div>
-      <div class="resource-card"><a href="resources/image-editing-guide.html">Image Editing Tools Guide</a></div>
+      <div class="resource-card">
+        <div class="resource-icon">📖</div>
+        <a href="resources/complete-seo-guide-beginners-2026.html">Complete SEO Guide for Beginners</a>
+        <p>50+ page comprehensive SEO guide with checklist</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📱</div>
+        <a href="resources/social-media-marketing-toolkit-2026.html">Social Media Marketing Toolkit</a>
+        <p>Content calendars, caption templates & hashtag strategies</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">📝</div>
+        <a href="resources/student-study-planner-templates.html">Student Study Planner</a>
+        <p>Weekly schedules, exam prep guides & note-taking templates</p>
+      </div>
+      <div class="resource-card">
+        <div class="resource-icon">⚡</div>
+        <a href="resources/productivity-hacks-workbook-2026.html">Productivity Hacks Workbook</a>
+        <p>15 proven techniques with time blocking templates</p>
+      </div>
     </div>
+    <a href="resources.html" class="view-all-btn">Browse All Resources →</a>
   </section>
 
   <!-- Newsletter -->
   <section id="newsletter">
-    <h2>Subscribe for Free Tools Updates</h2>
-    <input type="email" placeholder="Enter your email">
-    <button>Subscribe</button>
+    <h2>📧 Get Weekly Updates & New Tools</h2>
+    <p style="margin-bottom:20px; font-size:1.1rem;">Subscribe for free tools, expert tips & exclusive resources delivered to your inbox!</p>
+    <form>
+      <input type="email" placeholder="Enter your email address" required>
+      <button type="submit">Subscribe Free</button>
+    </form>
+    <p style="margin-top:15px; font-size:0.9rem; opacity:0.9;">✅ No spam, unsubscribe anytime</p>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="footer-links">
-      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="about.html">About Us</a>
+      <a href="privacy.html">Privacy Policy</a>
       <a href="terms.html">Terms of Use</a>
+      <a href="disclaimer.html">Disclaimer</a>
       <a href="contact.html">Contact Us</a>
     </div>
-    <p>&copy; 2026 Free Tools Hub. All Rights Reserved.</p>
+    <p>&copy; 2026 Free Tools Hub. All Rights Reserved. Made with ❤️ for creators and learners.</p>
   </footer>
+
+  <script>
+    // Simple search functionality
+    document.getElementById('searchBar')?.addEventListener('input', function(e) {
+      const searchTerm = e.target.value.toLowerCase();
+      console.log('Searching for:', searchTerm);
+      // Add search logic here
+    });
+  </script>
 
 </body>
 </html>
