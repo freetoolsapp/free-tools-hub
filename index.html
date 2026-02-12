@@ -116,6 +116,7 @@
       box-shadow:0 5px 15px rgba(0,0,0,0.08); 
       transition:0.3s;
       border:2px solid transparent;
+      text-align:center;
     }
     
     .tool-card:hover, .blog-card:hover, .resource-card:hover, .category-card:hover {
@@ -138,9 +139,19 @@
       line-height:1.5;
     }
 
-    .tool-icon, .resource-icon, .blog-icon {
+    .tool-icon {
       font-size:2.5rem;
       margin-bottom:15px;
+    }
+
+    .category-badge {
+      display:inline-block;
+      padding:5px 12px;
+      background:#667eea;
+      color:#fff;
+      border-radius:20px;
+      font-size:0.85rem;
+      margin-bottom:10px;
     }
 
     /* Categories Section */
@@ -226,6 +237,13 @@
       transform:translateY(-2px);
     }
 
+    /* Loading State */
+    .loading {
+      text-align:center;
+      padding:40px;
+      color:#666;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .hero-section h1 { font-size:2rem; }
@@ -250,15 +268,15 @@
   <!-- Stats Bar -->
   <div class="stats-bar">
     <div class="stat-item">
-      <div class="stat-number">100+</div>
+      <div class="stat-number" id="toolsCount">0</div>
       <div class="stat-label">Free Tools</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">50+</div>
+      <div class="stat-number" id="blogsCount">0</div>
       <div class="stat-label">Expert Blogs</div>
     </div>
     <div class="stat-item">
-      <div class="stat-number">8+</div>
+      <div class="stat-number" id="resourcesCount">8</div>
       <div class="stat-label">Resources & Guides</div>
     </div>
     <div class="stat-item">
@@ -270,39 +288,10 @@
   <!-- Popular Tools -->
   <section id="popular-tools">
     <h2>⭐ Most Popular Tools</h2>
-    <div class="tools-grid">
-      <div class="tool-card">
-        <div class="tool-icon">📝</div>
-        <a href="tools/seo-analyzer.html">SEO Analyzer</a>
-        <p>Analyze your website's SEO performance</p>
-      </div>
-      <div class="tool-card">
-        <div class="tool-icon">⏰</div>
-        <a href="tools/pomodoro-timer.html">Pomodoro Timer</a>
-        <p>Stay focused with timed work sessions</p>
-      </div>
-      <div class="tool-card">
-        <div class="tool-icon">📊</div>
-        <a href="tools/gpa-calculator.html">GPA Calculator</a>
-        <p>Calculate your Grade Point Average</p>
-      </div>
-      <div class="tool-card">
-        <div class="tool-icon">✅</div>
-        <a href="tools/daily-task-planner.html">Task Planner</a>
-        <p>Organize your daily tasks efficiently</p>
-      </div>
-      <div class="tool-card">
-        <div class="tool-icon">🎯</div>
-        <a href="tools/weekly-goal-tracker.html">Goal Tracker</a>
-        <p>Track and achieve your weekly goals</p>
-      </div>
-      <div class="tool-card">
-        <div class="tool-icon">🔗</div>
-        <a href="tools/backlink-checker.html">Backlink Checker</a>
-        <p>Check backlinks to your website</p>
-      </div>
+    <div class="tools-grid" id="toolsGrid">
+      <div class="loading">Loading tools...</div>
     </div>
-    <a href="tools.html" class="view-all-btn">View All Tools →</a>
+    <a href="index.html#tools" class="view-all-btn">View All Tools →</a>
   </section>
 
   <!-- Categories -->
@@ -310,23 +299,23 @@
     <h2>🔍 Explore Tools by Category</h2>
     <div class="categories-grid">
       <div class="category-card">
-        <a href="#seo-tools">🚀 SEO Tools</a>
+        <a href="index.html#seo-tools">🚀 SEO Tools</a>
         <p>Boost your website rankings</p>
       </div>
       <div class="category-card">
-        <a href="#student-tools">🎓 Student Tools</a>
+        <a href="index.html#student-tools">🎓 Student Tools</a>
         <p>Academic calculators & planners</p>
       </div>
       <div class="category-card">
-        <a href="#productivity-tools">⚡ Productivity Tools</a>
+        <a href="index.html#productivity-tools">⚡ Productivity Tools</a>
         <p>Maximize your efficiency</p>
       </div>
       <div class="category-card">
-        <a href="#design-tools">🎨 Design Tools</a>
+        <a href="index.html#design-tools">🎨 Design Tools</a>
         <p>Create stunning graphics</p>
       </div>
       <div class="category-card">
-        <a href="#utility-tools">🔧 Utility Tools</a>
+        <a href="index.html#utility-tools">🔧 Utility Tools</a>
         <p>Everyday helpful tools</p>
       </div>
     </div>
@@ -335,27 +324,8 @@
   <!-- Latest Blogs -->
   <section id="blogs">
     <h2>📰 Latest Expert Blogs</h2>
-    <div class="blog-grid">
-      <div class="blog-card">
-        <div class="blog-icon">🔍</div>
-        <a href="blog-posts/best-free-seo-tools-2026.html">10 Best Free SEO Tools 2026</a>
-        <p>Boost your rankings with these powerful free tools</p>
-      </div>
-      <div class="blog-card">
-        <div class="blog-icon">⏱️</div>
-        <a href="blog-posts/time-management-tools-2026.html">Time Management Tools & Techniques</a>
-        <p>Increase productivity by 300% with proven methods</p>
-      </div>
-      <div class="blog-card">
-        <div class="blog-icon">📈</div>
-        <a href="blog-posts/productivity-hacks-professionals-2026.html">15 Productivity Hacks 2026</a>
-        <p>Transform your work efficiency today</p>
-      </div>
-      <div class="blog-card">
-        <div class="blog-icon">🎓</div>
-        <a href="blog-posts/student-productivity-tips.html">Student Productivity Hacks</a>
-        <p>Ace your exams with better study strategies</p>
-      </div>
+    <div class="blog-grid" id="blogsGrid">
+      <div class="loading">Loading blogs...</div>
     </div>
     <a href="blog.html" class="view-all-btn">Read All Blogs →</a>
   </section>
@@ -363,27 +333,8 @@
   <!-- Resources & Guides -->
   <section id="resources">
     <h2>📚 Free Resources & Downloadable Guides</h2>
-    <div class="resources-grid">
-      <div class="resource-card">
-        <div class="resource-icon">📖</div>
-        <a href="resources/complete-seo-guide-beginners-2026.html">Complete SEO Guide for Beginners</a>
-        <p>50+ page comprehensive SEO guide with checklist</p>
-      </div>
-      <div class="resource-card">
-        <div class="resource-icon">📱</div>
-        <a href="resources/social-media-marketing-toolkit-2026.html">Social Media Marketing Toolkit</a>
-        <p>Content calendars, caption templates & hashtag strategies</p>
-      </div>
-      <div class="resource-card">
-        <div class="resource-icon">📝</div>
-        <a href="resources/student-study-planner-templates.html">Student Study Planner</a>
-        <p>Weekly schedules, exam prep guides & note-taking templates</p>
-      </div>
-      <div class="resource-card">
-        <div class="resource-icon">⚡</div>
-        <a href="resources/productivity-hacks-workbook-2026.html">Productivity Hacks Workbook</a>
-        <p>15 proven techniques with time blocking templates</p>
-      </div>
+    <div class="resources-grid" id="resourcesGrid">
+      <div class="loading">Loading resources...</div>
     </div>
     <a href="resources.html" class="view-all-btn">Browse All Resources →</a>
   </section>
@@ -412,11 +363,176 @@
   </footer>
 
   <script>
-    // Simple search functionality
+    // Icon mapping for tools
+    const toolIcons = {
+      'seo': '🔍',
+      'analyzer': '📊',
+      'timer': '⏰',
+      'pomodoro': '⏱️',
+      'calculator': '🧮',
+      'gpa': '🎓',
+      'task': '✅',
+      'planner': '📝',
+      'goal': '🎯',
+      'tracker': '📈',
+      'backlink': '🔗',
+      'meta': '🏷️',
+      'generator': '⚡',
+      'checker': '✓',
+      'counter': '🔢',
+      'converter': '🔄',
+      'default': '🛠️'
+    };
+
+    const blogIcons = {
+      'seo': '🔍',
+      'productivity': '⚡',
+      'time': '⏱️',
+      'student': '🎓',
+      'social': '📱',
+      'marketing': '📈',
+      'default': '📰'
+    };
+
+    function getIcon(title, type = 'tool') {
+      const icons = type === 'blog' ? blogIcons : toolIcons;
+      const lowerTitle = title.toLowerCase();
+      
+      for (let key in icons) {
+        if (lowerTitle.includes(key)) {
+          return icons[key];
+        }
+      }
+      return icons.default;
+    }
+
+    // Load Tools from tools.json
+    async function loadTools() {
+      try {
+        const response = await fetch('tools.json');
+        const tools = await response.json();
+        
+        // Update count
+        document.getElementById('toolsCount').textContent = tools.length + '+';
+        
+        // Display first 6 tools
+        const toolsGrid = document.getElementById('toolsGrid');
+        toolsGrid.innerHTML = '';
+        
+        tools.slice(0, 6).forEach(tool => {
+          const icon = getIcon(tool.name);
+          const card = `
+            <div class="tool-card">
+              <div class="tool-icon">${icon}</div>
+              <a href="tools/${tool.file}">${tool.name}</a>
+              <p>${tool.description ? tool.description.substring(0, 80) + '...' : 'Free online tool'}</p>
+            </div>
+          `;
+          toolsGrid.innerHTML += card;
+        });
+      } catch (error) {
+        console.error('Error loading tools:', error);
+        document.getElementById('toolsGrid').innerHTML = '<p>Unable to load tools. Please try again.</p>';
+      }
+    }
+
+    // Load Blogs from blog.json
+    async function loadBlogs() {
+      try {
+        const response = await fetch('blog.json');
+        const blogs = await response.json();
+        
+        // Update count
+        document.getElementById('blogsCount').textContent = blogs.length + '+';
+        
+        // Display first 4 blogs
+        const blogsGrid = document.getElementById('blogsGrid');
+        blogsGrid.innerHTML = '';
+        
+        blogs.slice(0, 4).forEach(blog => {
+          const icon = getIcon(blog.title, 'blog');
+          const card = `
+            <div class="blog-card">
+              <div class="tool-icon">${icon}</div>
+              <span class="category-badge">${blog.category || 'Blog'}</span>
+              <a href="blog-posts/${blog.file}">${blog.title}</a>
+              <p>${blog.excerpt ? blog.excerpt.substring(0, 100) + '...' : ''}</p>
+            </div>
+          `;
+          blogsGrid.innerHTML += card;
+        });
+      } catch (error) {
+        console.error('Error loading blogs:', error);
+        document.getElementById('blogsGrid').innerHTML = '<p>Unable to load blogs. Please try again.</p>';
+      }
+    }
+
+    // Load Resources
+    async function loadResources() {
+      try {
+        const response = await fetch('resources.json');
+        const resources = await response.json();
+        
+        // Display first 4 resources
+        const resourcesGrid = document.getElementById('resourcesGrid');
+        resourcesGrid.innerHTML = '';
+        
+        resources.slice(0, 4).forEach(resource => {
+          const card = `
+            <div class="resource-card">
+              <div class="tool-icon">📖</div>
+              <span class="category-badge">${resource.category || 'Resource'}</span>
+              <a href="resources/${resource.file}">${resource.title}</a>
+              <p>${resource.description ? resource.description.substring(0, 100) + '...' : ''}</p>
+            </div>
+          `;
+          resourcesGrid.innerHTML += card;
+        });
+      } catch (error) {
+        console.error('Error loading resources:', error);
+        // Fallback to static resources
+        const resourcesGrid = document.getElementById('resourcesGrid');
+        resourcesGrid.innerHTML = `
+          <div class="resource-card">
+            <div class="tool-icon">📖</div>
+            <span class="category-badge">SEO Resources</span>
+            <a href="resources/complete-seo-guide-beginners-2026.html">Complete SEO Guide for Beginners</a>
+            <p>50+ page comprehensive SEO guide with checklist</p>
+          </div>
+          <div class="resource-card">
+            <div class="tool-icon">📱</div>
+            <span class="category-badge">Social Media Resources</span>
+            <a href="resources/social-media-marketing-toolkit-2026.html">Social Media Marketing Toolkit</a>
+            <p>Content calendars, caption templates & hashtag strategies</p>
+          </div>
+          <div class="resource-card">
+            <div class="tool-icon">📝</div>
+            <span class="category-badge">Student Resources</span>
+            <a href="resources/student-study-planner-templates.html">Student Study Planner</a>
+            <p>Weekly schedules, exam prep guides & note-taking templates</p>
+          </div>
+          <div class="resource-card">
+            <div class="tool-icon">⚡</div>
+            <span class="category-badge">Productivity Resources</span>
+            <a href="resources/productivity-hacks-workbook-2026.html">Productivity Hacks Workbook</a>
+            <p>15 proven techniques with time blocking templates</p>
+          </div>
+        `;
+      }
+    }
+
+    // Search functionality
     document.getElementById('searchBar')?.addEventListener('input', function(e) {
       const searchTerm = e.target.value.toLowerCase();
       console.log('Searching for:', searchTerm);
       // Add search logic here
+    });
+
+    // Load all data on page load
+    document.addEventListener('DOMContentLoaded', function() {
+      loadTools();
+      loadBlogs();
+      loadResources();
     });
   </script>
 
