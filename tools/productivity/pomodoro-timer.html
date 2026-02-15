@@ -1,678 +1,245 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Essential Meta Tags -->
+    <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- SEO Meta Tags - CTR Optimized -->
-    <title>Free Pomodoro Timer 2026 | Focus Timer with Task Manager - TriHub</title>
-    <meta name="title" content="Pomodoro Focus Timer - Free 25-Minute Work Sessions + Tasks">
-    <meta name="description" content="Free Pomodoro timer with integrated task manager. Track focus sessions, manage tasks & boost productivity by 300%. Works offline. No signup required!">
-    <meta name="keywords" content="pomodoro timer, focus timer, 25 minute timer, productivity timer, task manager, work timer, pomodoro technique, time management">
-    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large">
-    <meta name="author" content="TriHub">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://yourusername.github.io/TriHub/tools/pomodoro-timer.html">
-    <meta property="og:title" content="Free Pomodoro Timer + Task Manager | Stay Focused">
-    <meta property="og:description" content="25-min focus sessions with task tracking. Free forever, works offline, saves your progress!">
-    <meta property="og:image" content="https://yourusername.github.io/TriHub/images/pomodoro-timer-og.jpg">
-    
-    <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image">
-    <meta property="twitter:title" content="Pomodoro Focus Timer - TriHub">
-    <meta property="twitter:description" content="Stay focused with 25-min work sessions. Track tasks & boost productivity!">
+    <!-- Primary Meta Tags -->
+    <title>Pomodoro Timer - Free Focus Timer | Free Tools Hub</title>
+    <meta name="title" content="Pomodoro Timer - Free Focus Timer">
+    <meta name="description" content="Free Pomodoro timer with 25-minute focus sessions. Boost productivity with work/break intervals. Track your time and stay focused!">
+    <meta name="keywords" content="pomodoro timer, focus timer, 25 minute timer, productivity timer, work timer">
+    <meta name="robots" content="index, follow">
     
     <!-- Canonical URL -->
-    <link rel="canonical" href="https://yourusername.github.io/TriHub/tools/pomodoro-timer.html">
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/productivity/pomodoro-timer.html">
     
-    <!-- Preconnect -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://pagead2.googlesyndication.com">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXX"
-         crossorigin="anonymous"></script>
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
-    <!-- Schema Markup - SoftwareApplication -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "SoftwareApplication",
-        "name": "Pomodoro Focus Timer",
-        "applicationCategory": "ProductivityApplication",
-        "operatingSystem": "Any",
-        "offers": {
-            "@type": "Offer",
-            "price": "0",
-            "priceCurrency": "USD"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.9",
-            "ratingCount": "3521"
-        },
-        "description": "Free Pomodoro timer with 25-minute focus sessions, break reminders, and integrated task management. Boost productivity today!",
-        "featureList": [
-            "25-minute focus sessions",
-            "5-minute short breaks",
-            "15-minute long breaks",
-            "Task management",
-            "Progress tracking",
-            "Local storage"
-        ]
-    }
-    </script>
-    
-    <!-- Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Karla:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #e74c3c;
-            --primary-dark: #c0392b;
-            --break-color: #27ae60;
-            --break-dark: #229954;
-            --dark: #2c3e50;
-            --text: #34495e;
-            --light: #ecf0f1;
-            --white: #ffffff;
-            --shadow: rgba(0, 0, 0, 0.15);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Karla', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            padding: 2rem 1rem;
-            color: var(--text);
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1.5fr;
-            gap: 2rem;
-        }
-
-        .timer-section {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 3rem;
-            box-shadow: 0 20px 60px var(--shadow);
-            text-align: center;
-            animation: fadeIn 0.6s ease-out;
-        }
-
-        .app-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            letter-spacing: 2px;
-        }
-
         .timer-display {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 6rem;
-            color: var(--dark);
-            margin: 2rem 0;
-            line-height: 1;
-            letter-spacing: 4px;
+            font-size: 4rem;
+            font-weight: 700;
+            font-family: 'Courier New', monospace;
         }
-
-        .timer-circle {
-            width: 300px;
-            height: 300px;
-            margin: 0 auto 2rem;
-            position: relative;
-        }
-
-        .circle-bg {
-            fill: none;
-            stroke: var(--light);
-            stroke-width: 12;
-        }
-
+        
         .circle-progress {
-            fill: none;
-            stroke: var(--primary);
-            stroke-width: 12;
-            stroke-linecap: round;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
             transition: stroke-dashoffset 1s linear;
         }
-
-        .timer-controls {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-family: 'Karla', sans-serif;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);
-        }
-
-        .btn-secondary {
-            background: var(--light);
-            color: var(--text);
-        }
-
-        .btn-secondary:hover {
-            background: #d5dbdb;
-        }
-
-        .mode-selector {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-            margin-bottom: 2rem;
-        }
-
-        .mode-btn {
-            padding: 0.75rem 1.5rem;
-            border: 2px solid var(--light);
-            background: var(--white);
-            border-radius: 25px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .mode-btn.active {
-            background: var(--primary);
-            color: var(--white);
-            border-color: var(--primary);
-        }
-
-        .mode-btn.active.break {
-            background: var(--break-color);
-            border-color: var(--break-color);
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .stat-box {
-            background: var(--light);
-            padding: 1rem;
-            border-radius: 12px;
-        }
-
-        .stat-label {
-            font-size: 0.85rem;
-            color: var(--text);
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--dark);
-        }
-
-        .tasks-section {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 20px 60px var(--shadow);
-            animation: fadeIn 0.6s ease-out 0.2s backwards;
-            max-height: 800px;
-            overflow-y: auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .section-title {
-            font-family: 'Bebas Neue', cursive;
-            font-size: 2rem;
-            color: var(--dark);
-            letter-spacing: 1px;
-        }
-
-        .task-input-group {
-            display: flex;
-            gap: 1rem;
-            margin-bottom: 2rem;
-        }
-
-        .task-input {
-            flex: 1;
-            padding: 1rem 1.5rem;
-            border: 2px solid var(--light);
-            border-radius: 12px;
-            font-size: 1rem;
-            font-family: 'Karla', sans-serif;
-            transition: border-color 0.3s ease;
-        }
-
-        .task-input:focus {
-            outline: none;
-            border-color: var(--primary);
-        }
-
-        .btn-add {
-            padding: 1rem 2rem;
-            background: var(--primary);
-            color: var(--white);
-            border: none;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        .btn-add:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .task-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .task-item {
-            background: var(--light);
-            padding: 1.5rem;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-            animation: slideIn 0.3s ease-out;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .task-item::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 100%;
-            width: 4px;
-            background: var(--primary);
-            transform: scaleY(0);
-            transition: transform 0.3s ease;
-        }
-
-        .task-item:hover::before {
-            transform: scaleY(1);
-        }
-
-        .task-item.active {
-            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            box-shadow: 0 4px 12px rgba(253, 203, 110, 0.4);
-        }
-
-        .task-item.completed {
-            opacity: 0.6;
-        }
-
-        .task-checkbox {
-            width: 22px;
-            height: 22px;
-            cursor: pointer;
-            accent-color: var(--primary);
-        }
-
-        .task-content {
-            flex: 1;
-        }
-
-        .task-text {
-            font-size: 1.1rem;
-            color: var(--dark);
-            font-weight: 600;
-            margin-bottom: 0.3rem;
-        }
-
-        .task-item.completed .task-text {
-            text-decoration: line-through;
-            color: var(--text);
-        }
-
-        .pomodoros-count {
-            display: flex;
-            gap: 0.3rem;
-            align-items: center;
-        }
-
-        .pomodoro-dot {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            background: var(--primary);
-            opacity: 0.3;
-        }
-
-        .pomodoro-dot.filled {
-            opacity: 1;
-        }
-
-        .task-actions {
-            display: flex;
-            gap: 0.5rem;
-        }
-
-        .action-btn {
-            padding: 0.5rem 1rem;
-            border: none;
-            background: var(--white);
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .action-btn:hover {
-            transform: scale(1.1);
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 3rem 1rem;
-            color: var(--text);
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateX(-10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        @media (max-width: 968px) {
-            body {
-                padding: 1rem 0.5rem;
-            }
-
-            .container {
-                grid-template-columns: 1fr;
-                gap: 1rem;
-            }
-
-            .timer-section {
-                padding: 1.5rem 1rem;
-                border-radius: 15px;
-            }
-
-            .app-title {
-                font-size: 1.8rem;
-                margin-bottom: 1rem;
-            }
-
+        
+        @media (max-width: 768px) {
             .timer-display {
-                font-size: 3rem;
-                margin: 1rem 0;
-            }
-
-            .timer-circle {
-                width: 200px;
-                height: 200px;
-                margin: 0 auto 1rem;
-            }
-
-            .mode-selector {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                margin-bottom: 1rem;
-            }
-
-            .mode-btn {
-                padding: 0.5rem 1rem;
-                font-size: 0.9rem;
-            }
-
-            .timer-controls {
-                flex-wrap: wrap;
-                gap: 0.5rem;
-                margin-bottom: 1rem;
-            }
-
-            .btn {
-                padding: 0.75rem 1.5rem;
-                font-size: 0.95rem;
-            }
-
-            .stats {
-                gap: 0.5rem;
-                margin-top: 1rem;
-            }
-
-            .stat-box {
-                padding: 0.75rem;
-            }
-
-            .stat-label {
-                font-size: 0.75rem;
-            }
-
-            .stat-value {
-                font-size: 1.5rem;
-            }
-
-            .tasks-section {
-                padding: 1.5rem 1rem;
-            }
-
-            .task-header h2 {
-                font-size: 1.5rem;
-            }
-
-            .task-input {
-                padding: 0.75rem;
-                font-size: 0.95rem;
-            }
-
-            .add-task-btn {
-                padding: 0.75rem 1.25rem;
-                font-size: 0.95rem;
+                font-size: 2.5rem;
             }
         }
     </style>
 </head>
-<body>
-    <div class="container">
-        <!-- Internal Navigation & Breadcrumbs -->
-        <nav style="margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--text); grid-column: 1 / -1;">
-            <a href="../index.html" style="color: var(--primary); text-decoration: none;">🏠 Home</a> 
-            <span style="margin: 0 0.5rem;">/</span>
-            <a href="../index.html#tools" style="color: var(--primary); text-decoration: none;">Tools</a>
-            <span style="margin: 0 0.5rem;">/</span>
-            <span>Pomodoro Timer</span>
-        </nav>
-
-        <!-- AdSense - Top Banner -->
-        <div style="text-align: center; margin-bottom: 2rem; grid-column: 1 / -1;">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-XXXXXXXXXX"
-                 data-ad-slot="1234567890"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-        <div class="timer-section">
-            <h1 class="app-title">Pomodoro Focus Timer</h1>
-            
-            <div class="mode-selector">
-                <button class="mode-btn active" onclick="setMode('work')">Work</button>
-                <button class="mode-btn break" onclick="setMode('shortBreak')">Short Break</button>
-                <button class="mode-btn break" onclick="setMode('longBreak')">Long Break</button>
-            </div>
-
-            <svg class="timer-circle" viewBox="0 0 300 300">
-                <circle class="circle-bg" cx="150" cy="150" r="140"/>
-                <circle class="circle-progress" id="progressCircle" cx="150" cy="150" r="140"/>
-            </svg>
-
-            <div class="timer-display" id="timerDisplay">25:00</div>
-
-            <div class="timer-controls">
-                <button class="btn btn-primary" id="startBtn" onclick="toggleTimer()">Start</button>
-                <button class="btn btn-secondary" onclick="resetTimer()">Reset</button>
-            </div>
-
-            <div class="stats">
-                <div class="stat-box">
-                    <div class="stat-label">Pomodoros Today</div>
-                    <div class="stat-value" id="completedPomodoros">0</div>
-                </div>
-                <div class="stat-box">
-                    <div class="stat-label">Focus Time</div>
-                    <div class="stat-value" id="focusTime">0h</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="tasks-section">
-            <div class="section-header">
-                <h2 class="section-title">Focus Tasks</h2>
-            </div>
-
-            <div class="task-input-group">
-                <input type="text" class="task-input" id="taskInput" placeholder="What are you working on?">
-                <button class="btn-add" onclick="addTask()">+ Add</button>
-            </div>
-
-            <div class="task-list" id="taskList"></div>
-        </div>
-    </div>
-
-    <!-- AdSense - Bottom (Sticky Anchor) -->
-    <div style="text-align: center; margin: 2rem 0; position: sticky; bottom: 0; background: white; padding: 1rem; box-shadow: 0 -4px 12px rgba(0,0,0,0.1);">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-XXXXXXXXXX"
-             data-ad-slot="5555555555"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <!-- Related Tools Section -->
-    <div style="max-width: 1100px; margin: 3rem auto; padding: 0 1rem;">
-        <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.15);">
-            <h2 style="font-family: 'Bebas Neue', cursive; font-size: 2.5rem; color: var(--dark); text-align: center; margin-bottom: 2rem; letter-spacing: 1px;">
-                ⚡ Maximize Your Productivity
-            </h2>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                <!-- Daily Task Planner -->
-                <a href="./daily-task-planner.html" style="text-decoration: none; background: linear-gradient(135deg, #1a1a2e 0%, #0f4c75 100%); color: white; padding: 2rem; border-radius: 12px; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">📝</div>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Daily Task Planner</h3>
-                    <p style="font-size: 0.95rem; opacity: 0.95; line-height: 1.5;">Organize daily tasks with priorities & filters</p>
+<body class="bg-gray-50">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="../../index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
                 </a>
                 
-                <!-- Weekly Goal Tracker -->
-                <a href="./weekly-goal-tracker.html" style="text-decoration: none; background: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); color: white; padding: 2rem; border-radius: 12px; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">🎯</div>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">Weekly Goal Tracker</h3>
-                    <p style="font-size: 0.95rem; opacity: 0.95; line-height: 1.5;">Track weekly goals with visual progress</p>
-                </a>
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="../../tools.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>All Tools</a>
+                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="../../news.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-newspaper mr-1"></i>News</a>
+                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
                 
-                <!-- Productivity Blog -->
-                <a href="../blog/productivity-hacks-professionals.html" style="text-decoration: none; background: linear-gradient(135deg, #00b894 0%, #55efc4 100%); color: white; padding: 2rem; border-radius: 12px; transition: transform 0.3s ease;" onmouseover="this.style.transform='translateY(-6px)'" onmouseout="this.style.transform='translateY(0)'">
-                    <div style="font-size: 2.5rem; margin-bottom: 0.75rem;">💡</div>
-                    <h3 style="font-size: 1.3rem; font-weight: 700; margin-bottom: 0.75rem;">15 Productivity Hacks</h3>
-                    <p style="font-size: 0.95rem; opacity: 0.95; line-height: 1.5;">Expert tips to boost efficiency by 300%</p>
-                </a>
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
             </div>
             
-            <!-- CTA -->
-            <div style="text-align: center; margin-top: 2.5rem;">
-                <a href="../index.html#tools" style="display: inline-block; background: var(--primary); color: white; padding: 1.25rem 3rem; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; box-shadow: 0 8px 20px rgba(231, 76, 60, 0.4);" onmouseover="this.style.background='var(--primary-dark)'; this.style.transform='translateY(-3px)'; this.style.boxShadow='0 12px 30px rgba(231, 76, 60, 0.5)'" onmouseout="this.style.background='var(--primary)'; this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(231, 76, 60, 0.4)'">
-                    Browse 100+ Free Tools
-                </a>
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="../../index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="../../tools.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-tools mr-2"></i>All Tools</a>
+                <a href="../../blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="../../news.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-newspaper mr-2"></i>News</a>
+                <a href="../../resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="../../contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <a href="../../tools.html" class="hover:text-blue-600">Tools</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">Pomodoro Timer</span>
             </div>
         </div>
-
-        <!-- Footer -->
-        <footer style="text-align: center; margin-top: 3rem; padding: 2rem 0; border-top: 3px solid var(--light); color: var(--text);">
-            <p style="margin-bottom: 1rem; font-weight: 600;">
-                <a href="../index.html" style="color: var(--primary); text-decoration: none; margin: 0 1rem;">Home</a> |
-                <a href="../blog.html" style="color: var(--primary); text-decoration: none; margin: 0 1rem;">Blog</a> |
-                <a href="../resources.html" style="color: var(--primary); text-decoration: none; margin: 0 1rem;">Resources</a> |
-                <a href="../index.html#tools" style="color: var(--primary); text-decoration: none; margin: 0 1rem;">Tools</a>
-            </p>
-            <p style="font-size: 0.9rem; color: var(--text);">© 2026 <strong>TriHub</strong> - Free Productivity Tools for Everyone</p>
-        </footer>
     </div>
+
+    <!-- Main Content -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-4xl">
+            
+            <!-- Title Section -->
+            <div class="text-center mb-8">
+                <h2 class="text-4xl font-bold text-gray-800 mb-3">
+                    <i class="fas fa-clock text-red-600 mr-3"></i>Pomodoro Timer
+                </h2>
+                <p class="text-gray-600 text-lg">Focus for 25 minutes, then take a break. Boost your productivity!</p>
+            </div>
+
+            <!-- Timer Card -->
+            <div class="bg-white rounded-xl shadow-lg p-8 mb-8">
+                
+                <!-- Mode Selector -->
+                <div class="flex justify-center gap-3 mb-6">
+                    <button onclick="setMode('work')" id="workBtn" class="px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition">
+                        <i class="fas fa-briefcase mr-2"></i>Work
+                    </button>
+                    <button onclick="setMode('shortBreak')" id="shortBreakBtn" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition">
+                        <i class="fas fa-coffee mr-2"></i>Short Break
+                    </button>
+                    <button onclick="setMode('longBreak')" id="longBreakBtn" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition">
+                        <i class="fas fa-couch mr-2"></i>Long Break
+                    </button>
+                </div>
+
+                <!-- Timer Circle -->
+                <div class="text-center mb-6">
+                    <svg width="250" height="250" viewBox="0 0 250 250" class="mx-auto">
+                        <circle cx="125" cy="125" r="110" fill="none" stroke="#e0e0e0" stroke-width="12"/>
+                        <circle id="progressCircle" cx="125" cy="125" r="110" fill="none" stroke="#ef4444" stroke-width="12" 
+                                stroke-dasharray="691" stroke-dashoffset="0" 
+                                transform="rotate(-90 125 125)" class="circle-progress"/>
+                    </svg>
+                </div>
+
+                <!-- Timer Display -->
+                <div class="text-center mb-6">
+                    <div id="timerDisplay" class="timer-display text-gray-800">25:00</div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="flex justify-center gap-4">
+                    <button onclick="startTimer()" id="startBtn" class="bg-green-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-green-700 transition">
+                        <i class="fas fa-play mr-2"></i>Start
+                    </button>
+                    <button onclick="pauseTimer()" id="pauseBtn" class="bg-yellow-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-yellow-700 transition hidden">
+                        <i class="fas fa-pause mr-2"></i>Pause
+                    </button>
+                    <button onclick="resetTimer()" class="bg-gray-600 text-white px-8 py-3 rounded-lg font-bold text-lg hover:bg-gray-700 transition">
+                        <i class="fas fa-redo mr-2"></i>Reset
+                    </button>
+                </div>
+
+                <!-- Stats -->
+                <div class="grid grid-cols-2 gap-4 mt-8">
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-gray-600 text-sm font-semibold mb-1">Sessions</div>
+                        <div id="sessionsCount" class="text-3xl font-bold text-red-600">0</div>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg text-center">
+                        <div class="text-gray-600 text-sm font-semibold mb-1">Total Time</div>
+                        <div id="totalTime" class="text-3xl font-bold text-blue-600">0m</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Info Section -->
+            <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg">
+                <h3 class="font-bold text-lg text-gray-800 mb-3">
+                    <i class="fas fa-info-circle text-blue-600 mr-2"></i>How it works
+                </h3>
+                <ul class="space-y-2 text-gray-700">
+                    <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Work:</strong> 25 minutes of focused work</li>
+                    <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Short Break:</strong> 5 minute break</li>
+                    <li><i class="fas fa-check text-green-600 mr-2"></i><strong>Long Break:</strong> 15 minute break (after 4 sessions)</li>
+                </ul>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="../../index.html" class="text-gray-400 hover:text-white"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="../../tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-tools mr-2"></i>All Tools</a></li>
+                        <li><a href="../../blog.html" class="text-gray-400 hover:text-white"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="../../contact.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="../../tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="../../tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="../../tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                        <li><a href="../../tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-code mr-2"></i>Web Dev Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Free Tools Hub. All rights reserved. | Made with <i class="fas fa-heart text-red-500"></i> for developers</p>
+            </div>
+        </div>
+    </footer>
 
     <script>
-        let timer = null;
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // Timer variables
+        let timerInterval;
         let timeLeft = 25 * 60; // 25 minutes in seconds
         let isRunning = false;
         let currentMode = 'work';
-        let tasks = [];
-        let activeTaskId = null;
-        let completedPomodoros = 0;
-        let totalFocusTime = 0;
+        let sessions = 0;
+        let totalMinutes = 0;
 
         const modes = {
             work: 25 * 60,
@@ -680,123 +247,42 @@
             longBreak: 15 * 60
         };
 
-        // Audio notification
-        const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBTGH0fPTgjMGHm7A7+OZRA8PVqzn77BdGAw9mNz0xXMpBSh+zPLaizsIGGS57OihUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERAUV6vk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXUsCSB2yPDcjT4LF2G16+yhUhELTKXh8bllHAU2jdXzzn0vBSF1xe/glEYPD1ap5O+zYBoNPZXa88p2KwUme8rx3I4+CRdjuOzroVIRC0ml4fG5ZRwFNo3V885/MQUgdMPv45dHERATVqzk7rhjHQxCoNr0yXU=');
-
-        // Load data
-        function loadData() {
-            const savedTasks = localStorage.getItem('pomodoroTasks');
-            const savedStats = localStorage.getItem('pomodoroStats');
-            
-            if (savedTasks) tasks = JSON.parse(savedTasks);
-            if (savedStats) {
-                const stats = JSON.parse(savedStats);
-                completedPomodoros = stats.pomodoros || 0;
-                totalFocusTime = stats.focusTime || 0;
-            }
-            
-            updateStats();
-            renderTasks();
-        }
-
-        // Save data
-        function saveData() {
-            localStorage.setItem('pomodoroTasks', JSON.stringify(tasks));
-            localStorage.setItem('pomodoroStats', JSON.stringify({
-                pomodoros: completedPomodoros,
-                focusTime: totalFocusTime
-            }));
-        }
+        const colors = {
+            work: '#ef4444',
+            shortBreak: '#10b981',
+            longBreak: '#3b82f6'
+        };
 
         // Set mode
         function setMode(mode) {
-            if (isRunning) return;
-            
             currentMode = mode;
             timeLeft = modes[mode];
-            updateDisplay();
-            updateProgress();
+            isRunning = false;
+            clearInterval(timerInterval);
             
-            // Update mode buttons
-            document.querySelectorAll('.mode-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
+            // Update button styles
+            document.getElementById('workBtn').className = mode === 'work' 
+                ? 'px-6 py-2 bg-red-600 text-white rounded-lg font-semibold hover:bg-red-700 transition'
+                : 'px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition';
+            
+            document.getElementById('shortBreakBtn').className = mode === 'shortBreak'
+                ? 'px-6 py-2 bg-green-600 text-white rounded-lg font-semibold hover:bg-green-700 transition'
+                : 'px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition';
+            
+            document.getElementById('longBreakBtn').className = mode === 'longBreak'
+                ? 'px-6 py-2 bg-blue-600 text-white rounded-lg font-semibold hover:bg-blue-700 transition'
+                : 'px-6 py-2 bg-gray-200 text-gray-700 rounded-lg font-semibold hover:bg-gray-300 transition';
             
             // Update circle color
-            const circle = document.getElementById('progressCircle');
-            if (mode === 'work') {
-                circle.style.stroke = 'var(--primary)';
-            } else {
-                circle.style.stroke = 'var(--break-color)';
-            }
-        }
-
-        // Toggle timer
-        function toggleTimer() {
-            if (isRunning) {
-                pauseTimer();
-            } else {
-                startTimer();
-            }
-        }
-
-        // Start timer
-        function startTimer() {
-            isRunning = true;
-            document.getElementById('startBtn').textContent = 'Pause';
+            document.getElementById('progressCircle').style.stroke = colors[mode];
             
-            timer = setInterval(() => {
-                timeLeft--;
-                updateDisplay();
-                updateProgress();
-                
-                if (timeLeft === 0) {
-                    completePomodoro();
-                }
-            }, 1000);
-        }
-
-        // Pause timer
-        function pauseTimer() {
-            isRunning = false;
-            document.getElementById('startBtn').textContent = 'Start';
-            clearInterval(timer);
-        }
-
-        // Reset timer
-        function resetTimer() {
-            pauseTimer();
-            timeLeft = modes[currentMode];
+            // Update display
             updateDisplay();
             updateProgress();
-        }
-
-        // Complete pomodoro
-        function completePomodoro() {
-            pauseTimer();
-            audio.play();
             
-            if (currentMode === 'work') {
-                completedPomodoros++;
-                totalFocusTime += 25;
-                
-                if (activeTaskId) {
-                    const task = tasks.find(t => t.id === activeTaskId);
-                    if (task) {
-                        task.pomodoros++;
-                        saveData();
-                        renderTasks();
-                    }
-                }
-                
-                updateStats();
-                alert('Pomodoro complete! Time for a break.');
-            } else {
-                alert('Break complete! Ready to focus again?');
-            }
-            
-            resetTimer();
+            // Toggle buttons
+            document.getElementById('startBtn').classList.remove('hidden');
+            document.getElementById('pauseBtn').classList.add('hidden');
         }
 
         // Update display
@@ -809,109 +295,71 @@
 
         // Update progress circle
         function updateProgress() {
-            const circle = document.getElementById('progressCircle');
-            const radius = 140;
-            const circumference = 2 * Math.PI * radius;
-            const progress = timeLeft / modes[currentMode];
-            const offset = circumference - (progress * circumference);
-            
-            circle.style.strokeDasharray = circumference;
-            circle.style.strokeDashoffset = offset;
+            const total = modes[currentMode];
+            const percent = timeLeft / total;
+            const dashoffset = 691 - (691 * percent);
+            document.getElementById('progressCircle').style.strokeDashoffset = dashoffset;
         }
 
-        // Update stats
-        function updateStats() {
-            document.getElementById('completedPomodoros').textContent = completedPomodoros;
-            document.getElementById('focusTime').textContent = Math.floor(totalFocusTime / 60) + 'h';
-        }
-
-        // Add task
-        function addTask() {
-            const input = document.getElementById('taskInput');
-            const text = input.value.trim();
-            
-            if (text === '') return;
-            
-            const task = {
-                id: Date.now(),
-                text: text,
-                completed: false,
-                pomodoros: 0
-            };
-            
-            tasks.unshift(task);
-            input.value = '';
-            saveData();
-            renderTasks();
-        }
-
-        // Toggle task
-        function toggleTask(id) {
-            const task = tasks.find(t => t.id === id);
-            if (task) {
-                task.completed = !task.completed;
-                saveData();
-                renderTasks();
+        // Start timer
+        function startTimer() {
+            if (!isRunning) {
+                isRunning = true;
+                document.getElementById('startBtn').classList.add('hidden');
+                document.getElementById('pauseBtn').classList.remove('hidden');
+                
+                timerInterval = setInterval(() => {
+                    if (timeLeft > 0) {
+                        timeLeft--;
+                        updateDisplay();
+                        updateProgress();
+                    } else {
+                        // Timer finished
+                        clearInterval(timerInterval);
+                        isRunning = false;
+                        playSound();
+                        
+                        if (currentMode === 'work') {
+                            sessions++;
+                            totalMinutes += 25;
+                            document.getElementById('sessionsCount').textContent = sessions;
+                            document.getElementById('totalTime').textContent = totalMinutes + 'm';
+                        }
+                        
+                        alert('Time\'s up! ' + (currentMode === 'work' ? 'Take a break!' : 'Back to work!'));
+                        document.getElementById('startBtn').classList.remove('hidden');
+                        document.getElementById('pauseBtn').classList.add('hidden');
+                    }
+                }, 1000);
             }
         }
 
-        // Set active task
-        function setActiveTask(id) {
-            activeTaskId = activeTaskId === id ? null : id;
-            renderTasks();
+        // Pause timer
+        function pauseTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            document.getElementById('startBtn').classList.remove('hidden');
+            document.getElementById('pauseBtn').classList.add('hidden');
         }
 
-        // Delete task
-        function deleteTask(id) {
-            tasks = tasks.filter(t => t.id !== id);
-            if (activeTaskId === id) activeTaskId = null;
-            saveData();
-            renderTasks();
+        // Reset timer
+        function resetTimer() {
+            isRunning = false;
+            clearInterval(timerInterval);
+            timeLeft = modes[currentMode];
+            updateDisplay();
+            updateProgress();
+            document.getElementById('startBtn').classList.remove('hidden');
+            document.getElementById('pauseBtn').classList.add('hidden');
         }
 
-        // Render tasks
-        function renderTasks() {
-            const taskList = document.getElementById('taskList');
-            
-            if (tasks.length === 0) {
-                taskList.innerHTML = `
-                    <div class="empty-state">
-                        <h3>No tasks yet</h3>
-                        <p>Add a task to start focusing!</p>
-                    </div>
-                `;
-                return;
-            }
-            
-            taskList.innerHTML = tasks.map(task => `
-                <div class="task-item ${task.completed ? 'completed' : ''} ${task.id === activeTaskId ? 'active' : ''}">
-                    <input type="checkbox" class="task-checkbox" ${task.completed ? 'checked' : ''} 
-                           onchange="toggleTask(${task.id})">
-                    <div class="task-content">
-                        <div class="task-text">${task.text}</div>
-                        <div class="pomodoros-count">
-                            ${Array(4).fill(0).map((_, i) => 
-                                `<div class="pomodoro-dot ${i < task.pomodoros ? 'filled' : ''}"></div>`
-                            ).join('')}
-                        </div>
-                    </div>
-                    <div class="task-actions">
-                        <button class="action-btn" onclick="setActiveTask(${task.id})">
-                            ${task.id === activeTaskId ? '⏸️' : '▶️'}
-                        </button>
-                        <button class="action-btn" onclick="deleteTask(${task.id})">🗑️</button>
-                    </div>
-                </div>
-            `).join('');
+        // Play sound
+        function playSound() {
+            const audio = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBSuBzvLZiTcIGWi77eefTRAMUKfj8LZjHAY4ktfyy3osBSR3yPDdkEAKFF60r==');
+            audio.play();
         }
-
-        // Enter key to add task
-        document.getElementById('taskInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') addTask();
-        });
 
         // Initialize
-        loadData();
         updateDisplay();
         updateProgress();
     </script>
