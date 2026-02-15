@@ -16,6 +16,141 @@
     },
     {
         "id": 2,
+        "title": "Free Icon Libraries Collection 2026",
+        "slug": "icon-libraries-collection-2026",
+        "description": "Best free icon packs for web and mobile design. 10,000+ icons including Font Awesome, Material Icons, Feather, Heroicons, and more. SVG, PNG formats available.",
+        "category": "Developer Resources",
+        "type": "Collection",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 15, 2026",
+        "downloads": 2856,
+        "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=400&fit=crop",
+        "featured": true,
+        "file": "icon-libraries-collection-2026.html"
+    },
+    {
+        "id": 3,
+        "title": "Color Palettes & Schemes 2026",
+        "slug": "color-palettes-schemes-2026",
+        "description": "Beautiful color schemes and palettes for web design. Trending colors, gradients, accessibility tools, and color psychology guides for developers and designers.",
+        "category": "Developer Resources",
+        "type": "Collection",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 14, 2026",
+        "downloads": 1923,
+        "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=400&fit=crop",
+        "featured": true,
+        "file": "color-palettes-schemes-2026.html"
+    },
+    {
+        "id": 4,
+        "title": "Free Font Libraries for Web & Design",
+        "slug": "font-libraries-web-design",
+        "description": "Best free fonts for web and design projects. Google Fonts, Adobe Fonts, and more. Includes pairing guides and typography best practices for developers.",
+        "category": "Developer Resources",
+        "type": "Collection",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 13, 2026",
+        "downloads": 2134,
+        "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=400&fit=crop",
+        "featured": true,
+        "file": "font-libraries-web-design.html"
+    },
+    {
+        "id": 5,
+        "title": "Popular CSS Frameworks Guide 2026",
+        "slug": "css-frameworks-guide-2026",
+        "description": "Complete guide to CSS frameworks: Tailwind, Bootstrap, Bulma, Foundation, and more. Compare features, learn best practices, and choose the right framework.",
+        "category": "Developer Resources",
+        "type": "Guide",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 12, 2026",
+        "downloads": 2789,
+        "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop",
+        "featured": true,
+        "file": "css-frameworks-guide-2026.html"
+    },
+    {
+        "id": 6,
+        "title": "Free Stock Photos Collection 2026",
+        "slug": "stock-photos-collection-2026",
+        "description": "Free high-quality images for commercial use. Unsplash, Pexels, Pixabay, and 20+ best sources. Perfect for websites, blogs, and social media content.",
+        "category": "Design Resources",
+        "type": "Collection",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 11, 2026",
+        "downloads": 3245,
+        "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&h=400&fit=crop",
+        "featured": true,
+        "file": "stock-photos-collection-2026.html"
+    },
+    {
+        "id": 7,
+        "title": "Free UI Kits & Design Systems 2026",
+        "slug": "ui-kits-design-systems-2026",
+        "description": "Ready-to-use design systems and UI kits for web and mobile. Material Design, Ant Design, Chakra UI, and more. Speed up your development workflow.",
+        "category": "Design Resources",
+        "type": "Collection",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 10, 2026",
+        "downloads": 2567,
+        "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop",
+        "featured": true,
+        "file": "ui-kits-design-systems-2026.html"
+    },
+    {
+        "id": 8,
+        "title": "Professional Mockup Templates Collection",
+        "slug": "mockup-templates-collection",
+        "description": "Professional mockup templates for showcasing designs. Device mockups, branding materials, print designs. Free PSD, Figma, and Sketch files included.",
+        "category": "Design Resources",
+        "type": "Collection",
+        "format": "Template Pack",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 9, 2026",
+        "downloads": 1876,
+        "image": "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=800&h=400&fit=crop",
+        "featured": false,
+        "file": "mockup-templates-collection.html"
+    },
+    {
+        "id": 9,
+        "title": "Free Illustration Sets & Vector Graphics",
+        "slug": "illustration-sets-vector-graphics",
+        "description": "Free vector graphics and illustration sets for web design. Flat designs, 3D illustrations, icons, and characters. SVG format for scalable graphics.",
+        "category": "Design Resources",
+        "type": "Collection",
+        "format": "Asset Pack",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 8, 2026",
+        "downloads": 2234,
+        "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=800&h=400&fit=crop",
+        "featured": false,
+        "file": "illustration-sets-vector-graphics.html"
+    },
+    {
+        "id": 10,
+        "title": "Best Figma Plugins & Extensions 2026",
+        "slug": "figma-plugins-extensions-2026",
+        "description": "Top Figma plugins and extensions for designers. Automate workflows, generate content, manage design systems. Free plugins to boost productivity.",
+        "category": "Design Resources",
+        "type": "Collection",
+        "format": "Web Guide",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 7, 2026",
+        "downloads": 1923,
+        "image": "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&h=400&fit=crop",
+        "featured": false,
+        "file": "figma-plugins-extensions-2026.html"
+    },
+    {
+        "id": 11,
         "title": "Complete SEO Guide for Beginners 2026",
         "slug": "complete-seo-guide-beginners-2026",
         "description": "Master SEO from scratch with this comprehensive guide. Learn keyword research, on-page optimization, link building, and technical SEO. Perfect for beginners!",
@@ -30,7 +165,7 @@
         "file": "complete-seo-guide-beginners-2026.html"
     },
     {
-        "id": 3,
+        "id": 12,
         "title": "Ultimate Social Media Marketing Toolkit 2026",
         "slug": "social-media-marketing-toolkit-2026",
         "description": "Everything you need for social media success: content calendars, caption templates, hashtag strategies, and analytics guides. Boost engagement by 300%!",
@@ -45,7 +180,7 @@
         "file": "social-media-marketing-toolkit-2026.html"
     },
     {
-        "id": 4,
+        "id": 13,
         "title": "Student Study Planner & Templates",
         "slug": "student-study-planner-templates",
         "description": "Comprehensive study planning toolkit with weekly schedules, exam preparation guides, note-taking templates, and productivity trackers. Ace your exams!",
@@ -60,7 +195,7 @@
         "file": "student-study-planner-templates.html"
     },
     {
-        "id": 5,
+        "id": 14,
         "title": "Content Writing Cheat Sheet 2026",
         "slug": "content-writing-cheat-sheet-2026",
         "description": "Master content writing with power words, headline formulas, storytelling frameworks, and SEO writing tips. Create engaging content that converts!",
@@ -75,7 +210,7 @@
         "file": "content-writing-cheat-sheet-2026.html"
     },
     {
-        "id": 6,
+        "id": 15,
         "title": "YouTube Growth Strategy Playbook",
         "slug": "youtube-growth-strategy-playbook",
         "description": "Complete YouTube growth guide: thumbnail design, SEO optimization, video scripting, analytics tracking, and monetization strategies. Grow your channel fast!",
@@ -90,7 +225,7 @@
         "file": "youtube-growth-strategy-playbook.html"
     },
     {
-        "id": 7,
+        "id": 16,
         "title": "Email Marketing Templates Collection",
         "slug": "email-marketing-templates-collection",
         "description": "50+ proven email templates for welcome series, promotional campaigns, newsletters, and abandoned cart recovery. Boost open rates by 250%!",
@@ -105,7 +240,7 @@
         "file": "email-marketing-templates-collection.html"
     },
     {
-        "id": 8,
+        "id": 17,
         "title": "Productivity Hacks Workbook 2026",
         "slug": "productivity-hacks-workbook-2026",
         "description": "Transform your productivity with proven techniques: time blocking templates, habit trackers, goal-setting worksheets, and focus strategies.",
@@ -120,7 +255,7 @@
         "file": "productivity-hacks-workbook-2026.html"
     },
     {
-        "id": 9,
+        "id": 18,
         "title": "Graphic Design Elements Pack",
         "slug": "graphic-design-elements-pack",
         "description": "Free design resources: color palettes, font pairings, icon sets, and design principles. Create professional graphics without design experience!",
