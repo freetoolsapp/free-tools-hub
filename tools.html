@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Meta Tags for SEO -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3CEQJ2D9WY');
+    </script>
+    
+    <!-- Primary Meta Tags -->
+    <title>All Free Tools - 100+ Online Tools | Free Tools Hub</title>
+    <meta name="title" content="All Free Tools - 100+ Online Tools | Free Tools Hub">
+    <meta name="description" content="Browse our complete collection of 100+ free online tools including AI tools, SEO tools, student calculators, design tools, and web development resources.">
+    <meta name="keywords" content="free tools, online tools, AI tools, SEO tools, calculators, web dev tools, design tools">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools.html">
+    <meta property="og:title" content="All Free Tools - Free Tools Hub">
+    <meta property="og:description" content="Browse 100+ free online tools for productivity, development, and creativity.">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- Stylesheets -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        .category-btn {
+            background: #f3f4f6;
+            color: #374151;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .category-btn:hover {
+            background: #e5e7eb;
+            transform: translateY(-2px);
+        }
+        
+        .category-btn.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            color: white;
+            border-color: #3b82f6;
+        }
+        
+        .tool-card {
+            transition: all 0.3s ease;
+        }
+        
+        .tool-card:hover {
+            transform: translateY(-5px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    
+    <!-- Header -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <a href="index.html" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
+                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
+                    <a href="tools.html" class="text-blue-600 font-medium border-b-2 border-blue-600"><i class="fas fa-tools mr-1"></i>All Tools</a>
+                    <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
+                    <a href="news.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-newspaper mr-1"></i>News</a>
+                    <a href="resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
+                    <a href="tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
+                    <a href="contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                </nav>
+                
+                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
+            </div>
+            
+            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
+                <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
+                <a href="tools.html" class="block py-2 text-blue-600 font-semibold"><i class="fas fa-tools mr-2"></i>All Tools</a>
+                <a href="blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
+                <a href="news.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-newspaper mr-2"></i>News</a>
+                <a href="resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
+                <a href="tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
+                <a href="contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white border-b">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center text-sm text-gray-600">
+                <a href="index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
+                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
+                <span class="text-gray-800 font-medium">All Tools</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <div class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-semibold mb-4 backdrop-blur">
+                <i class="fas fa-tools mr-2"></i>100+ FREE TOOLS
+            </div>
+            <h2 class="text-4xl md:text-5xl font-bold mb-4">All Free Tools</h2>
+            <p class="text-xl mb-8">Browse our complete collection of online tools</p>
+            
+            <!-- Search Bar -->
+            <div class="max-w-2xl mx-auto">
+                <input type="search" 
+                       id="searchTools" 
+                       placeholder="Search tools by name or description..." 
+                       class="w-full px-6 py-4 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300">
+            </div>
+        </div>
+    </section>
+
+    <!-- Category Filters -->
+    <section class="bg-white shadow-sm py-4 sticky top-[72px] z-40">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-wrap gap-3 justify-center">
+                <button onclick="filterTools('all')" class="category-btn active px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-home mr-2"></i>All Tools
+                </button>
+                <button onclick="filterTools('utility')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-wrench mr-2"></i>Utility
+                </button>
+                <button onclick="filterTools('student')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-graduation-cap mr-2"></i>Student
+                </button>
+                <button onclick="filterTools('design')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-palette mr-2"></i>Design
+                </button>
+                <button onclick="filterTools('webdev')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-code mr-2"></i>Web Dev
+                </button>
+                <button onclick="filterTools('seo')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-chart-line mr-2"></i>SEO
+                </button>
+                <button onclick="filterTools('social')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fab fa-instagram mr-2"></i>Social
+                </button>
+                <button onclick="filterTools('productivity')" class="category-btn px-6 py-2 rounded-lg font-semibold">
+                    <i class="fas fa-rocket mr-2"></i>Productivity
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tools Grid -->
+    <main class="py-12">
+        <div class="container mx-auto px-4 max-w-7xl">
+            
+            <!-- Tools Count -->
+            <div class="mb-8 text-center">
+                <p class="text-gray-600 text-lg">
+                    Showing <span id="toolCount" class="font-bold text-blue-600">0</span> tools
+                </p>
+            </div>
+
+            <!-- Tools Grid -->
+            <div id="toolsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"></div>
+
+            <!-- No Results -->
+            <div id="noResults" class="hidden text-center py-16">
+                <i class="fas fa-search text-6xl text-gray-300 mb-4"></i>
+                <p class="text-gray-600 text-xl">No tools found matching your search</p>
+                <button onclick="resetFilters()" class="mt-4 bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Show All Tools
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 mt-12">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+                            <i class="fas fa-tools text-white"></i>
+                        </div>
+                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
+                    </div>
+                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools.</p>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Quick Links</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white"><i class="fas fa-home mr-2"></i>Home</a></li>
+                        <li><a href="tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-tools mr-2"></i>All Tools</a></li>
+                        <li><a href="blog.html" class="text-gray-400 hover:text-white"><i class="fas fa-blog mr-2"></i>Blog</a></li>
+                        <li><a href="contact.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Categories</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="#" onclick="filterTools('utility')" class="text-gray-400 hover:text-white"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
+                        <li><a href="#" onclick="filterTools('student')" class="text-gray-400 hover:text-white"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
+                        <li><a href="#" onclick="filterTools('seo')" class="text-gray-400 hover:text-white"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
+                        <li><a href="#" onclick="filterTools('webdev')" class="text-gray-400 hover:text-white"><i class="fas fa-code mr-2"></i>Web Dev Tools</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-bold mb-4">Connect</h4>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-github"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
+                <p>&copy; 2024 Free Tools Hub. All rights reserved. | Made with <i class="fas fa-heart text-red-500"></i> for developers</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
+            document.getElementById('mobileMenu').classList.toggle('hidden');
+        });
+
+        // All tools data
+        let allTools = [];
+        let filteredTools = [];
+
+        // Color classes mapping
+        const colorClasses = {
+            'blue': 'from-blue-600 to-blue-700',
+            'green': 'from-green-600 to-green-700',
+            'red': 'from-red-600 to-red-700',
+            'orange': 'from-orange-600 to-orange-700',
+            'purple': 'from-purple-600 to-purple-700',
+            'pink': 'from-pink-600 to-pink-700',
+            'indigo': 'from-indigo-600 to-indigo-700',
+            'teal': 'from-teal-600 to-teal-700'
+        };
+        
+        const badgeClasses = {
+            'HOT': 'bg-red-500',
+            'NEW': 'bg-green-500',
+            'POPULAR': 'bg-blue-500'
+        };
+
+        // Load tools from JSON file
+        async function loadTools() {
+            try {
+                console.log('📦 Loading tools from tools.json...');
+                const response = await fetch('tools.json');
+                if (!response.ok) {
+                    throw new Error('Failed to load tools.json');
+                }
+                const data = await response.json();
+                allTools = data.tools;
+                filteredTools = [...allTools];
+                console.log(`✅ Loaded ${allTools.length} tools`);
+                displayTools(allTools);
+            } catch (error) {
+                console.error('❌ Error loading tools:', error);
+                // Show error message to user
+                document.getElementById('toolsGrid').innerHTML = `
+                    <div class="col-span-full text-center py-16">
+                        <i class="fas fa-exclamation-triangle text-6xl text-red-500 mb-4"></i>
+                        <p class="text-gray-600 text-xl mb-2">Failed to load tools</p>
+                        <p class="text-gray-500">Please make sure tools.json file exists</p>
+                    </div>
+                `;
+            }
+        }
+
+        // Display tools
+        function displayTools(tools) {
+            const grid = document.getElementById('toolsGrid');
+            const noResults = document.getElementById('noResults');
+            const toolCount = document.getElementById('toolCount');
+            
+            grid.innerHTML = '';
+            toolCount.textContent = tools.length;
+            
+            if (tools.length === 0) {
+                noResults.classList.remove('hidden');
+                return;
+            } else {
+                noResults.classList.add('hidden');
+            }
+            
+            tools.forEach(tool => {
+                const gradient = colorClasses[tool.color] || 'from-blue-600 to-blue-700';
+                const badgeColor = badgeClasses[tool.badge] || 'bg-blue-500';
+                
+                const card = document.createElement('a');
+                card.href = tool.file;
+                card.className = 'tool-card block bg-white rounded-lg shadow-md hover:shadow-xl transition-all p-6 relative overflow-hidden group';
+                card.dataset.category = tool.category;
+                
+                card.innerHTML = `
+                    ${tool.badge ? `<span class="${badgeColor} text-white text-xs px-2 py-1 rounded-full absolute top-4 right-4 font-bold">${tool.badge}</span>` : ''}
+                    <div class="bg-gradient-to-r ${gradient} w-16 h-16 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                        <i class="fas ${tool.icon} text-white text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-lg text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">${tool.name}</h3>
+                    <p class="text-gray-600 text-sm">${tool.description}</p>
+                    <div class="mt-4 flex items-center text-blue-600 font-medium text-sm">
+                        <span>Try Now</span>
+                        <i class="fas fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                    </div>
+                `;
+                
+                grid.appendChild(card);
+            });
+        }
+
+        // Filter by category
+        function filterTools(category) {
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.closest('.category-btn').classList.add('active');
+            
+            // Filter tools
+            if (category === 'all') {
+                filteredTools = [...allTools];
+            } else {
+                filteredTools = allTools.filter(tool => tool.category === category);
+            }
+            
+            displayTools(filteredTools);
+        }
+
+        // Search functionality
+        document.getElementById('searchTools').addEventListener('input', (e) => {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            const searchResults = filteredTools.filter(tool => 
+                tool.name.toLowerCase().includes(searchTerm) || 
+                tool.description.toLowerCase().includes(searchTerm)
+            );
+            
+            displayTools(searchResults);
+        });
+
+        // Reset filters
+        function resetFilters() {
+            document.getElementById('searchTools').value = '';
+            document.querySelectorAll('.category-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.querySelector('.category-btn').classList.add('active');
+            filteredTools = [...allTools];
+            displayTools(filteredTools);
+        }
+
+        // Initialize - Load tools on page load
+        loadTools();
+    </script>
+</body>
+</html>
