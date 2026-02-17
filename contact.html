@@ -3,277 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3CEQJ2D9WY'); </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Contact Us - Free Tools Hub</title>
-    <meta name="description" content="Get in touch with Free Tools Hub. Send us your questions, feedback, or suggestions.">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3CEQJ2D9WY');</script>
+    <title>Contact Us — Free Tools Hub | Get in Touch</title>
+    <meta name="description" content="Contact Free Tools Hub — send us your questions, feedback, or suggestions. We respond within 24-48 hours. Email: freetoolshub.help@gmail.com">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/contact.html">
-    
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        .page-hero{background:linear-gradient(135deg,var(--purple-900),var(--purple-700));color:white;padding:64px 0 48px;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 75% 25%,rgba(217,70,239,.18) 0%,transparent 60%);pointer-events:none;}
+        .page-hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:48px;background:var(--gray-50);clip-path:ellipse(55% 100% at 50% 100%);}
+        .page-hero-inner{position:relative;z-index:1;text-align:center;}
+        .breadcrumb{background:white;border-bottom:1px solid var(--gray-200);padding:12px 0;font-size:13px;}
+        .breadcrumb-inner{display:flex;align-items:center;gap:8px;color:var(--gray-500);}
+        .breadcrumb a{color:var(--gray-500);transition:var(--transition);}
+        .breadcrumb a:hover{color:var(--purple-600);}
+        .breadcrumb-sep{color:var(--gray-300);font-size:11px;}
+        .breadcrumb-current{color:var(--gray-800);font-weight:500;}
+        .contact-layout{display:grid;grid-template-columns:1fr 360px;gap:28px;align-items:start;}
+        .contact-form-card{background:white;border:1.5px solid var(--gray-200);border-radius:var(--radius-xl);padding:40px;}
+        .contact-form-card h2{font-family:var(--font-display);font-size:1.5rem;font-weight:800;color:var(--gray-900);margin-bottom:28px;display:flex;align-items:center;gap:10px;}
+        .form-group{margin-bottom:20px;}
+        .form-label{display:block;font-size:13.5px;font-weight:600;color:var(--gray-700);margin-bottom:8px;}
+        .form-label i{color:var(--purple-500);margin-right:6px;}
+        .form-input,.form-textarea{width:100%;padding:13px 16px;border:1.5px solid var(--gray-200);border-radius:var(--radius-md);font-family:var(--font-body);font-size:15px;color:var(--gray-800);background:var(--gray-50);outline:none;transition:var(--transition);}
+        .form-input:focus,.form-textarea:focus{border-color:var(--purple-500);background:white;box-shadow:0 0 0 3px rgba(124,58,237,.12);}
+        .form-input::placeholder,.form-textarea::placeholder{color:var(--gray-400);}
+        .form-textarea{resize:vertical;min-height:140px;}
+        .form-submit{width:100%;padding:15px;border:none;border-radius:var(--radius-full);background:linear-gradient(135deg,var(--purple-600),var(--fuchsia-500));color:white;font-family:var(--font-body);font-size:16px;font-weight:700;cursor:pointer;transition:var(--transition);display:flex;align-items:center;justify-content:center;gap:8px;}
+        .form-submit:hover{box-shadow:0 6px 20px rgba(124,58,237,.40);transform:translateY(-2px);}
+        .form-note{text-align:center;font-size:12.5px;color:var(--gray-400);margin-top:12px;}
+        .success-msg{display:none;background:#f0fdf4;border:1.5px solid #86efac;border-radius:var(--radius-lg);padding:20px 24px;color:#15803d;font-size:15px;font-weight:500;text-align:center;margin-top:20px;}
+        .success-msg.show{display:flex;align-items:center;justify-content:center;gap:10px;}
+        .info-stack{display:flex;flex-direction:column;gap:16px;}
+        .info-card{background:white;border:1.5px solid var(--gray-200);border-radius:var(--radius-lg);padding:24px;}
+        .info-card-header{display:flex;align-items:center;gap:14px;margin-bottom:14px;}
+        .info-card-icon{width:44px;height:44px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;}
+        .info-card h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:2px;}
+        .info-card p{font-size:12.5px;color:var(--gray-500);margin:0;}
+        .email-link{font-size:14.5px;font-weight:600;color:var(--purple-600);word-break:break-all;transition:var(--transition);}
+        .email-link:hover{color:var(--purple-700);}
+        .social-row{display:flex;gap:10px;flex-wrap:wrap;}
+        .social-btn{width:40px;height:40px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:17px;transition:var(--transition);border:1.5px solid var(--gray-200);}
+        .social-btn:hover{background:var(--purple-600);border-color:var(--purple-600);color:white;transform:translateY(-2px);}
+        .response-card{background:linear-gradient(135deg,var(--purple-800),var(--purple-600));border-radius:var(--radius-lg);padding:24px;color:white;}
+        .response-card h3{font-family:var(--font-display);font-size:15px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+        .response-list{list-style:none;display:flex;flex-direction:column;gap:10px;}
+        .response-list li{display:flex;align-items:center;gap:8px;font-size:13.5px;opacity:.90;}
+        .tips-card{background:var(--purple-50);border:1.5px solid rgba(124,58,237,.15);border-radius:var(--radius-lg);padding:24px;margin-top:28px;}
+        .tips-card h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--gray-900);margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+        .tips-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+        .tips-list li{display:flex;align-items:flex-start;gap:8px;font-size:13.5px;color:var(--gray-600);}
+        .tips-list li i{color:var(--purple-500);margin-top:2px;flex-shrink:0;}
+        @media(max-width:900px){.contact-layout{grid-template-columns:1fr;}}
+        @media(max-width:480px){.contact-form-card{padding:24px;}}
+    </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
-                    </div>
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="site-logo" aria-label="Free Tools Hub Home">
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-text"><span class="logo-name">Free Tools Hub</span><span class="logo-tagline">Tools · Blogs · Resources</span></div>
                 </a>
-                <nav class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
-                    <a href="index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="about.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-info-circle mr-1"></i>About</a>
+                <nav class="main-nav">
+                    <a href="index.html"><i class="fas fa-home"></i>Home</a>
+                    <a href="tools.html"><i class="fas fa-tools"></i>All Tools</a>
+                    <a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+                    <a href="news.html"><i class="fas fa-newspaper"></i>News</a>
+                    <a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+                    <a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+                    <a href="contact.html" class="nav-cta active"><i class="fas fa-paper-plane"></i>Contact</a>
                 </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
             </div>
         </div>
+        <nav class="mobile-nav" id="mobileMenu">
+            <a href="index.html"><i class="fas fa-home"></i>Home</a>
+            <a href="tools.html"><i class="fas fa-tools"></i>All Tools</a>
+            <a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+            <a href="news.html"><i class="fas fa-newspaper"></i>News</a>
+            <a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+            <a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+            <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16">
-        <div class="container mx-auto px-4 text-center">
-            <h1 class="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p class="text-xl">We'd love to hear from you! Send us your questions or feedback.</p>
+    <div class="breadcrumb"><div class="container"><div class="breadcrumb-inner">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+        <span class="breadcrumb-current">Contact</span>
+    </div></div></div>
+
+    <section class="page-hero">
+        <div class="container page-hero-inner">
+            <div class="hero-badge" style="margin-bottom:20px;"><i class="fas fa-paper-plane"></i><span>Get In Touch</span></div>
+            <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;">Contact Us</h1>
+            <p style="font-size:1.05rem;opacity:.80;font-weight:300;max-width:420px;margin:0 auto;">We'd love to hear from you — questions, feedback, or suggestions are all welcome!</p>
         </div>
     </section>
 
-    <!-- Main Content -->
-    <main class="py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+    <main style="background:var(--gray-50);padding:56px 0;" id="main-content">
+        <div class="container" style="max-width:1060px;">
+            <div class="contact-layout">
+
                 <!-- Contact Form -->
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-6">
-                        <i class="fas fa-paper-plane text-blue-600 mr-2"></i>Send Us a Message
-                    </h2>
-                    
-                    <form id="contactForm" class="space-y-6">
-                        <div>
-                            <label for="name" class="block text-gray-700 font-medium mb-2">
-                                <i class="fas fa-user mr-2"></i>Your Name *
-                            </label>
-                            <input 
-                                type="text" 
-                                id="name" 
-                                name="name" 
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
-                                placeholder="John Doe"
-                            >
+                <div class="contact-form-card">
+                    <h2><i class="fas fa-paper-plane" style="color:var(--purple-600);"></i> Send Us a Message</h2>
+                    <form id="contactForm" novalidate>
+                        <div class="form-group">
+                            <label class="form-label" for="name"><i class="fas fa-user"></i>Your Name <span style="color:#dc2626;">*</span></label>
+                            <input class="form-input" type="text" id="name" name="name" placeholder="John Doe" required autocomplete="name">
                         </div>
-
-                        <div>
-                            <label for="email" class="block text-gray-700 font-medium mb-2">
-                                <i class="fas fa-envelope mr-2"></i>Your Email *
-                            </label>
-                            <input 
-                                type="email" 
-                                id="email" 
-                                name="email" 
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
-                                placeholder="john@example.com"
-                            >
+                        <div class="form-group">
+                            <label class="form-label" for="email"><i class="fas fa-envelope"></i>Your Email <span style="color:#dc2626;">*</span></label>
+                            <input class="form-input" type="email" id="email" name="email" placeholder="john@example.com" required autocomplete="email">
                         </div>
-
-                        <div>
-                            <label for="subject" class="block text-gray-700 font-medium mb-2">
-                                <i class="fas fa-tag mr-2"></i>Subject *
-                            </label>
-                            <input 
-                                type="text" 
-                                id="subject" 
-                                name="subject" 
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600"
-                                placeholder="How can we help you?"
-                            >
+                        <div class="form-group">
+                            <label class="form-label" for="subject"><i class="fas fa-tag"></i>Subject <span style="color:#dc2626;">*</span></label>
+                            <input class="form-input" type="text" id="subject" name="subject" placeholder="How can we help you?" required>
                         </div>
-
-                        <div>
-                            <label for="message" class="block text-gray-700 font-medium mb-2">
-                                <i class="fas fa-comment mr-2"></i>Message *
-                            </label>
-                            <textarea 
-                                id="message" 
-                                name="message" 
-                                rows="6"
-                                required
-                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:border-blue-600 resize-none"
-                                placeholder="Tell us what's on your mind..."
-                            ></textarea>
+                        <div class="form-group">
+                            <label class="form-label" for="message"><i class="fas fa-comment"></i>Message <span style="color:#dc2626;">*</span></label>
+                            <textarea class="form-textarea" id="message" name="message" placeholder="Tell us what's on your mind..." required></textarea>
                         </div>
-
-                        <button 
-                            type="submit" 
-                            class="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg hover:shadow-lg transition font-medium"
-                        >
-                            <i class="fas fa-paper-plane mr-2"></i>Send Message
+                        <button type="submit" class="form-submit">
+                            <i class="fas fa-paper-plane"></i> Send Message
                         </button>
-
-                        <p class="text-sm text-gray-600 text-center">
-                            <i class="fas fa-clock mr-1"></i>We typically respond within 24-48 hours
-                        </p>
+                        <p class="form-note"><i class="fas fa-clock" style="margin-right:4px;"></i>We typically respond within 24–48 hours</p>
                     </form>
-
-                    <!-- Success Message -->
-                    <div id="successMessage" class="hidden mt-6 bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded-lg">
-                        <i class="fas fa-check-circle mr-2"></i>
-                        Thank you for your message! We'll get back to you soon.
+                    <div class="success-msg" id="successMsg">
+                        <i class="fas fa-check-circle" style="font-size:22px;color:#16a34a;"></i>
+                        Thank you! Your message has been sent. We'll get back to you soon.
                     </div>
                 </div>
 
-                <!-- Contact Information -->
-                <div class="space-y-6">
+                <!-- Info Sidebar -->
+                <div class="info-stack">
+
                     <!-- Email -->
-                    <div class="bg-white rounded-lg shadow-lg p-8">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-envelope text-2xl text-blue-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Email Us</h3>
-                                <p class="text-gray-600">Send us an email anytime</p>
-                            </div>
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon" style="background:var(--purple-100);color:var(--purple-700);"><i class="fas fa-envelope"></i></div>
+                            <div><h3>Email Us</h3><p>Send us an email anytime</p></div>
                         </div>
-                        <p class="text-gray-700">
-                            <a href="mailto:contact@freetoolshub.com" class="text-blue-600 hover:underline">
-                                freetoolshub.help@gmail.com
-                            </a>
-                        </p>
-                    </div>
-
-                    <!-- Social Media -->
-                    <div class="bg-white rounded-lg shadow-lg p-8">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-share-alt text-2xl text-purple-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Follow Us</h3>
-                                <p class="text-gray-600">Connect on social media</p>
-                            </div>
-                        </div>
-                        <div class="flex space-x-4">
-                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition">
-                                <i class="fab fa-twitter text-blue-600"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center hover:bg-blue-200 transition">
-                                <i class="fab fa-facebook text-blue-600"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-pink-100 rounded-full flex items-center justify-center hover:bg-pink-200 transition">
-                                <i class="fab fa-instagram text-pink-600"></i>
-                            </a>
-                            <a href="#" class="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center hover:bg-red-200 transition">
-                                <i class="fab fa-youtube text-red-600"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- FAQ -->
-                    <div class="bg-white rounded-lg shadow-lg p-8">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-question-circle text-2xl text-green-600"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg text-gray-800">Have Questions?</h3>
-                                <p class="text-gray-600">Check our FAQ section</p>
-                            </div>
-                        </div>
-                        <p class="text-gray-700 mb-4">
-                            Before reaching out, you might find answers to common questions in our FAQ section.
-                        </p>
-                        <a href="resources.html" class="text-blue-600 hover:underline font-medium">
-                            <i class="fas fa-arrow-right mr-2"></i>View FAQ
+                        <a href="mailto:freetoolshub.help@gmail.com" class="email-link">
+                            <i class="fas fa-at" style="margin-right:6px;"></i>freetoolshub.help@gmail.com
                         </a>
                     </div>
 
-                    <!-- Working Hours -->
-                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-8 text-white">
-                        <div class="flex items-center mb-4">
-                            <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center mr-4">
-                                <i class="fas fa-clock text-2xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-lg">Response Time</h3>
-                                <p class="text-blue-100">We're here to help</p>
-                            </div>
+                    <!-- Social -->
+                    <div class="info-card">
+                        <div class="info-card-header">
+                            <div class="info-card-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="fas fa-share-alt"></i></div>
+                            <div><h3>Follow Us</h3><p>Connect on social media</p></div>
                         </div>
-                        <div class="space-y-2">
-                            <p><i class="fas fa-check mr-2"></i>Email: 24-48 hours</p>
-                            <p><i class="fas fa-check mr-2"></i>Social Media: 1-2 business days</p>
-                            <p><i class="fas fa-check mr-2"></i>Urgent Issues: Priority response</p>
+                        <div class="social-row">
+                            <a href="#" class="social-btn" aria-label="Twitter" style="color:#1da1f2;"><i class="fab fa-twitter"></i></a>
+                            <a href="https://github.com/freetoolsapp" class="social-btn" aria-label="GitHub" target="_blank" rel="noopener noreferrer" style="color:#333;"><i class="fab fa-github"></i></a>
+                            <a href="#" class="social-btn" aria-label="LinkedIn" style="color:#0077b5;"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" class="social-btn" aria-label="YouTube" style="color:#ff0000;"><i class="fab fa-youtube"></i></a>
                         </div>
                     </div>
+
+                    <!-- Response Times -->
+                    <div class="response-card">
+                        <h3><i class="fas fa-clock"></i> Response Times</h3>
+                        <ul class="response-list">
+                            <li><i class="fas fa-check-circle"></i> Email: 24–48 hours</li>
+                            <li><i class="fas fa-check-circle"></i> Social Media: 1–2 business days</li>
+                            <li><i class="fas fa-check-circle"></i> Urgent Issues: Priority response</li>
+                        </ul>
+                    </div>
+
                 </div>
             </div>
 
-            <!-- Additional Info -->
-            <div class="max-w-6xl mx-auto mt-12">
-                <div class="bg-blue-50 border-l-4 border-blue-600 p-6 rounded-lg">
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">
-                        <i class="fas fa-info-circle text-blue-600 mr-2"></i>What to Include in Your Message
-                    </h3>
-                    <ul class="text-gray-700 space-y-2">
-                        <li><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Clear description of your question or issue</li>
-                        <li><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Which tool or feature you're asking about (if applicable)</li>
-                        <li><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Your browser and device information (for technical issues)</li>
-                        <li><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Screenshots if reporting a bug or error</li>
-                    </ul>
-                </div>
+            <!-- Tips -->
+            <div class="tips-card">
+                <h3><i class="fas fa-lightbulb" style="color:var(--purple-600);"></i> What to Include in Your Message</h3>
+                <ul class="tips-list">
+                    <li><i class="fas fa-chevron-right"></i> Clear description of your question or issue</li>
+                    <li><i class="fas fa-chevron-right"></i> Which tool or feature you're asking about (if applicable)</li>
+                    <li><i class="fas fa-chevron-right"></i> Your browser and device info (for technical issues)</li>
+                    <li><i class="fas fa-chevron-right"></i> Screenshots if you're reporting a bug or error</li>
+                </ul>
             </div>
+
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12 mt-12">
-        <div class="container mx-auto px-4 text-center">
-            <p class="text-gray-400 text-sm">&copy; 2025 Free Tools Hub. All rights reserved.</p>
-            <div class="mt-4 space-x-4">
-                <a href="privacy.html" class="text-gray-400 hover:text-white transition">Privacy Policy</a>
-                <a href="terms.html" class="text-gray-400 hover:text-white transition">Terms of Service</a>
-                <a href="about.html" class="text-gray-400 hover:text-white transition">About Us</a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="site-logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div><div class="logo-text"><span class="logo-name">Free Tools Hub</span></div></div>
+                    <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials.</p>
+                    <div class="footer-social" style="margin-top:20px;">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/freetoolsapp" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col"><h4>Quick Links</h4><ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="tools.html"><i class="fas fa-tools"></i>All Tools</a></li>
+                    <li><a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i>News</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+                </ul></div>
+                <div class="footer-col"><h4>Categories</h4><ul>
+                    <li><a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a></li>
+                    <li><a href="comparisons.html"><i class="fas fa-balance-scale"></i>Comparisons</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i>About Us</a></li>
+                </ul></div>
+                <div class="footer-col"><h4>Legal</h4><ul>
+                    <li><a href="privacy.html"><i class="fas fa-shield-alt"></i>Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i>Terms of Service</a></li>
+                    <li><a href="disclaimer.html"><i class="fas fa-exclamation-circle"></i>Disclaimer</a></li>
+                </ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="index.html">Free Tools Hub</a>. All rights reserved. Made with <span class="heart">♥</span> for developers &amp; creators.</p>
+                <div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div>
             </div>
         </div>
     </footer>
 
-    <!-- Contact Form Script -->
     <script>
+        const header=document.getElementById('siteHeader');
+        window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>20),{passive:true});
+        const btn=document.getElementById('mobileMenuBtn'),menu=document.getElementById('mobileMenu');
+        btn.addEventListener('click',()=>{const o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.innerHTML=o?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';});
+        menu.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='<i class="fas fa-bars"></i>';}));
+
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Get form values
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            
-            // Here you would normally send this data to your backend
-            // For now, we'll just show a success message
-            
-            // Hide form and show success message
+            const name    = document.getElementById('name').value.trim();
+            const email   = document.getElementById('email').value.trim();
+            const subject = document.getElementById('subject').value.trim();
+            const message = document.getElementById('message').value.trim();
+            if (!name || !email || !subject || !message) return;
+            // Open mailto with form data
+            const mailtoLink = `mailto:freetoolshub.help@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
+            window.location.href = mailtoLink;
+            // Show success
             this.style.display = 'none';
-            document.getElementById('successMessage').classList.remove('hidden');
-            
-            // Optional: Send email using mailto (opens email client)
-            // window.location.href = `mailto:contact@freetoolshub.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`)}`;
-            
-            // Reset form after 3 seconds
-            setTimeout(() => {
-                this.reset();
-                this.style.display = 'block';
-                document.getElementById('successMessage').classList.add('hidden');
-            }, 3000);
+            document.getElementById('successMsg').classList.add('show');
         });
     </script>
 </body>
