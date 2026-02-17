@@ -1,648 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags for SEO -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <!-- Primary Meta Tags -->
-    <title>Word to PDF Converter - Free Tools Hub</title>
-    <meta name="title" content="Word to PDF Converter - Free Tools Hub">
-    <meta name="description" content="Convert Word documents (DOCX, DOC) to PDF files instantly. Preserve formatting, fonts, and images. Free, fast, and no signup required!">
-    <meta name="keywords" content="Word to PDF, DOCX to PDF, DOC to PDF, convert Word, Word converter, free converter">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="author" content="freetoolsapp">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
-    <meta property="og:title" content="Word to PDF Converter - Free Tools Hub">
-    <meta property="og:description" content="Convert Word documents (DOCX, DOC) to PDF files instantly. Preserve formatting, fonts, and images. Free, fast, and no signup required!">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
-    
-    <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Libraries for Word to PDF conversion -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    
-    <style>
-        .drop-zone {
-            border: 3px dashed #667eea;
-            transition: all 0.3s;
-        }
-        
-        .drop-zone.dragover {
-            border-color: #4caf50;
-            background: #e8f5e9 !important;
-            transform: scale(1.02);
-        }
-        
-        .upload-section.dragover {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%) !important;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        .method-card {
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .method-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word to PDF Converter - Free Tools Hub</title>
+<meta name="description" content="Convert Word documents or pasted text into PDF instantly. Free online Word to PDF converter. No signup required.">
+<meta name="keywords" content="Word to PDF, text to PDF, DOCX to PDF, convert text to PDF online">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
+<link rel="icon" href="../../favicon.ico">
 
-        .preview-container {
-            max-height: 500px;
-            overflow-y: auto;
-            background: white;
-            padding: 30px;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            font-family: 'Times New Roman', serif;
-            line-height: 1.8;
-        }
-        
-        .preview-container p {
-            margin-bottom: 16px;
-        }
-        
-        .preview-container h1, .preview-container h2, .preview-container h3 {
-            font-weight: bold;
-            margin-top: 20px;
-            margin-bottom: 12px;
-        }
-        
-        .preview-container ul, .preview-container ol {
-            margin-left: 24px;
-            margin-bottom: 16px;
-        }
-        
-        .preview-container li {
-            margin-bottom: 8px;
-        }
-    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+.tab-btn { padding: 10px 20px; border-radius: 6px; font-weight: 600; cursor: pointer; transition: all 0.3s; }
+.active-tab { background: #2563eb; color: #fff; }
+.tab-btn:hover { opacity: 0.9; }
+.spinner { border: 4px solid #f3f3f3; border-top: 4px solid #2563eb; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; margin: auto; }
+@keyframes spin { 0%{transform:rotate(0)} 100%{transform:rotate(360deg)} }
+</style>
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="../../index.html" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
-                    </div>
-                </a>
-                
-                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
-                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
-                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
-                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
-                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
-                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
-                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
-                </nav>
-                
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
-            </div>
-            
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
-                <a href="../../index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="../../index.html#tools" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-tools mr-2"></i>Tools</a>
-                <a href="../../blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="../../resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-                <a href="../../tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
-                <a href="../../comparisons.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
-                <a href="../../contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
-            </nav>
-        </div>
-    </header>
 
-    <!-- Breadcrumb -->
-    <div class="bg-white border-b">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center text-sm text-gray-600">
-                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
-                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
-                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-                <span class="text-gray-800 font-medium">Word to PDF Converter</span>
-            </div>
-        </div>
-    </div>
+<body class="bg-gray-50 font-sans">
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
-                <i class="fas fa-file-pdf text-5xl"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">Word to PDF Converter</h2>
-            <p class="text-xl mb-2">Convert DOCX and DOC files to PDF format instantly</p>
-            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • No Signup • Instant Results • Preserves Formatting</p>
-        </div>
-    </section>
+<header class="bg-white shadow-md sticky top-0 z-50">
+<div class="container mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center">
+<a href="../../index.html" class="flex items-center space-x-3 mb-3 sm:mb-0">
+<div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
+<i class="fas fa-tools text-white"></i>
+</div>
+<div>
+<h1 class="font-bold text-lg sm:text-xl text-gray-800">Free Tools Hub</h1>
+<p class="text-xs sm:text-sm text-gray-500">Tools • Blogs • Resources</p>
+</div>
+</a>
+</div>
+</header>
 
-    <!-- Main Content -->
-    <main class="py-12">
-        <div class="container mx-auto px-4 max-w-6xl">
-            
-            <!-- Upload Section -->
-            <div id="uploadSection" class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg shadow-lg p-8 mb-8 transition-all duration-300 upload-section">
-                <div class="text-center mb-6">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">
-                        <i class="fas fa-cloud-upload-alt text-blue-600 mr-2"></i>Upload Your Word Document
-                    </h3>
-                    <p class="text-gray-600">Drag and drop or click to select your DOCX/DOC file</p>
-                </div>
+<section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white py-10 sm:py-16 text-center px-4">
+<h2 class="text-2xl sm:text-4xl font-bold mb-2">Word / Text to PDF Converter</h2>
+<p class="text-sm sm:text-lg">Upload file or paste content to create PDF instantly</p>
+</section>
 
-                <div id="dropZone" class="drop-zone bg-white rounded-lg p-12 text-center cursor-pointer">
-                    <i class="fas fa-file-word text-6xl text-blue-600 mb-4"></i>
-                    <p class="text-lg font-semibold text-gray-700 mb-2">Drop your Word document here</p>
-                    <p class="text-sm text-gray-500 mb-4">or click to browse</p>
-                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                        <i class="fas fa-folder-open mr-2"></i>Choose File
-                    </button>
-                    <p class="text-xs text-gray-400 mt-4">Supported formats: DOCX, DOC • Max size: 10MB</p>
-                </div>
+<main class="py-10 sm:py-12 px-4">
+<div class="container mx-auto max-w-xl sm:max-w-3xl">
 
-                <input type="file" id="fileInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" class="hidden">
+<!-- TAB SWITCH -->
+<div class="flex flex-col sm:flex-row justify-center space-y-2 sm:space-y-0 sm:space-x-4 mb-6">
+<button id="fileTab" class="tab-btn active-tab" onclick="showFile()">Upload File</button>
+<button id="textTab" class="tab-btn bg-gray-200" onclick="showText()">Paste Text</button>
+</div>
 
-                <!-- File Info -->
-                <div id="fileInfo" class="hidden mt-6 bg-white rounded-lg p-4 border-l-4 border-blue-600">
-                    <div class="flex items-center justify-between">
-                        <div class="flex items-center space-x-3">
-                            <i class="fas fa-file-word text-3xl text-blue-600"></i>
-                            <div>
-                                <p class="font-semibold text-gray-800" id="fileName">document.docx</p>
-                                <p class="text-sm text-gray-500">Ready to convert</p>
-                            </div>
-                        </div>
-                        <button onclick="resetUpload()" class="text-red-500 hover:text-red-700">
-                            <i class="fas fa-times-circle text-2xl"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<!-- FILE SECTION -->
+<div id="fileSection" class="bg-white shadow-lg rounded-lg p-6 sm:p-8 text-center">
+<input type="file" id="fileInput" class="hidden"
+accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
+<button onclick="document.getElementById('fileInput').click()"
+class="w-full sm:w-auto bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold">
+Choose Word File
+</button>
+</div>
 
-            <!-- Processing Section -->
-            <div id="processing" class="hidden bg-white rounded-lg shadow-lg p-8 mb-8">
-                <div class="text-center">
-                    <div class="spinner mb-6"></div>
-                    <h3 class="text-2xl font-bold text-gray-800 mb-2">Converting to PDF...</h3>
-                    <p id="processingMsg" class="text-gray-600 mb-6">📄 Processing your document...</p>
-                    
-                    <div class="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
-                        <div id="progressFill" class="bg-gradient-to-r from-blue-600 to-purple-600 h-6 rounded-full text-white text-sm font-semibold flex items-center justify-center transition-all duration-500" style="width: 0%">0%</div>
-                    </div>
-                </div>
-            </div>
+<!-- TEXT SECTION -->
+<div id="textSection" class="hidden bg-white shadow-lg rounded-lg p-6 sm:p-8 mt-6">
+<textarea id="textInput" rows="8"
+class="w-full border rounded-lg p-3 sm:p-4 mb-4 text-sm sm:text-base"
+placeholder="Paste your content here..."></textarea>
+<button onclick="convertTextToPDF()"
+class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold">
+Convert Text to PDF
+</button>
+</div>
 
-            <!-- Results Section -->
-            <div id="results" class="hidden">
-                <div class="bg-white rounded-lg shadow-lg p-8 mb-8">
-                    <div class="text-center mb-6">
-                        <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                            <i class="fas fa-check-circle text-4xl text-green-600"></i>
-                        </div>
-                        <h3 class="text-3xl font-bold text-gray-800 mb-2">✅ Conversion Complete!</h3>
-                        <p class="text-gray-600">Your PDF is ready to download</p>
-                    </div>
+<!-- PROCESSING -->
+<div id="processing" class="hidden bg-white shadow-lg rounded-lg p-6 sm:p-8 text-center mt-6">
+<div class="spinner mb-4"></div>
+<h3 class="font-semibold text-lg sm:text-xl mb-4">Converting...</h3>
+</div>
 
-                    <div class="grid md:grid-cols-2 gap-4 mb-6">
-                        <div class="bg-blue-50 rounded-lg p-4 text-center">
-                            <i class="fas fa-file-alt text-3xl text-blue-600 mb-2"></i>
-                            <p class="text-sm text-gray-600">Total Pages</p>
-                            <p class="text-2xl font-bold text-gray-800"><span id="pageCount">1</span> page(s)</p>
-                        </div>
-                        <div class="bg-purple-50 rounded-lg p-4 text-center">
-                            <i class="fas fa-hdd text-3xl text-purple-600 mb-2"></i>
-                            <p class="text-sm text-gray-600">File Size</p>
-                            <p class="text-2xl font-bold text-gray-800" id="fileSize">0 KB</p>
-                        </div>
-                    </div>
+<!-- RESULT -->
+<div id="results" class="hidden bg-white shadow-lg rounded-lg p-6 sm:p-8 text-center mt-6">
+<i class="fas fa-check-circle text-4xl text-green-600 mb-3"></i>
+<h3 class="text-xl sm:text-2xl font-bold mb-4">PDF Ready</h3>
+<button onclick="downloadPDF()"
+class="w-full sm:w-auto bg-green-600 text-white py-3 px-6 rounded-lg font-bold mb-3">
+Download PDF
+</button>
+<button onclick="resetTool()"
+class="w-full sm:w-auto bg-gray-200 py-3 px-6 rounded-lg">
+Convert Another
+</button>
+</div>
 
-                    <button onclick="downloadPDF()" class="w-full bg-gradient-to-r from-green-500 to-green-600 text-white py-4 rounded-lg font-bold text-lg hover:shadow-lg transition mb-4">
-                        <i class="fas fa-download mr-2"></i>Download PDF
-                    </button>
+</div>
+</main>
 
-                    <button onclick="resetUpload()" class="w-full bg-gray-100 text-gray-700 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
-                        <i class="fas fa-redo mr-2"></i>Convert Another File
-                    </button>
-                </div>
+<footer class="bg-gray-900 text-white py-6 sm:py-8 text-center mt-12">
+<p class="text-gray-400 text-sm sm:text-base">&copy; 2024 Free Tools Hub</p>
+</footer>
 
-                <!-- Preview Section -->
-                <div class="bg-white rounded-lg shadow-lg p-8">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-4">
-                        <i class="fas fa-eye mr-2 text-blue-600"></i>Document Preview
-                    </h3>
-                    <div id="previewContent" class="preview-container"></div>
-                </div>
-            </div>
+<script>
+let pdfBlob=null;
+let currentFileName="document.pdf";
 
-            <!-- Features -->
-            <div class="grid md:grid-cols-3 gap-6 mb-12">
-                <div class="method-card bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-lock text-3xl text-blue-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">100% Secure</h3>
-                    <p class="text-gray-600">All conversions happen in your browser. Your files never leave your device.</p>
-                </div>
+function showFile(){
+fileSection.classList.remove("hidden");
+textSection.classList.add("hidden");
+fileTab.classList.add("active-tab");
+textTab.classList.remove("active-tab");
+}
 
-                <div class="method-card bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-bolt text-3xl text-purple-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Lightning Fast</h3>
-                    <p class="text-gray-600">Convert Word to PDF in seconds with our optimized conversion engine.</p>
-                </div>
+function showText(){
+textSection.classList.remove("hidden");
+fileSection.classList.add("hidden");
+textTab.classList.add("active-tab");
+fileTab.classList.remove("active-tab");
+}
 
-                <div class="method-card bg-white rounded-lg shadow-md p-6 text-center">
-                    <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                        <i class="fas fa-palette text-3xl text-green-600"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-gray-800 mb-2">Preserves Formatting</h3>
-                    <p class="text-gray-600">Maintains all fonts, images, tables, and formatting from your Word document.</p>
-                </div>
-            </div>
+fileInput.onchange=async(e)=>{
+if(e.target.files.length>0){
+document.getElementById("processing").classList.remove("hidden");
+const file=e.target.files[0];
+currentFileName=file.name.replace(/\.(docx|doc)$/i,"")+".pdf";
+const arrayBuffer=await file.arrayBuffer();
+const result=await mammoth.convertToHtml({arrayBuffer});
+await createPDF(result.value);
+}
+};
 
-            <!-- How It Works -->
-            <div class="bg-white rounded-lg shadow-lg p-8 mb-12">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>How It Works
-                </h3>
-                
-                <div class="grid md:grid-cols-4 gap-6">
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-blue-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">1</div>
-                        <h4 class="font-bold text-gray-800 mb-2">Upload</h4>
-                        <p class="text-sm text-gray-600">Select your Word document (.docx or .doc)</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-purple-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">2</div>
-                        <h4 class="font-bold text-gray-800 mb-2">Convert</h4>
-                        <p class="text-sm text-gray-600">Our tool converts it to PDF automatically</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-pink-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">3</div>
-                        <h4 class="font-bold text-gray-800 mb-2">Preview</h4>
-                        <p class="text-sm text-gray-600">Review your PDF before downloading</p>
-                    </div>
-                    <div class="text-center">
-                        <div class="w-16 h-16 bg-green-600 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-2xl font-bold">4</div>
-                        <h4 class="font-bold text-gray-800 mb-2">Download</h4>
-                        <p class="text-sm text-gray-600">Save your PDF file to your device</p>
-                    </div>
-                </div>
-            </div>
+async function convertTextToPDF(){
+const text=document.getElementById("textInput").value;
+if(!text.trim()){alert("Paste some content first");return;}
+document.getElementById("processing").classList.remove("hidden");
+currentFileName="text-to-pdf.pdf";
+await createPDF("<p>"+text.replace(/\n/g,"<br>")+"</p>");
+}
 
-            <!-- FAQ -->
-            <div class="bg-white rounded-lg shadow-lg p-8">
-                <h3 class="text-3xl font-bold text-gray-800 mb-8 text-center">
-                    <i class="fas fa-question-circle text-blue-600 mr-2"></i>Frequently Asked Questions
-                </h3>
-                
-                <div class="space-y-6">
-                    <div class="border-b pb-4">
-                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Is this converter really free?</h4>
-                        <p class="text-gray-600 ml-6">Yes! Our Word to PDF converter is completely free with no hidden charges or subscription required.</p>
-                    </div>
-                    
-                    <div class="border-b pb-4">
-                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Are my files safe?</h4>
-                        <p class="text-gray-600 ml-6">Absolutely! All conversions happen in your browser. Your files are never uploaded to any server.</p>
-                    </div>
-                    
-                    <div class="border-b pb-4">
-                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-chevron-right text-blue-600 mr-2"></i>What file formats are supported?</h4>
-                        <p class="text-gray-600 ml-6">We support both .docx (Word 2007+) and .doc (Word 97-2003) formats.</p>
-                    </div>
-                    
-                    <div class="border-b pb-4">
-                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Is there a file size limit?</h4>
-                        <p class="text-gray-600 ml-6">The maximum file size is 10MB for optimal performance.</p>
-                    </div>
-                    
-                    <div>
-                        <h4 class="font-bold text-gray-800 mb-2"><i class="fas fa-chevron-right text-blue-600 mr-2"></i>Will the formatting be preserved?</h4>
-                        <p class="text-gray-600 ml-6">Yes! Our converter maintains all formatting, including fonts, images, tables, and styles from your Word document.</p>
-                    </div>
-                </div>
-            </div>
+async function createPDF(htmlContent){
+const {jsPDF}=window.jspdf;
+const tempDiv=document.createElement("div");
+tempDiv.innerHTML=htmlContent;
+document.body.appendChild(tempDiv);
 
-        </div>
-    </main>
+const canvas=await html2canvas(tempDiv,{scale:2});
+const imgData=canvas.toDataURL("image/png");
+const pdf=new jsPDF();
+pdf.addImage(imgData,"PNG",0,0,210,297);
+pdfBlob=pdf.output("blob");
+document.body.removeChild(tempDiv);
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-tools text-white"></i>
-                        </div>
-                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools, tutorials, and resources.</p>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="../../index.html" class="text-gray-400 hover:text-white"><i class="fas fa-home mr-2"></i>Home</a></li>
-                        <li><a href="../../index.html#tools" class="text-gray-400 hover:text-white"><i class="fas fa-tools mr-2"></i>All Tools</a></li>
-                        <li><a href="../../blog.html" class="text-gray-400 hover:text-white"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="../../contact.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="../../index.html#tools" class="text-gray-400 hover:text-white"><i class="fas fa-file mr-2"></i>Utility Tools</a></li>
-                        <li><a href="../../resources.html" class="text-gray-400 hover:text-white"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="../../tutorials.html" class="text-gray-400 hover:text-white"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-github"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 Free Tools Hub. All rights reserved. | Made with <i class="fas fa-heart text-red-500"></i> for developers</p>
-            </div>
-        </div>
-    </footer>
+document.getElementById("processing").classList.add("hidden");
+document.getElementById("results").classList.remove("hidden");
+}
 
-    <script>
-        // Mobile menu toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        });
+function downloadPDF(){
+const url=URL.createObjectURL(pdfBlob);
+const link=document.createElement("a");
+link.href=url;
+link.download=currentFileName;
+link.click();
+URL.revokeObjectURL(url);
+}
 
-        // File upload variables
-        let currentFile = null;
-        let pdfBlob = null;
-        let pageCount = 0;
+function resetTool(){
+location.reload();
+}
+</script>
 
-        const dropZone = document.getElementById('dropZone');
-        const fileInput = document.getElementById('fileInput');
-
-        // Reset upload function
-        function resetUpload() {
-            currentFile = null;
-            pdfBlob = null;
-            pageCount = 0;
-            
-            document.getElementById('fileInfo').classList.add('hidden');
-            document.getElementById('processing').classList.add('hidden');
-            document.getElementById('results').classList.add('hidden');
-            document.getElementById('uploadSection').classList.remove('hidden');
-            fileInput.value = '';
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        // Click to upload
-        dropZone.addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        // Drag and drop handlers
-        dropZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            dropZone.classList.add('dragover');
-            document.getElementById('uploadSection').classList.add('dragover');
-        });
-
-        dropZone.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            document.getElementById('uploadSection').classList.remove('dragover');
-        });
-
-        dropZone.addEventListener('drop', (e) => {
-            e.preventDefault();
-            dropZone.classList.remove('dragover');
-            document.getElementById('uploadSection').classList.remove('dragover');
-            handleDrop(e);
-        });
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files.length > 0) {
-                processFile(files[0]);
-            }
-        }
-
-        // Handle file input change
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                processFile(file);
-            }
-        });
-
-        async function processFile(file) {
-            // Validate file type
-            const validTypes = [
-                'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-                'application/msword'
-            ];
-            
-            if (!validTypes.includes(file.type) && !file.name.match(/\.(docx|doc)$/i)) {
-                alert('❌ Please upload a valid Word document (.docx or .doc)');
-                return;
-            }
-
-            // Check file size (max 10MB)
-            if (file.size > 10 * 1024 * 1024) {
-                alert('❌ File too large! Please upload a file smaller than 10MB');
-                return;
-            }
-
-            currentFile = file;
-            
-            // Show file info
-            document.getElementById('fileName').textContent = file.name;
-            document.getElementById('fileInfo').classList.remove('hidden');
-            
-            // Show processing
-            document.getElementById('processing').classList.remove('hidden');
-            document.getElementById('results').classList.add('hidden');
-            updateProgress(10);
-
-            try {
-                // Extract content from Word document
-                document.getElementById('processingMsg').textContent = '📄 Reading Word document...';
-                const arrayBuffer = await file.arrayBuffer();
-                const result = await mammoth.convertToHtml({ arrayBuffer: arrayBuffer });
-                
-                updateProgress(40);
-                
-                // Show preview
-                document.getElementById('previewContent').innerHTML = result.value;
-                
-                updateProgress(60);
-                
-                // Convert to PDF
-                document.getElementById('processingMsg').textContent = '🔄 Converting to PDF...';
-                await convertToPDF(result.value, file.name);
-                
-                updateProgress(100);
-                
-                // Show results
-                setTimeout(() => {
-                    document.getElementById('processing').classList.add('hidden');
-                    document.getElementById('results').classList.remove('hidden');
-                    document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }, 500);
-                
-            } catch (error) {
-                console.error('Conversion error:', error);
-                alert('❌ Error converting file: ' + error.message + '\n\nPlease try again with a different file.');
-                document.getElementById('processing').classList.add('hidden');
-            }
-        }
-
-        async function convertToPDF(htmlContent, fileName) {
-            const { jsPDF } = window.jspdf;
-            
-            // Create temporary container
-            const tempDiv = document.createElement('div');
-            tempDiv.style.width = '210mm';
-            tempDiv.style.padding = '20mm';
-            tempDiv.style.background = 'white';
-            tempDiv.style.position = 'absolute';
-            tempDiv.style.left = '-9999px';
-            tempDiv.style.fontFamily = 'Times New Roman, serif';
-            tempDiv.style.fontSize = '12pt';
-            tempDiv.style.lineHeight = '1.6';
-            tempDiv.innerHTML = htmlContent;
-            document.body.appendChild(tempDiv);
-
-            try {
-                // Render with html2canvas
-                const canvas = await html2canvas(tempDiv, {
-                    scale: 2,
-                    useCORS: true,
-                    logging: false,
-                    backgroundColor: '#ffffff'
-                });
-
-                const imgData = canvas.toDataURL('image/png');
-                const pdf = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4'
-                });
-
-                const imgWidth = 210; // A4 width
-                const pageHeight = 297; // A4 height
-                const imgHeight = (canvas.height * imgWidth) / canvas.width;
-                let heightLeft = imgHeight;
-                let position = 0;
-                pageCount = 1;
-
-                // Add first page
-                pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                heightLeft -= pageHeight;
-
-                // Add additional pages if needed
-                while (heightLeft > 0) {
-                    position = heightLeft - imgHeight;
-                    pdf.addPage();
-                    pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-                    heightLeft -= pageHeight;
-                    pageCount++;
-                }
-
-                // Generate blob
-                pdfBlob = pdf.output('blob');
-                
-                // Update UI
-                document.getElementById('pageCount').textContent = pageCount;
-                document.getElementById('fileSize').textContent = formatBytes(pdfBlob.size);
-
-            } finally {
-                // Clean up
-                document.body.removeChild(tempDiv);
-            }
-        }
-
-        function downloadPDF() {
-            if (!pdfBlob) {
-                alert('❌ No PDF available to download');
-                return;
-            }
-
-            const url = URL.createObjectURL(pdfBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = currentFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-
-            setTimeout(() => {
-                alert('✅ PDF downloaded successfully!\n\n📄 Your Word document has been converted to PDF format with formatting preserved.');
-            }, 500);
-        }
-
-        function updateProgress(percent) {
-            const fill = document.getElementById('progressFill');
-            fill.style.width = percent + '%';
-            fill.textContent = percent + '%';
-        }
-
-        function formatBytes(bytes) {
-            if (bytes === 0) return '0 Bytes';
-            const k = 1024;
-            const sizes = ['Bytes', 'KB', 'MB'];
-            const i = Math.floor(Math.log(bytes) / Math.log(k));
-            return Math.round((bytes / Math.pow(k, i)) * 100) / 100 + ' ' + sizes[i];
-        }
-    </script>
 </body>
 </html>
