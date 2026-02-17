@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags for SEO -->
+    <!-- Meta Tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
     <script>
@@ -14,621 +14,749 @@
         gtag('js', new Date());
         gtag('config', 'G-3CEQJ2D9WY');
     </script>
-    
-    <!-- Primary Meta Tags -->
-    <title>Free Tools Hub - 100+ Free AI Tools, SEO Tools, Calculators & Resources 2026</title>
-    <meta name="title" content="Free Tools Hub - 100+ Free AI Tools, SEO Tools, Calculators & Resources 2026">
-    <meta name="description" content="Access 100+ free online tools instantly! AI tools, SEO tools, student calculators, design tools, web development resources. No signup required. Fast, secure & updated for 2026.">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>Free Tools Hub — 100+ Free AI, SEO & Productivity Tools | 2026</title>
+    <meta name="title" content="Free Tools Hub — 100+ Free AI, SEO & Productivity Tools | 2026">
+    <meta name="description" content="Access 100+ free online tools instantly — AI tools, SEO tools, student calculators, design & web dev resources. No signup required. Fast, secure & updated for 2026.">
     <meta name="keywords" content="free tools, AI tools 2026, SEO tools free, online calculator, student tools, design tools, web development, productivity tools, no signup tools, free resources">
     <meta name="robots" content="index, follow">
-    
+    <meta name="author" content="Free Tools Hub">
+    <meta name="language" content="English">
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/">
-    <meta property="og:title" content="Free Tools Hub - 100+ Free AI Tools, SEO Tools & Resources">
-    <meta property="og:description" content="Your complete hub for 100+ free online tools, expert blogs, and curated resources.">
-    
-    <!-- Canonical URL -->
+    <meta property="og:title" content="Free Tools Hub — 100+ Free AI, SEO & Productivity Tools">
+    <meta property="og:description" content="Your complete hub for 100+ free online tools, expert blogs, and curated resources. No signup required.">
+    <meta property="og:image" content="https://freetoolsapp.github.io/free-tools-hub/og-image.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/">
+    <meta name="twitter:title" content="Free Tools Hub — 100+ Free Online Tools">
+    <meta name="twitter:description" content="Access 100+ free AI, SEO, student & design tools instantly. No signup required.">
+    <meta name="twitter:image" content="https://freetoolsapp.github.io/free-tools-hub/og-image.jpg">
+
+    <!-- Canonical -->
     <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/">
-    
+
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+
+    <!-- Schema Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Free Tools Hub",
+        "url": "https://freetoolsapp.github.io/free-tools-hub/",
+        "description": "Your complete hub for 100+ free online tools, expert blogs, and curated resources.",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://freetoolsapp.github.io/free-tools-hub/tools.html?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+
+    <!-- Google Fonts + Font Awesome -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .tool-card, .blog-card, .news-card {
-            transition: all 0.3s ease;
-        }
-        
-        .tool-card:hover, .blog-card:hover, .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .section-header {
-            position: relative;
-            padding-bottom: 16px;
-            margin-bottom: 32px;
-        }
-        
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #3b82f6, #8b5cf6);
-            border-radius: 2px;
-        }
-        
-        .resource-item {
-            transition: all 0.2s ease;
-        }
-        
-        .resource-item:hover {
-            background: #f3f4f6;
-            padding-left: 24px;
-        }
-    </style>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50">
-    
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-xl"></i>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <div class="header-inner">
+
+                <!-- Logo -->
+                <a href="index.html" class="site-logo" aria-label="Free Tools Hub Home">
+                    <div class="logo-icon">
+                        <i class="fas fa-bolt" aria-hidden="true"></i>
                     </div>
-                    <div>
-                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
+                    <div class="logo-text">
+                        <span class="logo-name">Free Tools Hub</span>
+                        <span class="logo-tagline">Tools · Blogs · Resources</span>
                     </div>
                 </a>
-                
-                <nav class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-blue-600 font-medium border-b-2 border-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
-                    <a href="tools.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>All Tools</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="news.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-newspaper mr-1"></i>News</a>
-                    <a href="resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
-                    <a href="tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
-                    <a href="contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+
+                <!-- Desktop Navigation -->
+                <nav class="main-nav" aria-label="Main navigation">
+                    <a href="index.html" class="active"><i class="fas fa-home" aria-hidden="true"></i>Home</a>
+                    <a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i>All Tools</a>
+                    <a href="blog.html"><i class="fas fa-pen-nib" aria-hidden="true"></i>Blog</a>
+                    <a href="news.html"><i class="fas fa-newspaper" aria-hidden="true"></i>News</a>
+                    <a href="resources.html"><i class="fas fa-layer-group" aria-hidden="true"></i>Resources</a>
+                    <a href="tutorials.html"><i class="fas fa-play-circle" aria-hidden="true"></i>Tutorials</a>
+                    <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane" aria-hidden="true"></i>Contact</a>
                 </nav>
-                
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
+
+                <!-- Mobile Toggle -->
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+
             </div>
-            
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
-                <a href="index.html" class="block py-2 text-blue-600 font-semibold"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="tools.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-tools mr-2"></i>All Tools</a>
-                <a href="blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="news.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-newspaper mr-2"></i>News</a>
-                <a href="resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-                <a href="tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
-                <a href="contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
-            </nav>
         </div>
+
+        <!-- Mobile Navigation -->
+        <nav class="mobile-nav" id="mobileMenu" aria-label="Mobile navigation">
+            <a href="index.html" class="active"><i class="fas fa-home" aria-hidden="true"></i>Home</a>
+            <a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i>All Tools</a>
+            <a href="blog.html"><i class="fas fa-pen-nib" aria-hidden="true"></i>Blog</a>
+            <a href="news.html"><i class="fas fa-newspaper" aria-hidden="true"></i>News</a>
+            <a href="resources.html"><i class="fas fa-layer-group" aria-hidden="true"></i>Resources</a>
+            <a href="tutorials.html"><i class="fas fa-play-circle" aria-hidden="true"></i>Tutorials</a>
+            <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane" aria-hidden="true"></i>Contact</a>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-20">
-        <div class="container mx-auto px-4 text-center">
-            <div class="inline-block bg-white/20 px-6 py-2 rounded-full backdrop-blur mb-6">
-                <i class="fas fa-fire text-yellow-300 mr-2"></i>
-                <span class="font-bold">100+ Free Tools • Expert Blogs • Latest Tech News</span>
-            </div>
-            <h2 class="text-4xl md:text-6xl font-bold mb-4">Your Complete Digital Hub</h2>
-            <p class="text-xl mb-8 max-w-3xl mx-auto">Free AI Tools • SEO Tools • Student Calculators • Design Tools • Web Dev Resources • Tech News</p>
-            <div class="max-w-2xl mx-auto">
-                <input type="search" placeholder="Search tools, blogs, news, resources..." class="w-full px-6 py-4 rounded-lg text-gray-800 text-lg focus:outline-none focus:ring-4 focus:ring-yellow-300">
+    <main id="main-content">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="hero" aria-label="Hero section">
+        <div class="container">
+            <div class="hero-inner animate-fade-up">
+
+                <div class="hero-badge">
+                    <i class="fas fa-fire" aria-hidden="true"></i>
+                    <span>100+ Free Tools &nbsp;·&nbsp; Expert Blogs &nbsp;·&nbsp; Latest Tech News</span>
+                </div>
+
+                <h1>Your Complete <span>Digital Hub</span></h1>
+
+                <p class="hero-subtitle">
+                    Free AI Tools · SEO Tools · Student Calculators · Design Tools · Web Dev Resources · Tech News — all in one place, no signup needed.
+                </p>
+
+                <div class="hero-search" role="search">
+                    <i class="fas fa-search hero-search-icon" aria-hidden="true"></i>
+                    <input
+                        type="search"
+                        id="heroSearch"
+                        placeholder="Search tools, blogs, resources..."
+                        aria-label="Search tools, blogs, resources"
+                        autocomplete="off"
+                    >
+                </div>
+
+                <div class="hero-stats" aria-label="Site statistics">
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">100+</div>
+                        <div class="hero-stat-label">Free Tools</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">7</div>
+                        <div class="hero-stat-label">Categories</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">0</div>
+                        <div class="hero-stat-label">Signup Needed</div>
+                    </div>
+                    <div class="hero-stat">
+                        <div class="hero-stat-num">2026</div>
+                        <div class="hero-stat-label">Updated</div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- FEATURED TOOLS SECTION -->
-    <!-- ========================================== -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="section-header text-center">
-                <h2 class="text-4xl font-bold text-gray-800">
-                    <i class="fas fa-star text-yellow-500 mr-3"></i>Popular Tools
-                </h2>
-                <p class="text-gray-600 mt-2">Most used tools by our community</p>
+    <!-- ==================== POPULAR TOOLS ==================== -->
+    <section class="section section-alt" id="popular-tools" aria-labelledby="tools-heading">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">
+                    <i class="fas fa-star" aria-hidden="true"></i> Most Popular
+                </div>
+                <h2 class="section-title" id="tools-heading">Popular Tools</h2>
+                <p class="section-subtitle">Most used tools by our community — free, fast, no signup required</p>
             </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                
+
+            <div class="tools-grid">
+
                 <!-- Tool 1: Word to PDF -->
-                <a href="tools/utility/word-to-pdf-converter.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-blue-600 to-blue-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-file-pdf text-white text-2xl"></i>
+                <a href="tools/utility/word-to-pdf-converter.html" class="tool-card" aria-label="Word to PDF Converter">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #2563eb, #1d4ed8);">
+                        <i class="fas fa-file-pdf" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">Word to PDF</h3>
-                    <p class="text-gray-600 text-sm mb-3">Convert DOCX to PDF instantly</p>
-                    <span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-semibold">HOT</span>
+                    <h3>Word to PDF</h3>
+                    <p>Convert DOCX to PDF instantly — no quality loss</p>
+                    <span class="tool-badge badge-hot"><i class="fas fa-fire" aria-hidden="true"></i> HOT</span>
                 </a>
 
-                <!-- Tool 2: PDF Pages Delete -->
-                <a href="tools/utility/pdf-pages-delete.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-red-600 to-red-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-trash-alt text-white text-2xl"></i>
+                <!-- Tool 2: Delete PDF Pages -->
+                <a href="tools/utility/pdf-pages-delete.html" class="tool-card" aria-label="Delete PDF Pages">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #dc2626, #b91c1c);">
+                        <i class="fas fa-file-minus" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">Delete PDF Pages</h3>
-                    <p class="text-gray-600 text-sm mb-3">Remove unwanted PDF pages</p>
-                    <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full font-semibold">NEW</span>
+                    <h3>Delete PDF Pages</h3>
+                    <p>Remove unwanted pages from any PDF file</p>
+                    <span class="tool-badge badge-new"><i class="fas fa-sparkles" aria-hidden="true"></i> NEW</span>
                 </a>
 
                 <!-- Tool 3: GPA Calculator -->
-                <a href="tools/student/gpa-calculator.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-teal-600 to-teal-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-calculator text-white text-2xl"></i>
+                <a href="tools/student/gpa-calculator.html" class="tool-card" aria-label="GPA Calculator">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #0d9488, #0f766e);">
+                        <i class="fas fa-calculator" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">GPA Calculator</h3>
-                    <p class="text-gray-600 text-sm mb-3">Calculate your GPA instantly</p>
-                    <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full font-semibold">POPULAR</span>
+                    <h3>GPA Calculator</h3>
+                    <p>Calculate your GPA instantly and accurately</p>
+                    <span class="tool-badge badge-popular"><i class="fas fa-thumbs-up" aria-hidden="true"></i> POPULAR</span>
                 </a>
 
                 <!-- Tool 4: Image Resizer -->
-                <a href="tools/design/image-resizer.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-purple-600 to-purple-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-image text-white text-2xl"></i>
+                <a href="tools/design/image-resizer.html" class="tool-card" aria-label="Image Resizer">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #7c3aed, #6d28d9);">
+                        <i class="fas fa-expand-arrows-alt" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">Image Resizer</h3>
-                    <p class="text-gray-600 text-sm mb-3">Resize images quickly</p>
-                    <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full font-semibold">NEW</span>
+                    <h3>Image Resizer</h3>
+                    <p>Resize images to any dimension in seconds</p>
+                    <span class="tool-badge badge-new"><i class="fas fa-sparkles" aria-hidden="true"></i> NEW</span>
                 </a>
 
                 <!-- Tool 5: Plagiarism Checker -->
-                <a href="tools/student/plagiarism-checker.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-orange-600 to-orange-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-search text-white text-2xl"></i>
+                <a href="tools/student/plagiarism-checker.html" class="tool-card" aria-label="Plagiarism Checker">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #ea580c, #c2410c);">
+                        <i class="fas fa-shield-check" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">Plagiarism Checker</h3>
-                    <p class="text-gray-600 text-sm mb-3">Check for plagiarism</p>
-                    <span class="bg-red-100 text-red-600 text-xs px-2 py-1 rounded-full font-semibold">HOT</span>
+                    <h3>Plagiarism Checker</h3>
+                    <p>Check your content for plagiarism instantly</p>
+                    <span class="tool-badge badge-hot"><i class="fas fa-fire" aria-hidden="true"></i> HOT</span>
                 </a>
 
                 <!-- Tool 6: Meta Description Generator -->
-                <a href="tools/seo/meta-description-generator.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-indigo-600 to-indigo-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-code text-white text-2xl"></i>
+                <a href="tools/seo/meta-description-generator.html" class="tool-card" aria-label="Meta Description Generator">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #4338ca, #3730a3);">
+                        <i class="fas fa-tags" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">Meta Description</h3>
-                    <p class="text-gray-600 text-sm mb-3">Generate SEO meta tags</p>
-                    <span class="bg-blue-100 text-blue-600 text-xs px-2 py-1 rounded-full font-semibold">POPULAR</span>
+                    <h3>Meta Description</h3>
+                    <p>Generate SEO-optimized meta tags instantly</p>
+                    <span class="tool-badge badge-popular"><i class="fas fa-thumbs-up" aria-hidden="true"></i> POPULAR</span>
                 </a>
 
                 <!-- Tool 7: JSON Formatter -->
-                <a href="tools/webdev/json-formatter.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-green-600 to-green-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-code text-white text-2xl"></i>
+                <a href="tools/webdev/json-formatter.html" class="tool-card" aria-label="JSON Formatter">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #16a34a, #15803d);">
+                        <i class="fas fa-code" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">JSON Formatter</h3>
-                    <p class="text-gray-600 text-sm mb-3">Format and validate JSON</p>
-                    <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full font-semibold">NEW</span>
+                    <h3>JSON Formatter</h3>
+                    <p>Format, validate and beautify JSON data</p>
+                    <span class="tool-badge badge-new"><i class="fas fa-sparkles" aria-hidden="true"></i> NEW</span>
                 </a>
 
                 <!-- Tool 8: BMI Calculator -->
-                <a href="tools/utility/bmi-calculator.html" class="tool-card block bg-white rounded-lg shadow-md p-6 hover:shadow-xl">
-                    <div class="bg-gradient-to-r from-pink-600 to-pink-700 w-16 h-16 rounded-lg flex items-center justify-center mb-4">
-                        <i class="fas fa-weight text-white text-2xl"></i>
+                <a href="tools/utility/bmi-calculator.html" class="tool-card" aria-label="BMI Calculator">
+                    <div class="tool-card-icon" style="background: linear-gradient(135deg, #db2777, #be185d);">
+                        <i class="fas fa-heartbeat" aria-hidden="true"></i>
                     </div>
-                    <h3 class="font-bold text-lg text-gray-800 mb-2">BMI Calculator</h3>
-                    <p class="text-gray-600 text-sm mb-3">Calculate Body Mass Index</p>
-                    <span class="bg-green-100 text-green-600 text-xs px-2 py-1 rounded-full font-semibold">NEW</span>
+                    <h3>BMI Calculator</h3>
+                    <p>Calculate Body Mass Index accurately</p>
+                    <span class="tool-badge badge-new"><i class="fas fa-sparkles" aria-hidden="true"></i> NEW</span>
                 </a>
 
             </div>
 
-            <div class="text-center">
-                <a href="tools.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-tools mr-2"></i>View All 100+ Tools
+            <div class="text-center mt-48">
+                <a href="tools.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-tools" aria-hidden="true"></i> View All 100+ Tools
                 </a>
             </div>
+
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- LATEST TECH NEWS SECTION -->
-    <!-- ========================================== -->
-    <section class="py-16 bg-gradient-to-br from-gray-50 to-blue-50">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="section-header text-center">
-                <h2 class="text-4xl font-bold text-gray-800">
-                    <i class="fas fa-newspaper text-blue-600 mr-3"></i>Latest Tech News
-                </h2>
-                <p class="text-gray-600 mt-2">Stay updated with AI & robotics breakthroughs</p>
+    <!-- ==================== LATEST TECH NEWS ==================== -->
+    <section class="section" style="background: var(--gray-50);" id="tech-news" aria-labelledby="news-heading">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">
+                    <i class="fas fa-satellite-dish" aria-hidden="true"></i> Breaking
+                </div>
+                <h2 class="section-title" id="news-heading">Latest Tech News</h2>
+                <p class="section-subtitle">Stay updated with AI, robotics & technology breakthroughs</p>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                
+
+            <div class="news-grid">
+
                 <!-- News 1 -->
-                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600" alt="Humanoid Robot" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="bg-red-100 text-red-600 text-xs px-3 py-1 rounded-full font-semibold">
-                            <i class="fas fa-fire mr-1"></i>TRENDING
-                        </span>
-                        <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">Moya: Robot with Warm Skin</h3>
-                        <p class="text-gray-600 text-sm mb-3">World's first biometric AI robot with warm skin and emotion tracking...</p>
-                        <a href="news.html" class="text-blue-600 font-semibold text-sm hover:text-blue-700">
-                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                <article class="news-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600&q=80"
+                        alt="Moya Humanoid Robot with biometric warm skin technology"
+                        class="news-card-img"
+                        loading="lazy"
+                        width="600" height="200"
+                    >
+                    <div class="news-card-body">
+                        <span class="news-tag tag-trending"><i class="fas fa-fire" aria-hidden="true"></i> TRENDING</span>
+                        <h3>Moya: Robot with Warm Skin</h3>
+                        <p>World's first biometric AI robot with warm skin and real-time emotion tracking technology.</p>
+                        <a href="news.html" class="news-read-more" aria-label="Read more about Moya Robot">
+                            Read More <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
 
                 <!-- News 2 -->
-                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600" alt="Tesla Optimus" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full font-semibold">
-                            <i class="fas fa-star mr-1"></i>FEATURED
-                        </span>
-                        <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">Tesla Optimus Running</h3>
-                        <p class="text-gray-600 text-sm mb-3">Gen 2 demonstrates smooth human-like running motion with AI navigation...</p>
-                        <a href="news.html" class="text-blue-600 font-semibold text-sm hover:text-blue-700">
-                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                <article class="news-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600&q=80"
+                        alt="Tesla Optimus Gen 2 humanoid robot running demonstration"
+                        class="news-card-img"
+                        loading="lazy"
+                        width="600" height="200"
+                    >
+                    <div class="news-card-body">
+                        <span class="news-tag tag-featured"><i class="fas fa-star" aria-hidden="true"></i> FEATURED</span>
+                        <h3>Tesla Optimus Running</h3>
+                        <p>Gen 2 demonstrates smooth human-like running motion with advanced AI navigation system.</p>
+                        <a href="news.html" class="news-read-more" aria-label="Read more about Tesla Optimus">
+                            Read More <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
 
                 <!-- News 3 -->
-                <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600" alt="AI Market" class="w-full h-48 object-cover">
-                    <div class="p-6">
-                        <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full font-semibold">
-                            <i class="fas fa-chart-line mr-1"></i>MARKET
-                        </span>
-                        <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">Market to Hit $13.8B</h3>
-                        <p class="text-gray-600 text-sm mb-3">Humanoid robot market growth driven by AI advances and manufacturing...</p>
-                        <a href="news.html" class="text-blue-600 font-semibold text-sm hover:text-blue-700">
-                            Read More <i class="fas fa-arrow-right ml-1"></i>
+                <article class="news-card">
+                    <img
+                        src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600&q=80"
+                        alt="Humanoid robot market growth to $13.8 billion"
+                        class="news-card-img"
+                        loading="lazy"
+                        width="600" height="200"
+                    >
+                    <div class="news-card-body">
+                        <span class="news-tag tag-market"><i class="fas fa-chart-line" aria-hidden="true"></i> MARKET</span>
+                        <h3>Market to Hit $13.8B</h3>
+                        <p>Humanoid robot market growth driven by AI advances, manufacturing demand, and venture capital.</p>
+                        <a href="news.html" class="news-read-more" aria-label="Read more about robot market growth">
+                            Read More <i class="fas fa-arrow-right" aria-hidden="true"></i>
                         </a>
                     </div>
                 </article>
 
             </div>
 
-            <div class="text-center">
-                <a href="news.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-newspaper mr-2"></i>View All Tech News
+            <div class="text-center mt-48">
+                <a href="news.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-newspaper" aria-hidden="true"></i> View All Tech News
                 </a>
             </div>
+
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- LATEST BLOG POSTS SECTION -->
-    <!-- ========================================== -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="section-header text-center">
-                <h2 class="text-4xl font-bold text-gray-800">
-                    <i class="fas fa-blog text-purple-600 mr-3"></i>Expert Blog Posts
-                </h2>
-                <p class="text-gray-600 mt-2">Learn from in-depth tutorials and guides</p>
+    <!-- ==================== EXPERT BLOG POSTS ==================== -->
+    <section class="section section-alt" id="blog" aria-labelledby="blog-heading">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">
+                    <i class="fas fa-pen-nib" aria-hidden="true"></i> Knowledge Base
+                </div>
+                <h2 class="section-title" id="blog-heading">Expert Blog Posts</h2>
+                <p class="section-subtitle">In-depth tutorials, guides, and strategies written by experts</p>
             </div>
-            
-            <div class="grid md:grid-cols-3 gap-8 mb-8">
-                
+
+            <div class="blog-grid">
+
                 <!-- Blog 1 -->
-                <article class="blog-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center">
-                        <i class="fas fa-robot text-white text-6xl opacity-50"></i>
+                <article class="blog-card">
+                    <div class="blog-card-thumb" style="background: linear-gradient(135deg, #3b82f6, #4f46e5);">
+                        <i class="fas fa-robot" aria-hidden="true"></i>
                     </div>
-                    <div class="p-6">
-                        <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-semibold">
-                            <i class="fas fa-robot mr-1"></i>AI
-                        </span>
-                        <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">AI Tools Guide 2026</h3>
-                        <p class="text-gray-600 text-sm mb-3">Complete guide to the best AI tools for productivity and creativity...</p>
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span><i class="fas fa-clock mr-1"></i>8 min read</span>
-                            <a href="blog.html" class="text-blue-600 font-semibold">Read More →</a>
+                    <div class="blog-card-body">
+                        <span class="blog-tag tag-ai"><i class="fas fa-robot" aria-hidden="true"></i> AI</span>
+                        <h3>AI Tools Guide 2026</h3>
+                        <p>Complete guide to the best AI tools for productivity, creativity, and business growth.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock" aria-hidden="true"></i> 8 min read</span>
+                            <a href="blog.html" class="blog-read-more" aria-label="Read AI Tools Guide 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
 
                 <!-- Blog 2 -->
-                <article class="blog-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gradient-to-br from-green-500 to-teal-600 flex items-center justify-center">
-                        <i class="fas fa-graduation-cap text-white text-6xl opacity-50"></i>
+                <article class="blog-card">
+                    <div class="blog-card-thumb" style="background: linear-gradient(135deg, #10b981, #0d9488);">
+                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
                     </div>
-                    <div class="p-6">
-                        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs font-semibold">
-                            <i class="fas fa-graduation-cap mr-1"></i>Student
-                        </span>
-                        <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">Student Tools Collection</h3>
-                        <p class="text-gray-600 text-sm mb-3">Essential free tools every student needs for academic success...</p>
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span><i class="fas fa-clock mr-1"></i>6 min read</span>
-                            <a href="blog.html" class="text-blue-600 font-semibold">Read More →</a>
+                    <div class="blog-card-body">
+                        <span class="blog-tag tag-student"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Student</span>
+                        <h3>Student Tools Collection</h3>
+                        <p>Essential free tools every student needs for academic success and productivity.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock" aria-hidden="true"></i> 6 min read</span>
+                            <a href="blog.html" class="blog-read-more" aria-label="Read Student Tools Collection">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
 
                 <!-- Blog 3 -->
-                <article class="blog-card bg-white rounded-xl shadow-lg overflow-hidden">
-                    <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-600 flex items-center justify-center">
-                        <i class="fas fa-search text-white text-6xl opacity-50"></i>
+                <article class="blog-card">
+                    <div class="blog-card-thumb" style="background: linear-gradient(135deg, #8b5cf6, #d946ef);">
+                        <i class="fas fa-search" aria-hidden="true"></i>
                     </div>
-                    <div class="p-6">
-                        <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-xs font-semibold">
-                            <i class="fas fa-search mr-1"></i>SEO
-                        </span>
-                        <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">SEO Guide 2026</h3>
-                        <p class="text-gray-600 text-sm mb-3">Latest SEO strategies from keyword research to link building...</p>
-                        <div class="flex items-center justify-between text-xs text-gray-500">
-                            <span><i class="fas fa-clock mr-1"></i>12 min read</span>
-                            <a href="blog.html" class="text-blue-600 font-semibold">Read More →</a>
+                    <div class="blog-card-body">
+                        <span class="blog-tag tag-seo"><i class="fas fa-search" aria-hidden="true"></i> SEO</span>
+                        <h3>SEO Guide 2026</h3>
+                        <p>Latest SEO strategies from keyword research to link building and technical optimization.</p>
+                        <div class="blog-meta">
+                            <span><i class="fas fa-clock" aria-hidden="true"></i> 12 min read</span>
+                            <a href="blog.html" class="blog-read-more" aria-label="Read SEO Guide 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
 
             </div>
 
-            <div class="text-center">
-                <a href="blog.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-blog mr-2"></i>View All Blog Posts
+            <div class="text-center mt-48">
+                <a href="blog.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-pen-nib" aria-hidden="true"></i> View All Blog Posts
                 </a>
             </div>
+
         </div>
     </section>
 
-    <!-- ========================================== -->
-    <!-- TOP RESOURCES SECTION (List Format) -->
-    <!-- ========================================== -->
-    <section class="py-16 bg-gradient-to-br from-purple-50 to-pink-50">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="section-header text-center">
-                <h2 class="text-4xl font-bold text-gray-800">
-                    <i class="fas fa-book text-green-600 mr-3"></i>Top Resources
-                </h2>
-                <p class="text-gray-600 mt-2">Curated collections for developers and creators</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-6 mb-8">
-                
-                <!-- Resources List 1 -->
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <i class="fas fa-code text-blue-600 mr-3"></i>Developer Resources
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-blue-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-blue-600">Free APIs Collection</a>
-                                <p class="text-xs text-gray-500">100+ free APIs for your projects</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-blue-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-blue-600">Icon Libraries</a>
-                                <p class="text-xs text-gray-500">Best free icon packs</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-blue-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-blue-600">Color Palettes</a>
-                                <p class="text-xs text-gray-500">Beautiful color schemes</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-blue-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-blue-600">Font Libraries</a>
-                                <p class="text-xs text-gray-500">Free fonts for web & design</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-blue-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-blue-600">CSS Frameworks</a>
-                                <p class="text-xs text-gray-500">Popular CSS libraries</p>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+    <!-- ==================== TOP RESOURCES ==================== -->
+    <section class="section" style="background: var(--purple-50);" id="resources" aria-labelledby="resources-heading">
+        <div class="container">
 
-                <!-- Resources List 2 -->
-                <div class="bg-white rounded-xl shadow-lg p-8">
-                    <h3 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
-                        <i class="fas fa-palette text-purple-600 mr-3"></i>Design Resources
-                    </h3>
-                    <ul class="space-y-4">
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-purple-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-purple-600">Stock Photos</a>
-                                <p class="text-xs text-gray-500">Free high-quality images</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-purple-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-purple-600">UI Kits</a>
-                                <p class="text-xs text-gray-500">Ready-to-use design systems</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-purple-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-purple-600">Mockup Templates</a>
-                                <p class="text-xs text-gray-500">Professional mockups</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-purple-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-purple-600">Illustration Sets</a>
-                                <p class="text-xs text-gray-500">Free vector graphics</p>
-                            </div>
-                        </li>
-                        <li class="resource-item flex items-center p-3 rounded-lg transition-all">
-                            <i class="fas fa-chevron-right text-purple-600 mr-3"></i>
-                            <div class="flex-1">
-                                <a href="resources.html" class="font-semibold text-gray-800 hover:text-purple-600">Figma Plugins</a>
-                                <p class="text-xs text-gray-500">Best Figma extensions</p>
-                            </div>
-                        </li>
-                    </ul>
+            <div class="section-header">
+                <div class="section-label">
+                    <i class="fas fa-layer-group" aria-hidden="true"></i> Curated
                 </div>
-
+                <h2 class="section-title" id="resources-heading">Top Resources</h2>
+                <p class="section-subtitle">Handpicked collections for developers, designers & creators</p>
             </div>
 
-            <div class="text-center">
-                <a href="resources.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-book mr-2"></i>Browse All Resources
-                </a>
-            </div>
-        </div>
-    </section>
+            <div class="resources-grid">
 
-    <!-- ========================================== -->
-    <!-- FEATURED TUTORIALS SECTION -->
-    <!-- ========================================== -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4 max-w-6xl">
-            <div class="section-header text-center">
-                <h2 class="text-4xl font-bold text-gray-800">
-                    <i class="fas fa-chalkboard-teacher text-orange-600 mr-3"></i>Featured Tutorials
-                </h2>
-                <p class="text-gray-600 mt-2">Step-by-step guides to master new skills</p>
-            </div>
-            
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                
-                <!-- Tutorial 1 -->
-                <div class="bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl shadow-lg p-6 text-white hover:shadow-2xl transition-all">
-                    <div class="text-5xl mb-4"><i class="fas fa-robot"></i></div>
-                    <h3 class="text-xl font-bold mb-2">AI Tools Mastery</h3>
-                    <p class="text-sm mb-4 opacity-90">Learn to use ChatGPT, Midjourney & more</p>
-                    <a href="tutorials.html" class="inline-block bg-white text-blue-600 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100">
-                        Start Tutorial →
-                    </a>
-                </div>
-
-                <!-- Tutorial 2 -->
-                <div class="bg-gradient-to-br from-green-500 to-green-600 rounded-xl shadow-lg p-6 text-white hover:shadow-2xl transition-all">
-                    <div class="text-5xl mb-4"><i class="fas fa-search"></i></div>
-                    <h3 class="text-xl font-bold mb-2">SEO Basics</h3>
-                    <p class="text-sm mb-4 opacity-90">Rank higher on Google search results</p>
-                    <a href="tutorials.html" class="inline-block bg-white text-green-600 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100">
-                        Start Tutorial →
-                    </a>
-                </div>
-
-                <!-- Tutorial 3 -->
-                <div class="bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl shadow-lg p-6 text-white hover:shadow-2xl transition-all">
-                    <div class="text-5xl mb-4"><i class="fas fa-code"></i></div>
-                    <h3 class="text-xl font-bold mb-2">Web Development</h3>
-                    <p class="text-sm mb-4 opacity-90">Build modern websites from scratch</p>
-                    <a href="tutorials.html" class="inline-block bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100">
-                        Start Tutorial →
-                    </a>
-                </div>
-
-                <!-- Tutorial 4 -->
-                <div class="bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl shadow-lg p-6 text-white hover:shadow-2xl transition-all">
-                    <div class="text-5xl mb-4"><i class="fas fa-palette"></i></div>
-                    <h3 class="text-xl font-bold mb-2">UI/UX Design</h3>
-                    <p class="text-sm mb-4 opacity-90">Create beautiful user interfaces</p>
-                    <a href="tutorials.html" class="inline-block bg-white text-orange-600 px-4 py-2 rounded-lg font-semibold text-sm hover:bg-gray-100">
-                        Start Tutorial →
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="text-center">
-                <a href="tutorials.html" class="inline-block bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-bold text-lg hover:shadow-xl transition-all">
-                    <i class="fas fa-chalkboard-teacher mr-2"></i>View All Tutorials
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="py-16 bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div class="container mx-auto px-4 text-center">
-            <h2 class="text-3xl md:text-4xl font-bold mb-4">Ready to Boost Your Productivity?</h2>
-            <p class="text-xl mb-8">Join thousands using Free Tools Hub daily</p>
-            <a href="tools.html" class="inline-block bg-white text-blue-600 px-8 py-4 rounded-lg font-bold text-lg hover:shadow-2xl transition-all">
-                Explore All Tools Now <i class="fas fa-arrow-right ml-2"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-tools text-white"></i>
+                <!-- Developer Resources -->
+                <div class="resource-box">
+                    <div class="resource-box-header">
+                        <div class="resource-box-icon" style="background: #dbeafe; color: #1d4ed8;">
+                            <i class="fas fa-code" aria-hidden="true"></i>
                         </div>
-                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
+                        <h3>Developer Resources</h3>
                     </div>
-                    <p class="text-gray-400 text-sm">Your complete hub for free tools, blogs, news, resources, and tutorials.</p>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white"><i class="fas fa-home mr-2"></i>Home</a></li>
-                        <li><a href="tools.html" class="text-gray-400 hover:text-white"><i class="fas fa-tools mr-2"></i>All Tools</a></li>
-                        <li><a href="blog.html" class="text-gray-400 hover:text-white"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="news.html" class="text-gray-400 hover:text-white"><i class="fas fa-newspaper mr-2"></i>News</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#dbeafe; color:#1d4ed8;"><i class="fas fa-plug" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Free APIs Collection</a>
+                                <p>100+ free APIs for your projects</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#dcfce7; color:#15803d;"><i class="fas fa-icons" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Icon Libraries</a>
+                                <p>Best free icon packs & SVG sets</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#fef3c7; color:#b45309;"><i class="fas fa-palette" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Color Palettes</a>
+                                <p>Beautiful, accessible color schemes</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#f3e8ff; color:#7c3aed;"><i class="fas fa-font" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Font Libraries</a>
+                                <p>Free fonts for web & print design</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#ffe4e6; color:#be123c;"><i class="fas fa-layer-group" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">CSS Frameworks</a>
+                                <p>Popular CSS libraries & utilities</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="resources.html" class="text-gray-400 hover:text-white"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="tutorials.html" class="text-gray-400 hover:text-white"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                        <li><a href="comparisons.html" class="text-gray-400 hover:text-white"><i class="fas fa-balance-scale mr-2"></i>Comparisons</a></li>
+
+                <!-- Design Resources -->
+                <div class="resource-box">
+                    <div class="resource-box-header">
+                        <div class="resource-box-icon" style="background: #f3e8ff; color: #7c3aed;">
+                            <i class="fas fa-paint-brush" aria-hidden="true"></i>
+                        </div>
+                        <h3>Design Resources</h3>
+                    </div>
+                    <ul class="resource-list">
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#dbeafe; color:#1d4ed8;"><i class="fas fa-images" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Stock Photos</a>
+                                <p>Free high-quality, royalty-free images</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#dcfce7; color:#15803d;"><i class="fas fa-object-group" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">UI Kits</a>
+                                <p>Ready-to-use design systems & components</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#fef3c7; color:#b45309;"><i class="fas fa-mobile-alt" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Mockup Templates</a>
+                                <p>Professional device & print mockups</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#f3e8ff; color:#7c3aed;"><i class="fas fa-vector-square" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Illustration Sets</a>
+                                <p>Free vector graphics & illustrations</p>
+                            </div>
+                        </li>
+                        <li class="resource-item">
+                            <div class="resource-item-icon" style="background:#ffe4e6; color:#be123c;"><i class="fas fa-puzzle-piece" aria-hidden="true"></i></div>
+                            <div>
+                                <a href="resources.html">Figma Plugins</a>
+                                <p>Best productivity Figma extensions</p>
+                            </div>
+                        </li>
                     </ul>
                 </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-github"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-linkedin"></i></a>
+
+            </div>
+
+            <div class="text-center mt-48">
+                <a href="resources.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-layer-group" aria-hidden="true"></i> Browse All Resources
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== TUTORIALS ==================== -->
+    <section class="section section-alt" id="tutorials" aria-labelledby="tutorials-heading">
+        <div class="container">
+
+            <div class="section-header">
+                <div class="section-label">
+                    <i class="fas fa-play-circle" aria-hidden="true"></i> Learn
+                </div>
+                <h2 class="section-title" id="tutorials-heading">Featured Tutorials</h2>
+                <p class="section-subtitle">Step-by-step guides to master in-demand digital skills</p>
+            </div>
+
+            <div class="tutorials-grid">
+
+                <div class="tutorial-card" style="background: linear-gradient(135deg, #2563eb, #4f46e5);">
+                    <i class="fas fa-robot tutorial-icon" aria-hidden="true"></i>
+                    <h3>AI Tools Mastery</h3>
+                    <p>Learn to use ChatGPT, Midjourney, Claude & more AI tools</p>
+                    <a href="tutorials.html" class="tutorial-btn" aria-label="Start AI Tools Mastery Tutorial">
+                        Start Tutorial <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="tutorial-card" style="background: linear-gradient(135deg, #059669, #0d9488);">
+                    <i class="fas fa-search tutorial-icon" aria-hidden="true"></i>
+                    <h3>SEO Basics</h3>
+                    <p>Rank higher on Google with proven SEO strategies</p>
+                    <a href="tutorials.html" class="tutorial-btn" aria-label="Start SEO Basics Tutorial">
+                        Start Tutorial <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="tutorial-card" style="background: linear-gradient(135deg, #7c3aed, #d946ef);">
+                    <i class="fas fa-code tutorial-icon" aria-hidden="true"></i>
+                    <h3>Web Development</h3>
+                    <p>Build modern, responsive websites from scratch</p>
+                    <a href="tutorials.html" class="tutorial-btn" aria-label="Start Web Development Tutorial">
+                        Start Tutorial <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+                <div class="tutorial-card" style="background: linear-gradient(135deg, #ea580c, #d97706);">
+                    <i class="fas fa-pencil-ruler tutorial-icon" aria-hidden="true"></i>
+                    <h3>UI/UX Design</h3>
+                    <p>Design beautiful, user-friendly interfaces</p>
+                    <a href="tutorials.html" class="tutorial-btn" aria-label="Start UI/UX Design Tutorial">
+                        Start Tutorial <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="text-center mt-48">
+                <a href="tutorials.html" class="btn btn-primary btn-lg">
+                    <i class="fas fa-play-circle" aria-hidden="true"></i> View All Tutorials
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- ==================== CTA ==================== -->
+    <section class="cta-section" aria-label="Call to action">
+        <div class="container cta-section-inner">
+            <h2>Ready to Boost Your Productivity?</h2>
+            <p>Join thousands of users who use Free Tools Hub every day — 100% free, forever.</p>
+            <div style="display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;">
+                <a href="tools.html" class="btn btn-white btn-lg">
+                    <i class="fas fa-tools" aria-hidden="true"></i> Explore All Tools
+                </a>
+                <a href="blog.html" class="btn btn-outline-white btn-lg">
+                    <i class="fas fa-pen-nib" aria-hidden="true"></i> Read Blog
+                </a>
+            </div>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer" aria-label="Site footer">
+        <div class="container">
+            <div class="footer-grid">
+
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <div class="site-logo">
+                        <div class="logo-icon">
+                            <i class="fas fa-bolt" aria-hidden="true"></i>
+                        </div>
+                        <div class="logo-text">
+                            <span class="logo-name">Free Tools Hub</span>
+                        </div>
+                    </div>
+                    <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials — all in one place.</p>
+                    <div class="footer-social" style="margin-top: 20px;">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://github.com/freetoolsapp" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
                     </div>
                 </div>
+
+                <!-- Quick Links -->
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home" aria-hidden="true"></i>Home</a></li>
+                        <li><a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i>All Tools</a></li>
+                        <li><a href="blog.html"><i class="fas fa-pen-nib" aria-hidden="true"></i>Blog</a></li>
+                        <li><a href="news.html"><i class="fas fa-newspaper" aria-hidden="true"></i>News</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i>Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Categories -->
+                <div class="footer-col">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="resources.html"><i class="fas fa-layer-group" aria-hidden="true"></i>Resources</a></li>
+                        <li><a href="tutorials.html"><i class="fas fa-play-circle" aria-hidden="true"></i>Tutorials</a></li>
+                        <li><a href="comparisons.html"><i class="fas fa-balance-scale" aria-hidden="true"></i>Comparisons</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle" aria-hidden="true"></i>About Us</a></li>
+                    </ul>
+                </div>
+
+                <!-- Legal -->
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract" aria-hidden="true"></i>Terms of Service</a></li>
+                        <li><a href="disclaimer.html"><i class="fas fa-exclamation-circle" aria-hidden="true"></i>Disclaimer</a></li>
+                    </ul>
+                </div>
+
             </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 Free Tools Hub. All rights reserved. | Made with <i class="fas fa-heart text-red-500"></i> for developers</p>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <p>
+                    &copy; 2026 <a href="index.html">Free Tools Hub</a>. All rights reserved.
+                    Made with <span class="heart">♥</span> for developers &amp; creators.
+                </p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
             </div>
+
         </div>
     </footer>
 
+    <!-- ==================== SCRIPTS ==================== -->
     <script>
+        // Header scroll effect
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+
         // Mobile menu toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu    = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+            mobileMenuBtn.innerHTML = isOpen
+                ? '<i class="fas fa-times" aria-hidden="true"></i>'
+                : '<i class="fas fa-bars"  aria-hidden="true"></i>';
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('open');
+                mobileMenuBtn.setAttribute('aria-expanded', 'false');
+                mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+            });
+        });
+
+        // Hero search — redirect to tools page with query
+        const heroSearch = document.getElementById('heroSearch');
+        heroSearch.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && heroSearch.value.trim()) {
+                window.location.href = `tools.html?q=${encodeURIComponent(heroSearch.value.trim())}`;
+            }
+        });
+
+        // Animate elements on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.tool-card, .news-card, .blog-card, .tutorial-card, .resource-box').forEach((el, i) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(24px)';
+            el.style.transition = `opacity 0.5s ease ${(i % 4) * 0.08}s, transform 0.5s ease ${(i % 4) * 0.08}s`;
+            observer.observe(el);
         });
     </script>
+
 </body>
 </html>
