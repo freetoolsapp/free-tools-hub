@@ -1,745 +1,172 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags for SEO -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <!-- Primary Meta Tags -->
-    <title>PDF to Word Converter - Free Tools Hub</title>
-    <meta name="title" content="PDF to Word Converter - Free Tools Hub">
-    <meta name="description" content="Convert PDF files and images to editable Word documents with OCR. Free, fast, and no signup required!">
-    <meta name="keywords" content="PDF to Word, PDF converter, OCR, image to text, free converter">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
-    <meta name="author" content="freetoolsapp">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-word.html">
-    <meta property="og:title" content="PDF to Word Converter - Free Tools Hub">
-    <meta property="og:description" content="Convert PDF files and images to editable Word documents with OCR. Free, fast, and no signup required!">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-word.html">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- PDF.js and Tesseract.js -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-    
-    <style>
-        .drop-zone {
-            border: 3px dashed #667eea;
-            transition: all 0.3s;
-        }
-        
-        .drop-zone.dragover {
-            border-color: #4caf50;
-            background: #e8f5e9 !important;
-            transform: scale(1.02);
-        }
-        
-        .upload-section.dragover {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%) !important;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
-        }
-        
-        .method-card {
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-        
-        .method-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>PDF to Word Converter – Free Online PDF to DOC Tool | FreeToolsHub</title>
+
+<meta name="description" content="Convert PDF to Word (DOC) online for free. Fast, secure and mobile-friendly PDF to Word converter. No signup required.">
+
+<meta name="keywords" content="pdf to word, pdf to doc converter, free pdf converter, convert pdf online">
+
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://freetoolshub.online/tools/pdf-to-word.html">
+
+<meta property="og:title" content="PDF to Word Converter – Free Online Tool">
+<meta property="og:description" content="Convert PDF files to editable Word documents instantly. 100% free.">
+<meta property="og:type" content="website">
+
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+
+<!-- Schema -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "PDF to Word Converter",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "All",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "USD"
+  }
+}
+</script>
+
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="../../index.html" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
-                    </div>
-                </a>
-                
-                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
-                    <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
-                    <a href="../../index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
-                    <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
-                    <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
-                    <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
-                    <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
-                </nav>
-                
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
-            </div>
-            
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
-                <a href="../../index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="../../index.html#tools" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-tools mr-2"></i>Tools</a>
-                <a href="../../blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="../../resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-                <a href="../../tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
-                <a href="../../comparisons.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
-                <a href="../../contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
-            </nav>
-        </div>
-    </header>
+<body class="bg-gray-50 text-gray-800">
 
-    <!-- Breadcrumb -->
-    <div class="bg-white border-b">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center text-sm text-gray-600">
-                <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
-                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-                <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
-                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-                <span class="text-gray-800 font-medium">PDF to Word Converter</span>
-            </div>
-        </div>
-    </div>
+<!-- HEADER -->
+<header class="bg-white shadow-md sticky top-0 z-50">
+<div class="container mx-auto px-4 py-4 flex justify-between items-center">
+<h1 class="text-2xl font-bold text-blue-600">
+<a href="../index.html">FreeToolsHub</a>
+</h1>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-12">
-        <div class="container mx-auto px-4 text-center">
-            <div class="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-4 backdrop-blur">
-                <i class="fas fa-file-word text-5xl"></i>
-            </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">PDF/Image to Word Converter</h2>
-            <p class="text-xl mb-2">Convert PDFs and images to editable Word documents with OCR</p>
-            <p class="text-sm opacity-90"><i class="fas fa-check-circle mr-1"></i>Free • No Signup • Instant Results • Preserves Formatting</p>
-        </div>
-    </section>
+<nav class="space-x-6 hidden md:block">
+<a href="../index.html" class="hover:text-blue-600">Home</a>
+<a href="../tools.html" class="hover:text-blue-600">Tools</a>
+<a href="../blog.html" class="hover:text-blue-600">Blog</a>
+</nav>
+</div>
+</header>
 
-    <!-- Main Content -->
-    <main class="py-12">
-        <div class="container mx-auto px-4 max-w-6xl">
-            
-            <!-- Upload Section -->
-            <div id="uploadSection" class="bg-gradient-to-br from-blue-50 to-purple-50 rounded-lg shadow-lg p-8 mb-8 transition-all duration-300">
-                <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                    <i class="fas fa-upload text-blue-600 mr-2"></i>Upload Your File
-                </h3>
-                
-                <div id="dropZone" class="drop-zone bg-white rounded-xl p-12 text-center cursor-pointer">
-                    <i class="fas fa-cloud-upload-alt text-6xl text-blue-600 mb-4"></i>
-                    <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
-                    <p class="text-gray-600 mb-4">Supports: PDF, JPG, PNG, JPEG • Max 10MB</p>
-                    <label for="fileInput" class="inline-block">
-                        <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition cursor-pointer inline-block">
-                            <i class="fas fa-folder-open mr-2"></i>Browse Files
-                        </div>
-                    </label>
-                    <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,image/*" class="hidden">
-                </div>
+<!-- HERO -->
+<section class="bg-blue-600 text-white py-14 text-center">
+<div class="container mx-auto px-4">
+<h2 class="text-4xl font-bold mb-2">PDF to Word Converter</h2>
+<p class="text-lg">Convert PDF files into editable Word documents</p>
+</div>
+</section>
 
-                <!-- Method Cards -->
-                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
-                    <div class="method-card bg-white p-6 rounded-lg border-2 border-blue-200 shadow hover:shadow-xl" onclick="document.getElementById('fileInput').click()">
-                        <i class="fas fa-file-upload text-4xl text-blue-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">📁 Upload File</h4>
-                        <p class="text-sm text-gray-600">Click to select PDF or image from your computer</p>
-                    </div>
-                    <div class="method-card bg-white p-6 rounded-lg border-2 border-purple-200 shadow hover:shadow-xl">
-                        <i class="fas fa-hand-pointer text-4xl text-purple-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">🖱️ Drag & Drop</h4>
-                        <p class="text-sm text-gray-600">Drop your file anywhere on the upload area</p>
-                    </div>
-                    <div class="method-card bg-white p-6 rounded-lg border-2 border-pink-200 shadow hover:shadow-xl">
-                        <i class="fas fa-clipboard text-4xl text-pink-600 mb-3"></i>
-                        <h4 class="font-bold text-gray-800 mb-2">📋 Paste (Ctrl+V)</h4>
-                        <p class="text-sm text-gray-600">Take screenshot and paste directly (Ctrl+V)</p>
-                    </div>
-                </div>
-                
-                <div class="bg-yellow-50 border-2 border-yellow-300 rounded-lg p-6 mt-8">
-                    <h4 class="font-bold text-yellow-800 mb-3 flex items-center">
-                        <i class="fas fa-lightbulb text-yellow-600 mr-2 text-xl"></i>
-                        Features & Tips
-                    </h4>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-yellow-800">
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Preserves paragraphs & line breaks</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Maintains numbers & formatting</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>PDF text extraction with structure</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Image OCR for English text</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Download as proper .doc file</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Copy formatted text to clipboard</div>
-                    </div>
-                </div>
-            </div>
+<!-- BREADCRUMB -->
+<div class="container mx-auto px-4 mt-6 text-sm text-gray-500">
+<a href="../index.html" class="hover:text-blue-600">Home</a> 
+<span class="mx-2">/</span>
+<a href="../tools.html" class="hover:text-blue-600">Tools</a>
+<span class="mx-2">/</span>
+<span class="text-gray-700 font-medium">PDF to Word</span>
+</div>
 
-            <!-- File Info -->
-            <div id="fileInfo" class="hidden bg-blue-50 border-2 border-blue-300 rounded-lg p-4 mb-6">
-                <strong class="text-blue-800"><i class="fas fa-file text-blue-600 mr-2"></i>File:</strong> 
-                <span id="fileName" class="text-blue-900"></span>
-            </div>
+<!-- TOOL SECTION -->
+<section class="py-12">
+<div class="container mx-auto px-4 max-w-3xl">
 
-            <!-- Processing Section -->
-            <div id="processing" class="hidden bg-white rounded-lg shadow-lg p-8 mb-8">
-                <div class="text-center">
-                    <div class="spinner mb-4"></div>
-                    <h3 id="processingMsg" class="text-xl font-bold text-gray-800 mb-2">⚡ Processing your file...</h3>
-                    <p class="text-gray-600 mb-4">This may take a few moments depending on file size</p>
-                    <div class="bg-gray-200 h-8 rounded-full overflow-hidden max-w-md mx-auto">
-                        <div id="progressFill" class="bg-gradient-to-r from-blue-600 to-purple-600 h-full flex items-center justify-center text-white font-bold transition-all duration-300" style="width: 0%">
-                            0%
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="bg-white p-8 rounded-lg shadow text-center">
 
-            <!-- Results Section -->
-            <div id="results" class="hidden">
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <!-- Preview Box -->
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-eye text-blue-600 mr-2"></i>
-                            Preview
-                        </h3>
-                        <div class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 max-h-96 overflow-auto">
-                            <img id="previewImg" class="max-w-full rounded-lg mx-auto" alt="Preview">
-                        </div>
-                    </div>
+<input type="file" id="pdfInput" accept=".pdf"
+class="mb-6 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-600 file:text-white hover:file:bg-blue-700">
 
-                    <!-- Extracted Text -->
-                    <div class="bg-white rounded-lg shadow-lg p-6">
-                        <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                            <i class="fas fa-file-alt text-green-600 mr-2"></i>
-                            Extracted Text
-                        </h3>
-                        <textarea id="extractedText" class="w-full h-64 p-4 border-2 border-gray-200 rounded-lg font-mono text-sm resize-vertical focus:border-blue-500 focus:outline-none" placeholder="Extracted text will appear here..."></textarea>
-                        
-                        <div class="flex flex-col gap-3 mt-4">
-                            <button onclick="downloadWordDoc()" class="bg-gradient-to-r from-green-600 to-green-700 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition flex items-center justify-center">
-                                <i class="fas fa-file-word mr-2 text-xl"></i>Download as Word (.doc)
-                            </button>
-                            <button onclick="copyText()" class="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-lg transition flex items-center justify-center">
-                                <i class="fas fa-copy mr-2"></i>Copy Text to Clipboard
-                            </button>
-                            <button onclick="location.reload()" class="bg-gray-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-gray-700 transition flex items-center justify-center">
-                                <i class="fas fa-redo mr-2"></i>Convert Another File
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<button onclick="convertPDFtoWord()"
+class="bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+Convert to Word
+</button>
 
-            <!-- Features Section -->
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-xl transition">
-                    <i class="fas fa-shield-alt text-4xl text-green-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">100% Secure</h4>
-                    <p class="text-sm text-gray-600">Your files are processed locally in your browser</p>
-                </div>
-                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-xl transition">
-                    <i class="fas fa-bolt text-4xl text-yellow-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Lightning Fast</h4>
-                    <p class="text-sm text-gray-600">Get results in seconds with our optimized engine</p>
-                </div>
-                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-xl transition">
-                    <i class="fas fa-user-slash text-4xl text-blue-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">No Signup</h4>
-                    <p class="text-sm text-gray-600">Use instantly without registration or downloads</p>
-                </div>
-                <div class="bg-white rounded-lg shadow p-6 text-center hover:shadow-xl transition">
-                    <i class="fas fa-magic text-4xl text-purple-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Smart OCR</h4>
-                    <p class="text-sm text-gray-600">Advanced text recognition with structure preservation</p>
-                </div>
-            </div>
+<p id="status" class="mt-4 text-gray-600"></p>
 
-        </div>
-    </main>
+</div>
 
-    <!-- Related Tools Section -->
-    <section class="bg-white py-12 border-t">
-        <div class="container mx-auto px-4">
-            <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">
-                <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools You Might Like
-            </h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-                <a href="../utility/word-counter.html" class="bg-gradient-to-br from-blue-50 to-blue-100 rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-blue-200 block">
-                    <i class="fas fa-hashtag text-3xl text-blue-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Word Counter</h4>
-                    <p class="text-sm text-gray-600">Count words, characters, and reading time</p>
-                </a>
-                <a href="../utility/password-generator.html" class="bg-gradient-to-br from-red-50 to-red-100 rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-red-200 block">
-                    <i class="fas fa-key text-3xl text-red-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Password Generator</h4>
-                    <p class="text-sm text-gray-600">Generate strong secure passwords</p>
-                </a>
-                <a href="../student/gpa-calculator.html" class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-teal-200 block">
-                    <i class="fas fa-calculator text-3xl text-teal-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">GPA Calculator</h4>
-                    <p class="text-sm text-gray-600">Calculate your GPA instantly</p>
-                </a>
-                <a href="../utility/age-calculator.html" class="bg-gradient-to-br from-pink-50 to-pink-100 rounded-lg shadow hover:shadow-xl transition p-6 border-2 border-pink-200 block">
-                    <i class="fas fa-birthday-cake text-3xl text-pink-600 mb-3"></i>
-                    <h4 class="font-bold text-gray-800 mb-2">Age Calculator</h4>
-                    <p class="text-sm text-gray-600">Calculate your exact age</p>
-                </a>
-            </div>
-        </div>
-    </section>
+</div>
+</section>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-                <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
-                    </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-code mr-2"></i>Web Dev Tools</a></li>
-                        <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fab fa-instagram mr-2"></i>Social Media</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                        <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
-                        <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                        <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
-                        <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4 text-2xl mb-4">
-                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    </div>
-                    <p class="text-gray-400 text-xs">by freetoolsapp</p>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
-            </div>
-        </div>
-    </footer>
+<!-- SEO CONTENT -->
+<section class="py-16 bg-white">
+<div class="container mx-auto px-4 max-w-3xl">
 
-    <!-- Back to Top Button -->
-    <button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hidden z-50" aria-label="Back to top">
-        <i class="fas fa-arrow-up"></i>
-    </button>
+<h2 class="text-3xl font-bold mb-6">Free PDF to Word Converter Online</h2>
 
-    <!-- Scripts -->
-    <script>
-        // PDF.js worker
-        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
-        
-        let currentText = '';
-        
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-        
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            const icon = mobileMenuBtn.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
-        });
+<p class="mb-4 text-gray-600">
+This free PDF to Word converter extracts text from PDF documents and converts it into an editable Word-compatible file. Works directly in your browser for maximum privacy.
+</p>
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-                mobileMenu.classList.add('hidden');
-                const icon = mobileMenuBtn.querySelector('i');
-                icon.classList.remove('fa-times');
-                icon.classList.add('fa-bars');
-            }
-        });
+<p class="text-gray-600">
+Ideal for students, professionals and businesses who need quick document editing.
+</p>
 
-        // Back to top button
-        const backToTop = document.getElementById('backToTop');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 300) {
-                backToTop.classList.remove('hidden');
-            } else {
-                backToTop.classList.add('hidden');
-            }
-        });
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
+</div>
+</section>
 
-        // File upload functionality
-        const dropZone = document.getElementById('dropZone');
-        const uploadSection = document.getElementById('uploadSection');
-        const fileInput = document.getElementById('fileInput');
+<!-- FOOTER -->
+<footer class="bg-gray-900 text-white py-10 text-center">
+<div class="container mx-auto px-4">
 
-        // Prevent default drag behaviors
-        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, preventDefaults, false);
-            document.body.addEventListener(eventName, preventDefaults, false);
-        });
+<div class="mb-4 space-x-6">
+<a href="../index.html" class="hover:text-gray-400">Home</a>
+<a href="../tools.html" class="hover:text-gray-400">Tools</a>
+<a href="../privacy.html" class="hover:text-gray-400">Privacy Policy</a>
+<a href="../contact.html" class="hover:text-gray-400">Contact</a>
+</div>
 
-        function preventDefaults(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        }
+<p>© 2026 FreeToolsHub. All Rights Reserved.</p>
 
-        // Highlight drop zone when dragging over it
-        ['dragenter', 'dragover'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => {
-                dropZone.classList.add('dragover');
-                uploadSection.classList.add('dragover');
+</div>
+</footer>
+
+<script>
+async function convertPDFtoWord() {
+    const input = document.getElementById('pdfInput');
+    const status = document.getElementById('status');
+
+    if (!input.files.length) {
+        status.innerText = "Please select a PDF file.";
+        return;
+    }
+
+    status.innerText = "Extracting text...";
+
+    const file = input.files[0];
+    const reader = new FileReader();
+
+    reader.onload = async function() {
+        const typedarray = new Uint8Array(this.result);
+        const pdf = await pdfjsLib.getDocument(typedarray).promise;
+
+        let fullText = "";
+
+        for (let i = 1; i <= pdf.numPages; i++) {
+            const page = await pdf.getPage(i);
+            const content = await page.getTextContent();
+            content.items.forEach(item => {
+                fullText += item.str + " ";
             });
-        });
-
-        ['dragleave', 'drop'].forEach(eventName => {
-            dropZone.addEventListener(eventName, () => {
-                dropZone.classList.remove('dragover');
-                uploadSection.classList.remove('dragover');
-            });
-        });
-
-        // Handle dropped files
-        dropZone.addEventListener('drop', handleDrop);
-        document.body.addEventListener('drop', handleDrop);
-
-        function handleDrop(e) {
-            const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files.length > 0) {
-                processFile(files[0], files[0].name);
-            }
+            fullText += "\n\n";
         }
 
-        // Handle file input change
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                processFile(file, file.name);
-            }
-        });
+        const blob = new Blob([fullText], { type: "application/msword" });
+        const link = document.createElement("a");
+        link.href = URL.createObjectURL(blob);
+        link.download = file.name.replace(".pdf", ".doc");
+        link.click();
 
-        // Paste functionality (Ctrl+V for images)
-        window.addEventListener('paste', function(e) {
-            const items = e.clipboardData.items;
-            for (let i = 0; i < items.length; i++) {
-                if (items[i].type.indexOf('image') !== -1) {
-                    e.preventDefault();
-                    const blob = items[i].getAsFile();
-                    const fileName = 'Pasted_Image_' + new Date().toLocaleTimeString().replace(/:/g, '-') + '.png';
-                    processFile(blob, fileName);
-                    return;
-                }
-            }
-        });
+        status.innerText = "Word file downloaded successfully!";
+    };
 
-        async function processFile(file, fileName) {
-            // Validate file
-            if (!file.type.includes('pdf') && !file.type.includes('image')) {
-                alert('❌ Please upload a PDF or image file (JPG, PNG, JPEG)');
-                return;
-            }
+    reader.readAsArrayBuffer(file);
+}
+</script>
 
-            // Check file size (max 10MB)
-            if (file.size > 10 * 1024 * 1024) {
-                alert('❌ File too large! Please upload a file smaller than 10MB');
-                return;
-            }
-
-            // Show file info
-            document.getElementById('fileName').textContent = fileName;
-            document.getElementById('fileInfo').classList.remove('hidden');
-            
-            // Show processing
-            document.getElementById('processing').classList.remove('hidden');
-            document.getElementById('results').classList.add('hidden');
-
-            // Show preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('previewImg').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-            
-            try {
-                let text = '';
-                
-                if (file.type === 'application/pdf') {
-                    document.getElementById('processingMsg').textContent = '📄 Extracting PDF with formatting...';
-                    text = await extractFromPDF(file);
-                } else if (file.type.startsWith('image/')) {
-                    document.getElementById('processingMsg').textContent = '🔍 Performing OCR with structure detection...';
-                    text = await extractFromImage(file);
-                }
-                
-                currentText = text;
-                document.getElementById('extractedText').value = text;
-                document.getElementById('processing').classList.add('hidden');
-                document.getElementById('results').classList.remove('hidden');
-                
-                // Scroll to results
-                document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
-            } catch (error) {
-                alert('❌ Error: ' + error.message + '\n\nPlease try again with a different file.');
-                document.getElementById('processing').classList.add('hidden');
-                console.error('Processing error:', error);
-            }
-        }
-
-        async function extractFromImage(file) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                const reader = new FileReader();
-                
-                reader.onload = function(e) {
-                    img.src = e.target.result;
-                    img.onload = async function() {
-                        try {
-                            const canvas = document.createElement('canvas');
-                            const ctx = canvas.getContext('2d');
-                            
-                            let width = img.width;
-                            let height = img.height;
-                            const maxWidth = 2400;
-                            
-                            if (width > maxWidth) {
-                                height = (height * maxWidth) / width;
-                                width = maxWidth;
-                            }
-                            
-                            canvas.width = width;
-                            canvas.height = height;
-                            ctx.filter = 'contrast(1.3) brightness(1.1)';
-                            ctx.drawImage(img, 0, 0, width, height);
-                            
-                            updateProgress(10);
-                            
-                            const result = await Tesseract.recognize(
-                                canvas,
-                                'eng',
-                                {
-                                    logger: function(m) {
-                                        if (m.status === 'recognizing text') {
-                                            const progress = 10 + Math.round(m.progress * 90);
-                                            updateProgress(progress);
-                                        }
-                                    },
-                                    tessedit_pageseg_mode: Tesseract.PSM.AUTO
-                                }
-                            );
-                            
-                            const lines = result.data.lines;
-                            let formattedText = '';
-                            let lastY = 0;
-                            
-                            lines.forEach((line, index) => {
-                                const lineText = line.text.trim();
-                                if (lineText) {
-                                    const currentY = line.bbox.y0;
-                                    if (index > 0 && (currentY - lastY) > 50) {
-                                        formattedText += '\n\n';
-                                    }
-                                    formattedText += lineText + '\n';
-                                    lastY = line.bbox.y1;
-                                }
-                            });
-                            
-                            resolve(formattedText);
-                        } catch (error) {
-                            reject(error);
-                        }
-                    };
-                };
-                
-                reader.readAsDataURL(file);
-            });
-        }
-
-        async function extractFromPDF(file) {
-            const arrayBuffer = await file.arrayBuffer();
-            const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-            let fullText = '';
-            
-            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                const page = await pdf.getPage(pageNum);
-                const textContent = await page.getTextContent();
-                const lines = {};
-                
-                textContent.items.forEach(item => {
-                    const y = Math.round(item.transform[5]);
-                    if (!lines[y]) {
-                        lines[y] = [];
-                    }
-                    lines[y].push({
-                        text: item.str,
-                        x: item.transform[4]
-                    });
-                });
-                
-                const sortedY = Object.keys(lines).sort((a, b) => b - a);
-                let lastY = null;
-                let pageText = '';
-                
-                sortedY.forEach(y => {
-                    lines[y].sort((a, b) => a.x - b.x);
-                    const lineText = lines[y].map(item => item.text).join(' ').trim();
-                    
-                    if (lineText) {
-                        if (lastY && (lastY - y) > 20) {
-                            pageText += '\n\n';
-                        }
-                        pageText += lineText + '\n';
-                        lastY = y;
-                    }
-                });
-                
-                fullText += pageText;
-                
-                if (pageNum < pdf.numPages) {
-                    fullText += '\n\n--- Page ' + (pageNum + 1) + ' ---\n\n';
-                }
-                
-                const progress = Math.round((pageNum / pdf.numPages) * 100);
-                updateProgress(progress);
-            }
-            
-            return fullText;
-        }
-
-        function updateProgress(percent) {
-            const fill = document.getElementById('progressFill');
-            fill.style.width = percent + '%';
-            fill.textContent = percent + '%';
-        }
-
-        function copyText() {
-            const text = document.getElementById('extractedText').value;
-            navigator.clipboard.writeText(text).then(function() {
-                alert('✅ Text copied successfully!\n\n📋 Formatting preserved - Paste in Word with Ctrl+V');
-            }).catch(function(err) {
-                alert('❌ Failed to copy text. Please select and copy manually.');
-            });
-        }
-
-        function downloadWordDoc() {
-            const text = document.getElementById('extractedText').value;
-            
-            if (!text.trim()) {
-                alert('❌ No text to download!');
-                return;
-            }
-            
-            const paragraphs = text.split('\n\n').map(para => {
-                const lines = para.split('\n').filter(line => line.trim());
-                return lines.map(line => `<p>${escapeHtml(line.trim())}</p>`).join('\n');
-            }).join('\n');
-            
-            const htmlContent = `
-<html xmlns:o='urn:schemas-microsoft-com:office:office' 
-      xmlns:w='urn:schemas-microsoft-com:office:word' 
-      xmlns='http://www.w3.org/TR/REC-html40'>
-<head>
-    <meta charset='utf-8'>
-    <title>Extracted Text</title>
-    <!--[if gte mso 9]>
-    <xml>
-        <w:WordDocument>
-            <w:View>Print</w:View>
-            <w:Zoom>100</w:Zoom>
-            <w:DoNotOptimizeForBrowser/>
-        </w:WordDocument>
-    </xml>
-    <![endif]-->
-    <style>
-        body {
-            font-family: 'Calibri', 'Arial', sans-serif;
-            font-size: 11pt;
-            line-height: 1.5;
-            margin: 1in;
-        }
-        p {
-            margin: 0 0 10pt 0;
-            text-align: justify;
-        }
-    </style>
-</head>
-<body>
-${paragraphs}
-</body>
-</html>`;
-            
-            const blob = new Blob(['\ufeff', htmlContent], {
-                type: 'application/msword'
-            });
-            
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = 'extracted_formatted_' + new Date().getTime() + '.doc';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-            
-            setTimeout(() => {
-                alert('✅ Word Document downloaded!\n\n📝 Formatting preserved:\n• Paragraphs intact\n• Line breaks maintained\n• Numbers & structure preserved\n\n💡 Open with Microsoft Word for best results');
-            }, 500);
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-    </script>
 </body>
 </html>
