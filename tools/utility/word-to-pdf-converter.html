@@ -1246,8 +1246,6 @@
     <!-- ==================== SCRIPTS ==================== -->
     <!-- JSZip for reading DOCX page dimensions from XML -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <!-- html2canvas for capturing rendered HTML as image -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- jsPDF for building the PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- mammoth for extracting HTML content from DOCX -->
@@ -1400,13 +1398,11 @@
         });
 
         // ==================== CORE CONVERSION ====================
-        // Approach: 
-        //   1. Read DOCX page setup (size + margins) via mammoth + XML parsing
-        //   2. Render full document HTML in hidden iframe at EXACT document pixel dimensions
-        //   3. Detect explicit page breaks from mammoth output
-        //   4. Measure every paragraph element — never cut mid-element
-        //   5. Each page slice is captured at exact page pixel height
-        //   6. Output PDF matches the original page size
+        // Pure jsPDF vector-text engine:
+        // Reads DOCX XML directly via JSZip, extracts paragraphs/runs/formatting,
+        // uses jsPDF built-in 'times' font (PostScript Times = Times New Roman),
+        // mathematically wraps text and places page breaks.
+        // No html2canvas. No browser font issues. Clean vector PDF.
 
         async function convertToPDF(file) {
             const { jsPDF } = window.jspdf;
@@ -1414,315 +1410,245 @@
             setProgress(10, 'Reading document...');
             const arrayBuffer = await file.arrayBuffer();
 
-            setProgress(20, 'Extracting content...');
+            setProgress(20, 'Parsing DOCX structure...');
 
-            // --- Step 1: Extract HTML from mammoth ---
-            const htmlResult = await mammoth.convertToHtml({ arrayBuffer });
-            let htmlContent = htmlResult.value || '<p>Empty document</p>';
-
-            // --- Step 2: Parse DOCX XML for page dimensions & margins ---
-            // Read the raw zip to get document.xml and settings
-            let pageSetup = { 
-                pageW_inch: 8.5, pageH_inch: 11.0,
-                marginTop_inch: 1.0, marginBot_inch: 1.0,
-                marginL_inch: 1.0, marginR_inch: 1.0
-            };
-
+            // ── Unzip DOCX ────────────────────────────────────────────────────
+            let zip, docXml = '';
             try {
-                // Use JSZip if available, otherwise use defaults
-                if (typeof JSZip !== 'undefined') {
-                    const zip = await JSZip.loadAsync(arrayBuffer);
-                    const docXml = await zip.file('word/document.xml').async('string');
-                    
-                    const pgSzMatch = docXml.match(/w:pgSz[^>]*w:w="(\d+)"[^>]*w:h="(\d+)"/);
-                    const pgMarMatch = docXml.match(/w:pgMar[^>]*w:top="(\d+)"[^>]*w:right="(\d+)"[^>]*w:bottom="(\d+)"[^>]*w:left="(\d+)"/);
-                    
-                    if (pgSzMatch) {
-                        // EMU units: 1 inch = 914400 EMU, but pgSz is in twentieths of a point
-                        // 1 inch = 1440 twips
-                        pageSetup.pageW_inch  = parseInt(pgSzMatch[1]) / 1440;
-                        pageSetup.pageH_inch  = parseInt(pgSzMatch[2]) / 1440;
-                    }
-                    if (pgMarMatch) {
-                        pageSetup.marginTop_inch = parseInt(pgMarMatch[1]) / 1440;
-                        pageSetup.marginR_inch   = parseInt(pgMarMatch[2]) / 1440;
-                        pageSetup.marginBot_inch = parseInt(pgMarMatch[3]) / 1440;
-                        pageSetup.marginL_inch   = parseInt(pgMarMatch[4]) / 1440;
-                    }
-                }
+                zip = await JSZip.loadAsync(arrayBuffer);
+                docXml = await zip.file('word/document.xml').async('string');
             } catch(e) {
-                // Keep defaults
+                throw new Error('Cannot read DOCX: ' + e.message);
             }
 
-            // --- Step 3: Convert inches to pixels at 96dpi ---
-            const DPI = 96;
-            const PX_PER_PT = DPI / 72;
+            // ── Page setup (twips → points: 1 twip = 1/20 pt) ───────────────
+            const twips2pt = v => parseFloat(v) / 20;
+            let pgW_pt = 612, pgH_pt = 792;
+            let marT_pt = 36, marB_pt = 36, marL_pt = 36, marR_pt = 36;
 
-            const PAGE_W_PX = Math.round(pageSetup.pageW_inch * DPI);   // e.g. 816 for Letter
-            const PAGE_H_PX = Math.round(pageSetup.pageH_inch * DPI);   // e.g. 1056 for Letter
-            const MAR_T_PX  = Math.round(pageSetup.marginTop_inch * DPI);
-            const MAR_B_PX  = Math.round(pageSetup.marginBot_inch * DPI);
-            const MAR_L_PX  = Math.round(pageSetup.marginL_inch * DPI);
-            const MAR_R_PX  = Math.round(pageSetup.marginR_inch * DPI);
-            const CONTENT_H_PX = PAGE_H_PX - MAR_T_PX - MAR_B_PX;
-
-            // Detect explicit page breaks in mammoth output (mammoth uses <hr> for page breaks)
-            // Replace <hr> with a sentinel div
-            htmlContent = htmlContent.replace(/<hr\s*\/?>/gi, '<div class="docx-page-break"></div>');
-
-            setProgress(35, 'Rendering document layout...');
-
-            // --- Step 4: Build styled HTML page matching exact Word settings ---
-            // Font: Times New Roman 10pt (from our analysis), spacing 5pt before/after
-            // We read actual font from mammoth or use safe fallback
-            const styledPage = `<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<style>
-  *, *::before, *::after { box-sizing: border-box; }
-  html { margin:0; padding:0; }
-  body {
-    margin: 0;
-    padding: ${MAR_T_PX}px ${MAR_R_PX}px ${MAR_B_PX}px ${MAR_L_PX}px;
-    width: ${PAGE_W_PX}px;
-    background: #fff;
-    font-family: 'Times New Roman', 'Georgia', serif;
-    font-size: 10pt;
-    line-height: 1.2;
-    color: #000;
-    /* CRITICAL: no min-height, no overflow — let content dictate height */
-  }
-  /* Paragraph spacing matching Word's 5pt before/after */
-  p {
-    margin: 0;
-    padding: 5pt 0;
-    line-height: 1.2;
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-  }
-  h1 { font-size: 16pt; font-weight: bold; margin: 6pt 0; line-height: 1.2; }
-  h2 { font-size: 13pt; font-weight: bold; margin: 5pt 0; line-height: 1.2; }
-  h3 { font-size: 11pt; font-weight: bold; margin: 4pt 0; line-height: 1.2; }
-  h4,h5,h6 { font-size: 10pt; font-weight: bold; margin: 3pt 0; }
-  strong, b { font-weight: bold; }
-  em, i { font-style: italic; }
-  u { text-decoration: underline; }
-  s { text-decoration: line-through; }
-  ul { list-style: disc outside; padding-left: 18pt; margin: 3pt 0; }
-  ol { list-style: decimal outside; padding-left: 18pt; margin: 3pt 0; }
-  li { margin: 2pt 0; padding: 2pt 0; font-size: 10pt; line-height: 1.2; white-space: pre-wrap; }
-  table { border-collapse: collapse; width: 100%; margin: 5pt 0; font-size: 10pt; }
-  td, th { border: 1px solid #000; padding: 3pt 5pt; vertical-align: top; font-size: 10pt; }
-  th { background: #f0f0f0; font-weight: bold; }
-  img { max-width: 100%; height: auto; display: block; margin: 5pt 0; }
-  a { color: #0563C1; }
-  blockquote { border-left: 3px solid #999; padding-left: 10pt; margin: 5pt 0 5pt 10pt; color: #333; font-style: italic; }
-  pre { font-family: 'Courier New', monospace; font-size: 9pt; background: #f5f5f5; padding: 6pt; margin: 5pt 0; white-space: pre-wrap; word-break: break-all; }
-  code { font-family: 'Courier New', monospace; font-size: 9pt; background: #f5f5f5; padding: 1pt 3pt; }
-  hr { border: none; border-top: 1px solid #666; margin: 10pt 0; }
-  /* Explicit page break sentinel — zero height, just a marker */
-  .docx-page-break { height: 0 !important; overflow: hidden; margin: 0; padding: 0; font-size: 0; line-height: 0; }
-</style>
-</head>
-<body>${htmlContent}</body>
-</html>`;
-
-            // --- Step 5: Render in hidden iframe at exact page width ---
-            const iframe = document.createElement('iframe');
-            iframe.setAttribute('sandbox', 'allow-same-origin');
-            iframe.style.cssText = [
-                'position:fixed',
-                'top:-99999px',
-                'left:-99999px',
-                `width:${PAGE_W_PX}px`,
-                'height:30000px',   // tall enough for any document
-                'border:none',
-                'visibility:hidden',
-                'overflow:hidden',
-                'pointer-events:none'
-            ].join(';');
-            document.body.appendChild(iframe);
-
-            await new Promise(resolve => {
-                iframe.onload = resolve;
-                iframe.srcdoc = styledPage;
-            });
-
-            // Wait generously for fonts + layout to fully settle
-            await new Promise(r => setTimeout(r, 1000));
-
-            const iframeDoc  = iframe.contentDocument;
-            const iframeBody = iframeDoc.body;
-
-            setProgress(50, 'Calculating page boundaries...');
-
-            // Force layout recalc
-            iframeBody.getBoundingClientRect();
-            const totalScrollH = iframeBody.scrollHeight;
-
-            // --- Step 6: Collect ALL block elements with their exact bounding rects ---
-            // getBoundingClientRect gives viewport coords; we need document coords
-            // Since the iframe is fixed offscreen, we use offsetTop traversal
-            function getDocTop(el) {
-                let top = 0;
-                let node = el;
-                while (node && node !== iframeDoc.documentElement) {
-                    top += node.offsetTop;
-                    node = node.offsetParent;
-                }
-                return top;
+            const pgSzM = docXml.match(/<w:pgSz([^>]*)>/);
+            if (pgSzM) {
+                const a = pgSzM[1];
+                const wm = a.match(/w:w="(\d+)"/); const hm = a.match(/w:h="(\d+)"/);
+                if (wm) pgW_pt = twips2pt(wm[1]);
+                if (hm) pgH_pt = twips2pt(hm[1]);
             }
-            function getDocBottom(el) {
-                return getDocTop(el) + el.offsetHeight;
+            const pgMM = docXml.match(/<w:pgMar([^>]*)>/);
+            if (pgMM) {
+                const a = pgMM[1];
+                const tm = a.match(/w:top="(\d+)"/);    if (tm) marT_pt = twips2pt(tm[1]);
+                const bm = a.match(/w:bottom="(\d+)"/); if (bm) marB_pt = twips2pt(bm[1]);
+                const lm = a.match(/w:left="(\d+)"/);   if (lm) marL_pt = twips2pt(lm[1]);
+                const rm = a.match(/w:right="(\d+)"/);  if (rm) marR_pt = twips2pt(rm[1]);
             }
+            const contentW_pt = pgW_pt - marL_pt - marR_pt;
 
-            // Collect explicit page break Y positions
-            const explicitBreakYs = [];
-            iframeBody.querySelectorAll('.docx-page-break').forEach(el => {
-                explicitBreakYs.push(getDocTop(el));
-            });
+            // ── Parse paragraphs from XML ─────────────────────────────────────
+            const parasXml = docXml.match(/<w:p[ >][\s\S]*?<\/w:p>/g) || [];
 
-            // Collect all paragraphs/blocks for smart break detection
-            const blockEls = Array.from(iframeBody.querySelectorAll(
-                'p, h1, h2, h3, h4, h5, h6, li, table, blockquote, pre, img'
-            ));
+            function parsePara(pXml) {
+                const hasPageBreak = /<w:br[^>]*w:type="page"/.test(pXml);
 
-            // --- Step 7: Build page boundaries ---
-            // Rules:
-            //   a) Explicit page break → force break there regardless
-            //   b) Natural page overflow → walk backwards to find last element
-            //      that fits completely within the page, break AFTER it
-            //   c) Never cut through an element
-
-            const pageStartYs = [0]; // Y positions where each page starts (in doc coords)
-            let pageTop = 0;
-
-            while (true) {
-                const idealPageBottom = pageTop + PAGE_H_PX;
-                if (idealPageBottom >= totalScrollH) break; // no more pages needed
-
-                // a) Check for explicit page break within this page's range
-                let forcedBreak = null;
-                for (const by of explicitBreakYs) {
-                    if (by > pageTop + 10 && by <= idealPageBottom) {
-                        forcedBreak = by;
-                        break;
+                // Paragraph spacing
+                let spBefore = 0, spAfter = 0, lineSpMul = 1.0, lineSpAbs = null;
+                const spcM = pXml.match(/<w:spacing([^>]*)>/);
+                if (spcM) {
+                    const a = spcM[1];
+                    const bef = a.match(/w:before="(\d+)"/); if (bef) spBefore = twips2pt(bef[1]);
+                    const aft = a.match(/w:after="(\d+)"/);  if (aft) spAfter  = twips2pt(aft[1]);
+                    const lin = a.match(/w:line="(\d+)"/);
+                    const lRule = a.match(/w:lineRule="([^"]+)"/);
+                    if (lin) {
+                        if (lRule && (lRule[1] === 'exact' || lRule[1] === 'atLeast')) {
+                            lineSpAbs = twips2pt(lin[1]);
+                        } else {
+                            lineSpMul = parseFloat(lin[1]) / 240;
+                        }
                     }
                 }
 
-                if (forcedBreak !== null) {
-                    pageTop = forcedBreak;
-                    pageStartYs.push(pageTop);
+                // Indentation
+                let indL = 0;
+                const indM = pXml.match(/<w:ind([^>]*)>/);
+                if (indM) {
+                    const lm = indM[1].match(/w:left="(\d+)"/);
+                    if (lm) indL = twips2pt(lm[1]);
+                }
+
+                // Runs
+                const runsXml = pXml.match(/<w:r[ >][\s\S]*?<\/w:r>/g) || [];
+                const runs = [];
+                for (const rXml of runsXml) {
+                    const rPr = rXml.match(/<w:rPr>([\s\S]*?)<\/w:rPr>/);
+                    let bold = false, italic = false, underline = false;
+                    let fontSize = null;
+                    if (rPr) {
+                        const rp = rPr[1];
+                        bold      = /<w:b(\s|\/>|>)/.test(rp) && !/<w:b w:val="0"/.test(rp);
+                        italic    = /<w:i(\s|\/>|>)/.test(rp) && !/<w:i w:val="0"/.test(rp);
+                        underline = /<w:u [^>]*w:val="(?!none)/.test(rp);
+                        const szm = rp.match(/<w:sz w:val="(\d+)"/);
+                        if (szm) fontSize = parseFloat(szm[1]) / 2;
+                    }
+                    // Line breaks within run
+                    const segments = rXml.split(/<w:br[^>]*\/>/);
+                    for (let si = 0; si < segments.length; si++) {
+                        if (si > 0) runs.push({ text: '\n', bold, italic, underline, fontSize });
+                        const tMs = segments[si].match(/<w:t[^>]*>([\s\S]*?)<\/w:t>/g) || [];
+                        const txt = tMs.map(t => t.replace(/<w:t[^>]*>/, '').replace(/<\/w:t>/, '')).join('');
+                        if (txt) runs.push({ text: txt, bold, italic, underline, fontSize });
+                    }
+                }
+
+                return { runs, spBefore, spAfter, lineSpMul, lineSpAbs, indL, hasPageBreak };
+            }
+
+            const paragraphs = parasXml.map(parsePara);
+
+            setProgress(35, 'Building PDF...');
+
+            // ── Setup jsPDF ───────────────────────────────────────────────────
+            const doc = new jsPDF({
+                unit: 'pt',
+                format: [pgW_pt, pgH_pt],
+                orientation: pgW_pt > pgH_pt ? 'landscape' : 'portrait'
+            });
+
+            const BASE_FONT    = 'times'; // built-in Times = Times New Roman
+            const DEFAULT_SIZE = 10;      // pt (from DOCX analysis)
+            const LHFAC        = 1.2;     // single-line multiplier for Times 10pt
+
+            // Measure text width via jsPDF
+            function textWidth(text, size, bold, italic) {
+                const style = bold && italic ? 'bolditalic' : bold ? 'bold' : italic ? 'italic' : 'normal';
+                doc.setFont(BASE_FONT, style);
+                doc.setFontSize(size);
+                return doc.getStringUnitWidth(text) * size;
+            }
+
+            // Word-wrap runs into display lines fitting maxW
+            function wrapRuns(runs, maxW, fontSize) {
+                const lines = [[]]; // lines of run-segment arrays
+                let lineW = 0;
+
+                for (const run of runs) {
+                    if (run.text === '\n') { lines.push([]); lineW = 0; continue; }
+                    const words = run.text.split(' ');
+                    for (let wi = 0; wi < words.length; wi++) {
+                        const word   = words[wi];
+                        const isLast = wi === words.length - 1;
+                        const piece  = isLast ? word : word + ' ';
+                        const pw     = textWidth(piece, fontSize, run.bold, run.italic);
+
+                        if (lineW + pw > maxW + 0.5 && lineW > 0 && piece.trim()) {
+                            lines.push([]);
+                            lineW = 0;
+                            // Word without trailing space
+                            const ww = textWidth(word, fontSize, run.bold, run.italic);
+                            lines[lines.length-1].push({ text: word, bold: run.bold, italic: run.italic, underline: run.underline });
+                            lineW = ww;
+                        } else {
+                            lines[lines.length-1].push({ text: piece, bold: run.bold, italic: run.italic, underline: run.underline });
+                            lineW += pw;
+                        }
+                    }
+                }
+                return lines.filter(l => l.length > 0 || lines.length === 1);
+            }
+
+            // ── Layout pass ───────────────────────────────────────────────────
+            let y = marT_pt;
+            let pageCount = 1;
+
+            function checkNewPage(neededH) {
+                if (y + neededH > pgH_pt - marB_pt) {
+                    doc.addPage([pgW_pt, pgH_pt]);
+                    pageCount++;
+                    y = marT_pt;
+                }
+            }
+
+            const total = paragraphs.length;
+            for (let pi = 0; pi < total; pi++) {
+                if (pi % 3 === 0) setProgress(35 + Math.round((pi/total)*57), 'Laying out content...');
+
+                const para = paragraphs[pi];
+
+                if (para.hasPageBreak) {
+                    doc.addPage([pgW_pt, pgH_pt]);
+                    pageCount++;
+                    y = marT_pt;
                     continue;
                 }
 
-                // b) Find the best natural break point
-                // = bottom of the last element that fits completely before idealPageBottom
-                let bestBreakY = pageTop + CONTENT_H_PX; // fallback: cut at content height
-                let foundSafe  = false;
+                const allText = para.runs.map(r => r.text).join('').trim();
+                if (!allText && para.runs.length === 0) {
+                    y += DEFAULT_SIZE * 0.5;
+                    continue;
+                }
 
-                for (let i = blockEls.length - 1; i >= 0; i--) {
-                    const el = blockEls[i];
-                    const elTop    = getDocTop(el);
-                    const elBottom = getDocBottom(el);
+                // Font size: use first run that specifies it, else default
+                const fsSrc = para.runs.find(r => r.fontSize);
+                const fontSize = fsSrc ? fsSrc.fontSize : DEFAULT_SIZE;
 
-                    // Element must start after current page top and end before ideal bottom
-                    if (elTop > pageTop && elBottom <= idealPageBottom && elBottom > pageTop) {
-                        bestBreakY = elBottom;
-                        foundSafe  = true;
-                        break;
+                // Line height
+                const lineH = para.lineSpAbs !== null
+                    ? para.lineSpAbs
+                    : fontSize * para.lineSpMul * (para.lineSpMul <= 1.05 ? LHFAC : para.lineSpMul);
+
+                const paraW  = contentW_pt - para.indL;
+                const xStart = marL_pt + para.indL;
+
+                // Filter out newline-only runs before wrapping (handled inside wrapRuns)
+                const displayLines = wrapRuns(para.runs, paraW, fontSize);
+
+                // Need space for at least space-before + first line
+                checkNewPage(para.spBefore + lineH);
+                y += para.spBefore;
+
+                for (let li = 0; li < displayLines.length; li++) {
+                    if (li > 0) checkNewPage(lineH);
+                    const segs = displayLines[li];
+                    let xCur = xStart;
+
+                    for (const seg of segs) {
+                        if (!seg.text) continue;
+                        const style = seg.bold && seg.italic ? 'bolditalic'
+                                    : seg.bold   ? 'bold'
+                                    : seg.italic ? 'italic' : 'normal';
+                        doc.setFont(BASE_FONT, style);
+                        doc.setFontSize(fontSize);
+                        doc.setTextColor(0, 0, 0);
+                        // jsPDF y = baseline
+                        doc.text(seg.text, xCur, y + fontSize * 0.85);
+                        const segW = textWidth(seg.text, fontSize, seg.bold, seg.italic);
+                        if (seg.underline) {
+                            doc.setLineWidth(0.4);
+                            doc.line(xCur, y + fontSize * 0.97, xCur + segW, y + fontSize * 0.97);
+                        }
+                        xCur += segW;
                     }
+                    y += lineH;
                 }
 
-                // Safety: if no element found (e.g. single huge element), force cut at PAGE_H_PX
-                if (!foundSafe) {
-                    bestBreakY = idealPageBottom;
-                }
-
-                pageTop = bestBreakY;
-                pageStartYs.push(pageTop);
+                y += para.spAfter;
             }
 
-            const totalPages = pageStartYs.length;
-
-            setProgress(60, `Found ${totalPages} page(s) — capturing...`);
-
-            // --- Step 8: Determine PDF page size from Word page dimensions ---
-            // Convert inches to mm (1 inch = 25.4mm)
-            const PDF_W_MM = pageSetup.pageW_inch * 25.4;
-            const PDF_H_MM = pageSetup.pageH_inch * 25.4;
-
-            // jsPDF format: use [width, height] in mm
-            const doc = new jsPDF({
-                unit: 'mm',
-                format: [PDF_W_MM, PDF_H_MM],
-                orientation: pageSetup.pageW_inch > pageSetup.pageH_inch ? 'landscape' : 'portrait'
-            });
-
-            // --- Step 9: Capture each page slice and add to PDF ---
-            for (let pi = 0; pi < totalPages; pi++) {
-                if (pi > 0) doc.addPage([PDF_W_MM, PDF_H_MM]);
-
-                setProgress(
-                    60 + Math.round((pi / totalPages) * 33),
-                    `Rendering page ${pi + 1} of ${totalPages}...`
-                );
-
-                const sliceY  = pageStartYs[pi];
-                const sliceH  = pi + 1 < totalPages
-                    ? Math.max(pageStartYs[pi + 1] - sliceY, 1)
-                    : Math.max(totalScrollH - sliceY, 1);
-
-                // Resize iframe tall enough to expose the current slice
-                iframe.style.height = (sliceY + sliceH + 200) + 'px';
-                await new Promise(r => setTimeout(r, 80)); // brief settle
-
-                // Capture ONLY the slice region
-                const canvas = await html2canvas(iframeBody, {
-                    useCORS:       true,
-                    allowTaint:    true,
-                    scale:         2,          // 2x for crisp text
-                    width:         PAGE_W_PX,
-                    height:        PAGE_H_PX,  // always capture a full page height
-                    x:             0,
-                    y:             sliceY,
-                    scrollX:       0,
-                    scrollY:       sliceY,
-                    windowWidth:   PAGE_W_PX,
-                    windowHeight:  PAGE_H_PX,
-                    backgroundColor: '#ffffff',
-                    logging:       false,
-                    imageTimeout:  0,
-                    removeContainer: true
-                });
-
-                const imgData = canvas.toDataURL('image/jpeg', 0.95);
-                // Fill the entire PDF page with the captured slice
-                doc.addImage(imgData, 'JPEG', 0, 0, PDF_W_MM, PDF_H_MM);
-
-                // Page number footer (outside captured area, over PDF)
+            // ── Page numbers + branding ───────────────────────────────────────
+            const numPages = doc.getNumberOfPages();
+            for (let p = 1; p <= numPages; p++) {
+                doc.setPage(p);
+                doc.setFont(BASE_FONT, 'normal');
                 doc.setFontSize(7);
-                doc.setTextColor(140);
-                doc.text(`Page ${pi + 1} of ${totalPages}`, PDF_W_MM / 2, PDF_H_MM - 3, { align: 'center' });
-                doc.setTextColor(0);
+                doc.setTextColor(140, 140, 140);
+                doc.text(`Page ${p} of ${numPages}`, pgW_pt / 2, pgH_pt - marB_pt * 0.4, { align: 'center' });
             }
-
-            // Branding in footer of last page
-            doc.setPage(totalPages);
+            doc.setPage(numPages);
             doc.setFontSize(6);
-            doc.setTextColor(180);
-            doc.text(
-                'Converted by Free Tools Hub  |  https://freetoolshub.online/',
-                PDF_W_MM / 2, PDF_H_MM - 1,
-                { align: 'center' }
-            );
+            doc.setTextColor(180, 180, 180);
+            doc.text('Converted by Free Tools Hub  |  https://freetoolshub.online/', pgW_pt / 2, pgH_pt - marB_pt * 0.15, { align: 'center' });
 
-            // Cleanup
-            document.body.removeChild(iframe);
-
-            setProgress(97, 'Finalizing PDF...');
+            setProgress(97, 'Finalizing...');
             convertedBlob = doc.output('blob');
             setProgress(100, 'Complete!');
 
@@ -1731,10 +1657,9 @@
                 downloadSection.classList.add('active');
             }, 300);
 
-            const outputFileName = selectedFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
+            const outputFileName = file.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
             downloadBtn.onclick = () => { saveAs(convertedBlob, outputFileName); };
         }
-
         function setProgress(pct, msg) {
             progressFill.style.width = pct + '%';
             progressText.textContent = msg;
