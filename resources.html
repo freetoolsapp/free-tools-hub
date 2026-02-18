@@ -1,443 +1,298 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-3CEQJ2D9WY'); </script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <!-- Primary Meta Tags -->
-    <title>Free Learning Resources - Educational Materials & Study Guides | Free Tools Hub</title>
-    <meta name="title" content="Free Learning Resources - Educational Materials & Study Guides">
-    <meta name="description" content="Access comprehensive educational resources including study guides, templates, worksheets, and learning materials. Free resources for students, teachers, and professionals.">
-    <meta name="keywords" content="free resources, educational materials, study guides, templates, worksheets, learning resources, student resources">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3CEQJ2D9WY');</script>
+    <title>Free Resources — Learning Materials, Templates & Study Guides | Free Tools Hub</title>
+    <meta name="title" content="Free Resources — Learning Materials, Templates & Study Guides">
+    <meta name="description" content="Access curated free resources including developer tools, design assets, learning materials, templates, and guides for students, teachers, and professionals.">
+    <meta name="keywords" content="free resources, developer resources, design assets, learning materials, study guides, templates, educational resources">
     <meta name="robots" content="index, follow">
-    
-    <!-- Open Graph / Facebook -->
+    <meta name="author" content="Free Tools Hub">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/resources.html">
-    <meta property="og:title" content="Free Learning Resources - Educational Materials & Study Guides">
-    <meta property="og:description" content="Access comprehensive educational resources including study guides, templates, worksheets, and learning materials.">
-    
-    <!-- Canonical URL -->
+    <meta property="og:title" content="Free Resources — Free Tools Hub">
+    <meta property="og:description" content="Curated free resources for developers, designers, students & professionals.">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/resources.html">
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    
-    <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="style.css">
     <style>
-        .category-card {
-            transition: all 0.3s ease;
-        }
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-        .resource-item {
-            transition: all 0.3s ease;
-        }
-        .resource-item:hover {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
-        .resource-item:hover .resource-icon {
-            background: white;
-            color: #667eea;
-        }
-        .gradient-bg {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        .featured-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-        }
-        .featured-card:hover {
-            border-color: #667eea;
-            transform: scale(1.02);
-        }
-        .resource-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-        .resource-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
-        }
-        .resource-card img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-        }
-        .badge {
-            display: inline-block;
-            padding: 0.25rem 0.75rem;
-            border-radius: 9999px;
-            font-size: 0.75rem;
-            font-weight: 600;
-        }
-        .badge-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-        }
+        .page-hero{background:linear-gradient(135deg,var(--purple-900),var(--purple-700));color:white;padding:72px 0 56px;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 70% 30%,rgba(217,70,239,.20) 0%,transparent 60%);pointer-events:none;}
+        .page-hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:48px;background:var(--gray-50);clip-path:ellipse(55% 100% at 50% 100%);}
+        .page-hero-inner{position:relative;z-index:1;text-align:center;}
+        .hero-stats{display:flex;justify-content:center;gap:24px;margin-top:32px;flex-wrap:wrap;}
+        .hero-stat{background:rgba(255,255,255,.12);backdrop-filter:blur(8px);padding:10px 20px;border-radius:var(--radius-full);font-size:13px;font-weight:500;display:flex;align-items:center;gap:6px;border:1px solid rgba(255,255,255,.20);}
+        .breadcrumb{background:white;border-bottom:1px solid var(--gray-200);padding:12px 0;font-size:13px;}
+        .breadcrumb-inner{display:flex;align-items:center;gap:8px;color:var(--gray-500);}
+        .breadcrumb a{color:var(--gray-500);transition:var(--transition);}
+        .breadcrumb a:hover{color:var(--purple-600);}
+        .breadcrumb-sep{color:var(--gray-300);font-size:11px;}
+        .breadcrumb-current{color:var(--gray-800);font-weight:500;}
+        .res-section-header{text-align:center;margin-bottom:44px;}
+        .res-section-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.12em;color:var(--purple-600);background:var(--purple-50);border:1px solid rgba(124,58,237,.15);padding:6px 14px;border-radius:var(--radius-full);margin-bottom:14px;}
+        .res-section-title{font-family:var(--font-display);font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;color:var(--gray-900);margin-bottom:10px;letter-spacing:-.03em;}
+        .res-section-desc{font-size:15px;color:var(--gray-500);max-width:460px;margin:0 auto;line-height:1.7;}
+        .res-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-bottom:48px;}
+        .res-box{background:white;border:1.5px solid var(--gray-200);border-radius:var(--radius-xl);padding:32px;}
+        .res-box-header{display:flex;align-items:center;gap:14px;margin-bottom:24px;}
+        .res-box-icon{width:48px;height:48px;border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+        .res-box h3{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--gray-900);}
+        .res-list{list-style:none;display:flex;flex-direction:column;gap:4px;}
+        .res-item{display:flex;align-items:flex-start;gap:12px;padding:12px 14px;border-radius:var(--radius-md);transition:var(--transition);cursor:pointer;}
+        .res-item:hover{background:var(--gray-50);transform:translateX(4px);}
+        .res-item-icon{width:32px;height:32px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;margin-top:2px;}
+        .res-item a{font-size:14px;font-weight:600;color:var(--gray-800);display:block;margin-bottom:2px;transition:var(--transition);}
+        .res-item:hover a{color:var(--purple-600);}
+        .res-item p{font-size:12px;color:var(--gray-400);line-height:1.4;margin:0;}
+        @media(max-width:768px){.res-grid{grid-template-columns:1fr;}.res-box{padding:24px;}}
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
-                    </div>
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="site-logo" aria-label="Free Tools Hub Home">
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-text"><span class="logo-name">Free Tools Hub</span><span class="logo-tagline">Tools · Blogs · Resources</span></div>
                 </a>
-                
-                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
-                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
-                    <a href="index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="resources.html" class="text-blue-600 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
-                    <a href="contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                <nav class="main-nav">
+                    <a href="index.html"><i class="fas fa-home"></i>Home</a>
+                    <a href="tools.html"><i class="fas fa-tools"></i>All Tools</a>
+                    <a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+                    <a href="news.html"><i class="fas fa-newspaper"></i>News</a>
+                    <a href="resources.html" class="active"><i class="fas fa-layer-group"></i>Resources</a>
+                    <a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+                    <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
                 </nav>
-                
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
             </div>
-            
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
-                <a href="index.html" class="block py-2"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="index.html#tools" class="block py-2"><i class="fas fa-tools mr-2"></i>Tools</a>
-                <a href="blog.html" class="block py-2"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="resources.html" class="block py-2 text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-                <a href="contact.html" class="block py-2"><i class="fas fa-envelope mr-2"></i>Contact</a>
-            </nav>
         </div>
+        <nav class="mobile-nav" id="mobileMenu">
+            <a href="index.html"><i class="fas fa-home"></i>Home</a>
+            <a href="tools.html"><i class="fas fa-tools"></i>All Tools</a>
+            <a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+            <a href="news.html"><i class="fas fa-newspaper"></i>News</a>
+            <a href="resources.html" class="active"><i class="fas fa-layer-group"></i>Resources</a>
+            <a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+            <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
+        </nav>
     </header>
 
-    <!-- Hero Section -->
-    <section class="gradient-bg text-white py-20">
-        <div class="container mx-auto px-4 text-center">
-            <div class="mb-6">
-                <div class="inline-block bg-white/20 px-6 py-2 rounded-full backdrop-blur">
-                    <i class="fas fa-star text-yellow-300 mr-2"></i>
-                    <span class="font-bold">8+ Free Resources • Updated Daily</span>
-                </div>
-            </div>
-            <h1 class="text-5xl md:text-6xl font-bold mb-6">Learning Resources Hub</h1>
-            <p class="text-xl md:text-2xl mb-8 max-w-3xl mx-auto">Discover comprehensive educational materials, study guides, templates, and tools to accelerate your learning journey</p>
-            
-            <div class="flex flex-wrap justify-center gap-4 mt-8">
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-check-circle mr-2"></i>100% Free</span>
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-download mr-2"></i>Instant Access</span>
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-user-shield mr-2"></i>No Registration</span>
-                <span class="bg-white/20 px-4 py-2 rounded-full text-sm backdrop-blur"><i class="fas fa-sync mr-2"></i>Updated Weekly</span>
+    <div class="breadcrumb"><div class="container"><div class="breadcrumb-inner">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+        <span class="breadcrumb-current">Resources</span>
+    </div></div></div>
+
+    <section class="page-hero">
+        <div class="container page-hero-inner">
+            <div class="hero-badge" style="margin-bottom:20px;"><i class="fas fa-star"></i><span>Curated Collections</span></div>
+            <h1 style="font-size:clamp(2.2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.03em;margin-bottom:12px;">Learning Resources Hub</h1>
+            <p style="font-size:1.05rem;opacity:.85;font-weight:300;max-width:540px;margin:0 auto;">Discover curated resources for developers, designers, students & professionals — all free, no signup</p>
+            <div class="hero-stats">
+                <span class="hero-stat"><i class="fas fa-check-circle"></i> 100% Free</span>
+                <span class="hero-stat"><i class="fas fa-download"></i> Instant Access</span>
+                <span class="hero-stat"><i class="fas fa-user-shield"></i> No Registration</span>
+                <span class="hero-stat"><i class="fas fa-sync"></i> Updated Weekly</span>
             </div>
         </div>
     </section>
 
-    <!-- Quick Category Filter -->
-    <section class="bg-white shadow-sm py-6 sticky top-20 z-40">
-        <div class="container mx-auto px-4">
-            <div class="flex flex-wrap gap-3 justify-center" id="categoryFilter">
-                <button class="category-btn px-6 py-2 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold" data-category="all">
-                    All Resources
-                </button>
-                <button class="category-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-semibold" data-category="SEO Resources">
-                    SEO
-                </button>
-                <button class="category-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-semibold" data-category="Student Resources">
-                    Student
-                </button>
-                <button class="category-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-semibold" data-category="Productivity Resources">
-                    Productivity
-                </button>
-                <button class="category-btn px-6 py-2 rounded-full bg-gray-200 text-gray-700 hover:bg-gray-300 font-semibold" data-category="Design Resources">
-                    Design
-                </button>
-            </div>
-        </div>
-    </section>
+    <main style="background:var(--gray-50);padding:64px 0;" id="main-content">
+        <div class="container" style="max-width:1100px;">
 
-    <!-- Featured Resources Section -->
-    <section class="py-16 bg-gray-50">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                    <i class="fas fa-star text-yellow-500 mr-2"></i>Featured Resources
-                </h2>
-                <p class="text-xl text-gray-600">Most popular and highly recommended resources</p>
+            <div class="res-section-header">
+                <div class="res-section-label"><i class="fas fa-layer-group"></i> Top Resources</div>
+                <h2 class="res-section-title">Curated Collections</h2>
+                <p class="res-section-desc">Handpicked developer tools, design assets & learning materials for creators</p>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="featured-resources">
-                <!-- Featured resources will load here -->
-                <div class="text-center py-8">
-                    <i class="fas fa-spinner fa-spin text-4xl text-blue-600"></i>
-                    <p class="mt-4 text-gray-600">Loading featured resources...</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <!-- All Resources Section -->
-    <section class="py-16 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl font-bold text-gray-800 mb-4">
-                    <i class="fas fa-book mr-2"></i>All Resources
-                </h2>
-                <p class="text-xl text-gray-600">Browse our complete collection of free resources</p>
-            </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8" id="all-resources">
-                <!-- All resources will load here -->
-                <div class="text-center py-8">
-                    <i class="fas fa-spinner fa-spin text-4xl text-blue-600"></i>
-                    <p class="mt-4 text-gray-600">Loading resources...</p>
-                </div>
-            </div>
-        </div>
-    </section>
+            <div class="res-grid">
 
-    <!-- Statistics Section -->
-    <section class="py-16 gradient-bg text-white">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">8+</div>
-                    <p class="text-blue-100">Free Resources</p>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">12K+</div>
-                    <p class="text-blue-100">Downloads</p>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">5K+</div>
-                    <p class="text-blue-100">Happy Users</p>
-                </div>
-                <div>
-                    <div class="text-4xl md:text-5xl font-bold mb-2">4.9</div>
-                    <p class="text-blue-100">Average Rating</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Newsletter Section -->
-    <section class="py-12 bg-white">
-        <div class="container mx-auto px-4">
-            <div class="max-w-3xl mx-auto text-center bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8 md:p-12">
-                <i class="fas fa-bell text-5xl text-blue-600 mb-4"></i>
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Get New Resources Weekly</h2>
-                <p class="text-gray-600 mb-6">Subscribe to our newsletter and never miss new educational materials, templates, and study guides.</p>
-                <div class="flex flex-col md:flex-row gap-3 max-w-md mx-auto">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-lg border-2 border-gray-300 focus:border-blue-500 focus:outline-none">
-                    <button class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                        Subscribe <i class="fas fa-paper-plane ml-2"></i>
-                    </button>
-                </div>
-                <p class="text-xs text-gray-500 mt-4">
-                    <i class="fas fa-lock mr-1"></i>We respect your privacy. Unsubscribe anytime.
-                </p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-12">
-        <div class="container mx-auto px-4">
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
-                <div>
-                    <h3 class="font-bold text-lg mb-4">
-                        <i class="fas fa-tools mr-2"></i>Free Tools Hub
-                    </h3>
-                    <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
-                        <li><a href="index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Resources</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Company</h4>
-                    <ul class="space-y-2 text-sm text-gray-400">
-                        <li><a href="about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
-                        <li><a href="contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                        <li><a href="privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
-                        <li><a href="terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4 text-2xl">
-                        <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                        <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <!-- Developer Resources -->
+                <div class="res-box">
+                    <div class="res-box-header">
+                        <div class="res-box-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fas fa-code"></i></div>
+                        <div><h3>Developer Resources</h3></div>
                     </div>
-                    <p class="text-gray-400 text-xs mt-4">by freetoolsapp</p>
+                    <ul class="res-list">
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fas fa-plug"></i></div>
+                            <div><a href="#">Free APIs Collection</a><p>100+ free APIs for your projects</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dcfce7;color:#15803d;"><i class="fas fa-icons"></i></div>
+                            <div><a href="#">Icon Libraries</a><p>Best free icon packs & SVG sets</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#fef3c7;color:#b45309;"><i class="fas fa-palette"></i></div>
+                            <div><a href="#">Color Palettes</a><p>Beautiful, accessible color schemes</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="fas fa-font"></i></div>
+                            <div><a href="#">Font Libraries</a><p>Free fonts for web & print design</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#ffe4e6;color:#be123c;"><i class="fas fa-layer-group"></i></div>
+                            <div><a href="#">CSS Frameworks</a><p>Popular CSS libraries & utilities</p></div>
+                        </li>
+                    </ul>
                 </div>
+
+                <!-- Design Resources -->
+                <div class="res-box">
+                    <div class="res-box-header">
+                        <div class="res-box-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="fas fa-paint-brush"></i></div>
+                        <div><h3>Design Resources</h3></div>
+                    </div>
+                    <ul class="res-list">
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fas fa-images"></i></div>
+                            <div><a href="#">Stock Photos</a><p>Free high-quality, royalty-free images</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dcfce7;color:#15803d;"><i class="fas fa-object-group"></i></div>
+                            <div><a href="#">UI Kits</a><p>Ready-to-use design systems & components</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#fef3c7;color:#b45309;"><i class="fas fa-mobile-alt"></i></div>
+                            <div><a href="#">Mockup Templates</a><p>Professional device & print mockups</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="fas fa-vector-square"></i></div>
+                            <div><a href="#">Illustration Sets</a><p>Free vector graphics & illustrations</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#ffe4e6;color:#be123c;"><i class="fas fa-puzzle-piece"></i></div>
+                            <div><a href="#">Figma Plugins</a><p>Best productivity Figma extensions</p></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Learning Resources -->
+                <div class="res-box">
+                    <div class="res-box-header">
+                        <div class="res-box-icon" style="background:#dcfce7;color:#15803d;"><i class="fas fa-graduation-cap"></i></div>
+                        <div><h3>Learning Resources</h3></div>
+                    </div>
+                    <ul class="res-list">
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fas fa-book"></i></div>
+                            <div><a href="#">Study Guides</a><p>Comprehensive study materials & notes</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dcfce7;color:#15803d;"><i class="fas fa-file-alt"></i></div>
+                            <div><a href="#">Templates</a><p>Essay, resume & document templates</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#fef3c7;color:#b45309;"><i class="fas fa-chalkboard-teacher"></i></div>
+                            <div><a href="#">Tutorials</a><p>Step-by-step learning guides</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="fas fa-video"></i></div>
+                            <div><a href="#">Video Courses</a><p>Free educational video content</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#ffe4e6;color:#be123c;"><i class="fas fa-clipboard-check"></i></div>
+                            <div><a href="#">Worksheets</a><p>Practice sheets & exercises</p></div>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Business Resources -->
+                <div class="res-box">
+                    <div class="res-box-header">
+                        <div class="res-box-icon" style="background:#fef3c7;color:#b45309;"><i class="fas fa-briefcase"></i></div>
+                        <div><h3>Business Resources</h3></div>
+                    </div>
+                    <ul class="res-list">
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dbeafe;color:#1d4ed8;"><i class="fas fa-chart-line"></i></div>
+                            <div><a href="#">Marketing Tools</a><p>Free marketing & analytics tools</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#dcfce7;color:#15803d;"><i class="fas fa-file-invoice"></i></div>
+                            <div><a href="#">Invoice Templates</a><p>Professional invoice & quote templates</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#fef3c7;color:#b45309;"><i class="fas fa-bullseye"></i></div>
+                            <div><a href="#">Business Plans</a><p>Startup & business plan templates</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#f3e8ff;color:#7c3aed;"><i class="fas fa-handshake"></i></div>
+                            <div><a href="#">Legal Templates</a><p>Contracts, agreements & terms</p></div>
+                        </li>
+                        <li class="res-item">
+                            <div class="res-item-icon" style="background:#ffe4e6;color:#be123c;"><i class="fas fa-envelope-open-text"></i></div>
+                            <div><a href="#">Email Templates</a><p>Professional email templates</p></div>
+                        </li>
+                    </ul>
+                </div>
+
             </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+
+            <div class="text-center" style="margin-top:32px;">
+                <a href="blog.html" class="btn btn-primary btn-lg"><i class="fas fa-pen-nib"></i> Browse Tutorials & Guides</a>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="site-logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div><div class="logo-text"><span class="logo-name">Free Tools Hub</span></div></div>
+                    <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials.</p>
+                    <div class="footer-social" style="margin-top:20px;">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/freetoolsapp" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col"><h4>Quick Links</h4><ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="tools.html"><i class="fas fa-tools"></i>All Tools</a></li>
+                    <li><a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i>News</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+                </ul></div>
+                <div class="footer-col"><h4>Categories</h4><ul>
+                    <li><a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a></li>
+                    <li><a href="comparisons.html"><i class="fas fa-balance-scale"></i>Comparisons</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i>About Us</a></li>
+                </ul></div>
+                <div class="footer-col"><h4>Legal</h4><ul>
+                    <li><a href="privacy.html"><i class="fas fa-shield-alt"></i>Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i>Terms of Service</a></li>
+                    <li><a href="disclaimer.html"><i class="fas fa-exclamation-circle"></i>Disclaimer</a></li>
+                </ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="index.html">Free Tools Hub</a>. All rights reserved. Made with <span class="heart">♥</span> for developers &amp; creators.</p>
+                <div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div>
             </div>
         </div>
     </footer>
 
-    <!-- Scripts -->
     <script>
-        let allResources = [];
-        let currentCategory = 'all';
-
-        // Load resources from JSON
-        async function loadResources() {
-            try {
-                const response = await fetch('resources.json');
-                if (!response.ok) {
-                    throw new Error('Failed to load resources');
-                }
-                allResources = await response.json();
-                
-                displayFeaturedResources();
-                displayAllResources();
-                
-            } catch (error) {
-                console.error('Error loading resources:', error);
-                document.getElementById('featured-resources').innerHTML = `
-                    <div class="col-span-3 text-center py-8">
-                        <i class="fas fa-exclamation-circle text-4xl text-red-500 mb-4"></i>
-                        <p class="text-gray-600">Error loading resources. Please try again later.</p>
-                    </div>
-                `;
-                document.getElementById('all-resources').innerHTML = `
-                    <div class="col-span-3 text-center py-8">
-                        <i class="fas fa-exclamation-circle text-4xl text-red-500 mb-4"></i>
-                        <p class="text-gray-600">Error loading resources. Please try again later.</p>
-                    </div>
-                `;
-            }
-        }
-
-        // Display featured resources
-        function displayFeaturedResources() {
-            const container = document.getElementById('featured-resources');
-            const featured = allResources.filter(r => r.featured);
-            
-            if (featured.length === 0) {
-                container.innerHTML = '<div class="col-span-3 text-center py-8"><p class="text-gray-600">No featured resources available.</p></div>';
-                return;
-            }
-            
-            container.innerHTML = '';
-            
-            featured.forEach(resource => {
-                const card = `
-                    <div class="resource-card">
-                        <img src="${resource.image}" alt="${resource.title}">
-                        <div class="p-6">
-                            <span class="badge badge-primary">${resource.category}</span>
-                            <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">${resource.title}</h3>
-                            <p class="text-gray-600 text-sm mb-4">${resource.description.substring(0, 120)}...</p>
-                            <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
-                                <span><i class="fas fa-download mr-1"></i> ${resource.downloads}</span>
-                                <span><i class="fas fa-file mr-1"></i> ${resource.format}</span>
-                            </div>
-                            <a href="resources/${resource.file}" class="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                                View Resource <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += card;
-            });
-        }
-
-        // Display all resources
-        function displayAllResources(category = 'all') {
-            const container = document.getElementById('all-resources');
-            let resourcesToShow = category === 'all' 
-                ? allResources 
-                : allResources.filter(r => r.category === category);
-            
-            if (resourcesToShow.length === 0) {
-                container.innerHTML = '<div class="col-span-3 text-center py-8"><p class="text-gray-600">No resources found in this category.</p></div>';
-                return;
-            }
-            
-            container.innerHTML = '';
-            
-            resourcesToShow.forEach(resource => {
-                const card = `
-                    <div class="resource-card">
-                        <img src="${resource.image}" alt="${resource.title}">
-                        <div class="p-6">
-                            <span class="badge badge-primary">${resource.category}</span>
-                            <h3 class="text-xl font-bold text-gray-800 mt-3 mb-2">${resource.title}</h3>
-                            <p class="text-gray-600 text-sm mb-4">${resource.description.substring(0, 100)}...</p>
-                            <div class="flex justify-between items-center text-sm text-gray-500 mb-4">
-                                <span><i class="fas fa-download mr-1"></i> ${resource.downloads}</span>
-                                <span><i class="fas fa-file mr-1"></i> ${resource.format}</span>
-                            </div>
-                            <a href="resources/${resource.file}" class="block w-full text-center bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 rounded-lg font-semibold hover:shadow-lg transition">
-                                View Resource <i class="fas fa-arrow-right ml-2"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-                container.innerHTML += card;
-            });
-        }
-
-        // Category filter functionality
-        document.getElementById('categoryFilter').addEventListener('click', (e) => {
-            if (e.target.classList.contains('category-btn')) {
-                // Update active button
-                document.querySelectorAll('.category-btn').forEach(btn => {
-                    btn.classList.remove('bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
-                    btn.classList.add('bg-gray-200', 'text-gray-700');
-                });
-                e.target.classList.remove('bg-gray-200', 'text-gray-700');
-                e.target.classList.add('bg-gradient-to-r', 'from-blue-600', 'to-purple-600', 'text-white');
-                
-                // Filter resources
-                const category = e.target.dataset.category;
-                currentCategory = category;
-                displayAllResources(category);
-            }
-        });
-
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
-
-        if (mobileMenuBtn) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenu.classList.toggle('hidden');
-            });
-        }
-
-        // Load resources on page load
-        document.addEventListener('DOMContentLoaded', loadResources);
+        const header=document.getElementById('siteHeader');
+        window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>20),{passive:true});
+        const btn=document.getElementById('mobileMenuBtn'),menu=document.getElementById('mobileMenu');
+        btn.addEventListener('click',()=>{const o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.innerHTML=o?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';});
+        menu.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='<i class="fas fa-bars"></i>';}));
     </script>
 </body>
 </html>
