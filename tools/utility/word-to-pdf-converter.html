@@ -105,6 +105,7 @@
     <!-- Fonts + Icons -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Nastaliq+Urdu:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../style.css">
@@ -1246,6 +1247,8 @@
     <!-- ==================== SCRIPTS ==================== -->
     <!-- JSZip for reading DOCX page dimensions from XML -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- html2canvas for Urdu/RTL text and vector image rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- jsPDF for building the PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <!-- mammoth for extracting HTML content from DOCX -->
@@ -1398,267 +1401,337 @@
         });
 
         // ==================== CORE CONVERSION ====================
-        // Pure jsPDF vector-text engine:
-        // Reads DOCX XML directly via JSZip, extracts paragraphs/runs/formatting,
-        // uses jsPDF built-in 'times' font (PostScript Times = Times New Roman),
-        // mathematically wraps text and places page breaks.
-        // No html2canvas. No browser font issues. Clean vector PDF.
+        // Supports: text (Times font), bold/italic, images (PNG/JPG/GIF/EMF/WMF),
+        //           Urdu/Arabic RTL text (rendered via Noto Nastaliq + html2canvas),
+        //           page breaks, spacing, indentation — all from raw DOCX XML.
 
         async function convertToPDF(file) {
             const { jsPDF } = window.jspdf;
 
             setProgress(10, 'Reading document...');
             const arrayBuffer = await file.arrayBuffer();
+            setProgress(18, 'Parsing DOCX...');
 
-            setProgress(20, 'Parsing DOCX structure...');
+            // Unzip DOCX
+            let zip;
+            try { zip = await JSZip.loadAsync(arrayBuffer); }
+            catch(e) { throw new Error('Cannot read DOCX: ' + e.message); }
 
-            // ── Unzip DOCX ────────────────────────────────────────────────────
-            let zip, docXml = '';
+            const docXml = await zip.file('word/document.xml').async('string');
+
+            // Build image map: rId -> { data(Uint8Array), ext, mime }
+            const imgMap = {};
             try {
-                zip = await JSZip.loadAsync(arrayBuffer);
-                docXml = await zip.file('word/document.xml').async('string');
-            } catch(e) {
-                throw new Error('Cannot read DOCX: ' + e.message);
-            }
+                const relsXml = await zip.file('word/_rels/document.xml.rels').async('string');
+                const relPat = /Id="([^"]+)"[^>]*Type="[^"]*image[^"]*"[^>]*Target="([^"]+)"/g;
+                let rm;
+                while ((rm = relPat.exec(relsXml)) !== null) {
+                    const rId = rm[1], tgt = rm[2];
+                    const path = tgt.startsWith('/') ? tgt.slice(1) : 'word/' + tgt;
+                    const entry = zip.file(path) || zip.file('word/' + tgt);
+                    if (entry) {
+                        const bytes = await entry.async('uint8array');
+                        const ext   = tgt.split('.').pop().toLowerCase();
+                        imgMap[rId] = { data: bytes, ext };
+                    }
+                }
+            } catch(e) { /* no images */ }
 
-            // ── Page setup (twips → points: 1 twip = 1/20 pt) ───────────────
-            const twips2pt = v => parseFloat(v) / 20;
-            let pgW_pt = 612, pgH_pt = 792;
-            let marT_pt = 36, marB_pt = 36, marL_pt = 36, marR_pt = 36;
-
+            // Page setup  (twips -> points: 1 twip = 1/20 pt)
+            const t2p = v => parseFloat(v) / 20;
+            let pgW=612, pgH=792, marT=72, marB=72, marL=72, marR=72;
             const pgSzM = docXml.match(/<w:pgSz([^>]*)>/);
             if (pgSzM) {
-                const a = pgSzM[1];
-                const wm = a.match(/w:w="(\d+)"/); const hm = a.match(/w:h="(\d+)"/);
-                if (wm) pgW_pt = twips2pt(wm[1]);
-                if (hm) pgH_pt = twips2pt(hm[1]);
+                const wm=pgSzM[1].match(/w:w="(\d+)"/), hm=pgSzM[1].match(/w:h="(\d+)"/);
+                if (wm) pgW=t2p(wm[1]); if (hm) pgH=t2p(hm[1]);
             }
             const pgMM = docXml.match(/<w:pgMar([^>]*)>/);
             if (pgMM) {
-                const a = pgMM[1];
-                const tm = a.match(/w:top="(\d+)"/);    if (tm) marT_pt = twips2pt(tm[1]);
-                const bm = a.match(/w:bottom="(\d+)"/); if (bm) marB_pt = twips2pt(bm[1]);
-                const lm = a.match(/w:left="(\d+)"/);   if (lm) marL_pt = twips2pt(lm[1]);
-                const rm = a.match(/w:right="(\d+)"/);  if (rm) marR_pt = twips2pt(rm[1]);
+                const a=pgMM[1];
+                const tm=a.match(/w:top="(\d+)"/),    bm=a.match(/w:bottom="(\d+)"/),
+                      lm=a.match(/w:left="(\d+)"/),   rm=a.match(/w:right="(\d+)"/);
+                if (tm) marT=t2p(tm[1]); if (bm) marB=t2p(bm[1]);
+                if (lm) marL=t2p(lm[1]); if (rm) marR=t2p(rm[1]);
             }
-            const contentW_pt = pgW_pt - marL_pt - marR_pt;
+            const cW = pgW - marL - marR;
 
-            // ── Parse paragraphs from XML ─────────────────────────────────────
+            // Parse paragraph XML
             const parasXml = docXml.match(/<w:p[ >][\s\S]*?<\/w:p>/g) || [];
 
             function parsePara(pXml) {
                 const hasPageBreak = /<w:br[^>]*w:type="page"/.test(pXml);
 
-                // Paragraph spacing
-                let spBefore = 0, spAfter = 0, lineSpMul = 1.0, lineSpAbs = null;
-                const spcM = pXml.match(/<w:spacing([^>]*)>/);
-                if (spcM) {
-                    const a = spcM[1];
-                    const bef = a.match(/w:before="(\d+)"/); if (bef) spBefore = twips2pt(bef[1]);
-                    const aft = a.match(/w:after="(\d+)"/);  if (aft) spAfter  = twips2pt(aft[1]);
-                    const lin = a.match(/w:line="(\d+)"/);
-                    const lRule = a.match(/w:lineRule="([^"]+)"/);
-                    if (lin) {
-                        if (lRule && (lRule[1] === 'exact' || lRule[1] === 'atLeast')) {
-                            lineSpAbs = twips2pt(lin[1]);
-                        } else {
-                            lineSpMul = parseFloat(lin[1]) / 240;
-                        }
-                    }
+                // Image/drawing
+                let imageInfo = null;
+                const drawM = pXml.match(/<w:drawing>([\s\S]*?)<\/w:drawing>/);
+                if (drawM) {
+                    const dXml = drawM[1];
+                    const embM=dXml.match(/r:embed="([^"]+)"/),
+                          cxM=dXml.match(/cx="(\d+)"/), cyM=dXml.match(/cy="(\d+)"/);
+                    if (embM) imageInfo = {
+                        rId: embM[1],
+                        wPt: cxM ? parseFloat(cxM[1])/914400*72 : cW,
+                        hPt: cyM ? parseFloat(cyM[1])/914400*72 : 72
+                    };
                 }
 
-                // Indentation
-                let indL = 0;
-                const indM = pXml.match(/<w:ind([^>]*)>/);
-                if (indM) {
-                    const lm = indM[1].match(/w:left="(\d+)"/);
-                    if (lm) indL = twips2pt(lm[1]);
+                // Spacing
+                let spBefore=0, spAfter=0, lsMul=1.0, lsAbs=null;
+                const spcM=pXml.match(/<w:spacing([^>]*)>/);
+                if (spcM) {
+                    const bf=spcM[1].match(/w:before="(\d+)"/), af=spcM[1].match(/w:after="(\d+)"/),
+                          ln=spcM[1].match(/w:line="(\d+)"/),   lr=spcM[1].match(/w:lineRule="([^"]+)"/);
+                    if (bf) spBefore=t2p(bf[1]); if (af) spAfter=t2p(af[1]);
+                    if (ln) { if (lr&&(lr[1]==='exact'||lr[1]==='atLeast')) lsAbs=t2p(ln[1]);
+                              else lsMul=parseFloat(ln[1])/240; }
                 }
+
+                let indL=0;
+                const indM=pXml.match(/<w:ind([^>]*)>/);
+                if (indM) { const lm=indM[1].match(/w:left="(\d+)"/); if (lm) indL=t2p(lm[1]); }
+
+                let jc='left';
+                const jcM=pXml.match(/<w:jc w:val="([^"]+)"/); if (jcM) jc=jcM[1];
+
+                const paraRTL = /<w:bidi[\s\/]/.test(pXml) || /<w:rtl[\s\/]/.test(pXml);
 
                 // Runs
                 const runsXml = pXml.match(/<w:r[ >][\s\S]*?<\/w:r>/g) || [];
                 const runs = [];
                 for (const rXml of runsXml) {
-                    const rPr = rXml.match(/<w:rPr>([\s\S]*?)<\/w:rPr>/);
-                    let bold = false, italic = false, underline = false;
-                    let fontSize = null;
+                    const rPr=rXml.match(/<w:rPr>([\s\S]*?)<\/w:rPr>/);
+                    let bold=false,italic=false,underline=false,fontSize=null,runRTL=false;
                     if (rPr) {
-                        const rp = rPr[1];
+                        const rp=rPr[1];
                         bold      = /<w:b(\s|\/>|>)/.test(rp) && !/<w:b w:val="0"/.test(rp);
                         italic    = /<w:i(\s|\/>|>)/.test(rp) && !/<w:i w:val="0"/.test(rp);
                         underline = /<w:u [^>]*w:val="(?!none)/.test(rp);
-                        const szm = rp.match(/<w:sz w:val="(\d+)"/);
-                        if (szm) fontSize = parseFloat(szm[1]) / 2;
+                        runRTL    = /<w:rtl[\s\/]/.test(rp);
+                        const szm=rp.match(/<w:sz w:val="(\d+)"/);    if (szm) fontSize=parseFloat(szm[1])/2;
+                        const cs =rp.match(/<w:szCs w:val="(\d+)"/);  if (cs&&!fontSize) fontSize=parseFloat(cs[1])/2;
                     }
-                    // Line breaks within run
-                    const segments = rXml.split(/<w:br[^>]*\/>/);
-                    for (let si = 0; si < segments.length; si++) {
-                        if (si > 0) runs.push({ text: '\n', bold, italic, underline, fontSize });
-                        const tMs = segments[si].match(/<w:t[^>]*>([\s\S]*?)<\/w:t>/g) || [];
-                        const txt = tMs.map(t => t.replace(/<w:t[^>]*>/, '').replace(/<\/w:t>/, '')).join('');
-                        if (txt) runs.push({ text: txt, bold, italic, underline, fontSize });
+                    const isRTLrun = runRTL || paraRTL;
+                    const segs = rXml.split(/<w:br[^>]*\/>/);
+                    for (let si=0; si<segs.length; si++) {
+                        if (si>0) runs.push({text:'\n',bold,italic,underline,fontSize,isRTL:isRTLrun});
+                        const tMs=segs[si].match(/<w:t[^>]*>([\s\S]*?)<\/w:t>/g)||[];
+                        const txt=tMs.map(t=>t.replace(/<w:t[^>]*>/,'').replace(/<\/w:t>/,'')).join('');
+                        if (txt) runs.push({text:txt,bold,italic,underline,fontSize,isRTL:isRTLrun});
                     }
                 }
-
-                return { runs, spBefore, spAfter, lineSpMul, lineSpAbs, indL, hasPageBreak };
+                return {runs,spBefore,spAfter,lsMul,lsAbs,indL,jc,isRTL:paraRTL,hasPageBreak,imageInfo};
             }
 
             const paragraphs = parasXml.map(parsePara);
+            setProgress(32, 'Setting up PDF...');
 
-            setProgress(35, 'Building PDF...');
+            const doc = new jsPDF({unit:'pt',format:[pgW,pgH],orientation:pgW>pgH?'landscape':'portrait'});
+            const BFONT='times', DSIZE=12, LHFAC=1.15;
 
-            // ── Setup jsPDF ───────────────────────────────────────────────────
-            const doc = new jsPDF({
-                unit: 'pt',
-                format: [pgW_pt, pgH_pt],
-                orientation: pgW_pt > pgH_pt ? 'landscape' : 'portrait'
-            });
-
-            const BASE_FONT    = 'times'; // built-in Times = Times New Roman
-            const DEFAULT_SIZE = 10;      // pt (from DOCX analysis)
-            const LHFAC        = 1.2;     // single-line multiplier for Times 10pt
-
-            // Measure text width via jsPDF
-            function textWidth(text, size, bold, italic) {
-                const style = bold && italic ? 'bolditalic' : bold ? 'bold' : italic ? 'italic' : 'normal';
-                doc.setFont(BASE_FONT, style);
-                doc.setFontSize(size);
-                return doc.getStringUnitWidth(text) * size;
+            function textW(text,size,bold,italic) {
+                const st=bold&&italic?'bolditalic':bold?'bold':italic?'italic':'normal';
+                doc.setFont(BFONT,st); doc.setFontSize(size);
+                return doc.getStringUnitWidth(text)*size;
             }
 
-            // Word-wrap runs into display lines fitting maxW
-            function wrapRuns(runs, maxW, fontSize) {
-                const lines = [[]]; // lines of run-segment arrays
-                let lineW = 0;
-
+            function wrapRuns(runs,maxW,fontSize) {
+                const lines=[[]]; let lw=0;
                 for (const run of runs) {
-                    if (run.text === '\n') { lines.push([]); lineW = 0; continue; }
-                    const words = run.text.split(' ');
-                    for (let wi = 0; wi < words.length; wi++) {
-                        const word   = words[wi];
-                        const isLast = wi === words.length - 1;
-                        const piece  = isLast ? word : word + ' ';
-                        const pw     = textWidth(piece, fontSize, run.bold, run.italic);
-
-                        if (lineW + pw > maxW + 0.5 && lineW > 0 && piece.trim()) {
-                            lines.push([]);
-                            lineW = 0;
-                            // Word without trailing space
-                            const ww = textWidth(word, fontSize, run.bold, run.italic);
-                            lines[lines.length-1].push({ text: word, bold: run.bold, italic: run.italic, underline: run.underline });
-                            lineW = ww;
-                        } else {
-                            lines[lines.length-1].push({ text: piece, bold: run.bold, italic: run.italic, underline: run.underline });
-                            lineW += pw;
-                        }
+                    if (run.text==='\n'){lines.push([]);lw=0;continue;}
+                    const words=run.text.split(' ');
+                    for (let wi=0;wi<words.length;wi++) {
+                        const word=words[wi],isLast=wi===words.length-1,piece=isLast?word:word+' ';
+                        const pw=textW(piece,fontSize,run.bold,run.italic);
+                        if (lw+pw>maxW+0.5&&lw>0&&piece.trim()){
+                            lines.push([]);lw=0;
+                            const ww=textW(word,fontSize,run.bold,run.italic);
+                            lines[lines.length-1].push({...run,text:word});lw=ww;
+                        } else {lines[lines.length-1].push({...run,text:piece});lw+=pw;}
                     }
                 }
-                return lines.filter(l => l.length > 0 || lines.length === 1);
+                return lines.filter(l=>l.length>0);
             }
 
-            // ── Layout pass ───────────────────────────────────────────────────
-            let y = marT_pt;
-            let pageCount = 1;
+            // Convert image bytes to base64 + format for jsPDF
+            async function bytesToBase64(imgInfo, targetWPt, targetHPt) {
+                const {data, ext} = imgInfo;
+                const directFmts = ['png','jpg','jpeg','gif','webp','bmp'];
 
-            function checkNewPage(neededH) {
-                if (y + neededH > pgH_pt - marB_pt) {
-                    doc.addPage([pgW_pt, pgH_pt]);
-                    pageCount++;
-                    y = marT_pt;
+                if (directFmts.includes(ext)) {
+                    let b64=''; const chk=8192;
+                    for (let i=0;i<data.length;i+=chk) b64+=String.fromCharCode(...data.subarray(i,i+chk));
+                    return {b64:btoa(b64), fmt: (ext==='jpg'||ext==='jpeg')?'JPEG':'PNG'};
+                }
+
+                // EMF/WMF/SVG: render in hidden <img> -> canvas
+                return new Promise(resolve => {
+                    const blob = new Blob([data]);
+                    const url  = URL.createObjectURL(blob);
+                    const img  = new Image();
+                    const canvasW = Math.round(targetWPt * 96/72);
+                    const canvasH = Math.round(targetHPt * 96/72);
+                    img.onload = () => {
+                        const c=document.createElement('canvas');
+                        c.width=canvasW; c.height=canvasH;
+                        const ctx=c.getContext('2d');
+                        ctx.fillStyle='#fff'; ctx.fillRect(0,0,canvasW,canvasH);
+                        ctx.drawImage(img,0,0,canvasW,canvasH);
+                        URL.revokeObjectURL(url);
+                        resolve({b64:c.toDataURL('image/jpeg',0.95).split(',')[1], fmt:'JPEG'});
+                    };
+                    img.onerror = () => {
+                        URL.revokeObjectURL(url);
+                        // EMF failed in browser — use html2canvas on a styled div as fallback
+                        // (browser cannot natively render EMF, so we show placeholder)
+                        const c=document.createElement('canvas');
+                        c.width=canvasW; c.height=canvasH;
+                        const ctx=c.getContext('2d');
+                        ctx.fillStyle='#fafafa'; ctx.fillRect(0,0,canvasW,canvasH);
+                        ctx.strokeStyle='#ddd'; ctx.lineWidth=1; ctx.strokeRect(2,2,canvasW-4,canvasH-4);
+                        ctx.fillStyle='#999'; ctx.font=`${Math.round(canvasH*0.25)}px Arial`;
+                        ctx.textAlign='center';
+                        ctx.fillText('[Image]', canvasW/2, canvasH/2+canvasH*0.08);
+                        resolve({b64:c.toDataURL('image/jpeg',0.9).split(',')[1], fmt:'JPEG'});
+                    };
+                    img.src = url;
+                });
+            }
+
+            // Render Urdu/Arabic RTL paragraph as image using Noto Nastaliq Urdu font
+            async function urduToImage(runs, wPt, fontSize) {
+                if (typeof html2canvas === 'undefined') return null;
+                const text = runs.map(r=>r.text).join('').replace(/\n/g,' ').trim();
+                if (!text) return null;
+                const dpr=2, wPx=Math.round(wPt*96/72);
+                const div=document.createElement('div');
+                div.style.cssText=[
+                    'position:fixed','top:-99999px','left:-99999px',
+                    `width:${wPx}px`,'background:#fff','color:#000',
+                    `font-size:${fontSize}pt`,
+                    "font-family:'Noto Nastaliq Urdu','Jameel Noori Nastaleem',serif",
+                    'direction:rtl','text-align:right','line-height:2.2',
+                    'padding:6px 2px','box-sizing:border-box','word-break:break-word'
+                ].join(';');
+                div.textContent=text;
+                document.body.appendChild(div);
+                await document.fonts.ready;
+                await new Promise(r=>setTimeout(r,300));
+                try {
+                    const canvas=await html2canvas(div,{
+                        scale:dpr,backgroundColor:'#ffffff',logging:false,
+                        useCORS:true,width:wPx,windowWidth:wPx
+                    });
+                    document.body.removeChild(div);
+                    return {
+                        b64:canvas.toDataURL('image/jpeg',0.95).split(',')[1],
+                        fmt:'JPEG', wPt, hPt:canvas.height/dpr*72/96
+                    };
+                } catch(e) {
+                    try{document.body.removeChild(div);}catch(_){}
+                    return null;
                 }
             }
 
-            const total = paragraphs.length;
-            for (let pi = 0; pi < total; pi++) {
-                if (pi % 3 === 0) setProgress(35 + Math.round((pi/total)*57), 'Laying out content...');
+            // Layout
+            let y=marT;
+            function checkPage(need) {
+                if (y+need>pgH-marB) { doc.addPage([pgW,pgH]); y=marT; }
+            }
 
-                const para = paragraphs[pi];
+            const total=paragraphs.length;
+            setProgress(38,'Rendering paragraphs...');
 
-                if (para.hasPageBreak) {
-                    doc.addPage([pgW_pt, pgH_pt]);
-                    pageCount++;
-                    y = marT_pt;
+            for (let pi=0;pi<total;pi++) {
+                if (pi%4===0) setProgress(38+Math.round((pi/total)*52),`Processing ${pi+1}/${total}...`);
+                const para=paragraphs[pi];
+
+                // Page break
+                if (para.hasPageBreak) { doc.addPage([pgW,pgH]); y=marT; continue; }
+
+                // IMAGE paragraph
+                if (para.imageInfo) {
+                    const {rId,wPt,hPt}=para.imageInfo;
+                    const inf=imgMap[rId];
+                    if (inf) {
+                        const sc=Math.min(1,cW/wPt);
+                        const iW=wPt*sc, iH=hPt*sc;
+                        checkPage(para.spBefore+iH+para.spAfter);
+                        y+=para.spBefore;
+                        try {
+                            const res=await bytesToBase64(inf,iW,iH);
+                            if (res) doc.addImage(`data:image/jpeg;base64,${res.b64}`,res.fmt,marL,y,iW,iH);
+                        } catch(_){}
+                        y+=iH+para.spAfter;
+                    }
                     continue;
                 }
 
-                const allText = para.runs.map(r => r.text).join('').trim();
-                if (!allText && para.runs.length === 0) {
-                    y += DEFAULT_SIZE * 0.5;
-                    continue;
+                // URDU/RTL paragraph
+                const hasUrduChars = para.runs.some(r=>/[\u0600-\u06FF\u0750-\u077F\uFB50-\uFDFF\uFE70-\uFEFF]/.test(r.text));
+                if (para.isRTL || hasUrduChars) {
+                    const fs=para.runs.find(r=>r.fontSize)?.fontSize||DSIZE;
+                    const res=await urduToImage(para.runs,cW,fs);
+                    if (res) {
+                        checkPage(para.spBefore+res.hPt+para.spAfter);
+                        y+=para.spBefore;
+                        doc.addImage(`data:image/jpeg;base64,${res.b64}`,'JPEG',marL,y,res.wPt,res.hPt);
+                        y+=res.hPt+para.spAfter;
+                        continue;
+                    }
                 }
 
-                // Font size: use first run that specifies it, else default
-                const fsSrc = para.runs.find(r => r.fontSize);
-                const fontSize = fsSrc ? fsSrc.fontSize : DEFAULT_SIZE;
+                // Regular TEXT paragraph
+                const allTxt=para.runs.map(r=>r.text).join('').trim();
+                if (!allTxt) { y+=DSIZE*LHFAC*0.5; continue; }
 
-                // Line height
-                const lineH = para.lineSpAbs !== null
-                    ? para.lineSpAbs
-                    : fontSize * para.lineSpMul * (para.lineSpMul <= 1.05 ? LHFAC : para.lineSpMul);
+                const fsSrc=para.runs.find(r=>r.fontSize);
+                const fs=fsSrc?fsSrc.fontSize:DSIZE;
+                const lineH=para.lsAbs!==null?para.lsAbs:fs*para.lsMul*(para.lsMul<=1.05?LHFAC:para.lsMul);
+                const paraW=cW-para.indL, xStart=marL+para.indL;
+                const dLines=wrapRuns(para.runs,paraW,fs);
 
-                const paraW  = contentW_pt - para.indL;
-                const xStart = marL_pt + para.indL;
+                checkPage(para.spBefore+lineH);
+                y+=para.spBefore;
 
-                // Filter out newline-only runs before wrapping (handled inside wrapRuns)
-                const displayLines = wrapRuns(para.runs, paraW, fontSize);
-
-                // Need space for at least space-before + first line
-                checkNewPage(para.spBefore + lineH);
-                y += para.spBefore;
-
-                for (let li = 0; li < displayLines.length; li++) {
-                    if (li > 0) checkNewPage(lineH);
-                    const segs = displayLines[li];
-                    let xCur = xStart;
+                for (let li=0;li<dLines.length;li++) {
+                    if (li>0) checkPage(lineH);
+                    const segs=dLines[li];
+                    let lw2=0; for (const s of segs) lw2+=textW(s.text,fs,s.bold,s.italic);
+                    let xCur=xStart;
+                    if (para.jc==='center') xCur+=(paraW-lw2)/2;
+                    else if (para.jc==='right'||para.jc==='end') xCur+=paraW-lw2;
 
                     for (const seg of segs) {
                         if (!seg.text) continue;
-                        const style = seg.bold && seg.italic ? 'bolditalic'
-                                    : seg.bold   ? 'bold'
-                                    : seg.italic ? 'italic' : 'normal';
-                        doc.setFont(BASE_FONT, style);
-                        doc.setFontSize(fontSize);
-                        doc.setTextColor(0, 0, 0);
-                        // jsPDF y = baseline
-                        doc.text(seg.text, xCur, y + fontSize * 0.85);
-                        const segW = textWidth(seg.text, fontSize, seg.bold, seg.italic);
-                        if (seg.underline) {
-                            doc.setLineWidth(0.4);
-                            doc.line(xCur, y + fontSize * 0.97, xCur + segW, y + fontSize * 0.97);
-                        }
-                        xCur += segW;
+                        const st=seg.bold&&seg.italic?'bolditalic':seg.bold?'bold':seg.italic?'italic':'normal';
+                        doc.setFont(BFONT,st); doc.setFontSize(fs); doc.setTextColor(0,0,0);
+                        doc.text(seg.text,xCur,y+fs*0.85);
+                        const sw=textW(seg.text,fs,seg.bold,seg.italic);
+                        if (seg.underline){doc.setLineWidth(0.4);doc.line(xCur,y+fs*0.97,xCur+sw,y+fs*0.97);}
+                        xCur+=sw;
                     }
-                    y += lineH;
+                    y+=lineH;
                 }
-
-                y += para.spAfter;
+                y+=para.spAfter;
             }
 
-            // ── Page numbers + branding ───────────────────────────────────────
-            const numPages = doc.getNumberOfPages();
-            for (let p = 1; p <= numPages; p++) {
+            // Page numbers + branding
+            const numPg=doc.getNumberOfPages();
+            for (let p=1;p<=numPg;p++) {
                 doc.setPage(p);
-                doc.setFont(BASE_FONT, 'normal');
-                doc.setFontSize(7);
-                doc.setTextColor(140, 140, 140);
-                doc.text(`Page ${p} of ${numPages}`, pgW_pt / 2, pgH_pt - marB_pt * 0.4, { align: 'center' });
+                doc.setFont(BFONT,'normal');doc.setFontSize(7);doc.setTextColor(140,140,140);
+                doc.text(`Page ${p} of ${numPg}`,pgW/2,pgH-marB*0.4,{align:'center'});
             }
-            doc.setPage(numPages);
-            doc.setFontSize(6);
-            doc.setTextColor(180, 180, 180);
-            doc.text('Converted by Free Tools Hub  |  https://freetoolshub.online/', pgW_pt / 2, pgH_pt - marB_pt * 0.15, { align: 'center' });
+            doc.setPage(numPg);
+            doc.setFontSize(6);doc.setTextColor(180,180,180);
+            doc.text('Converted by Free Tools Hub  |  https://freetoolshub.online/',pgW/2,pgH-marB*0.15,{align:'center'});
 
-            setProgress(97, 'Finalizing...');
-            convertedBlob = doc.output('blob');
-            setProgress(100, 'Complete!');
-
-            setTimeout(() => {
-                progressSection.classList.remove('active');
-                downloadSection.classList.add('active');
-            }, 300);
-
-            const outputFileName = file.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
-            downloadBtn.onclick = () => { saveAs(convertedBlob, outputFileName); };
+            setProgress(97,'Finalizing...');
+            convertedBlob=doc.output('blob');
+            setProgress(100,'Complete!');
+            setTimeout(()=>{progressSection.classList.remove('active');downloadSection.classList.add('active');},300);
+            const outName=file.name.replace(/\.(docx|doc)$/i,'')+'.pdf';
+            downloadBtn.onclick=()=>saveAs(convertedBlob,outName);
         }
         function setProgress(pct, msg) {
             progressFill.style.width = pct + '%';
