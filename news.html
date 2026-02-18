@@ -1,622 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Meta Tags for SEO -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3CEQJ2D9WY');
-    </script>
-    
-    <!-- Primary Meta Tags -->
-    <title>AI & Tech News - Latest Updates on Robotics, AI & Innovation | Free Tools Hub</title>
-    <meta name="title" content="AI & Tech News - Latest Updates on Robotics, AI & Innovation">
-    <meta name="description" content="Stay updated with the latest breakthroughs in AI, humanoid robots, and technology. Read expert analysis and trending tech news from around the world.">
+    <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-3CEQJ2D9WY');</script>
+    <title>AI & Tech News — Latest Robotics, AI & Innovation Updates | Free Tools Hub</title>
+    <meta name="title" content="AI & Tech News — Latest Robotics, AI & Innovation Updates">
+    <meta name="description" content="Stay updated with the latest breakthroughs in AI, humanoid robots, and technology. Expert analysis and trending tech news from around the world.">
     <meta name="keywords" content="AI news, tech news, robotics news, humanoid robots, technology updates, AI breakthroughs, innovation news, Tesla Optimus, Boston Dynamics">
     <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
     <meta name="author" content="Free Tools Hub">
-    
-    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/news.html">
-    <meta property="og:title" content="AI & Tech News - Free Tools Hub">
-    <meta property="og:description" content="Stay updated with the latest breakthroughs in AI, humanoid robots, and technology innovations.">
-    
-    <!-- Canonical URL -->
+    <meta property="og:title" content="AI & Tech News — Free Tools Hub">
+    <meta property="og:description" content="Latest breakthroughs in AI, humanoid robots, and technology innovations.">
+    <meta name="twitter:card" content="summary_large_image">
     <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/news.html">
-    
-    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-    
-    <!-- Stylesheets -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <link rel="stylesheet" href="style.css">
     <style>
-        html {
-            scroll-behavior: smooth;
-        }
-        
-        .news-card {
-            transition: all 0.3s ease;
-        }
-        
-        .news-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-        }
-        
-        .news-card img {
-            transition: transform 0.3s ease;
-        }
-        
-        .news-card:hover img {
-            transform: scale(1.05);
-        }
-        
-        .line-clamp-3 {
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-        
-        .category-filter {
-            transition: all 0.3s ease;
-        }
-        
-        .category-filter:hover {
-            transform: translateY(-2px);
-        }
-        
-        .category-filter.active {
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            color: white;
-        }
+        .page-hero{background:linear-gradient(135deg,var(--purple-900),var(--purple-700));color:white;padding:64px 0 48px;position:relative;overflow:hidden;}
+        .page-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 70% at 75% 25%,rgba(217,70,239,.18) 0%,transparent 60%);pointer-events:none;}
+        .page-hero::after{content:'';position:absolute;bottom:-1px;left:0;right:0;height:48px;background:var(--gray-50);clip-path:ellipse(55% 100% at 50% 100%);}
+        .page-hero-inner{position:relative;z-index:1;text-align:center;}
+        .breadcrumb{background:white;border-bottom:1px solid var(--gray-200);padding:12px 0;font-size:13px;}
+        .breadcrumb-inner{display:flex;align-items:center;gap:8px;color:var(--gray-500);}
+        .breadcrumb a{color:var(--gray-500);transition:var(--transition);}
+        .breadcrumb a:hover{color:var(--purple-600);}
+        .breadcrumb-sep{color:var(--gray-300);font-size:11px;}
+        .breadcrumb-current{color:var(--gray-800);font-weight:500;}
+        .filter-bar{background:white;border-bottom:1px solid var(--gray-200);padding:14px 0;position:sticky;top:68px;z-index:40;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+        .filter-bar-inner{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;}
+        .cat-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 18px;border-radius:var(--radius-full);border:1.5px solid var(--gray-200);background:white;color:var(--gray-600);font-family:var(--font-body);font-size:13.5px;font-weight:500;cursor:pointer;transition:var(--transition);white-space:nowrap;}
+        .cat-btn:hover{border-color:var(--purple-400);color:var(--purple-600);background:var(--purple-50);}
+        .cat-btn.active{background:linear-gradient(135deg,var(--purple-600),var(--fuchsia-500));border-color:transparent;color:white;box-shadow:0 4px 12px rgba(124,58,237,.30);}
+        .cat-btn i{font-size:12px;}
+        .news-page-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+        .news-card-full{background:white;border:1.5px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden;transition:var(--transition);}
+        .news-card-full:hover{border-color:rgba(124,58,237,.22);box-shadow:var(--shadow-lg);transform:translateY(-5px);}
+        .news-img-wrap{position:relative;height:200px;overflow:hidden;flex-shrink:0;}
+        .news-img-wrap img{width:100%;height:100%;object-fit:cover;transition:transform .5s ease;}
+        .news-card-full:hover .news-img-wrap img{transform:scale(1.05);}
+        .news-card-body{padding:24px;}
+        .news-tag{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:4px 12px;border-radius:var(--radius-full);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px;}
+        .tag-trending{background:#fee2e2;color:#dc2626;}
+        .tag-featured{background:#dcfce7;color:#16a34a;}
+        .tag-market{background:#fef9c3;color:#ca8a04;}
+        .tag-ai{background:#dbeafe;color:#1d4ed8;}
+        .tag-robotics{background:var(--purple-100);color:var(--purple-700);}
+        .tag-manufacturing{background:#ffedd5;color:#c2410c;}
+        .news-card-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--gray-900);line-height:1.35;margin-bottom:10px;transition:var(--transition);}
+        .news-card-full:hover .news-card-title{color:var(--purple-600);}
+        .news-card-excerpt{font-size:13.5px;color:var(--gray-500);line-height:1.65;margin-bottom:16px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;}
+        .news-card-meta{display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--gray-400);}
+        .news-read-link{display:inline-flex;align-items:center;gap:5px;font-size:13px;font-weight:600;color:var(--purple-600);transition:var(--transition);}
+        .news-card-full:hover .news-read-link{gap:9px;}
+        .newsletter-section{background:linear-gradient(135deg,var(--purple-800),var(--purple-600));color:white;padding:72px 0;text-align:center;position:relative;overflow:hidden;margin-top:48px;border-radius:var(--radius-xl);}
+        .newsletter-section::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 25% 50%,rgba(217,70,239,.18) 0%,transparent 60%);pointer-events:none;}
+        .newsletter-inner{position:relative;z-index:1;}
+        .newsletter-icon{font-size:48px;margin-bottom:20px;display:block;opacity:.9;}
+        .newsletter-section h2{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;margin-bottom:10px;letter-spacing:-.02em;}
+        .newsletter-section p{font-size:1rem;opacity:.80;margin-bottom:32px;}
+        .newsletter-form{display:flex;gap:12px;max-width:460px;margin:0 auto;flex-wrap:wrap;justify-content:center;}
+        .newsletter-input{flex:1;min-width:220px;padding:14px 22px;border-radius:var(--radius-full);border:none;outline:none;font-family:var(--font-body);font-size:15px;color:var(--gray-800);background:white;box-shadow:0 4px 16px rgba(0,0,0,.15);}
+        .newsletter-input::placeholder{color:var(--gray-400);}
+        .newsletter-btn{padding:14px 28px;border-radius:var(--radius-full);border:none;cursor:pointer;background:white;color:var(--purple-700);font-family:var(--font-body);font-size:15px;font-weight:700;transition:var(--transition);box-shadow:0 4px 16px rgba(0,0,0,.15);}
+        .newsletter-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.20);}
+        @media(max-width:768px){.filter-bar{top:60px;}.news-page-grid{grid-template-columns:1fr;}}
+        @media(max-width:480px){.cat-btn{padding:7px 14px;font-size:12.5px;}}
     </style>
 </head>
-<body class="bg-gray-50">
-    <!-- Header -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex justify-between items-center">
-                <a href="index.html" class="flex items-center space-x-3">
-                    <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-xl"></i>
-                    </div>
-                    <div>
-                        <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                        <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
-                    </div>
+<body>
+
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="site-logo" aria-label="Free Tools Hub Home">
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-text"><span class="logo-name">Free Tools Hub</span><span class="logo-tagline">Tools · Blogs · Resources</span></div>
                 </a>
-                
-                <nav class="hidden md:flex items-center space-x-6" aria-label="Main Navigation">
-                    <a href="index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
-                    <a href="index.html#tools" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-tools mr-1"></i>Tools</a>
-                    <a href="blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                    <a href="news.html" class="text-blue-600 font-medium border-b-2 border-blue-600"><i class="fas fa-newspaper mr-1"></i>News</a>
-                    <a href="resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
-                    <a href="tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
-                    <a href="comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
-                    <a href="contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
+                <nav class="main-nav">
+                    <a href="index.html"><i class="fas fa-home"></i>Home</a>
+                    <a href="tools.html"><i class="fas fa-tools"></i>All Tools</a>
+                    <a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+                    <a href="news.html" class="active"><i class="fas fa-newspaper"></i>News</a>
+                    <a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+                    <a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+                    <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
                 </nav>
-                
-                <button id="mobileMenuBtn" class="md:hidden text-gray-700" aria-label="Toggle mobile menu"><i class="fas fa-bars text-2xl"></i></button>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false"><i class="fas fa-bars"></i></button>
             </div>
-            
-            <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2" aria-label="Mobile Navigation">
-                <a href="index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
-                <a href="index.html#tools" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-tools mr-2"></i>Tools</a>
-                <a href="blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
-                <a href="news.html" class="block py-2 text-blue-600 font-semibold"><i class="fas fa-newspaper mr-2"></i>News</a>
-                <a href="resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-                <a href="tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
-                <a href="comparisons.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
-                <a href="contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
-            </nav>
         </div>
+        <nav class="mobile-nav" id="mobileMenu">
+            <a href="index.html"><i class="fas fa-home"></i>Home</a>
+            <a href="tools.html"><i class="fas fa-tools"></i>All Tools</a>
+            <a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+            <a href="news.html" class="active"><i class="fas fa-newspaper"></i>News</a>
+            <a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+            <a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+            <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
+        </nav>
     </header>
 
-    <!-- Breadcrumb -->
-    <div class="bg-white border-b">
-        <div class="container mx-auto px-4 py-3">
-            <div class="flex items-center text-sm text-gray-600">
-                <a href="index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
-                <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-                <span class="text-gray-800 font-medium">AI & Tech News</span>
+    <div class="breadcrumb"><div class="container"><div class="breadcrumb-inner">
+        <a href="index.html"><i class="fas fa-home"></i> Home</a>
+        <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+        <span class="breadcrumb-current">AI & Tech News</span>
+    </div></div></div>
+
+    <section class="page-hero">
+        <div class="container page-hero-inner">
+            <div class="hero-badge" style="margin-bottom:20px;"><i class="fas fa-newspaper"></i><span>Latest Updates</span></div>
+            <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-.03em;margin-bottom:10px;">AI & Tech News</h1>
+            <p style="font-size:1.05rem;opacity:.80;font-weight:300;max-width:480px;margin:0 auto;">Stay updated with the latest breakthroughs in AI, robotics & technology</p>
+        </div>
+    </section>
+
+    <div class="filter-bar">
+        <div class="container">
+            <div class="filter-bar-inner" id="categoryFilters">
+                <button class="cat-btn active" data-cat="all"><i class="fas fa-th"></i> All News</button>
+                <button class="cat-btn" data-cat="ai"><i class="fas fa-brain"></i> AI</button>
+                <button class="cat-btn" data-cat="robotics"><i class="fas fa-robot"></i> Robotics</button>
+                <button class="cat-btn" data-cat="trending"><i class="fas fa-fire"></i> Trending</button>
             </div>
         </div>
     </div>
 
-    <!-- Hero Section -->
-    <section class="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white py-16">
-        <div class="container mx-auto px-4 text-center">
-            <div class="inline-block bg-white/20 px-4 py-1 rounded-full text-sm font-semibold mb-4 backdrop-blur">
-                <i class="fas fa-newspaper mr-2"></i>LATEST UPDATES
+    <main style="background:var(--gray-50);padding:56px 0;" id="main-content">
+        <div class="container">
+            <div class="news-page-grid" id="newsGrid">
+                <!-- News cards rendered by JS -->
             </div>
-            <h2 class="text-4xl md:text-5xl font-bold mb-4">AI & Tech News</h2>
-            <p class="text-xl mb-2">Stay Updated with the Latest in AI, Robotics & Technology</p>
-            <p class="text-sm opacity-90"><i class="fas fa-clock mr-1"></i>Updated Daily • Expert Analysis • Global Coverage</p>
-        </div>
-    </section>
 
-    <!-- Category Filters -->
-    <section class="bg-white border-b sticky top-[72px] z-40">
-        <div class="container mx-auto px-4 py-4">
-            <div class="flex flex-wrap gap-3 justify-center">
-                <button onclick="filterNews('all')" class="category-filter active px-6 py-2 rounded-lg font-semibold bg-gray-100 hover:bg-gray-200">
-                    <i class="fas fa-globe mr-2"></i>All News
-                </button>
-                <button onclick="filterNews('robotics')" class="category-filter px-6 py-2 rounded-lg font-semibold bg-gray-100 hover:bg-gray-200">
-                    <i class="fas fa-robot mr-2"></i>Robotics
-                </button>
-                <button onclick="filterNews('ai')" class="category-filter px-6 py-2 rounded-lg font-semibold bg-gray-100 hover:bg-gray-200">
-                    <i class="fas fa-brain mr-2"></i>AI
-                </button>
-                <button onclick="filterNews('industry')" class="category-filter px-6 py-2 rounded-lg font-semibold bg-gray-100 hover:bg-gray-200">
-                    <i class="fas fa-industry mr-2"></i>Industry
-                </button>
-                <button onclick="filterNews('healthcare')" class="category-filter px-6 py-2 rounded-lg font-semibold bg-gray-100 hover:bg-gray-200">
-                    <i class="fas fa-heartbeat mr-2"></i>Healthcare
-                </button>
-            </div>
-        </div>
-    </section>
-
-    <!-- Main News Grid -->
-    <main class="py-12">
-        <div class="container mx-auto px-4 max-w-6xl">
-            
-            <!-- Featured News -->
-            <div class="mb-12">
-                <h3 class="text-3xl font-bold text-gray-800 mb-6 flex items-center">
-                    <i class="fas fa-star text-yellow-500 mr-3"></i>Featured Stories
-                </h3>
-                
-                <div id="newsGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    
-                    <!-- News Card 1: Moya Humanoid Robot -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="robotics">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600" 
-                                 alt="Moya Humanoid Robot with warm skin and emotion recognition" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-red-100 text-red-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-fire mr-1"></i>TRENDING
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>1 week ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                Moya: Humanoid Robot with Warm Skin & Emotions
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Chinese startup DroidUp unveils Moya, the world's first biometric AI robot with warm skin (90-97°F), camera eyes that track emotions, and 92% human-like walking accuracy. The robot can express emotions and maintain eye contact.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-robot text-blue-600"></i>
-                                    <span>Robotics</span>
-                                </div>
-                                <a href="https://newatlas.com/ai-humanoids/moya-droidup-lifelike-robot/" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 2: Tesla Optimus -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="robotics industry">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600" 
-                                 alt="Tesla Optimus Gen 2 humanoid robot running" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-green-100 text-green-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-star mr-1"></i>FEATURED
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>2 months ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                Tesla Optimus Gen 2 Shows Human-Like Running
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Tesla's Optimus humanoid robot demonstrates smooth running motion with both feet leaving the ground. The Gen 2 model features articulated fingers, improved AI navigation, and is designed for factory labor with advanced actuator engineering.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-industry text-purple-600"></i>
-                                    <span>Manufacturing</span>
-                                </div>
-                                <a href="https://interestingengineering.com/ai-robotics/top-seven-humanoid-stories" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 3: Boston Dynamics Atlas -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="robotics">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?w=600" 
-                                 alt="Boston Dynamics Atlas electric robot" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-blue-100 text-blue-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-bolt mr-1"></i>INNOVATION
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>3 months ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                Atlas Goes Fully Electric: Running & Backflipping
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Boston Dynamics' Atlas robot transitions to fully electric design, dropping hydraulics for modular electric actuators. The 2025 version excels in dynamic movement including running, jumping, and backflipping with high-torque-density motors.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-cog text-green-600"></i>
-                                    <span>Engineering</span>
-                                </div>
-                                <a href="https://www.mosrac.com/resources/blog/top-15-humanoid-robots.html" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 4: China Humanoid Deployment -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="ai industry">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1531746790731-6c087fecd65a?w=600" 
-                                 alt="China AI Conference humanoid robots" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-purple-100 text-purple-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-globe mr-1"></i>GLOBAL
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>6 months ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                60+ Humanoid Robots at China's AI Conference
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Over 60 humanoid robots showcased at 2025 World AI Conference in Shanghai. China moves toward scaled commercialization with robots deployed across healthcare, manufacturing, and service industries serving over 1 million patients.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-hospital text-red-600"></i>
-                                    <span>Healthcare</span>
-                                </div>
-                                <a href="http://english.scio.gov.cn/m/chinavoices/2025-07/28/content_117999947.html" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 5: Pepper Companion Robot -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="robotics healthcare">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=600" 
-                                 alt="Pepper social companion robot" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-pink-100 text-pink-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-heart mr-1"></i>SOCIAL
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>1 month ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                Robots That Understand Human Emotions
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Humanoid robots like Pepper can now recognize faces, track emotions, and provide companionship. They're being deployed in healthcare for elderly care, reducing loneliness and assisting with patient monitoring and medication reminders.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-users text-pink-600"></i>
-                                    <span>Social Care</span>
-                                </div>
-                                <a href="https://blog.robozaps.com/b/applications-of-humanoid-robots" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 6: Industry Growth -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="industry">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=600" 
-                                 alt="Humanoid robot industry market growth" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-yellow-100 text-yellow-700 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-chart-line mr-1"></i>MARKET
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>2 weeks ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                Humanoid Market to Reach $13.8B by 2028
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                The global humanoid robot market will grow from $1.8B in 2023 to $13.8B by 2028. Driven by AI advances, battery improvements, and deployment in logistics, retail, healthcare, and manufacturing sectors worldwide.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-briefcase text-yellow-600"></i>
-                                    <span>Business</span>
-                                </div>
-                                <a href="https://www.articsledge.com/post/ai-humanoid-robots" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 7: AI Breakthrough -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="ai">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1677756119517-756a188d2d94?w=600" 
-                                 alt="AI neural network visualization" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-indigo-100 text-indigo-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-brain mr-1"></i>AI
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>3 days ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                AI Models Learn to Reason Like Humans
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                New AI models demonstrate unprecedented reasoning capabilities, solving complex problems step-by-step similar to human thought processes. This breakthrough could revolutionize how AI assistants help with planning and decision-making.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-brain text-indigo-600"></i>
-                                    <span>AI Research</span>
-                                </div>
-                                <a href="#" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 8: Healthcare AI -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="ai healthcare">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600" 
-                                 alt="Medical AI diagnosis system" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-teal-100 text-teal-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-stethoscope mr-1"></i>HEALTH
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>1 week ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                AI Diagnoses Diseases with 95% Accuracy
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Medical AI systems now achieve 95% accuracy in diagnosing various diseases from medical imaging. Hospitals worldwide are adopting these tools to support doctors in early disease detection and treatment planning.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-hospital text-teal-600"></i>
-                                    <span>Medical Tech</span>
-                                </div>
-                                <a href="#" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
-                    <!-- News Card 9: Industry Automation -->
-                    <article class="news-card bg-white rounded-xl shadow-lg overflow-hidden" data-category="industry robotics">
-                        <div class="overflow-hidden">
-                            <img src="https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600" 
-                                 alt="Factory automation robots" 
-                                 class="w-full h-48 object-cover">
-                        </div>
-                        <div class="p-6">
-                            <div class="flex items-center space-x-2 mb-3">
-                                <span class="bg-orange-100 text-orange-600 text-xs px-3 py-1 rounded-full font-semibold">
-                                    <i class="fas fa-industry mr-1"></i>MANUFACTURING
-                                </span>
-                                <span class="text-gray-500 text-sm">
-                                    <i class="far fa-clock mr-1"></i>5 days ago
-                                </span>
-                            </div>
-                            <h3 class="text-xl font-bold text-gray-800 mb-3 hover:text-blue-600 transition">
-                                Smart Factories Deploy 10,000 Collaborative Robots
-                            </h3>
-                            <p class="text-gray-600 text-sm mb-4 line-clamp-3">
-                                Major manufacturers are deploying thousands of collaborative robots (cobots) that work safely alongside humans. These robots boost productivity by 40% while reducing workplace injuries.
-                            </p>
-                            <div class="flex items-center justify-between">
-                                <div class="flex items-center space-x-2 text-gray-500 text-sm">
-                                    <i class="fas fa-cogs text-orange-600"></i>
-                                    <span>Automation</span>
-                                </div>
-                                <a href="#" 
-                                   target="_blank" 
-                                   rel="noopener noreferrer"
-                                   class="text-blue-600 font-semibold text-sm hover:text-blue-700 transition">
-                                    Read More <i class="fas fa-arrow-right ml-1"></i>
-                                </a>
-                            </div>
-                        </div>
-                    </article>
-
+            <div class="newsletter-section">
+                <div class="newsletter-inner">
+                    <i class="fas fa-envelope-open-text newsletter-icon"></i>
+                    <h2>Stay Updated with Latest Tech News</h2>
+                    <p>Get weekly updates on AI, robotics & innovation delivered to your inbox</p>
+                    <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                        <input type="email" class="newsletter-input" placeholder="Enter your email..." aria-label="Email for newsletter" required id="newsEmail">
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i> Subscribe</button>
+                    </form>
+                    <p id="newsMsg" style="margin-top:14px;font-size:13.5px;opacity:0;transition:opacity .3s;"></p>
                 </div>
             </div>
-
-            <!-- Newsletter Signup -->
-            <div class="bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl shadow-2xl p-8 md:p-12 text-white text-center">
-                <i class="fas fa-envelope-open-text text-5xl mb-4 opacity-80"></i>
-                <h3 class="text-3xl font-bold mb-3">Stay Updated with Latest Tech News</h3>
-                <p class="text-lg mb-6 opacity-90">Get weekly updates on AI, robotics, and innovation delivered to your inbox</p>
-                <div class="max-w-md mx-auto flex gap-3">
-                    <input type="email" placeholder="Enter your email" class="flex-1 px-6 py-3 rounded-lg text-gray-800 focus:outline-none focus:ring-4 focus:ring-white/50">
-                    <button class="bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition">
-                        Subscribe
-                    </button>
-                </div>
-            </div>
-
         </div>
     </main>
 
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-12 mt-12">
-        <div class="container mx-auto px-4">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <div class="flex items-center space-x-3 mb-4">
-                        <div class="w-10 h-10 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                            <i class="fas fa-tools text-white"></i>
-                        </div>
-                        <h3 class="font-bold text-xl">Free Tools Hub</h3>
-                    </div>
-                    <p class="text-gray-400 text-sm">Your one-stop destination for free online tools, expert blogs, and curated resources.</p>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Quick Links</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="index.html" class="text-gray-400 hover:text-white"><i class="fas fa-home mr-2"></i>Home</a></li>
-                        <li><a href="index.html#tools" class="text-gray-400 hover:text-white"><i class="fas fa-tools mr-2"></i>All Tools</a></li>
-                        <li><a href="blog.html" class="text-gray-400 hover:text-white"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                        <li><a href="news.html" class="text-gray-400 hover:text-white"><i class="fas fa-newspaper mr-2"></i>News</a></li>
-                        <li><a href="contact.html" class="text-gray-400 hover:text-white"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Categories</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="index.html#tools" class="text-gray-400 hover:text-white"><i class="fas fa-robot mr-2"></i>AI Tools</a></li>
-                        <li><a href="resources.html" class="text-gray-400 hover:text-white"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                        <li><a href="tutorials.html" class="text-gray-400 hover:text-white"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                    </ul>
-                </div>
-                
-                <div>
-                    <h4 class="font-bold mb-4">Connect</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-github"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-white text-2xl"><i class="fab fa-linkedin"></i></a>
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="site-logo"><div class="logo-icon"><i class="fas fa-bolt"></i></div><div class="logo-text"><span class="logo-name">Free Tools Hub</span></div></div>
+                    <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials.</p>
+                    <div class="footer-social" style="margin-top:20px;">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="https://github.com/freetoolsapp" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
                     </div>
                 </div>
+                <div class="footer-col"><h4>Quick Links</h4><ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="tools.html"><i class="fas fa-tools"></i>All Tools</a></li>
+                    <li><a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a></li>
+                    <li><a href="news.html"><i class="fas fa-newspaper"></i>News</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+                </ul></div>
+                <div class="footer-col"><h4>Categories</h4><ul>
+                    <li><a href="resources.html"><i class="fas fa-layer-group"></i>Resources</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a></li>
+                    <li><a href="comparisons.html"><i class="fas fa-balance-scale"></i>Comparisons</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i>About Us</a></li>
+                </ul></div>
+                <div class="footer-col"><h4>Legal</h4><ul>
+                    <li><a href="privacy.html"><i class="fas fa-shield-alt"></i>Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i>Terms of Service</a></li>
+                    <li><a href="disclaimer.html"><i class="fas fa-exclamation-circle"></i>Disclaimer</a></li>
+                </ul></div>
             </div>
-            
-            <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-400">
-                <p>&copy; 2024 Free Tools Hub. All rights reserved. | Made with <i class="fas fa-heart text-red-500"></i> for developers</p>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="index.html">Free Tools Hub</a>. All rights reserved. Made with <span class="heart">♥</span> for developers &amp; creators.</p>
+                <div class="footer-legal"><a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="disclaimer.html">Disclaimer</a></div>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-            document.getElementById('mobileMenu').classList.toggle('hidden');
-        });
+        const header=document.getElementById('siteHeader');
+        window.addEventListener('scroll',()=>header.classList.toggle('scrolled',window.scrollY>20),{passive:true});
+        const btn=document.getElementById('mobileMenuBtn'),menu=document.getElementById('mobileMenu');
+        btn.addEventListener('click',()=>{const o=menu.classList.toggle('open');btn.setAttribute('aria-expanded',o);btn.innerHTML=o?'<i class="fas fa-times"></i>':'<i class="fas fa-bars"></i>';});
+        menu.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{menu.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.innerHTML='<i class="fas fa-bars"></i>';}));
 
-        // Filter news by category
-        function filterNews(category) {
-            const newsCards = document.querySelectorAll('.news-card');
-            const filterBtns = document.querySelectorAll('.category-filter');
-            
-            // Update active button
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            
-            // Filter cards
-            newsCards.forEach(card => {
-                if (category === 'all') {
-                    card.style.display = 'block';
-                } else {
-                    const categories = card.dataset.category || '';
-                    if (categories.includes(category)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                }
+        // News data
+        const newsData=[
+            {title:'Moya: World\'s First Robot with Warm Skin',tag:'trending',tagClass:'tag-trending',excerpt:'Revolutionary biometric AI robot with warm skin and real-time emotion tracking technology launches globally.',img:'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=600',cat:['all','trending','robotics']},
+            {title:'Tesla Optimus Running at Human Speed',tag:'featured',tagClass:'tag-featured',excerpt:'Gen 2 demonstrates smooth human-like running motion with advanced AI navigation and balance control.',img:'https://images.unsplash.com/photo-1635070041078-e363dbe005cb?w=600',cat:['all','trending','robotics']},
+            {title:'Humanoid Robot Market to Hit $13.8B',tag:'market',tagClass:'tag-market',excerpt:'Market growth driven by AI advances, manufacturing demand, and significant venture capital investment.',img:'https://images.unsplash.com/photo-1551434678-e076c223a692?w=600',cat:['all','trending']},
+            {title:'Boston Dynamics Atlas Gets AI Upgrade',tag:'ai',tagClass:'tag-ai',excerpt:'Latest Atlas model features enhanced AI decision-making for complex industrial tasks and warehouses.',img:'https://images.unsplash.com/photo-1563207153-f403bf289096?w=600',cat:['all','ai','robotics']},
+            {title:'Figure 01 Robot Deployed in BMW Plants',tag:'robotics',tagClass:'tag-robotics',excerpt:'Figure AI\'s humanoid robots now assemble car parts in BMW manufacturing facilities across Europe.',img:'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600',cat:['all','robotics']},
+            {title:'AI Breakthrough: GPT-5 Announced',tag:'ai',tagClass:'tag-ai',excerpt:'OpenAI reveals next-generation model with revolutionary reasoning capabilities and multimodal understanding.',img:'https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=600',cat:['all','ai','trending']},
+            {title:'Smart Factories Deploy 10,000 Robots',tag:'manufacturing',tagClass:'tag-manufacturing',excerpt:'Major manufacturers deploy thousands of collaborative robots that boost productivity by 40% safely.',img:'https://images.unsplash.com/photo-1565043589221-1a6fd9ae45c7?w=600',cat:['all','robotics']},
+        ];
+
+        let activeCat='all';
+
+        function renderNews(){
+            const grid=document.getElementById('newsGrid');
+            const filtered=newsData.filter(n=>n.cat.includes(activeCat));
+            grid.innerHTML='';
+            filtered.forEach((n,i)=>{
+                const art=document.createElement('article');
+                art.className='news-card-full';
+                art.style.opacity='0';
+                art.style.transform='translateY(20px)';
+                art.style.transition=`opacity .45s ease ${(i%3)*.08}s, transform .45s ease ${(i%3)*.08}s, border-color .25s, box-shadow .25s`;
+                art.innerHTML=`
+                    <div class="news-img-wrap"><img src="${n.img}" alt="${n.title}" loading="lazy" width="600" height="200"></div>
+                    <div class="news-card-body">
+                        <span class="news-tag ${n.tagClass}"><i class="fas fa-fire"></i> ${n.tag}</span>
+                        <h3 class="news-card-title">${n.title}</h3>
+                        <p class="news-card-excerpt">${n.excerpt}</p>
+                        <div class="news-card-meta">
+                            <span><i class="far fa-clock"></i> ${Math.floor(Math.random()*5)+1} days ago</span>
+                            <a href="#" class="news-read-link">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(art);
+                requestAnimationFrame(()=>{setTimeout(()=>{art.style.opacity='1';art.style.transform='translateY(0)';},30+(i%3)*80);});
             });
         }
+
+        document.getElementById('categoryFilters').addEventListener('click',e=>{
+            if(e.target.closest('.cat-btn')){
+                const btn=e.target.closest('.cat-btn');
+                document.querySelectorAll('.cat-btn').forEach(b=>b.classList.remove('active'));
+                btn.classList.add('active');
+                activeCat=btn.dataset.cat;
+                renderNews();
+            }
+        });
+
+        function handleNewsletter(e){
+            e.preventDefault();
+            const em=document.getElementById('newsEmail'),msg=document.getElementById('newsMsg');
+            if(!em.value||!em.value.includes('@')){msg.textContent='⚠️ Please enter a valid email address.';msg.style.opacity='1';return;}
+            msg.textContent='✅ Thank you! You\'ve been subscribed successfully.';msg.style.opacity='1';em.value='';
+            setTimeout(()=>msg.style.opacity='0',4000);
+        }
+
+        renderNews();
     </script>
 </body>
 </html>
