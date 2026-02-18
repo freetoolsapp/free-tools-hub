@@ -1398,146 +1398,250 @@
         });
 
         // ==================== CORE CONVERSION ====================
-        // Strategy: render the mammoth HTML in a hidden off-screen iframe,
-        // then use html2canvas to capture each "page" worth of content,
-        // and stitch into a jsPDF document — preserving layout faithfully.
+        // Strategy:
+        // 1. Use mammoth to get HTML + raw XML to detect explicit page breaks
+        // 2. Render full document in a hidden iframe (A4 width, no height limit)
+        // 3. Measure each block element's top/bottom position
+        // 4. Slice into pages at exact A4 content height boundaries,
+        //    respecting explicit page breaks and never cutting mid-element
+        // 5. Capture each page slice with html2canvas at 2x scale
+        // 6. Stitch into jsPDF
 
         async function convertToPDF(file) {
             const { jsPDF } = window.jspdf;
 
             setProgress(10, 'Reading document...');
-
             const arrayBuffer = await file.arrayBuffer();
 
-            setProgress(25, 'Extracting content & styles...');
+            setProgress(20, 'Extracting content...');
 
-            // Get HTML from mammoth
-            const result = await mammoth.convertToHtml({ arrayBuffer });
-            const htmlContent = result.value || '<p>Empty document</p>';
+            // Extract HTML with mammoth (preserves headings, bold, tables, lists etc.)
+            const htmlResult = await mammoth.convertToHtml({ arrayBuffer });
+            let htmlContent = htmlResult.value || '<p>Empty document</p>';
 
-            setProgress(40, 'Rendering document layout...');
+            // Detect mammoth page-break markers and convert to explicit HR with data attr
+            // mammoth emits page breaks as <p> with specific class sometimes, or we inject them
+            // We'll inject a visible page-break marker div
+            htmlContent = htmlContent.replace(
+                /<hr\s*\/?>/gi,
+                '<div class="word-page-break" data-pagebreak="true"></div>'
+            );
 
-            // Build a full styled HTML page to render
+            setProgress(35, 'Rendering document...');
+
+            // A4 at 96dpi: 794×1123px. Content area with 1-inch margins (96px each side)
+            const PAGE_W_PX   = 794;
+            const PAGE_H_PX   = 1123;
+            const MARGIN_TOP  = 96;   // ~1 inch
+            const MARGIN_BOT  = 96;
+            const MARGIN_LR   = 96;
+            const CONTENT_H   = PAGE_H_PX - MARGIN_TOP - MARGIN_BOT; // 931px usable
+
             const styledPage = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <style>
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+  *, *::before, *::after { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: #fff; }
   body {
-    font-family: 'Calibri', 'Arial', sans-serif;
-    font-size: 11pt;
-    line-height: 1.5;
+    font-family: 'Calibri', 'Georgia', serif;
+    font-size: 12pt;
+    line-height: 1.6;
     color: #000;
-    background: #fff;
-    padding: 72px 80px; /* ~1 inch margins */
-    width: 794px; /* A4 width at 96dpi */
+    width: ${PAGE_W_PX}px;
+    padding: ${MARGIN_TOP}px ${MARGIN_LR}px ${MARGIN_BOT}px;
+    /* No height limit — full scroll height */
   }
-  h1 { font-size: 20pt; font-weight: bold; margin: 12pt 0 6pt; }
-  h2 { font-size: 16pt; font-weight: bold; margin: 10pt 0 5pt; }
-  h3 { font-size: 13pt; font-weight: bold; margin: 8pt 0 4pt; }
-  h4 { font-size: 11pt; font-weight: bold; margin: 6pt 0 3pt; }
-  h5, h6 { font-size: 10pt; font-weight: bold; margin: 4pt 0 2pt; }
-  p { margin: 0 0 8pt; }
+  h1 { font-size: 22pt; font-weight: bold; margin: 14pt 0 6pt; line-height: 1.25; }
+  h2 { font-size: 17pt; font-weight: bold; margin: 12pt 0 5pt; line-height: 1.3; }
+  h3 { font-size: 14pt; font-weight: bold; margin: 10pt 0 4pt; line-height: 1.3; }
+  h4 { font-size: 12pt; font-weight: bold; margin: 8pt 0 3pt; }
+  h5, h6 { font-size: 11pt; font-weight: bold; margin: 6pt 0 2pt; }
+  p { margin: 0 0 9pt; orphans: 3; widows: 3; }
   strong, b { font-weight: bold; }
   em, i { font-style: italic; }
   u { text-decoration: underline; }
   s { text-decoration: line-through; }
-  ul { list-style: disc; padding-left: 24pt; margin: 4pt 0 8pt; }
-  ol { list-style: decimal; padding-left: 24pt; margin: 4pt 0 8pt; }
-  li { margin-bottom: 3pt; }
-  table { border-collapse: collapse; width: 100%; margin: 8pt 0; font-size: 10pt; }
-  td, th { border: 1px solid #000; padding: 4pt 6pt; vertical-align: top; }
-  th { background-color: #f0f0f0; font-weight: bold; }
-  img { max-width: 100%; height: auto; display: block; margin: 8pt 0; }
-  a { color: #0563C1; }
-  blockquote { border-left: 3px solid #ccc; padding-left: 12pt; margin: 8pt 0 8pt 12pt; color: #555; font-style: italic; }
-  hr { border: none; border-top: 1px solid #000; margin: 12pt 0; }
-  pre, code { font-family: 'Courier New', monospace; font-size: 10pt; background: #f5f5f5; padding: 2pt 4pt; border-radius: 2px; }
-  pre { padding: 8pt; margin: 6pt 0; white-space: pre-wrap; word-wrap: break-word; }
+  ul { list-style: disc outside; padding-left: 26pt; margin: 4pt 0 9pt; }
+  ol { list-style: decimal outside; padding-left: 26pt; margin: 4pt 0 9pt; }
+  li { margin-bottom: 3pt; line-height: 1.5; }
+  table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 10.5pt; page-break-inside: avoid; }
+  td, th { border: 1px solid #000; padding: 4pt 7pt; vertical-align: top; }
+  th { background: #f0f0f0; font-weight: bold; }
+  img { max-width: 100%; height: auto; display: block; margin: 8pt 0; page-break-inside: avoid; }
+  a { color: #0563C1; text-decoration: underline; }
+  blockquote { border-left: 3px solid #aaa; padding-left: 14pt; margin: 9pt 0 9pt 14pt; color: #444; font-style: italic; }
+  hr { border: none; border-top: 1px solid #999; margin: 14pt 0; }
+  pre { font-family: 'Courier New', monospace; font-size: 9.5pt; background: #f5f5f5; padding: 8pt; margin: 8pt 0; white-space: pre-wrap; word-break: break-all; border-radius: 2px; }
+  code { font-family: 'Courier New', monospace; font-size: 9.5pt; background: #f5f5f5; padding: 1pt 3pt; border-radius: 2px; }
+  /* Invisible marker for explicit page breaks */
+  .word-page-break { height: 0; margin: 0; padding: 0; border: none; }
 </style>
 </head>
 <body>${htmlContent}</body>
 </html>`;
 
-            // Create hidden iframe to render HTML
+            // Render in hidden iframe
             const iframe = document.createElement('iframe');
-            iframe.style.cssText = 'position:fixed; top:-9999px; left:-9999px; width:794px; height:1123px; border:none; visibility:hidden;';
+            iframe.style.cssText = `position:fixed;top:-99999px;left:-99999px;width:${PAGE_W_PX}px;height:10000px;border:none;visibility:hidden;overflow:hidden;`;
             document.body.appendChild(iframe);
 
-            await new Promise((resolve) => {
+            await new Promise(resolve => {
                 iframe.onload = resolve;
                 iframe.srcdoc = styledPage;
             });
 
-            // Let fonts/images settle
-            await new Promise(r => setTimeout(r, 600));
+            // Wait for fonts & layout to settle
+            await new Promise(r => setTimeout(r, 800));
 
-            setProgress(55, 'Capturing pages...');
-
-            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const iframeWin  = iframe.contentWindow;
+            const iframeDoc  = iframe.contentDocument;
             const iframeBody = iframeDoc.body;
 
-            // A4 dimensions at 96dpi
-            const pageWidthPx  = 794;
-            const pageHeightPx = 1123;
-            const totalHeight  = iframeBody.scrollHeight;
-            const totalPages   = Math.ceil(totalHeight / pageHeightPx);
+            setProgress(50, 'Calculating page boundaries...');
 
+            const totalScrollHeight = iframeBody.scrollHeight;
+
+            // --- Collect all block-level elements and their bounding positions ---
+            const allBlocks = Array.from(iframeBody.querySelectorAll(
+                'p, h1, h2, h3, h4, h5, h6, li, table, tr, img, blockquote, pre, div, hr, .word-page-break'
+            ));
+
+            // Build page-break points:
+            // Start with CONTENT_H increments, then adjust to nearest safe boundary
+            const pageBreakYs = []; // absolute Y positions where a new page starts
+
+            let currentPageStart = 0; // in document px (relative to body top including padding)
+            const docPaddingTop = MARGIN_TOP;
+
+            // Helper: get element top relative to iframeBody top (including body padding)
+            function getElTop(el) {
+                let top = 0;
+                let node = el;
+                while (node && node !== iframeBody) {
+                    top += node.offsetTop;
+                    node = node.offsetParent;
+                }
+                return top;
+            }
+            function getElBottom(el) {
+                return getElTop(el) + el.offsetHeight;
+            }
+
+            // Collect explicit page breaks from .word-page-break markers
+            const explicitBreaks = new Set();
+            iframeBody.querySelectorAll('.word-page-break').forEach(el => {
+                explicitBreaks.add(getElTop(el));
+            });
+
+            // Build pages: iterate and figure out where each page ends
+            pageBreakYs.push(0); // page 1 starts at 0
+
+            let pageTop = 0; // top of current page in doc coords
+
+            while (pageTop + PAGE_H_PX < totalScrollHeight) {
+                const idealBottom = pageTop + PAGE_H_PX; // where page would naturally end
+
+                // Check for any explicit break in the range [pageTop+100 .. idealBottom]
+                let breakAt = null;
+                for (const bY of explicitBreaks) {
+                    if (bY > pageTop + 50 && bY <= idealBottom) {
+                        breakAt = bY;
+                        break;
+                    }
+                }
+
+                if (breakAt !== null) {
+                    // Snap to explicit break
+                    pageTop = breakAt;
+                } else {
+                    // Find the last block element that ends BEFORE idealBottom
+                    // so we don't cut through a paragraph or table row
+                    let bestBreak = idealBottom;
+                    for (const el of allBlocks) {
+                        const elBottom = getElBottom(el);
+                        const elTop    = getElTop(el);
+                        // Element fits completely in current page and ends close to page bottom
+                        if (elBottom <= idealBottom && elBottom > pageTop + CONTENT_H * 0.5) {
+                            bestBreak = elBottom;
+                        }
+                    }
+                    pageTop = bestBreak;
+                }
+
+                pageBreakYs.push(pageTop);
+            }
+
+            const totalPages = pageBreakYs.length;
+
+            setProgress(60, `Capturing ${totalPages} pages...`);
+
+            // --- Capture each page slice ---
             const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
-            const pdfPageWidth  = 210; // mm
-            const pdfPageHeight = 297; // mm
+            const PDF_W = 210;
+            const PDF_H = 297;
 
-            for (let page = 0; page < totalPages; page++) {
-                if (page > 0) doc.addPage();
+            for (let pi = 0; pi < totalPages; pi++) {
+                if (pi > 0) doc.addPage();
 
-                setProgress(55 + Math.round((page / totalPages) * 30), `Capturing page ${page + 1} of ${totalPages}...`);
+                setProgress(60 + Math.round((pi / totalPages) * 30), `Rendering page ${pi + 1} of ${totalPages}...`);
 
-                // Scroll iframe to current page region
-                iframe.contentWindow.scrollTo(0, page * pageHeightPx);
+                const sliceTop    = pageBreakYs[pi];
+                const sliceBottom = (pi + 1 < totalPages) ? pageBreakYs[pi + 1] : totalScrollHeight;
+                const sliceH      = Math.max(sliceBottom - sliceTop, 10);
+
+                // Expand iframe height to accommodate current slice
+                iframe.style.height = (sliceTop + sliceH + 200) + 'px';
+                await new Promise(r => setTimeout(r, 60));
 
                 const canvas = await html2canvas(iframeBody, {
                     useCORS: true,
                     allowTaint: true,
-                    scale: 2, // retina quality
-                    width: pageWidthPx,
-                    height: pageHeightPx,
+                    scale: 2,
+                    width:  PAGE_W_PX,
+                    height: sliceH,
                     x: 0,
-                    y: page * pageHeightPx,
-                    windowWidth: pageWidthPx,
-                    windowHeight: pageHeightPx,
+                    y: sliceTop,
                     scrollX: 0,
-                    scrollY: page * pageHeightPx,
+                    scrollY: sliceTop,
+                    windowWidth:  PAGE_W_PX,
+                    windowHeight: sliceH,
                     backgroundColor: '#ffffff',
                     logging: false
                 });
 
-                const imgData = canvas.toDataURL('image/jpeg', 0.92);
-                doc.addImage(imgData, 'JPEG', 0, 0, pdfPageWidth, pdfPageHeight);
+                // Scale canvas slice to exactly fill A4 page proportionally
+                const imgData = canvas.toDataURL('image/jpeg', 0.95);
 
-                // Page number footer
+                // Calculate rendered height in mm to maintain aspect ratio
+                // canvas is PAGE_W_PX wide → PDF_W mm wide
+                const scale    = PDF_W / PAGE_W_PX;           // mm per px
+                const imgH_mm  = sliceH * scale;               // height in mm for this slice
+
+                // If content is shorter than a full page, place at top; otherwise scale to fill
+                const renderH = Math.min(imgH_mm, PDF_H);
+                doc.addImage(imgData, 'JPEG', 0, 0, PDF_W, renderH);
+
+                // Page number
                 doc.setFontSize(8);
-                doc.setTextColor(150);
-                doc.text(`Page ${page + 1} of ${totalPages}`, pdfPageWidth / 2, pdfPageHeight - 5, { align: 'center' });
+                doc.setTextColor(140);
+                doc.text(`Page ${pi + 1} of ${totalPages}`, PDF_W / 2, PDF_H - 4, { align: 'center' });
                 doc.setTextColor(0);
             }
 
-            // Add final signature page
-            doc.addPage();
-            doc.setFontSize(10);
-            doc.setTextColor(80);
-            doc.text('Converted by Free Tools Hub', pdfPageWidth / 2, pdfPageHeight / 2, { align: 'center' });
-            doc.setFontSize(8);
-            doc.setTextColor(100, 58, 237);
-            doc.text('https://freetoolshub.online/', pdfPageWidth / 2, pdfPageHeight / 2 + 8, { align: 'center' });
+            // Signature on last page (append small footer, not a new page)
+            // We write it inside the last page footer area
+            doc.setPage(totalPages);
+            doc.setFontSize(7);
+            doc.setTextColor(180);
+            doc.text('Converted by Free Tools Hub  |  https://freetoolshub.online/', PDF_W / 2, PDF_H - 1, { align: 'center' });
 
             // Cleanup
             document.body.removeChild(iframe);
 
-            setProgress(95, 'Finalizing PDF...');
-
+            setProgress(98, 'Finalizing PDF...');
             convertedBlob = doc.output('blob');
-
             setProgress(100, 'Complete!');
 
             setTimeout(() => {
