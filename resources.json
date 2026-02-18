@@ -12,7 +12,7 @@
         "downloads": 3421,
         "image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "free-apis-2026.html"
+        "file": "resources/free-apis-2026.html"
     },
     {
         "id": 2,
@@ -27,7 +27,7 @@
         "downloads": 2856,
         "image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "icon-libraries-collection-2026.html"
+        "file": "resources/icon-libraries-collection-2026.html"
     },
     {
         "id": 3,
@@ -42,7 +42,7 @@
         "downloads": 1923,
         "image": "https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "color-palettes-schemes-2026.html"
+        "file": "resources/color-palettes-schemes-2026.html"
     },
     {
         "id": 4,
@@ -57,7 +57,7 @@
         "downloads": 2134,
         "image": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "font-libraries-web-design.html"
+        "file": "resources/font-libraries-web-design.html"
     },
     {
         "id": 5,
@@ -72,7 +72,7 @@
         "downloads": 2789,
         "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "css-frameworks-guide-2026.html"
+        "file": "resources/css-frameworks-guide-2026.html"
     },
     {
         "id": 6,
@@ -87,7 +87,7 @@
         "downloads": 3245,
         "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "stock-photos-collection-2026.html"
+        "file": "resources/stock-photos-collection-2026.html"
     },
     {
         "id": 7,
@@ -102,7 +102,7 @@
         "downloads": 2567,
         "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "ui-kits-design-systems-2026.html"
+        "file": "resources/ui-kits-design-systems-2026.html"
     },
     {
         "id": 8,
@@ -117,7 +117,7 @@
         "downloads": 1876,
         "image": "https://images.unsplash.com/photo-1512486130939-2c4f79935e4f?w=800&h=400&fit=crop",
         "featured": false,
-        "file": "mockup-templates-collection.html"
+        "file": "resources/mockup-templates-collection.html"
     },
     {
         "id": 9,
@@ -132,7 +132,7 @@
         "downloads": 2234,
         "image": "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?w=800&h=400&fit=crop",
         "featured": false,
-        "file": "illustration-sets-vector-graphics.html"
+        "file": "resources/illustration-sets-vector-graphics.html"
     },
     {
         "id": 10,
@@ -147,7 +147,7 @@
         "downloads": 1923,
         "image": "https://images.unsplash.com/photo-1609921212029-bb5a28e60960?w=800&h=400&fit=crop",
         "featured": false,
-        "file": "figma-plugins-extensions-2026.html"
+        "file": "resources/figma-plugins-extensions-2026.html"
     },
     {
         "id": 11,
@@ -162,7 +162,7 @@
         "downloads": 1247,
         "image": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c2e3?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "complete-seo-guide-beginners-2026.html"
+        "file": "resources/complete-seo-guide-beginners-2026.html"
     },
     {
         "id": 12,
@@ -177,7 +177,7 @@
         "downloads": 892,
         "image": "https://images.unsplash.com/photo-1611162616305-c69b3fa7fbe0?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "social-media-marketing-toolkit-2026.html"
+        "file": "resources/social-media-marketing-toolkit-2026.html"
     },
     {
         "id": 13,
@@ -192,7 +192,7 @@
         "downloads": 2134,
         "image": "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "student-study-planner-templates.html"
+        "file": "resources/student-study-planner-templates.html"
     },
     {
         "id": 14,
@@ -207,7 +207,7 @@
         "downloads": 1567,
         "image": "https://images.unsplash.com/photo-1455390582262-044cdead277a?w=800&h=400&fit=crop",
         "featured": false,
-        "file": "content-writing-cheat-sheet-2026.html"
+        "file": "resources/content-writing-cheat-sheet-2026.html"
     },
     {
         "id": 15,
@@ -222,7 +222,7 @@
         "downloads": 1823,
         "image": "https://images.unsplash.com/photo-1611162616475-46b635cb6868?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "youtube-growth-strategy-playbook.html"
+        "file": "resources/youtube-growth-strategy-playbook.html"
     },
     {
         "id": 16,
@@ -237,7 +237,7 @@
         "downloads": 976,
         "image": "https://images.unsplash.com/photo-1557200134-90327ee9fafa?w=800&h=400&fit=crop",
         "featured": false,
-        "file": "email-marketing-templates-collection.html"
+        "file": "resources/email-marketing-templates-collection.html"
     },
     {
         "id": 17,
@@ -252,7 +252,7 @@
         "downloads": 1789,
         "image": "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=800&h=400&fit=crop",
         "featured": true,
-        "file": "productivity-hacks-workbook-2026.html"
+        "file": "resources/productivity-hacks-workbook-2026.html"
     },
     {
         "id": 18,
@@ -267,6 +267,6 @@
         "downloads": 2567,
         "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop",
         "featured": false,
-        "file": "graphic-design-elements-pack.html"
+        "file": "resources/graphic-design-elements-pack.html"
     }
 ]
