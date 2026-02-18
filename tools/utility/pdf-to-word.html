@@ -270,10 +270,42 @@
         @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
         .download-section h3 { color: var(--gray-900); margin-bottom: 8px; }
         .download-section p { color: var(--gray-600); margin-bottom: 24px; }
-        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 14px 32px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; transition: var(--transition); }
+        .download-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 0; }
+        .btn-download { display: inline-flex; align-items: center; gap: 10px; background: linear-gradient(135deg, #10b981, #059669); color: white; padding: 14px 32px; border-radius: var(--radius-md); font-weight: 600; text-decoration: none; transition: var(--transition); border: none; cursor: pointer; font-size: 1rem; }
         .btn-download:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .btn-convert-another { display: inline-block; margin-left: 12px; color: var(--purple-600); padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; transition: var(--transition); }
-        .btn-convert-another:hover { background: var(--purple-50); }
+        .btn-convert-another { display: inline-flex; align-items: center; gap: 8px; color: var(--purple-600); padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600; transition: var(--transition); text-decoration: none; border: 2px solid var(--purple-200); background: white; cursor: pointer; font-size: 1rem; }
+        .btn-convert-another:hover { background: var(--purple-50); border-color: var(--purple-400); }
+        /* ── Extracted Text Preview Panel ── */
+        .text-preview-panel { display: none; margin-top: 28px; background: var(--gray-50); border: 1px solid var(--gray-200); border-radius: var(--radius-lg); overflow: hidden; }
+        .text-preview-panel.active { display: block; }
+        .text-preview-header { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px; background: white; border-bottom: 1px solid var(--gray-200); flex-wrap: wrap; gap: 10px; }
+        .text-preview-header-left { display: flex; align-items: center; gap: 10px; }
+        .text-preview-header h4 { margin: 0; color: var(--gray-900); font-size: 1rem; font-weight: 600; }
+        .text-preview-header-left span { font-size: 12px; color: var(--gray-500); background: var(--gray-100); padding: 2px 8px; border-radius: 20px; }
+        .text-preview-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+        .btn-text-action { display: inline-flex; align-items: center; gap: 6px; padding: 7px 14px; border-radius: var(--radius-sm); border: 1px solid var(--gray-300); background: white; color: var(--gray-700); font-size: 13px; font-weight: 500; cursor: pointer; transition: var(--transition); }
+        .btn-text-action:hover { background: var(--gray-100); border-color: var(--gray-400); }
+        .btn-text-action.success { background: #d1fae5; border-color: #10b981; color: #065f46; }
+        .btn-text-action.purple { background: var(--purple-600); border-color: var(--purple-600); color: white; }
+        .btn-text-action.purple:hover { background: var(--purple-700); }
+        .text-preview-body { position: relative; }
+        .text-preview-pages { max-height: 480px; overflow-y: auto; padding: 0; }
+        .text-page-block { padding: 20px 24px; border-bottom: 1px solid var(--gray-200); }
+        .text-page-block:last-child { border-bottom: none; }
+        .text-page-label { font-size: 11px; font-weight: 700; color: var(--purple-600); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; }
+        .text-page-label::after { content: ''; flex: 1; height: 1px; background: var(--purple-100); }
+        .text-page-content { font-family: 'DM Sans', sans-serif; font-size: 14px; line-height: 1.75; color: var(--gray-800); white-space: pre-wrap; word-break: break-word; }
+        .text-page-content.empty { color: var(--gray-400); font-style: italic; font-size: 13px; }
+        .text-search-bar { padding: 10px 16px; background: white; border-bottom: 1px solid var(--gray-200); display: none; }
+        .text-search-bar.active { display: block; }
+        .text-search-bar input { width: 100%; padding: 8px 12px; border: 1px solid var(--gray-300); border-radius: var(--radius-sm); font-size: 14px; outline: none; }
+        .text-search-bar input:focus { border-color: var(--purple-400); box-shadow: 0 0 0 3px rgba(124,58,237,0.1); }
+        mark { background: #fef08a; padding: 0 2px; border-radius: 2px; }
+        @media (max-width: 768px) {
+            .text-preview-header { flex-direction: column; align-items: flex-start; }
+            .text-preview-actions { width: 100%; }
+            .btn-text-action { flex: 1; justify-content: center; }
+        }
         .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 24px; margin-bottom: 64px; }
         .feature-card { background: white; padding: 32px; border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); text-align: center; transition: var(--transition); }
         .feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
@@ -452,13 +484,47 @@
             <div class="download-section" id="downloadSection">
                 <div class="success-icon"><i class="fas fa-check"></i></div>
                 <h3>Conversion Complete!</h3>
-                <p>Your Word document is ready to download</p>
-                <a href="#" class="btn-download" id="downloadBtn" onclick="return false;">
-                    <i class="fas fa-download"></i> Download Word File
-                </a>
-                <a href="#" class="btn-convert-another" id="convertAnotherBtn">
-                    <i class="fas fa-redo"></i> Convert Another File
-                </a>
+                <p>Your Word document is ready — download it or copy text below</p>
+                <div class="download-btns">
+                    <button class="btn-download" id="downloadBtn">
+                        <i class="fas fa-download"></i> Download Word (.docx)
+                    </button>
+                    <a href="#" class="btn-convert-another" id="convertAnotherBtn">
+                        <i class="fas fa-redo"></i> Convert Another
+                    </a>
+                </div>
+
+                <!-- ── Extracted Text Preview Panel ── -->
+                <div class="text-preview-panel" id="textPreviewPanel">
+                    <div class="text-preview-header">
+                        <div class="text-preview-header-left">
+                            <h4><i class="fas fa-align-left" style="color:var(--purple-500)"></i> Extracted Text</h4>
+                            <span id="pageCountBadge">0 pages</span>
+                        </div>
+                        <div class="text-preview-actions">
+                            <button class="btn-text-action" id="searchToggleBtn" title="Find in text">
+                                <i class="fas fa-search"></i> Find
+                            </button>
+                            <button class="btn-text-action" id="copyAllBtn" title="Copy all text">
+                                <i class="fas fa-copy"></i> Copy All
+                            </button>
+                            <button class="btn-text-action" id="copyPageBtn" title="Copy current page text">
+                                <i class="fas fa-file-alt"></i> Copy Page
+                            </button>
+                            <button class="btn-text-action purple" id="selectAllBtn" title="Select all text for manual copy">
+                                <i class="fas fa-mouse-pointer"></i> Select All
+                            </button>
+                        </div>
+                    </div>
+                    <!-- Search bar (hidden until Find clicked) -->
+                    <div class="text-search-bar" id="textSearchBar">
+                        <input type="text" id="searchInput" placeholder="Type to search in text..." autocomplete="off">
+                    </div>
+                    <!-- Text content pages -->
+                    <div class="text-preview-body">
+                        <div class="text-preview-pages" id="textPreviewPages"></div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -722,305 +788,473 @@
         </div>
     </footer>
 
+
+    <!-- PDF.js for preview and text extraction -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf-lib/1.17.1/pdf-lib.min.js"></script>
-    <script src="https://unpkg.com/docx@7.8.2/build/index.js"></script>
+    <!-- JSZip for building .docx (ZIP format) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- FileSaver for download -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
     <script>
         pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
 
+        // Header scroll
         const header = document.getElementById('siteHeader');
         window.addEventListener('scroll', () => { header.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
 
+        // Mobile menu
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileMenu    = document.getElementById('mobileMenu');
         mobileMenuBtn.addEventListener('click', () => {
             const isOpen = mobileMenu.classList.toggle('open');
             mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-            mobileMenuBtn.innerHTML = isOpen ? '<i class="fas fa-times" aria-hidden="true"></i>' : '<i class="fas fa-bars" aria-hidden="true"></i>';
+            mobileMenuBtn.innerHTML = isOpen
+                ? '<i class="fas fa-times" aria-hidden="true"></i>'
+                : '<i class="fas fa-bars" aria-hidden="true"></i>';
         });
-        mobileMenu.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                mobileMenu.classList.remove('open');
-                mobileMenuBtn.setAttribute('aria-expanded', 'false');
-                mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
-            });
-        });
+        mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+        }));
 
-        function toggleFaq(element) {
-            const faqItem = element.parentElement;
-            const isActive = faqItem.classList.contains('active');
-            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
-            if (!isActive) faqItem.classList.add('active');
+        function toggleFaq(el) {
+            const item = el.parentElement;
+            const wasActive = item.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+            if (!wasActive) item.classList.add('active');
         }
 
-        // ============================================================
-        // STATE
-        // ============================================================
-        const uploadZone     = document.getElementById('uploadZone');
-        const fileInput      = document.getElementById('fileInput');
-        const browseBtn      = document.getElementById('browseBtn');
-        const filePreview    = document.getElementById('filePreview');
-        const previewSection = document.getElementById('previewSection');
-        const convertSection = document.getElementById('convertSection');
-        const progressSection= document.getElementById('progressSection');
-        const downloadSection= document.getElementById('downloadSection');
-        const convertBtn     = document.getElementById('convertBtn');
-        const removeBtn      = document.getElementById('removeBtn');
-        const downloadBtn    = document.getElementById('downloadBtn');
+        // ── DOM refs ──────────────────────────────────────────────────
+        const uploadZone      = document.getElementById('uploadZone');
+        const fileInput       = document.getElementById('fileInput');
+        const browseBtn       = document.getElementById('browseBtn');
+        const filePreview     = document.getElementById('filePreview');
+        const previewSection  = document.getElementById('previewSection');
+        const convertSection  = document.getElementById('convertSection');
+        const progressSection = document.getElementById('progressSection');
+        const downloadSection = document.getElementById('downloadSection');
+        const convertBtn      = document.getElementById('convertBtn');
+        const removeBtn       = document.getElementById('removeBtn');
+        const downloadBtn     = document.getElementById('downloadBtn');
         const convertAnotherBtn = document.getElementById('convertAnotherBtn');
-        const fileName       = document.getElementById('fileName');
-        const fileSize       = document.getElementById('fileSize');
-        const fileIconElement= document.getElementById('fileIconElement');
-        const progressFill   = document.getElementById('progressFill');
-        const progressText   = document.getElementById('progressText');
-        const previewCanvas  = document.getElementById('previewCanvas');
-        const ctx            = previewCanvas.getContext('2d');
-        const prevPageBtn    = document.getElementById('prevPageBtn');
-        const nextPageBtn    = document.getElementById('nextPageBtn');
-        const pageInfo       = document.getElementById('pageInfo');
-        const zoomInBtn      = document.getElementById('zoomInBtn');
-        const zoomOutBtn     = document.getElementById('zoomOutBtn');
-        const resetZoomBtn   = document.getElementById('resetZoomBtn');
-        const copyImageBtn   = document.getElementById('copyImageBtn');
+        const fileNameEl      = document.getElementById('fileName');
+        const fileSizeEl      = document.getElementById('fileSize');
+        const fileIconEl      = document.getElementById('fileIconElement');
+        const progressFill    = document.getElementById('progressFill');
+        const progressText    = document.getElementById('progressText');
+        const previewCanvas   = document.getElementById('previewCanvas');
+        const ctx             = previewCanvas.getContext('2d');
+        const prevPageBtn     = document.getElementById('prevPageBtn');
+        const nextPageBtn     = document.getElementById('nextPageBtn');
+        const pageInfo        = document.getElementById('pageInfo');
+        const zoomInBtn       = document.getElementById('zoomInBtn');
+        const zoomOutBtn      = document.getElementById('zoomOutBtn');
+        const resetZoomBtn    = document.getElementById('resetZoomBtn');
+        const copyImageBtn    = document.getElementById('copyImageBtn');
+        const pasteHint       = document.getElementById('pasteHint');
+        const pasteSuccess    = document.getElementById('pasteSuccess');
+        const textPreviewPanel= document.getElementById('textPreviewPanel');
+        const textPreviewPages= document.getElementById('textPreviewPages');
+        const pageCountBadge  = document.getElementById('pageCountBadge');
+        const copyAllBtn      = document.getElementById('copyAllBtn');
+        const copyPageBtn     = document.getElementById('copyPageBtn');
+        const selectAllBtn    = document.getElementById('selectAllBtn');
+        const searchToggleBtn = document.getElementById('searchToggleBtn');
+        const textSearchBar   = document.getElementById('textSearchBar');
+        const searchInput     = document.getElementById('searchInput');
 
-        let selectedFile = null, convertedBlob = null, pdfDocument = null;
+        // ── State ─────────────────────────────────────────────────────
+        let selectedFile = null, pdfDocument = null;
         let currentPage = 1, totalPages = 1, currentScale = 1.5;
         let currentImage = null, isImageFile = false;
+        let extractedPages = []; // stored after conversion for text preview
 
-        // ============================================================
-        // UPLOAD / DRAG-DROP
-        // ============================================================
+        // ── Upload / Drag / Paste ─────────────────────────────────────
         browseBtn.addEventListener('click', e => { e.stopPropagation(); fileInput.click(); });
         uploadZone.addEventListener('click', () => fileInput.click());
         fileInput.addEventListener('change', e => {
             const f = e.target.files[0];
-            if (f && (f.type === 'application/pdf' || f.type.startsWith('image/'))) handleFile(f);
-            else alert('Please select a valid PDF or image file (JPG, PNG)');
+            if (f) pickFile(f);
         });
-        uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragover',  e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
         uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
         uploadZone.addEventListener('drop', e => {
             e.preventDefault(); uploadZone.classList.remove('dragover');
-            const f = e.dataTransfer.files[0];
-            if (f && (f.type === 'application/pdf' || f.type.startsWith('image/'))) handleFile(f);
-            else alert('Please drop a valid PDF or image file');
+            if (e.dataTransfer.files[0]) pickFile(e.dataTransfer.files[0]);
         });
 
-        // ============================================================
-        // PASTE SUPPORT — Ctrl+V / Cmd+V se clipboard image paste karo
-        // ============================================================
-        document.addEventListener('paste', async (e) => {
-            // Agar upload zone visible nahi hai (file already loaded) toh ignore karo
+        // Ctrl+V paste support
+        document.addEventListener('paste', async e => {
             if (uploadZone.style.display === 'none') return;
-
-            const items = (e.clipboardData || window.clipboardData).items;
-            if (!items) return;
-
-            let imageItem = null;
-            for (const item of items) {
-                if (item.type.startsWith('image/')) {
-                    imageItem = item;
-                    break;
-                }
-            }
-
-            if (!imageItem) {
-                // Koi image nahi clipboard mein — silently ignore
-                return;
-            }
-
+            const items = [...(e.clipboardData || window.clipboardData).items];
+            const imgItem = items.find(i => i.type.startsWith('image/'));
+            if (!imgItem) return;
             e.preventDefault();
-
-            // Visual feedback
             uploadZone.classList.add('paste-active');
-            document.getElementById('pasteSuccess').style.display = 'flex';
-            document.getElementById('pasteHint').style.display = 'none';
-
-            const blob = imageItem.getAsFile();
-            // Blob ko File mein convert karo taaki handleFile kaam kare
-            const pastedFile = new File([blob], 'pasted-image.png', { type: blob.type || 'image/png' });
-
-            setTimeout(async () => {
-                uploadZone.classList.remove('paste-active');
-                await handleFile(pastedFile);
-            }, 400);
+            pasteSuccess.style.display = 'flex';
+            pasteHint.style.display    = 'none';
+            const blob = imgItem.getAsFile();
+            const f = new File([blob], 'pasted-image.png', { type: blob.type || 'image/png' });
+            setTimeout(async () => { uploadZone.classList.remove('paste-active'); await pickFile(f); }, 350);
         });
+
+        function pickFile(f) {
+            if (f.type === 'application/pdf' || f.type.startsWith('image/')) {
+                handleFile(f);
+            } else {
+                alert('Please select a PDF or image file (JPG, PNG)');
+            }
+        }
 
         async function handleFile(file) {
             selectedFile = file;
             isImageFile  = file.type.startsWith('image/');
-            fileName.textContent = file.name;
-            fileSize.textContent = formatFileSize(file.size);
-            fileIconElement.className = isImageFile ? 'fas fa-file-image' : 'fas fa-file-pdf';
+            fileNameEl.textContent = file.name;
+            fileSizeEl.textContent = fmtSize(file.size);
+            fileIconEl.className   = isImageFile ? 'fas fa-file-image' : 'fas fa-file-pdf';
             filePreview.classList.add('active');
             convertSection.classList.add('active');
             previewSection.classList.add('active');
             uploadZone.style.display = 'none';
-            if (isImageFile) await loadImagePreview(file);
-            else             await loadPdfPreview(file);
+            if (isImageFile) await previewImage(file);
+            else             await previewPdf(file);
         }
 
-        // ============================================================
-        // PREVIEW
-        // ============================================================
-        async function loadPdfPreview(file) {
+        // ── Preview ───────────────────────────────────────────────────
+        async function previewPdf(file) {
             try {
-                const buf = await file.arrayBuffer();
-                pdfDocument = await pdfjsLib.getDocument({ data: buf }).promise;
+                pdfDocument = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
                 totalPages = pdfDocument.numPages; currentPage = 1;
-                await renderPage(currentPage); updatePageInfo();
+                await renderPdfPage(currentPage);
+                refreshNav();
             } catch(e) { console.error(e); alert('Error loading PDF preview'); }
         }
 
-        async function loadImagePreview(file) {
+        async function previewImage(file) {
             return new Promise((res, rej) => {
-                const reader = new FileReader();
-                reader.onload = e => {
+                const r = new FileReader();
+                r.onload = ev => {
                     const img = new Image();
-                    img.onload = () => { currentImage = img; totalPages = 1; currentPage = 1; renderImage(); updatePageInfo(); res(); };
+                    img.onload = () => { currentImage = img; totalPages = 1; currentPage = 1; renderImg(); refreshNav(); res(); };
                     img.onerror = rej;
-                    img.src = e.target.result;
+                    img.src = ev.target.result;
                 };
-                reader.onerror = rej;
-                reader.readAsDataURL(file);
+                r.onerror = rej;
+                r.readAsDataURL(file);
             });
         }
 
-        async function renderPage(num) {
-            const page = await pdfDocument.getPage(num);
+        async function renderPdfPage(n) {
+            const page = await pdfDocument.getPage(n);
             const vp = page.getViewport({ scale: currentScale });
             previewCanvas.width = vp.width; previewCanvas.height = vp.height;
             await page.render({ canvasContext: ctx, viewport: vp }).promise;
         }
 
-        function renderImage() {
+        function renderImg() {
             if (!currentImage) return;
             const maxW = 800;
             let w = currentImage.width * currentScale, h = currentImage.height * currentScale;
-            if (w > maxW) { h = h * (maxW / w); w = maxW; }
+            if (w > maxW) { h *= maxW / w; w = maxW; }
             previewCanvas.width = w; previewCanvas.height = h;
             ctx.clearRect(0, 0, w, h);
             ctx.drawImage(currentImage, 0, 0, w, h);
         }
 
-        function updatePageInfo() {
+        function refreshNav() {
             pageInfo.textContent = `Page ${currentPage} of ${totalPages}`;
             prevPageBtn.disabled = currentPage <= 1;
             nextPageBtn.disabled = currentPage >= totalPages;
-            const d = isImageFile ? 'none' : 'flex';
-            prevPageBtn.style.display = d; nextPageBtn.style.display = d;
-            pageInfo.style.display = isImageFile ? 'none' : 'block';
+            const show = !isImageFile;
+            prevPageBtn.style.display = show ? 'flex'  : 'none';
+            nextPageBtn.style.display = show ? 'flex'  : 'none';
+            pageInfo.style.display    = show ? 'block' : 'none';
         }
 
-        prevPageBtn.addEventListener('click', async () => { if (currentPage > 1) { currentPage--; await renderPage(currentPage); updatePageInfo(); } });
-        nextPageBtn.addEventListener('click', async () => { if (currentPage < totalPages) { currentPage++; await renderPage(currentPage); updatePageInfo(); } });
+        prevPageBtn.addEventListener('click', async () => { if (currentPage > 1) { currentPage--; await renderPdfPage(currentPage); refreshNav(); } });
+        nextPageBtn.addEventListener('click', async () => { if (currentPage < totalPages) { currentPage++; await renderPdfPage(currentPage); refreshNav(); } });
 
-        zoomInBtn.addEventListener('click',   async () => { currentScale = Math.min(3, currentScale + 0.25); isImageFile ? renderImage() : await renderPage(currentPage); });
-        zoomOutBtn.addEventListener('click',  async () => { currentScale = Math.max(0.5, currentScale - 0.25); isImageFile ? renderImage() : await renderPage(currentPage); });
-        resetZoomBtn.addEventListener('click',async () => { currentScale = 1.5; isImageFile ? renderImage() : await renderPage(currentPage); });
+        zoomInBtn.addEventListener('click',   async () => { currentScale = Math.min(3, currentScale+.25); isImageFile ? renderImg() : await renderPdfPage(currentPage); });
+        zoomOutBtn.addEventListener('click',  async () => { currentScale = Math.max(.5, currentScale-.25); isImageFile ? renderImg() : await renderPdfPage(currentPage); });
+        resetZoomBtn.addEventListener('click',async () => { currentScale = 1.5; isImageFile ? renderImg() : await renderPdfPage(currentPage); });
 
         copyImageBtn.addEventListener('click', async () => {
             try {
                 const blob = await new Promise(r => previewCanvas.toBlob(r, 'image/png'));
-                await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+                await navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
                 const orig = copyImageBtn.innerHTML;
                 copyImageBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
                 copyImageBtn.style.background = '#10b981';
                 setTimeout(() => { copyImageBtn.innerHTML = orig; copyImageBtn.style.background = ''; }, 2000);
                 alert('Image copied! Paste into Word with Ctrl+V / Cmd+V');
-            } catch(e) { alert('Failed to copy. Try downloading the Word file.'); }
+            } catch(e) { alert('Failed to copy. Use the Download button instead.'); }
         });
 
-        function formatFileSize(b) {
-            if (!b) return '0 Bytes';
-            const k = 1024, s = ['Bytes','KB','MB','GB'], i = Math.floor(Math.log(b)/Math.log(k));
-            return Math.round(b/Math.pow(k,i)*100)/100 + ' ' + s[i];
-        }
+        removeBtn.addEventListener('click', resetAll);
+        convertAnotherBtn.addEventListener('click', e => { e.preventDefault(); resetAll(); });
 
-        removeBtn.addEventListener('click', resetConverter);
-
-        // ============================================================
-        // CONVERT BUTTON
-        // ============================================================
+        // ── Convert ───────────────────────────────────────────────────
         convertBtn.addEventListener('click', async () => {
             if (!selectedFile) return;
             convertBtn.disabled = true;
             convertSection.style.display = 'none';
             progressSection.classList.add('active');
-            try { await convertToWord(selectedFile); }
-            catch(e) { alert('Conversion failed. Please try again.'); console.error(e); resetConverter(); }
+            try {
+                await doConvert(selectedFile);
+            } catch(err) {
+                console.error('Conversion error:', err);
+                alert('Conversion failed: ' + (err.message || err));
+                resetAll();
+            }
         });
 
-        // ============================================================
-        // CORE: EXTRACT TEXT PAGE-BY-PAGE, PRESERVE LINES & PAGE BREAKS
-        // ============================================================
-        async function convertToWord(file) {
-            // Initial progress
-            for (let i = 0; i <= 30; i += 10) {
-                await new Promise(r => setTimeout(r, 80));
-                progressFill.style.width = i + '%';
-                progressText.textContent = `Processing... ${i}%`;
-            }
+        // ── Core conversion ───────────────────────────────────────────
+        async function doConvert(file) {
+            setProgress(5, 'Starting...');
 
-            let pages = []; // [{lines:[], imageData:null}]
+            // 1. Collect pages data
+            let pages = []; // [{lines:string[], imgB64:string|null}]
 
             if (isImageFile) {
-                const imgData = await getImageBase64(file);
-                pages.push({ lines: [], imageData: imgData });
+                setProgress(20, 'Reading image...');
+                const b64 = await fileToBase64(file);
+                pages.push({ lines: [], imgB64: b64 });
             } else {
-                const buf = await file.arrayBuffer();
-                const pdf = await pdfjsLib.getDocument({ data: buf }).promise;
-
+                setProgress(15, 'Loading PDF...');
+                const pdf = await pdfjsLib.getDocument({ data: await file.arrayBuffer() }).promise;
                 for (let p = 1; p <= pdf.numPages; p++) {
-                    const page    = await pdf.getPage(p);
-                    const vp      = page.getViewport({ scale: 1 });
-                    const pgH     = vp.height;
-                    const tcObj   = await page.getTextContent({ includeMarkedContent: false });
+                    const page  = await pdf.getPage(p);
+                    const vp    = page.getViewport({ scale: 1 });
+                    const pgH   = vp.height;
+                    const tc    = await page.getTextContent({ includeMarkedContent: false });
 
-                    // Normalise items: flip Y so 0 = top of page
-                    const items = tcObj.items
-                        .filter(it => it.str !== undefined && it.str !== null)
-                        .map(it => ({
-                            str: it.str,
-                            x  : it.transform[4],
-                            y  : pgH - it.transform[5],  // top-to-bottom
-                        }))
+                    // sort items top→bottom, left→right
+                    const items = tc.items
+                        .filter(it => it.str)
+                        .map(it => ({ str: it.str, x: it.transform[4], y: pgH - it.transform[5] }))
                         .sort((a, b) => a.y - b.y || a.x - b.x);
 
-                    // Group into lines: items within 6pt vertically = same line
-                    const lineGroups = [];
-                    let curGroup     = null;
+                    // group into lines (±6pt tolerance)
+                    const groups = [];
+                    let cur = null;
                     for (const it of items) {
-                        if (!curGroup || Math.abs(it.y - curGroup.y) > 6) {
-                            curGroup = { y: it.y, parts: [] };
-                            lineGroups.push(curGroup);
-                        }
-                        curGroup.parts.push(it);
+                        if (!cur || Math.abs(it.y - cur.y) > 6) { cur = { y: it.y, parts: [] }; groups.push(cur); }
+                        cur.parts.push(it);
                     }
 
-                    // Build line strings (sort left-to-right within each line)
-                    const lines = lineGroups.map(g => {
-                        g.parts.sort((a, b) => a.x - b.x);
-                        return g.parts.map(it => it.str).join(' ').trimEnd();
-                    }).filter(l => l.trim() !== '');
+                    const lines = groups
+                        .map(g => g.parts.sort((a,b)=>a.x-b.x).map(i=>i.str).join(' ').trimEnd())
+                        .filter(l => l.trim());
 
-                    pages.push({ lines, imageData: null });
+                    pages.push({ lines, imgB64: null });
 
-                    const pct = 30 + Math.round((p / pdf.numPages) * 55);
-                    progressFill.style.width = pct + '%';
-                    progressText.textContent = `Extracting page ${p} of ${pdf.numPages}...`;
+                    const pct = 15 + Math.round((p / pdf.numPages) * 65);
+                    setProgress(pct, `Extracting page ${p} of ${pdf.numPages}...`);
                 }
             }
 
-            progressFill.style.width = '88%';
-            progressText.textContent  = 'Building Word document...';
-            await createProperDocx(pages, file.name);
-            progressFill.style.width = '100%';
-            progressText.textContent  = 'Complete!';
+            setProgress(82, 'Building Word document...');
+            const blob = await buildDocx(pages);
+
+            setProgress(100, 'Done!');
+            await new Promise(r => setTimeout(r, 300));
+
+            // Store pages globally for text preview
+            extractedPages = pages;
+
+            progressSection.classList.remove('active');
+            downloadSection.classList.add('active');
+
+            const outName = file.name.replace(/\.[^/.]+$/, '') + '.docx';
+            downloadBtn.onclick = () => saveAs(blob, outName);
+
+            // Render text preview panel
+            renderTextPreview(pages);
         }
 
-        function getImageBase64(file) {
+        // ── DOCX builder using JSZip + raw OOXML ─────────────────────
+        async function buildDocx(pages) {
+            // Build the body XML
+            let bodyXml = '';
+
+            for (let pi = 0; pi < pages.length; pi++) {
+                const page = pages[pi];
+
+                // Page break before every page except first
+                if (pi > 0) {
+                    bodyXml += `<w:p><w:r><w:br w:type="page"/></w:r></w:p>`;
+                }
+
+                // Image
+                if (page.imgB64) {
+                    // We'll embed the image as a relationship
+                    // Add a placeholder — actual image embedding handled below
+                    bodyXml += `<!-- IMG_${pi} -->`;
+                }
+
+                // Text lines
+                for (const line of page.lines) {
+                    const escaped = escXml(line);
+                    bodyXml += `<w:p><w:pPr><w:spacing w:line="276" w:lineRule="auto" w:before="0" w:after="0"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/><w:sz w:val="24"/><w:szCs w:val="24"/></w:rPr><w:t xml:space="preserve">${escaped}</w:t></w:r></w:p>`;
+                }
+
+                // Empty page fallback
+                if (!page.imgB64 && page.lines.length === 0) {
+                    bodyXml += `<w:p><w:pPr><w:spacing w:before="0" w:after="0"/></w:pPr></w:p>`;
+                }
+            }
+
+            // Branding footer
+            bodyXml += `<w:p><w:pPr><w:spacing w:before="240" w:after="0"/><w:jc w:val="center"/></w:pPr><w:r><w:rPr><w:rFonts w:ascii="Calibri" w:hAnsi="Calibri"/><w:sz w:val="14"/><w:szCs w:val="14"/><w:color w:val="CCCCCC"/><w:i/></w:rPr><w:t>freetoolshub.online</w:t></w:r></w:p>`;
+
+            // ── Now handle images ──────────────────────────────────────
+            const imageFiles  = []; // {rId, filename, mime, bytes}
+            const relationships = []; // extra rels for images
+
+            for (let pi = 0; pi < pages.length; pi++) {
+                const page = pages[pi];
+                if (!page.imgB64) continue;
+
+                const b64    = page.imgB64.split(',')[1];
+                const mime   = page.imgB64.split(';')[0].split(':')[1];
+                const ext    = mime.includes('png') ? 'png' : 'jpeg';
+                const bytes  = b64ToBytes(b64);
+                const rId    = `rId${pi + 10}`;
+                const fname  = `image${pi}.${ext}`;
+
+                imageFiles.push({ rId, filename: fname, mime, bytes });
+                relationships.push(
+                    `<Relationship Id="${rId}" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/image" Target="media/${fname}"/>`
+                );
+
+                // Build inline image XML (6858000 EMU ≈ 19cm wide, auto height)
+                const imgW = 5486400; // ~15.24cm in EMU
+                const imgH = 7315200; // ~20.32cm in EMU
+                const imgXml = `<w:p><w:r><w:rPr/><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0" xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"><wp:extent cx="${imgW}" cy="${imgH}"/><wp:effectExtent l="0" t="0" r="0" b="0"/><wp:docPr id="${pi+1}" name="Image${pi+1}"/><wp:cNvGraphicFramePr><a:graphicFrameLocks xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main" noChangeAspect="1"/></wp:cNvGraphicFramePr><a:graphic xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"><a:graphicData uri="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:pic xmlns:pic="http://schemas.openxmlformats.org/drawingml/2006/picture"><pic:nvPicPr><pic:cNvPr id="${pi+1}" name="Image${pi+1}"/><pic:cNvPicPr><a:picLocks noChangeAspect="1" noChangeArrowheads="1"/></pic:cNvPicPr></pic:nvPicPr><pic:blipFill><a:blip r:embed="${rId}" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"/><a:stretch><a:fillRect/></a:stretch></pic:blipFill><pic:spPr bwMode="auto"><a:xfrm><a:off x="0" y="0"/><a:ext cx="${imgW}" cy="${imgH}"/></a:xfrm><a:prstGeom prst="rect"><a:avLst/></a:prstGeom><a:noFill/></pic:spPr></pic:pic></a:graphicData></a:graphic></wp:inline></w:drawing></w:r></w:p>`;
+
+                bodyXml = bodyXml.replace(`<!-- IMG_${pi} -->`, imgXml);
+            }
+
+            // ── Assemble OOXML files ───────────────────────────────────
+            const docXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:document xmlns:wpc="http://schemas.microsoft.com/office/word/2010/wordprocessingCanvas"
+    xmlns:mo="http://schemas.microsoft.com/office/mac/office/2008/main"
+    xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"
+    xmlns:m="http://schemas.openxmlformats.org/officeDocument/2006/math"
+    xmlns:o="urn:schemas-microsoft-com:office:office"
+    xmlns:v="urn:schemas-microsoft-com:vml"
+    xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+    xmlns:w14="http://schemas.microsoft.com/office/word/2010/wordml"
+    xmlns:wp="http://schemas.openxmlformats.org/drawingml/2006/wordprocessingDrawing"
+    xmlns:a="http://schemas.openxmlformats.org/drawingml/2006/main"
+    mc:Ignorable="w14" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006">
+  <w:body>
+    ${bodyXml}
+    <w:sectPr>
+      <w:pgSz w:w="12240" w:h="15840"/>
+      <w:pgMar w:top="1440" w:right="1440" w:bottom="1440" w:left="1440"
+               w:header="720" w:footer="720" w:gutter="0"/>
+    </w:sectPr>
+  </w:body>
+</w:document>`;
+
+            const relsXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/styles" Target="styles.xml"/>
+  ${relationships.join('\n  ')}
+</Relationships>`;
+
+            const stylesXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<w:styles xmlns:w="http://schemas.openxmlformats.org/wordprocessingml/2006/main"
+          xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships">
+  <w:docDefaults>
+    <w:rPrDefault>
+      <w:rPr>
+        <w:rFonts w:ascii="Calibri" w:eastAsia="Calibri" w:hAnsi="Calibri" w:cs="Calibri"/>
+        <w:sz w:val="24"/>
+        <w:szCs w:val="24"/>
+      </w:rPr>
+    </w:rPrDefault>
+  </w:docDefaults>
+  <w:style w:type="paragraph" w:default="1" w:styleId="Normal">
+    <w:name w:val="Normal"/>
+    <w:pPr><w:spacing w:after="0" w:line="276" w:lineRule="auto"/></w:pPr>
+  </w:style>
+</w:styles>`;
+
+            const appXml = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Properties xmlns="http://schemas.openxmlformats.org/officeDocument/2006/extended-properties">
+  <Application>FreeToolsHub PDF to Word Converter</Application>
+</Properties>`;
+
+            const contentTypes = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types">
+  <Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/>
+  <Default Extension="xml"  ContentType="application/xml"/>
+  <Default Extension="png"  ContentType="image/png"/>
+  <Default Extension="jpeg" ContentType="image/jpeg"/>
+  <Default Extension="jpg"  ContentType="image/jpeg"/>
+  <Override PartName="/word/document.xml"
+    ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.document.main+xml"/>
+  <Override PartName="/word/styles.xml"
+    ContentType="application/vnd.openxmlformats-officedocument.wordprocessingml.styles+xml"/>
+  <Override PartName="/docProps/app.xml"
+    ContentType="application/vnd.openxmlformats-officedocument.extended-properties+xml"/>
+</Types>`;
+
+            const rootRels = `<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships">
+  <Relationship Id="rId1"
+    Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument"
+    Target="word/document.xml"/>
+  <Relationship Id="rId2"
+    Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/extended-properties"
+    Target="docProps/app.xml"/>
+</Relationships>`;
+
+            // ── Build ZIP ─────────────────────────────────────────────
+            const zip = new JSZip();
+            zip.file('[Content_Types].xml', contentTypes);
+            zip.file('_rels/.rels',         rootRels);
+            zip.file('word/document.xml',   docXml);
+            zip.file('word/styles.xml',     stylesXml);
+            zip.file('word/_rels/document.xml.rels', relsXml);
+            zip.file('docProps/app.xml',    appXml);
+
+            for (const img of imageFiles) {
+                zip.file(`word/media/${img.filename}`, img.bytes, { binary: true });
+            }
+
+            const blob = await zip.generateAsync({
+                type            : 'blob',
+                mimeType        : 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+                compression     : 'DEFLATE',
+                compressionOptions: { level: 6 },
+            });
+
+            return blob;
+        }
+
+        // ── Helpers ───────────────────────────────────────────────────
+        function escXml(str) {
+            return str
+                .replace(/&/g,  '&amp;')
+                .replace(/</g,  '&lt;')
+                .replace(/>/g,  '&gt;')
+                .replace(/"/g,  '&quot;')
+                .replace(/'/g,  '&apos;');
+        }
+
+        function b64ToBytes(b64) {
+            const bin = atob(b64);
+            const buf = new Uint8Array(bin.length);
+            for (let i = 0; i < bin.length; i++) buf[i] = bin.charCodeAt(i);
+            return buf;
+        }
+
+        function fileToBase64(file) {
             return new Promise((res, rej) => {
                 const r = new FileReader();
                 r.onload  = e => res(e.target.result);
@@ -1029,143 +1263,191 @@
             });
         }
 
-        // ============================================================
-        // DOCX BUILDER — no extra headers, real page breaks per page,
-        // subtle freetoolshub.online branding at the very end
-        // ============================================================
-        async function createProperDocx(pages, originalFileName) {
-            const { Document, Packer, Paragraph, TextRun, ImageRun, AlignmentType, PageBreak } = docx;
-
-            const children = [];
-
-            pages.forEach((page, idx) => {
-                // Page break before every page except the first
-                if (idx > 0) {
-                    children.push(
-                        new Paragraph({
-                            children: [new PageBreak()],
-                            spacing: { before: 0, after: 0 },
-                        })
-                    );
-                }
-
-                // --- Image (for image uploads) ---
-                if (page.imageData) {
-                    try {
-                        const b64      = page.imageData.split(',')[1];
-                        const mime     = page.imageData.split(';')[0].split(':')[1];
-                        const imgType  = mime.includes('png') ? 'png' : 'jpg';
-                        const binStr   = atob(b64);
-                        const bytes    = new Uint8Array(binStr.length);
-                        for (let i = 0; i < binStr.length; i++) bytes[i] = binStr.charCodeAt(i);
-
-                        children.push(
-                            new Paragraph({
-                                children: [
-                                    new ImageRun({
-                                        data          : bytes,
-                                        type          : imgType,
-                                        transformation: { width: 520, height: 680 },
-                                    }),
-                                ],
-                                spacing: { before: 0, after: 0 },
-                            })
-                        );
-                    } catch(err) {
-                        console.error('Image embed error:', err);
-                        children.push(
-                            new Paragraph({
-                                children: [new TextRun({ text: '[Image could not be embedded]', italics: true, color: '999999', size: 20 })],
-                            })
-                        );
-                    }
-                }
-
-                // --- Text lines — each PDF line becomes one Word paragraph ---
-                if (page.lines && page.lines.length > 0) {
-                    page.lines.forEach(line => {
-                        children.push(
-                            new Paragraph({
-                                children: [
-                                    new TextRun({
-                                        text: line,
-                                        size: 24,         // 12 pt
-                                        font: 'Calibri',
-                                    }),
-                                ],
-                                spacing: {
-                                    line    : 276,        // ~1.15× — matches Word default
-                                    lineRule: 'auto',
-                                    before  : 0,
-                                    after   : 0,
-                                },
-                            })
-                        );
-                    });
-                }
-            });
-
-            // Tiny, light-grey branding line at the very end — unobtrusive
-            children.push(
-                new Paragraph({ text: '', spacing: { before: 240, after: 0 } }),
-                new Paragraph({
-                    children: [
-                        new TextRun({
-                            text   : 'freetoolshub.online',
-                            size   : 14,      // 7 pt
-                            color  : 'CCCCCC',
-                            italics: true,
-                        }),
-                    ],
-                    alignment: AlignmentType.CENTER,
-                    spacing  : { before: 0, after: 0 },
-                })
-            );
-
-            // Build DOCX with US Letter page size + 1-inch margins
-            const doc = new Document({
-                sections: [{
-                    properties: {
-                        page: {
-                            size  : { width: 12240, height: 15840 },   // 8.5 × 11 in (DXA)
-                            margin: { top: 1440, right: 1440, bottom: 1440, left: 1440 },
-                        },
-                    },
-                    children,
-                }],
-            });
-
-            const blob = await Packer.toBlob(doc);
-            convertedBlob = blob;
-
-            progressSection.classList.remove('active');
-            downloadSection.classList.add('active');
-
-            const outName = originalFileName.replace(/\.[^/.]+$/, '') + '.docx';
-            downloadBtn.onclick = () => saveAs(blob, outName);
+        function fmtSize(b) {
+            if (!b) return '0 Bytes';
+            const k = 1024, s = ['Bytes','KB','MB','GB'];
+            const i = Math.floor(Math.log(b) / Math.log(k));
+            return Math.round(b / Math.pow(k, i) * 100) / 100 + ' ' + s[i];
         }
 
-        // ============================================================
-        // MISC
-        // ============================================================
-        convertAnotherBtn.addEventListener('click', e => { e.preventDefault(); resetConverter(); });
+        function setProgress(pct, msg) {
+            progressFill.style.width = pct + '%';
+            progressText.textContent = msg;
+        }
 
-        function resetConverter() {
-            selectedFile = null; convertedBlob = null; pdfDocument = null;
-            currentImage = null; isImageFile = false;
-            currentPage = 1; totalPages = 1; currentScale = 1.5;
+        // ── Text Preview Panel ────────────────────────────────────────
+        function renderTextPreview(pages) {
+            const textPages = pages.filter(p => p.lines && p.lines.length > 0);
+
+            if (textPages.length === 0) {
+                // Image-only file — hide panel
+                textPreviewPanel.classList.remove('active');
+                return;
+            }
+
+            textPreviewPanel.classList.add('active');
+            pageCountBadge.textContent = `${textPages.length} page${textPages.length !== 1 ? 's' : ''}`;
+
+            // Build page blocks HTML
+            textPreviewPages.innerHTML = '';
+            textPages.forEach((page, idx) => {
+                const block = document.createElement('div');
+                block.className = 'text-page-block';
+                block.dataset.pageIndex = idx;
+
+                const label = document.createElement('div');
+                label.className = 'text-page-label';
+                label.textContent = `Page ${idx + 1}`;
+
+                const content = document.createElement('div');
+                content.className = 'text-page-content';
+                content.textContent = page.lines.join('\n');
+
+                block.appendChild(label);
+                block.appendChild(content);
+                textPreviewPages.appendChild(block);
+            });
+        }
+
+        // ── Get all extracted text as single string ───────────────────
+        function getAllText() {
+            return extractedPages
+                .filter(p => p.lines && p.lines.length > 0)
+                .map((p, i) => `--- Page ${i + 1} ---\n${p.lines.join('\n')}`)
+                .join('\n\n');
+        }
+
+        // ── Copy All button ───────────────────────────────────────────
+        copyAllBtn.addEventListener('click', async () => {
+            const text = getAllText();
+            if (!text.trim()) { alert('No text to copy.'); return; }
+            try {
+                await navigator.clipboard.writeText(text);
+                flashBtn(copyAllBtn, '<i class="fas fa-check"></i> Copied!');
+            } catch(e) {
+                // fallback: select all and prompt
+                selectAllText();
+                alert('Could not auto-copy. Text has been selected — press Ctrl+C to copy.');
+            }
+        });
+
+        // ── Copy Page button (copies text of visible/first page) ──────
+        copyPageBtn.addEventListener('click', async () => {
+            // Find which page is visible in the scroll viewport
+            const blocks = textPreviewPages.querySelectorAll('.text-page-block');
+            let targetBlock = blocks[0];
+            const containerRect = textPreviewPages.getBoundingClientRect();
+            for (const b of blocks) {
+                const r = b.getBoundingClientRect();
+                if (r.top >= containerRect.top - 10) { targetBlock = b; break; }
+            }
+            const content = targetBlock ? targetBlock.querySelector('.text-page-content') : null;
+            const text = content ? content.textContent : '';
+            if (!text.trim()) { alert('No text on this page.'); return; }
+            try {
+                await navigator.clipboard.writeText(text);
+                flashBtn(copyPageBtn, '<i class="fas fa-check"></i> Copied!');
+            } catch(e) {
+                alert('Copy failed. Please select text manually.');
+            }
+        });
+
+        // ── Select All button ─────────────────────────────────────────
+        selectAllBtn.addEventListener('click', () => {
+            selectAllText();
+            flashBtn(selectAllBtn, '<i class="fas fa-check"></i> Selected!', true);
+        });
+
+        function selectAllText() {
+            const range = document.createRange();
+            range.selectNodeContents(textPreviewPages);
+            const sel = window.getSelection();
+            sel.removeAllRanges();
+            sel.addRange(range);
+            textPreviewPages.focus();
+        }
+
+        // ── Search/Find button ────────────────────────────────────────
+        searchToggleBtn.addEventListener('click', () => {
+            const isOpen = textSearchBar.classList.toggle('active');
+            searchToggleBtn.innerHTML = isOpen
+                ? '<i class="fas fa-times"></i> Close'
+                : '<i class="fas fa-search"></i> Find';
+            if (isOpen) {
+                searchInput.focus();
+                searchInput.value = '';
+            } else {
+                clearHighlights();
+                searchInput.value = '';
+            }
+        });
+
+        searchInput.addEventListener('input', () => {
+            const query = searchInput.value.trim();
+            clearHighlights();
+            if (query.length < 2) return;
+            highlightText(query);
+        });
+
+        function highlightText(query) {
+            const blocks = textPreviewPages.querySelectorAll('.text-page-content');
+            let firstMatch = null;
+            blocks.forEach(block => {
+                const original = block.textContent;
+                const escaped  = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                const regex    = new RegExp(`(${escaped})`, 'gi');
+                if (regex.test(original)) {
+                    block.innerHTML = original.replace(regex, '<mark>$1</mark>');
+                    if (!firstMatch) firstMatch = block.querySelector('mark');
+                }
+            });
+            if (firstMatch) firstMatch.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }
+
+        function clearHighlights() {
+            textPreviewPages.querySelectorAll('.text-page-content').forEach(block => {
+                if (block.querySelector('mark')) {
+                    block.textContent = block.textContent; // strips HTML including marks
+                }
+            });
+            // Re-render cleanly from extractedPages
+            const textPages = extractedPages.filter(p => p.lines && p.lines.length > 0);
+            textPreviewPages.querySelectorAll('.text-page-content').forEach((el, i) => {
+                if (textPages[i]) el.textContent = textPages[i].lines.join('\n');
+            });
+        }
+
+        function flashBtn(btn, html, isSelect = false) {
+            const orig = btn.innerHTML;
+            const origClass = btn.className;
+            btn.innerHTML = html;
+            if (!isSelect) btn.classList.add('success');
+            setTimeout(() => {
+                btn.innerHTML = orig;
+                btn.className = origClass;
+            }, 2000);
+        }
+
+        // ── Reset ─────────────────────────────────────────────────────
+        function resetAll() {
+            selectedFile = null; pdfDocument = null; currentImage = null;
+            isImageFile = false; currentPage = 1; totalPages = 1; currentScale = 1.5;
+            extractedPages = [];
             fileInput.value = '';
             filePreview.classList.remove('active');
             previewSection.classList.remove('active');
             convertSection.classList.remove('active');
             progressSection.classList.remove('active');
             downloadSection.classList.remove('active');
+            textPreviewPanel.classList.remove('active');
             uploadZone.style.display = 'block';
             uploadZone.classList.remove('paste-active');
-            document.getElementById('pasteHint').style.display = 'flex';
-            document.getElementById('pasteSuccess').style.display = 'none';
-            progressFill.style.width = '0%';
-            progressText.textContent = 'Converting... 0%';
+            pasteHint.style.display    = 'flex';
+            pasteSuccess.style.display = 'none';
+            textPreviewPages.innerHTML = '';
+            textSearchBar.classList.remove('active');
+            searchInput.value = '';
+            setProgress(0, 'Converting... 0%');
             convertBtn.disabled = false;
             ctx.clearRect(0, 0, previewCanvas.width, previewCanvas.height);
         }
