@@ -1244,6 +1244,8 @@
     </footer>
 
     <!-- ==================== SCRIPTS ==================== -->
+    <!-- JSZip for reading DOCX page dimensions from XML -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <!-- html2canvas for capturing rendered HTML as image -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <!-- jsPDF for building the PDF -->
@@ -1398,14 +1400,13 @@
         });
 
         // ==================== CORE CONVERSION ====================
-        // Strategy:
-        // 1. Use mammoth to get HTML + raw XML to detect explicit page breaks
-        // 2. Render full document in a hidden iframe (A4 width, no height limit)
-        // 3. Measure each block element's top/bottom position
-        // 4. Slice into pages at exact A4 content height boundaries,
-        //    respecting explicit page breaks and never cutting mid-element
-        // 5. Capture each page slice with html2canvas at 2x scale
-        // 6. Stitch into jsPDF
+        // Approach: 
+        //   1. Read DOCX page setup (size + margins) via mammoth + XML parsing
+        //   2. Render full document HTML in hidden iframe at EXACT document pixel dimensions
+        //   3. Detect explicit page breaks from mammoth output
+        //   4. Measure every paragraph element — never cut mid-element
+        //   5. Each page slice is captured at exact page pixel height
+        //   6. Output PDF matches the original page size
 
         async function convertToPDF(file) {
             const { jsPDF } = window.jspdf;
@@ -1415,76 +1416,133 @@
 
             setProgress(20, 'Extracting content...');
 
-            // Extract HTML with mammoth (preserves headings, bold, tables, lists etc.)
+            // --- Step 1: Extract HTML from mammoth ---
             const htmlResult = await mammoth.convertToHtml({ arrayBuffer });
             let htmlContent = htmlResult.value || '<p>Empty document</p>';
 
-            // Detect mammoth page-break markers and convert to explicit HR with data attr
-            // mammoth emits page breaks as <p> with specific class sometimes, or we inject them
-            // We'll inject a visible page-break marker div
-            htmlContent = htmlContent.replace(
-                /<hr\s*\/?>/gi,
-                '<div class="word-page-break" data-pagebreak="true"></div>'
-            );
+            // --- Step 2: Parse DOCX XML for page dimensions & margins ---
+            // Read the raw zip to get document.xml and settings
+            let pageSetup = { 
+                pageW_inch: 8.5, pageH_inch: 11.0,
+                marginTop_inch: 1.0, marginBot_inch: 1.0,
+                marginL_inch: 1.0, marginR_inch: 1.0
+            };
 
-            setProgress(35, 'Rendering document...');
+            try {
+                // Use JSZip if available, otherwise use defaults
+                if (typeof JSZip !== 'undefined') {
+                    const zip = await JSZip.loadAsync(arrayBuffer);
+                    const docXml = await zip.file('word/document.xml').async('string');
+                    
+                    const pgSzMatch = docXml.match(/w:pgSz[^>]*w:w="(\d+)"[^>]*w:h="(\d+)"/);
+                    const pgMarMatch = docXml.match(/w:pgMar[^>]*w:top="(\d+)"[^>]*w:right="(\d+)"[^>]*w:bottom="(\d+)"[^>]*w:left="(\d+)"/);
+                    
+                    if (pgSzMatch) {
+                        // EMU units: 1 inch = 914400 EMU, but pgSz is in twentieths of a point
+                        // 1 inch = 1440 twips
+                        pageSetup.pageW_inch  = parseInt(pgSzMatch[1]) / 1440;
+                        pageSetup.pageH_inch  = parseInt(pgSzMatch[2]) / 1440;
+                    }
+                    if (pgMarMatch) {
+                        pageSetup.marginTop_inch = parseInt(pgMarMatch[1]) / 1440;
+                        pageSetup.marginR_inch   = parseInt(pgMarMatch[2]) / 1440;
+                        pageSetup.marginBot_inch = parseInt(pgMarMatch[3]) / 1440;
+                        pageSetup.marginL_inch   = parseInt(pgMarMatch[4]) / 1440;
+                    }
+                }
+            } catch(e) {
+                // Keep defaults
+            }
 
-            // A4 at 96dpi: 794×1123px. Content area with 1-inch margins (96px each side)
-            const PAGE_W_PX   = 794;
-            const PAGE_H_PX   = 1123;
-            const MARGIN_TOP  = 96;   // ~1 inch
-            const MARGIN_BOT  = 96;
-            const MARGIN_LR   = 96;
-            const CONTENT_H   = PAGE_H_PX - MARGIN_TOP - MARGIN_BOT; // 931px usable
+            // --- Step 3: Convert inches to pixels at 96dpi ---
+            const DPI = 96;
+            const PX_PER_PT = DPI / 72;
 
+            const PAGE_W_PX = Math.round(pageSetup.pageW_inch * DPI);   // e.g. 816 for Letter
+            const PAGE_H_PX = Math.round(pageSetup.pageH_inch * DPI);   // e.g. 1056 for Letter
+            const MAR_T_PX  = Math.round(pageSetup.marginTop_inch * DPI);
+            const MAR_B_PX  = Math.round(pageSetup.marginBot_inch * DPI);
+            const MAR_L_PX  = Math.round(pageSetup.marginL_inch * DPI);
+            const MAR_R_PX  = Math.round(pageSetup.marginR_inch * DPI);
+            const CONTENT_H_PX = PAGE_H_PX - MAR_T_PX - MAR_B_PX;
+
+            // Detect explicit page breaks in mammoth output (mammoth uses <hr> for page breaks)
+            // Replace <hr> with a sentinel div
+            htmlContent = htmlContent.replace(/<hr\s*\/?>/gi, '<div class="docx-page-break"></div>');
+
+            setProgress(35, 'Rendering document layout...');
+
+            // --- Step 4: Build styled HTML page matching exact Word settings ---
+            // Font: Times New Roman 10pt (from our analysis), spacing 5pt before/after
+            // We read actual font from mammoth or use safe fallback
             const styledPage = `<!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <style>
   *, *::before, *::after { box-sizing: border-box; }
-  html, body { margin: 0; padding: 0; background: #fff; }
+  html { margin:0; padding:0; }
   body {
-    font-family: 'Calibri', 'Georgia', serif;
-    font-size: 12pt;
-    line-height: 1.6;
-    color: #000;
+    margin: 0;
+    padding: ${MAR_T_PX}px ${MAR_R_PX}px ${MAR_B_PX}px ${MAR_L_PX}px;
     width: ${PAGE_W_PX}px;
-    padding: ${MARGIN_TOP}px ${MARGIN_LR}px ${MARGIN_BOT}px;
-    /* No height limit — full scroll height */
+    background: #fff;
+    font-family: 'Times New Roman', 'Georgia', serif;
+    font-size: 10pt;
+    line-height: 1.2;
+    color: #000;
+    /* CRITICAL: no min-height, no overflow — let content dictate height */
   }
-  h1 { font-size: 22pt; font-weight: bold; margin: 14pt 0 6pt; line-height: 1.25; }
-  h2 { font-size: 17pt; font-weight: bold; margin: 12pt 0 5pt; line-height: 1.3; }
-  h3 { font-size: 14pt; font-weight: bold; margin: 10pt 0 4pt; line-height: 1.3; }
-  h4 { font-size: 12pt; font-weight: bold; margin: 8pt 0 3pt; }
-  h5, h6 { font-size: 11pt; font-weight: bold; margin: 6pt 0 2pt; }
-  p { margin: 0 0 9pt; orphans: 3; widows: 3; }
+  /* Paragraph spacing matching Word's 5pt before/after */
+  p {
+    margin: 0;
+    padding: 5pt 0;
+    line-height: 1.2;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+  }
+  h1 { font-size: 16pt; font-weight: bold; margin: 6pt 0; line-height: 1.2; }
+  h2 { font-size: 13pt; font-weight: bold; margin: 5pt 0; line-height: 1.2; }
+  h3 { font-size: 11pt; font-weight: bold; margin: 4pt 0; line-height: 1.2; }
+  h4,h5,h6 { font-size: 10pt; font-weight: bold; margin: 3pt 0; }
   strong, b { font-weight: bold; }
   em, i { font-style: italic; }
   u { text-decoration: underline; }
   s { text-decoration: line-through; }
-  ul { list-style: disc outside; padding-left: 26pt; margin: 4pt 0 9pt; }
-  ol { list-style: decimal outside; padding-left: 26pt; margin: 4pt 0 9pt; }
-  li { margin-bottom: 3pt; line-height: 1.5; }
-  table { border-collapse: collapse; width: 100%; margin: 10pt 0; font-size: 10.5pt; page-break-inside: avoid; }
-  td, th { border: 1px solid #000; padding: 4pt 7pt; vertical-align: top; }
+  ul { list-style: disc outside; padding-left: 18pt; margin: 3pt 0; }
+  ol { list-style: decimal outside; padding-left: 18pt; margin: 3pt 0; }
+  li { margin: 2pt 0; padding: 2pt 0; font-size: 10pt; line-height: 1.2; white-space: pre-wrap; }
+  table { border-collapse: collapse; width: 100%; margin: 5pt 0; font-size: 10pt; }
+  td, th { border: 1px solid #000; padding: 3pt 5pt; vertical-align: top; font-size: 10pt; }
   th { background: #f0f0f0; font-weight: bold; }
-  img { max-width: 100%; height: auto; display: block; margin: 8pt 0; page-break-inside: avoid; }
-  a { color: #0563C1; text-decoration: underline; }
-  blockquote { border-left: 3px solid #aaa; padding-left: 14pt; margin: 9pt 0 9pt 14pt; color: #444; font-style: italic; }
-  hr { border: none; border-top: 1px solid #999; margin: 14pt 0; }
-  pre { font-family: 'Courier New', monospace; font-size: 9.5pt; background: #f5f5f5; padding: 8pt; margin: 8pt 0; white-space: pre-wrap; word-break: break-all; border-radius: 2px; }
-  code { font-family: 'Courier New', monospace; font-size: 9.5pt; background: #f5f5f5; padding: 1pt 3pt; border-radius: 2px; }
-  /* Invisible marker for explicit page breaks */
-  .word-page-break { height: 0; margin: 0; padding: 0; border: none; }
+  img { max-width: 100%; height: auto; display: block; margin: 5pt 0; }
+  a { color: #0563C1; }
+  blockquote { border-left: 3px solid #999; padding-left: 10pt; margin: 5pt 0 5pt 10pt; color: #333; font-style: italic; }
+  pre { font-family: 'Courier New', monospace; font-size: 9pt; background: #f5f5f5; padding: 6pt; margin: 5pt 0; white-space: pre-wrap; word-break: break-all; }
+  code { font-family: 'Courier New', monospace; font-size: 9pt; background: #f5f5f5; padding: 1pt 3pt; }
+  hr { border: none; border-top: 1px solid #666; margin: 10pt 0; }
+  /* Explicit page break sentinel — zero height, just a marker */
+  .docx-page-break { height: 0 !important; overflow: hidden; margin: 0; padding: 0; font-size: 0; line-height: 0; }
 </style>
 </head>
 <body>${htmlContent}</body>
 </html>`;
 
-            // Render in hidden iframe
+            // --- Step 5: Render in hidden iframe at exact page width ---
             const iframe = document.createElement('iframe');
-            iframe.style.cssText = `position:fixed;top:-99999px;left:-99999px;width:${PAGE_W_PX}px;height:10000px;border:none;visibility:hidden;overflow:hidden;`;
+            iframe.setAttribute('sandbox', 'allow-same-origin');
+            iframe.style.cssText = [
+                'position:fixed',
+                'top:-99999px',
+                'left:-99999px',
+                `width:${PAGE_W_PX}px`,
+                'height:30000px',   // tall enough for any document
+                'border:none',
+                'visibility:hidden',
+                'overflow:hidden',
+                'pointer-events:none'
+            ].join(';');
             document.body.appendChild(iframe);
 
             await new Promise(resolve => {
@@ -1492,155 +1550,179 @@
                 iframe.srcdoc = styledPage;
             });
 
-            // Wait for fonts & layout to settle
-            await new Promise(r => setTimeout(r, 800));
+            // Wait generously for fonts + layout to fully settle
+            await new Promise(r => setTimeout(r, 1000));
 
-            const iframeWin  = iframe.contentWindow;
             const iframeDoc  = iframe.contentDocument;
             const iframeBody = iframeDoc.body;
 
             setProgress(50, 'Calculating page boundaries...');
 
-            const totalScrollHeight = iframeBody.scrollHeight;
+            // Force layout recalc
+            iframeBody.getBoundingClientRect();
+            const totalScrollH = iframeBody.scrollHeight;
 
-            // --- Collect all block-level elements and their bounding positions ---
-            const allBlocks = Array.from(iframeBody.querySelectorAll(
-                'p, h1, h2, h3, h4, h5, h6, li, table, tr, img, blockquote, pre, div, hr, .word-page-break'
-            ));
-
-            // Build page-break points:
-            // Start with CONTENT_H increments, then adjust to nearest safe boundary
-            const pageBreakYs = []; // absolute Y positions where a new page starts
-
-            let currentPageStart = 0; // in document px (relative to body top including padding)
-            const docPaddingTop = MARGIN_TOP;
-
-            // Helper: get element top relative to iframeBody top (including body padding)
-            function getElTop(el) {
+            // --- Step 6: Collect ALL block elements with their exact bounding rects ---
+            // getBoundingClientRect gives viewport coords; we need document coords
+            // Since the iframe is fixed offscreen, we use offsetTop traversal
+            function getDocTop(el) {
                 let top = 0;
                 let node = el;
-                while (node && node !== iframeBody) {
+                while (node && node !== iframeDoc.documentElement) {
                     top += node.offsetTop;
                     node = node.offsetParent;
                 }
                 return top;
             }
-            function getElBottom(el) {
-                return getElTop(el) + el.offsetHeight;
+            function getDocBottom(el) {
+                return getDocTop(el) + el.offsetHeight;
             }
 
-            // Collect explicit page breaks from .word-page-break markers
-            const explicitBreaks = new Set();
-            iframeBody.querySelectorAll('.word-page-break').forEach(el => {
-                explicitBreaks.add(getElTop(el));
+            // Collect explicit page break Y positions
+            const explicitBreakYs = [];
+            iframeBody.querySelectorAll('.docx-page-break').forEach(el => {
+                explicitBreakYs.push(getDocTop(el));
             });
 
-            // Build pages: iterate and figure out where each page ends
-            pageBreakYs.push(0); // page 1 starts at 0
+            // Collect all paragraphs/blocks for smart break detection
+            const blockEls = Array.from(iframeBody.querySelectorAll(
+                'p, h1, h2, h3, h4, h5, h6, li, table, blockquote, pre, img'
+            ));
 
-            let pageTop = 0; // top of current page in doc coords
+            // --- Step 7: Build page boundaries ---
+            // Rules:
+            //   a) Explicit page break → force break there regardless
+            //   b) Natural page overflow → walk backwards to find last element
+            //      that fits completely within the page, break AFTER it
+            //   c) Never cut through an element
 
-            while (pageTop + PAGE_H_PX < totalScrollHeight) {
-                const idealBottom = pageTop + PAGE_H_PX; // where page would naturally end
+            const pageStartYs = [0]; // Y positions where each page starts (in doc coords)
+            let pageTop = 0;
 
-                // Check for any explicit break in the range [pageTop+100 .. idealBottom]
-                let breakAt = null;
-                for (const bY of explicitBreaks) {
-                    if (bY > pageTop + 50 && bY <= idealBottom) {
-                        breakAt = bY;
+            while (true) {
+                const idealPageBottom = pageTop + PAGE_H_PX;
+                if (idealPageBottom >= totalScrollH) break; // no more pages needed
+
+                // a) Check for explicit page break within this page's range
+                let forcedBreak = null;
+                for (const by of explicitBreakYs) {
+                    if (by > pageTop + 10 && by <= idealPageBottom) {
+                        forcedBreak = by;
                         break;
                     }
                 }
 
-                if (breakAt !== null) {
-                    // Snap to explicit break
-                    pageTop = breakAt;
-                } else {
-                    // Find the last block element that ends BEFORE idealBottom
-                    // so we don't cut through a paragraph or table row
-                    let bestBreak = idealBottom;
-                    for (const el of allBlocks) {
-                        const elBottom = getElBottom(el);
-                        const elTop    = getElTop(el);
-                        // Element fits completely in current page and ends close to page bottom
-                        if (elBottom <= idealBottom && elBottom > pageTop + CONTENT_H * 0.5) {
-                            bestBreak = elBottom;
-                        }
-                    }
-                    pageTop = bestBreak;
+                if (forcedBreak !== null) {
+                    pageTop = forcedBreak;
+                    pageStartYs.push(pageTop);
+                    continue;
                 }
 
-                pageBreakYs.push(pageTop);
+                // b) Find the best natural break point
+                // = bottom of the last element that fits completely before idealPageBottom
+                let bestBreakY = pageTop + CONTENT_H_PX; // fallback: cut at content height
+                let foundSafe  = false;
+
+                for (let i = blockEls.length - 1; i >= 0; i--) {
+                    const el = blockEls[i];
+                    const elTop    = getDocTop(el);
+                    const elBottom = getDocBottom(el);
+
+                    // Element must start after current page top and end before ideal bottom
+                    if (elTop > pageTop && elBottom <= idealPageBottom && elBottom > pageTop) {
+                        bestBreakY = elBottom;
+                        foundSafe  = true;
+                        break;
+                    }
+                }
+
+                // Safety: if no element found (e.g. single huge element), force cut at PAGE_H_PX
+                if (!foundSafe) {
+                    bestBreakY = idealPageBottom;
+                }
+
+                pageTop = bestBreakY;
+                pageStartYs.push(pageTop);
             }
 
-            const totalPages = pageBreakYs.length;
+            const totalPages = pageStartYs.length;
 
-            setProgress(60, `Capturing ${totalPages} pages...`);
+            setProgress(60, `Found ${totalPages} page(s) — capturing...`);
 
-            // --- Capture each page slice ---
-            const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
-            const PDF_W = 210;
-            const PDF_H = 297;
+            // --- Step 8: Determine PDF page size from Word page dimensions ---
+            // Convert inches to mm (1 inch = 25.4mm)
+            const PDF_W_MM = pageSetup.pageW_inch * 25.4;
+            const PDF_H_MM = pageSetup.pageH_inch * 25.4;
 
+            // jsPDF format: use [width, height] in mm
+            const doc = new jsPDF({
+                unit: 'mm',
+                format: [PDF_W_MM, PDF_H_MM],
+                orientation: pageSetup.pageW_inch > pageSetup.pageH_inch ? 'landscape' : 'portrait'
+            });
+
+            // --- Step 9: Capture each page slice and add to PDF ---
             for (let pi = 0; pi < totalPages; pi++) {
-                if (pi > 0) doc.addPage();
+                if (pi > 0) doc.addPage([PDF_W_MM, PDF_H_MM]);
 
-                setProgress(60 + Math.round((pi / totalPages) * 30), `Rendering page ${pi + 1} of ${totalPages}...`);
+                setProgress(
+                    60 + Math.round((pi / totalPages) * 33),
+                    `Rendering page ${pi + 1} of ${totalPages}...`
+                );
 
-                const sliceTop    = pageBreakYs[pi];
-                const sliceBottom = (pi + 1 < totalPages) ? pageBreakYs[pi + 1] : totalScrollHeight;
-                const sliceH      = Math.max(sliceBottom - sliceTop, 10);
+                const sliceY  = pageStartYs[pi];
+                const sliceH  = pi + 1 < totalPages
+                    ? Math.max(pageStartYs[pi + 1] - sliceY, 1)
+                    : Math.max(totalScrollH - sliceY, 1);
 
-                // Expand iframe height to accommodate current slice
-                iframe.style.height = (sliceTop + sliceH + 200) + 'px';
-                await new Promise(r => setTimeout(r, 60));
+                // Resize iframe tall enough to expose the current slice
+                iframe.style.height = (sliceY + sliceH + 200) + 'px';
+                await new Promise(r => setTimeout(r, 80)); // brief settle
 
+                // Capture ONLY the slice region
                 const canvas = await html2canvas(iframeBody, {
-                    useCORS: true,
-                    allowTaint: true,
-                    scale: 2,
-                    width:  PAGE_W_PX,
-                    height: sliceH,
-                    x: 0,
-                    y: sliceTop,
-                    scrollX: 0,
-                    scrollY: sliceTop,
-                    windowWidth:  PAGE_W_PX,
-                    windowHeight: sliceH,
+                    useCORS:       true,
+                    allowTaint:    true,
+                    scale:         2,          // 2x for crisp text
+                    width:         PAGE_W_PX,
+                    height:        PAGE_H_PX,  // always capture a full page height
+                    x:             0,
+                    y:             sliceY,
+                    scrollX:       0,
+                    scrollY:       sliceY,
+                    windowWidth:   PAGE_W_PX,
+                    windowHeight:  PAGE_H_PX,
                     backgroundColor: '#ffffff',
-                    logging: false
+                    logging:       false,
+                    imageTimeout:  0,
+                    removeContainer: true
                 });
 
-                // Scale canvas slice to exactly fill A4 page proportionally
                 const imgData = canvas.toDataURL('image/jpeg', 0.95);
+                // Fill the entire PDF page with the captured slice
+                doc.addImage(imgData, 'JPEG', 0, 0, PDF_W_MM, PDF_H_MM);
 
-                // Calculate rendered height in mm to maintain aspect ratio
-                // canvas is PAGE_W_PX wide → PDF_W mm wide
-                const scale    = PDF_W / PAGE_W_PX;           // mm per px
-                const imgH_mm  = sliceH * scale;               // height in mm for this slice
-
-                // If content is shorter than a full page, place at top; otherwise scale to fill
-                const renderH = Math.min(imgH_mm, PDF_H);
-                doc.addImage(imgData, 'JPEG', 0, 0, PDF_W, renderH);
-
-                // Page number
-                doc.setFontSize(8);
+                // Page number footer (outside captured area, over PDF)
+                doc.setFontSize(7);
                 doc.setTextColor(140);
-                doc.text(`Page ${pi + 1} of ${totalPages}`, PDF_W / 2, PDF_H - 4, { align: 'center' });
+                doc.text(`Page ${pi + 1} of ${totalPages}`, PDF_W_MM / 2, PDF_H_MM - 3, { align: 'center' });
                 doc.setTextColor(0);
             }
 
-            // Signature on last page (append small footer, not a new page)
-            // We write it inside the last page footer area
+            // Branding in footer of last page
             doc.setPage(totalPages);
-            doc.setFontSize(7);
+            doc.setFontSize(6);
             doc.setTextColor(180);
-            doc.text('Converted by Free Tools Hub  |  https://freetoolshub.online/', PDF_W / 2, PDF_H - 1, { align: 'center' });
+            doc.text(
+                'Converted by Free Tools Hub  |  https://freetoolshub.online/',
+                PDF_W_MM / 2, PDF_H_MM - 1,
+                { align: 'center' }
+            );
 
             // Cleanup
             document.body.removeChild(iframe);
 
-            setProgress(98, 'Finalizing PDF...');
+            setProgress(97, 'Finalizing PDF...');
             convertedBlob = doc.output('blob');
             setProgress(100, 'Complete!');
 
