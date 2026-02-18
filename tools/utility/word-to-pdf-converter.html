@@ -1,21 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word to PDF Converter – Free Tools Hub</title>
-<meta name="description" content="Convert DOCX to PDF instantly online. Free, secure and browser-based Word to PDF converter.">
+<title>PDF to Word Converter – Free Tools Hub</title>
+<meta name="description" content="Convert PDF to editable Word file instantly. Free PDF to DOC converter.">
 <link rel="stylesheet" href="../../style.css">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script>
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+</script>
 
 <style>
 .hero{padding:70px 0;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;text-align:center}
 .tool-box{background:#fff;padding:40px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 .drop-zone{border:2px dashed #c4b5fd;padding:60px 20px;text-align:center;border-radius:12px;cursor:pointer;background:#f5f3ff}
-.preview{margin-top:30px;padding:25px;border:1px solid #e5e7eb;border-radius:12px;max-height:500px;overflow:auto;background:#fff}
+textarea{width:100%;min-height:350px;margin-top:20px;padding:20px;border-radius:12px;border:1px solid #ddd}
 @media(max-width:768px){.tool-box{padding:20px}}
 </style>
 </head>
@@ -45,8 +46,8 @@
 
 <section class="hero">
 <div class="container">
-<h1>Word to PDF Converter</h1>
-<p>Upload DOCX file and convert to PDF instantly.</p>
+<h1>PDF to Word Converter</h1>
+<p>Upload PDF and extract text instantly.</p>
 </div>
 </section>
 
@@ -54,21 +55,15 @@
 <div class="container-sm">
 <div class="tool-box">
 
-<div id="uploadSection">
-<div class="drop-zone" id="dropZone">
-<h2>Upload DOCX File</h2>
-<p>Click below to choose file</p>
-<input type="file" id="fileInput" accept=".docx" hidden>
-<button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Choose File</button>
-</div>
+<div class="drop-zone">
+<h2>Upload PDF File</h2>
+<input type="file" id="fileInput" accept=".pdf">
 </div>
 
-<div id="previewSection" style="display:none">
-<div id="previewContainer" class="preview"></div>
+<textarea id="outputText" placeholder="Extracted text will appear here..."></textarea>
+
 <div style="text-align:center;margin-top:20px">
-<button onclick="convertToPDF()" class="btn btn-primary">Download PDF</button>
-<button onclick="resetTool()" class="btn btn-outline-white" style="margin-left:10px">Convert Another</button>
-</div>
+<button onclick="downloadDoc()" class="btn btn-primary">Download Word</button>
 </div>
 
 </div>
@@ -87,47 +82,33 @@
 
 <script>
 const fileInput=document.getElementById("fileInput");
-const previewContainer=document.getElementById("previewContainer");
-const previewSection=document.getElementById("previewSection");
-const uploadSection=document.getElementById("uploadSection");
+const outputText=document.getElementById("outputText");
 
 fileInput.addEventListener("change", async function(){
 const file=this.files[0];
 if(!file){return;}
-if(file.type!=="application/vnd.openxmlformats-officedocument.wordprocessingml.document"){
-alert("Please upload DOCX file only.");
-return;
-}
 const reader=new FileReader();
-reader.onload=async function(e){
-try{
-const result=await mammoth.convertToHtml({arrayBuffer:e.target.result});
-previewContainer.innerHTML=result.value;
-uploadSection.style.display="none";
-previewSection.style.display="block";
-}catch(err){
-alert("Error reading file.");
+reader.onload=async function(){
+const typedarray=new Uint8Array(this.result);
+const pdf=await pdfjsLib.getDocument(typedarray).promise;
+let text="";
+for(let i=1;i<=pdf.numPages;i++){
+const page=await pdf.getPage(i);
+const content=await page.getTextContent();
+content.items.forEach(item=>{text+=item.str+" ";});
+text+="\n\n";
 }
+outputText.value=text;
 };
 reader.readAsArrayBuffer(file);
 });
 
-async function convertToPDF(){
-const {jsPDF}=window.jspdf;
-const canvas=await html2canvas(previewContainer,{scale:2});
-const imgData=canvas.toDataURL("image/png");
-const pdf=new jsPDF("p","mm","a4");
-const pdfWidth=210;
-const pdfHeight=(canvas.height*pdfWidth)/canvas.width;
-pdf.addImage(imgData,"PNG",0,0,pdfWidth,pdfHeight);
-pdf.save("converted.pdf");
-}
-
-function resetTool(){
-fileInput.value="";
-previewContainer.innerHTML="";
-previewSection.style.display="none";
-uploadSection.style.display="block";
+function downloadDoc(){
+const blob=new Blob(['\ufeff',outputText.value],{type:'application/msword'});
+const link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="converted.doc";
+link.click();
 }
 </script>
 
