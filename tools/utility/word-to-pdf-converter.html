@@ -3,22 +3,20 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word to PDF Converter – Free Online DOCX to PDF Tool | Free Tools Hub</title>
-<meta name="description" content="Convert Word (DOC, DOCX) to PDF instantly. Free, secure, mobile-friendly and browser-based Word to PDF converter.">
-<meta name="robots" content="index, follow">
-<link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
+<title>Word to PDF Converter – Free Tools Hub</title>
+<meta name="description" content="Convert DOCX to PDF instantly online. Free, secure and browser-based Word to PDF converter.">
 <link rel="stylesheet" href="../../style.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
 <style>
 .hero{padding:70px 0;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;text-align:center}
 .tool-box{background:#fff;padding:40px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
-.drop-zone{border:3px dashed #c4b5fd;padding:60px 20px;text-align:center;border-radius:14px;cursor:pointer;background:#f5f3ff}
-.drop-zone:hover{background:#ede9fe}
-.preview{margin-top:30px;padding:30px;border:1px solid #e5e7eb;border-radius:12px;max-height:600px;overflow:auto}
-@media(max-width:768px){.tool-box{padding:20px}.drop-zone{padding:40px 15px}}
+.drop-zone{border:2px dashed #c4b5fd;padding:60px 20px;text-align:center;border-radius:12px;cursor:pointer;background:#f5f3ff}
+.preview{margin-top:30px;padding:25px;border:1px solid #e5e7eb;border-radius:12px;max-height:500px;overflow:auto;background:#fff}
+@media(max-width:768px){.tool-box{padding:20px}}
 </style>
 </head>
 <body>
@@ -48,7 +46,7 @@
 <section class="hero">
 <div class="container">
 <h1>Word to PDF Converter</h1>
-<p>Convert DOC & DOCX files to high-quality PDF instantly. Secure, fast and 100% browser-based.</p>
+<p>Upload DOCX file and convert to PDF instantly.</p>
 </div>
 </section>
 
@@ -58,17 +56,17 @@
 
 <div id="uploadSection">
 <div class="drop-zone" id="dropZone">
-<h2>Upload Word File</h2>
-<p>Drag & drop your file or click below</p>
-<input type="file" id="fileInput" accept=".doc,.docx" hidden>
-<button class="btn btn-primary" onclick="fileInput.click()">Choose File</button>
+<h2>Upload DOCX File</h2>
+<p>Click below to choose file</p>
+<input type="file" id="fileInput" accept=".docx" hidden>
+<button class="btn btn-primary" onclick="document.getElementById('fileInput').click()">Choose File</button>
 </div>
 </div>
 
 <div id="previewSection" style="display:none">
 <div id="previewContainer" class="preview"></div>
 <div style="text-align:center;margin-top:20px">
-<button onclick="convertToPDF()" class="btn btn-primary btn-lg">Convert to PDF</button>
+<button onclick="convertToPDF()" class="btn btn-primary">Download PDF</button>
 <button onclick="resetTool()" class="btn btn-outline-white" style="margin-left:10px">Convert Another</button>
 </div>
 </div>
@@ -77,57 +75,51 @@
 </div>
 </section>
 
-<section style="padding:50px 0;background:#f9fafb">
-<div class="container-sm">
-<h2>Related Tools</h2>
-<p>
-<a href="pdf-to-word.html">PDF to Word Converter</a> |
-<a href="jpg-to-pdf.html">JPG to PDF</a> |
-<a href="excel-to-pdf.html">Excel to PDF</a>
-</p>
-</div>
-</section>
-
 </main>
 
 <footer class="site-footer">
 <div class="container">
 <div class="footer-bottom">
-<p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a>. All rights reserved.</p>
+<p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a></p>
 </div>
 </div>
 </footer>
 
 <script>
 const fileInput=document.getElementById("fileInput");
-const dropZone=document.getElementById("dropZone");
+const previewContainer=document.getElementById("previewContainer");
 const previewSection=document.getElementById("previewSection");
 const uploadSection=document.getElementById("uploadSection");
-const previewContainer=document.getElementById("previewContainer");
 
-dropZone.addEventListener("click",()=>fileInput.click());
-fileInput.addEventListener("change",e=>handleFile(e.target.files[0]));
-
-async function handleFile(file){
-if(!file) return;
+fileInput.addEventListener("change", async function(){
+const file=this.files[0];
+if(!file){return;}
+if(file.type!=="application/vnd.openxmlformats-officedocument.wordprocessingml.document"){
+alert("Please upload DOCX file only.");
+return;
+}
 const reader=new FileReader();
-reader.onload=async e=>{
+reader.onload=async function(e){
+try{
 const result=await mammoth.convertToHtml({arrayBuffer:e.target.result});
 previewContainer.innerHTML=result.value;
 uploadSection.style.display="none";
 previewSection.style.display="block";
+}catch(err){
+alert("Error reading file.");
+}
 };
 reader.readAsArrayBuffer(file);
-}
+});
 
 async function convertToPDF(){
 const {jsPDF}=window.jspdf;
-const canvas=await html2canvas(previewContainer);
+const canvas=await html2canvas(previewContainer,{scale:2});
 const imgData=canvas.toDataURL("image/png");
-const pdf=new jsPDF("p","pt","a4");
-const width=pdf.internal.pageSize.getWidth();
-const height=canvas.height*width/canvas.width;
-pdf.addImage(imgData,"PNG",0,0,width,height);
+const pdf=new jsPDF("p","mm","a4");
+const pdfWidth=210;
+const pdfHeight=(canvas.height*pdfWidth)/canvas.width;
+pdf.addImage(imgData,"PNG",0,0,pdfWidth,pdfHeight);
 pdf.save("converted.pdf");
 }
 
