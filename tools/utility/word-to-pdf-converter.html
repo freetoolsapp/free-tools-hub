@@ -26,20 +26,20 @@
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
+    <meta property="og:url" content="https://freetoolshub.online/tools/utility/word-to-pdf-converter.html">
     <meta property="og:title" content="Word to PDF Converter — Free Tools Hub">
     <meta property="og:description" content="Convert Word documents to PDF files instantly. Free, fast & secure.">
-    <meta property="og:image" content="https://freetoolsapp.github.io/free-tools-hub/og-image.jpg">
+    <meta property="og:image" content="https://freetoolshub.online/og-image.jpg">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
+    <meta name="twitter:url" content="https://freetoolshub.online/tools/utility/word-to-pdf-converter.html">
     <meta name="twitter:title" content="Word to PDF Converter — Free Tools Hub">
     <meta name="twitter:description" content="Convert Word documents to PDF files instantly. Free, fast & secure.">
-    <meta name="twitter:image" content="https://freetoolsapp.github.io/free-tools-hub/og-image.jpg">
+    <meta name="twitter:image" content="https://freetoolshub.online/og-image.jpg">
 
     <!-- Canonical -->
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
+    <link rel="canonical" href="https://freetoolshub.online/tools/utility/word-to-pdf-converter.html">
     
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
@@ -50,7 +50,7 @@
         "@context": "https://schema.org",
         "@type": "WebApplication",
         "name": "Word to PDF Converter",
-        "url": "https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html",
+        "url": "https://freetoolshub.online/tools/utility/word-to-pdf-converter.html",
         "description": "Convert Word documents to PDF files instantly. Free online converter supporting DOCX and DOC formats.",
         "applicationCategory": "UtilityApplication",
         "operatingSystem": "Any",
@@ -69,7 +69,7 @@
         "isPartOf": {
             "@type": "WebSite",
             "name": "Free Tools Hub",
-            "url": "https://freetoolsapp.github.io/free-tools-hub/"
+            "url": "https://freetoolshub.online/"
         }
     }
     </script>
@@ -84,19 +84,19 @@
                 "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
-                "item": "https://freetoolsapp.github.io/free-tools-hub/"
+                "item": "https://freetoolshub.online/"
             },
             {
                 "@type": "ListItem",
                 "position": 2,
                 "name": "All Tools",
-                "item": "https://freetoolsapp.github.io/free-tools-hub/tools.html"
+                "item": "https://freetoolshub.online/tools.html"
             },
             {
                 "@type": "ListItem",
                 "position": 3,
                 "name": "Word to PDF Converter",
-                "item": "https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html"
+                "item": "https://freetoolshub.online/tools/utility/word-to-pdf-converter.html"
             }
         ]
     }
@@ -188,13 +188,24 @@
             margin-top: 20px;
             max-height: 400px;
             overflow-y: auto;
-            font-family: 'Courier New', monospace;
             font-size: 13px;
             line-height: 1.6;
             color: var(--gray-700);
-            white-space: pre-wrap;
-            word-wrap: break-word;
         }
+
+        /* HTML preview styling */
+        .preview-content h1 { font-size: 1.6em; font-weight: bold; margin: 0.5em 0; color: #111; }
+        .preview-content h2 { font-size: 1.4em; font-weight: bold; margin: 0.5em 0; color: #222; }
+        .preview-content h3 { font-size: 1.2em; font-weight: bold; margin: 0.4em 0; color: #333; }
+        .preview-content h4, .preview-content h5, .preview-content h6 { font-size: 1em; font-weight: bold; margin: 0.3em 0; }
+        .preview-content p { margin: 0.4em 0; }
+        .preview-content strong, .preview-content b { font-weight: bold; }
+        .preview-content em, .preview-content i { font-style: italic; }
+        .preview-content ul, .preview-content ol { padding-left: 1.5em; margin: 0.3em 0; }
+        .preview-content li { margin: 0.2em 0; }
+        .preview-content table { border-collapse: collapse; width: 100%; margin: 0.5em 0; }
+        .preview-content td, .preview-content th { border: 1px solid #ccc; padding: 4px 8px; font-size: 12px; }
+        .preview-content th { background: #f0f0f0; font-weight: bold; }
 
         .breadcrumb {
             background: white;
@@ -1233,10 +1244,15 @@
     </footer>
 
     <!-- ==================== SCRIPTS ==================== -->
+    <!-- html2canvas for capturing rendered HTML as image -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <!-- jsPDF for building the PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://unpkg.com/docx@7.8.2/build/index.js"></script>
+    <!-- mammoth for extracting HTML content from DOCX -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <!-- FileSaver for downloading -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+
     <script>
         // Header scroll effect
         const header = document.getElementById('siteHeader');
@@ -1267,17 +1283,11 @@
         function toggleFaq(element) {
             const faqItem = element.parentElement;
             const isActive = faqItem.classList.contains('active');
-            
-            document.querySelectorAll('.faq-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            
-            if (!isActive) {
-                faqItem.classList.add('active');
-            }
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+            if (!isActive) faqItem.classList.add('active');
         }
 
-        // File Upload Functionality
+        // ==================== CONVERTER LOGIC ====================
         const uploadZone = document.getElementById('uploadZone');
         const fileInput = document.getElementById('fileInput');
         const browseBtn = document.getElementById('browseBtn');
@@ -1301,87 +1311,68 @@
 
         let selectedFile = null;
         let convertedBlob = null;
-        let extractedText = '';
+        let extractedHTML = '';
 
         // Click to browse
-        browseBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            fileInput.click();
-        });
-
-        uploadZone.addEventListener('click', () => {
-            fileInput.click();
-        });
-
-        // File selection
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                handleFile(file);
-            }
-        });
+        browseBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
+        uploadZone.addEventListener('click', () => fileInput.click());
+        fileInput.addEventListener('change', (e) => { if (e.target.files[0]) handleFile(e.target.files[0]); });
 
         // Drag and drop
-        uploadZone.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            uploadZone.classList.add('dragover');
-        });
-
-        uploadZone.addEventListener('dragleave', () => {
-            uploadZone.classList.remove('dragover');
-        });
-
+        uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+        uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
         uploadZone.addEventListener('drop', (e) => {
             e.preventDefault();
             uploadZone.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file) {
-                handleFile(file);
-            }
+            if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
         });
 
-        // Handle file
         async function handleFile(file) {
             selectedFile = file;
             fileName.textContent = file.name;
             fileSize.textContent = formatFileSize(file.size);
-            
             previewFileName.textContent = file.name;
             previewFileType.textContent = file.name.endsWith('.docx') ? 'DOCX (Word 2007+)' : 'DOC (Word 97-2003)';
             previewFileSize.textContent = formatFileSize(file.size);
-            
             filePreview.classList.add('active');
             previewSection.classList.add('active');
             convertSection.classList.add('active');
             uploadZone.style.display = 'none';
-
-            // Load preview
             await loadDocumentPreview(file);
         }
 
-        // Load document preview
         async function loadDocumentPreview(file) {
             try {
-                previewContent.textContent = 'Extracting text...';
-                
+                previewContent.innerHTML = '<p style="color:#888;">Extracting content...</p>';
                 const arrayBuffer = await file.arrayBuffer();
-                const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
-                extractedText = result.value;
-                
-                if (extractedText.trim()) {
-                    // Show first 2000 characters
-                    const preview = extractedText.substring(0, 2000);
-                    previewContent.textContent = preview + (extractedText.length > 2000 ? '\n\n... (preview truncated)' : '');
+
+                // Use mammoth to convert DOCX → HTML (preserves headings, bold, lists, tables)
+                const result = await mammoth.convertToHtml({ arrayBuffer });
+                extractedHTML = result.value;
+
+                if (extractedHTML.trim()) {
+                    // Show a preview (first ~3000 chars of HTML, but render as HTML)
+                    const tempDiv = document.createElement('div');
+                    tempDiv.innerHTML = extractedHTML;
+                    const textLength = tempDiv.textContent.length;
+
+                    previewContent.innerHTML = extractedHTML;
+
+                    if (textLength > 3000) {
+                        const note = document.createElement('p');
+                        note.style.cssText = 'color:#888; font-style:italic; margin-top:12px; font-size:12px;';
+                        note.textContent = '... (preview truncated — full document will be converted)';
+                        previewContent.appendChild(note);
+                    }
                 } else {
-                    previewContent.textContent = 'No text content found in document.\n\nThe document may contain only images or complex formatting.\nConversion will still proceed with the document structure.';
+                    previewContent.innerHTML = '<p style="color:#888;">No text content found. The document may contain only images or complex formatting. Conversion will still proceed.</p>';
                 }
             } catch (error) {
                 console.error('Preview error:', error);
-                previewContent.textContent = 'Unable to preview document.\n\nConversion will still work - click Convert to PDF below.';
+                previewContent.innerHTML = '<p style="color:#888;">Unable to preview document. Conversion will still work — click Convert to PDF below.</p>';
             }
         }
 
-        // Format file size
         function formatFileSize(bytes) {
             if (bytes === 0) return '0 Bytes';
             const k = 1024;
@@ -1390,142 +1381,185 @@
             return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
         }
 
-        // Remove file
-        removeBtn.addEventListener('click', () => {
-            resetConverter();
-        });
+        removeBtn.addEventListener('click', resetConverter);
 
-        // Convert button
         convertBtn.addEventListener('click', async () => {
             if (!selectedFile) return;
-
             convertBtn.disabled = true;
             convertSection.style.display = 'none';
             progressSection.classList.add('active');
-
             try {
                 await convertToPDF(selectedFile);
             } catch (error) {
-                alert('Conversion failed. Please try again.');
+                alert('Conversion failed. Please try again.\n' + error.message);
                 console.error(error);
                 resetConverter();
             }
         });
 
-        // Convert to PDF
+        // ==================== CORE CONVERSION ====================
+        // Strategy: render the mammoth HTML in a hidden off-screen iframe,
+        // then use html2canvas to capture each "page" worth of content,
+        // and stitch into a jsPDF document — preserving layout faithfully.
+
         async function convertToPDF(file) {
             const { jsPDF } = window.jspdf;
 
-            // Progress updates
-            progressFill.style.width = '20%';
-            progressText.textContent = 'Reading document...';
+            setProgress(10, 'Reading document...');
 
-            try {
-                // Extract text from Word document
-                const arrayBuffer = await file.arrayBuffer();
-                
-                progressFill.style.width = '40%';
-                progressText.textContent = 'Extracting content...';
+            const arrayBuffer = await file.arrayBuffer();
 
-                const result = await mammoth.extractRawText({ arrayBuffer: arrayBuffer });
-                let textContent = result.value || 'Document content';
+            setProgress(25, 'Extracting content & styles...');
 
-                progressFill.style.width = '60%';
-                progressText.textContent = 'Creating PDF...';
+            // Get HTML from mammoth
+            const result = await mammoth.convertToHtml({ arrayBuffer });
+            const htmlContent = result.value || '<p>Empty document</p>';
 
-                // Create PDF
-                const doc = new jsPDF();
-                const pageWidth = doc.internal.pageSize.getWidth();
-                const pageHeight = doc.internal.pageSize.getHeight();
-                const margin = 20;
-                const maxWidth = pageWidth - (margin * 2);
-                
-                // Add title
-                doc.setFontSize(16);
-                doc.setFont(undefined, 'bold');
-                doc.text('Document Conversion', margin, margin);
-                
-                doc.setFontSize(10);
-                doc.setFont(undefined, 'normal');
-                doc.text(`Original: ${file.name}`, margin, margin + 10);
-                doc.text(`Date: ${new Date().toLocaleString()}`, margin, margin + 16);
-                
-                // Add separator
-                doc.setLineWidth(0.5);
-                doc.line(margin, margin + 22, pageWidth - margin, margin + 22);
+            setProgress(40, 'Rendering document layout...');
 
-                // Add content
-                doc.setFontSize(11);
-                let yPosition = margin + 32;
+            // Build a full styled HTML page to render
+            const styledPage = `<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Calibri', 'Arial', sans-serif;
+    font-size: 11pt;
+    line-height: 1.5;
+    color: #000;
+    background: #fff;
+    padding: 72px 80px; /* ~1 inch margins */
+    width: 794px; /* A4 width at 96dpi */
+  }
+  h1 { font-size: 20pt; font-weight: bold; margin: 12pt 0 6pt; }
+  h2 { font-size: 16pt; font-weight: bold; margin: 10pt 0 5pt; }
+  h3 { font-size: 13pt; font-weight: bold; margin: 8pt 0 4pt; }
+  h4 { font-size: 11pt; font-weight: bold; margin: 6pt 0 3pt; }
+  h5, h6 { font-size: 10pt; font-weight: bold; margin: 4pt 0 2pt; }
+  p { margin: 0 0 8pt; }
+  strong, b { font-weight: bold; }
+  em, i { font-style: italic; }
+  u { text-decoration: underline; }
+  s { text-decoration: line-through; }
+  ul { list-style: disc; padding-left: 24pt; margin: 4pt 0 8pt; }
+  ol { list-style: decimal; padding-left: 24pt; margin: 4pt 0 8pt; }
+  li { margin-bottom: 3pt; }
+  table { border-collapse: collapse; width: 100%; margin: 8pt 0; font-size: 10pt; }
+  td, th { border: 1px solid #000; padding: 4pt 6pt; vertical-align: top; }
+  th { background-color: #f0f0f0; font-weight: bold; }
+  img { max-width: 100%; height: auto; display: block; margin: 8pt 0; }
+  a { color: #0563C1; }
+  blockquote { border-left: 3px solid #ccc; padding-left: 12pt; margin: 8pt 0 8pt 12pt; color: #555; font-style: italic; }
+  hr { border: none; border-top: 1px solid #000; margin: 12pt 0; }
+  pre, code { font-family: 'Courier New', monospace; font-size: 10pt; background: #f5f5f5; padding: 2pt 4pt; border-radius: 2px; }
+  pre { padding: 8pt; margin: 6pt 0; white-space: pre-wrap; word-wrap: break-word; }
+</style>
+</head>
+<body>${htmlContent}</body>
+</html>`;
 
-                // Split text into lines that fit the page width
-                const lines = doc.splitTextToSize(textContent, maxWidth);
-                
-                for (let i = 0; i < lines.length; i++) {
-                    if (yPosition > pageHeight - margin) {
-                        doc.addPage();
-                        yPosition = margin;
-                    }
-                    doc.text(lines[i], margin, yPosition);
-                    yPosition += 7;
-                }
+            // Create hidden iframe to render HTML
+            const iframe = document.createElement('iframe');
+            iframe.style.cssText = 'position:fixed; top:-9999px; left:-9999px; width:794px; height:1123px; border:none; visibility:hidden;';
+            document.body.appendChild(iframe);
 
-                // Add footer on last page
-                const totalPages = doc.internal.getNumberOfPages();
-                for (let i = 1; i <= totalPages; i++) {
-                    doc.setPage(i);
-                    doc.setFontSize(8);
-                    doc.setTextColor(128);
-                    doc.text(`Page ${i} of ${totalPages}`, pageWidth / 2, pageHeight - 10, { align: 'center' });
-                }
+            await new Promise((resolve) => {
+                iframe.onload = resolve;
+                iframe.srcdoc = styledPage;
+            });
 
-                // Add final page with info
-                doc.addPage();
-                doc.setFontSize(10);
-                doc.setTextColor(0);
-                doc.text('Converted by Free Tools Hub', pageWidth / 2, pageHeight / 2, { align: 'center' });
+            // Let fonts/images settle
+            await new Promise(r => setTimeout(r, 600));
+
+            setProgress(55, 'Capturing pages...');
+
+            const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+            const iframeBody = iframeDoc.body;
+
+            // A4 dimensions at 96dpi
+            const pageWidthPx  = 794;
+            const pageHeightPx = 1123;
+            const totalHeight  = iframeBody.scrollHeight;
+            const totalPages   = Math.ceil(totalHeight / pageHeightPx);
+
+            const doc = new jsPDF({ unit: 'mm', format: 'a4', orientation: 'portrait' });
+            const pdfPageWidth  = 210; // mm
+            const pdfPageHeight = 297; // mm
+
+            for (let page = 0; page < totalPages; page++) {
+                if (page > 0) doc.addPage();
+
+                setProgress(55 + Math.round((page / totalPages) * 30), `Capturing page ${page + 1} of ${totalPages}...`);
+
+                // Scroll iframe to current page region
+                iframe.contentWindow.scrollTo(0, page * pageHeightPx);
+
+                const canvas = await html2canvas(iframeBody, {
+                    useCORS: true,
+                    allowTaint: true,
+                    scale: 2, // retina quality
+                    width: pageWidthPx,
+                    height: pageHeightPx,
+                    x: 0,
+                    y: page * pageHeightPx,
+                    windowWidth: pageWidthPx,
+                    windowHeight: pageHeightPx,
+                    scrollX: 0,
+                    scrollY: page * pageHeightPx,
+                    backgroundColor: '#ffffff',
+                    logging: false
+                });
+
+                const imgData = canvas.toDataURL('image/jpeg', 0.92);
+                doc.addImage(imgData, 'JPEG', 0, 0, pdfPageWidth, pdfPageHeight);
+
+                // Page number footer
                 doc.setFontSize(8);
-                doc.setTextColor(100, 58, 237);
-                doc.text('https://freetoolsapp.github.io/free-tools-hub/', pageWidth / 2, pageHeight / 2 + 10, { align: 'center' });
-
-                progressFill.style.width = '90%';
-                progressText.textContent = 'Finalizing PDF...';
-
-                // Generate blob
-                convertedBlob = doc.output('blob');
-
-                progressFill.style.width = '100%';
-                progressText.textContent = 'Complete!';
-
-                // Show download section
-                setTimeout(() => {
-                    progressSection.classList.remove('active');
-                    downloadSection.classList.add('active');
-                }, 300);
-
-                // Setup download
-                const outputFileName = file.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
-                downloadBtn.onclick = () => {
-                    saveAs(convertedBlob, outputFileName);
-                };
-
-            } catch (error) {
-                console.error('Conversion error:', error);
-                throw error;
+                doc.setTextColor(150);
+                doc.text(`Page ${page + 1} of ${totalPages}`, pdfPageWidth / 2, pdfPageHeight - 5, { align: 'center' });
+                doc.setTextColor(0);
             }
+
+            // Add final signature page
+            doc.addPage();
+            doc.setFontSize(10);
+            doc.setTextColor(80);
+            doc.text('Converted by Free Tools Hub', pdfPageWidth / 2, pdfPageHeight / 2, { align: 'center' });
+            doc.setFontSize(8);
+            doc.setTextColor(100, 58, 237);
+            doc.text('https://freetoolshub.online/', pdfPageWidth / 2, pdfPageHeight / 2 + 8, { align: 'center' });
+
+            // Cleanup
+            document.body.removeChild(iframe);
+
+            setProgress(95, 'Finalizing PDF...');
+
+            convertedBlob = doc.output('blob');
+
+            setProgress(100, 'Complete!');
+
+            setTimeout(() => {
+                progressSection.classList.remove('active');
+                downloadSection.classList.add('active');
+            }, 300);
+
+            const outputFileName = selectedFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
+            downloadBtn.onclick = () => { saveAs(convertedBlob, outputFileName); };
         }
 
-        // Convert another file
-        convertAnotherBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            resetConverter();
-        });
+        function setProgress(pct, msg) {
+            progressFill.style.width = pct + '%';
+            progressText.textContent = msg;
+        }
 
-        // Reset converter
+        convertAnotherBtn.addEventListener('click', (e) => { e.preventDefault(); resetConverter(); });
+
         function resetConverter() {
             selectedFile = null;
             convertedBlob = null;
-            extractedText = '';
+            extractedHTML = '';
             fileInput.value = '';
             filePreview.classList.remove('active');
             previewSection.classList.remove('active');
@@ -1533,10 +1567,11 @@
             progressSection.classList.remove('active');
             downloadSection.classList.remove('active');
             uploadZone.style.display = 'block';
+            convertSection.style.display = '';
             progressFill.style.width = '0%';
             progressText.textContent = 'Converting... 0%';
             convertBtn.disabled = false;
-            previewContent.textContent = 'Loading document preview...';
+            previewContent.innerHTML = 'Loading document preview...';
         }
     </script>
 
