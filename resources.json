@@ -150,19 +150,20 @@
         "file": "resources/figma-plugins-extensions-2026.html"
     },
     {
-        "id": 11,
-        "title": "Complete SEO Guide for Beginners 2026",
-        "slug": "complete-seo-guide-beginners-2026",
-        "description": "Master SEO from scratch with this comprehensive guide. Learn keyword research, on-page optimization, link building, and technical SEO. Perfect for beginners!",
-        "category": "SEO Resources",
-        "type": "Guide",
-        "format": "PDF",
-        "author": "Free Tools Hub Team",
-        "date": "Feb 9, 2026",
-        "downloads": 1247,
-        "image": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c2e3?w=800&h=400&fit=crop",
-        "featured": true,
-        "file": "resources/complete-seo-guide-beginners-2026.html"
+    "id": 11,
+    "title": "Complete SEO Guide for Beginners 2026",
+    "slug": "complete-seo-guide-beginners-2026",
+    "description": "Master SEO from scratch with this comprehensive guide. Learn keyword research, on-page optimization, link building, and technical SEO. Perfect for beginners!",
+    "category": "SEO Resources",
+    "type": "Guide",
+    "format": "PDF",
+    "author": "Free Tools Hub Team",
+    "date": "Feb 9, 2026",
+    "downloads": 1247,
+    "image": "https://images.unsplash.com/photo-1432888622747-4eb9a8f2c2e3?w=800&h=400&fit=crop",
+    "featured": true,
+    "file": "resources/complete-seo-guide-beginners-2026.html",
+    "download": "downloads/Complete-SEO-Guide-Beginners-2026.pdf"
     },
     {
         "id": 12,
