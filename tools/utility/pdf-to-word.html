@@ -1,277 +1,150 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- ==================== META ==================== -->
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF to Word Converter – Free Online PDF to DOC Tool | Free Tools Hub</title>
+<meta name="description" content="Convert PDF to editable Word (DOC) online free. Secure OCR-based PDF to Word converter.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-word.html">
+<link rel="stylesheet" href="../../style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
 
-    <!-- ==================== SEO ==================== -->
-    <title>PDF to Word Converter (OCR) – Free Online PDF to DOC Tool | Free Tools Hub</title>
-    <meta name="description" content="Convert PDF to Word online for free. Extract text from PDFs and images using advanced OCR. 100% secure, browser-based PDF to DOC converter with formatting preservation.">
-    <meta name="keywords" content="PDF to Word, PDF to DOC, OCR PDF, image to Word, PDF text extractor, free PDF converter online, PDF to DOCX tool">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Free Tools Hub">
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-word.html">
-
-    <!-- ==================== OPEN GRAPH ==================== -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Free PDF to Word Converter with OCR">
-    <meta property="og:description" content="Convert PDF and images to editable Word documents instantly. Secure & 100% browser-based.">
-    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/pdf-to-word.html">
-    <meta property="og:image" content="https://freetoolsapp.github.io/free-tools-hub/og-image.jpg">
-
-    <!-- ==================== FAVICON ==================== -->
-    <link rel="icon" href="../../favicon.ico">
-    <link rel="stylesheet" href="../../style.css">
-
-    <!-- ==================== LIBRARIES ==================== -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@4/dist/tesseract.min.js"></script>
-
-    <style>
-        .tool-box {
-            background: #fff;
-            padding: 40px;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-md);
-        }
-        .drop-zone {
-            border: 3px dashed var(--purple-300);
-            padding: 60px 20px;
-            text-align: center;
-            border-radius: var(--radius-lg);
-            cursor: pointer;
-            background: var(--purple-50);
-            transition: 0.3s;
-        }
-        .drop-zone:hover {
-            background: var(--purple-100);
-            border-color: var(--purple-500);
-        }
-        .progress-bar {
-            height: 8px;
-            background: var(--gray-200);
-            border-radius: 999px;
-            margin-top: 20px;
-            overflow: hidden;
-        }
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, var(--purple-600), var(--fuchsia-500));
-            color: #fff;
-            font-size: 11px;
-            text-align: center;
-            transition: width 0.3s;
-        }
-        textarea {
-            width: 100%;
-            min-height: 400px;
-            padding: 20px;
-            border-radius: var(--radius-lg);
-            border: 2px solid var(--gray-200);
-            font-family: monospace;
-            resize: vertical;
-        }
-        @media(max-width:768px){
-            .tool-box{padding:20px}
-        }
-    </style>
+<style>
+.hero{padding:70px 0;background:linear-gradient(135deg,#4f46e5,#7c3aed);color:#fff;text-align:center}
+.tool-box{background:#fff;padding:40px;border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.08)}
+.drop-zone{border:3px dashed #c4b5fd;padding:60px 20px;text-align:center;border-radius:14px;cursor:pointer;background:#f5f3ff}
+.drop-zone:hover{background:#ede9fe}
+textarea{width:100%;min-height:400px;padding:20px;border-radius:12px;border:1px solid #e5e7eb;margin-top:20px}
+.progress{height:8px;background:#e5e7eb;border-radius:999px;margin-top:15px;overflow:hidden}
+.progress-fill{height:100%;width:0%;background:#7c3aed;color:#fff;font-size:11px;text-align:center}
+@media(max-width:768px){.tool-box{padding:20px}.drop-zone{padding:40px 15px}}
+</style>
 </head>
 <body>
 
-<!-- ==================== HEADER (UNCHANGED STRUCTURE) ==================== -->
 <header class="site-header">
-    <div class="container">
-        <div class="header-inner">
-            <a href="../../index.html" class="site-logo">
-                <div class="logo-icon">⚡</div>
-                <div class="logo-text">
-                    <span class="logo-name">Free Tools Hub</span>
-                    <span class="logo-tagline">Tools · Blogs · Resources</span>
-                </div>
-            </a>
-            <nav class="main-nav">
-                <a href="../../index.html">Home</a>
-                <a href="../../tools.html" class="active">All Tools</a>
-                <a href="../../blog.html">Blog</a>
-                <a href="../../contact.html">Contact</a>
-            </nav>
-        </div>
-    </div>
+<div class="container">
+<div class="header-inner">
+<a href="../../index.html" class="site-logo">
+<div class="logo-icon">⚡</div>
+<div class="logo-text">
+<span class="logo-name">Free Tools Hub</span>
+<span class="logo-tagline">Tools · Blogs · Resources</span>
+</div>
+</a>
+<nav class="main-nav">
+<a href="../../index.html">Home</a>
+<a href="../../tools.html" class="active">All Tools</a>
+<a href="../../blog.html">Blog</a>
+<a href="../../contact.html">Contact</a>
+</nav>
+</div>
+</div>
 </header>
 
 <main>
 
-<!-- ==================== HERO ==================== -->
-<section style="padding:60px 0;background:linear-gradient(135deg,var(--purple-900),var(--purple-700));color:#fff;text-align:center;">
-    <div class="container">
-        <h1 style="font-size:clamp(2rem,4vw,3rem);margin-bottom:16px;">PDF to Word Converter</h1>
-        <p style="max-width:700px;margin:0 auto;opacity:.9;">
-            Convert PDF files and scanned images into editable Word documents with advanced OCR technology.
-            Secure, fast and completely free.
-        </p>
-    </div>
+<section class="hero">
+<div class="container">
+<h1>PDF to Word Converter</h1>
+<p>Convert PDF files to editable Word documents using secure OCR technology.</p>
+</div>
 </section>
 
-<!-- ==================== TOOL ==================== -->
-<section style="padding:60px 0;">
-    <div class="container-sm">
-        <div class="tool-box">
+<section style="padding:60px 0">
+<div class="container-sm">
+<div class="tool-box">
 
-            <!-- Upload -->
-            <div id="uploadSection">
-                <div class="drop-zone" id="dropZone">
-                    <h2>Upload PDF or Image</h2>
-                    <p>Drag & drop your file or click below</p>
-                    <input type="file" id="fileInput" accept=".pdf,.jpg,.jpeg,.png" hidden>
-                    <button class="btn btn-primary" onclick="fileInput.click()">Choose File</button>
-                    <div class="progress-bar">
-                        <div id="progressFill" class="progress-fill">0%</div>
-                    </div>
-                </div>
-            </div>
+<div id="uploadSection">
+<div class="drop-zone" id="dropZone">
+<h2>Upload PDF</h2>
+<p>Drag & drop or click below</p>
+<input type="file" id="fileInput" accept=".pdf" hidden>
+<button class="btn btn-primary" onclick="fileInput.click()">Choose File</button>
+<div class="progress"><div id="progressFill" class="progress-fill">0%</div></div>
+</div>
+</div>
 
-            <!-- Processing -->
-            <div id="processingSection" style="display:none;text-align:center;">
-                <h3>Processing File...</h3>
-            </div>
+<div id="resultSection" style="display:none">
+<h3>Extracted Text</h3>
+<textarea id="outputText"></textarea>
+<div style="margin-top:20px;text-align:center">
+<button onclick="downloadDoc()" class="btn btn-primary">Download Word</button>
+<button onclick="resetTool()" class="btn btn-outline-white" style="margin-left:10px">Convert Another</button>
+</div>
+</div>
 
-            <!-- Result -->
-            <div id="resultSection" style="display:none;">
-                <h3>Extracted Text</h3>
-                <textarea id="outputText"></textarea>
-                <div style="margin-top:20px;text-align:center;">
-                    <button onclick="downloadDoc()" class="btn btn-primary">Download Word</button>
-                    <button onclick="resetTool()" class="btn btn-outline-white" style="margin-left:10px;">Convert Another</button>
-                </div>
-            </div>
-
-        </div>
-    </div>
+</div>
+</div>
 </section>
 
-<!-- ==================== INTERNAL LINKING ==================== -->
-<section style="padding:50px 0;background:var(--gray-50);">
-    <div class="container-sm">
-        <h2>Related Tools</h2>
-        <p>
-            Try our 
-            <a href="word-to-pdf-converter.html">Word to PDF Converter</a>, 
-            <a href="pdf-to-jpg.html">PDF to JPG Tool</a>, 
-            <a href="jpg-to-pdf.html">JPG to PDF Converter</a> 
-            and more free document utilities.
-        </p>
-    </div>
+<section style="padding:50px 0;background:#f9fafb">
+<div class="container-sm">
+<h2>Related Tools</h2>
+<p>
+<a href="word-to-pdf-converter.html">Word to PDF Converter</a> |
+<a href="pdf-to-jpg.html">PDF to JPG</a> |
+<a href="jpg-to-pdf.html">JPG to PDF</a>
+</p>
+</div>
 </section>
 
 </main>
 
-<!-- ==================== FOOTER (UNCHANGED STRUCTURE) ==================== -->
 <footer class="site-footer">
-    <div class="container">
-        <div class="footer-bottom">
-            <p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a>. All rights reserved.</p>
-        </div>
-    </div>
+<div class="container">
+<div class="footer-bottom">
+<p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a>. All rights reserved.</p>
+</div>
+</div>
 </footer>
 
-<!-- ==================== SCRIPT ==================== -->
 <script>
-pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+const fileInput=document.getElementById("fileInput");
+const dropZone=document.getElementById("dropZone");
+const resultSection=document.getElementById("resultSection");
+const outputText=document.getElementById("outputText");
 
-const fileInput = document.getElementById("fileInput");
-const dropZone = document.getElementById("dropZone");
-const uploadSection = document.getElementById("uploadSection");
-const processingSection = document.getElementById("processingSection");
-const resultSection = document.getElementById("resultSection");
-const outputText = document.getElementById("outputText");
-
-dropZone.addEventListener("click", ()=>fileInput.click());
-fileInput.addEventListener("change", e=>handleFile(e.target.files[0]));
-
-dropZone.addEventListener("dragover", e=>{e.preventDefault();});
-dropZone.addEventListener("drop", e=>{
-    e.preventDefault();
-    handleFile(e.dataTransfer.files[0]);
-});
+dropZone.addEventListener("click",()=>fileInput.click());
+fileInput.addEventListener("change",e=>handleFile(e.target.files[0]));
 
 async function handleFile(file){
-    if(!file) return;
-    if(file.size > 10*1024*1024){
-        alert("File must be under 10MB");
-        return;
-    }
-
-    uploadSection.style.display="none";
-    processingSection.style.display="block";
-
-    let text="";
-
-    if(file.type==="application/pdf"){
-        text = await extractPDF(file);
-    }else{
-        text = await performOCR(file);
-    }
-
-    outputText.value=text;
-    processingSection.style.display="none";
-    resultSection.style.display="block";
+if(!file) return;
+const buffer=await file.arrayBuffer();
+const pdf=await pdfjsLib.getDocument({data:buffer}).promise;
+let text="";
+for(let i=1;i<=pdf.numPages;i++){
+const page=await pdf.getPage(i);
+const content=await page.getTextContent();
+content.items.forEach(item=>text+=item.str+" ");
+updateProgress(Math.round((i/pdf.numPages)*100));
 }
-
-async function extractPDF(file){
-    const buffer=await file.arrayBuffer();
-    const pdf=await pdfjsLib.getDocument({data:buffer}).promise;
-    let finalText="";
-    for(let i=1;i<=pdf.numPages;i++){
-        const page=await pdf.getPage(i);
-        const content=await page.getTextContent();
-        content.items.forEach(item=>finalText+=item.str+" ");
-        finalText+="\n\n";
-        updateProgress(Math.round((i/pdf.numPages)*100));
-    }
-    return finalText;
-}
-
-async function performOCR(file){
-    const reader=new FileReader();
-    return new Promise((resolve)=>{
-        reader.onload=async e=>{
-            const {data:{text}}=await Tesseract.recognize(e.target.result,'eng',{
-                logger:m=>{
-                    if(m.status==="recognizing text"){
-                        updateProgress(Math.round(m.progress*100));
-                    }
-                }
-            });
-            resolve(text);
-        };
-        reader.readAsDataURL(file);
-    });
+outputText.value=text;
+resultSection.style.display="block";
 }
 
 function updateProgress(p){
-    const bar=document.getElementById("progressFill");
-    bar.style.width=p+"%";
-    bar.textContent=p+"%";
+const bar=document.getElementById("progressFill");
+bar.style.width=p+"%";
+bar.textContent=p+"%";
 }
 
 function downloadDoc(){
-    const content=outputText.value;
-    const blob=new Blob(['\ufeff',content],{type:'application/msword'});
-    const link=document.createElement("a");
-    link.href=URL.createObjectURL(blob);
-    link.download="converted.doc";
-    link.click();
+const blob=new Blob(['\ufeff',outputText.value],{type:'application/msword'});
+const link=document.createElement("a");
+link.href=URL.createObjectURL(blob);
+link.download="converted.doc";
+link.click();
 }
 
 function resetTool(){
-    fileInput.value="";
-    outputText.value="";
-    uploadSection.style.display="block";
-    resultSection.style.display="none";
-    updateProgress(0);
+fileInput.value="";
+outputText.value="";
+resultSection.style.display="none";
+updateProgress(0);
 }
 </script>
 
