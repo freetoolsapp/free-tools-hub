@@ -630,6 +630,37 @@
     .step-card h4 { font-weight: 700; margin-bottom: 6px; font-size: .95rem; }
     .step-card p { color: var(--text-muted); font-size: .83rem; line-height: 1.55; }
 
+    /* ===== RELATED TOOLS ===== */
+    .related-section { margin-top: 60px; }
+    .related-section h2 {
+      font-family: var(--font-head);
+      font-size: 1.5rem; font-weight: 800;
+      text-align: center; margin-bottom: 28px; letter-spacing: -.3px;
+    }
+    .related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+    .related-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 20px;
+      text-decoration: none;
+      color: var(--text);
+      transition: all .2s;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .related-card:hover { border-color: var(--brand); box-shadow: var(--shadow); transform: translateY(-2px); }
+    .related-icon {
+      width: 44px; height: 44px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; color: #fff; flex-shrink: 0;
+    }
+    .related-card h4 { font-size: .875rem; font-weight: 700; margin-bottom: 3px; }
+    .related-card p { font-size: .75rem; color: var(--text-muted); }
+
     /* ===== FAQ SECTION ===== */
     .faq-section {
       background: var(--surface);
@@ -924,6 +955,37 @@
           <h4>Download</h4>
           <p>Hit "Delete Marked Pages" and instantly download your cleaned PDF — free, no watermark.</p>
         </div>
+      </div>
+    </div>
+
+    <!-- Related Tools -->
+    <div class="related-section">
+      <h2>Related Tools</h2>
+      <div class="related-grid">
+        <a href="https://freetoolshub.online/tools/design/image-resizer.html" class="related-card">
+          <div class="related-icon" style="background:linear-gradient(135deg,#7c3aed,#a855f7);"><i class="fas fa-expand-arrows-alt"></i></div>
+          <div><h4>Image Resizer</h4><p>Resize images to any dimension</p></div>
+        </a>
+        <a href="https://freetoolshub.online/tools/utility/pdf-to-jpg.html" class="related-card">
+          <div class="related-icon" style="background:linear-gradient(135deg,#ea580c,#c2410c);"><i class="fas fa-file-image"></i></div>
+          <div><h4>PDF to JPG</h4><p>Convert PDF pages to images</p></div>
+        </a>
+        <a href="https://freetoolshub.online/tools/utility/jpg-to-pdf.html" class="related-card">
+          <div class="related-icon" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);"><i class="fas fa-file-pdf"></i></div>
+          <div><h4>JPG to PDF</h4><p>Convert images to PDF document</p></div>
+        </a>
+        <a href="https://freetoolshub.online/tools/utility/word-to-pdf-converter.html" class="related-card">
+          <div class="related-icon" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);"><i class="fas fa-file-word"></i></div>
+          <div><h4>Word to PDF</h4><p>Convert DOCX to PDF instantly</p></div>
+        </a>
+        <a href="https://freetoolshub.online/tools/utility/pdf-duplicate.html" class="related-card">
+          <div class="related-icon" style="background:linear-gradient(135deg,#16a34a,#15803d);"><i class="fas fa-copy"></i></div>
+          <div><h4>Duplicate PDF Pages</h4><p>Make duplicates of PDF pages</p></div>
+        </a>
+        <a href="https://freetoolshub.online/tools/utility/rotate-pdf-pages.html" class="related-card">
+          <div class="related-icon" style="background:linear-gradient(135deg,#2563eb,#1d4ed8);"><i class="fas fa-sync-alt"></i></div>
+          <div><h4>Rotate PDF Pages</h4><p>Rotate pages in your PDF</p></div>
+        </a>
       </div>
     </div>
 
