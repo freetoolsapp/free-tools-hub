@@ -1437,6 +1437,95 @@
                 }
             } catch(e) { /* no images */ }
 
+            // Parse numbering.xml → build numId → { ilvl → { numFmt, lvlText, start } }
+            const numDefs = {};   // numId → abstractNumId
+            const absDefs = {};   // abstractNumId → { ilvl → { numFmt, lvlText, start } }
+            const numCounters = {}; // 'numId:ilvl' → current count
+            try {
+                const numEntry = zip.file('word/numbering.xml');
+                if (numEntry) {
+                    const numXml = await numEntry.async('string');
+
+                    // Parse abstractNum definitions
+                    const absRE = /<w:abstractNum w:abstractNumId="(\d+)">([\s\S]*?)<\/w:abstractNum>/g;
+                    let absM;
+                    while ((absM = absRE.exec(numXml)) !== null) {
+                        const absId = absM[1], absContent = absM[2];
+                        const lvls = {};
+                        const lvlRE = /<w:lvl w:ilvl="(\d+)"[^>]*>([\s\S]*?)<\/w:lvl>/g;
+                        let lvlM;
+                        while ((lvlM = lvlRE.exec(absContent)) !== null) {
+                            const ilvl = parseInt(lvlM[1]), lc = lvlM[2];
+                            const nf = lc.match(/<w:numFmt w:val="([^"]+)"/);
+                            const lt = lc.match(/<w:lvlText w:val="([^"]*)"/);
+                            const st = lc.match(/<w:start w:val="(\d+)"/);
+                            lvls[ilvl] = {
+                                numFmt:  nf ? nf[1] : 'decimal',
+                                lvlText: lt ? lt[1] : '%1.',
+                                start:   st ? parseInt(st[1]) : 1
+                            };
+                        }
+                        absDefs[absId] = lvls;
+                    }
+
+                    // Map numId → abstractNumId
+                    const numMapRE = /<w:num w:numId="(\d+)">\s*<w:abstractNumId w:val="(\d+)"/g;
+                    let nmM;
+                    while ((nmM = numMapRE.exec(numXml)) !== null) {
+                        numDefs[nmM[1]] = nmM[2];
+                    }
+                }
+            } catch(e) { /* no numbering */ }
+
+            // Helper: get level def for a numId + ilvl
+            function getLvlDef(numId, ilvl) {
+                const absId = numDefs[numId];
+                if (!absId) return null;
+                const abs = absDefs[absId];
+                if (!abs) return null;
+                return abs[ilvl] || null;
+            }
+
+            // Helper: format a number according to numFmt
+            function formatNum(n, numFmt) {
+                if (numFmt === 'decimal')       return String(n);
+                if (numFmt === 'upperRoman')    return toRoman(n).toUpperCase();
+                if (numFmt === 'lowerRoman')    return toRoman(n).toLowerCase();
+                if (numFmt === 'upperLetter')   return String.fromCharCode(64 + n);
+                if (numFmt === 'lowerLetter')   return String.fromCharCode(96 + n);
+                if (numFmt === 'bullet')        return '•';
+                return String(n);
+            }
+
+            function toRoman(num) {
+                const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+                const syms = ['m','cm','d','cd','c','xc','l','xl','x','ix','v','iv','i'];
+                let result = '';
+                for (let i=0; i<vals.length; i++) {
+                    while (num >= vals[i]) { result += syms[i]; num -= vals[i]; }
+                }
+                return result;
+            }
+
+            // Get next list label for a paragraph (increments counter)
+            function getListLabel(numId, ilvl) {
+                const lvlDef = getLvlDef(numId, ilvl);
+                if (!lvlDef) return '';
+                const key = numId + ':' + ilvl;
+                if (!(key in numCounters)) numCounters[key] = lvlDef.start;
+                const n = numCounters[key];
+                numCounters[key]++;
+                // Reset deeper levels when parent increments
+                for (let deeper = ilvl+1; deeper <= 8; deeper++) {
+                    const dkey = numId + ':' + deeper;
+                    const dDef = getLvlDef(numId, deeper);
+                    if (dDef) numCounters[dkey] = dDef.start;
+                }
+                // Build label from lvlText (e.g. "%1." → replace %N with formatted number)
+                const formatted = formatNum(n, lvlDef.numFmt);
+                return lvlDef.lvlText.replace(/%\d+/g, formatted) + ' ';
+            }
+
             // Page setup  (twips -> points: 1 twip = 1/20 pt)
             const t2p = v => parseFloat(v) / 20;
             let pgW=612, pgH=792, marT=72, marB=72, marL=72, marR=72;
@@ -1495,6 +1584,17 @@
 
                 const paraRTL = /<w:bidi[\s\/]/.test(pXml) || /<w:rtl[\s\/]/.test(pXml);
 
+                // List numbering
+                let listNumId = null, listIlvl = 0;
+                const numPrM = pXml.match(/<w:numPr>([\s\S]*?)<\/w:numPr>/);
+                if (numPrM) {
+                    const np = numPrM[1];
+                    const niM = np.match(/<w:numId w:val="(\d+)"/);
+                    const ilM = np.match(/<w:ilvl w:val="(\d+)"/);
+                    if (niM && niM[1] !== '0') listNumId = niM[1];
+                    if (ilM) listIlvl = parseInt(ilM[1]);
+                }
+
                 // Runs
                 const runsXml = pXml.match(/<w:r[ >][\s\S]*?<\/w:r>/g) || [];
                 const runs = [];
@@ -1519,7 +1619,7 @@
                         if (txt) runs.push({text:txt,bold,italic,underline,fontSize,isRTL:isRTLrun});
                     }
                 }
-                return {runs,spBefore,spAfter,lsMul,lsAbs,indL,jc,isRTL:paraRTL,hasPageBreak,imageInfo};
+                return {runs,spBefore,spAfter,lsMul,lsAbs,indL,jc,isRTL:paraRTL,hasPageBreak,imageInfo,listNumId,listIlvl};
             }
 
             const paragraphs = parasXml.map(parsePara);
@@ -1550,6 +1650,19 @@
                     }
                 }
                 return lines.filter(l=>l.length>0);
+            }
+
+            // Like wrapRuns but prepends a label run to the first line only
+            function wrapRunsWithLabel(runs, maxW, fontSize, labelRuns) {
+                if (!labelRuns || labelRuns.length === 0) return wrapRuns(runs, maxW, fontSize);
+                // Calculate label width
+                const lw = labelRuns.reduce((acc, r) => acc + textW(r.text, fontSize, r.bold, r.italic), 0);
+                // Wrap body runs with reduced first-line width
+                const bodyLines = wrapRuns(runs, maxW - lw, fontSize);
+                // Prepend label to first line
+                if (bodyLines.length === 0) return [labelRuns];
+                const firstLine = [...labelRuns, ...bodyLines[0]];
+                return [firstLine, ...bodyLines.slice(1)];
             }
 
             // Convert image bytes to base64 + format for jsPDF
@@ -1682,13 +1795,23 @@
 
                 // Regular TEXT paragraph
                 const allTxt=para.runs.map(r=>r.text).join('').trim();
-                if (!allTxt) { y+=DSIZE*LHFAC*0.5; continue; }
+                if (!allTxt && !para.listNumId) { y+=DSIZE*LHFAC*0.5; continue; }
 
                 const fsSrc=para.runs.find(r=>r.fontSize);
                 const fs=fsSrc?fsSrc.fontSize:DSIZE;
                 const lineH=para.lsAbs!==null?para.lsAbs:fs*para.lsMul*(para.lsMul<=1.05?LHFAC:para.lsMul);
-                const paraW=cW-para.indL, xStart=marL+para.indL;
-                const dLines=wrapRuns(para.runs,paraW,fs);
+
+                // List label (e.g. "1. ", "i. ", "(a) ")
+                const listLabel = para.listNumId ? getListLabel(para.listNumId, para.listIlvl) : '';
+                // List indentation: hanging indent style
+                const listIndent = para.listNumId ? (para.listIlvl+1) * 18 : 0;
+                const labelRuns = listLabel ? [{ text: listLabel, bold: false, italic: false, underline: false, fontSize: fs, isRTL: false }] : [];
+                const allRuns = [...labelRuns, ...para.runs];
+
+                const paraW=cW-para.indL-listIndent, xStart=marL+para.indL+listIndent;
+                // For the first line, subtract the label width so text wraps correctly
+                const labelW = listLabel ? textW(listLabel, fs, false, false) : 0;
+                const dLines=wrapRunsWithLabel(para.runs, paraW, fs, labelRuns);
 
                 checkPage(para.spBefore+lineH);
                 y+=para.spBefore;
