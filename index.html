@@ -1,74 +1,231 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" prefix="og: https://ogp.me/ns#">
 <head>
-    <!-- Meta Tags -->
+    <!-- ═══════════════════════════════════════════════
+         BASIC META
+    ═══════════════════════════════════════════════ -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="content-language" content="en">
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-3CEQJ2D9WY');
-    </script>
+    <!-- ═══════════════════════════════════════════════
+         GOOGLE SITE VERIFICATION
+    ═══════════════════════════════════════════════ -->
     <meta name="google-site-verification" content="Z1kb4njkoafxB3GC_vwFqKQCYNjO-WLEQ6JjEXruX9U" />
 
-    <!-- Primary SEO Meta Tags -->
-    <title>Free Tools Hub — 100+ Free AI, SEO & Productivity Tools | 2026</title>
-    <meta name="title" content="Free Tools Hub — 100+ Free AI, SEO & Productivity Tools | 2026">
-    <meta name="description" content="Access 100+ free online tools instantly — AI tools, SEO tools, student calculators, design & web dev resources. No signup required. Fast, secure & updated for 2026.">
-    <meta name="keywords" content="free tools, AI tools 2026, SEO tools free, online calculator, student tools, design tools, web development, productivity tools, no signup tools, free resources">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Free Tools Hub">
+    <!-- ═══════════════════════════════════════════════
+         PRIMARY SEO META TAGS
+    ═══════════════════════════════════════════════ -->
+    <title>FreeToolsHub — 100+ Free Online Tools | AI, SEO, PDF & Productivity | 2026</title>
+    <meta name="title" content="FreeToolsHub — 100+ Free Online Tools | AI, SEO, PDF & Productivity | 2026">
+    <meta name="description" content="Access 100+ free online tools instantly at FreeToolsHub.online — PDF tools, AI tools, SEO tools, image tools, student calculators & productivity tools. No signup, no watermark, no cost. Updated for 2026.">
+    <meta name="keywords" content="free online tools, free PDF tools, free AI tools 2026, SEO tools free, image resizer online, delete PDF pages, word to pdf converter, free student tools, productivity tools free, no signup tools, freetoolshub">
+    <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="author" content="FreeToolsHub">
     <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="general">
+    <meta name="copyright" content="FreeToolsHub 2026">
+    <meta name="theme-color" content="#7c3aed">
 
-    <!-- Open Graph / Facebook -->
+    <!-- ═══════════════════════════════════════════════
+         OPEN GRAPH / FACEBOOK
+    ═══════════════════════════════════════════════ -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://freetoolshub.online/">
-    <meta property="og:title" content="Free Tools Hub — 100+ Free AI, SEO & Productivity Tools">
-    <meta property="og:description" content="Your complete hub for 100+ free online tools, expert blogs, and curated resources. No signup required.">
+    <meta property="og:site_name" content="FreeToolsHub">
+    <meta property="og:title" content="FreeToolsHub — 100+ Free Online Tools | AI, SEO, PDF & More">
+    <meta property="og:description" content="Your complete hub for 100+ free online tools — PDF, AI, SEO, image, student & productivity tools. No signup required. Fast, secure & updated for 2026.">
     <meta property="og:image" content="https://freetoolshub.online/og-image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="FreeToolsHub - 100+ Free Online Tools">
+    <meta property="og:locale" content="en_US">
 
-    <!-- Twitter Card -->
+    <!-- ═══════════════════════════════════════════════
+         TWITTER CARD
+    ═══════════════════════════════════════════════ -->
     <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@freetoolshub">
+    <meta name="twitter:creator" content="@freetoolshub">
     <meta name="twitter:url" content="https://freetoolshub.online/">
-    <meta name="twitter:title" content="Free Tools Hub — 100+ Free Online Tools">
-    <meta name="twitter:description" content="Access 100+ free AI, SEO, student & design tools instantly. No signup required.">
+    <meta name="twitter:title" content="FreeToolsHub — 100+ Free Online Tools">
+    <meta name="twitter:description" content="Access 100+ free AI, SEO, PDF & productivity tools instantly. No signup required. Fast & secure.">
     <meta name="twitter:image" content="https://freetoolshub.online/og-image.jpg">
+    <meta name="twitter:image:alt" content="FreeToolsHub - Free Online Tools">
 
-    <!-- Canonical -->
+    <!-- ═══════════════════════════════════════════════
+         CANONICAL & ALTERNATE
+    ═══════════════════════════════════════════════ -->
     <link rel="canonical" href="https://freetoolshub.online/">
 
-    <!-- Favicon -->
+    <!-- ═══════════════════════════════════════════════
+         FAVICON & ICONS
+    ═══════════════════════════════════════════════ -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
 
-    <!-- Schema Markup -->
+    <!-- ═══════════════════════════════════════════════
+         SCHEMA: WebSite + SearchAction
+    ═══════════════════════════════════════════════ -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "Free Tools Hub",
+        "name": "FreeToolsHub",
+        "alternateName": "Free Tools Hub",
         "url": "https://freetoolshub.online/",
-        "description": "Your complete hub for 100+ free online tools, expert blogs, and curated resources.",
+        "description": "Your complete hub for 100+ free online tools — PDF tools, AI tools, SEO tools, image tools, student calculators and productivity tools. No signup required.",
+        "inLanguage": "en-US",
         "potentialAction": {
             "@type": "SearchAction",
-            "target": "https://freetoolshub.online/tools.html?q={search_term_string}",
+            "target": {
+                "@type": "EntryPoint",
+                "urlTemplate": "https://freetoolshub.online/tools.html?q={search_term_string}"
+            },
             "query-input": "required name=search_term_string"
         }
     }
     </script>
 
-    <!-- Google Fonts + Font Awesome -->
+    <!-- ═══════════════════════════════════════════════
+         SCHEMA: Organization
+    ═══════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "FreeToolsHub",
+        "url": "https://freetoolshub.online/",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "https://freetoolshub.online/apple-touch-icon.png",
+            "width": 180,
+            "height": 180
+        },
+        "description": "FreeToolsHub provides 100+ free online tools including PDF tools, AI tools, SEO tools, image tools, student calculators and productivity tools.",
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "Customer Support",
+            "url": "https://freetoolshub.online/contact.html"
+        },
+        "sameAs": [
+            "https://github.com/freetoolsapp"
+        ]
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+         SCHEMA: WebPage
+    ═══════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "FreeToolsHub — 100+ Free Online Tools | AI, SEO, PDF & Productivity | 2026",
+        "url": "https://freetoolshub.online/",
+        "description": "Access 100+ free online tools instantly — PDF tools, AI tools, SEO tools, image resizer, student calculators & productivity tools. No signup required.",
+        "inLanguage": "en-US",
+        "isPartOf": { "@type": "WebSite", "url": "https://freetoolshub.online/" },
+        "about": {
+            "@type": "Thing",
+            "name": "Free Online Tools"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://freetoolshub.online/" }
+            ]
+        }
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+         SCHEMA: ItemList (Popular Tools)
+    ═══════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Popular Free Online Tools",
+        "description": "Most popular free online tools at FreeToolsHub — no signup required",
+        "url": "https://freetoolshub.online/#popular-tools",
+        "numberOfItems": 8,
+        "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Word to PDF Converter", "url": "https://freetoolshub.online/tools/utility/word-to-pdf-converter.html" },
+            { "@type": "ListItem", "position": 2, "name": "Delete PDF Pages",       "url": "https://freetoolshub.online/tools/utility/pdf-pages-delete.html" },
+            { "@type": "ListItem", "position": 3, "name": "GPA Calculator",          "url": "https://freetoolshub.online/tools/student/gpa-calculator.html" },
+            { "@type": "ListItem", "position": 4, "name": "Image Resizer",           "url": "https://freetoolshub.online/tools/design/image-resizer.html" },
+            { "@type": "ListItem", "position": 5, "name": "Plagiarism Checker",      "url": "https://freetoolshub.online/tools/student/plagiarism-checker.html" },
+            { "@type": "ListItem", "position": 6, "name": "Meta Description Generator","url": "https://freetoolshub.online/tools/seo/meta-description-generator.html" },
+            { "@type": "ListItem", "position": 7, "name": "JSON Formatter",          "url": "https://freetoolshub.online/tools/webdev/json-formatter.html" },
+            { "@type": "ListItem", "position": 8, "name": "BMI Calculator",          "url": "https://freetoolshub.online/tools/utility/bmi-calculator.html" }
+        ]
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+         SCHEMA: FAQPage (Homepage FAQ for Rich Results)
+    ═══════════════════════════════════════════════ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Are all tools on FreeToolsHub really free?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes, all 100+ tools on FreeToolsHub.online are completely free to use. There is no signup, no subscription, and no hidden fees. You can use all tools directly in your browser at no cost." }
+            },
+            {
+                "@type": "Question",
+                "name": "Do I need to create an account to use FreeToolsHub tools?",
+                "acceptedAnswer": { "@type": "Answer", "text": "No. FreeToolsHub requires absolutely no account or signup. All tools work instantly in your browser — just open the tool, upload your file or enter your data, and get your result immediately." }
+            },
+            {
+                "@type": "Question",
+                "name": "Is my data safe when using FreeToolsHub tools?",
+                "acceptedAnswer": { "@type": "Answer", "text": "Yes. Most FreeToolsHub tools process your files and data entirely in your browser using JavaScript. Your files are never uploaded to any server, keeping your data completely private and secure." }
+            },
+            {
+                "@type": "Question",
+                "name": "What types of tools are available on FreeToolsHub?",
+                "acceptedAnswer": { "@type": "Answer", "text": "FreeToolsHub offers 100+ tools across 7 categories: PDF Tools (delete pages, word to PDF, rotate, merge), Design Tools (image resizer), SEO Tools (meta description generator, keyword checker), Student Tools (GPA calculator, plagiarism checker), Productivity Tools, Web Dev Tools (JSON formatter, HTML minifier), and AI Tools." }
+            }
+        ]
+    }
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+         GOOGLE ANALYTICS
+    ═══════════════════════════════════════════════ -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-3CEQJ2D9WY"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-3CEQJ2D9WY', {
+            page_title: 'Home — FreeToolsHub',
+            page_location: 'https://freetoolshub.online/'
+        });
+    </script>
+
+    <!-- ═══════════════════════════════════════════════
+         FONTS & ICONS — Preloaded for performance
+    ═══════════════════════════════════════════════ -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Custom CSS -->
+    <!-- ═══════════════════════════════════════════════
+         CUSTOM CSS
+    ═══════════════════════════════════════════════ -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -373,7 +530,7 @@
 
             <div class="blog-grid">
 
-                <!-- Blog 1 -->
+                <!-- Blog 1: AI Tools Guide 2026 -->
                 <article class="blog-card">
                     <div class="blog-card-thumb" style="background: linear-gradient(135deg, #3b82f6, #4f46e5);">
                         <i class="fas fa-robot" aria-hidden="true"></i>
@@ -384,39 +541,39 @@
                         <p>Complete guide to the best AI tools for productivity, creativity, and business growth.</p>
                         <div class="blog-meta">
                             <span><i class="fas fa-clock" aria-hidden="true"></i> 8 min read</span>
-                            <a href="blog.html" class="blog-read-more" aria-label="Read AI Tools Guide 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="blogs/ai-tools-guide-2026.html" class="blog-read-more" aria-label="Read AI Tools Guide 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Blog 2 -->
+                <!-- Blog 2: Productivity Hacks 2026 -->
                 <article class="blog-card">
                     <div class="blog-card-thumb" style="background: linear-gradient(135deg, #10b981, #0d9488);">
-                        <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+                        <i class="fas fa-rocket" aria-hidden="true"></i>
                     </div>
                     <div class="blog-card-body">
-                        <span class="blog-tag tag-student"><i class="fas fa-graduation-cap" aria-hidden="true"></i> Student</span>
-                        <h3>Student Tools Collection</h3>
-                        <p>Essential free tools every student needs for academic success and productivity.</p>
+                        <span class="blog-tag tag-student"><i class="fas fa-rocket" aria-hidden="true"></i> Productivity</span>
+                        <h3>15 Proven Productivity Hacks 2026</h3>
+                        <p>Science-backed productivity hacks used by top performers. Boost efficiency and achieve more in less time.</p>
                         <div class="blog-meta">
                             <span><i class="fas fa-clock" aria-hidden="true"></i> 6 min read</span>
-                            <a href="blog.html" class="blog-read-more" aria-label="Read Student Tools Collection">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="blogs/productivity-hacks-2026.html" class="blog-read-more" aria-label="Read 15 Proven Productivity Hacks 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
 
-                <!-- Blog 3 -->
+                <!-- Blog 3: SEO Tools Guide 2026 -->
                 <article class="blog-card">
                     <div class="blog-card-thumb" style="background: linear-gradient(135deg, #8b5cf6, #d946ef);">
-                        <i class="fas fa-search" aria-hidden="true"></i>
+                        <i class="fas fa-chart-line" aria-hidden="true"></i>
                     </div>
                     <div class="blog-card-body">
-                        <span class="blog-tag tag-seo"><i class="fas fa-search" aria-hidden="true"></i> SEO</span>
-                        <h3>SEO Guide 2026</h3>
-                        <p>Latest SEO strategies from keyword research to link building and technical optimization.</p>
+                        <span class="blog-tag tag-seo"><i class="fas fa-chart-line" aria-hidden="true"></i> SEO</span>
+                        <h3>10 Best Free SEO Tools 2026</h3>
+                        <p>The 10 most powerful free SEO tools to skyrocket your rankings. Complete guide with strategies.</p>
                         <div class="blog-meta">
                             <span><i class="fas fa-clock" aria-hidden="true"></i> 12 min read</span>
-                            <a href="blog.html" class="blog-read-more" aria-label="Read SEO Guide 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+                            <a href="blogs/best-free-seo-tools-2026.html" class="blog-read-more" aria-label="Read 10 Best Free SEO Tools 2026">Read More <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
                         </div>
                     </div>
                 </article>
