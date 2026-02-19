@@ -1,0 +1,153 @@
+{
+  "categories": [
+    {
+      "id": "css",
+      "name": "CSS Preparation Books",
+      "icon": "fa-award",
+      "color": "#3730a3",
+      "description": "Complete CSS preparation materials including past papers, books, and study guides",
+      "count": "50+ Materials",
+      "link": "css.html",
+      "priority": 1,
+      "featured": true
+    },
+    {
+      "id": "fpsc",
+      "name": "FPSC Books & Materials",
+      "icon": "fa-briefcase",
+      "color": "#1d4ed8",
+      "description": "FPSC test preparation, past papers, and recruitment updates",
+      "count": "40+ Materials",
+      "link": "fpsc.html",
+      "priority": 2,
+      "featured": true
+    },
+    {
+      "id": "matric",
+      "name": "Matric (Class 9-10)",
+      "icon": "fa-book-open",
+      "color": "#0d9488",
+      "description": "Complete textbooks, notes, and past papers for Class 9 and 10",
+      "count": "100+ Materials",
+      "link": "matric.html",
+      "priority": 3,
+      "featured": true
+    },
+    {
+      "id": "fsc",
+      "name": "FSc/ICS (Class 11-12)",
+      "icon": "fa-graduation-cap",
+      "color": "#7c3aed",
+      "description": "FSc and ICS complete study materials, notes, and past papers",
+      "count": "120+ Materials",
+      "link": "fsc.html",
+      "priority": 4,
+      "featured": true
+    },
+    {
+      "id": "pms",
+      "name": "PMS Preparation",
+      "icon": "fa-trophy",
+      "color": "#b45309",
+      "description": "Provincial Management Service exam preparation materials",
+      "count": "35+ Materials",
+      "link": "pms.html",
+      "priority": 5,
+      "featured": false
+    },
+    {
+      "id": "ppsc",
+      "name": "PPSC Materials",
+      "icon": "fa-file-alt",
+      "color": "#dc2626",
+      "description": "Punjab Public Service Commission exam materials and updates",
+      "count": "30+ Materials",
+      "link": "ppsc.html",
+      "priority": 6,
+      "featured": false
+    },
+    {
+      "id": "nts",
+      "name": "NTS Test Preparation",
+      "icon": "fa-pen",
+      "color": "#16a34a",
+      "description": "NTS GAT, NAT, and other tests preparation materials",
+      "count": "25+ Materials",
+      "link": "nts.html",
+      "priority": 7,
+      "featured": false
+    },
+    {
+      "id": "past-papers",
+      "name": "Past Papers Collection",
+      "icon": "fa-file-pdf",
+      "color": "#ea580c",
+      "description": "Board exam past papers from all provinces and boards",
+      "count": "200+ Papers",
+      "link": "past-papers.html",
+      "priority": 8,
+      "featured": true
+    },
+    {
+      "id": "textbooks-punjab",
+      "name": "Text Books (Punjab)",
+      "icon": "fa-book",
+      "color": "#4f46e5",
+      "description": "Punjab Board textbooks for all classes",
+      "count": "150+ Books",
+      "link": "textbooks-punjab.html",
+      "priority": 9,
+      "featured": false
+    },
+    {
+      "id": "textbooks-federal",
+      "name": "Text Books (Federal)",
+      "icon": "fa-book",
+      "color": "#0891b2",
+      "description": "Federal Board textbooks for all classes",
+      "count": "120+ Books",
+      "link": "textbooks-federal.html",
+      "priority": 10,
+      "featured": false
+    },
+    {
+      "id": "smart-syllabus",
+      "name": "Smart Syllabus Notes",
+      "icon": "fa-file-alt",
+      "color": "#db2777",
+      "description": "Smart syllabus aligned notes for all subjects",
+      "count": "80+ Notes",
+      "link": "smart-syllabus.html",
+      "priority": 11,
+      "featured": false
+    },
+    {
+      "id": "guess-papers",
+      "name": "Guess Papers",
+      "icon": "fa-clipboard-list",
+      "color": "#65a30d",
+      "description": "Board exam guess papers with high success rate",
+      "count": "60+ Papers",
+      "link": "guess-papers.html",
+      "priority": 12,
+      "featured": false
+    }
+  ],
+  "quick_links": [
+    {
+      "name": "Explore All Categories",
+      "link": "education.html",
+      "icon": "fa-th"
+    },
+    {
+      "name": "Latest Updates",
+      "link": "education.html#updates",
+      "icon": "fa-bell"
+    },
+    {
+      "name": "Job Notifications",
+      "link": "education.html#jobs",
+      "icon": "fa-briefcase"
+    }
+  ]
+}

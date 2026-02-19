@@ -1,0 +1,166 @@
+{
+  "materials": [
+    {
+      "id": 1,
+      "title": "CSS English Essay Writing Guide 2026",
+      "description": "Complete guide for CSS English essay paper with 50+ sample essays, writing techniques, and evaluation criteria",
+      "type": "guide",
+      "category": "English",
+      "format": "PDF",
+      "pages": 150,
+      "size": "3.8 MB",
+      "downloads": "22.1K",
+      "date": "2026-02-14",
+      "file": "css/css-essay-guide-2026.pdf",
+      "featured": true
+    },
+    {
+      "id": 2,
+      "title": "CSS Past Papers Collection (2016-2025)",
+      "description": "Complete collection of CSS written examination papers from last 10 years with detailed solutions",
+      "type": "past-papers",
+      "category": "All Subjects",
+      "format": "PDF",
+      "pages": 280,
+      "size": "8.5 MB",
+      "downloads": "35.4K",
+      "date": "2026-02-10",
+      "file": "css/css-past-papers-2016-2025.pdf",
+      "featured": true
+    },
+    {
+      "id": 3,
+      "title": "Pakistan Affairs for CSS - Complete Notes",
+      "description": "Comprehensive notes covering entire Pakistan Affairs syllabus with current affairs integration",
+      "type": "notes",
+      "category": "Pakistan Affairs",
+      "format": "PDF",
+      "pages": 220,
+      "size": "5.2 MB",
+      "downloads": "28.6K",
+      "date": "2026-02-08",
+      "file": "css/pakistan-affairs-notes.pdf",
+      "featured": true
+    },
+    {
+      "id": 4,
+      "title": "Current Affairs 2025 for CSS",
+      "description": "Year-wise compilation of important current affairs with analysis for CSS examination",
+      "type": "notes",
+      "category": "Current Affairs",
+      "format": "PDF",
+      "pages": 180,
+      "size": "4.2 MB",
+      "downloads": "31.2K",
+      "date": "2026-02-12",
+      "file": "css/current-affairs-2025.pdf",
+      "featured": false
+    },
+    {
+      "id": 5,
+      "title": "CSS Islamic Studies Complete Book",
+      "description": "Complete Islamic Studies book covering entire syllabus with Quranic references and Hadith",
+      "type": "book",
+      "category": "Islamic Studies",
+      "format": "PDF",
+      "pages": 320,
+      "size": "7.8 MB",
+      "downloads": "25.8K",
+      "date": "2026-02-06",
+      "file": "css/islamic-studies-complete.pdf",
+      "featured": false
+    },
+    {
+      "id": 6,
+      "title": "General Knowledge MCQs - 5000+ Questions",
+      "description": "Extensive MCQs bank covering Pakistan Affairs, World Affairs, Geography, and General Knowledge",
+      "type": "mcqs",
+      "category": "General Knowledge",
+      "format": "PDF",
+      "pages": 250,
+      "size": "4.5 MB",
+      "downloads": "42.1K",
+      "date": "2026-02-15",
+      "file": "css/gk-mcqs-5000.pdf",
+      "featured": true
+    },
+    {
+      "id": 7,
+      "title": "CSS Everyday Science Complete Guide",
+      "description": "Complete guide for Everyday Science paper with concepts, definitions, and practice questions",
+      "type": "guide",
+      "category": "Everyday Science",
+      "format": "PDF",
+      "pages": 190,
+      "size": "4.8 MB",
+      "downloads": "19.4K",
+      "date": "2026-02-05",
+      "file": "css/everyday-science-guide.pdf",
+      "featured": false
+    },
+    {
+      "id": 8,
+      "title": "CSS Interview Preparation Guide",
+      "description": "Complete interview preparation with common questions, answers, and panel expectations",
+      "type": "guide",
+      "category": "Interview",
+      "format": "PDF",
+      "pages": 95,
+      "size": "2.1 MB",
+      "downloads": "16.7K",
+      "date": "2026-02-11",
+      "file": "css/interview-guide.pdf",
+      "featured": false
+    },
+    {
+      "id": 9,
+      "title": "CSS Recommended Books List 2026",
+      "description": "Comprehensive list of recommended books for all CSS subjects with authors and editions",
+      "type": "guide",
+      "category": "Study Plan",
+      "format": "PDF",
+      "pages": 45,
+      "size": "1.2 MB",
+      "downloads": "27.9K",
+      "date": "2026-02-13",
+      "file": "css/recommended-books-2026.pdf",
+      "featured": false
+    },
+    {
+      "id": 10,
+      "title": "CSS Syllabus 2026 - Complete Breakdown",
+      "description": "Detailed syllabus breakdown with topic-wise weightage and study strategy",
+      "type": "syllabus",
+      "category": "Syllabus",
+      "format": "PDF",
+      "pages": 65,
+      "size": "1.8 MB",
+      "downloads": "33.5K",
+      "date": "2026-02-09",
+      "file": "css/syllabus-2026.pdf",
+      "featured": true
+    }
+  ],
+  "latest_updates": [
+    {
+      "title": "CSS 2026 Written Exam Schedule Released",
+      "date": "2026-02-15",
+      "type": "schedule",
+      "description": "Federal Public Service Commission has released the written examination schedule for CSS 2026. Exams start from April 20, 2026."
+    },
+    {
+      "title": "CSS Results 2025 Announced",
+      "date": "2026-02-10",
+      "type": "result",
+      "description": "FPSC announces CSS 2025 written examination results. 412 candidates qualified for interview."
+    },
+    {
+      "title": "CSS Application 2027 Open",
+      "date": "2026-02-08",
+      "type": "notification",
+      "description": "Applications for CSS 2027 are now open. Last date for submission is March 15, 2026."
+    }
+  ],
+  "categories": ["All Subjects", "English", "Pakistan Affairs", "Current Affairs", "Islamic Studies", "General Knowledge", "Everyday Science", "Interview", "Study Plan", "Syllabus"],
+  "types": ["book", "notes", "past-papers", "mcqs", "guide", "syllabus"]
+}
