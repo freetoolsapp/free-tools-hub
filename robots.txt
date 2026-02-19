@@ -1,0 +1,32 @@
+# Robots.txt for Free Tools Hub
+# Website: https://freetoolshub.online
+# Last Updated: February 18, 2026
+
+# Allow all crawlers
+User-agent: *
+Allow: /
+
+# Disallow crawling of admin/private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /_test/
+
+# Allow specific search engines full access
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Sitemap location
+Sitemap: https://freetoolshub.online/sitemap.xml
+
+# Crawl-delay (optional - prevents server overload)
+# User-agent: *
+# Crawl-delay: 1
