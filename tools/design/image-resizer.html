@@ -119,22 +119,6 @@
           "@type": "Answer",
           "text": "Enable the 'Lock Aspect Ratio' toggle before entering dimensions. When locked, changing the width will automatically update the height to keep the original proportions, preventing image distortion."
         }
-      },
-      {
-        "@type": "Question",
-        "name": "What is the maximum image size I can upload?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Since processing happens in your browser, there is no hard server-side file size limit. Very large images (50MB+) may take a moment to process depending on your device. Most standard images (up to 20MB) work instantly."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Will the downloaded image have a watermark?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. Images downloaded from FreeToolsHub Image Resizer have absolutely no watermark. The output is clean and ready to use professionally."
-        }
       }
     ]
   }
@@ -152,82 +136,134 @@
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
   <style>
     :root {
-      --brand:        #7c3aed;
-      --brand-dark:   #5b21b6;
+      --brand:        #8b5cf6;
+      --brand-dark:   #7c3aed;
       --brand-light:  #ede9fe;
-      --brand2:       #a855f7;
       --surface:      #ffffff;
-      --surface2:     #f8f9fc;
-      --surface3:     #f1f0fe;
-      --text:         #1a1a2e;
+      --surface2:     #f9fafb;
+      --text:         #111827;
       --text-muted:   #6b7280;
-      --border:       #e2e5ef;
-      --shadow:       0 4px 24px rgba(0,0,0,.08);
-      --radius:       14px;
-      --radius-sm:    8px;
-      --font-head:    'Syne', sans-serif;
-      --font-body:    'DM Sans', sans-serif;
+      --border:       #e5e7eb;
+      --shadow:       0 1px 3px rgba(0,0,0,.1);
+      --radius:       12px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
-      font-family: var(--font-body);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--surface2);
       color: var(--text);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      line-height: 1.6;
     }
 
-    /* ===== HEADER ===== */
-    .site-header {
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
-      color: #fff;
+    /* ===== HEADER - EXACT AS SCREENSHOT ===== */
+    .top-header {
+      background: #fff;
       padding: 1rem 0;
-      box-shadow: 0 2px 16px rgba(124,58,237,.15);
+      border-bottom: 1px solid var(--border);
     }
-    .site-header .container {
+    .top-header .container {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 1.5rem;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      flex-wrap: wrap;
       gap: 1rem;
     }
-    .site-header .logo {
-      font-family: var(--font-head);
-      font-size: 1.5rem;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
+    .logo-section {
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 1rem;
     }
-    .site-header nav {
+    .logo-icon {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      border-radius: 16px;
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 12px rgba(139,92,246,.2);
+    }
+    .logo-icon i {
+      font-size: 2rem;
+      color: #fff;
+    }
+    .logo-text {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-text h1 {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--text);
+      line-height: 1.2;
+    }
+    .logo-text p {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .all-tools-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 0.75rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: all .2s;
+      white-space: nowrap;
+    }
+    .all-tools-btn:hover {
+      background: var(--brand-light);
+      border-color: var(--brand);
+      color: var(--brand-dark);
+    }
+
+    /* Breadcrumbs */
+    .breadcrumbs {
+      background: var(--surface2);
+      padding: 0.75rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .breadcrumbs .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       flex-wrap: wrap;
     }
-    .site-header nav a {
-      color: rgba(255,255,255,.9);
+    .breadcrumbs a {
+      color: var(--text-muted);
       text-decoration: none;
-      font-weight: 500;
+      font-size: 0.875rem;
       transition: color .2s;
     }
-    .site-header nav a:hover { color: #fff; }
+    .breadcrumbs a:hover {
+      color: var(--brand);
+    }
+    .breadcrumbs span {
+      color: var(--text);
+      font-weight: 600;
+      font-size: 0.875rem;
+    }
+    .breadcrumbs i {
+      color: var(--border);
+      font-size: 0.75rem;
+    }
 
-    /* ===== MAIN CONTAINER ===== */
+    /* ===== MAIN CONTENT ===== */
     main {
-      flex: 1;
       padding: 2rem 0;
     }
     .container {
@@ -236,54 +272,86 @@
       padding: 0 1.5rem;
     }
 
-    /* ===== HERO ===== */
+    /* Hero Section */
     .hero {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 2rem 0 3rem;
+    }
+    .hero .badge {
+      display: inline-block;
+      background: var(--brand-light);
+      color: var(--brand-dark);
+      padding: 0.5rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 1.5rem;
     }
     .hero h1 {
-      font-family: var(--font-head);
-      font-size: clamp(2rem, 5vw, 3rem);
-      font-weight: 800;
-      color: var(--brand);
-      margin-bottom: 1rem;
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 900;
       line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero h1 .highlight {
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .hero p {
-      font-size: 1.1rem;
+      font-size: 1.125rem;
       color: var(--text-muted);
-      max-width: 640px;
-      margin: 0 auto;
+      max-width: 720px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+    .hero .feature-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      justify-content: center;
+      margin-bottom: 2rem;
+    }
+    .feature-pill {
+      background: #fff;
+      border: 1px solid var(--border);
+      padding: 0.625rem 1.25rem;
+      border-radius: 50px;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      white-space: nowrap;
     }
 
-    /* ===== TOOL WRAPPER - MOBILE FIRST ===== */
-    .tool-wrapper {
+    /* Tool Layout */
+    .tool-layout {
       display: flex;
       flex-direction: column;
-      gap: 1.5rem;
-      margin-bottom: 3rem;
+      gap: 2rem;
+      margin-bottom: 4rem;
     }
-
-    /* Desktop: side by side */
     @media (min-width: 992px) {
-      .tool-wrapper {
+      .tool-layout {
         flex-direction: row;
         align-items: flex-start;
       }
       .control-panel {
-        flex: 0 0 360px;
+        flex: 0 0 380px;
         position: sticky;
         top: 2rem;
       }
-      .preview-area {
+      .preview-section {
         flex: 1;
         min-width: 0;
       }
     }
 
-    /* ===== CONTROL PANEL ===== */
+    /* Control Panel */
     .control-panel {
-      background: var(--surface);
+      background: #fff;
       border-radius: var(--radius);
       padding: 1.5rem;
       box-shadow: var(--shadow);
@@ -291,107 +359,157 @@
       width: 100%;
     }
     .control-panel h2 {
-      font-family: var(--font-head);
-      font-size: 1.3rem;
+      font-size: 1.25rem;
+      font-weight: 700;
       margin-bottom: 1.5rem;
-      color: var(--brand);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* ===== UPLOAD CARD ===== */
+    /* Upload Card */
     .upload-card {
       border: 2px dashed var(--brand);
       border-radius: var(--radius);
-      padding: 2.5rem 1.5rem;
+      padding: 3rem 1.5rem;
       text-align: center;
-      background: var(--brand-light);
+      background: linear-gradient(135deg, #faf5ff, #f5f3ff);
       cursor: pointer;
       transition: all .3s;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+      position: relative;
+      overflow: hidden;
     }
-    .upload-card:hover { border-color: var(--brand-dark); background: var(--surface3); }
-    .upload-card i { font-size: 3rem; color: var(--brand); margin-bottom: 1rem; }
-    .upload-card p { color: var(--text-muted); margin: 0.5rem 0; }
-    .upload-card .file-types { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem; }
+    .upload-card::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 200px;
+      height: 200px;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      border-radius: 50%;
+      opacity: 0.1;
+      z-index: 0;
+    }
+    .upload-card-content {
+      position: relative;
+      z-index: 1;
+    }
+    .upload-card:hover {
+      border-color: var(--brand-dark);
+      background: linear-gradient(135deg, #f5f3ff, #ede9fe);
+      transform: translateY(-2px);
+    }
+    .upload-icon-wrap {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      border-radius: 20px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 8px 24px rgba(139,92,246,.3);
+    }
+    .upload-icon-wrap i {
+      font-size: 2.5rem;
+      color: #fff;
+    }
+    .upload-card h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .upload-card p {
+      color: var(--text-muted);
+      margin: 0.25rem 0;
+    }
+    .upload-card .file-types {
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      margin-top: 1rem;
+      font-weight: 500;
+    }
     input[type="file"] { display: none; }
 
-    /* ===== FORM GROUPS ===== */
+    /* Form Groups */
     .form-group {
       margin-bottom: 1.5rem;
     }
     .form-group label {
-      display: block;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       font-weight: 600;
-      margin-bottom: 0.5rem;
+      margin-bottom: 0.75rem;
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
     }
     .form-group input, .form-group select {
       width: 100%;
-      padding: 0.75rem;
+      padding: 0.875rem;
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       font-size: 1rem;
       font-family: inherit;
-      transition: border .2s;
+      transition: all .2s;
+      background: var(--surface);
     }
     .form-group input:focus, .form-group select:focus {
       outline: none;
       border-color: var(--brand);
+      box-shadow: 0 0 0 3px var(--brand-light);
     }
 
     .dim-row {
       display: flex;
-      gap: 1rem;
+      gap: 0.75rem;
       align-items: flex-end;
     }
     .dim-row .form-group {
       flex: 1;
       margin-bottom: 0;
     }
-    .dim-row .lock-btn-wrap {
-      flex: 0 0 auto;
-    }
 
     .lock-btn {
-      width: 48px;
-      height: 48px;
+      width: 52px;
+      height: 52px;
       border: 1px solid var(--border);
       background: var(--surface);
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       color: var(--text-muted);
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       cursor: pointer;
       transition: all .2s;
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-shrink: 0;
     }
     .lock-btn.locked {
       background: var(--brand);
       color: #fff;
       border-color: var(--brand);
     }
-    .aspect-toggle { display: none; }
 
-    /* ===== PRESETS ===== */
+    /* Presets */
     .presets {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 0.5rem;
-      margin-bottom: 1.5rem;
     }
     .preset-btn {
-      flex: 1 1 calc(50% - 0.25rem);
-      min-width: 0;
-      padding: 0.6rem 0.8rem;
+      padding: 0.75rem;
       background: var(--surface2);
       border: 1px solid var(--border);
-      border-radius: var(--radius-sm);
-      font-size: 0.9rem;
-      font-weight: 500;
+      border-radius: 8px;
+      font-size: 0.9375rem;
+      font-weight: 600;
       cursor: pointer;
       transition: all .2s;
-      white-space: nowrap;
+      font-family: inherit;
     }
     .preset-btn:hover {
       background: var(--brand-light);
@@ -399,20 +517,15 @@
       color: var(--brand-dark);
     }
 
-    /* ===== QUALITY SLIDER ===== */
-    #qualitySection {
-      margin-bottom: 1.5rem;
-    }
+    /* Quality Slider */
     .slider-container {
       display: flex;
       align-items: center;
       gap: 1rem;
-      margin-top: 0.5rem;
     }
     .quality-slider {
       flex: 1;
       -webkit-appearance: none;
-      appearance: none;
       height: 8px;
       border-radius: 5px;
       background: linear-gradient(to right, var(--brand) var(--val, 90%), var(--border) var(--val, 90%));
@@ -420,13 +533,12 @@
     }
     .quality-slider::-webkit-slider-thumb {
       -webkit-appearance: none;
-      appearance: none;
       width: 20px;
       height: 20px;
       border-radius: 50%;
       background: var(--brand);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(124,58,237,.3);
+      box-shadow: 0 2px 8px rgba(139,92,246,.4);
     }
     .quality-slider::-moz-range-thumb {
       width: 20px;
@@ -435,83 +547,68 @@
       border-radius: 50%;
       background: var(--brand);
       cursor: pointer;
-      box-shadow: 0 2px 8px rgba(124,58,237,.3);
     }
     .quality-val {
       font-weight: 700;
       color: var(--brand);
-      font-size: 1.1rem;
-      min-width: 50px;
+      font-size: 1.125rem;
+      min-width: 55px;
       text-align: right;
     }
 
-    /* ===== BUTTONS ===== */
+    /* Buttons */
     .btn {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.5rem;
-      padding: 0.9rem 1.5rem;
+      gap: 0.625rem;
+      padding: 1rem 1.5rem;
       border: none;
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       font-size: 1rem;
-      font-weight: 600;
+      font-weight: 700;
       cursor: pointer;
       transition: all .2s;
       font-family: inherit;
-      text-decoration: none;
       width: 100%;
     }
     .btn-primary {
-      background: linear-gradient(135deg, var(--brand), var(--brand2));
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
       color: #fff;
-      box-shadow: 0 4px 16px rgba(124,58,237,.3);
+      box-shadow: 0 4px 16px rgba(139,92,246,.3);
     }
     .btn-primary:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(124,58,237,.4);
+      box-shadow: 0 6px 20px rgba(139,92,246,.4);
     }
     .btn-primary:disabled {
       opacity: 0.6;
       cursor: not-allowed;
       transform: none;
     }
-    .btn-secondary {
-      background: var(--surface2);
-      color: var(--text);
-      border: 1px solid var(--border);
-    }
-    .btn-secondary:hover {
-      background: var(--brand-light);
-      border-color: var(--brand);
-      color: var(--brand-dark);
-    }
 
-    /* ===== PREVIEW AREA ===== */
-    .preview-area {
-      background: var(--surface);
+    /* Preview Section */
+    .preview-section {
+      background: #fff;
       border-radius: var(--radius);
       padding: 1.5rem;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
       width: 100%;
     }
-    .preview-area h2 {
-      font-family: var(--font-head);
-      font-size: 1.3rem;
+    .preview-section h2 {
+      font-size: 1.25rem;
+      font-weight: 700;
       margin-bottom: 1.5rem;
-      color: var(--brand);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
-    /* ===== WORKSPACE ===== */
-    .workspace {
-      display: none;
-    }
-    .workspace.visible {
-      display: block;
-    }
+    .workspace { display: none; }
+    .workspace.visible { display: block; }
 
-    /* ===== TABS ===== */
+    /* Tabs */
     .tabs {
       display: flex;
       gap: 0.5rem;
@@ -520,13 +617,13 @@
     }
     .tab-btn {
       flex: 1;
-      padding: 0.8rem 1rem;
+      padding: 0.875rem 1rem;
       background: transparent;
       border: none;
       border-bottom: 3px solid transparent;
       cursor: pointer;
       font-weight: 600;
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
       color: var(--text-muted);
       transition: all .2s;
       font-family: inherit;
@@ -536,24 +633,22 @@
       border-bottom-color: var(--brand);
     }
 
-    /* ===== PREVIEW PANES ===== */
+    /* Preview Panes */
     .preview-pane {
       display: none;
       min-height: 400px;
       background: var(--surface2);
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       padding: 1rem;
       overflow: auto;
     }
-    .preview-pane.active {
-      display: block;
-    }
+    .preview-pane.active { display: block; }
     .preview-pane img {
       max-width: 100%;
       height: auto;
       display: block;
       margin: 0 auto;
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
     }
     .preview-placeholder {
       display: flex;
@@ -566,18 +661,14 @@
     .preview-placeholder i {
       font-size: 4rem;
       margin-bottom: 1rem;
-      opacity: 0.4;
-    }
-    .preview-placeholder p {
-      font-size: 1rem;
-      opacity: 0.7;
+      opacity: 0.3;
     }
 
-    /* ===== INFO BAR ===== */
+    /* Info Bar */
     .img-info-bar {
       display: none;
       background: var(--brand-light);
-      border-radius: var(--radius-sm);
+      border-radius: 8px;
       padding: 1rem;
       margin-top: 1rem;
       flex-wrap: wrap;
@@ -589,7 +680,7 @@
     }
     .info-item strong {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8125rem;
       color: var(--text-muted);
       margin-bottom: 0.25rem;
     }
@@ -599,57 +690,48 @@
       color: var(--brand);
     }
 
-    /* ===== DOWNLOAD SECTION ===== */
+    /* Download Section */
     .download-section {
       display: none;
-      background: linear-gradient(135deg, var(--brand-light), var(--surface3));
+      background: linear-gradient(135deg, #faf5ff, #f5f3ff);
       border-radius: var(--radius);
       padding: 2rem 1.5rem;
       margin-top: 2rem;
       text-align: center;
       border: 2px solid var(--brand);
     }
-    .download-section.visible {
-      display: block;
-    }
-    .download-section i.success-icon {
+    .download-section.visible { display: block; }
+    .download-section .success-icon {
       font-size: 3rem;
       color: var(--brand);
       margin-bottom: 1rem;
     }
     .download-section h3 {
-      font-family: var(--font-head);
       font-size: 1.5rem;
+      font-weight: 800;
       color: var(--brand);
       margin-bottom: 1rem;
-    }
-    .download-section p {
-      color: var(--text-muted);
-      margin-bottom: 1.5rem;
     }
     .download-stats {
       display: flex;
       justify-content: center;
       gap: 2rem;
-      margin-bottom: 1.5rem;
+      margin: 1.5rem 0;
       flex-wrap: wrap;
-    }
-    .download-stats .stat {
-      text-align: center;
     }
     .download-stats .stat strong {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8125rem;
       color: var(--text-muted);
       margin-bottom: 0.25rem;
     }
     .download-stats .stat span {
-      font-size: 1.2rem;
+      font-size: 1.25rem;
       font-weight: 700;
       color: var(--brand);
     }
 
-    /* ===== TOAST ===== */
+    /* Toast */
     .toast {
       position: fixed;
       bottom: 2rem;
@@ -658,65 +740,87 @@
       background: var(--text);
       color: #fff;
       padding: 1rem 1.5rem;
-      border-radius: var(--radius-sm);
-      box-shadow: 0 6px 24px rgba(0,0,0,.2);
+      border-radius: 8px;
+      box-shadow: 0 8px 24px rgba(0,0,0,.3);
       z-index: 9999;
       opacity: 0;
       transition: all .3s;
       max-width: 90%;
       text-align: center;
+      font-weight: 600;
     }
     .toast.show {
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
 
-    /* ===== FEATURES ===== */
-    .features {
+    /* Related Tools */
+    .related-tools {
+      margin: 4rem 0;
+    }
+    .related-tools h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .tools-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 1.5rem;
-      margin: 3rem 0;
     }
-    .feature-card {
-      background: var(--surface);
+    .tool-card {
+      background: #fff;
       border-radius: var(--radius);
       padding: 1.5rem;
       box-shadow: var(--shadow);
       border: 1px solid var(--border);
-      text-align: center;
+      text-decoration: none;
+      color: inherit;
+      transition: all .3s;
     }
-    .feature-card i {
-      font-size: 2.5rem;
-      color: var(--brand);
+    .tool-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0,0,0,.1);
+    }
+    .tool-card .icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #8b5cf6, #a78bfa);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       margin-bottom: 1rem;
     }
-    .feature-card h3 {
-      font-family: var(--font-head);
-      font-size: 1.1rem;
-      margin-bottom: 0.75rem;
-      color: var(--text);
+    .tool-card .icon i {
+      font-size: 1.75rem;
+      color: #fff;
     }
-    .feature-card p {
+    .tool-card h3 {
+      font-size: 1.125rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+    }
+    .tool-card p {
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.9375rem;
       line-height: 1.6;
     }
 
-    /* ===== FAQ ===== */
+    /* FAQ */
     .faq-section {
-      margin: 3rem 0;
+      margin: 4rem 0;
     }
     .faq-section h2 {
-      font-family: var(--font-head);
       font-size: 2rem;
+      font-weight: 800;
       text-align: center;
       margin-bottom: 2rem;
-      color: var(--brand);
     }
     .faq-item {
-      background: var(--surface);
-      border-radius: var(--radius-sm);
+      background: #fff;
+      border-radius: 8px;
       margin-bottom: 1rem;
       border: 1px solid var(--border);
       overflow: hidden;
@@ -727,7 +831,7 @@
       padding: 1.25rem 1.5rem;
       background: transparent;
       border: none;
-      font-size: 1.05rem;
+      font-size: 1.0625rem;
       font-weight: 600;
       color: var(--text);
       cursor: pointer;
@@ -759,10 +863,10 @@
     .faq-a-inner {
       padding: 0 1.5rem 1.5rem;
       color: var(--text-muted);
-      line-height: 1.7;
+      line-height: 1.8;
     }
 
-    /* ===== FOOTER ===== */
+    /* Footer */
     .site-footer {
       background: var(--text);
       color: rgba(255,255,255,.8);
@@ -782,72 +886,104 @@
       color: #fff;
     }
 
-    /* ===== RESPONSIVE ===== */
+    /* Responsive */
     @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 2rem;
+      .logo-icon {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+      }
+      .logo-icon i {
+        font-size: 1.5rem;
+      }
+      .logo-text h1 {
+        font-size: 1.125rem;
+      }
+      .logo-text p {
+        font-size: 0.75rem;
+      }
+      .all-tools-btn {
+        padding: 0.625rem 1rem;
+        font-size: 0.875rem;
       }
       .dim-row {
         flex-direction: column;
-        align-items: stretch;
-      }
-      .dim-row .form-group {
-        margin-bottom: 1rem;
       }
       .lock-btn {
         width: 100%;
-        height: 48px;
       }
-      .preset-btn {
-        flex: 1 1 100%;
-      }
-      .download-stats {
-        gap: 1rem;
+      .presets {
+        grid-template-columns: 1fr;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- ===== HEADER ===== -->
-  <header class="site-header">
+  <!-- ===== HEADER (EXACT AS SCREENSHOT) ===== -->
+  <header class="top-header">
     <div class="container">
-      <a href="../../index.html" class="logo">
-        <i class="fas fa-tools"></i>
-        FreeToolsHub
-      </a>
-      <nav>
-        <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
-        <a href="../../tools.html"><i class="fas fa-toolbox"></i> All Tools</a>
-        <a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a>
-        <a href="../../contact.html"><i class="fas fa-envelope"></i> Contact</a>
-      </nav>
+      <div class="logo-section">
+        <div class="logo-icon">
+          <i class="fas fa-tools"></i>
+        </div>
+        <div class="logo-text">
+          <h1>Free Tools Hub</h1>
+          <p>Tools · Blogs · Resources</p>
+        </div>
+      </div>
+      <a href="../../index.html" class="all-tools-btn">All Tools</a>
     </div>
   </header>
 
-  <!-- ===== MAIN ===== -->
+  <!-- Breadcrumbs -->
+  <nav class="breadcrumbs">
+    <div class="container">
+      <a href="../../index.html">Home</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="../../index.html#tools">All Tools</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="../../index.html#design">Design Tools</a>
+      <i class="fas fa-chevron-right"></i>
+      <span>Image Resizer</span>
+    </div>
+  </nav>
+
+  <!-- ===== MAIN CONTENT ===== -->
   <main>
     <div class="container">
 
       <!-- Hero -->
-      <div class="hero">
-        <h1><i class="fas fa-compress-arrows-alt"></i> Image Resizer Online Free</h1>
-        <p>Resize JPG, PNG, WEBP, GIF images instantly. Set custom dimensions, maintain aspect ratio, control quality. 100% free, no signup, no watermark.</p>
-      </div>
+      <section class="hero">
+        <div class="badge">DESIGN TOOL</div>
+        <h1>Free Online <span class="highlight">Image Resizer</span></h1>
+        <p>Resize JPG, PNG, WEBP & GIF images instantly. Set custom dimensions, lock aspect ratio, and download your resized image — no signup, no watermark.</p>
+        <div class="feature-pills">
+          <div class="feature-pill">Aspect Ratio Lock</div>
+          <div class="feature-pill">Quality Control</div>
+          <div class="feature-pill">100% Private</div>
+          <div class="feature-pill">Instant Download</div>
+          <div class="feature-pill">No Watermark</div>
+        </div>
+      </section>
 
-      <!-- Tool Wrapper -->
-      <div class="tool-wrapper">
+      <!-- Tool Layout -->
+      <div class="tool-layout">
 
-        <!-- CONTROL PANEL -->
+        <!-- Control Panel -->
         <aside class="control-panel">
-          <h2><i class="fas fa-sliders-h"></i> Settings & Controls</h2>
+          <h2><i class="fas fa-sliders-h"></i> Settings</h2>
 
           <!-- Upload Card -->
           <div class="upload-card" id="uploadCard" onclick="document.getElementById('fileInput').click()">
-            <i class="fas fa-cloud-upload-alt"></i>
-            <p><strong>Click to Upload Image</strong></p>
-            <p>or drag & drop here</p>
-            <p class="file-types">JPG, PNG, WEBP, GIF — Up to 50 MB</p>
+            <div class="upload-card-content">
+              <div class="upload-icon-wrap">
+                <i class="fas fa-cloud-upload-alt"></i>
+              </div>
+              <h3>Upload your image here</h3>
+              <p>Click to browse or drag & drop</p>
+              <p class="file-types">JPG, PNG, WEBP, GIF — Up to 50 MB</p>
+            </div>
           </div>
           <input type="file" id="fileInput" accept="image/jpeg,image/png,image/webp,image/gif" />
 
@@ -863,12 +999,10 @@
                 <label for="heightInput">Height</label>
                 <input type="number" id="heightInput" placeholder="e.g. 600" min="1" />
               </div>
-              <div class="lock-btn-wrap">
-                <input type="checkbox" id="aspectToggle" class="aspect-toggle" checked />
-                <button type="button" class="lock-btn locked" id="lockBtn" title="Lock aspect ratio">
-                  <i class="fas fa-lock" id="lockIcon"></i>
-                </button>
-              </div>
+              <input type="checkbox" id="aspectToggle" style="display:none" checked />
+              <button type="button" class="lock-btn locked" id="lockBtn" title="Lock aspect ratio">
+                <i class="fas fa-lock" id="lockIcon"></i>
+              </button>
             </div>
           </div>
 
@@ -895,10 +1029,12 @@
 
           <!-- Quality -->
           <div id="qualitySection">
-            <label><i class="fas fa-adjust"></i> Quality</label>
-            <div class="slider-container">
-              <input type="range" class="quality-slider" id="qualitySlider" min="1" max="100" value="90" />
-              <span class="quality-val" id="qualityVal">90%</span>
+            <div class="form-group">
+              <label><i class="fas fa-adjust"></i> Quality</label>
+              <div class="slider-container">
+                <input type="range" class="quality-slider" id="qualitySlider" min="1" max="100" value="90" />
+                <span class="quality-val" id="qualityVal">90%</span>
+              </div>
             </div>
           </div>
 
@@ -909,13 +1045,12 @@
 
         </aside>
 
-        <!-- PREVIEW AREA -->
-        <section class="preview-area">
-          <h2><i class="fas fa-eye"></i> Image Preview</h2>
+        <!-- Preview Section -->
+        <section class="preview-section">
+          <h2><i class="fas fa-eye"></i> Preview</h2>
 
           <!-- Workspace -->
           <div class="workspace" id="workspace">
-            <!-- Tabs -->
             <div class="tabs">
               <button class="tab-btn active" id="tabOrig" onclick="showTab('orig')">
                 <i class="fas fa-image"></i> Original
@@ -925,7 +1060,6 @@
               </button>
             </div>
 
-            <!-- Panes -->
             <div class="preview-pane active" id="paneOrig">
               <div class="preview-placeholder">
                 <i class="fas fa-image"></i>
@@ -939,7 +1073,6 @@
               </div>
             </div>
 
-            <!-- Info Bar -->
             <div class="img-info-bar" id="imgInfoBar">
               <div class="info-item">
                 <strong>Original Size</strong>
@@ -988,41 +1121,61 @@
 
       </div>
 
-      <!-- Features -->
-      <section class="features">
-        <div class="feature-card">
-          <i class="fas fa-shield-alt"></i>
-          <h3>100% Private & Secure</h3>
-          <p>Your images never leave your device. All processing happens locally in your browser using HTML5 Canvas.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-infinity"></i>
-          <h3>Unlimited & Free</h3>
-          <p>Resize as many images as you want, absolutely free. No signup, no subscription, no hidden fees.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-tachometer-alt"></i>
-          <h3>Lightning Fast</h3>
-          <p>Instant resizing powered by modern browser technology. Most images resize in under 1 second.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-check-circle"></i>
-          <h3>No Watermark</h3>
-          <p>Download clean, professional images without any watermark. Perfect for personal and commercial use.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-palette"></i>
-          <h3>Quality Control</h3>
-          <p>Adjust output quality from 1-100% to find the perfect balance between file size and image quality.</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-lock"></i>
-          <h3>Aspect Ratio Lock</h3>
-          <p>Maintain original proportions automatically when resizing to prevent distortion and stretching.</p>
+      <!-- ===== RELATED TOOLS ===== -->
+      <section class="related-tools">
+        <h2>Related Design Tools</h2>
+        <div class="tools-grid">
+          <a href="../design/background-remover.html" class="tool-card">
+            <div class="icon">
+              <i class="fas fa-eraser"></i>
+            </div>
+            <h3>Background Remover</h3>
+            <p>Remove image backgrounds instantly with AI. Perfect for product photos and portraits.</p>
+          </a>
+
+          <a href="../design/image-compressor.html" class="tool-card">
+            <div class="icon">
+              <i class="fas fa-compress"></i>
+            </div>
+            <h3>Image Compressor</h3>
+            <p>Compress JPG, PNG images without losing quality. Reduce file size up to 90%.</p>
+          </a>
+
+          <a href="../design/image-converter.html" class="tool-card">
+            <div class="icon">
+              <i class="fas fa-exchange-alt"></i>
+            </div>
+            <h3>Image Converter</h3>
+            <p>Convert between JPG, PNG, WEBP, GIF formats. Fast and free online converter.</p>
+          </a>
+
+          <a href="../design/meme-generator.html" class="tool-card">
+            <div class="icon">
+              <i class="fas fa-laugh-beam"></i>
+            </div>
+            <h3>Meme Generator</h3>
+            <p>Create funny memes with custom text. Choose from popular templates or upload your own.</p>
+          </a>
+
+          <a href="../design/crop-image.html" class="tool-card">
+            <div class="icon">
+              <i class="fas fa-crop"></i>
+            </div>
+            <h3>Image Cropper</h3>
+            <p>Crop images to any size or aspect ratio. Perfect for social media posts.</p>
+          </a>
+
+          <a href="../design/photo-editor.html" class="tool-card">
+            <div class="icon">
+              <i class="fas fa-paint-brush"></i>
+            </div>
+            <h3>Photo Editor</h3>
+            <p>Edit photos online with filters, effects, and adjustments. No software needed.</p>
+          </a>
         </div>
       </section>
 
-      <!-- FAQ -->
+      <!-- ===== FAQ SECTION ===== -->
       <section class="faq-section">
         <h2><i class="fas fa-question-circle"></i> Frequently Asked Questions</h2>
 
@@ -1033,7 +1186,7 @@
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              Yes, the Image Resizer on FreeToolsHub.online is 100% free. No signup, no subscription, and no hidden fees. You can resize as many images as you want at no cost.
+              Yes, the Image Resizer on FreeToolsHub is 100% free. No signup, no subscription, and no hidden fees. You can resize as many images as you want at no cost.
             </div>
           </div>
         </div>
@@ -1081,7 +1234,7 @@
           </button>
           <div class="faq-a">
             <div class="faq-a-inner">
-              Enable the 'Lock Aspect Ratio' toggle before entering dimensions. When locked, changing the width will automatically update the height to keep the original proportions, preventing image distortion.
+              Enable the 'Lock Aspect Ratio' toggle (lock icon) before entering dimensions. When locked, changing the width will automatically update the height to keep the original proportions, preventing image distortion.
             </div>
           </div>
         </div>
@@ -1106,6 +1259,44 @@
           <div class="faq-a">
             <div class="faq-a-inner">
               No. Images downloaded from FreeToolsHub Image Resizer have absolutely no watermark. The output is clean and ready to use professionally.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>Can I resize multiple images at once?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Currently, you can resize one image at a time. However, the process is very fast (usually under 1 second per image), so you can quickly process multiple images by uploading them one after another.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>Does this tool work on mobile devices?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              Yes! FreeToolsHub Image Resizer is fully responsive and works perfectly on smartphones and tablets. You can resize images on any device with a modern web browser.
+            </div>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <button class="faq-q" aria-expanded="false">
+            <span>What's the difference between JPG, PNG, and WEBP?</span>
+            <i class="fas fa-chevron-down"></i>
+          </button>
+          <div class="faq-a">
+            <div class="faq-a-inner">
+              <strong>JPG:</strong> Best for photos with many colors. Smaller file size but lossy compression.<br>
+              <strong>PNG:</strong> Best for graphics, logos, and images with transparency. Lossless compression but larger file size.<br>
+              <strong>WEBP:</strong> Modern format with excellent compression. Smaller file sizes than JPG while maintaining quality.
             </div>
           </div>
         </div>
@@ -1158,7 +1349,7 @@
     let isLocked    = true;
     let aspectRatio = 1;
 
-    // ========== FILE SELECTION ==========
+    // File selection
     fileInput.addEventListener('change', e => {
       const file = e.target.files[0];
       if (!file) return;
@@ -1169,7 +1360,7 @@
       loadImage(file);
     });
 
-    // Drag & Drop
+    // Drag & drop
     uploadCard.addEventListener('dragover', e => {
       e.preventDefault();
       uploadCard.style.borderColor = 'var(--brand-dark)';
@@ -1188,7 +1379,7 @@
       }
     });
 
-    // ========== LOAD IMAGE ==========
+    // Load image
     function loadImage(file) {
       originalFile = file;
       originalBytes= file.size;
@@ -1198,16 +1389,13 @@
         originalImg = img;
         aspectRatio = img.width / img.height;
 
-        // Set default dimensions
         widthInput.value  = img.width;
         heightInput.value = img.height;
 
-        // Show original preview
         const paneOrig = document.getElementById('paneOrig');
         paneOrig.innerHTML = `<img src="${url}" alt="Original image" />`;
         showTab('orig');
 
-        // Show workspace
         uploadCard.style.display = 'none';
         workspace.classList.add('visible');
         downloadSec.classList.remove('visible');
@@ -1218,7 +1406,7 @@
       img.src = url;
     }
 
-    // ========== ASPECT RATIO LOCK ==========
+    // Aspect ratio lock
     aspectToggle.addEventListener('change', () => {
       isLocked = aspectToggle.checked;
       lockBtn.classList.toggle('locked', isLocked);
@@ -1246,14 +1434,13 @@
       }
     });
 
-    // ========== PRESETS ==========
+    // Presets
     document.querySelectorAll('.preset-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         const w = parseInt(btn.dataset.w);
         const h = parseInt(btn.dataset.h);
         widthInput.value  = w;
         heightInput.value = h;
-        // Temporarily unlock for presets
         isLocked = false;
         aspectToggle.checked = false;
         lockBtn.classList.remove('locked');
@@ -1261,20 +1448,19 @@
       });
     });
 
-    // ========== QUALITY SLIDER ==========
+    // Quality slider
     qualitySlider.addEventListener('input', () => {
       const v = qualitySlider.value;
       qualityVal.textContent = v + '%';
       qualitySlider.style.setProperty('--val', v + '%');
     });
 
-    // Hide quality for PNG
     formatSelect.addEventListener('change', () => {
       document.getElementById('qualitySection').style.display =
         formatSelect.value === 'image/png' ? 'none' : '';
     });
 
-    // ========== RESIZE ==========
+    // Resize
     resizeBtn.addEventListener('click', () => {
       if (!originalImg) return;
       const w = parseInt(widthInput.value);
@@ -1300,12 +1486,10 @@
           resizedBlob = blob;
           const resizedUrl = URL.createObjectURL(blob);
 
-          // Show resized preview
           const paneResized = document.getElementById('paneResized');
           paneResized.innerHTML = `<img src="${resizedUrl}" alt="Resized image" />`;
           showTab('resized');
 
-          // Info bar
           const infoBar = document.getElementById('imgInfoBar');
           infoBar.style.display = 'flex';
           document.getElementById('infoOrigDims').textContent = `${originalImg.width}×${originalImg.height}`;
@@ -1313,7 +1497,6 @@
           document.getElementById('infoOrigSz').textContent   = formatBytes(originalBytes);
           document.getElementById('infoNewSz').textContent    = formatBytes(blob.size);
 
-          // Download section
           const reduction = originalBytes > 0
             ? Math.round((1 - blob.size / originalBytes) * 100)
             : 0;
@@ -1324,7 +1507,6 @@
           downloadSec.classList.add('visible');
           downloadSec.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 
-          // Download handler
           document.getElementById('downloadBtn').onclick = () => {
             const a = document.createElement('a');
             a.href = resizedUrl;
@@ -1342,7 +1524,7 @@
       }, 50);
     });
 
-    // ========== TABS ==========
+    // Tabs
     function showTab(tab) {
       document.getElementById('paneOrig').classList.toggle('active', tab === 'orig');
       document.getElementById('paneResized').classList.toggle('active', tab === 'resized');
@@ -1350,21 +1532,7 @@
       document.getElementById('tabResized').classList.toggle('active', tab === 'resized');
     }
 
-    // ========== RESET ==========
-    function resetTool() {
-      originalImg = null; originalFile = null; resizedBlob = null; originalBytes = 0;
-      fileInput.value = '';
-      widthInput.value = ''; heightInput.value = '';
-      document.getElementById('paneOrig').innerHTML = '<div class="preview-placeholder"><i class="fas fa-image"></i><p>Original image will appear here</p></div>';
-      document.getElementById('paneResized').innerHTML = '<div class="preview-placeholder"><i class="fas fa-compress-arrows-alt"></i><p>Click "Resize Image" to see preview</p></div>';
-      document.getElementById('imgInfoBar').style.display = 'none';
-      downloadSec.classList.remove('visible');
-      workspace.classList.remove('visible');
-      uploadCard.style.display = '';
-      showTab('orig');
-    }
-
-    // ========== HELPERS ==========
+    // Helpers
     function formatBytes(bytes) {
       if (bytes < 1024) return bytes + ' B';
       if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
@@ -1378,7 +1546,7 @@
       setTimeout(() => t.classList.remove('show'), 3000);
     }
 
-    // ========== FAQ ACCORDION ==========
+    // FAQ accordion
     document.querySelectorAll('.faq-q').forEach(btn => {
       btn.addEventListener('click', () => {
         const item = btn.closest('.faq-item');
