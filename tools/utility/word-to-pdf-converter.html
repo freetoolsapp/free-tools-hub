@@ -4,261 +4,158 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word to PDF Converter — Free Online DOCX to PDF Converter 2026</title>
-    <meta name="description" content="Convert Word documents to PDF files instantly. Free online Word to PDF converter supporting DOCX, DOC formats. No signup required. Fast, secure & high-quality conversion.">
+    <meta name="description" content="Convert Word documents to PDF files instantly. Free online Word to PDF converter. Exact layout preserved.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="../../style.css">
-
     <style>
-        .tool-container { max-width: 960px; margin: 0 auto; padding: 40px 24px 80px; }
+        .tool-container{max-width:960px;margin:0 auto;padding:40px 24px 80px}
+        .tool-header{text-align:center;margin-bottom:48px}
+        .tool-badge{display:inline-flex;align-items:center;gap:6px;background:linear-gradient(135deg,var(--purple-600),var(--fuchsia-500));color:white;padding:6px 14px;border-radius:var(--radius-full);font-size:13px;font-weight:600;margin-bottom:16px}
+        .tool-header h1{font-size:2.5rem;color:var(--gray-900);margin-bottom:12px}
+        .tool-header p{font-size:1.1rem;color:var(--gray-600);max-width:620px;margin:0 auto}
+        .converter-card{background:white;border-radius:var(--radius-xl);padding:48px;box-shadow:var(--shadow-lg);border:1px solid var(--gray-200);margin-bottom:48px}
+        .upload-zone{border:2px dashed var(--purple-300);border-radius:var(--radius-lg);padding:48px 32px;text-align:center;background:var(--purple-50);transition:var(--transition);cursor:pointer}
+        .upload-zone:hover,.upload-zone.dragover{border-color:var(--purple-600);background:var(--purple-100)}
+        .upload-icon{width:64px;height:64px;background:linear-gradient(135deg,var(--purple-600),var(--fuchsia-500));border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:28px;color:white}
+        .upload-zone h3{color:var(--gray-900);margin-bottom:8px;font-size:1.3rem}
+        .upload-zone p{color:var(--gray-600);margin-bottom:20px}
+        .file-input{display:none}
+        .btn-upload{display:inline-flex;align-items:center;gap:8px;background:var(--purple-600);color:white;padding:14px 28px;border-radius:var(--radius-md);font-weight:600;border:none;cursor:pointer}
+        .btn-upload:hover{background:var(--purple-700)}
+        .file-preview{display:none;background:var(--gray-100);border-radius:var(--radius-md);padding:20px;margin-top:24px}
+        .file-preview.active{display:block}
+        .file-info{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .file-details{display:flex;align-items:center;gap:12px;flex:1}
+        .file-icon{width:48px;height:48px;background:var(--purple-600);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;color:white;font-size:20px}
+        .file-meta h4{color:var(--gray-900);font-size:1rem;margin-bottom:4px}
+        .file-meta p{color:var(--gray-500);font-size:14px}
+        .btn-remove{background:var(--gray-200);color:var(--gray-700);border:none;padding:8px 16px;border-radius:var(--radius-md);cursor:pointer}
+        .btn-remove:hover{background:var(--gray-300)}
 
-        .tool-header { text-align: center; margin-bottom: 48px; }
-        .tool-badge {
-            display: inline-flex; align-items: center; gap: 6px;
-            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
-            color: white; padding: 6px 14px; border-radius: var(--radius-full);
-            font-size: 13px; font-weight: 600; margin-bottom: 16px;
-        }
-        .tool-header h1 { font-size: 2.5rem; color: var(--gray-900); margin-bottom: 12px; }
-        .tool-header p { font-size: 1.1rem; color: var(--gray-600); max-width: 600px; margin: 0 auto; }
+        /* preview */
+        .preview-wrapper{display:none;margin-top:24px;border:1px solid var(--gray-200);border-radius:var(--radius-lg);overflow:hidden}
+        .preview-wrapper.active{display:block}
+        .preview-header-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:var(--gray-50);border-bottom:1px solid var(--gray-200)}
+        .preview-header-bar span{font-size:14px;font-weight:600;color:var(--gray-700)}
+        .preview-badge{color:white;font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;transition:.3s}
 
-        .converter-card {
-            background: white; border-radius: var(--radius-xl); padding: 48px;
-            box-shadow: var(--shadow-lg); border: 1px solid var(--gray-200); margin-bottom: 48px;
-        }
+        /* docx-preview exact render area */
+        #docxBox{max-height:540px;overflow-y:auto;background:#525659;padding:20px;display:none}
+        #docxBox .docx-wrapper{background:#525659 !important}
+        #docxBox .docx-wrapper>section.docx{box-shadow:0 4px 20px rgba(0,0,0,.4) !important;margin:0 auto 20px auto !important}
 
-        .upload-zone {
-            border: 2px dashed var(--purple-300); border-radius: var(--radius-lg);
-            padding: 48px 32px; text-align: center; background: var(--purple-50);
-            transition: var(--transition); cursor: pointer;
-        }
-        .upload-zone:hover { border-color: var(--purple-500); background: var(--purple-100); }
-        .upload-zone.dragover { border-color: var(--purple-600); background: var(--purple-100); transform: scale(1.01); }
+        /* mammoth html fallback */
+        #htmlBox{max-height:540px;overflow-y:auto;background:#fff;padding:40px 48px;display:none;
+            font-family:'Times New Roman',serif;font-size:12pt;line-height:1.6;color:#000}
+        #htmlBox h1{font-size:18pt;font-weight:bold;margin:.6em 0}
+        #htmlBox h2{font-size:15pt;font-weight:bold;margin:.5em 0}
+        #htmlBox h3{font-size:13pt;font-weight:bold;margin:.4em 0}
+        #htmlBox p{margin:.35em 0}
+        #htmlBox table{border-collapse:collapse;width:100%;margin:.5em 0}
+        #htmlBox td,#htmlBox th{border:1px solid #ccc;padding:4px 8px;font-size:11pt}
+        #htmlBox th{background:#f0f0f0;font-weight:bold}
+        #htmlBox ul,#htmlBox ol{padding-left:1.5em;margin:.3em 0}
+        #htmlBox img{max-width:100%;height:auto}
+        #htmlBox strong,#htmlBox b{font-weight:bold}
+        #htmlBox em,#htmlBox i{font-style:italic}
 
-        .upload-icon {
-            width: 64px; height: 64px;
-            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
-            border-radius: 50%; display: flex; align-items: center;
-            justify-content: center; margin: 0 auto 20px; font-size: 28px; color: white;
-        }
-        .upload-zone h3 { color: var(--gray-900); margin-bottom: 8px; font-size: 1.3rem; }
-        .upload-zone p { color: var(--gray-600); margin-bottom: 20px; }
-        .file-input { display: none; }
+        .convert-section{display:none;text-align:center;margin-top:32px}
+        .convert-section.active{display:block}
+        .btn-convert{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,var(--purple-600),var(--fuchsia-500));color:white;padding:16px 40px;border-radius:var(--radius-md);font-size:1.1rem;font-weight:600;border:none;cursor:pointer;transition:var(--transition)}
+        .btn-convert:hover{transform:translateY(-3px);box-shadow:var(--shadow-xl)}
+        .btn-convert:disabled{opacity:.6;cursor:not-allowed;transform:none}
+        .progress-section{display:none;margin-top:32px}
+        .progress-section.active{display:block}
+        .progress-bar{height:8px;background:var(--gray-200);border-radius:var(--radius-full);overflow:hidden;margin-bottom:12px}
+        .progress-fill{height:100%;background:linear-gradient(90deg,var(--purple-600),var(--fuchsia-500));width:0%;transition:width .3s ease}
+        .progress-text{text-align:center;color:var(--gray-600);font-size:14px}
+        .download-section{display:none;text-align:center;margin-top:32px}
+        .download-section.active{display:block}
+        .success-icon{width:64px;height:64px;background:linear-gradient(135deg,#10b981,#059669);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:32px;color:white;animation:scaleIn .4s ease}
+        @keyframes scaleIn{from{transform:scale(0)}to{transform:scale(1)}}
+        .download-section h3{color:var(--gray-900);margin-bottom:8px}
+        .download-section p{color:var(--gray-600);margin-bottom:24px}
+        .btn-download{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#10b981,#059669);color:white;padding:14px 32px;border-radius:var(--radius-md);font-weight:600;cursor:pointer;border:none;transition:var(--transition)}
+        .btn-download:hover{transform:translateY(-2px)}
+        .btn-convert-another{display:inline-block;margin-left:12px;color:var(--purple-600);padding:14px 24px;border-radius:var(--radius-md);font-weight:600;cursor:pointer;background:none;border:none}
+        .btn-convert-another:hover{background:var(--purple-50)}
 
-        .btn-upload {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--purple-600); color: white; padding: 14px 28px;
-            border-radius: var(--radius-md); font-weight: 600; border: none; cursor: pointer;
-        }
-        .btn-upload:hover { background: var(--purple-700); }
+        .features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-bottom:48px}
+        .feature-card{background:white;padding:28px;border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);border:1px solid var(--gray-200);text-align:center;transition:var(--transition)}
+        .feature-card:hover{box-shadow:var(--shadow-md);transform:translateY(-4px)}
+        .feature-icon{width:52px;height:52px;background:var(--purple-100);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:22px;color:var(--purple-600)}
+        .feature-card h3{color:var(--gray-900);margin-bottom:6px}
+        .feature-card p{color:var(--gray-600);font-size:14px;line-height:1.6}
 
-        .file-preview { display: none; background: var(--gray-100); border-radius: var(--radius-md); padding: 20px; margin-top: 24px; }
-        .file-preview.active { display: block; }
-        .file-info { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
-        .file-details { display: flex; align-items: center; gap: 12px; flex: 1; }
-        .file-icon {
-            width: 48px; height: 48px; background: var(--purple-600);
-            border-radius: var(--radius-md); display: flex; align-items: center;
-            justify-content: center; color: white; font-size: 20px;
-        }
-        .file-meta h4 { color: var(--gray-900); font-size: 1rem; margin-bottom: 4px; }
-        .file-meta p { color: var(--gray-500); font-size: 14px; }
-        .btn-remove {
-            background: var(--gray-200); color: var(--gray-700); border: none;
-            padding: 8px 16px; border-radius: var(--radius-md); cursor: pointer;
-        }
-        .btn-remove:hover { background: var(--gray-300); }
-
-        /* PREVIEW AREA - this is where docx-preview renders */
-        .preview-wrapper {
-            display: none; margin-top: 24px;
-            border: 1px solid var(--gray-200); border-radius: var(--radius-lg);
-            overflow: hidden;
-        }
-        .preview-wrapper.active { display: block; }
-        .preview-header-bar {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 12px 20px; background: var(--gray-50);
-            border-bottom: 1px solid var(--gray-200);
-        }
-        .preview-header-bar span { font-size: 14px; font-weight: 600; color: var(--gray-700); }
-        .preview-badge {
-            background: #10b981; color: white; font-size: 11px; font-weight: 700;
-            padding: 3px 10px; border-radius: 99px;
-        }
-
-        /* The docx-preview container */
-        #docxPreviewContainer {
-            max-height: 500px;
-            overflow-y: auto;
-            background: #525659;
-            padding: 20px;
-            /* docx-preview renders pages inside here */
-        }
-        /* Style the pages rendered by docx-preview */
-        #docxPreviewContainer .docx-wrapper {
-            background: #525659 !important;
-        }
-        #docxPreviewContainer .docx-wrapper > section.docx {
-            box-shadow: 0 4px 20px rgba(0,0,0,0.4) !important;
-            margin: 0 auto 20px auto !important;
-        }
-
-        .convert-section { display: none; text-align: center; margin-top: 32px; }
-        .convert-section.active { display: block; }
-        .btn-convert {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
-            color: white; padding: 16px 40px; border-radius: var(--radius-md);
-            font-size: 1.1rem; font-weight: 600; border: none; cursor: pointer; transition: var(--transition);
-        }
-        .btn-convert:hover { transform: translateY(-3px); box-shadow: var(--shadow-xl); }
-        .btn-convert:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-
-        .progress-section { display: none; margin-top: 32px; }
-        .progress-section.active { display: block; }
-        .progress-bar { height: 8px; background: var(--gray-200); border-radius: var(--radius-full); overflow: hidden; margin-bottom: 12px; }
-        .progress-fill { height: 100%; background: linear-gradient(90deg, var(--purple-600), var(--fuchsia-500)); width: 0%; transition: width 0.3s ease; }
-        .progress-text { text-align: center; color: var(--gray-600); font-size: 14px; }
-
-        .download-section { display: none; text-align: center; margin-top: 32px; }
-        .download-section.active { display: block; }
-        .success-icon {
-            width: 64px; height: 64px; background: linear-gradient(135deg, #10b981, #059669);
-            border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 20px; font-size: 32px; color: white; animation: scaleIn 0.4s ease;
-        }
-        @keyframes scaleIn { from { transform: scale(0); } to { transform: scale(1); } }
-        .download-section h3 { color: var(--gray-900); margin-bottom: 8px; }
-        .download-section p { color: var(--gray-600); margin-bottom: 24px; }
-        .btn-download {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: white; padding: 14px 32px; border-radius: var(--radius-md);
-            font-weight: 600; cursor: pointer; border: none; transition: var(--transition);
-        }
-        .btn-download:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
-        .btn-convert-another {
-            display: inline-block; margin-left: 12px; color: var(--purple-600);
-            padding: 14px 24px; border-radius: var(--radius-md); font-weight: 600;
-            cursor: pointer; background: none; border: none;
-        }
-        .btn-convert-another:hover { background: var(--purple-50); }
-
-        .info-banner {
-            background: linear-gradient(135deg, #eff6ff, #f0f9ff);
-            border: 1px solid #bfdbfe; border-radius: var(--radius-md);
-            padding: 14px 18px; margin-top: 20px; display: flex; align-items: flex-start; gap: 12px;
-        }
-        .info-banner i { color: #3b82f6; margin-top: 2px; flex-shrink: 0; }
-        .info-banner p { color: #1e40af; font-size: 13px; line-height: 1.5; margin: 0; }
-
-        .features-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 24px; margin-bottom: 48px;
-        }
-        .feature-card {
-            background: white; padding: 28px; border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); text-align: center;
-        }
-        .feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); transition: var(--transition); }
-        .feature-icon {
-            width: 52px; height: 52px; background: var(--purple-100); border-radius: var(--radius-md);
-            display: flex; align-items: center; justify-content: center; margin: 0 auto 14px;
-            font-size: 22px; color: var(--purple-600);
-        }
-        .feature-card h3 { color: var(--gray-900); margin-bottom: 6px; font-size: 1.05rem; }
-        .feature-card p { color: var(--gray-600); font-size: 14px; line-height: 1.6; }
-
-        .breadcrumb { background: white; border-bottom: 1px solid var(--gray-200); padding: 12px 0; font-size: 13px; margin-bottom: 32px; }
-        .breadcrumb-inner { display: flex; align-items: center; gap: 8px; color: var(--gray-500); }
-        .breadcrumb a { color: var(--gray-600); }
-        .breadcrumb a:hover { color: var(--purple-600); }
-
-        /* FAQ */
-        .faq-section { margin-top: 48px; }
-        .section-title { text-align: center; font-size: 2rem; color: var(--gray-900); margin-bottom: 40px; }
-        .faq-item { background: white; border-radius: var(--radius-lg); padding: 22px 26px; margin-bottom: 14px; box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200); }
-        .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
-        .faq-question h3 { color: var(--gray-900); font-size: 1rem; font-weight: 600; }
-        .faq-icon { color: var(--purple-600); font-size: 18px; transition: var(--transition); }
-        .faq-item.active .faq-icon { transform: rotate(180deg); }
-        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-        .faq-item.active .faq-answer { max-height: 300px; margin-top: 14px; }
-        .faq-answer p { color: var(--gray-600); line-height: 1.7; }
-
-        @media (max-width: 768px) {
-            .tool-header h1 { font-size: 1.8rem; }
-            .converter-card { padding: 28px 20px; }
-        }
+        .breadcrumb{background:white;border-bottom:1px solid var(--gray-200);padding:12px 0;font-size:13px;margin-bottom:32px}
+        .breadcrumb-inner{display:flex;align-items:center;gap:8px;color:var(--gray-500)}
+        .breadcrumb a{color:var(--gray-600)}
+        .breadcrumb a:hover{color:var(--purple-600)}
+        .faq-section{margin-top:48px}
+        .section-title{text-align:center;font-size:2rem;color:var(--gray-900);margin-bottom:40px}
+        .faq-item{background:white;border-radius:var(--radius-lg);padding:22px 26px;margin-bottom:14px;box-shadow:var(--shadow-sm);border:1px solid var(--gray-200)}
+        .faq-question{display:flex;justify-content:space-between;align-items:center;cursor:pointer}
+        .faq-question h3{color:var(--gray-900);font-size:1rem;font-weight:600}
+        .faq-icon{color:var(--purple-600);transition:var(--transition)}
+        .faq-item.active .faq-icon{transform:rotate(180deg)}
+        .faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease}
+        .faq-item.active .faq-answer{max-height:300px;margin-top:14px}
+        .faq-answer p{color:var(--gray-600);line-height:1.7}
+        @media(max-width:768px){.tool-header h1{font-size:1.8rem}.converter-card{padding:28px 20px}}
     </style>
 </head>
 <body>
 
 <header class="site-header" id="siteHeader">
-    <div class="container">
-        <div class="header-inner">
-            <a href="../../index.html" class="site-logo">
-                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
-                <div class="logo-text">
-                    <span class="logo-name">Free Tools Hub</span>
-                    <span class="logo-tagline">Tools · Blogs · Resources</span>
-                </div>
-            </a>
-            <nav class="main-nav">
-                <a href="../../index.html"><i class="fas fa-home"></i>Home</a>
-                <a href="../../tools.html" class="active"><i class="fas fa-tools"></i>All Tools</a>
-                <a href="../../blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
-                <a href="../../news.html"><i class="fas fa-newspaper"></i>News</a>
-                <a href="../../resources.html"><i class="fas fa-layer-group"></i>Resources</a>
-                <a href="../../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
-            </nav>
-            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
-            </button>
-        </div>
-    </div>
+    <div class="container"><div class="header-inner">
+        <a href="../../index.html" class="site-logo">
+            <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+            <div class="logo-text"><span class="logo-name">Free Tools Hub</span><span class="logo-tagline">Tools · Blogs · Resources</span></div>
+        </a>
+        <nav class="main-nav">
+            <a href="../../index.html"><i class="fas fa-home"></i>Home</a>
+            <a href="../../tools.html" class="active"><i class="fas fa-tools"></i>All Tools</a>
+            <a href="../../blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+            <a href="../../news.html"><i class="fas fa-newspaper"></i>News</a>
+            <a href="../../resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+            <a href="../../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
+        </nav>
+        <button class="mobile-menu-btn" id="mobileMenuBtn"><i class="fas fa-bars"></i></button>
+    </div></div>
     <nav class="mobile-nav" id="mobileMenu">
         <a href="../../index.html"><i class="fas fa-home"></i>Home</a>
         <a href="../../tools.html" class="active"><i class="fas fa-tools"></i>All Tools</a>
         <a href="../../blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
-        <a href="../../news.html"><i class="fas fa-newspaper"></i>News</a>
-        <a href="../../resources.html"><i class="fas fa-layer-group"></i>Resources</a>
         <a href="../../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
     </nav>
 </header>
 
-<div class="breadcrumb">
-    <div class="container">
-        <div class="breadcrumb-inner">
-            <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
-            <span>/</span>
-            <a href="../../tools.html">All Tools</a>
-            <span>/</span>
-            <span>Word to PDF Converter</span>
-        </div>
-    </div>
-</div>
+<div class="breadcrumb"><div class="container"><div class="breadcrumb-inner">
+    <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
+    <span>/</span><a href="../../tools.html">All Tools</a>
+    <span>/</span><span>Word to PDF Converter</span>
+</div></div></div>
 
 <main class="tool-container">
     <div class="tool-header">
         <div class="tool-badge"><i class="fas fa-fire"></i> HOT TOOL</div>
         <h1>Word to PDF Converter</h1>
-        <p>Convert Word documents to PDF with <strong>exact layout preservation</strong> — fonts, images, tables, and formatting intact.</p>
+        <p>Convert DOCX to PDF with <strong>exact layout preservation</strong> — fonts, images, tables, Urdu/RTL text, all intact.</p>
     </div>
 
     <div class="converter-card">
+        <!-- UPLOAD -->
         <div class="upload-zone" id="uploadZone">
             <div class="upload-icon"><i class="fas fa-file-word"></i></div>
             <h3>Drop your Word document here or click to browse</h3>
-            <p>Supports DOCX files up to 50MB — exact layout preserved</p>
-            <button class="btn-upload" id="browseBtn">
-                <i class="fas fa-folder-open"></i> Choose Word File
-            </button>
+            <p>Supports .DOCX — layout preserved exactly as in Word</p>
+            <button class="btn-upload" id="browseBtn"><i class="fas fa-folder-open"></i> Choose Word File</button>
             <input type="file" id="fileInput" class="file-input" accept=".docx,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
         </div>
 
+        <!-- FILE INFO BAR -->
         <div class="file-preview" id="filePreview">
             <div class="file-info">
                 <div class="file-details">
@@ -272,393 +169,495 @@
             </div>
         </div>
 
-        <!-- DOCX PREVIEW - pixel-perfect rendering -->
+        <!-- PREVIEW PANEL -->
         <div class="preview-wrapper" id="previewWrapper">
             <div class="preview-header-bar">
-                <span><i class="fas fa-eye"></i> &nbsp;Live Document Preview</span>
-                <span class="preview-badge">✓ Exact Layout</span>
+                <span id="previewTitle"><i class="fas fa-eye"></i>&nbsp; Document Preview</span>
+                <span class="preview-badge" id="previewBadge" style="background:#9ca3af;">Loading…</span>
             </div>
-            <div id="docxPreviewContainer"></div>
+            <!-- exact mode (docx-preview) -->
+            <div id="docxBox"></div>
+            <!-- fallback mode (mammoth HTML) -->
+            <div id="htmlBox"></div>
         </div>
 
-        <div class="info-banner" id="infoBanner" style="display:none;">
-            <i class="fas fa-info-circle"></i>
-            <p>Preview shows the <strong>exact layout</strong> that will appear in your PDF — same fonts, spacing, images, tables, and page structure as your Word document.</p>
-        </div>
-
+        <!-- CONVERT BUTTON -->
         <div class="convert-section" id="convertSection">
             <button class="btn-convert" id="convertBtn">
-                <i class="fas fa-file-pdf"></i> Convert to PDF (Exact Layout)
+                <i class="fas fa-file-pdf"></i> Convert to PDF
             </button>
         </div>
 
+        <!-- PROGRESS -->
         <div class="progress-section" id="progressSection">
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <p class="progress-text" id="progressText">Converting... please wait</p>
+            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            <p class="progress-text" id="progressText">Converting…</p>
         </div>
 
+        <!-- DOWNLOAD -->
         <div class="download-section" id="downloadSection">
             <div class="success-icon"><i class="fas fa-check"></i></div>
             <h3>Conversion Complete!</h3>
-            <p>Your PDF is ready — with exact layout preserved</p>
-            <button class="btn-download" id="downloadBtn">
-                <i class="fas fa-download"></i> Download PDF
-            </button>
-            <button class="btn-convert-another" id="convertAnotherBtn">
-                <i class="fas fa-redo"></i> Convert Another File
-            </button>
+            <p>Your PDF is ready to download</p>
+            <button class="btn-download" id="downloadBtn"><i class="fas fa-download"></i> Download PDF</button>
+            <button class="btn-convert-another" id="convertAnotherBtn"><i class="fas fa-redo"></i> Convert Another</button>
         </div>
-    </div>
+    </div><!-- /converter-card -->
 
     <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-clone"></i></div>
-            <h3>Pixel-Perfect Layout</h3>
-            <p>Preserves exact fonts, spacing, images, tables, columns, and page structure from your Word file.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-eye"></i></div>
-            <h3>Live Preview</h3>
-            <p>See exactly how your PDF will look before converting — what you see is what you get.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
-            <h3>100% Private</h3>
-            <p>All processing happens in your browser. Your file never leaves your device.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon"><i class="fas fa-infinity"></i></div>
-            <h3>Free & Unlimited</h3>
-            <p>No signup, no limits. Convert as many files as you need, completely free.</p>
-        </div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-clone"></i></div><h3>Exact Layout</h3><p>Fonts, spacing, images, tables, columns — all preserved exactly as in Word.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-language"></i></div><h3>Urdu & RTL</h3><p>Urdu, Arabic, and all RTL text renders exactly as in your original document.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-shield-alt"></i></div><h3>100% Private</h3><p>All processing runs in your browser. File never leaves your device.</p></div>
+        <div class="feature-card"><div class="feature-icon"><i class="fas fa-infinity"></i></div><h3>Free & Unlimited</h3><p>No signup, no limits. Convert as many files as you need.</p></div>
     </div>
 
     <section class="faq-section">
         <h2 class="section-title">Frequently Asked Questions</h2>
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <h3>How is this different from other Word to PDF converters?</h3>
-                <i class="fas fa-chevron-down faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>This converter uses <strong>docx-preview</strong> — the same rendering engine used by Microsoft's own online viewers. It renders the document with pixel-accurate fidelity, then captures each page as a high-resolution image for the PDF. Other converters rebuild the document from scratch and lose formatting.</p>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)"><h3>Will my exact layout be preserved?</h3><i class="fas fa-chevron-down faq-icon"></i></div>
+            <div class="faq-answer"><p>Yes. The document is rendered visually (just like Word displays it), then each page is captured at high resolution and assembled into a PDF. Tables, images, headers, footers — everything appears exactly as in Word.</p></div>
         </div>
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <h3>Will my images and tables be preserved?</h3>
-                <i class="fas fa-chevron-down faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Yes. Since we render the document visually first (like a browser would), then capture it as images into the PDF, every element — tables, images, shapes, headers, footers — appears exactly as in Word.</p>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)"><h3>Does it support Urdu and Arabic text?</h3><i class="fas fa-chevron-down faq-icon"></i></div>
+            <div class="faq-answer"><p>Yes. Because we capture a visual rendering rather than extracting raw text, all RTL languages including Urdu and Arabic render exactly as in the original document.</p></div>
         </div>
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <h3>Is my file uploaded to a server?</h3>
-                <i class="fas fa-chevron-down faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>No. Everything runs in your browser locally. Your file never leaves your device and is never uploaded to any server.</p>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)"><h3>Is my file uploaded anywhere?</h3><i class="fas fa-chevron-down faq-icon"></i></div>
+            <div class="faq-answer"><p>No. Everything runs inside your browser locally. Your file is never sent to any server.</p></div>
         </div>
         <div class="faq-item">
-            <div class="faq-question" onclick="toggleFaq(this)">
-                <h3>Does it support Urdu, Arabic, and other RTL languages?</h3>
-                <i class="fas fa-chevron-down faq-icon"></i>
-            </div>
-            <div class="faq-answer">
-                <p>Yes. Because we use visual rendering (not text extraction), RTL text, Urdu, Arabic, and any other language renders exactly as it appears in the original Word document.</p>
-            </div>
+            <div class="faq-question" onclick="toggleFaq(this)"><h3>What file types are supported?</h3><i class="fas fa-chevron-down faq-icon"></i></div>
+            <div class="faq-answer"><p>This converter supports modern .DOCX files (Word 2007 and later). For best results use a standard Word document without heavy macro content.</p></div>
         </div>
     </section>
 </main>
 
 <footer class="site-footer">
-    <div class="container">
-        <div class="footer-bottom">
-            <p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a>. All rights reserved.</p>
-        </div>
-    </div>
+    <div class="container"><div class="footer-bottom">
+        <p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a>. All rights reserved. Made with <span>♥</span> for developers &amp; creators.</p>
+    </div></div>
 </footer>
 
-<!-- ==================== LIBRARIES ==================== -->
-<!-- docx-preview: renders DOCX files with exact Word layout -->
+<!-- ======= LIBRARIES (cdnjs only — always available in browsers) ======= -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-<script src="https://unpkg.com/docx-preview@0.1.22/dist/docx-preview.umd.js"></script>
-<!-- html2canvas: captures rendered pages as images -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<!-- jsPDF: assembles captured images into a PDF -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<!-- FileSaver -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 
-<script>
-// ==================== UI SETUP ====================
-const header = document.getElementById('siteHeader');
-window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+<!--
+    docx-preview gives EXACT Word-like rendering.
+    Try multiple CDNs in order; if all fail we silently use the mammoth fallback.
+    The key fix: we wait for the script to actually load before using it.
+-->
+<script id="docxPreviewLoader">
+(function() {
+    var CDNS = [
+        'https://cdn.jsdelivr.net/npm/docx-preview@0.1.22/dist/docx-preview.umd.js',
+        'https://unpkg.com/docx-preview@0.1.22/dist/docx-preview.umd.js',
+        'https://cdn.jsdelivr.net/npm/docx-preview/dist/docx-preview.umd.js',
+        'https://unpkg.com/docx-preview/dist/docx-preview.umd.js'
+    ];
+    var idx = 0;
+    function next() {
+        if (idx >= CDNS.length) { window.__dpFailed = true; return; }
+        var s = document.createElement('script');
+        s.src = CDNS[idx++];
+        s.onload  = function() { window.__dpReady = true; };
+        s.onerror = function() { next(); };
+        document.head.appendChild(s);
+    }
+    next();
+})();
+</script>
 
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu = document.getElementById('mobileMenu');
-mobileMenuBtn.addEventListener('click', () => {
-    const isOpen = mobileMenu.classList.toggle('open');
-    mobileMenuBtn.setAttribute('aria-expanded', isOpen);
-    mobileMenuBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+<script>
+/* =========================================================
+   UI helpers
+   ========================================================= */
+var header = document.getElementById('siteHeader');
+window.addEventListener('scroll', function(){ header.classList.toggle('scrolled', window.scrollY > 20); }, { passive: true });
+
+var mobileMenuBtn = document.getElementById('mobileMenuBtn');
+var mobileMenu    = document.getElementById('mobileMenu');
+mobileMenuBtn.addEventListener('click', function(){
+    var open = mobileMenu.classList.toggle('open');
+    mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
 });
 
 function toggleFaq(el) {
-    const item = el.parentElement;
-    const isActive = item.classList.contains('active');
-    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-    if (!isActive) item.classList.add('active');
+    var item = el.parentElement;
+    var was  = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('active'); });
+    if (!was) item.classList.add('active');
 }
 
-// ==================== ELEMENT REFS ====================
-const uploadZone = document.getElementById('uploadZone');
-const fileInput = document.getElementById('fileInput');
-const browseBtn = document.getElementById('browseBtn');
-const filePreview = document.getElementById('filePreview');
-const previewWrapper = document.getElementById('previewWrapper');
-const docxContainer = document.getElementById('docxPreviewContainer');
-const infoBanner = document.getElementById('infoBanner');
-const convertSection = document.getElementById('convertSection');
-const progressSection = document.getElementById('progressSection');
-const downloadSection = document.getElementById('downloadSection');
-const convertBtn = document.getElementById('convertBtn');
-const removeBtn = document.getElementById('removeBtn');
-const downloadBtn = document.getElementById('downloadBtn');
-const convertAnotherBtn = document.getElementById('convertAnotherBtn');
-const fileNameEl = document.getElementById('fileName');
-const fileSizeEl = document.getElementById('fileSize');
-const progressFill = document.getElementById('progressFill');
-const progressText = document.getElementById('progressText');
+/* =========================================================
+   DOM refs
+   ========================================================= */
+var uploadZone      = document.getElementById('uploadZone');
+var fileInput       = document.getElementById('fileInput');
+var browseBtn       = document.getElementById('browseBtn');
+var filePreview     = document.getElementById('filePreview');
+var previewWrapper  = document.getElementById('previewWrapper');
+var docxBox         = document.getElementById('docxBox');
+var htmlBox         = document.getElementById('htmlBox');
+var previewTitle    = document.getElementById('previewTitle');
+var previewBadge    = document.getElementById('previewBadge');
+var convertSection  = document.getElementById('convertSection');
+var progressSection = document.getElementById('progressSection');
+var downloadSection = document.getElementById('downloadSection');
+var convertBtn      = document.getElementById('convertBtn');
+var removeBtn       = document.getElementById('removeBtn');
+var downloadBtn     = document.getElementById('downloadBtn');
+var convAnotherBtn  = document.getElementById('convertAnotherBtn');
+var fileNameEl      = document.getElementById('fileName');
+var fileSizeEl      = document.getElementById('fileSize');
+var progressFill    = document.getElementById('progressFill');
+var progressText    = document.getElementById('progressText');
 
-let selectedFile = null;
-let convertedBlob = null;
+var selectedFile   = null;
+var convertedBlob  = null;
+var usingExactMode = false;   // true = docx-preview; false = mammoth
 
-// ==================== FILE HANDLING ====================
-browseBtn.addEventListener('click', (e) => { e.stopPropagation(); fileInput.click(); });
-uploadZone.addEventListener('click', () => fileInput.click());
-fileInput.addEventListener('change', (e) => { if (e.target.files[0]) handleFile(e.target.files[0]); });
-
-uploadZone.addEventListener('dragover', (e) => { e.preventDefault(); uploadZone.classList.add('dragover'); });
-uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('dragover'));
-uploadZone.addEventListener('drop', (e) => {
+/* =========================================================
+   File upload
+   ========================================================= */
+browseBtn.addEventListener('click', function(e){ e.stopPropagation(); fileInput.click(); });
+uploadZone.addEventListener('click', function(){ fileInput.click(); });
+fileInput.addEventListener('change', function(e){ if (e.target.files[0]) handleFile(e.target.files[0]); });
+uploadZone.addEventListener('dragover', function(e){ e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', function(){ uploadZone.classList.remove('dragover'); });
+uploadZone.addEventListener('drop', function(e){
     e.preventDefault(); uploadZone.classList.remove('dragover');
     if (e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 });
 
-function formatFileSize(bytes) {
-    if (bytes === 0) return '0 Bytes';
-    const k = 1024, sizes = ['Bytes', 'KB', 'MB', 'GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+function fmtSize(b){
+    if (!b) return '0 B';
+    var k=1024, u=['B','KB','MB','GB'], i=Math.floor(Math.log(b)/Math.log(k));
+    return (b/Math.pow(k,i)).toFixed(1)+' '+u[i];
 }
 
 async function handleFile(file) {
-    selectedFile = file;
+    selectedFile  = file;
+    usingExactMode = false;
     fileNameEl.textContent = file.name;
-    fileSizeEl.textContent = formatFileSize(file.size);
+    fileSizeEl.textContent = fmtSize(file.size);
     filePreview.classList.add('active');
     uploadZone.style.display = 'none';
-
-    // Render preview using docx-preview
-    await renderDocxPreview(file);
-
     previewWrapper.classList.add('active');
-    infoBanner.style.display = 'flex';
+    setBadge('Loading…', '#9ca3af');
+
+    var buf = await file.arrayBuffer();
+    await renderPreview(buf);
     convertSection.classList.add('active');
 }
 
-// ==================== DOCX-PREVIEW RENDERING ====================
-async function renderDocxPreview(file) {
-    docxContainer.innerHTML = '<div style="padding:40px;text-align:center;color:#aaa;"><i class="fas fa-spinner fa-spin" style="font-size:28px;"></i><p style="margin-top:12px;">Rendering document preview...</p></div>';
+/* =========================================================
+   Preview — try docx-preview first, fall back to mammoth
+   ========================================================= */
+async function renderPreview(arrayBuffer) {
+    // Wait up to 4 s for docx-preview script to load
+    var waited = 0;
+    while (!window.__dpReady && !window.__dpFailed && waited < 4000) {
+        await sleep(120); waited += 120;
+    }
+
+    var dpAvailable = window.__dpReady && window.docx && typeof window.docx.renderAsync === 'function';
+
+    if (dpAvailable) {
+        try {
+            await renderExact(arrayBuffer);
+            return;
+        } catch(err) {
+            console.warn('docx-preview failed, falling back:', err);
+        }
+    }
+
+    // Fallback
+    await renderFallback(arrayBuffer);
+}
+
+async function renderExact(arrayBuffer) {
+    docxBox.innerHTML = spinner('Rendering exact layout…');
+    docxBox.style.display = 'block';
+    htmlBox.style.display = 'none';
+
+    var opts = {
+        className: 'docx',
+        inWrapper: true,
+        ignoreWidth: false,
+        ignoreHeight: false,
+        ignoreFonts: false,
+        breakPages: true,
+        ignoreLastRenderedPageBreak: false,
+        experimental: true,
+        trimXmlDeclaration: true,
+    };
+
+    docxBox.innerHTML = '';
+    await window.docx.renderAsync(new Uint8Array(arrayBuffer), docxBox, null, opts);
+
+    // Style rendered pages
+    docxBox.querySelectorAll('section.docx').forEach(function(p){
+        p.style.margin    = '0 auto 20px auto';
+        p.style.boxShadow = '0 4px 24px rgba(0,0,0,.45)';
+    });
+
+    usingExactMode = true;
+    setBadge('✓ Exact Layout', '#10b981');
+    previewTitle.innerHTML = '<i class="fas fa-eye"></i>&nbsp; Live Preview — Exact Word Layout';
+}
+
+async function renderFallback(arrayBuffer) {
+    htmlBox.innerHTML = spinner('Loading preview…');
+    htmlBox.style.display = 'block';
+    docxBox.style.display = 'none';
 
     try {
-        const arrayBuffer = await file.arrayBuffer();
-
-        // docx-preview options for accurate rendering
-        const options = {
-            className: 'docx',
-            inWrapper: true,
-            ignoreWidth: false,
-            ignoreHeight: false,
-            ignoreFonts: false,
-            breakPages: true,
-            ignoreLastRenderedPageBreak: false,
-            experimental: true,
-            trimXmlDeclaration: true,
-            debug: false,
-        };
-
-        // Clear and render
-        docxContainer.innerHTML = '';
-        await docx.renderAsync(arrayBuffer, docxContainer, null, options);
-
-        // Style the rendered pages
-        styleRenderedPages();
-
-    } catch (err) {
-        console.error('Preview error:', err);
-        docxContainer.innerHTML = `<div style="padding:30px;text-align:center;color:#ef4444;">
-            <i class="fas fa-exclamation-triangle" style="font-size:28px;"></i>
-            <p style="margin-top:10px;">Preview failed: ${err.message}</p>
-            <p style="color:#888;font-size:13px;">Conversion will still proceed correctly.</p>
-        </div>`;
+        var result = await mammoth.convertToHtml(
+            { arrayBuffer: arrayBuffer },
+            {
+                convertImage: mammoth.images.inline(function(el){
+                    return el.read('base64').then(function(b64){
+                        return { src: 'data:' + el.contentType + ';base64,' + b64 };
+                    });
+                })
+            }
+        );
+        htmlBox.innerHTML = result.value || '<p style="color:#888">No content found.</p>';
+        setBadge('✓ Preview Ready', '#f59e0b');
+        previewTitle.innerHTML = '<i class="fas fa-eye"></i>&nbsp; Document Preview';
+    } catch(err) {
+        htmlBox.innerHTML = '<p style="color:#ef4444;padding:20px;">Preview error: ' + err.message + '</p>';
+        setBadge('Preview Error', '#ef4444');
     }
 }
 
-function styleRenderedPages() {
-    // Make all page sections look clean with shadows
-    const pages = docxContainer.querySelectorAll('section.docx, .docx-wrapper > section');
-    pages.forEach(page => {
-        page.style.margin = '0 auto 20px auto';
-        page.style.boxShadow = '0 4px 24px rgba(0,0,0,0.35)';
-        page.style.borderRadius = '2px';
-    });
-}
-
-// ==================== PDF CONVERSION ====================
-// Strategy: render each Word page visually (already done via docx-preview),
-// then use html2canvas to capture each page as a high-res image,
-// and assemble them into a PDF with jsPDF.
-
-convertBtn.addEventListener('click', async () => {
+/* =========================================================
+   Conversion
+   ========================================================= */
+convertBtn.addEventListener('click', async function(){
     if (!selectedFile) return;
     convertBtn.disabled = true;
     convertSection.classList.remove('active');
     progressSection.classList.add('active');
-
     try {
-        await convertToPDF();
-    } catch (err) {
+        if (usingExactMode) {
+            await convertExact();
+        } else {
+            await convertFallback();
+        }
+    } catch(err) {
         alert('Conversion failed: ' + err.message);
         console.error(err);
         resetConverter();
     }
 });
 
-function setProgress(pct, msg) {
-    progressFill.style.width = pct + '%';
-    progressText.textContent = msg;
-}
+/* --- Method A: capture docx-preview pages with html2canvas --- */
+async function convertExact() {
+    var jsPDF = window.jspdf.jsPDF;
+    setP(5, 'Preparing pages…');
+    await sleep(200);
 
-async function convertToPDF() {
-    const { jsPDF } = window.jspdf;
+    var pages = Array.from(docxBox.querySelectorAll('section.docx'));
+    if (!pages.length) pages = Array.from(docxBox.querySelectorAll('.docx-wrapper section'));
+    if (!pages.length) pages = [docxBox];
 
-    setProgress(5, 'Preparing document...');
+    setP(10, 'Capturing ' + pages.length + ' page(s)…');
 
-    // Make sure docx-preview has fully rendered
-    await new Promise(r => setTimeout(r, 300));
+    var pdf = null;
 
-    // Find all rendered page sections
-    // docx-preview renders each Word page as a <section> element
-    let pages = Array.from(docxContainer.querySelectorAll('section.docx'));
-    if (pages.length === 0) {
-        pages = Array.from(docxContainer.querySelectorAll('.docx-wrapper section'));
-    }
-    if (pages.length === 0) {
-        pages = [docxContainer]; // fallback: capture whole container
-    }
+    for (var i = 0; i < pages.length; i++) {
+        var pg = pages[i];
+        setP(10 + Math.round(i / pages.length * 82), 'Rendering page ' + (i+1) + ' of ' + pages.length + '…');
 
-    setProgress(10, `Found ${pages.length} page(s). Capturing...`);
+        var wPx = pg.scrollWidth  || pg.offsetWidth  || 794;
+        var hPx = pg.scrollHeight || pg.offsetHeight || 1123;
 
-    const DPI_SCALE = 2; // high-res capture (2x = crisp on retina)
-    const PDF_DPI = 96;
-
-    let pdf = null;
-    let pdfW = 0, pdfH = 0;
-
-    for (let i = 0; i < pages.length; i++) {
-        const page = pages[i];
-        const pct = 10 + Math.round((i / pages.length) * 80);
-        setProgress(pct, `Capturing page ${i + 1} of ${pages.length}...`);
-
-        // Get page dimensions in points
-        const rect = page.getBoundingClientRect();
-        const pageWidthPx = rect.width;
-        const pageHeightPx = rect.height;
-
-        // Convert px to PDF points (1 pt = 96/72 px at screen resolution)
-        // We use mm for jsPDF
-        const pageWidthMM = (pageWidthPx / PDF_DPI) * 25.4;
-        const pageHeightMM = (pageHeightPx / PDF_DPI) * 25.4;
-
-        // Capture page as high-res image
-        const canvas = await html2canvas(page, {
-            scale: DPI_SCALE,
+        var canvas = await html2canvas(pg, {
+            scale: 2,
             useCORS: true,
             allowTaint: true,
             backgroundColor: '#ffffff',
             logging: false,
-            width: pageWidthPx,
-            height: pageHeightPx,
+            width: wPx,
+            height: hPx,
             scrollX: 0,
-            scrollY: -window.scrollY,
-            windowWidth: document.documentElement.scrollWidth,
-            windowHeight: document.documentElement.scrollHeight,
-            foreignObjectRendering: false,
+            scrollY: 0,
+            windowWidth: wPx,
         });
 
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        var imgData = canvas.toDataURL('image/jpeg', 0.95);
+        var wMM = wPx / 96 * 25.4;
+        var hMM = hPx / 96 * 25.4;
 
-        if (i === 0) {
-            // Initialize PDF with first page dimensions
-            pdfW = pageWidthMM;
-            pdfH = pageHeightMM;
-            pdf = new jsPDF({
-                unit: 'mm',
-                format: [pdfW, pdfH],
-                orientation: pdfW > pdfH ? 'landscape' : 'portrait',
-                compress: true
-            });
+        if (!pdf) {
+            pdf = new jsPDF({ unit:'mm', format:[wMM,hMM], compress:true });
         } else {
-            // Add new page with this page's dimensions
-            pdf.addPage([pageWidthMM, pageHeightMM], pageWidthMM > pageHeightMM ? 'landscape' : 'portrait');
+            pdf.addPage([wMM, hMM]);
         }
-
-        // Add the captured image to fill the entire page
-        pdf.addImage(imgData, 'JPEG', 0, 0, pageWidthMM, pageHeightMM, '', 'FAST');
-
-        // Small delay to keep UI responsive
-        await new Promise(r => setTimeout(r, 10));
+        pdf.addImage(imgData, 'JPEG', 0, 0, wMM, hMM, '', 'FAST');
+        await sleep(10);
     }
-
-    setProgress(95, 'Finalizing PDF...');
-    await new Promise(r => setTimeout(r, 100));
-
-    convertedBlob = pdf.output('blob');
-
-    setProgress(100, 'Done!');
-    await new Promise(r => setTimeout(r, 300));
-
-    progressSection.classList.remove('active');
-    downloadSection.classList.add('active');
-
-    const outName = selectedFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
-    downloadBtn.onclick = () => saveAs(convertedBlob, outName);
+    finishPdf(pdf);
 }
 
-// ==================== RESET ====================
-removeBtn.addEventListener('click', resetConverter);
-convertAnotherBtn.addEventListener('click', resetConverter);
+/* --- Method B: mammoth HTML → render in hidden div → html2canvas page slices --- */
+async function convertFallback() {
+    var jsPDF = window.jspdf.jsPDF;
 
-function resetConverter() {
-    selectedFile = null;
-    convertedBlob = null;
+    setP(5, 'Reading document…');
+    var buf = await selectedFile.arrayBuffer();
+    setP(15, 'Converting to HTML…');
+
+    var result = await mammoth.convertToHtml(
+        { arrayBuffer: buf },
+        {
+            convertImage: mammoth.images.inline(function(el){
+                return el.read('base64').then(function(b64){
+                    return { src: 'data:'+el.contentType+';base64,'+b64 };
+                });
+            })
+        }
+    );
+
+    var html = result.value;
+    setP(28, 'Rendering…');
+
+    /* Build hidden A4 stage */
+    var A4W = 794, MARGIN = 56;
+    var stage = document.createElement('div');
+    stage.style.cssText =
+        'position:fixed;top:0;left:-9999px;z-index:-100;' +
+        'width:'+A4W+'px;background:white;' +
+        'padding:'+MARGIN+'px;box-sizing:border-box;visibility:hidden;' +
+        'font-family:"Times New Roman",serif;font-size:12pt;' +
+        'line-height:1.6;color:#000;';
+    stage.innerHTML =
+        '<style>' +
+        '* { box-sizing:border-box }' +
+        'h1{font-size:18pt;font-weight:bold;margin:.5em 0}' +
+        'h2{font-size:15pt;font-weight:bold;margin:.45em 0}' +
+        'h3{font-size:13pt;font-weight:bold;margin:.4em 0}' +
+        'h4,h5,h6{font-size:12pt;font-weight:bold;margin:.35em 0}' +
+        'p{margin:.35em 0}' +
+        'table{border-collapse:collapse;width:100%;margin:.5em 0}' +
+        'td,th{border:1px solid #ccc;padding:4px 8px;font-size:11pt}' +
+        'th{background:#f0f0f0;font-weight:bold}' +
+        'ul,ol{padding-left:1.4em;margin:.3em 0}' +
+        'li{margin:.2em 0}' +
+        'img{max-width:100%;height:auto}' +
+        'strong,b{font-weight:bold}em,i{font-style:italic}' +
+        '</style>' + html;
+
+    document.body.appendChild(stage);
+
+    /* Wait for images */
+    await Promise.all(Array.from(stage.querySelectorAll('img')).map(function(img){
+        if (img.complete) return Promise.resolve();
+        return new Promise(function(res){ img.onload=res; img.onerror=res; });
+    }));
+    await sleep(250);
+    stage.style.visibility = 'visible';
+
+    var totalH  = stage.scrollHeight;
+    var A4H     = 1123;                     // px at 96 dpi
+    var pageH   = A4H - MARGIN * 2;        // usable height per page
+    var pageCount = Math.ceil(totalH / pageH);
+    setP(38, 'Splitting into ' + pageCount + ' page(s)…');
+
+    /* Capture full tall image */
+    var full = await html2canvas(stage, {
+        scale: 2,
+        useCORS: true,
+        allowTaint: true,
+        backgroundColor: '#ffffff',
+        logging: false,
+        width: A4W,
+        height: totalH,
+        scrollX: 0,
+        scrollY: 0,
+        windowWidth: A4W,
+    });
+
+    document.body.removeChild(stage);
+
+    var pdf        = new jsPDF({ unit:'mm', format:'a4', compress:true });
+    var A4W_MM     = 210, A4H_MM = 297;
+    var scale      = full.width / A4W;           // =2 because html2canvas scale:2
+    var sliceHpx   = Math.round(pageH * scale);
+    var totalCanH  = full.height;
+    var actualPgs  = Math.ceil(totalCanH / sliceHpx);
+
+    for (var i = 0; i < actualPgs; i++) {
+        setP(40 + Math.round(i / actualPgs * 55), 'Building page ' + (i+1) + ' of ' + actualPgs + '…');
+
+        var startY  = i * sliceHpx;
+        var thisH   = Math.min(sliceHpx, totalCanH - startY);
+
+        var pc = document.createElement('canvas');
+        pc.width  = full.width;
+        pc.height = sliceHpx;
+        var ctx = pc.getContext('2d');
+        ctx.fillStyle = '#ffffff';
+        ctx.fillRect(0, 0, pc.width, pc.height);
+        ctx.drawImage(full, 0, startY, full.width, thisH, 0, 0, full.width, thisH);
+
+        var imgData = pc.toDataURL('image/jpeg', 0.95);
+        if (i > 0) pdf.addPage('a4');
+        pdf.addImage(imgData, 'JPEG', 0, 0, A4W_MM, A4H_MM, '', 'FAST');
+        await sleep(5);
+    }
+
+    finishPdf(pdf);
+}
+
+function finishPdf(pdf) {
+    setP(98, 'Finalizing…');
+    convertedBlob = pdf.output('blob');
+    setP(100, 'Done!');
+    setTimeout(function(){
+        progressSection.classList.remove('active');
+        downloadSection.classList.add('active');
+        var name = selectedFile.name.replace(/\.(docx|doc)$/i,'') + '.pdf';
+        downloadBtn.onclick = function(){ saveAs(convertedBlob, name); };
+    }, 350);
+}
+
+/* =========================================================
+   Helpers
+   ========================================================= */
+function setP(pct, msg){ progressFill.style.width=pct+'%'; progressText.textContent=msg; }
+function setBadge(txt, color){ previewBadge.textContent=txt; previewBadge.style.background=color; }
+function sleep(ms){ return new Promise(function(r){ setTimeout(r,ms); }); }
+function spinner(msg){
+    return '<div style="padding:40px;text-align:center;color:#aaa;">' +
+           '<i class="fas fa-spinner fa-spin" style="font-size:28px;display:block;margin-bottom:12px;"></i>' +
+           msg + '</div>';
+}
+
+/* =========================================================
+   Reset
+   ========================================================= */
+removeBtn.addEventListener('click', resetConverter);
+convAnotherBtn.addEventListener('click', resetConverter);
+
+function resetConverter(){
+    selectedFile = null; convertedBlob = null; usingExactMode = false;
     fileInput.value = '';
     filePreview.classList.remove('active');
     previewWrapper.classList.remove('active');
-    infoBanner.style.display = 'none';
     convertSection.classList.remove('active');
     progressSection.classList.remove('active');
     downloadSection.classList.remove('active');
     uploadZone.style.display = 'block';
-    docxContainer.innerHTML = '';
+    docxBox.innerHTML = ''; docxBox.style.display = 'none';
+    htmlBox.innerHTML = ''; htmlBox.style.display = 'none';
     progressFill.style.width = '0%';
-    progressText.textContent = 'Converting... please wait';
+    progressText.textContent = 'Converting…';
     convertBtn.disabled = false;
 }
 </script>
