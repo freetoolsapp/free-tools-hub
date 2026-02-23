@@ -1,574 +1,830 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word to PDF Converter — Exact Layout, Powered by LibreOffice</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    <!-- Meta Tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-  :root {
-    --bg:       #f0f2f5;
-    --card:     #ffffff;
-    --border:   #e2e6ea;
-    --primary:  #2563eb;
-    --primary-h:#1d4ed8;
-    --success:  #16a34a;
-    --danger:   #dc2626;
-    --text:     #111827;
-    --muted:    #6b7280;
-    --radius:   14px;
-    --shadow:   0 2px 16px rgba(0,0,0,.08);
-    --shadow-lg:0 8px 40px rgba(0,0,0,.13);
-  }
+    <!-- Primary SEO Meta Tags -->
+    <title>Word to PDF Converter — Free Online DOCX to PDF Converter 2026</title>
+    <meta name="title" content="Word to PDF Converter — Free Online DOCX to PDF Converter 2026">
+    <meta name="description" content="Convert Word documents to PDF files instantly. Free online Word to PDF converter supporting DOCX, DOC formats. No signup required. Fast, secure & high-quality conversion.">
+    <meta name="keywords" content="Word to PDF converter, DOCX to PDF, convert Word to PDF, DOC to PDF free, online Word converter">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Free Tools Hub">
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 48px 20px 80px;
-  }
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolshub.online/tools/utility/word-to-pdf-converter.html">
+    <meta property="og:title" content="Word to PDF Converter — Free Tools Hub">
+    <meta property="og:description" content="Convert Word documents to PDF files instantly. Free, fast & secure.">
+    <link rel="canonical" href="https://freetoolshub.online/tools/utility/word-to-pdf-converter.html">
 
-  /* ── Header ── */
-  .header { text-align: center; margin-bottom: 40px; }
-  .header .logo {
-    display: inline-flex; align-items: center; gap: 10px;
-    font-size: 1.1rem; font-weight: 700; color: var(--primary);
-    text-decoration: none; margin-bottom: 20px;
-    letter-spacing: -.3px;
-  }
-  .header .logo i { font-size: 1.4rem; }
-  .header h1 {
-    font-size: clamp(1.8rem, 4vw, 2.6rem);
-    font-weight: 700; letter-spacing: -.6px;
-    color: var(--text); margin-bottom: 10px;
-  }
-  .header p { color: var(--muted); font-size: 1.05rem; max-width: 520px; margin: 0 auto; }
+    <!-- Fonts + Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../../style.css">
 
-  /* ── Badges ── */
-  .badges { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 16px; }
-  .badge {
-    display: inline-flex; align-items: center; gap: 5px;
-    background: #eff6ff; color: #1d4ed8;
-    font-size: 12px; font-weight: 600; padding: 4px 12px;
-    border-radius: 99px; border: 1px solid #bfdbfe;
-  }
-  .badge.green { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
-  .badge.orange { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+    <style>
+        /* ── Page layout ─────────────────────────────────── */
+        .tool-container {
+            max-width: 860px;
+            margin: 0 auto;
+            padding: 40px 24px 80px;
+        }
 
-  /* ── Card ── */
-  .card {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border);
-    width: 100%; max-width: 680px;
-    overflow: hidden;
-  }
+        /* ── Breadcrumb ──────────────────────────────────── */
+        .breadcrumb {
+            background: white;
+            border-bottom: 1px solid var(--gray-200);
+            padding: 12px 0;
+            font-size: 13px;
+            margin-bottom: 32px;
+        }
+        .breadcrumb-inner {
+            display: flex; align-items: center;
+            gap: 8px; color: var(--gray-500); flex-wrap: wrap;
+        }
+        .breadcrumb a { color: var(--gray-600); transition: var(--transition); }
+        .breadcrumb a:hover { color: var(--purple-600); }
 
-  .card-body { padding: 40px; }
+        /* ── Tool header ─────────────────────────────────── */
+        .tool-header { text-align: center; margin-bottom: 44px; }
+        .tool-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
+            color: white; padding: 6px 14px;
+            border-radius: var(--radius-full);
+            font-size: 13px; font-weight: 600; margin-bottom: 16px;
+        }
+        .tool-header h1 { font-size: 2.5rem; color: var(--gray-900); margin-bottom: 12px; line-height: 1.2; }
+        .tool-header p  { font-size: 1.1rem; color: var(--gray-600); max-width: 600px; margin: 0 auto 20px; }
+        .engine-badge {
+            display: inline-flex; align-items: center; gap: 6px;
+            background: #f0fdf4; border: 1px solid #86efac;
+            color: #166534; padding: 6px 16px;
+            border-radius: var(--radius-full); font-size: 13px; font-weight: 600;
+        }
 
-  /* ── Upload zone ── */
-  .drop-zone {
-    border: 2.5px dashed #93c5fd;
-    border-radius: 10px;
-    padding: 52px 32px;
-    text-align: center;
-    background: #f8faff;
-    cursor: pointer;
-    transition: all .2s;
-    position: relative;
-  }
-  .drop-zone:hover, .drop-zone.over {
-    border-color: var(--primary);
-    background: #eff6ff;
-  }
-  .drop-zone input[type=file] {
-    position: absolute; inset: 0; opacity: 0; cursor: pointer;
-  }
-  .dz-icon {
-    width: 68px; height: 68px;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    border-radius: 18px; display: flex; align-items: center;
-    justify-content: center; margin: 0 auto 18px;
-    font-size: 28px; color: white;
-    box-shadow: 0 4px 16px rgba(37,99,235,.35);
-  }
-  .dz-title { font-size: 1.15rem; font-weight: 600; color: var(--text); margin-bottom: 6px; }
-  .dz-sub   { font-size: .9rem; color: var(--muted); }
-  .dz-btn {
-    display: inline-flex; align-items: center; gap: 7px;
-    background: var(--primary); color: white;
-    padding: 10px 22px; border-radius: 8px;
-    font-size: .92rem; font-weight: 600;
-    margin-top: 18px; border: none; cursor: pointer;
-    transition: background .2s;
-  }
-  .dz-btn:hover { background: var(--primary-h); }
+        /* ── Converter card ──────────────────────────────── */
+        .converter-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 44px;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--gray-200);
+            margin-bottom: 44px;
+        }
 
-  /* ── File chip ── */
-  .file-chip {
-    display: none;
-    align-items: center; gap: 14px;
-    background: #f0fdf4; border: 1px solid #86efac;
-    border-radius: 10px; padding: 14px 18px;
-    margin-top: 20px;
-  }
-  .file-chip.show { display: flex; }
-  .chip-icon {
-    width: 42px; height: 42px; background: #16a34a;
-    border-radius: 10px; display: flex; align-items: center;
-    justify-content: center; color: white; font-size: 18px; flex-shrink: 0;
-  }
-  .chip-meta { flex: 1; min-width: 0; }
-  .chip-name { font-weight: 600; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .chip-size { font-size: .8rem; color: var(--muted); margin-top: 2px; }
-  .chip-remove {
-    background: none; border: none; color: var(--muted);
-    cursor: pointer; font-size: 16px; padding: 4px; flex-shrink: 0;
-    border-radius: 6px; transition: color .2s, background .2s;
-  }
-  .chip-remove:hover { color: var(--danger); background: #fee2e2; }
+        /* ── Upload zone ─────────────────────────────────── */
+        .upload-zone {
+            border: 2px dashed var(--purple-300);
+            border-radius: var(--radius-lg);
+            padding: 52px 32px;
+            text-align: center;
+            background: var(--purple-50);
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .upload-zone:hover, .upload-zone.dragover {
+            border-color: var(--purple-600);
+            background: var(--purple-100);
+        }
+        .upload-icon {
+            width: 68px; height: 68px;
+            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
+            border-radius: 18px;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 30px; color: white;
+            box-shadow: 0 4px 18px rgba(124,58,237,.3);
+        }
+        .upload-zone h3 { color: var(--gray-900); margin-bottom: 8px; font-size: 1.25rem; }
+        .upload-zone p  { color: var(--gray-600); margin-bottom: 22px; font-size: .95rem; }
+        .file-input { display: none; }
+        .btn-upload {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: var(--purple-600); color: white;
+            padding: 13px 28px; border-radius: var(--radius-md);
+            font-weight: 600; border: none; cursor: pointer; transition: var(--transition);
+        }
+        .btn-upload:hover { background: var(--purple-700); transform: translateY(-1px); }
 
-  /* ── Convert button ── */
-  .convert-wrap { margin-top: 24px; }
-  .btn-convert {
-    width: 100%; padding: 15px;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white; font-size: 1.05rem; font-weight: 700;
-    border: none; border-radius: 10px; cursor: pointer;
-    display: flex; align-items: center; justify-content: center; gap: 9px;
-    transition: opacity .2s, transform .15s;
-    box-shadow: 0 4px 18px rgba(37,99,235,.3);
-    letter-spacing: .01em;
-  }
-  .btn-convert:hover:not(:disabled) { opacity: .93; transform: translateY(-1px); }
-  .btn-convert:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+        /* ── File chip ───────────────────────────────────── */
+        .file-chip {
+            display: none;
+            align-items: center; gap: 14px;
+            background: #f0fdf4; border: 1px solid #86efac;
+            border-radius: var(--radius-md);
+            padding: 14px 18px; margin-top: 20px;
+        }
+        .file-chip.show { display: flex; }
+        .chip-icon {
+            width: 44px; height: 44px; background: #16a34a;
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            color: white; font-size: 18px; flex-shrink: 0;
+        }
+        .chip-meta { flex: 1; min-width: 0; }
+        .chip-name { font-weight: 600; font-size: .95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .chip-size { font-size: .8rem; color: var(--gray-500); margin-top: 2px; }
+        .chip-remove {
+            background: none; border: none; color: var(--gray-400);
+            cursor: pointer; font-size: 16px; padding: 6px;
+            border-radius: var(--radius-sm); transition: var(--transition);
+        }
+        .chip-remove:hover { color: #dc2626; background: #fee2e2; }
 
-  /* ── Progress ── */
-  .progress-wrap {
-    display: none; margin-top: 28px;
-    background: #f9fafb; border: 1px solid var(--border);
-    border-radius: 10px; padding: 20px 22px;
-  }
-  .progress-wrap.show { display: block; }
-  .progress-label {
-    display: flex; justify-content: space-between;
-    font-size: .85rem; font-weight: 500; color: var(--text);
-    margin-bottom: 10px;
-  }
-  .progress-bar {
-    height: 8px; background: #e5e7eb;
-    border-radius: 99px; overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, #2563eb, #7c3aed);
-    border-radius: 99px;
-    width: 0%;
-    transition: width .35s ease;
-  }
-  .progress-status { font-size: .82rem; color: var(--muted); margin-top: 8px; }
+        /* ── Error box ───────────────────────────────────── */
+        .error-box {
+            display: none;
+            margin-top: 18px;
+            background: #fef2f2; border: 1px solid #fca5a5;
+            border-radius: var(--radius-md);
+            padding: 14px 18px; color: #dc2626;
+            font-size: .9rem; font-weight: 500;
+        }
+        .error-box.show { display: block; }
 
-  /* ── Success panel ── */
-  .success-panel {
-    display: none; margin-top: 28px;
-    background: #f0fdf4; border: 1px solid #86efac;
-    border-radius: 10px; padding: 24px;
-    text-align: center;
-  }
-  .success-panel.show { display: block; }
-  .success-icon {
-    width: 60px; height: 60px; background: var(--success);
-    border-radius: 50%; display: flex; align-items: center;
-    justify-content: center; margin: 0 auto 14px;
-    font-size: 26px; color: white;
-    animation: pop .4s cubic-bezier(.34,1.56,.64,1);
-  }
-  @keyframes pop { from{transform:scale(0)} to{transform:scale(1)} }
-  .success-title { font-size: 1.15rem; font-weight: 700; color: #14532d; margin-bottom: 4px; }
-  .success-sub   { font-size: .9rem; color: #166534; margin-bottom: 20px; }
-  .btn-download {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: var(--success); color: white;
-    padding: 12px 28px; border-radius: 9px;
-    font-weight: 700; font-size: .97rem;
-    border: none; cursor: pointer; transition: opacity .2s;
-    box-shadow: 0 4px 14px rgba(22,163,74,.3);
-  }
-  .btn-download:hover { opacity: .9; }
-  .btn-again {
-    display: block; margin: 12px auto 0; background: none; border: none;
-    color: var(--primary); font-size: .88rem; font-weight: 600;
-    cursor: pointer; text-decoration: underline;
-  }
+        /* ── Convert button ──────────────────────────────── */
+        .convert-wrap { margin-top: 24px; display: none; }
+        .btn-convert {
+            width: 100%; padding: 16px;
+            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
+            color: white; font-size: 1.05rem; font-weight: 700;
+            border: none; border-radius: var(--radius-md); cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: var(--transition);
+            box-shadow: 0 4px 18px rgba(124,58,237,.3);
+            letter-spacing: .01em;
+        }
+        .btn-convert:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(124,58,237,.4);
+        }
+        .btn-convert:disabled { opacity: .6; cursor: not-allowed; transform: none; }
 
-  /* ── Error ── */
-  .error-box {
-    display: none; margin-top: 20px;
-    background: #fef2f2; border: 1px solid #fca5a5;
-    border-radius: 10px; padding: 14px 18px;
-    color: var(--danger); font-size: .9rem; font-weight: 500;
-  }
-  .error-box.show { display: block; }
-  .error-box i { margin-right: 6px; }
+        /* ── Progress ────────────────────────────────────── */
+        .progress-wrap {
+            display: none;
+            margin-top: 28px;
+            background: var(--gray-50); border: 1px solid var(--gray-200);
+            border-radius: var(--radius-md); padding: 22px 24px;
+        }
+        .progress-wrap.show { display: block; }
+        .progress-top {
+            display: flex; justify-content: space-between;
+            font-size: .85rem; font-weight: 600; color: var(--gray-700);
+            margin-bottom: 10px;
+        }
+        .progress-bar {
+            height: 8px; background: var(--gray-200);
+            border-radius: var(--radius-full); overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--purple-600), var(--fuchsia-500));
+            border-radius: var(--radius-full);
+            width: 0%; transition: width .4s ease;
+        }
+        .progress-status { font-size: .82rem; color: var(--gray-500); margin-top: 8px; }
 
-  /* ── Info strip ── */
-  .info-strip {
-    display: flex; gap: 6px; flex-wrap: wrap; margin-top: 22px; justify-content: center;
-  }
-  .info-item {
-    display: flex; align-items: center; gap: 5px;
-    font-size: .8rem; color: var(--muted); font-weight: 500;
-  }
-  .info-item i { color: #9ca3af; font-size: .75rem; }
+        /* ── Success panel ───────────────────────────────── */
+        .success-panel {
+            display: none;
+            margin-top: 28px;
+            background: #f0fdf4; border: 1px solid #86efac;
+            border-radius: var(--radius-md); padding: 28px;
+            text-align: center;
+        }
+        .success-panel.show { display: block; }
+        .success-icon {
+            width: 64px; height: 64px; background: #16a34a;
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 28px; color: white;
+            animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+        }
+        @keyframes popIn { from { transform: scale(0); } to { transform: scale(1); } }
+        .success-title { font-size: 1.2rem; font-weight: 700; color: #14532d; margin-bottom: 4px; }
+        .success-sub   { font-size: .9rem; color: #166534; margin-bottom: 22px; }
+        .btn-download {
+            display: inline-flex; align-items: center; gap: 9px;
+            background: #16a34a; color: white;
+            padding: 13px 32px; border-radius: var(--radius-md);
+            font-weight: 700; font-size: 1rem;
+            border: none; cursor: pointer; transition: var(--transition);
+            box-shadow: 0 4px 16px rgba(22,163,74,.3);
+        }
+        .btn-download:hover { background: #15803d; transform: translateY(-1px); }
+        .btn-again {
+            display: block; margin: 14px auto 0;
+            background: none; border: none;
+            color: var(--purple-600); font-size: .88rem; font-weight: 600;
+            cursor: pointer; text-decoration: underline;
+        }
 
-  /* ── How it works ── */
-  .how-card {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    border: 1px solid var(--border);
-    width: 100%; max-width: 680px;
-    padding: 32px 40px;
-    margin-top: 24px;
-  }
-  .how-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 20px; }
-  .steps { display: flex; gap: 20px; flex-wrap: wrap; }
-  .step { flex: 1; min-width: 140px; display: flex; align-items: flex-start; gap: 12px; }
-  .step-num {
-    width: 34px; height: 34px; flex-shrink: 0;
-    background: linear-gradient(135deg, #2563eb, #7c3aed);
-    color: white; border-radius: 9px;
-    display: flex; align-items: center; justify-content: center;
-    font-weight: 800; font-size: .9rem;
-  }
-  .step-text h4 { font-size: .88rem; font-weight: 700; margin-bottom: 3px; }
-  .step-text p  { font-size: .8rem; color: var(--muted); line-height: 1.5; }
+        /* ── Features grid ───────────────────────────────── */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+            gap: 22px; margin-bottom: 56px;
+        }
+        .feature-card {
+            background: white; padding: 28px;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200);
+            text-align: center; transition: var(--transition);
+        }
+        .feature-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); }
+        .feature-icon {
+            width: 52px; height: 52px; background: var(--purple-100);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 14px; font-size: 22px; color: var(--purple-600);
+        }
+        .feature-card h3 { color: var(--gray-900); margin-bottom: 6px; font-size: 1rem; }
+        .feature-card p  { color: var(--gray-600); font-size: 14px; line-height: 1.6; }
 
-  /* ── Footer ── */
-  .footer {
-    margin-top: 40px; text-align: center;
-    font-size: .8rem; color: #9ca3af;
-  }
-  .footer a { color: #9ca3af; text-decoration: none; }
+        /* ── How it works ────────────────────────────────── */
+        .how-section {
+            background: var(--gray-100);
+            padding: 56px 24px;
+            margin: 0 -24px 56px;
+        }
+        .how-inner { max-width: 860px; margin: 0 auto; }
+        .section-title { text-align: center; font-size: 1.85rem; color: var(--gray-900); margin-bottom: 40px; font-weight: 700; }
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 28px;
+        }
+        .step-card { text-align: center; }
+        .step-num {
+            width: 48px; height: 48px;
+            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
+            color: white; border-radius: 14px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.2rem; font-weight: 800;
+            margin: 0 auto 18px;
+        }
+        .step-card h3 { color: var(--gray-900); margin-bottom: 6px; font-size: 1.05rem; }
+        .step-card p  { color: var(--gray-600); line-height: 1.6; font-size: .9rem; }
 
-  /* ── Responsive ── */
-  @media (max-width: 500px) {
-    .card-body, .how-card { padding: 28px 22px; }
-    .drop-zone { padding: 36px 20px; }
-    body { padding: 28px 14px 60px; }
-  }
+        /* ── FAQ ─────────────────────────────────────────── */
+        .faq-section { margin-top: 56px; }
+        .faq-item {
+            background: white; border-radius: var(--radius-lg);
+            padding: 22px 26px; margin-bottom: 14px;
+            box-shadow: var(--shadow-sm); border: 1px solid var(--gray-200);
+        }
+        .faq-question { display: flex; justify-content: space-between; align-items: center; cursor: pointer; gap: 16px; }
+        .faq-question h3 { color: var(--gray-900); font-size: 1rem; font-weight: 600; }
+        .faq-icon { color: var(--purple-600); font-size: 18px; transition: var(--transition); }
+        .faq-item.active .faq-icon { transform: rotate(180deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height .3s ease; }
+        .faq-item.active .faq-answer { max-height: 300px; margin-top: 14px; }
+        .faq-answer p { color: var(--gray-600); line-height: 1.7; }
 
-  /* Loading dots animation */
-  .dots::after {
-    content: '';
-    animation: dots 1.4s steps(4, end) infinite;
-  }
-  @keyframes dots {
-    0%  { content: ''; }
-    25% { content: '.'; }
-    50% { content: '..'; }
-    75% { content: '...'; }
-  }
-</style>
+        /* ── Related tools ───────────────────────────────── */
+        .related-tools { margin-top: 56px; }
+        .related-tools h2 { text-align: center; font-size: 1.85rem; color: var(--gray-900); margin-bottom: 36px; font-weight: 700; }
+        .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 22px; }
+        .related-card {
+            background: white; border-radius: var(--radius-lg);
+            padding: 26px; box-shadow: var(--shadow-sm);
+            border: 1px solid var(--gray-200); transition: var(--transition);
+            display: flex; align-items: flex-start; gap: 16px;
+            text-decoration: none;
+        }
+        .related-card:hover { box-shadow: var(--shadow-md); transform: translateY(-4px); border-color: var(--purple-300); }
+        .related-icon {
+            width: 46px; height: 46px; background: var(--purple-100);
+            border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; color: var(--purple-600); flex-shrink: 0;
+        }
+        .related-content h3 { color: var(--gray-900); font-size: 1rem; margin-bottom: 5px; }
+        .related-content p  { color: var(--gray-600); font-size: 14px; line-height: 1.5; }
+        .hot-tag {
+            display: inline-block; background: linear-gradient(135deg,#ef4444,#dc2626);
+            color: white; padding: 2px 7px; border-radius: 4px;
+            font-size: 10px; font-weight: 700; margin-left: 6px; vertical-align: middle;
+        }
+
+        /* Loading dots */
+        .dots::after { content:''; animation: dots 1.4s steps(4,end) infinite; }
+        @keyframes dots { 0%{content:''} 25%{content:'.'} 50%{content:'..'} 75%{content:'...'} }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .tool-header h1 { font-size: 1.9rem; }
+            .converter-card { padding: 28px 20px; }
+            .how-section { padding: 44px 20px; margin: 0 -20px 44px; }
+        }
+        @media (max-width: 480px) {
+            .tool-container { padding: 24px 16px 60px; }
+            .btn-download, .btn-again { display: block; width: 100%; margin: 8px 0 0; }
+        }
+    </style>
 </head>
 <body>
 
-<!-- Header -->
-<div class="header">
-  <a href="#" class="logo"><i class="fas fa-bolt"></i> Free Tools Hub</a>
-  <h1>Word to PDF Converter</h1>
-  <p>Professional-grade conversion using LibreOffice. Exact fonts, layout, images, and page breaks — every time.</p>
-  <div class="badges">
-    <span class="badge green"><i class="fas fa-check-circle"></i> LibreOffice Engine</span>
-    <span class="badge"><i class="fas fa-shield-alt"></i> No Upload to Cloud</span>
-    <span class="badge orange"><i class="fas fa-bolt"></i> Instant Conversion</span>
-  </div>
+<!-- ==================== HEADER ==================== -->
+<header class="site-header" id="siteHeader">
+    <div class="container">
+        <div class="header-inner">
+            <a href="../../index.html" class="site-logo" aria-label="Free Tools Hub Home">
+                <div class="logo-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                <div class="logo-text">
+                    <span class="logo-name">Free Tools Hub</span>
+                    <span class="logo-tagline">Tools · Blogs · Resources</span>
+                </div>
+            </a>
+            <nav class="main-nav" aria-label="Main navigation">
+                <a href="../../index.html"><i class="fas fa-home"></i>Home</a>
+                <a href="../../tools.html" class="active"><i class="fas fa-tools"></i>All Tools</a>
+                <a href="../../blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+                <a href="../../news.html"><i class="fas fa-newspaper"></i>News</a>
+                <a href="../../resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+                <a href="../../tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+                <a href="../../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
+            </nav>
+            <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+    <nav class="mobile-nav" id="mobileMenu" aria-label="Mobile navigation">
+        <a href="../../index.html"><i class="fas fa-home"></i>Home</a>
+        <a href="../../tools.html" class="active"><i class="fas fa-tools"></i>All Tools</a>
+        <a href="../../blog.html"><i class="fas fa-pen-nib"></i>Blog</a>
+        <a href="../../news.html"><i class="fas fa-newspaper"></i>News</a>
+        <a href="../../resources.html"><i class="fas fa-layer-group"></i>Resources</a>
+        <a href="../../tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a>
+        <a href="../../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i>Contact</a>
+    </nav>
+</header>
+
+<!-- ==================== BREADCRUMB ==================== -->
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
+            <span>/</span>
+            <a href="../../tools.html">All Tools</a>
+            <span>/</span>
+            <span>Word to PDF Converter</span>
+        </div>
+    </div>
 </div>
 
-<!-- Main Card -->
-<div class="card">
-  <div class="card-body">
+<!-- ==================== MAIN ==================== -->
+<main class="tool-container">
 
-    <!-- Drop Zone -->
-    <div class="drop-zone" id="dropZone">
-      <input type="file" id="fileInput" accept=".docx,.doc">
-      <div class="dz-icon"><i class="fas fa-file-word"></i></div>
-      <div class="dz-title">Drop your Word document here</div>
-      <div class="dz-sub">Supports .DOCX and .DOC files — up to 100 MB</div>
-      <button class="dz-btn" type="button" onclick="document.getElementById('fileInput').click()">
-        <i class="fas fa-folder-open"></i> Browse File
-      </button>
+    <!-- Header -->
+    <div class="tool-header">
+        <div class="tool-badge"><i class="fas fa-fire"></i> HOT TOOL</div>
+        <h1>Word to PDF Converter</h1>
+        <p>Convert DOCX to PDF with <strong>100% exact layout</strong> — fonts, images, tables, page breaks, and Urdu/Arabic text preserved perfectly.</p>
+        <div class="engine-badge"><i class="fas fa-check-circle"></i> Powered by LibreOffice Engine</div>
     </div>
 
-    <!-- File chip -->
-    <div class="file-chip" id="fileChip">
-      <div class="chip-icon"><i class="fas fa-file-word"></i></div>
-      <div class="chip-meta">
-        <div class="chip-name" id="chipName">—</div>
-        <div class="chip-size" id="chipSize">—</div>
-      </div>
-      <button class="chip-remove" id="chipRemove" title="Remove file"><i class="fas fa-times"></i></button>
+    <!-- ── Converter Card ── -->
+    <div class="converter-card">
+
+        <!-- Upload Zone -->
+        <div class="upload-zone" id="uploadZone">
+            <input type="file" id="fileInput" class="file-input" accept=".docx,.doc,application/vnd.openxmlformats-officedocument.wordprocessingml.document,application/msword">
+            <div class="upload-icon"><i class="fas fa-file-word"></i></div>
+            <h3>Drop your Word document here</h3>
+            <p>Supports .DOCX and .DOC files — up to 100 MB</p>
+            <button class="btn-upload" type="button" id="browseBtn">
+                <i class="fas fa-folder-open"></i> Choose File
+            </button>
+        </div>
+
+        <!-- File chip -->
+        <div class="file-chip" id="fileChip">
+            <div class="chip-icon"><i class="fas fa-file-word"></i></div>
+            <div class="chip-meta">
+                <div class="chip-name" id="chipName">—</div>
+                <div class="chip-size" id="chipSize">—</div>
+            </div>
+            <button class="chip-remove" id="chipRemove" title="Remove file"><i class="fas fa-times"></i></button>
+        </div>
+
+        <!-- Error -->
+        <div class="error-box" id="errorBox"></div>
+
+        <!-- Convert button -->
+        <div class="convert-wrap" id="convertWrap">
+            <button class="btn-convert" id="convertBtn">
+                <i class="fas fa-file-pdf"></i> Convert to PDF — Exact Layout
+            </button>
+        </div>
+
+        <!-- Progress -->
+        <div class="progress-wrap" id="progressWrap">
+            <div class="progress-top">
+                <span id="progressLabel">Converting<span class="dots"></span></span>
+                <span id="progressPct">0%</span>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <div class="progress-status" id="progressStatus">Sending file to conversion engine…</div>
+        </div>
+
+        <!-- Success -->
+        <div class="success-panel" id="successPanel">
+            <div class="success-icon"><i class="fas fa-check"></i></div>
+            <div class="success-title">Conversion Complete!</div>
+            <div class="success-sub" id="successSub">Your PDF is ready</div>
+            <button class="btn-download" id="downloadBtn">
+                <i class="fas fa-download"></i> Download PDF
+            </button>
+            <button class="btn-again" id="btnAgain">Convert another file</button>
+        </div>
+
+    </div><!-- /converter-card -->
+
+    <!-- Features -->
+    <div class="features-grid">
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-clone"></i></div>
+            <h3>Pixel-Perfect Layout</h3>
+            <p>LibreOffice preserves exact fonts, spacing, tables, images, columns, and page breaks.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-language"></i></div>
+            <h3>Urdu & RTL Support</h3>
+            <p>Urdu, Arabic, and all right-to-left text renders exactly as in your Word document.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-shield-alt"></i></div>
+            <h3>100% Private</h3>
+            <p>Files processed on your own server. No third-party cloud services involved.</p>
+        </div>
+        <div class="feature-card">
+            <div class="feature-icon"><i class="fas fa-infinity"></i></div>
+            <h3>Free & Unlimited</h3>
+            <p>No signup, no limits, no watermarks. Convert as many files as needed.</p>
+        </div>
     </div>
 
-    <!-- Convert button -->
-    <div class="convert-wrap" id="convertWrap" style="display:none">
-      <button class="btn-convert" id="convertBtn">
-        <i class="fas fa-file-pdf"></i>
-        Convert to PDF — Exact Layout
-      </button>
+    <!-- How it works -->
+    <div class="how-section">
+        <div class="how-inner">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-num">1</div>
+                    <h3>Upload</h3>
+                    <p>Select or drag and drop your .DOCX or .DOC file into the box above.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">2</div>
+                    <h3>LibreOffice Converts</h3>
+                    <p>Our server runs LibreOffice headless — the gold standard for Word to PDF conversion.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-num">3</div>
+                    <h3>Download PDF</h3>
+                    <p>Get your PDF instantly. Exact same layout as your Word document, every time.</p>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Error -->
-    <div class="error-box" id="errorBox"></div>
+    <!-- FAQ -->
+    <section class="faq-section">
+        <h2 class="section-title">Frequently Asked Questions</h2>
 
-    <!-- Progress -->
-    <div class="progress-wrap" id="progressWrap">
-      <div class="progress-label">
-        <span id="progressLabel">Converting<span class="dots"></span></span>
-        <span id="progressPct">0%</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-      <div class="progress-status" id="progressStatus">Sending file to LibreOffice engine…</div>
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Why is this better than other online converters?</h3>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Most online converters use JavaScript libraries (like jsPDF or mammoth) that try to re-create the PDF from scratch — they often get fonts, spacing, tables, and page breaks wrong. This tool uses <strong>LibreOffice</strong>, which is the same rendering engine that major office suites are built on. It reads the Word format natively and produces a perfectly faithful PDF output.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Will tables, images, and page breaks be preserved?</h3>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes — completely. LibreOffice handles all Word formatting features including tables, embedded images, page breaks, headers, footers, footnotes, columns, text boxes, and all font styles. The output PDF looks identical to the Word document.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Does it support Urdu, Arabic, and other languages?</h3>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Yes. LibreOffice has full Unicode support. Urdu, Arabic, Persian, and all other right-to-left languages render exactly as they appear in the original Word document.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>Is my file sent to the cloud?</h3>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>No. Your file is sent only to <strong>our own server</strong> where LibreOffice processes it. It is deleted immediately after conversion. We do not use any third-party cloud services for conversion.</p>
+            </div>
+        </div>
+
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFaq(this)">
+                <h3>What is the maximum file size?</h3>
+                <i class="fas fa-chevron-down faq-icon"></i>
+            </div>
+            <div class="faq-answer">
+                <p>Up to 100 MB. This covers virtually all Word documents including those with many images and complex formatting.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Tools -->
+    <section class="related-tools">
+        <h2>Related Document Tools</h2>
+        <div class="related-grid">
+            <a href="pdf-to-word.html" class="related-card">
+                <div class="related-icon"><i class="fas fa-file-word"></i></div>
+                <div class="related-content">
+                    <h3>PDF to Word <span class="hot-tag">HOT</span></h3>
+                    <p>Convert PDF files back to editable Word documents</p>
+                </div>
+            </a>
+            <a href="excel-to-pdf.html" class="related-card">
+                <div class="related-icon"><i class="fas fa-file-excel"></i></div>
+                <div class="related-content">
+                    <h3>Excel to PDF <span class="hot-tag">HOT</span></h3>
+                    <p>Convert Excel spreadsheets to PDF format</p>
+                </div>
+            </a>
+            <a href="powerpoint-to-pdf.html" class="related-card">
+                <div class="related-icon"><i class="fas fa-file-powerpoint"></i></div>
+                <div class="related-content">
+                    <h3>PowerPoint to PDF</h3>
+                    <p>Convert presentations to PDF documents</p>
+                </div>
+            </a>
+            <a href="jpg-to-pdf.html" class="related-card">
+                <div class="related-icon"><i class="fas fa-images"></i></div>
+                <div class="related-content">
+                    <h3>JPG to PDF</h3>
+                    <p>Convert images to PDF documents quickly</p>
+                </div>
+            </a>
+        </div>
+    </section>
+
+</main>
+
+<!-- ==================== FOOTER ==================== -->
+<footer class="site-footer" aria-label="Site footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="site-logo">
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-text"><span class="logo-name">Free Tools Hub</span></div>
+                </div>
+                <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials — all in one place.</p>
+                <div class="footer-social" style="margin-top:20px;">
+                    <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/freetoolsapp" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="../../index.html"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="../../tools.html"><i class="fas fa-tools"></i>All Tools</a></li>
+                    <li><a href="../../blog.html"><i class="fas fa-pen-nib"></i>Blog</a></li>
+                    <li><a href="../../news.html"><i class="fas fa-newspaper"></i>News</a></li>
+                    <li><a href="../../contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="../../privacy.html"><i class="fas fa-shield-alt"></i>Privacy Policy</a></li>
+                    <li><a href="../../terms.html"><i class="fas fa-file-contract"></i>Terms of Service</a></li>
+                    <li><a href="../../disclaimer.html"><i class="fas fa-exclamation-circle"></i>Disclaimer</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 <a href="../../index.html">Free Tools Hub</a>. All rights reserved. Made with <span class="heart">♥</span> for developers &amp; creators.</p>
+            <div class="footer-legal">
+                <a href="../../privacy.html">Privacy</a>
+                <a href="../../terms.html">Terms</a>
+                <a href="../../disclaimer.html">Disclaimer</a>
+            </div>
+        </div>
     </div>
+</footer>
 
-    <!-- Success -->
-    <div class="success-panel" id="successPanel">
-      <div class="success-icon"><i class="fas fa-check"></i></div>
-      <div class="success-title">Conversion Complete!</div>
-      <div class="success-sub" id="successSub">Your PDF is ready</div>
-      <button class="btn-download" id="downloadBtn">
-        <i class="fas fa-download"></i> Download PDF
-      </button>
-      <button class="btn-again" id="btnAgain">Convert another file</button>
-    </div>
-
-    <!-- Info strip -->
-    <div class="info-strip">
-      <div class="info-item"><i class="fas fa-lock"></i> Processed locally on your server</div>
-      <div class="info-item"><i class="fas fa-infinity"></i> No file size limit restrictions</div>
-      <div class="info-item"><i class="fas fa-language"></i> Urdu, Arabic & all languages</div>
-    </div>
-
-  </div><!-- /card-body -->
-</div><!-- /card -->
-
-<!-- How it works -->
-<div class="how-card">
-  <div class="how-title"><i class="fas fa-info-circle" style="color:var(--primary);margin-right:7px"></i>How It Works</div>
-  <div class="steps">
-    <div class="step">
-      <div class="step-num">1</div>
-      <div class="step-text"><h4>Upload</h4><p>Select or drop your .DOCX or .DOC file</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">2</div>
-      <div class="step-text"><h4>LibreOffice converts</h4><p>The same engine Microsoft Word is based on — pixel-perfect output</p></div>
-    </div>
-    <div class="step">
-      <div class="step-num">3</div>
-      <div class="step-text"><h4>Download</h4><p>Get your PDF instantly with all layout preserved</p></div>
-    </div>
-  </div>
-</div>
-
-<div class="footer">
-  &copy; 2026 <a href="#">Free Tools Hub</a> &nbsp;·&nbsp; Powered by LibreOffice
-</div>
-
+<!-- ==================== SCRIPTS ==================== -->
 <script>
-const dropZone    = document.getElementById('dropZone');
-const fileInput   = document.getElementById('fileInput');
-const fileChip    = document.getElementById('fileChip');
-const chipName    = document.getElementById('chipName');
-const chipSize    = document.getElementById('chipSize');
-const chipRemove  = document.getElementById('chipRemove');
-const convertWrap = document.getElementById('convertWrap');
-const convertBtn  = document.getElementById('convertBtn');
-const errorBox    = document.getElementById('errorBox');
-const progressWrap= document.getElementById('progressWrap');
-const progressFill= document.getElementById('progressFill');
-const progressPct = document.getElementById('progressPct');
+// ── Header scroll ──────────────────────────────────────────────────────────
+const siteHeader = document.getElementById('siteHeader');
+window.addEventListener('scroll', () => siteHeader.classList.toggle('scrolled', window.scrollY > 20), { passive: true });
+
+// ── Mobile menu ────────────────────────────────────────────────────────────
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const mobileMenu    = document.getElementById('mobileMenu');
+mobileMenuBtn.addEventListener('click', () => {
+    const open = mobileMenu.classList.toggle('open');
+    mobileMenuBtn.setAttribute('aria-expanded', open);
+    mobileMenuBtn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+});
+mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    mobileMenuBtn.setAttribute('aria-expanded', false);
+    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+}));
+
+// ── FAQ ────────────────────────────────────────────────────────────────────
+function toggleFaq(el) {
+    const item = el.parentElement, was = item.classList.contains('active');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+    if (!was) item.classList.add('active');
+}
+
+// ── Element refs ───────────────────────────────────────────────────────────
+const uploadZone   = document.getElementById('uploadZone');
+const fileInput    = document.getElementById('fileInput');
+const browseBtn    = document.getElementById('browseBtn');
+const fileChip     = document.getElementById('fileChip');
+const chipName     = document.getElementById('chipName');
+const chipSize     = document.getElementById('chipSize');
+const chipRemove   = document.getElementById('chipRemove');
+const errorBox     = document.getElementById('errorBox');
+const convertWrap  = document.getElementById('convertWrap');
+const convertBtn   = document.getElementById('convertBtn');
+const progressWrap = document.getElementById('progressWrap');
+const progressFill = document.getElementById('progressFill');
+const progressPct  = document.getElementById('progressPct');
 const progressStatus = document.getElementById('progressStatus');
 const progressLabel  = document.getElementById('progressLabel');
-const successPanel= document.getElementById('successPanel');
-const successSub  = document.getElementById('successSub');
-const downloadBtn = document.getElementById('downloadBtn');
-const btnAgain    = document.getElementById('btnAgain');
+const successPanel = document.getElementById('successPanel');
+const successSub   = document.getElementById('successSub');
+const downloadBtn  = document.getElementById('downloadBtn');
+const btnAgain     = document.getElementById('btnAgain');
 
 let selectedFile = null;
-let pdfBlob = null;
+let pdfBlob      = null;
 
-// ── Drag & drop ──────────────────────────────────────────────────────────────
-dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('over'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('over'));
-dropZone.addEventListener('drop', e => {
-  e.preventDefault(); dropZone.classList.remove('over');
-  const f = e.dataTransfer.files[0];
-  if (f) selectFile(f);
+// ── Drag & drop ────────────────────────────────────────────────────────────
+uploadZone.addEventListener('dragover',  e => { e.preventDefault(); uploadZone.classList.add('dragover'); });
+uploadZone.addEventListener('dragleave', ()  => uploadZone.classList.remove('dragover'));
+uploadZone.addEventListener('drop', e => {
+    e.preventDefault(); uploadZone.classList.remove('dragover');
+    if (e.dataTransfer.files[0]) selectFile(e.dataTransfer.files[0]);
 });
+uploadZone.addEventListener('click', e => { if (e.target === uploadZone) fileInput.click(); });
+browseBtn.addEventListener('click',  e => { e.stopPropagation(); fileInput.click(); });
 fileInput.addEventListener('change', e => { if (e.target.files[0]) selectFile(e.target.files[0]); });
-
-function fmtSize(b) {
-  if (b < 1024) return b + ' B';
-  if (b < 1048576) return (b/1024).toFixed(1) + ' KB';
-  return (b/1048576).toFixed(2) + ' MB';
-}
-
-function selectFile(f) {
-  const ext = f.name.split('.').pop().toLowerCase();
-  if (!['docx','doc'].includes(ext)) {
-    showError('<i class="fas fa-exclamation-triangle"></i> Only .docx and .doc files are supported.');
-    return;
-  }
-  selectedFile = f;
-  chipName.textContent = f.name;
-  chipSize.textContent = fmtSize(f.size);
-  fileChip.classList.add('show');
-  convertWrap.style.display = 'block';
-  hideError();
-  resetResults();
-}
-
 chipRemove.addEventListener('click', reset);
+btnAgain.addEventListener('click',   reset);
 
-// ── Convert ──────────────────────────────────────────────────────────────────
+// ── Helpers ────────────────────────────────────────────────────────────────
+function fmtSize(b) {
+    if (b < 1024) return b + ' B';
+    if (b < 1048576) return (b / 1024).toFixed(1) + ' KB';
+    return (b / 1048576).toFixed(2) + ' MB';
+}
+function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
+function showErr(msg) { errorBox.innerHTML = msg; errorBox.classList.add('show'); }
+function hideErr()    { errorBox.classList.remove('show'); }
+
+// ── File select ────────────────────────────────────────────────────────────
+function selectFile(f) {
+    const ext = f.name.split('.').pop().toLowerCase();
+    if (!['docx', 'doc'].includes(ext)) {
+        showErr('<i class="fas fa-exclamation-triangle"></i> Only .docx and .doc files are supported.'); return;
+    }
+    selectedFile = f;
+    chipName.textContent = f.name;
+    chipSize.textContent = fmtSize(f.size);
+    fileChip.classList.add('show');
+    convertWrap.style.display = 'block';
+    hideErr(); resetResult();
+}
+
+// ── Convert ────────────────────────────────────────────────────────────────
 convertBtn.addEventListener('click', async () => {
-  if (!selectedFile) return;
-  startProgress();
+    if (!selectedFile) return;
+    startProgress();
 
-  const formData = new FormData();
-  formData.append('file', selectedFile, selectedFile.name);
+    const formData = new FormData();
+    formData.append('file', selectedFile, selectedFile.name);
 
-  try {
-    setProgress(15, 'Uploading file…');
-    await sleep(300);
+    try {
+        setP(10, 'Uploading file…');
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', '/convert', true);
+        xhr.responseType = 'blob';
 
-    const xhr = new XMLHttpRequest();
-    xhr.open('POST', '/convert', true);
-    xhr.responseType = 'blob';
-
-    // Upload progress
-    xhr.upload.onprogress = e => {
-      if (e.lengthComputable) {
-        const pct = Math.round(e.loaded / e.total * 40);
-        setProgress(pct, 'Uploading' + (pct < 40 ? '…' : ' complete'));
-      }
-    };
-
-    xhr.onload = async () => {
-      if (xhr.status === 200) {
-        setProgress(75, 'LibreOffice converting…');
-        await sleep(400);
-        setProgress(95, 'Finalizing PDF…');
-        await sleep(300);
-
-        pdfBlob = xhr.response;
-        const outName = selectedFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
-        const url = URL.createObjectURL(pdfBlob);
-
-        setProgress(100, 'Done!');
-        await sleep(250);
-
-        showSuccess(outName, pdfBlob.size);
-        downloadBtn.onclick = () => {
-          const a = document.createElement('a');
-          a.href = url; a.download = outName; a.click();
+        xhr.upload.onprogress = e => {
+            if (e.lengthComputable) {
+                const p = Math.round(e.loaded / e.total * 45);
+                setP(p, p < 45 ? 'Uploading…' : 'Upload complete');
+            }
         };
 
-      } else {
-        // Try to read error
-        const reader = new FileReader();
-        reader.onload = () => {
-          try {
-            const j = JSON.parse(reader.result);
-            showError('<i class="fas fa-times-circle"></i> ' + (j.error || 'Conversion failed'));
-          } catch {
-            showError('<i class="fas fa-times-circle"></i> Conversion failed (status ' + xhr.status + ')');
-          }
-          resetProgress();
+        xhr.onload = async () => {
+            if (xhr.status === 200) {
+                setP(75, 'LibreOffice converting…');
+                await sleep(350);
+                setP(95, 'Finalizing PDF…');
+                await sleep(250);
+                pdfBlob = xhr.response;
+                const outName = selectedFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
+                const url = URL.createObjectURL(pdfBlob);
+                setP(100, 'Done!');
+                await sleep(300);
+                showSuccess(outName, pdfBlob.size);
+                downloadBtn.onclick = () => { const a = document.createElement('a'); a.href = url; a.download = outName; a.click(); };
+            } else {
+                const fr = new FileReader();
+                fr.onload = () => {
+                    try { const j = JSON.parse(fr.result); showErr('<i class="fas fa-times-circle"></i> ' + (j.error || 'Conversion failed')); }
+                    catch { showErr('<i class="fas fa-times-circle"></i> Conversion failed (HTTP ' + xhr.status + ')'); }
+                    resetProgress();
+                };
+                fr.readAsText(xhr.response);
+            }
         };
-        reader.readAsText(xhr.response);
-      }
-    };
 
-    xhr.onerror = () => {
-      showError('<i class="fas fa-wifi" style="color:var(--danger)"></i> Cannot reach the conversion server. Make sure <code>server.py</code> is running.');
-      resetProgress();
-    };
+        xhr.onerror = () => {
+            showErr('<i class="fas fa-exclamation-triangle"></i> Cannot reach the server. Make sure <strong>server.py</strong> is running on your server.');
+            resetProgress();
+        };
 
-    xhr.send(formData);
+        xhr.send(formData);
 
-  } catch (err) {
-    showError('<i class="fas fa-times-circle"></i> ' + err.message);
-    resetProgress();
-  }
+    } catch (err) {
+        showErr('<i class="fas fa-times-circle"></i> ' + err.message);
+        resetProgress();
+    }
 });
 
-// ── UI helpers ────────────────────────────────────────────────────────────────
+// ── Progress helpers ───────────────────────────────────────────────────────
 function startProgress() {
-  convertBtn.disabled = true;
-  convertWrap.style.display = 'block';
-  progressWrap.classList.add('show');
-  successPanel.classList.remove('show');
-  hideError();
-  setProgress(5, 'Preparing…');
+    convertBtn.disabled = true;
+    progressWrap.classList.add('show');
+    successPanel.classList.remove('show');
+    hideErr();
+    setP(5, 'Preparing…');
 }
-
-function setProgress(pct, msg) {
-  progressFill.style.width = pct + '%';
-  progressPct.textContent  = pct + '%';
-  progressStatus.textContent = msg;
-  if (pct >= 100) {
-    progressLabel.innerHTML = 'Converting — Done!';
-  }
+function setP(pct, msg) {
+    progressFill.style.width = pct + '%';
+    progressPct.textContent  = pct + '%';
+    progressStatus.textContent = msg;
+    if (pct >= 100) progressLabel.textContent = 'Done!';
 }
-
 function resetProgress() {
-  convertBtn.disabled = false;
-  progressWrap.classList.remove('show');
-  progressFill.style.width = '0%';
-  progressPct.textContent  = '0%';
-  progressLabel.innerHTML  = 'Converting<span class="dots"></span>';
+    convertBtn.disabled = false;
+    progressWrap.classList.remove('show');
+    progressFill.style.width = '0%';
+    progressPct.textContent  = '0%';
+    progressLabel.innerHTML  = 'Converting<span class="dots"></span>';
 }
-
 function showSuccess(name, size) {
-  progressWrap.classList.remove('show');
-  successPanel.classList.add('show');
-  successSub.textContent = name + '  (' + fmtSize(size) + ')';
+    progressWrap.classList.remove('show');
+    successPanel.classList.add('show');
+    successSub.textContent = name + ' (' + fmtSize(size) + ')';
 }
-
-function showError(msg) {
-  errorBox.innerHTML = msg;
-  errorBox.classList.add('show');
+function resetResult() {
+    successPanel.classList.remove('show');
+    progressWrap.classList.remove('show');
+    hideErr(); convertBtn.disabled = false;
 }
-function hideError() { errorBox.classList.remove('show'); }
-
-function resetResults() {
-  successPanel.classList.remove('show');
-  progressWrap.classList.remove('show');
-  hideError();
-  convertBtn.disabled = false;
-}
-
 function reset() {
-  selectedFile = null; pdfBlob = null;
-  fileInput.value = '';
-  fileChip.classList.remove('show');
-  convertWrap.style.display = 'none';
-  resetResults();
+    selectedFile = null; pdfBlob = null;
+    fileInput.value = '';
+    fileChip.classList.remove('show');
+    convertWrap.style.display = 'none';
+    resetResult();
 }
-
-btnAgain.addEventListener('click', reset);
-function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 </script>
 </body>
 </html>
