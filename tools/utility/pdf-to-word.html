@@ -155,7 +155,7 @@
                 <div id="dropZone" class="drop-zone bg-white rounded-xl p-12 text-center cursor-pointer">
                     <i class="fas fa-cloud-upload-alt text-6xl text-blue-600 mb-4"></i>
                     <h4 class="text-xl font-bold text-gray-800 mb-2">Drag & Drop or Click to Upload</h4>
-                    <p class="text-gray-600 mb-4">Supports: PDF, JPG, PNG, JPEG • Max 10MB</p>
+                    <p class="text-gray-600 mb-4">Supports: PDF, JPG, PNG, JPEG • Max 100MB</p>
                     <label for="fileInput" class="inline-block">
                         <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:shadow-lg transition cursor-pointer inline-block">
                             <i class="fas fa-folder-open mr-2"></i>Browse Files
@@ -471,7 +471,7 @@
                 return;
             }
 
-            // Check file size (max 10MB)
+            // Check file size (max 100MB)
             if (file.size > 10 * 1024 * 1024) {
                 alert('❌ File too large! Please upload a file smaller than 10MB');
                 return;
