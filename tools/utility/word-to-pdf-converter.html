@@ -1,741 +1,208 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Word to PDF Converter - Free Tools Hub</title>
-    <meta name="description" content="Convert Word documents to PDF. Make DOC and DOCX files easy to read by converting them to PDF. Free, fast, no signup.">
-    <meta name="keywords" content="Word to PDF, DOCX to PDF, DOC to PDF, free PDF converter">
-    <meta name="author" content="freetoolsapp">
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<title>Free Word to PDF Converter Online – High Quality DOCX to PDF Tool</title>
 
-    <!-- Conversion libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<meta name="description" content="Convert Word to PDF online for free. High quality DOCX to PDF converter with multi-page support, print optimization, custom margins, watermark & batch upload. No signup required.">
 
-    <style>
-        * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
-        body { background: #fff; color: #333; }
+<meta name="keywords" content="Word to PDF converter, DOCX to PDF free, convert Word online, high quality PDF converter, free PDF tool">
 
-        /* ─── HEADER ─────────────────────────────── */
-        .site-header { background:#fff; border-bottom:1px solid #e8e8e8; }
-        .nav-link { font-size:13px; font-weight:500; color:#555; transition:color .2s; text-decoration:none; }
-        .nav-link:hover { color:#e2574c; }
-        .nav-link.active { color:#e2574c; font-weight:600; }
+<link rel="canonical" href="https://freetoolshub.online/word-to-pdf-converter.html">
 
-        /* ─── RED BUTTON ─────────────────────────── */
-        .btn-red {
-            background:#e2574c;
-            color:#fff;
-            border:none;
-            border-radius:6px;
-            padding:12px 28px;
-            font-size:15px;
-            font-weight:600;
-            cursor:pointer;
-            transition:all .2s;
-            display:inline-flex;
-            align-items:center;
-            gap:8px;
-            text-decoration:none;
-        }
-        .btn-red:hover { background:#cc3f35; transform:translateY(-1px); box-shadow:0 4px 14px rgba(226,87,76,.35); }
-        .btn-red:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
+<meta property="og:title" content="Free Word to PDF Converter Online">
+<meta property="og:description" content="Convert DOCX to high-quality PDF online. Multi-page, print optimized, free.">
+<meta property="og:type" content="website">
 
-        /* ─── TOOL HERO SECTION ──────────────────── */
-        .tool-hero {
-            background: linear-gradient(135deg, #f8f3ff 0%, #fff5f4 100%);
-            border-bottom: 1px solid #ede8f5;
-            padding: 52px 20px 56px;
-            text-align: center;
-        }
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.4.26/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-        /* ─── UPLOAD ZONE ────────────────────────── */
-        .upload-zone {
-            border: 2px dashed #d4b8f0;
-            border-radius: 14px;
-            background: #fff;
-            padding: 52px 30px;
-            cursor: pointer;
-            transition: all .25s;
-            position: relative;
-        }
-        .upload-zone:hover, .upload-zone.over {
-            border-color: #e2574c;
-            background: #fff8f7;
-        }
-        .upload-zone.over { transform: scale(1.01); }
-        #fileInput { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; z-index:5; }
-
-        /* ─── FILE LIST (ilovepdf style thumbnails) ─ */
-        .file-item {
-            background: #fff;
-            border: 1.5px solid #e8e8e8;
-            border-radius: 10px;
-            padding: 14px 18px;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            transition: box-shadow .2s;
-        }
-        .file-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
-        .file-thumb {
-            width: 44px; height: 52px;
-            background: linear-gradient(135deg,#e3f2fd,#bbdefb);
-            border-radius: 6px;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0;
-        }
-
-        /* ─── PROGRESS ───────────────────────────── */
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .spinner {
-            border: 3px solid #f0f0f0;
-            border-top-color: #e2574c;
-            border-radius: 50%;
-            animation: spin .8s linear infinite;
-        }
-        .prog-track { background:#ede8f5; border-radius:99px; overflow:hidden; }
-        @keyframes progShimmer { to { background-position:-200% 0; } }
-        .prog-fill {
-            height:100%;
-            background: linear-gradient(90deg,#e2574c,#c0392b,#e2574c);
-            background-size:200% 100%;
-            animation: progShimmer 1.4s linear infinite;
-            border-radius:99px;
-            transition: width .4s ease;
-        }
-
-        /* ─── RESULT BOX ─────────────────────────── */
-        .result-box {
-            background:#fff;
-            border:1.5px solid #e8e8e8;
-            border-radius:14px;
-            overflow:hidden;
-        }
-        .result-header {
-            background:#f7f7f7;
-            border-bottom:1px solid #e8e8e8;
-            padding:12px 18px;
-            display:flex; align-items:center; justify-content:space-between;
-        }
-
-        /* ─── DOCX STAGE (page render) ──────────── */
-        #docxStage { background:#525659; padding:20px; min-height:120px; max-height:420px; overflow-y:auto; }
-        #docxStage .docx-wrapper { background:#525659 !important; }
-        #docxStage section.docx { margin:0 auto 14px !important; box-shadow:0 4px 20px rgba(0,0,0,.45) !important; }
-
-        /* ─── SUCCESS ────────────────────────────── */
-        @keyframes pop { 0%{transform:scale(0) rotate(-20deg)} 70%{transform:scale(1.12) rotate(4deg)} 100%{transform:scale(1) rotate(0)} }
-        .pop-anim { animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
-
-        /* ─── GREEN DOWNLOAD BTN ─────────────────── */
-        .btn-green {
-            background: linear-gradient(135deg,#27ae60,#1e8449);
-            color:#fff; border:none; border-radius:8px;
-            padding:15px 32px; font-size:16px; font-weight:700;
-            cursor:pointer; display:inline-flex; align-items:center; gap:10px;
-            transition:all .2s; width:100%; justify-content:center;
-            box-shadow:0 4px 16px rgba(39,174,96,.3);
-        }
-        .btn-green:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(39,174,96,.4); }
-
-        /* ─── TOOL CARDS ─────────────────────────── */
-        .tool-card { border:1.5px solid #eee; border-radius:12px; transition:all .2s; background:#fff; text-decoration:none; display:block; }
-        .tool-card:hover { border-color:#e2574c; box-shadow:0 6px 20px rgba(226,87,76,.14); transform:translateY(-3px); }
-
-        /* ─── SCROLL ─────────────────────────────── */
-        ::-webkit-scrollbar { width:5px; }
-        ::-webkit-scrollbar-thumb { background:#ddd; border-radius:3px; }
-        ::-webkit-scrollbar-thumb:hover { background:#e2574c; }
-    </style>
+<style>
+body{
+    font-family: Arial, sans-serif;
+    background:#f4f6f9;
+    margin:0;
+    padding:30px;
+    text-align:center;
+}
+.container{
+    max-width:1100px;
+    margin:auto;
+}
+.drop-zone{
+    border:2px dashed #007bff;
+    padding:40px;
+    background:#fff;
+    cursor:pointer;
+}
+#docx-stage section{
+    background:#fff;
+    margin:20px auto;
+    padding:40px;
+    width:794px;
+    min-height:1123px;
+    box-shadow:0 0 15px rgba(0,0,0,0.1);
+}
+.controls{
+    margin-top:20px;
+}
+input,select{
+    padding:8px;
+    margin:5px;
+}
+button{
+    padding:12px 25px;
+    background:#007bff;
+    color:#fff;
+    border:none;
+    border-radius:6px;
+    cursor:pointer;
+}
+</style>
 </head>
+
 <body>
 
-<!-- ══════════════ HEADER ══════════════ -->
-<header class="site-header sticky top-0 z-50">
-    <div class="max-w-screen-xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
+<div class="container">
 
-        <!-- Logo -->
-        <a href="../../index.html" class="flex items-center gap-3 flex-shrink-0">
-            <div class="w-9 h-9 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
-                <i class="fas fa-tools text-white text-sm"></i>
-            </div>
-            <div>
-                <div class="font-bold text-gray-900 text-sm leading-none">Free Tools Hub</div>
-                <div class="text-gray-400 text-xs leading-none mt-0.5">Tools • Blogs • Resources</div>
-            </div>
-        </a>
+<h1>Free Word to PDF Converter</h1>
+<p>Convert DOCX to high-quality PDF online. No signup required.</p>
 
-        <!-- Nav desktop -->
-        <nav class="hidden lg:flex items-center gap-5">
-            <a href="../../index.html" class="nav-link"><i class="fas fa-home mr-1 text-xs"></i>Home</a>
-            <a href="../../index.html#tools" class="nav-link active"><i class="fas fa-tools mr-1 text-xs"></i>Tools</a>
-            <a href="../../blog.html" class="nav-link"><i class="fas fa-blog mr-1 text-xs"></i>Blog</a>
-            <a href="../../resources.html" class="nav-link"><i class="fas fa-book mr-1 text-xs"></i>Resources</a>
-            <a href="../../tutorials.html" class="nav-link"><i class="fas fa-chalkboard-teacher mr-1 text-xs"></i>Tutorials</a>
-            <a href="../../comparisons.html" class="nav-link"><i class="fas fa-balance-scale mr-1 text-xs"></i>Compare</a>
-            <a href="../../contact.html" class="btn-red py-2 px-4 text-sm">
-                <i class="fas fa-envelope"></i>Contact
-            </a>
-        </nav>
-
-        <button id="mobileMenuBtn" class="lg:hidden text-gray-600 text-xl p-1">
-            <i class="fas fa-bars"></i>
-        </button>
-    </div>
-
-    <!-- Mobile nav -->
-    <nav id="mobileMenu" class="hidden lg:hidden border-t border-gray-100 bg-white">
-        <div class="max-w-screen-xl mx-auto px-5 py-3 space-y-1 text-sm">
-            <a href="../../index.html" class="block py-2 nav-link"><i class="fas fa-home w-5 mr-1"></i>Home</a>
-            <a href="../../index.html#tools" class="block py-2 nav-link active"><i class="fas fa-tools w-5 mr-1"></i>Tools</a>
-            <a href="../../blog.html" class="block py-2 nav-link"><i class="fas fa-blog w-5 mr-1"></i>Blog</a>
-            <a href="../../resources.html" class="block py-2 nav-link"><i class="fas fa-book w-5 mr-1"></i>Resources</a>
-            <a href="../../tutorials.html" class="block py-2 nav-link"><i class="fas fa-chalkboard-teacher w-5 mr-1"></i>Tutorials</a>
-            <a href="../../comparisons.html" class="block py-2 nav-link"><i class="fas fa-balance-scale w-5 mr-1"></i>Compare</a>
-            <a href="../../contact.html" class="block py-2 nav-link"><i class="fas fa-envelope w-5 mr-1"></i>Contact</a>
-        </div>
-    </nav>
-</header>
-
-<!-- ══════════════ BREADCRUMB ══════════════ -->
-<div class="bg-gray-50 border-b border-gray-100 text-xs py-2">
-    <div class="max-w-screen-xl mx-auto px-5 flex items-center gap-2 text-gray-400">
-        <a href="../../index.html" class="hover:text-red-500 transition">Home</a>
-        <i class="fas fa-chevron-right text-gray-300"></i>
-        <a href="../../index.html#tools" class="hover:text-red-500 transition">Tools</a>
-        <i class="fas fa-chevron-right text-gray-300"></i>
-        <span class="text-gray-600 font-medium">Word to PDF</span>
-    </div>
+<div class="drop-zone" id="dropZone">
+    Drag & Drop Word Files Here or Click to Upload
+    <input type="file" id="fileInput" multiple accept=".doc,.docx" hidden>
 </div>
 
-<!-- ══════════════ TOOL HERO ══════════════ -->
-<section class="tool-hero">
-    <div class="max-w-2xl mx-auto">
+<div class="controls">
+    <label>Top Margin:</label>
+    <input type="number" id="marginTop" value="20"> pt
 
-        <!-- Icon (iLovePDF uses big colorful icon) -->
-        <div class="w-24 h-24 mx-auto mb-6 relative">
-            <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
-                <i class="fas fa-file-word text-white text-5xl"></i>
-            </div>
-            <!-- PDF badge overlay -->
-            <div class="absolute -bottom-1 -right-1 w-9 h-9 bg-red-500 rounded-lg flex items-center justify-center shadow-md">
-                <i class="fas fa-file-pdf text-white text-base"></i>
-            </div>
-        </div>
+    <label>Bottom Margin:</label>
+    <input type="number" id="marginBottom" value="20"> pt
 
-        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">Convert WORD to PDF</h1>
-        <p class="text-gray-500 text-lg mb-10 leading-relaxed">Make DOC and DOCX files easy to read by converting them to PDF.</p>
+    <label>Watermark (optional):</label>
+    <input type="text" id="watermarkText" placeholder="Enter watermark text">
 
-        <!-- ── UPLOAD ZONE ── -->
-        <div id="stageUpload">
-            <div id="uploadZone" class="upload-zone mb-4">
-                <input type="file" id="fileInput" accept=".docx,.doc">
-                <div class="pointer-events-none">
-                    <i class="fas fa-cloud-upload-alt text-5xl text-purple-300 mb-4 block"></i>
-                    <p class="text-gray-500 text-base mb-5">Upload your file and transform it.</p>
-                    <div class="btn-red mx-auto w-max text-sm pointer-events-auto" style="pointer-events:auto" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
-                        <i class="fas fa-folder-open"></i>Select WORD files
-                    </div>
-                    <p class="text-gray-400 text-xs mt-5">or drop WORD documents here</p>
-                </div>
-            </div>
+    <br><br>
+    <button id="convertBtn">Convert to High Quality PDF</button>
+</div>
 
-            <!-- Error -->
-            <div id="errBox" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-sm flex items-center gap-2 text-left">
-                <i class="fas fa-exclamation-circle flex-shrink-0"></i>
-                <span id="errMsg"></span>
-            </div>
-        </div>
+<div id="docx-stage"></div>
 
-        <!-- ── PROCESSING STAGE ── -->
-        <div id="stageProcess" class="hidden">
-            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm">
-                <div class="spinner w-14 h-14 mx-auto mb-6"></div>
-                <h3 id="procTitle" class="text-lg font-bold text-gray-800 mb-1">Rendering your document…</h3>
-                <p id="procSub" class="text-gray-400 text-sm mb-6">Please wait a moment</p>
-                <div class="prog-track h-2.5 mb-2">
-                    <div id="progFill" class="prog-fill" style="width:5%"></div>
-                </div>
-                <div class="flex justify-between text-xs text-gray-400">
-                    <span id="progStatus">Reading file…</span>
-                    <span id="progPct">5%</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- ── PREVIEW + CONVERT STAGE ── -->
-        <div id="stagePreview" class="hidden">
-
-            <!-- File info row -->
-            <div class="file-item mb-5 text-left">
-                <div class="file-thumb">
-                    <i class="fas fa-file-word text-blue-500 text-2xl"></i>
-                </div>
-                <div class="flex-1 min-w-0">
-                    <div id="fName" class="font-semibold text-gray-800 text-sm truncate"></div>
-                    <div id="fSize" class="text-gray-400 text-xs mt-0.5"></div>
-                </div>
-                <button id="removeBtn" class="w-8 h-8 rounded-full hover:bg-red-50 text-gray-300 hover:text-red-400 transition flex items-center justify-center">
-                    <i class="fas fa-times text-sm"></i>
-                </button>
-            </div>
-
-            <!-- Document preview box -->
-            <div class="result-box mb-6 text-left">
-                <div class="result-header">
-                    <span class="text-sm font-semibold text-gray-700 flex items-center gap-2">
-                        <i class="fas fa-eye text-purple-400"></i>Preview
-                    </span>
-                    <span id="prevBadge" class="text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full">Exact Layout</span>
-                </div>
-                <div id="docxStage"></div>
-            </div>
-
-            <!-- CONVERT BUTTON — big, centered, red -->
-            <button id="convertBtn" class="btn-red w-full justify-center text-lg py-4 mb-3">
-                <i class="fas fa-cog text-xl"></i>
-                Convert to PDF
-            </button>
-            <p class="text-gray-400 text-xs text-center">
-                <i class="fas fa-lock mr-1"></i>Processed locally — your file never leaves your device
-            </p>
-
-            <!-- Converting mini-progress (shown during pdf generation) -->
-            <div id="convProgress" class="hidden mt-5 bg-gray-50 border border-gray-200 rounded-xl p-4 text-left">
-                <div class="flex items-center gap-3 mb-3">
-                    <div class="spinner w-6 h-6 flex-shrink-0" style="border-width:2.5px"></div>
-                    <span id="convMsg" class="text-sm text-gray-700 font-medium">Generating PDF…</span>
-                </div>
-                <div class="prog-track h-2">
-                    <div id="convFill" class="prog-fill" style="width:10%"></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- ── SUCCESS STAGE ── -->
-        <div id="stageSuccess" class="hidden">
-            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm text-center">
-                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-5 pop-anim">
-                    <i class="fas fa-check text-white text-3xl"></i>
-                </div>
-                <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Your PDF is ready!</h3>
-                <p id="sucName" class="text-gray-400 text-sm mb-8"></p>
-
-                <button id="dlBtn" class="btn-green mb-4">
-                    <i class="fas fa-download text-xl"></i>
-                    Download PDF
-                </button>
-
-                <button onclick="resetAll()"
-                    class="w-full border border-gray-200 text-gray-500 py-3 rounded-xl text-sm font-semibold hover:border-red-300 hover:text-red-500 transition flex items-center justify-center gap-2">
-                    <i class="fas fa-redo text-xs"></i>Convert another WORD file
-                </button>
-            </div>
-        </div>
-
-    </div><!-- /max-w-2xl -->
-</section>
-
-<!-- ══════════════ HOW IT WORKS ══════════════ -->
-<section class="py-16 bg-white border-t border-gray-100">
-    <div class="max-w-4xl mx-auto px-5">
-        <h2 class="text-2xl font-bold text-gray-900 text-center mb-12">How to convert Word to PDF</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div class="text-center">
-                <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-purple-600">1</div>
-                <h3 class="font-bold text-gray-800 mb-2">Select WORD file</h3>
-                <p class="text-gray-500 text-sm">Click "Select WORD files" or drag &amp; drop your .DOCX or .DOC file</p>
-            </div>
-            <div class="text-center">
-                <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-red-500">2</div>
-                <h3 class="font-bold text-gray-800 mb-2">Click CONVERT</h3>
-                <p class="text-gray-500 text-sm">Preview your document then click the Convert button — done in seconds</p>
-            </div>
-            <div class="text-center">
-                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-green-600">3</div>
-                <h3 class="font-bold text-gray-800 mb-2">Download PDF</h3>
-                <p class="text-gray-500 text-sm">Your PDF downloads instantly with full layout and formatting preserved</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════ FEATURES ══════════════ -->
-<section class="py-16 bg-gray-50 border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-5">
-        <h2 class="text-2xl font-bold text-gray-900 text-center mb-10">Why use our Word to PDF converter?</h2>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-            <div class="tool-card p-6 text-center">
-                <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-shield-alt text-2xl text-green-500"></i>
-                </div>
-                <h4 class="font-bold text-gray-800 mb-2 text-sm">100% Secure</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">Files processed in your browser. Never uploaded to any server.</p>
-            </div>
-            <div class="tool-card p-6 text-center">
-                <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-bolt text-2xl text-yellow-500"></i>
-                </div>
-                <h4 class="font-bold text-gray-800 mb-2 text-sm">Lightning Fast</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">Instant preview and fast PDF generation directly in browser.</p>
-            </div>
-            <div class="tool-card p-6 text-center">
-                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-user-slash text-2xl text-blue-500"></i>
-                </div>
-                <h4 class="font-bold text-gray-800 mb-2 text-sm">No Signup</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">No account needed. Free to use instantly — no limits.</p>
-            </div>
-            <div class="tool-card p-6 text-center">
-                <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mx-auto mb-4">
-                    <i class="fas fa-clone text-2xl text-purple-500"></i>
-                </div>
-                <h4 class="font-bold text-gray-800 mb-2 text-sm">Layout Preserved</h4>
-                <p class="text-xs text-gray-500 leading-relaxed">Tables, images, fonts and page breaks all perfectly preserved.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════ RELATED TOOLS ══════════════ -->
-<section class="py-16 bg-white border-t border-gray-100">
-    <div class="max-w-5xl mx-auto px-5">
-        <h2 class="text-2xl font-bold text-gray-900 text-center mb-10">Related Tools</h2>
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <a href="pdf-to-word.html" class="tool-card p-5 text-center">
-                <i class="fas fa-file-word text-3xl text-blue-500 mb-3 block"></i>
-                <div class="font-semibold text-gray-800 text-sm mb-0.5">PDF to Word</div>
-                <div class="text-xs text-gray-400">Convert PDF to editable DOC</div>
-                <div class="mt-2"><span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">HOT</span></div>
-            </a>
-            <a href="excel-to-pdf.html" class="tool-card p-5 text-center">
-                <i class="fas fa-file-excel text-3xl text-green-500 mb-3 block"></i>
-                <div class="font-semibold text-gray-800 text-sm mb-0.5">Excel to PDF</div>
-                <div class="text-xs text-gray-400">Convert spreadsheets to PDF</div>
-            </a>
-            <a href="powerpoint-to-pdf.html" class="tool-card p-5 text-center">
-                <i class="fas fa-file-powerpoint text-3xl text-orange-500 mb-3 block"></i>
-                <div class="font-semibold text-gray-800 text-sm mb-0.5">PPT to PDF</div>
-                <div class="text-xs text-gray-400">Convert presentations to PDF</div>
-            </a>
-            <a href="jpg-to-pdf.html" class="tool-card p-5 text-center">
-                <i class="fas fa-image text-3xl text-pink-500 mb-3 block"></i>
-                <div class="font-semibold text-gray-800 text-sm mb-0.5">JPG to PDF</div>
-                <div class="text-xs text-gray-400">Convert images to PDF</div>
-            </a>
-        </div>
-    </div>
-</section>
-
-<!-- ══════════════ FOOTER ══════════════ -->
-<footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
-    <div class="max-w-6xl mx-auto px-5">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
-            <div>
-                <div class="flex items-center gap-2 mb-3">
-                    <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
-                        <i class="fas fa-tools text-white text-sm"></i>
-                    </div>
-                    <span class="font-bold text-white text-sm">Free Tools Hub</span>
-                </div>
-                <p class="text-gray-400 text-xs leading-relaxed">Free online PDF and document tools. Fast, simple, and always free.</p>
-            </div>
-            <div>
-                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Categories</h4>
-                <ul class="space-y-2 text-xs text-gray-500">
-                    <li><a href="../../index.html#tools" class="hover:text-white transition">Utility Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition">Student Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition">Design Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition">SEO Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition">Web Dev Tools</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Resources</h4>
-                <ul class="space-y-2 text-xs text-gray-500">
-                    <li><a href="../../blog.html" class="hover:text-white transition">Blog</a></li>
-                    <li><a href="../../tutorials.html" class="hover:text-white transition">Tutorials</a></li>
-                    <li><a href="../../resources.html" class="hover:text-white transition">Resources</a></li>
-                    <li><a href="../../comparisons.html" class="hover:text-white transition">Compare Tools</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Company</h4>
-                <ul class="space-y-2 text-xs text-gray-500">
-                    <li><a href="../../about.html" class="hover:text-white transition">About Us</a></li>
-                    <li><a href="../../contact.html" class="hover:text-white transition">Contact</a></li>
-                    <li><a href="../../privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
-                    <li><a href="../../terms.html" class="hover:text-white transition">Terms of Service</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Connect</h4>
-                <div class="flex gap-3 mb-3">
-                    <a href="#" class="text-gray-500 hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-red-500 transition text-lg"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="text-gray-500 hover:text-pink-400 transition text-lg"><i class="fab fa-instagram"></i></a>
-                </div>
-                <p class="text-gray-600 text-xs">by freetoolsapp</p>
-            </div>
-        </div>
-        <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-600">
-            <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500 mx-1"></i>for creators and learners.</p>
-            <div class="flex gap-5">
-                <a href="../../privacy.html" class="hover:text-gray-300 transition">Privacy</a>
-                <a href="../../terms.html" class="hover:text-gray-300 transition">Terms</a>
-                <a href="../../contact.html" class="hover:text-gray-300 transition">Contact</a>
-            </div>
-        </div>
-    </div>
-</footer>
-
-<!-- Back to top -->
-<button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg hidden z-50 transition items-center justify-center">
-    <i class="fas fa-arrow-up text-sm"></i>
-</button>
-
-<!-- docx-preview CDN cascade -->
-<script>
-(function(){
-    var c=['https://cdn.jsdelivr.net/npm/docx-preview@0.1.22/dist/docx-preview.umd.js',
-           'https://unpkg.com/docx-preview@0.1.22/dist/docx-preview.umd.js',
-           'https://cdn.jsdelivr.net/npm/docx-preview/dist/docx-preview.umd.js'],i=0;
-    function t(){if(i>=c.length){window.__dpFailed=true;return;}
-        var s=document.createElement('script');s.src=c[i++];
-        s.onload=function(){window.__dpReady=true;};s.onerror=t;
-        document.head.appendChild(s);}t();
-})();
-</script>
+</div>
 
 <script>
-/* ── Mobile menu ─────────────────────────────────────── */
-const $mb  = document.getElementById('mobileMenuBtn');
-const $mm  = document.getElementById('mobileMenu');
-$mb.addEventListener('click', () => {
-    $mm.classList.toggle('hidden');
-    const ic = $mb.querySelector('i');
-    ic.classList.toggle('fa-bars'); ic.classList.toggle('fa-times');
+
+let files = [];
+const dropZone = document.getElementById("dropZone");
+const fileInput = document.getElementById("fileInput");
+const convertBtn = document.getElementById("convertBtn");
+const docxStage = document.getElementById("docx-stage");
+
+dropZone.addEventListener("click",()=>fileInput.click());
+
+dropZone.addEventListener("dragover",(e)=>{
+    e.preventDefault();
+    dropZone.style.background="#e9f3ff";
 });
-document.addEventListener('click', e => {
-    if(!$mb.contains(e.target)&&!$mm.contains(e.target)){
-        $mm.classList.add('hidden');
-        const ic=$mb.querySelector('i'); ic.classList.remove('fa-times'); ic.classList.add('fa-bars');
-    }
+dropZone.addEventListener("dragleave",()=>{
+    dropZone.style.background="#fff";
+});
+dropZone.addEventListener("drop",(e)=>{
+    e.preventDefault();
+    files = Array.from(e.dataTransfer.files);
+    handleFiles();
 });
 
-/* ── Back to top ─────────────────────────────────────── */
-const $btt = document.getElementById('btt');
-window.addEventListener('scroll', () => {
-    $btt.style.display = window.scrollY>400 ? 'flex' : 'none';
-},{passive:true});
-$btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
-
-/* ── DOM refs ─────────────────────────────────────────── */
-const stageUpload   = document.getElementById('stageUpload');
-const stageProcess  = document.getElementById('stageProcess');
-const stagePreview  = document.getElementById('stagePreview');
-const stageSuccess  = document.getElementById('stageSuccess');
-const uploadZone    = document.getElementById('uploadZone');
-const fileInput     = document.getElementById('fileInput');
-const errBox        = document.getElementById('errBox');
-const errMsg        = document.getElementById('errMsg');
-const procTitle     = document.getElementById('procTitle');
-const procSub       = document.getElementById('procSub');
-const progFill      = document.getElementById('progFill');
-const progStatus    = document.getElementById('progStatus');
-const progPct       = document.getElementById('progPct');
-const fName         = document.getElementById('fName');
-const fSize         = document.getElementById('fSize');
-const removeBtn     = document.getElementById('removeBtn');
-const prevBadge     = document.getElementById('prevBadge');
-const docxStage     = document.getElementById('docxStage');
-const convertBtn    = document.getElementById('convertBtn');
-const convProgress  = document.getElementById('convProgress');
-const convMsg       = document.getElementById('convMsg');
-const convFill      = document.getElementById('convFill');
-const dlBtn         = document.getElementById('dlBtn');
-const sucName       = document.getElementById('sucName');
-
-let selFile = null;
-
-/* ── Helpers ──────────────────────────────────────────── */
-const fmt   = b => b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB';
-const sleep = ms => new Promise(r=>setTimeout(r,ms));
-
-function show(name){
-    [stageUpload,stageProcess,stagePreview,stageSuccess].forEach(s=>s.classList.add('hidden'));
-    document.getElementById('stage'+name).classList.remove('hidden');
-}
-function setP(pct,st){ progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(st) progStatus.textContent=st; }
-function showErr(m){ errMsg.textContent=m; errBox.classList.remove('hidden'); }
-function hideErr()  { errBox.classList.add('hidden'); }
-
-/* ── Drag & drop ──────────────────────────────────────── */
-['dragenter','dragover','dragleave','drop'].forEach(ev=>{
-    uploadZone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
-    document.body.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
+fileInput.addEventListener("change",(e)=>{
+    files = Array.from(e.target.files);
+    handleFiles();
 });
-['dragenter','dragover'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.add('over')));
-['dragleave','drop'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.remove('over')));
-uploadZone.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)pick(f);});
-fileInput.addEventListener('change',e=>{if(e.target.files[0])pick(e.target.files[0]);});
-removeBtn.addEventListener('click',resetAll);
 
-/* ── Pick file ────────────────────────────────────────── */
-function pick(f){
-    const ext=f.name.split('.').pop().toLowerCase();
-    if(!['docx','doc'].includes(ext)){showErr('Only .docx and .doc files are supported.');return;}
-    hideErr(); selFile=f; doRender(f);
-}
+async function handleFiles(){
+    docxStage.innerHTML="";
+    for(const file of files){
+        const ext = file.name.split(".").pop().toLowerCase();
 
-/* ── Render preview ───────────────────────────────────── */
-async function doRender(file){
-    show('Process'); setP(5,'Reading file…');
-    procTitle.textContent='Rendering your document…';
-    procSub.textContent='Please wait a moment';
-
-    const buf=await file.arrayBuffer();
-    setP(20,'Parsing document…');
-
-    // Wait for docx-preview (max 5s)
-    let w=0;
-    while(!window.__dpReady&&!window.__dpFailed&&w<5000){await sleep(150);w+=150;}
-
-    const dp=window.__dpReady&&window.docx&&typeof window.docx.renderAsync==='function';
-    docxStage.innerHTML='';
-    docxStage.style.cssText='background:#525659;padding:20px;min-height:120px;max-height:420px;overflow-y:auto;';
-
-    if(dp){
-        try{
-            setP(40,'Rendering exact Word layout…');
-            await window.docx.renderAsync(new Uint8Array(buf),docxStage,null,{
-                className:'docx',inWrapper:true,breakPages:true,
-                ignoreWidth:false,ignoreHeight:false,experimental:true
-            });
-            docxStage.querySelectorAll('section.docx').forEach(pg=>{
-                pg.style.margin='0 auto 14px';
-                pg.style.boxShadow='0 4px 20px rgba(0,0,0,.45)';
-            });
-            prevBadge.textContent='✓ Exact Layout';
-            prevBadge.className='text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full';
-        }catch(e){
-            console.warn('docx-preview err:',e);
-            await doFallback(buf);
+        if(ext==="docx"){
+            const arrayBuffer = await file.arrayBuffer();
+            const result = await mammoth.convertToHtml({arrayBuffer});
+            const wrapper=document.createElement("div");
+            wrapper.innerHTML=result.value;
+            docxStage.appendChild(wrapper);
         }
-    }else{
-        await doFallback(buf);
+        else{
+            alert("For best results use DOCX format.");
+        }
     }
-
-    setP(100,'Done!'); await sleep(200);
-    fName.textContent=file.name; fSize.textContent=fmt(file.size);
-    show('Preview');
-    document.querySelector('.tool-hero').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-async function doFallback(buf){
-    setP(40,'Loading content…');
-    docxStage.style.cssText='background:#fff;padding:32px 36px;max-height:420px;overflow-y:auto;'+
-        'font-family:"Times New Roman",serif;font-size:12pt;line-height:1.6;color:#000;';
-    try{
-        const r=await mammoth.convertToHtml({arrayBuffer:buf},{
-            convertImage:mammoth.images.inline(el=>el.read('base64').then(b=>({src:`data:${el.contentType};base64,${b}`})))
+convertBtn.addEventListener("click", async function(){
+
+    if(files.length===0){
+        alert("Upload at least one file.");
+        return;
+    }
+
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+        orientation:'portrait',
+        unit:'pt',
+        format:'a4',
+        compress:true
+    });
+
+    const pdfWidth = pdf.internal.pageSize.getWidth();
+    const watermark = document.getElementById("watermarkText").value;
+
+    const pages = Array.from(docxStage.children);
+
+    for(let i=0;i<pages.length;i++){
+
+        const canvas = await html2canvas(pages[i],{
+            scale:4,
+            useCORS:true,
+            backgroundColor:"#ffffff"
         });
-        docxStage.innerHTML=`<style>
-            #docxStage h1{font-size:18pt;font-weight:bold;margin:.5em 0}
-            #docxStage h2{font-size:15pt;font-weight:bold;margin:.4em 0}
-            #docxStage h3{font-size:13pt;font-weight:bold;margin:.35em 0}
-            #docxStage p{margin:.3em 0}
-            #docxStage table{border-collapse:collapse;width:100%;margin:.4em 0}
-            #docxStage td,#docxStage th{border:1px solid #ccc;padding:4px 8px}
-            #docxStage th{background:#f0f0f0;font-weight:bold}
-            #docxStage ul,#docxStage ol{padding-left:1.4em;margin:.25em 0}
-            #docxStage img{max-width:100%;height:auto}
-            #docxStage b,#docxStage strong{font-weight:bold}
-            #docxStage i,#docxStage em{font-style:italic}
-        </style>${r.value}`;
-        prevBadge.textContent='Preview';
-        prevBadge.className='text-xs font-bold bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full';
-    }catch(e){
-        docxStage.innerHTML='<p style="color:#aaa;text-align:center;padding:40px 20px">Preview unavailable — conversion will still work.</p>';
-    }
-}
 
-/* ── Convert to PDF ───────────────────────────────────── */
-convertBtn.addEventListener('click',async()=>{
-    if(!selFile)return;
-    convertBtn.disabled=true;
-    convertBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Converting…';
-    convProgress.classList.remove('hidden');
-    convFill.style.width='10%'; convMsg.textContent='Capturing pages…';
+        const imgData = canvas.toDataURL("image/png");
+        const imgProps = pdf.getImageProperties(imgData);
+        const imgHeight = (imgProps.height * pdfWidth) / imgProps.width;
 
-    try{
-        const {jsPDF}=window.jspdf;
-        const dps=Array.from(docxStage.querySelectorAll('section.docx'));
-        const pages=dps.length?dps:[docxStage];
-        let pdf=null;
+        if(i>0) pdf.addPage();
 
-        for(let i=0;i<pages.length;i++){
-            const pg=pages[i];
-            const wPx=Math.max(pg.scrollWidth,pg.offsetWidth,794);
-            const hPx=Math.max(pg.scrollHeight,pg.offsetHeight,200);
-            convMsg.textContent=`Rendering page ${i+1} of ${pages.length}…`;
-            convFill.style.width=Math.round(10+(i/pages.length*85))+'%';
+        pdf.addImage(imgData,"PNG",0,0,pdfWidth,imgHeight);
 
-            const cv=await html2canvas(pg,{
-                scale:2,useCORS:true,allowTaint:true,
-                backgroundColor:'#ffffff',logging:false,
-                width:wPx,height:hPx,scrollX:0,scrollY:0,windowWidth:wPx
-            });
-            const img=cv.toDataURL('image/jpeg',.95);
-            const wMM=wPx/96*25.4, hMM=hPx/96*25.4;
-            if(!pdf){pdf=new jsPDF({unit:'mm',format:[wMM,hMM],compress:true});}
-            else    {pdf.addPage([wMM,hMM]);}
-            pdf.addImage(img,'JPEG',0,0,wMM,hMM,'','FAST');
-            await sleep(10);
+        if(watermark){
+            pdf.setFontSize(60);
+            pdf.setTextColor(150);
+            pdf.text(watermark, pdfWidth/2, 400, {align:"center", angle:45});
         }
-
-        convFill.style.width='100%'; convMsg.textContent='Done!'; await sleep(300);
-
-        const outName=selFile.name.replace(/\.(docx|doc)$/i,'')+'.pdf';
-        const blob=pdf.output('blob');
-        const url=URL.createObjectURL(blob);
-
-        show('Success');
-        sucName.textContent=outName+' — '+fmt(blob.size);
-        dlBtn.onclick=()=>{const a=document.createElement('a');a.href=url;a.download=outName;a.click();};
-        stageSuccess.scrollIntoView({behavior:'smooth',block:'center'});
-
-    }catch(err){
-        showErr('Conversion failed: '+err.message);
-        show('Preview');
     }
 
-    convertBtn.disabled=false;
-    convertBtn.innerHTML='<i class="fas fa-cog text-xl"></i> Convert to PDF';
-    convProgress.classList.add('hidden');
+    pdf.save("converted.pdf");
 });
 
-/* ── Reset ────────────────────────────────────────────── */
-function resetAll(){
-    selFile=null; fileInput.value='';
-    docxStage.innerHTML='';
-    docxStage.style.cssText='background:#525659;padding:20px;min-height:120px;max-height:420px;overflow-y:auto;';
-    convProgress.classList.add('hidden');
-    convertBtn.disabled=false;
-    convertBtn.innerHTML='<i class="fas fa-cog text-xl"></i> Convert to PDF';
-    hideErr(); show('Upload');
-    window.scrollTo({top:0,behavior:'smooth'});
+</script>
+
+<!-- Software Schema -->
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "SoftwareApplication",
+ "name": "Free Word to PDF Converter",
+ "applicationCategory": "UtilityApplication",
+ "operatingSystem": "Web",
+ "offers": {
+   "@type": "Offer",
+   "price": "0",
+   "priceCurrency": "USD"
+ }
 }
 </script>
+
 </body>
 </html>
