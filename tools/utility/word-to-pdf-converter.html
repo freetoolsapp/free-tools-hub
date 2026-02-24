@@ -326,7 +326,6 @@
 
         /* ── Progress ────────────────────────────────────── */
         #processing { display: none; }
-        #processing.visible { display: block; }
         .processing-inner { text-align: center; }
         .spinner-wrap { margin-bottom: 20px; }
         .spinner {
@@ -352,7 +351,6 @@
 
         /* ── Results ─────────────────────────────────────── */
         #results { display: none; }
-        #results.visible { display: block; }
         .success-badge {
             display: flex; align-items: center; justify-content: center;
             width: 72px; height: 72px;
@@ -830,16 +828,6 @@
 </footer>
 
 <script>
-/* ═══════════════════════════════════════════════════════════════
-   Word to PDF Converter — Full JS
-   Features:
-     • Mammoth DOCX → HTML extraction with style mapping
-     • Smart page-break detection (w:pageBreakBefore, section breaks)
-     • A4 paginated preview with page numbers
-     • html2canvas slice rendering → jsPDF assembly
-     • Per-page page number stamped in PDF
-═══════════════════════════════════════════════════════════════ */
-
 // ── Mobile menu
 document.getElementById('mobileMenuBtn').addEventListener('click', () => {
     document.getElementById('mobileMenu').classList.toggle('open');
@@ -847,41 +835,61 @@ document.getElementById('mobileMenuBtn').addEventListener('click', () => {
 
 // ── State
 let currentFile = null;
-let pdfBlob      = null;
-let pageCount    = 0;
-let rawHtml      = '';
+let pdfBlob     = null;
+let pageCount   = 0;
+let rawHtml     = '';
 
-// ── DOM refs
+// ── DOM helpers — simple, no class conflict
+function elShow(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = '';
+}
+function elHide(id) {
+    const el = document.getElementById(id);
+    if (el) el.style.display = 'none';
+}
+
+// ── Hide results & processing on load
+window.addEventListener('DOMContentLoaded', () => {
+    elHide('processing');
+    elHide('results');
+});
+
+// ── Drop zone
 const dropZone  = document.getElementById('dropZone');
 const fileInput = document.getElementById('fileInput');
 
-// ── Reset
-function resetUpload() {
-    currentFile = pdfBlob = null;
-    pageCount = 0; rawHtml = '';
-    document.getElementById('fileInfo').classList.remove('visible');
-    hide('processing'); hide('results');
-    show('uploadSection');
-    fileInput.value = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-// ── Upload triggers
 dropZone.addEventListener('click', () => fileInput.click());
 dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('dragover'); });
 dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
 dropZone.addEventListener('drop', e => {
     e.preventDefault();
     dropZone.classList.remove('dragover');
-    const f = e.dataTransfer.files[0];
-    if (f) processFile(f);
+    if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]);
 });
-fileInput.addEventListener('change', e => { if (e.target.files[0]) processFile(e.target.files[0]); });
+fileInput.addEventListener('change', e => {
+    if (e.target.files[0]) processFile(e.target.files[0]);
+});
 
-// ── Process
+// ── Reset
+function resetUpload() {
+    currentFile = pdfBlob = null;
+    pageCount = 0; rawHtml = '';
+    document.getElementById('fileInfo').style.display = 'none';
+    elHide('processing');
+    elHide('results');
+    elShow('uploadSection');
+    fileInput.value = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ── Main process
 async function processFile(file) {
-    const valid = ['application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword'];
-    if (!valid.includes(file.type) && !file.name.match(/\.(docx|doc)$/i)) {
+    const validTypes = [
+        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'application/msword'
+    ];
+    if (!validTypes.includes(file.type) && !file.name.match(/\.(docx|doc)$/i)) {
         return alert('❌ Please upload a valid Word document (.docx or .doc)');
     }
     if (file.size > 10 * 1024 * 1024) {
@@ -889,15 +897,19 @@ async function processFile(file) {
     }
 
     currentFile = file;
+
+    // Show file info bar
     document.getElementById('fileName').textContent  = file.name;
     document.getElementById('fileSize2').textContent = formatBytes(file.size) + ' · Ready to convert';
-    document.getElementById('fileInfo').classList.add('visible');
+    document.getElementById('fileInfo').style.display = 'flex';
 
-    hide('results');
-    show('processing');
+    // Show processing, hide results
+    elHide('results');
+    elShow('processing');
     setProgress(10, '📄 Reading Word document…');
 
     try {
+        // 1. Parse DOCX → HTML
         const arrayBuffer = await file.arrayBuffer();
         const result = await mammoth.convertToHtml({
             arrayBuffer,
@@ -910,253 +922,245 @@ async function processFile(file) {
                 "r[style-name='Strong']    => strong",
                 "p[style-name='List Paragraph'] => li:fresh",
                 "b => strong", "i => em", "u => u"
-            ],
-            includeDefaultStyleMap: true
+            ]
         });
 
         rawHtml = result.value;
-        setProgress(40, '🔍 Detecting page breaks…');
+        if (!rawHtml || rawHtml.trim() === '') throw new Error('No content extracted from document.');
 
-        // Build paginated preview
-        await new Promise(r => setTimeout(r, 80));
+        setProgress(35, '🔍 Detecting page breaks…');
+        await tick();
+
+        // 2. Build page preview
         buildPagePreview(rawHtml);
-        populateFlowPreview(rawHtml);
+        document.getElementById('flowPreview').innerHTML = rawHtml;
 
-        setProgress(60, '🖨️ Rendering PDF pages…');
-        await convertToPDF(rawHtml, file.name);
+        setProgress(55, '🖨️ Rendering PDF…');
+        await tick();
+
+        // 3. Convert to PDF
+        await convertToPDF(rawHtml);
 
         setProgress(100, '✅ Done!');
-        await new Promise(r => setTimeout(r, 500));
+        await new Promise(r => setTimeout(r, 400));
 
-        hide('processing');
-        show('results');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        // 4. Show results
+        elHide('processing');
+        elShow('results');
+        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
     } catch (err) {
-        console.error(err);
-        hide('processing');
-        alert('❌ Conversion failed: ' + err.message + '\n\nTry a different file.');
+        console.error('Conversion error:', err);
+        elHide('processing');
+        alert('❌ Conversion failed:\n' + err.message + '\n\nPlease try another file.');
     }
 }
 
-/* ───────────────────────────────────────────────────────────────
-   buildPagePreview()
-   Splits HTML into logical A4 pages using character-count heuristic
-   + page-break markers, then renders each as a styled <div>.
-─────────────────────────────────────────────────────────────── */
-function buildPagePreview(html) {
-    const pages = splitIntoPages(html);
-    pageCount = pages.length;
-    document.getElementById('pageCount').textContent = pageCount;
-
-    const container = document.getElementById('pagePreview');
-    container.innerHTML = '';
-    pages.forEach((content, i) => {
-        const page = document.createElement('div');
-        page.className = 'a4-page';
-        page.innerHTML = content;
-        // page number
-        const num = document.createElement('div');
-        num.className = 'page-number-label';
-        num.textContent = `Page ${i + 1} of ${pageCount}`;
-        page.appendChild(num);
-        container.appendChild(page);
-    });
-}
-
-/* ───────────────────────────────────────────────────────────────
-   splitIntoPages(html)
-   Strategy:
-   1. Split on explicit <hr class="page-break"> that mammoth emits
-      for w:pageBreakBefore / w:br type="page"
-   2. Also split on manual hard page-break markers mammoth leaves
-   3. Fallback: chunk by approximate character count (~4 000 chars
-      per A4 page at 12pt Calibri, 644px content width)
-─────────────────────────────────────────────────────────────── */
+// ── Split HTML into pages
 function splitIntoPages(html) {
-    // mammoth emits <hr> for explicit page breaks
-    const HR_BREAK = /<hr\s*\/?>/gi;
-    const RAW_BREAK = /(<p[^>]*>[\s]*<\/p>){3,}/gi; // 3+ empty paras ≈ page break
+    // 1) mammoth emits <hr> for Word page breaks
+    let parts = html.split(/<hr\s*\/?>/gi).map(p => p.trim()).filter(Boolean);
+    if (parts.length > 1) return parts;
 
-    // First try HR-based split
-    let parts = html.split(HR_BREAK);
-    if (parts.length > 1) return parts.filter(p => p.trim());
+    // 2) Three or more consecutive empty paragraphs → page break
+    parts = html.split(/(?:<p[^>]*>\s*<\/p>\s*){3,}/gi).map(p => p.trim()).filter(Boolean);
+    if (parts.length > 1) return parts;
 
-    // Try empty-paragraph clusters
-    parts = html.split(RAW_BREAK);
-    if (parts.length > 1) return parts.filter(p => p.trim());
-
-    // Fallback: measure DOM node lengths and bucket into ~3 800 char groups
+    // 3) Fallback: split by ~3500 text characters per page
+    const CHARS = 3500;
     const div = document.createElement('div');
     div.innerHTML = html;
-    const children = Array.from(div.childNodes);
-    const CHARS_PER_PAGE = 3800;
+    const nodes = Array.from(div.childNodes);
     const pages = [];
-    let buf = ''; let bufLen = 0;
+    let buf = '', len = 0;
 
-    children.forEach(node => {
-        const nodeHtml = node.nodeType === 1 ? node.outerHTML : (node.textContent || '');
-        const nodeLen  = node.textContent ? node.textContent.length : 0;
-        if (bufLen + nodeLen > CHARS_PER_PAGE && bufLen > 0) {
+    for (const node of nodes) {
+        const html_  = node.nodeType === 1 ? node.outerHTML : '';
+        const chars  = node.textContent ? node.textContent.length : 0;
+        if (len + chars > CHARS && len > 0) {
             pages.push(buf);
-            buf = ''; bufLen = 0;
+            buf = ''; len = 0;
         }
-        buf += nodeHtml;
-        bufLen += nodeLen;
-    });
+        buf += html_;
+        len += chars;
+    }
     if (buf.trim()) pages.push(buf);
     return pages.length ? pages : [html];
 }
 
-function populateFlowPreview(html) {
-    document.getElementById('flowPreview').innerHTML = html;
+// ── Build A4 page preview
+function buildPagePreview(html) {
+    const pages = splitIntoPages(html);
+    pageCount = pages.length;
+    document.getElementById('pageCount').textContent = pageCount + (pageCount === 1 ? ' page' : ' pages');
+
+    const container = document.getElementById('pagePreview');
+    container.innerHTML = '';
+
+    pages.forEach((content, i) => {
+        const page = document.createElement('div');
+        page.className = 'a4-page';
+        page.innerHTML = content;
+
+        const numEl = document.createElement('div');
+        numEl.className = 'page-number-label';
+        numEl.textContent = `Page ${i + 1} of ${pages.length}`;
+        page.appendChild(numEl);
+        container.appendChild(page);
+    });
 }
 
-/* ───────────────────────────────────────────────────────────────
-   convertToPDF()
-   Renders each page div with html2canvas then stitches into jsPDF.
-   Page number text is drawn natively in jsPDF for crisp rendering.
-─────────────────────────────────────────────────────────────── */
-async function convertToPDF(html, fileName) {
+// ── Convert to PDF
+async function convertToPDF(html) {
     const { jsPDF } = window.jspdf;
 
-    const A4_W_PX  = 794;
-    const A4_H_PX  = 1123;
-    const MARGIN   = 75;
-    const SCALE    = 2;
+    const A4_W_PX = 794;
+    const A4_H_PX = 1123;
+    const MARGIN  = 75;
+    const SCALE   = 2;
+    const PW_MM   = 210;
+    const PH_MM   = 297;
 
-    // Build off-screen wrapper
-    const styleTag = document.createElement('style');
-    styleTag.id = '__pdfStyle';
-    styleTag.textContent = `
-        #__pdfWrap {
+    // Inject styles for off-screen render
+    const styleEl = document.createElement('style');
+    styleEl.id = '__pdfStyles';
+    styleEl.textContent = `
+        #__pdfPage {
             font-family: Calibri, 'Times New Roman', serif;
             font-size: 12pt; line-height: 1.5; color: #000;
             word-break: break-word;
         }
-        #__pdfWrap p   { margin: 0 0 8pt; }
-        #__pdfWrap h1  { font-size: 20pt; font-weight: bold; margin: 14pt 0 6pt; }
-        #__pdfWrap h2  { font-size: 16pt; font-weight: bold; margin: 12pt 0 5pt; }
-        #__pdfWrap h3  { font-size: 13pt; font-weight: bold; margin: 10pt 0 4pt; }
-        #__pdfWrap h4, #__pdfWrap h5, #__pdfWrap h6
+        #__pdfPage p   { margin: 0 0 8pt; }
+        #__pdfPage h1  { font-size: 20pt; font-weight: bold; margin: 14pt 0 6pt; }
+        #__pdfPage h2  { font-size: 16pt; font-weight: bold; margin: 12pt 0 5pt; }
+        #__pdfPage h3  { font-size: 13pt; font-weight: bold; margin: 10pt 0 4pt; }
+        #__pdfPage h4, #__pdfPage h5, #__pdfPage h6
                        { font-size: 12pt; font-weight: bold; margin: 8pt 0 4pt; }
-        #__pdfWrap ul, #__pdfWrap ol { margin: 0 0 8pt 24pt; padding: 0; }
-        #__pdfWrap li  { margin-bottom: 4pt; }
-        #__pdfWrap table { width: 100%; border-collapse: collapse; margin-bottom: 10pt; }
-        #__pdfWrap td, #__pdfWrap th { border: 1px solid #ccc; padding: 4pt 6pt; font-size: 11pt; }
-        #__pdfWrap strong, #__pdfWrap b { font-weight: bold; }
-        #__pdfWrap em,     #__pdfWrap i { font-style: italic; }
-        #__pdfWrap u { text-decoration: underline; }
-        #__pdfWrap img { max-width: 100%; height: auto; }
+        #__pdfPage ul, #__pdfPage ol { margin: 0 0 8pt 24pt; padding: 0; }
+        #__pdfPage li  { margin-bottom: 4pt; }
+        #__pdfPage table { width: 100%; border-collapse: collapse; margin-bottom: 10pt; }
+        #__pdfPage td,
+        #__pdfPage th  { border: 1px solid #ccc; padding: 4pt 6pt; font-size: 11pt; }
+        #__pdfPage strong, #__pdfPage b { font-weight: bold; }
+        #__pdfPage em,     #__pdfPage i { font-style: italic; }
+        #__pdfPage u       { text-decoration: underline; }
+        #__pdfPage img     { max-width: 100%; height: auto; }
     `;
-    document.head.appendChild(styleTag);
+    document.head.appendChild(styleEl);
 
     const pages = splitIntoPages(html);
-    pageCount = pages.length;
-    document.getElementById('pageCount').textContent = pageCount;
+    pageCount   = pages.length;
+    document.getElementById('pageCount').textContent = pageCount + (pageCount === 1 ? ' page' : ' pages');
 
     const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-    const PAGE_W_MM = 210;
-    const PAGE_H_MM = 297;
 
     for (let i = 0; i < pages.length; i++) {
-        setProgress(60 + Math.round((i / pages.length) * 35),
-            `🖨️ Rendering page ${i + 1} of ${pages.length}…`);
+        const pct = 55 + Math.round(((i + 1) / pages.length) * 40);
+        setProgress(pct, `🖨️ Rendering page ${i + 1} of ${pages.length}…`);
 
-        const wrap = document.createElement('div');
-        wrap.id = '__pdfWrap';
-        wrap.style.cssText = `
-            position: absolute; left: -9999px; top: 0;
-            width: ${A4_W_PX}px; min-height: ${A4_H_PX}px;
-            background: #fff; box-sizing: border-box; padding: ${MARGIN}px;
-        `;
-        wrap.innerHTML = pages[i];
-        document.body.appendChild(wrap);
+        // Create off-screen page div
+        const div = document.createElement('div');
+        div.id = '__pdfPage';
+        div.style.cssText = [
+            'position:fixed',
+            'left:-9999px',
+            'top:0',
+            `width:${A4_W_PX}px`,
+            `min-height:${A4_H_PX}px`,
+            'background:#fff',
+            'box-sizing:border-box',
+            `padding:${MARGIN}px`
+        ].join(';');
+        div.innerHTML = pages[i];
+        document.body.appendChild(div);
 
-        await new Promise(r => setTimeout(r, 80));
+        // Small wait for paint
+        await tick(100);
 
-        const canvas = await html2canvas(wrap, {
-            scale: SCALE,
-            useCORS: true,
-            logging: false,
-            backgroundColor: '#ffffff',
-            width: A4_W_PX,
-            windowWidth: A4_W_PX
-        });
+        let canvas;
+        try {
+            canvas = await html2canvas(div, {
+                scale: SCALE,
+                useCORS: true,
+                allowTaint: true,
+                logging: false,
+                backgroundColor: '#ffffff',
+                width:  A4_W_PX,
+                height: A4_H_PX,
+                windowWidth: A4_W_PX
+            });
+        } finally {
+            document.body.removeChild(div);
+        }
 
-        document.body.removeChild(wrap);
-
-        // Crop/pad canvas to exactly A4 height
-        const sliceCanvas = document.createElement('canvas');
-        sliceCanvas.width  = canvas.width;
-        sliceCanvas.height = A4_H_PX * SCALE;
-        const ctx = sliceCanvas.getContext('2d');
-        ctx.fillStyle = '#ffffff';
-        ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+        // Crop canvas to exact A4 height
+        const out  = document.createElement('canvas');
+        out.width  = canvas.width;
+        out.height = A4_H_PX * SCALE;
+        const ctx  = out.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, out.width, out.height);
         ctx.drawImage(canvas, 0, 0);
 
-        const imgData = sliceCanvas.toDataURL('image/jpeg', 0.92);
-        if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', 0, 0, PAGE_W_MM, PAGE_H_MM);
+        const imgData = out.toDataURL('image/jpeg', 0.90);
 
-        // ── Stamp page number in PDF (crisp vector text) ──
+        if (i > 0) pdf.addPage();
+        pdf.addImage(imgData, 'JPEG', 0, 0, PW_MM, PH_MM);
+
+        // Page number (vector — crisp)
         pdf.setFont('helvetica', 'normal');
         pdf.setFontSize(8);
-        pdf.setTextColor(150, 150, 150);
+        pdf.setTextColor(140);
         const label = `Page ${i + 1} of ${pages.length}`;
-        const textW = pdf.getTextWidth(label);
-        pdf.text(label, PAGE_W_MM - 12 - textW, PAGE_H_MM - 8);
+        pdf.text(label, PW_MM - 12 - pdf.getTextWidth(label), PH_MM - 7);
     }
 
-    document.head.removeChild(styleTag);
+    document.head.removeChild(styleEl);
 
     pdfBlob = pdf.output('blob');
     document.getElementById('fileSizeResult').textContent = formatBytes(pdfBlob.size);
 }
 
-// ── Download
+// ── Download PDF
 function downloadPDF() {
-    if (!pdfBlob) return alert('❌ No PDF available. Please convert a file first.');
+    if (!pdfBlob) return alert('❌ No PDF ready. Please convert a file first.');
     const url  = URL.createObjectURL(pdfBlob);
-    const link = document.createElement('a');
-    link.href     = url;
-    link.download = currentFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(url);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = currentFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 
-// ── Preview toggle
+// ── Preview tab switch
 function switchView(mode) {
-    const pageDiv = document.getElementById('pagePreview');
-    const flowDiv = document.getElementById('flowPreview');
-    const btnPage = document.getElementById('btnPageView');
-    const btnFlow = document.getElementById('btnFlowView');
+    const pg = document.getElementById('pagePreview');
+    const fl = document.getElementById('flowPreview');
+    const bp = document.getElementById('btnPageView');
+    const bf = document.getElementById('btnFlowView');
     if (mode === 'page') {
-        pageDiv.style.display = 'block';
-        flowDiv.style.display = 'none';
-        btnPage.classList.add('active'); btnFlow.classList.remove('active');
+        pg.style.display = ''; fl.style.display = 'none';
+        bp.classList.add('active'); bf.classList.remove('active');
     } else {
-        pageDiv.style.display = 'none';
-        flowDiv.style.display = 'block';
-        btnFlow.classList.add('active'); btnPage.classList.remove('active');
+        pg.style.display = 'none'; fl.style.display = '';
+        bf.classList.add('active'); bp.classList.remove('active');
     }
 }
 
-// ── Helpers
+// ── Utilities
 function setProgress(pct, msg) {
     document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressLabel').textContent  = pct + '%';
+    document.getElementById('progressLabel').textContent = pct + '%';
     if (msg) document.getElementById('processingMsg').textContent = msg;
 }
-function show(id) { document.getElementById(id).classList.remove('hidden'); document.getElementById(id).style.display = ''; }
-function hide(id) { document.getElementById(id).style.display = 'none'; }
-function formatBytes(bytes) {
-    if (!bytes) return '0 B';
-    const k = 1024, s = ['B','KB','MB','GB'];
-    const i = Math.floor(Math.log(bytes) / Math.log(k));
-    return (bytes / Math.pow(k, i)).toFixed(2) + ' ' + s[i];
+function tick(ms = 50) { return new Promise(r => setTimeout(r, ms)); }
+function formatBytes(b) {
+    if (!b) return '0 B';
+    const k = 1024, u = ['B','KB','MB','GB'];
+    const i = Math.floor(Math.log(b) / Math.log(k));
+    return (b / Math.pow(k, i)).toFixed(2) + ' ' + u[i];
 }
 </script>
 </body>
