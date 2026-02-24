@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: https://ogp.me/ns#">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML & CSS Basics 2026 — Complete Beginner Tutorial | FreeToolsHub</title>
+    <meta name="description" content="Learn HTML & CSS from scratch in 2026. This beginner-friendly tutorial covers everything you need to build your first website — step-by-step guide by FreeToolsHub.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://freetoolshub.online/tutorials/html-css-basics-2026.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --purple: #7c3aed;
+            --purple-dark: #6d28d9;
+            --purple-light: #a78bfa;
+            --purple-50: #f5f3ff;
+            --blue: #2563eb;
+            --green: #16a34a;
+            --orange: #ea580c;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --radius: 16px;
+            --shadow: 0 4px 24px rgba(0,0,0,.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--text); background: var(--bg); line-height: 1.7; }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ===== HEADER ===== */
+        .site-header {
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(255,255,255,.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+            padding: 14px 0;
+        }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .site-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+        .logo-name { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--text); }
+        .logo-tagline { font-size: 11px; color: var(--text-muted); display: block; }
+        .main-nav { display: flex; align-items: center; gap: 4px; }
+        .main-nav a { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: all .2s; }
+        .main-nav a:hover { color: var(--purple); background: var(--purple-50); }
+        .nav-cta { background: var(--purple) !important; color: white !important; }
+        .nav-cta:hover { background: var(--purple-dark) !important; }
+
+        /* ===== BREADCRUMB ===== */
+        .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--text-muted); }
+        .breadcrumb a { color: var(--purple); text-decoration: none; }
+        .breadcrumb span { margin: 0 6px; }
+
+        /* ===== TUTORIAL HERO ===== */
+        .tutorial-hero {
+            background: linear-gradient(135deg, #2563eb 0%, #4f46e5 50%, #7c3aed 100%);
+            padding: 60px 0 50px;
+            position: relative;
+            overflow: hidden;
+        }
+        .tutorial-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .tutorial-hero-inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); color: white; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; letter-spacing: .5px; text-transform: uppercase; }
+        .tutorial-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: white; line-height: 1.2; max-width: 700px; }
+        .tutorial-hero h1 span { background: linear-gradient(90deg, #fde68a, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .tutorial-hero p { color: rgba(255,255,255,.85); font-size: 1.1rem; max-width: 560px; }
+        .tutorial-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .meta-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,.8); font-size: 13px; }
+
+        /* ===== LAYOUT ===== */
+        .tutorial-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: 48px 0 80px; align-items: start; }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar { position: sticky; top: 80px; }
+        .sidebar-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+        .sidebar-card h3 { font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+        .toc-list li a { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 8px 10px; border-radius: 8px; transition: all .2s; }
+        .toc-list li a:hover, .toc-list li a.active { background: var(--purple-50); color: var(--purple); font-weight: 500; }
+        .toc-list li a .step-num { width: 22px; height: 22px; background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; transition: all .2s; }
+        .toc-list li a:hover .step-num, .toc-list li a.active .step-num { background: var(--purple); color: white; }
+
+        /* ===== PROGRESS ===== */
+        .progress-card { margin-top: 16px; }
+        .progress-bar-wrap { background: var(--border); border-radius: 100px; height: 8px; overflow: hidden; margin: 12px 0 8px; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--purple), var(--purple-light)); border-radius: 100px; width: 0%; transition: width .4s ease; }
+        .progress-text { font-size: 12px; color: var(--text-muted); }
+
+        /* ===== MAIN CONTENT ===== */
+        .tutorial-content { min-width: 0; }
+        .section-block { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--border); animation: fadeUp .5s ease both; }
+        .section-block:last-child { border-bottom: none; }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .step-badge { width: 48px; height: 48px; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; flex-shrink: 0; }
+        .step-info .step-label { font-size: 12px; font-weight: 600; color: var(--purple); text-transform: uppercase; letter-spacing: 1px; }
+        .step-info h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--text); }
+
+        .tutorial-content p { font-size: 16px; color: #334155; margin-bottom: 16px; }
+        .tutorial-content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 24px 0 12px; }
+
+        /* ===== CODE BLOCKS ===== */
+        .code-block { background: #0f172a; border-radius: 12px; overflow: hidden; margin: 20px 0; box-shadow: var(--shadow-lg); }
+        .code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,.08); }
+        .code-lang { font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .code-lang i { color: #f97316; }
+        .code-dots { display: flex; gap: 6px; }
+        .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .code-dot:nth-child(1) { background: #ef4444; }
+        .code-dot:nth-child(2) { background: #f59e0b; }
+        .code-dot:nth-child(3) { background: #22c55e; }
+        .copy-btn { background: rgba(255,255,255,.08); border: none; color: #94a3b8; font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 6px; }
+        .copy-btn:hover { background: rgba(255,255,255,.15); color: white; }
+        pre { padding: 24px 20px; overflow-x: auto; font-family: 'Courier New', Courier, monospace; font-size: 14px; line-height: 1.7; }
+        .kw { color: #c084fc; } /* keywords */
+        .tag { color: #38bdf8; } /* html tags */
+        .attr { color: #86efac; } /* attributes */
+        .val { color: #fde68a; } /* values */
+        .com { color: #64748b; font-style: italic; } /* comments */
+        .str { color: #fca5a5; } /* strings */
+        .prop { color: #f0abfc; } /* css properties */
+        .sel { color: #38bdf8; } /* css selectors */
+
+        /* ===== TIP / NOTE BOX ===== */
+        .tip-box { display: flex; gap: 14px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px 20px; margin: 20px 0; }
+        .tip-box.warning { background: #fffbeb; border-color: #fde68a; }
+        .tip-box.info { background: #eff6ff; border-color: #bfdbfe; }
+        .tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+        .tip-box p { margin: 0; font-size: 14px; color: #166534; }
+        .tip-box.warning p { color: #92400e; }
+        .tip-box.info p { color: #1e40af; }
+
+        /* ===== VISUAL EXPLAINER ===== */
+        .html-structure { background: var(--bg-alt); border: 2px dashed var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; font-family: 'Courier New', monospace; font-size: 13px; }
+        .html-line { padding: 3px 0; }
+        .html-line .indent { display: inline-block; width: 20px; }
+        .hl-doctype { color: #64748b; }
+        .hl-html { color: #2563eb; }
+        .hl-head { color: #7c3aed; }
+        .hl-body { color: #16a34a; }
+        .hl-title { color: #ea580c; }
+        .hl-comment { color: #94a3b8; font-style: italic; }
+
+        /* ===== CSS PROP DEMO ===== */
+        .props-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .prop-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 10px; padding: 14px; }
+        .prop-card .prop-name { font-family: 'Courier New', monospace; font-size: 13px; color: var(--purple); font-weight: 600; margin-bottom: 4px; }
+        .prop-card p { font-size: 13px; color: var(--text-muted); margin: 0; }
+
+        /* ===== QUIZ SECTION ===== */
+        .quiz-card { background: linear-gradient(135deg, var(--purple-50), #ede9fe); border: 1px solid #ddd6fe; border-radius: var(--radius); padding: 28px; margin: 24px 0; }
+        .quiz-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 16px; color: var(--text); }
+        .quiz-option { background: white; border: 2px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; cursor: pointer; font-size: 14px; transition: all .2s; display: flex; align-items: center; gap: 10px; }
+        .quiz-option:hover { border-color: var(--purple); background: var(--purple-50); }
+        .quiz-option.correct { border-color: var(--green); background: #f0fdf4; color: #166534; }
+        .quiz-option.wrong { border-color: #ef4444; background: #fef2f2; color: #b91c1c; }
+        .quiz-option .opt-letter { width: 26px; height: 26px; border-radius: 50%; background: var(--purple-50); color: var(--purple); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .quiz-feedback { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; display: none; }
+
+        /* ===== LIVE PREVIEW ===== */
+        .preview-wrap { border: 1px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; }
+        .preview-bar { background: var(--bg-alt); padding: 10px 16px; border-bottom: 1px solid var(--border); font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 8px; }
+        .preview-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); }
+        .preview-body { padding: 24px; background: white; }
+        .preview-body h1 { font-size: 1.4rem; font-weight: 700; color: #1e3a8a; margin-bottom: 8px; }
+        .preview-body p { font-size: 14px; color: #475569; }
+        .preview-body .preview-btn { display: inline-block; background: #2563eb; color: white; padding: 8px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-top: 12px; text-decoration: none; }
+
+        /* ===== COMPLETE PROJECT ===== */
+        .project-box { background: linear-gradient(135deg, #1e1b4b, #312e81); color: white; border-radius: var(--radius); padding: 32px; margin: 20px 0; }
+        .project-box h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
+        .project-box p { color: rgba(255,255,255,.8); font-size: 14px; }
+        .project-features { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+        .project-feat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 100px; padding: 4px 14px; font-size: 12px; color: rgba(255,255,255,.9); }
+
+        /* ===== NEXT TUTORIALS ===== */
+        .next-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+        .next-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-decoration: none; color: var(--text); transition: all .2s; display: flex; align-items: center; gap: 14px; }
+        .next-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--purple); }
+        .next-card-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0; }
+        .next-card h4 { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .next-card p { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+        /* ===== FOOTER ===== */
+        .site-footer { background: #0f172a; color: rgba(255,255,255,.6); padding: 40px 0; margin-top: 80px; text-align: center; font-size: 14px; }
+        .site-footer a { color: var(--purple-light); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .tutorial-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .props-grid { grid-template-columns: 1fr; }
+            .next-grid { grid-template-columns: 1fr; }
+            .main-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="../index.html" class="site-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <div class="logo-text">
+                    <span class="logo-name">Free Tools Hub</span>
+                    <span class="logo-tagline">Tools · Blogs · Resources</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../tools.html"><i class="fas fa-tools"></i> Tools</a>
+                <a href="../blog.html"><i class="fas fa-pen-nib"></i> Blog</a>
+                <a href="../tutorials.html" class="active"><i class="fas fa-play-circle"></i> Tutorials</a>
+                <a href="../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Contact</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="../index.html">Home</a>
+        <span>›</span>
+        <a href="../tutorials.html">Tutorials</a>
+        <span>›</span>
+        <span>HTML &amp; CSS Basics 2026</span>
+    </nav>
+</div>
+
+<!-- TUTORIAL HERO -->
+<section class="tutorial-hero">
+    <div class="container">
+        <div class="tutorial-hero-inner">
+            <div class="hero-badge">
+                <i class="fas fa-code"></i> Web Development Tutorial
+            </div>
+            <h1>Master <span>HTML &amp; CSS</span> From Scratch</h1>
+            <p>Bilkul beginner se shuru karein — ek complete step-by-step guide jo aapko apni pehli website banana sikhayegi.</p>
+            <div class="tutorial-meta">
+                <div class="meta-item"><i class="fas fa-clock"></i> 25 minute read</div>
+                <div class="meta-item"><i class="fas fa-signal"></i> Beginner Level</div>
+                <div class="meta-item"><i class="fas fa-calendar"></i> February 2026</div>
+                <div class="meta-item"><i class="fas fa-list-ol"></i> 6 Steps</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN LAYOUT -->
+<div class="container">
+    <div class="tutorial-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <ul class="toc-list">
+                    <li><a href="#step1" class="active"><span class="step-num">1</span> HTML kya hai?</a></li>
+                    <li><a href="#step2"><span class="step-num">2</span> Basic HTML Structure</a></li>
+                    <li><a href="#step3"><span class="step-num">3</span> Common HTML Tags</a></li>
+                    <li><a href="#step4"><span class="step-num">4</span> CSS kya hai?</a></li>
+                    <li><a href="#step5"><span class="step-num">5</span> CSS Styling Apply Karna</a></li>
+                    <li><a href="#step6"><span class="step-num">6</span> Complete Project</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card progress-card" style="margin-top:16px;">
+                <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progressBar" style="width:0%"></div>
+                </div>
+                <p class="progress-text" id="progressText">0% Complete</p>
+            </div>
+
+            <div class="sidebar-card" style="margin-top:16px; background: linear-gradient(135deg,#2563eb,#4f46e5); border:none;">
+                <h3 style="color:rgba(255,255,255,.7)"><i class="fas fa-tools"></i> Related Tools</h3>
+                <a href="../tools/webdev/json-formatter.html" style="display:block; background:rgba(255,255,255,.12); border-radius:8px; padding:10px; color:white; text-decoration:none; font-size:13px; margin-bottom:8px;">
+                    <i class="fas fa-code"></i> JSON Formatter
+                </a>
+                <a href="../tools/seo/seo-analyzer.html" style="display:block; background:rgba(255,255,255,.12); border-radius:8px; padding:10px; color:white; text-decoration:none; font-size:13px;">
+                    <i class="fas fa-search"></i> SEO Analyzer
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="tutorial-content">
+
+            <!-- STEP 1 -->
+            <section class="section-block" id="step1">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 01</div>
+                        <h2>HTML kya hai?</h2>
+                    </div>
+                </div>
+
+                <p>HTML ka poora naam <strong>HyperText Markup Language</strong> hai. Yeh koi programming language nahi — yeh ek <strong>markup language</strong> hai jo browsers ko batati hai ke webpage par kya dikhana hai.</p>
+
+                <p>Sochain ke aap ek ghar bana rahe hain. HTML wohi neenv (foundation) aur deewarein hain. CSS ghar ko rangna aur sajana hai. JavaScript ghar mein bijli aur paani chalana hai.</p>
+
+                <div class="tip-box info">
+                    <div class="tip-icon"><i class="fas fa-lightbulb" style="color:#2563eb"></i></div>
+                    <p><strong>Yaad rakhein:</strong> Aaj ke tutorial mein hum sirf HTML aur CSS cover karenge. Yeh do cheezein seekh kar aap koi bhi basic website bana sakte hain!</p>
+                </div>
+
+                <h3>HTML kaise kaam karta hai?</h3>
+                <p>HTML <strong>tags</strong> use karta hai — jo angled brackets <code style="background:#f1f5f9;padding:2px 6px;border-radius:4px;font-family:monospace;font-size:13px;">&lt; &gt;</code> mein likhe jaate hain. Har tag browser ko batata hai ke is content ka role kya hai.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-html5" style="color:#f97316"></i> HTML</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">&lt;!-- Yeh ek heading hai --&gt;</span>
+<span class="tag">&lt;h1&gt;</span>Mera Pehla Heading<span class="tag">&lt;/h1&gt;</span>
+
+<span class="com">&lt;!-- Yeh ek paragraph hai --&gt;</span>
+<span class="tag">&lt;p&gt;</span>Yeh mera pehla paragraph hai. HTML seekhna bahut aasaan hai!<span class="tag">&lt;/p&gt;</span>
+
+<span class="com">&lt;!-- Yeh ek link hai --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://freetoolshub.online"</span><span class="tag">&gt;</span>FreeToolsHub visit karein<span class="tag">&lt;/a&gt;</span></pre>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-icon"><i class="fas fa-check-circle" style="color:#16a34a"></i></div>
+                    <p><strong>Opening &amp; Closing Tags:</strong> Zyada tar tags do jagah likhe jaate hain — ek opening tag <code style="font-family:monospace">&lt;p&gt;</code> aur ek closing tag <code style="font-family:monospace">&lt;/p&gt;</code> (forward slash ke saath).</p>
+                </div>
+            </section>
+
+            <!-- STEP 2 -->
+            <section class="section-block" id="step2">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 02</div>
+                        <h2>Basic HTML Structure</h2>
+                    </div>
+                </div>
+
+                <p>Har HTML page ki ek standard structure hoti hai. Yeh structure likhna zaroor hai — warna browser sahi se page nahi dikhayega.</p>
+
+                <div class="html-structure">
+                    <div class="html-line"><span class="hl-doctype">&lt;!DOCTYPE html&gt;</span> <span style="color:#94a3b8">← Browser ko batata hai "yeh HTML5 page hai"</span></div>
+                    <div class="html-line"><span class="hl-html">&lt;html lang="ur"&gt;</span> <span style="color:#94a3b8">← Poora page is tag mein hota hai</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="hl-head">&lt;head&gt;</span> <span style="color:#94a3b8">← Page ki info (user ko nahi dikhti)</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="indent"></span><span class="hl-title">&lt;title&gt;</span>Mera Website<span class="hl-title">&lt;/title&gt;</span> <span style="color:#94a3b8">← Browser tab mein naam</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="hl-head">&lt;/head&gt;</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="hl-body">&lt;body&gt;</span> <span style="color:#94a3b8">← Yahan sab kuch dikhta hai</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="indent"></span><span class="hl-html">&lt;h1&gt;</span>Mera Pehla Website<span class="hl-html">&lt;/h1&gt;</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="indent"></span><span class="hl-html">&lt;p&gt;</span>Hello Duniya!<span class="hl-html">&lt;/p&gt;</span></div>
+                    <div class="html-line"><span class="indent"></span><span class="hl-body">&lt;/body&gt;</span></div>
+                    <div class="html-line"><span class="hl-html">&lt;/html&gt;</span></div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-html5" style="color:#f97316"></i> Complete HTML Page</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Mera Pehla Website<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;h1&gt;</span>Assalam o Alaikum!<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Yeh mera pehla website hai.<span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+                </div>
+
+                <div class="tip-box warning">
+                    <div class="tip-icon"><i class="fas fa-exclamation-triangle" style="color:#d97706"></i></div>
+                    <p><strong>Practice Tip:</strong> Notepad (ya VS Code) kholein, yeh code paste karein, <strong>index.html</strong> naam se save karein, aur browser mein double-click karke kholein. Aapka pehla webpage taiyar!</p>
+                </div>
+            </section>
+
+            <!-- STEP 3 -->
+            <section class="section-block" id="step3">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 03</div>
+                        <h2>Common HTML Tags</h2>
+                    </div>
+                </div>
+
+                <p>Yeh woh tags hain jo aap har webpage par dekhenge. Inhe yaad karlein!</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-html5" style="color:#f97316"></i> Important HTML Tags</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">&lt;!-- Headings: h1 sabse bada, h6 sabse chhota --&gt;</span>
+<span class="tag">&lt;h1&gt;</span>Main Title<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span>Sub-Title<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;h3&gt;</span>Chhota Heading<span class="tag">&lt;/h3&gt;</span>
+
+<span class="com">&lt;!-- Paragraph --&gt;</span>
+<span class="tag">&lt;p&gt;</span>Normal text yahan aata hai.<span class="tag">&lt;/p&gt;</span>
+
+<span class="com">&lt;!-- Link (Hyperlink) --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"https://google.com"</span> <span class="attr">target</span>=<span class="val">"_blank"</span><span class="tag">&gt;</span>Google kholein<span class="tag">&lt;/a&gt;</span>
+
+<span class="com">&lt;!-- Image --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="val">"photo.jpg"</span> <span class="attr">alt</span>=<span class="val">"Meri Photo"</span> <span class="attr">width</span>=<span class="val">"300"</span><span class="tag">&gt;</span>
+
+<span class="com">&lt;!-- List --&gt;</span>
+<span class="tag">&lt;ul&gt;</span>
+    <span class="tag">&lt;li&gt;</span>HTML<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>CSS<span class="tag">&lt;/li&gt;</span>
+    <span class="tag">&lt;li&gt;</span>JavaScript<span class="tag">&lt;/li&gt;</span>
+<span class="tag">&lt;/ul&gt;</span>
+
+<span class="com">&lt;!-- Button --&gt;</span>
+<span class="tag">&lt;button&gt;</span>Click karein!<span class="tag">&lt;/button&gt;</span>
+
+<span class="com">&lt;!-- Divider line --&gt;</span>
+<span class="tag">&lt;hr&gt;</span></pre>
+                </div>
+
+                <!-- QUIZ -->
+                <div class="quiz-card">
+                    <h3><i class="fas fa-question-circle" style="color:var(--purple)"></i> &nbsp;Quick Quiz — Test Yourself!</h3>
+                    <p style="font-size:14px; color:var(--text-muted); margin-bottom:16px;">HTML mein image dikhane ke liye kaunsa tag use hota hai?</p>
+                    <div class="quiz-option" onclick="answer(this, false)">
+                        <span class="opt-letter">A</span> &lt;picture&gt;
+                    </div>
+                    <div class="quiz-option" onclick="answer(this, true)">
+                        <span class="opt-letter">B</span> &lt;img&gt;
+                    </div>
+                    <div class="quiz-option" onclick="answer(this, false)">
+                        <span class="opt-letter">C</span> &lt;photo&gt;
+                    </div>
+                    <div class="quiz-option" onclick="answer(this, false)">
+                        <span class="opt-letter">D</span> &lt;image&gt;
+                    </div>
+                    <div class="quiz-feedback" id="quiz1Feedback"></div>
+                </div>
+            </section>
+
+            <!-- STEP 4 -->
+            <section class="section-block" id="step4">
+                <div class="step-header">
+                    <div class="step-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">4</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 04</div>
+                        <h2>CSS kya hai?</h2>
+                    </div>
+                </div>
+
+                <p>CSS ka poora naam <strong>Cascading Style Sheets</strong> hai. Yeh aapke HTML ko khoobsurat banata hai — rango, fonts, sizes, aur layouts ke zariye.</p>
+
+                <p>HTML ne structure banaya — CSS ne use design diya. Bina CSS ke website bilkul plain aur boring lagti hai.</p>
+
+                <div class="props-grid">
+                    <div class="prop-card">
+                        <div class="prop-name">color</div>
+                        <p>Text ka rang set karta hai</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-name">background</div>
+                        <p>Background color ya image</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-name">font-size</div>
+                        <p>Text ka size control karta hai</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-name">padding</div>
+                        <p>Element ke andar space</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-name">margin</div>
+                        <p>Element ke bahar space</p>
+                    </div>
+                    <div class="prop-card">
+                        <div class="prop-name">border-radius</div>
+                        <p>Corners ko round banata hai</p>
+                    </div>
+                </div>
+
+                <h3>CSS kaise likha jaata hai?</h3>
+                <p>CSS ka syntax bahut simple hai: <strong>selector</strong> + <strong>property</strong> + <strong>value</strong>.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> CSS Syntax</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">/* Selector { property: value; } */</span>
+
+<span class="sel">h1</span> {
+    <span class="prop">color</span>: <span class="val">blue</span>;
+    <span class="prop">font-size</span>: <span class="val">32px</span>;
+    <span class="prop">text-align</span>: <span class="val">center</span>;
+}
+
+<span class="sel">p</span> {
+    <span class="prop">color</span>: <span class="val">#555555</span>;
+    <span class="prop">font-size</span>: <span class="val">16px</span>;
+    <span class="prop">line-height</span>: <span class="val">1.6</span>;
+}</pre>
+                </div>
+            </section>
+
+            <!-- STEP 5 -->
+            <section class="section-block" id="step5">
+                <div class="step-header">
+                    <div class="step-badge" style="background:linear-gradient(135deg,#7c3aed,#a855f7)">5</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 05</div>
+                        <h2>CSS Styling Apply Karna</h2>
+                    </div>
+                </div>
+
+                <p>CSS apply karne ke teen tarike hain. Hum <strong>external CSS</strong> recommend karte hain — yeh sabse clean aur professional tarika hai.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-html5" style="color:#f97316"></i> HTML + CSS Complete Example</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Mera Styled Page<span class="tag">&lt;/title&gt;</span>
+
+    <span class="com">&lt;!-- Andar CSS (style tag mein) --&gt;</span>
+    <span class="tag">&lt;style&gt;</span>
+        <span class="sel">body</span> {
+            <span class="prop">font-family</span>: <span class="val">Arial, sans-serif</span>;
+            <span class="prop">background-color</span>: <span class="val">#f0f4ff</span>;
+            <span class="prop">margin</span>: <span class="val">0</span>;
+            <span class="prop">padding</span>: <span class="val">40px</span>;
+        }
+
+        <span class="sel">h1</span> {
+            <span class="prop">color</span>: <span class="val">#1e3a8a</span>;
+            <span class="prop">font-size</span>: <span class="val">2rem</span>;
+        }
+
+        <span class="sel">p</span> {
+            <span class="prop">color</span>: <span class="val">#475569</span>;
+            <span class="prop">max-width</span>: <span class="val">600px</span>;
+        }
+
+        <span class="sel">.btn</span> {
+            <span class="prop">display</span>: <span class="val">inline-block</span>;
+            <span class="prop">background</span>: <span class="val">#2563eb</span>;
+            <span class="prop">color</span>: <span class="val">white</span>;
+            <span class="prop">padding</span>: <span class="val">12px 24px</span>;
+            <span class="prop">border-radius</span>: <span class="val">8px</span>;
+            <span class="prop">text-decoration</span>: <span class="val">none</span>;
+            <span class="prop">font-weight</span>: <span class="val">bold</span>;
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Mera Khoobsurat Website<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>Ab mera page rang-birang lag raha hai!<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span> <span class="attr">class</span>=<span class="val">"btn"</span><span class="tag">&gt;</span>More Explore Karein<span class="tag">&lt;/a&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+                </div>
+
+                <h3>Live Preview — Yeh aise dikhega:</h3>
+                <div class="preview-wrap">
+                    <div class="preview-bar">
+                        <div class="preview-dot"></div><div class="preview-dot"></div><div class="preview-dot"></div>
+                        &nbsp; Live Preview
+                    </div>
+                    <div class="preview-body">
+                        <h1>Mera Khoobsurat Website</h1>
+                        <p>Ab mera page rang-birang lag raha hai! CSS ne ise bilkul naya look de diya.</p>
+                        <a href="#" class="preview-btn">More Explore Karein</a>
+                    </div>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-icon"><i class="fas fa-magic" style="color:#16a34a"></i></div>
+                    <p><strong>Class aur ID:</strong> CSS mein <code style="font-family:monospace">.classname</code> class select karta hai aur <code style="font-family:monospace">#idname</code> ID. Class zyada useful hai kyunki ek class kai elements par lagayi ja sakti hai.</p>
+                </div>
+            </section>
+
+            <!-- STEP 6 -->
+            <section class="section-block" id="step6">
+                <div class="step-header">
+                    <div class="step-badge" style="background:linear-gradient(135deg,#16a34a,#0d9488)">6</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 06 — Final Project</div>
+                        <h2>Complete Portfolio Page Banayein</h2>
+                    </div>
+                </div>
+
+                <p>Ab hum sab kuch mila kar ek simple portfolio page banayenge. Yeh code copy karein, <strong>index.html</strong> mein save karein aur browser mein kholein!</p>
+
+                <div class="project-box">
+                    <h3>🎯 Aaj ka Project: Personal Portfolio Page</h3>
+                    <p>Is project mein aap seekhenge:</p>
+                    <div class="project-features">
+                        <span class="project-feat">✓ Header Section</span>
+                        <span class="project-feat">✓ About Me</span>
+                        <span class="project-feat">✓ Skills List</span>
+                        <span class="project-feat">✓ Contact Button</span>
+                        <span class="project-feat">✓ CSS Styling</span>
+                        <span class="project-feat">✓ Responsive Design</span>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fas fa-star" style="color:#fbbf24"></i> Complete Portfolio Page</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Mera Portfolio<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;style&gt;</span>
+        <span class="sel">* </span>{ <span class="prop">margin</span>: <span class="val">0</span>; <span class="prop">padding</span>: <span class="val">0</span>; <span class="prop">box-sizing</span>: <span class="val">border-box</span>; }
+
+        <span class="sel">body</span> {
+            <span class="prop">font-family</span>: <span class="val">Arial, sans-serif</span>;
+            <span class="prop">background</span>: <span class="val">#f8fafc</span>;
+            <span class="prop">color</span>: <span class="val">#334155</span>;
+        }
+
+        <span class="sel">header</span> {
+            <span class="prop">background</span>: <span class="val">linear-gradient(135deg, #1e3a8a, #7c3aed)</span>;
+            <span class="prop">color</span>: <span class="val">white</span>;
+            <span class="prop">text-align</span>: <span class="val">center</span>;
+            <span class="prop">padding</span>: <span class="val">60px 20px</span>;
+        }
+
+        <span class="sel">header h1</span> { <span class="prop">font-size</span>: <span class="val">2.5rem</span>; <span class="prop">margin-bottom</span>: <span class="val">10px</span>; }
+        <span class="sel">header p</span> { <span class="prop">font-size</span>: <span class="val">1.1rem</span>; <span class="prop">opacity</span>: <span class="val">0.85</span>; }
+
+        <span class="sel">.container</span> {
+            <span class="prop">max-width</span>: <span class="val">800px</span>;
+            <span class="prop">margin</span>: <span class="val">0 auto</span>;
+            <span class="prop">padding</span>: <span class="val">40px 20px</span>;
+        }
+
+        <span class="sel">.section</span> {
+            <span class="prop">background</span>: <span class="val">white</span>;
+            <span class="prop">border-radius</span>: <span class="val">12px</span>;
+            <span class="prop">padding</span>: <span class="val">30px</span>;
+            <span class="prop">margin-bottom</span>: <span class="val">24px</span>;
+            <span class="prop">box-shadow</span>: <span class="val">0 2px 12px rgba(0,0,0,.06)</span>;
+        }
+
+        <span class="sel">.section h2</span> {
+            <span class="prop">color</span>: <span class="val">#1e3a8a</span>;
+            <span class="prop">margin-bottom</span>: <span class="val">16px</span>;
+            <span class="prop">font-size</span>: <span class="val">1.4rem</span>;
+        }
+
+        <span class="sel">ul li</span> { <span class="prop">padding</span>: <span class="val">6px 0</span>; }
+
+        <span class="sel">.btn</span> {
+            <span class="prop">display</span>: <span class="val">inline-block</span>;
+            <span class="prop">background</span>: <span class="val">#7c3aed</span>;
+            <span class="prop">color</span>: <span class="val">white</span>;
+            <span class="prop">padding</span>: <span class="val">14px 32px</span>;
+            <span class="prop">border-radius</span>: <span class="val">8px</span>;
+            <span class="prop">text-decoration</span>: <span class="val">none</span>;
+            <span class="prop">font-weight</span>: <span class="val">bold</span>;
+            <span class="prop">font-size</span>: <span class="val">1rem</span>;
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;header&gt;</span>
+        <span class="tag">&lt;h1&gt;</span>Ali Khan<span class="tag">&lt;/h1&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Web Developer | Pakistan 🇵🇰<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/header&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"container"</span><span class="tag">&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"section"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>Mere Baare Mein<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Main ek beginner web developer hoon jo HTML, CSS
+            aur JavaScript seekh raha hoon. Mujhe websites
+            banana bahut pasand hai!<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"section"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>Meri Skills<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;ul&gt;</span>
+                <span class="tag">&lt;li&gt;</span>✅ HTML — Basic Structure<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>✅ CSS — Styling &amp; Layout<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>🔄 JavaScript — Seekh raha hoon<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ul&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"section"</span> <span class="attr">style</span>=<span class="val">"text-align:center"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>Mujhse Contact Karein<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"mailto:ali@example.com"</span> <span class="attr">class</span>=<span class="val">"btn"</span><span class="tag">&gt;</span>
+                Email Bhejein
+            <span class="tag">&lt;/a&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-icon"><i class="fas fa-trophy" style="color:#16a34a"></i></div>
+                    <p><strong>Mubarak ho! 🎉</strong> Aapne apna pehla complete HTML + CSS webpage bana liya. Is code mein "Ali Khan" ki jagah apna naam likhin aur email address badlein!</p>
+                </div>
+
+                <h3 style="margin-top:32px;">Agle Steps Kya Hain?</h3>
+                <p>Yeh tutorial complete karne ke baad in tutorials ki taraf badhein:</p>
+
+                <div class="next-grid">
+                    <a href="../tutorials.html" class="next-card">
+                        <div class="next-card-icon" style="background:linear-gradient(135deg,#f59e0b,#ea580c)">
+                            <i class="fas fa-layer-group"></i>
+                        </div>
+                        <div>
+                            <h4>CSS Flexbox & Grid</h4>
+                            <p>Modern layouts banana seekhein</p>
+                        </div>
+                    </a>
+                    <a href="../tutorials.html" class="next-card">
+                        <div class="next-card-icon" style="background:linear-gradient(135deg,#f59e0b,#16a34a)">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div>
+                            <h4>JavaScript Basics</h4>
+                            <p>Website ko interactive banayein</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <p>&copy; 2026 <a href="../index.html">Free Tools Hub</a>. All rights reserved. Made with ♥ for Pakistani developers &amp; students.</p>
+    </div>
+</footer>
+
+<script>
+    // Progress tracking
+    const sections = document.querySelectorAll('.section-block');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                tocLinks.forEach(link => {
+                    link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+                });
+                // Update progress
+                const ids = ['step1','step2','step3','step4','step5','step6'];
+                const idx = ids.indexOf(id);
+                if (idx >= 0) {
+                    const pct = Math.round(((idx + 1) / 6) * 100);
+                    progressBar.style.width = pct + '%';
+                    progressText.textContent = pct + '% Complete';
+                }
+            }
+        });
+    }, { threshold: 0.3 });
+
+    sections.forEach(s => observer.observe(s));
+
+    // Quiz
+    function answer(el, correct) {
+        const parent = el.parentElement;
+        parent.querySelectorAll('.quiz-option').forEach(o => {
+            o.style.pointerEvents = 'none';
+            o.classList.remove('correct', 'wrong');
+        });
+        el.classList.add(correct ? 'correct' : 'wrong');
+        // Show correct if wrong
+        if (!correct) {
+            parent.querySelectorAll('.quiz-option')[1].classList.add('correct');
+        }
+        const fb = document.getElementById('quiz1Feedback');
+        fb.style.display = 'block';
+        if (correct) {
+            fb.style.background = '#f0fdf4';
+            fb.style.color = '#166534';
+            fb.innerHTML = '✅ <strong>Bilkul sahi!</strong> &lt;img&gt; tag HTML mein image dikhane ke liye use hota hai. src attribute mein image ka path dete hain.';
+        } else {
+            fb.style.background = '#fef2f2';
+            fb.style.color = '#b91c1c';
+            fb.innerHTML = '❌ <strong>Galat.</strong> Sahi jawab <strong>&lt;img&gt;</strong> hai. Dobara try karein aur yaad rakhein!';
+        }
+    }
+
+    // Copy code
+    function copyCode(btn) {
+        const pre = btn.closest('.code-block').querySelector('pre');
+        const text = pre.innerText;
+        navigator.clipboard.writeText(text).then(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.color = '#22c55e';
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fas fa-copy"></i> Copy';
+                btn.style.color = '';
+            }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
