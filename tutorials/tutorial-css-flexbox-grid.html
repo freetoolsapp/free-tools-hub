@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Flexbox & Grid 2026 — Complete Tutorial | FreeToolsHub</title>
+    <meta name="description" content="CSS Flexbox aur Grid banana seekhein — modern layouts ke liye complete beginner tutorial. FreeToolsHub par free, step-by-step guide.">
+    <link rel="canonical" href="https://freetoolshub.online/tutorials/css-flexbox-grid-2026.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --purple: #7c3aed;
+            --purple-dark: #6d28d9;
+            --purple-light: #a78bfa;
+            --purple-50: #f5f3ff;
+            --blue: #2563eb;
+            --green: #16a34a;
+            --orange: #ea580c;
+            --teal: #0d9488;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --radius: 16px;
+            --shadow: 0 4px 24px rgba(0,0,0,.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,.12);
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--text); background: var(--bg); line-height: 1.7; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* HEADER */
+        .site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .site-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--purple), var(--purple-dark)); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+        .logo-name { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--text); }
+        .logo-tagline { font-size: 11px; color: var(--text-muted); display: block; }
+        .main-nav { display: flex; align-items: center; gap: 4px; }
+        .main-nav a { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: all .2s; }
+        .main-nav a:hover, .main-nav a.active { color: var(--purple); background: var(--purple-50); }
+        .nav-cta { background: var(--purple) !important; color: white !important; border-radius: 8px; }
+        .nav-cta:hover { background: var(--purple-dark) !important; }
+
+        /* BREADCRUMB */
+        .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--text-muted); }
+        .breadcrumb a { color: var(--purple); text-decoration: none; }
+        .breadcrumb span { margin: 0 6px; }
+
+        /* HERO */
+        .tutorial-hero { background: linear-gradient(135deg, #0d9488 0%, #7c3aed 60%, #4f46e5 100%); padding: 60px 0 50px; position: relative; overflow: hidden; }
+        .tutorial-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .tutorial-hero-inner { position: relative; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,.18); border: 1px solid rgba(255,255,255,.3); color: white; font-size: 12px; font-weight: 600; padding: 6px 14px; border-radius: 100px; letter-spacing: .5px; text-transform: uppercase; }
+        .tutorial-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: white; line-height: 1.2; max-width: 700px; }
+        .tutorial-hero h1 span { background: linear-gradient(90deg, #fde68a, #fbbf24); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .tutorial-hero p { color: rgba(255,255,255,.85); font-size: 1.1rem; max-width: 560px; }
+        .tutorial-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .meta-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,.8); font-size: 13px; }
+
+        /* LAYOUT */
+        .tutorial-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: 48px 0 80px; align-items: start; }
+
+        /* SIDEBAR */
+        .sidebar { position: sticky; top: 80px; }
+        .sidebar-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); margin-bottom: 16px; }
+        .sidebar-card h3 { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 4px; }
+        .toc-list li a { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 8px 10px; border-radius: 8px; transition: all .2s; }
+        .toc-list li a:hover, .toc-list li a.active { background: var(--purple-50); color: var(--purple); font-weight: 500; }
+        .step-num { width: 22px; height: 22px; background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; transition: all .2s; }
+        .toc-list li a:hover .step-num, .toc-list li a.active .step-num { background: var(--purple); color: white; }
+        .progress-bar-wrap { background: var(--border); border-radius: 100px; height: 8px; overflow: hidden; margin: 12px 0 8px; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--teal), var(--purple)); border-radius: 100px; width: 0%; transition: width .4s ease; }
+        .progress-text { font-size: 12px; color: var(--text-muted); }
+
+        /* MAIN CONTENT */
+        .tutorial-content { min-width: 0; }
+        .section-block { margin-bottom: 56px; padding-bottom: 56px; border-bottom: 1px solid var(--border); }
+        .section-block:last-child { border-bottom: none; }
+        .step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+        .step-badge { width: 48px; height: 48px; background: linear-gradient(135deg, var(--teal), var(--purple)); border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; flex-shrink: 0; }
+        .step-info .step-label { font-size: 12px; font-weight: 600; color: var(--teal); text-transform: uppercase; letter-spacing: 1px; }
+        .step-info h2 { font-family: var(--font-display); font-size: 1.6rem; font-weight: 800; color: var(--text); }
+        .tutorial-content p { font-size: 16px; color: #334155; margin-bottom: 16px; }
+        .tutorial-content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 28px 0 12px; }
+
+        /* CODE BLOCKS */
+        .code-block { background: #0f172a; border-radius: 12px; overflow: hidden; margin: 20px 0; box-shadow: var(--shadow-lg); }
+        .code-header { display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; border-bottom: 1px solid rgba(255,255,255,.08); }
+        .code-lang { font-size: 12px; font-weight: 600; color: #94a3b8; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .code-dots { display: flex; gap: 6px; }
+        .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .code-dot:nth-child(1) { background: #ef4444; }
+        .code-dot:nth-child(2) { background: #f59e0b; }
+        .code-dot:nth-child(3) { background: #22c55e; }
+        .copy-btn { background: rgba(255,255,255,.08); border: none; color: #94a3b8; font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 6px; }
+        .copy-btn:hover { background: rgba(255,255,255,.15); color: white; }
+        pre { padding: 24px 20px; overflow-x: auto; font-family: 'Courier New', monospace; font-size: 14px; line-height: 1.8; color: #e2e8f0; }
+        .kw { color: #c084fc; }
+        .tag { color: #38bdf8; }
+        .attr { color: #86efac; }
+        .val { color: #fde68a; }
+        .com { color: #64748b; font-style: italic; }
+        .prop { color: #f0abfc; }
+        .sel { color: #38bdf8; }
+        code { background: #f1f5f9; padding: 2px 7px; border-radius: 5px; font-family: 'Courier New', monospace; font-size: 13px; color: var(--purple); }
+
+        /* TIP BOXES */
+        .tip-box { display: flex; gap: 14px; background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 12px; padding: 18px 20px; margin: 20px 0; }
+        .tip-box.warning { background: #fffbeb; border-color: #fde68a; }
+        .tip-box.info { background: #eff6ff; border-color: #bfdbfe; }
+        .tip-box.teal { background: #f0fdfa; border-color: #99f6e4; }
+        .tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+        .tip-box p { margin: 0; font-size: 14px; color: #166534; }
+        .tip-box.warning p { color: #92400e; }
+        .tip-box.info p { color: #1e40af; }
+        .tip-box.teal p { color: #0f766e; }
+
+        /* ===== VISUAL DEMO BOXES ===== */
+        .demo-wrap { border: 2px solid var(--border); border-radius: 12px; overflow: hidden; margin: 20px 0; }
+        .demo-label { background: var(--bg-alt); border-bottom: 1px solid var(--border); padding: 10px 16px; font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 8px; letter-spacing: .5px; text-transform: uppercase; }
+        .demo-body { padding: 20px; background: white; }
+
+        /* Flexbox demos */
+        .flex-demo { display: flex; gap: 10px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 2px dashed var(--border); margin-bottom: 12px; transition: all .3s; }
+        .flex-demo.col { flex-direction: column; }
+        .flex-demo.wrap { flex-wrap: wrap; }
+        .flex-demo.center { justify-content: center; align-items: center; }
+        .flex-demo.space { justify-content: space-between; }
+        .flex-demo.end { justify-content: flex-end; }
+        .flex-item { background: linear-gradient(135deg, var(--teal), var(--purple)); color: white; font-weight: 700; font-size: 13px; padding: 12px 18px; border-radius: 8px; text-align: center; min-width: 60px; }
+        .flex-item.grow { flex: 1; }
+        .flex-item.big { padding: 20px 24px; }
+        .flex-item.sm { padding: 8px 14px; font-size: 11px; }
+        .demo-caption { font-size: 12px; color: var(--text-muted); margin-bottom: 8px; font-weight: 600; }
+
+        /* Grid demos */
+        .grid-demo { display: grid; gap: 10px; padding: 16px; background: #f8fafc; border-radius: 8px; border: 2px dashed var(--border); margin-bottom: 12px; }
+        .grid-demo.two { grid-template-columns: 1fr 1fr; }
+        .grid-demo.three { grid-template-columns: 1fr 1fr 1fr; }
+        .grid-demo.mixed { grid-template-columns: 2fr 1fr; }
+        .grid-demo.layout { grid-template-columns: 200px 1fr; grid-template-rows: auto 1fr auto; }
+        .grid-item { background: linear-gradient(135deg, #4f46e5, var(--purple)); color: white; font-weight: 700; font-size: 13px; padding: 16px; border-radius: 8px; text-align: center; }
+        .grid-item.header { background: linear-gradient(135deg, #1e3a8a, #2563eb); grid-column: 1 / -1; }
+        .grid-item.sidebar { background: linear-gradient(135deg, #065f46, var(--teal)); }
+        .grid-item.footer { background: linear-gradient(135deg, #7f1d1d, #dc2626); grid-column: 1 / -1; }
+
+        /* COMPARISON TABLE */
+        .compare-table { width: 100%; border-collapse: collapse; margin: 20px 0; border-radius: 12px; overflow: hidden; box-shadow: var(--shadow); }
+        .compare-table th { background: linear-gradient(135deg, var(--teal), var(--purple)); color: white; font-family: var(--font-display); font-size: 14px; font-weight: 700; padding: 14px 20px; text-align: left; }
+        .compare-table td { padding: 12px 20px; font-size: 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+        .compare-table tr:nth-child(even) td { background: var(--bg-alt); }
+        .compare-table .prop-name { font-family: 'Courier New', monospace; color: var(--purple); font-weight: 600; font-size: 13px; }
+        .compare-table .badge { display: inline-block; background: #dcfce7; color: #166534; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 100px; }
+        .compare-table .badge.flex { background: #dbeafe; color: #1d4ed8; }
+
+        /* QUIZ */
+        .quiz-card { background: linear-gradient(135deg, #f0fdfa, #f5f3ff); border: 1px solid #c4b5fd; border-radius: var(--radius); padding: 28px; margin: 24px 0; }
+        .quiz-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .quiz-card p.q { font-size: 15px; color: #334155; margin-bottom: 16px; }
+        .quiz-option { background: white; border: 2px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; cursor: pointer; font-size: 14px; transition: all .2s; display: flex; align-items: center; gap: 10px; }
+        .quiz-option:hover { border-color: var(--purple); background: var(--purple-50); }
+        .quiz-option.correct { border-color: var(--green); background: #f0fdf4; color: #166534; pointer-events: none; }
+        .quiz-option.wrong { border-color: #ef4444; background: #fef2f2; color: #b91c1c; pointer-events: none; }
+        .quiz-option.disabled { pointer-events: none; opacity: .6; }
+        .opt-letter { width: 26px; height: 26px; border-radius: 50%; background: var(--purple-50); color: var(--purple); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .quiz-feedback { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; display: none; }
+
+        /* INTERACTIVE FLEX PLAYGROUND */
+        .playground { background: var(--bg-alt); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin: 24px 0; }
+        .playground h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+        .controls { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+        .ctrl-group { display: flex; flex-direction: column; gap: 4px; }
+        .ctrl-group label { font-size: 12px; font-weight: 600; color: var(--text-muted); }
+        .ctrl-group select { border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 13px; font-family: var(--font-body); color: var(--text); background: white; cursor: pointer; }
+        .ctrl-group select:focus { outline: 2px solid var(--purple); outline-offset: 1px; }
+        .play-area { background: white; border: 2px dashed var(--border); border-radius: 10px; padding: 16px; min-height: 120px; display: flex; gap: 10px; transition: all .3s; }
+        .play-item { background: linear-gradient(135deg, var(--teal), var(--purple)); color: white; font-weight: 700; font-size: 13px; padding: 14px 20px; border-radius: 8px; white-space: nowrap; }
+
+        /* PROJECT BOX */
+        .project-box { background: linear-gradient(135deg, #1e1b4b, #065f46); color: white; border-radius: var(--radius); padding: 32px; margin: 20px 0; }
+        .project-box h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
+        .project-box p { color: rgba(255,255,255,.8); font-size: 14px; }
+        .project-features { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+        .project-feat { background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2); border-radius: 100px; padding: 4px 14px; font-size: 12px; color: rgba(255,255,255,.9); }
+
+        /* NEXT TUTORIALS */
+        .next-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+        .next-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-decoration: none; color: var(--text); transition: all .2s; display: flex; align-items: center; gap: 14px; }
+        .next-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--purple); }
+        .next-card-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0; }
+        .next-card h4 { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .next-card p { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+        /* FOOTER */
+        .site-footer { background: #0f172a; color: rgba(255,255,255,.6); padding: 40px 0; text-align: center; font-size: 14px; margin-top: 80px; }
+        .site-footer a { color: var(--purple-light); text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .tutorial-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .main-nav { display: none; }
+            .next-grid { grid-template-columns: 1fr; }
+            .grid-demo.three { grid-template-columns: 1fr 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="../index.html" class="site-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <div class="logo-text">
+                    <span class="logo-name">Free Tools Hub</span>
+                    <span class="logo-tagline">Tools · Blogs · Resources</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../tools.html"><i class="fas fa-tools"></i> Tools</a>
+                <a href="../blog.html"><i class="fas fa-pen-nib"></i> Blog</a>
+                <a href="../tutorials.html" class="active"><i class="fas fa-play-circle"></i> Tutorials</a>
+                <a href="../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Contact</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <nav class="breadcrumb">
+        <a href="../index.html">Home</a><span>›</span>
+        <a href="../tutorials.html">Tutorials</a><span>›</span>
+        <span>CSS Flexbox &amp; Grid 2026</span>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="tutorial-hero">
+    <div class="container">
+        <div class="tutorial-hero-inner">
+            <div class="hero-badge"><i class="fab fa-css3-alt"></i> CSS Layout Tutorial</div>
+            <h1>Master <span>CSS Flexbox &amp; Grid</span> in 2026</h1>
+            <p>Modern layouts banana seekhein — interactive demos aur real code ke saath. Ek baar seekha to phir manually positioning kabhi nahi karni padegi!</p>
+            <div class="tutorial-meta">
+                <div class="meta-item"><i class="fas fa-clock"></i> 30 minute read</div>
+                <div class="meta-item"><i class="fas fa-signal"></i> Beginner–Intermediate</div>
+                <div class="meta-item"><i class="fas fa-calendar"></i> February 2026</div>
+                <div class="meta-item"><i class="fas fa-list-ol"></i> 7 Steps</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- LAYOUT -->
+<div class="container">
+    <div class="tutorial-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <ul class="toc-list">
+                    <li><a href="#step1" class="active"><span class="step-num">1</span> Layout kya hai?</a></li>
+                    <li><a href="#step2"><span class="step-num">2</span> Flexbox Basics</a></li>
+                    <li><a href="#step3"><span class="step-num">3</span> Flex Properties</a></li>
+                    <li><a href="#step4"><span class="step-num">4</span> Interactive Playground</a></li>
+                    <li><a href="#step5"><span class="step-num">5</span> CSS Grid Basics</a></li>
+                    <li><a href="#step6"><span class="step-num">6</span> Grid vs Flexbox</a></li>
+                    <li><a href="#step7"><span class="step-num">7</span> Final Project</a></li>
+                </ul>
+            </div>
+            <div class="sidebar-card">
+                <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <p class="progress-text" id="progressText">0% Complete</p>
+            </div>
+            <div class="sidebar-card" style="background:linear-gradient(135deg,#065f46,#0d9488);border:none;">
+                <h3 style="color:rgba(255,255,255,.7)"><i class="fas fa-graduation-cap"></i> Series</h3>
+                <a href="tutorial-html-css-basics.html" style="display:block;background:rgba(255,255,255,.12);border-radius:8px;padding:10px;color:white;text-decoration:none;font-size:13px;margin-bottom:8px;">
+                    <i class="fas fa-check-circle"></i> Part 1: HTML &amp; CSS Basics
+                </a>
+                <a href="#" style="display:block;background:rgba(255,255,255,.25);border-radius:8px;padding:10px;color:white;text-decoration:none;font-size:13px;margin-bottom:8px;border:1px solid rgba(255,255,255,.4);">
+                    <i class="fas fa-play-circle"></i> Part 2: Flexbox &amp; Grid ← Aap yahan hain
+                </a>
+                <a href="#" style="display:block;background:rgba(255,255,255,.12);border-radius:8px;padding:10px;color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;">
+                    <i class="fas fa-lock"></i> Part 3: JavaScript — Coming Soon
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="tutorial-content">
+
+            <!-- STEP 1 -->
+            <section class="section-block" id="step1">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 01</div>
+                        <h2>CSS Layout kya hoti hai?</h2>
+                    </div>
+                </div>
+
+                <p>Pehle CSS mein layout banana bahut mushkil tha — log <code>float</code> aur <code>position</code> use karte the jo confusing hota tha. Lekin ab hamare paas do amazing tools hain:</p>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:20px 0;">
+                    <div style="background:linear-gradient(135deg,#0d9488,#06b6d4);border-radius:12px;padding:24px;color:white;">
+                        <div style="font-size:2rem;margin-bottom:8px;">↔️</div>
+                        <h3 style="color:white;margin:0 0 8px;font-family:var(--font-display);">Flexbox</h3>
+                        <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0;">Ek direction mein layout — row ya column. Navbar, cards, buttons ke liye perfect.</p>
+                    </div>
+                    <div style="background:linear-gradient(135deg,#4f46e5,#7c3aed);border-radius:12px;padding:24px;color:white;">
+                        <div style="font-size:2rem;margin-bottom:8px;">⊞</div>
+                        <h3 style="color:white;margin:0 0 8px;font-family:var(--font-display);">CSS Grid</h3>
+                        <p style="color:rgba(255,255,255,.85);font-size:14px;margin:0;">Row aur column dono mein layout. Puri page structure, dashboard, gallery ke liye best.</p>
+                    </div>
+                </div>
+
+                <div class="tip-box teal">
+                    <div class="tip-icon"><i class="fas fa-lightbulb" style="color:#0d9488"></i></div>
+                    <p><strong>Simple rule:</strong> Ek line mein cheezein rakhni hain? → <strong>Flexbox</strong>. Puri page ka layout banana hai (rows + columns)? → <strong>Grid</strong>.</p>
+                </div>
+            </section>
+
+            <!-- STEP 2 -->
+            <section class="section-block" id="step2">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 02</div>
+                        <h2>Flexbox Basics</h2>
+                    </div>
+                </div>
+
+                <p>Flexbox sirf ek property se start hota hai: <code>display: flex</code>. Yeh parent element par lagao aur us ke andar ke sab elements automatic ek line mein aa jaate hain!</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> Flexbox Start</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">/* Parent ko flex banao */</span>
+<span class="sel">.container</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;   <span class="com">/* Yeh hai magic line! */</span>
+    <span class="prop">gap</span>: <span class="val">16px</span>;       <span class="com">/* Items ke beech space */</span>
+}
+
+<span class="com">/* Children automatic flex items ban jaate hain */</span>
+<span class="sel">.container .item</span> {
+    <span class="prop">background</span>: <span class="val">teal</span>;
+    <span class="prop">padding</span>: <span class="val">20px</span>;
+    <span class="prop">border-radius</span>: <span class="val">8px</span>;
+    <span class="prop">color</span>: <span class="val">white</span>;
+}</pre>
+                </div>
+
+                <div class="demo-wrap">
+                    <div class="demo-label"><i class="fas fa-eye"></i> Live Demo — Bina Flex vs Flex ke saath</div>
+                    <div class="demo-body">
+                        <p class="demo-caption">❌ Bina display:flex — sab neeche neeche:</p>
+                        <div style="background:#f8fafc;border-radius:8px;padding:12px;border:2px dashed #e2e8f0;margin-bottom:16px;">
+                            <div style="background:linear-gradient(135deg,#0d9488,#7c3aed);color:white;font-weight:700;padding:12px 18px;border-radius:8px;margin-bottom:8px;">Box 1</div>
+                            <div style="background:linear-gradient(135deg,#0d9488,#7c3aed);color:white;font-weight:700;padding:12px 18px;border-radius:8px;margin-bottom:8px;">Box 2</div>
+                            <div style="background:linear-gradient(135deg,#0d9488,#7c3aed);color:white;font-weight:700;padding:12px 18px;border-radius:8px;">Box 3</div>
+                        </div>
+                        <p class="demo-caption">✅ display:flex ke saath — sab ek line mein:</p>
+                        <div class="flex-demo">
+                            <div class="flex-item">Box 1</div>
+                            <div class="flex-item">Box 2</div>
+                            <div class="flex-item">Box 3</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 3 -->
+            <section class="section-block" id="step3">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 03</div>
+                        <h2>Flex Properties — Sab Control Karein</h2>
+                    </div>
+                </div>
+
+                <p>Flexbox mein kai properties hain jo aapko exact control deti hain. Inhe ek ek dekhtey hain live demos ke saath:</p>
+
+                <h3>1. flex-direction — Kaunsi taraf?</h3>
+                <div class="demo-wrap">
+                    <div class="demo-label"><i class="fas fa-arrows-alt-h"></i> flex-direction Demo</div>
+                    <div class="demo-body">
+                        <p class="demo-caption"><code>flex-direction: row</code> (default) — left se right:</p>
+                        <div class="flex-demo" style="margin-bottom:16px;">
+                            <div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div>
+                        </div>
+                        <p class="demo-caption"><code>flex-direction: column</code> — upar se neeche:</p>
+                        <div class="flex-demo col" style="width:120px;">
+                            <div class="flex-item">A</div><div class="flex-item">B</div><div class="flex-item">C</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>2. justify-content — Horizontal alignment</h3>
+                <div class="demo-wrap">
+                    <div class="demo-label"><i class="fas fa-align-center"></i> justify-content Demo</div>
+                    <div class="demo-body">
+                        <p class="demo-caption"><code>justify-content: flex-start</code> (default):</p>
+                        <div class="flex-demo" style="margin-bottom:12px;">
+                            <div class="flex-item sm">1</div><div class="flex-item sm">2</div><div class="flex-item sm">3</div>
+                        </div>
+                        <p class="demo-caption"><code>justify-content: center</code>:</p>
+                        <div class="flex-demo center" style="margin-bottom:12px;">
+                            <div class="flex-item sm">1</div><div class="flex-item sm">2</div><div class="flex-item sm">3</div>
+                        </div>
+                        <p class="demo-caption"><code>justify-content: space-between</code>:</p>
+                        <div class="flex-demo space" style="margin-bottom:12px;">
+                            <div class="flex-item sm">1</div><div class="flex-item sm">2</div><div class="flex-item sm">3</div>
+                        </div>
+                        <p class="demo-caption"><code>justify-content: flex-end</code>:</p>
+                        <div class="flex-demo end">
+                            <div class="flex-item sm">1</div><div class="flex-item sm">2</div><div class="flex-item sm">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>3. flex — Item kitna space le?</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> flex property</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="sel">.container</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">gap</span>: <span class="val">12px</span>;
+}
+
+<span class="com">/* flex: 1 — barabar space lo */</span>
+<span class="sel">.item</span> { <span class="prop">flex</span>: <span class="val">1</span>; }
+
+<span class="com">/* flex: 2 — double space lo */</span>
+<span class="sel">.item.big</span> { <span class="prop">flex</span>: <span class="val">2</span>; }
+
+<span class="com">/* Navbar example */</span>
+<span class="sel">.navbar</span> {
+    <span class="prop">display</span>: <span class="val">flex</span>;
+    <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+    <span class="prop">align-items</span>: <span class="val">center</span>;
+    <span class="prop">padding</span>: <span class="val">16px 24px</span>;
+    <span class="prop">background</span>: <span class="val">#1e3a8a</span>;
+}</pre>
+                </div>
+
+                <div class="demo-wrap">
+                    <div class="demo-label"><i class="fas fa-eye"></i> flex: 1 vs flex: 2</div>
+                    <div class="demo-body">
+                        <div class="flex-demo">
+                            <div class="flex-item grow" style="flex:1">flex: 1</div>
+                            <div class="flex-item grow" style="flex:2;background:linear-gradient(135deg,#dc2626,#ea580c)">flex: 2 (double!)</div>
+                            <div class="flex-item grow" style="flex:1">flex: 1</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- QUIZ 1 -->
+                <div class="quiz-card">
+                    <h3><i class="fas fa-question-circle" style="color:var(--purple)"></i> &nbsp;Quick Quiz!</h3>
+                    <p class="q">Flexbox items ko horizontally center karne ke liye kaunsi property use hogi?</p>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',false)"><span class="opt-letter">A</span> align-items: center</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',true)"><span class="opt-letter">B</span> justify-content: center</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',false)"><span class="opt-letter">C</span> text-align: center</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',false)"><span class="opt-letter">D</span> margin: auto</div>
+                    <div class="quiz-feedback" id="q1-fb"></div>
+                </div>
+            </section>
+
+            <!-- STEP 4 -->
+            <section class="section-block" id="step4">
+                <div class="step-header">
+                    <div class="step-badge">4</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 04</div>
+                        <h2>Interactive Flexbox Playground</h2>
+                    </div>
+                </div>
+
+                <p>Yeh ek live playground hai — properties badlein aur dekho kya hota hai! Yeh seekhne ka sabse acha tarika hai.</p>
+
+                <div class="playground">
+                    <h3><i class="fas fa-flask" style="color:var(--teal)"></i> Flexbox Playground</h3>
+                    <div class="controls">
+                        <div class="ctrl-group">
+                            <label>flex-direction</label>
+                            <select id="ctrl-direction" onchange="updatePlayground()">
+                                <option value="row">row</option>
+                                <option value="column">column</option>
+                                <option value="row-reverse">row-reverse</option>
+                                <option value="column-reverse">column-reverse</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-group">
+                            <label>justify-content</label>
+                            <select id="ctrl-justify" onchange="updatePlayground()">
+                                <option value="flex-start">flex-start</option>
+                                <option value="center">center</option>
+                                <option value="flex-end">flex-end</option>
+                                <option value="space-between">space-between</option>
+                                <option value="space-around">space-around</option>
+                                <option value="space-evenly">space-evenly</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-group">
+                            <label>align-items</label>
+                            <select id="ctrl-align" onchange="updatePlayground()">
+                                <option value="stretch">stretch</option>
+                                <option value="center">center</option>
+                                <option value="flex-start">flex-start</option>
+                                <option value="flex-end">flex-end</option>
+                            </select>
+                        </div>
+                        <div class="ctrl-group">
+                            <label>gap</label>
+                            <select id="ctrl-gap" onchange="updatePlayground()">
+                                <option value="0px">0px</option>
+                                <option value="8px" selected>8px</option>
+                                <option value="16px">16px</option>
+                                <option value="24px">24px</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="play-area" id="playground" style="min-height:160px;">
+                        <div class="play-item">Box 1</div>
+                        <div class="play-item">Box 2</div>
+                        <div class="play-item">Box 3</div>
+                        <div class="play-item">Box 4</div>
+                    </div>
+                    <div style="margin-top:14px;background:#0f172a;border-radius:8px;padding:14px 16px;font-family:'Courier New',monospace;font-size:13px;color:#e2e8f0;" id="playgroundCode">
+                        .container { display: flex; flex-direction: row; justify-content: flex-start; align-items: stretch; gap: 8px; }
+                    </div>
+                </div>
+            </section>
+
+            <!-- STEP 5 -->
+            <section class="section-block" id="step5">
+                <div class="step-header">
+                    <div class="step-badge">5</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 05</div>
+                        <h2>CSS Grid Basics</h2>
+                    </div>
+                </div>
+
+                <p>Grid aapko rows <strong>aur</strong> columns dono mein control deta hai — bilkul ek Excel spreadsheet ki tarah. Complex page layouts ke liye yeh perfect hai.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> CSS Grid Start</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="sel">.container</span> {
+    <span class="prop">display</span>: <span class="val">grid</span>;
+
+    <span class="com">/* 3 equal columns banao */</span>
+    <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr 1fr</span>;
+
+    <span class="com">/* Ya shorthand: */</span>
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+
+    <span class="prop">gap</span>: <span class="val">20px</span>;   <span class="com">/* Rows aur columns ke beech space */</span>
+}
+
+<span class="com">/* Mixed columns — sidebar + main */</span>
+<span class="sel">.layout</span> {
+    <span class="prop">display</span>: <span class="val">grid</span>;
+    <span class="prop">grid-template-columns</span>: <span class="val">250px 1fr</span>;   <span class="com">/* Sidebar fixed, main flexible */</span>
+    <span class="prop">gap</span>: <span class="val">24px</span>;
+}</pre>
+                </div>
+
+                <h3>Grid demos — Live dekho</h3>
+                <div class="demo-wrap">
+                    <div class="demo-label"><i class="fas fa-th"></i> Grid Layout Demos</div>
+                    <div class="demo-body">
+                        <p class="demo-caption"><code>grid-template-columns: 1fr 1fr</code> — 2 equal columns:</p>
+                        <div class="grid-demo two" style="margin-bottom:16px;">
+                            <div class="grid-item">Col 1</div>
+                            <div class="grid-item">Col 2</div>
+                            <div class="grid-item">Col 3</div>
+                            <div class="grid-item">Col 4</div>
+                        </div>
+
+                        <p class="demo-caption"><code>grid-template-columns: 1fr 1fr 1fr</code> — 3 equal columns:</p>
+                        <div class="grid-demo three" style="margin-bottom:16px;">
+                            <div class="grid-item">1</div>
+                            <div class="grid-item">2</div>
+                            <div class="grid-item">3</div>
+                            <div class="grid-item">4</div>
+                            <div class="grid-item">5</div>
+                            <div class="grid-item">6</div>
+                        </div>
+
+                        <p class="demo-caption"><code>grid-template-columns: 2fr 1fr</code> — mixed size:</p>
+                        <div class="grid-demo mixed" style="margin-bottom:16px;">
+                            <div class="grid-item">Main Content (2fr)</div>
+                            <div class="grid-item" style="background:linear-gradient(135deg,#065f46,#0d9488)">Sidebar (1fr)</div>
+                        </div>
+
+                        <p class="demo-caption">Full page layout — header, sidebar, content, footer:</p>
+                        <div class="grid-demo layout">
+                            <div class="grid-item header">🔝 Header (full width)</div>
+                            <div class="grid-item sidebar">📂 Sidebar</div>
+                            <div class="grid-item" style="min-height:80px;">📄 Main Content</div>
+                            <div class="grid-item footer">🔻 Footer (full width)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>grid-column: span — Multiple columns cover karo</h3>
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-css3-alt" style="color:#38bdf8"></i> Spanning Columns</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="sel">.container</span> {
+    <span class="prop">display</span>: <span class="val">grid</span>;
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+    <span class="prop">gap</span>: <span class="val">16px</span>;
+}
+
+<span class="com">/* Header — sab columns cover karo */</span>
+<span class="sel">.header</span> {
+    <span class="prop">grid-column</span>: <span class="val">1 / -1</span>;   <span class="com">/* Start to end */</span>
+}
+
+<span class="com">/* Ya span use karo */</span>
+<span class="sel">.wide-item</span> {
+    <span class="prop">grid-column</span>: <span class="val">span 2</span>;  <span class="com">/* 2 columns cover karo */</span>
+}</pre>
+                </div>
+
+                <!-- QUIZ 2 -->
+                <div class="quiz-card">
+                    <h3><i class="fas fa-question-circle" style="color:var(--purple)"></i> &nbsp;Quick Quiz!</h3>
+                    <p class="q">CSS Grid mein 4 equal columns banana ho to kaunsi property likhein ge?</p>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',false)"><span class="opt-letter">A</span> grid-columns: 4</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',false)"><span class="opt-letter">B</span> columns: repeat(4, equal)</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',true)"><span class="opt-letter">C</span> grid-template-columns: repeat(4, 1fr)</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',false)"><span class="opt-letter">D</span> display: grid-4</div>
+                    <div class="quiz-feedback" id="q2-fb"></div>
+                </div>
+            </section>
+
+            <!-- STEP 6 -->
+            <section class="section-block" id="step6">
+                <div class="step-header">
+                    <div class="step-badge">6</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 06</div>
+                        <h2>Grid vs Flexbox — Kab kya use karein?</h2>
+                    </div>
+                </div>
+
+                <p>Yeh sawal aksar puchha jaata hai. Simple jawab yeh hai:</p>
+
+                <table class="compare-table">
+                    <tr>
+                        <th>Situation</th>
+                        <th>Use Karein</th>
+                        <th>Example</th>
+                    </tr>
+                    <tr>
+                        <td>Navigation bar</td>
+                        <td><span class="badge flex">Flexbox</span></td>
+                        <td>Logo left, links right mein</td>
+                    </tr>
+                    <tr>
+                        <td>Button group</td>
+                        <td><span class="badge flex">Flexbox</span></td>
+                        <td>Buttons ek line mein</td>
+                    </tr>
+                    <tr>
+                        <td>Card row</td>
+                        <td><span class="badge flex">Flexbox</span></td>
+                        <td>3 cards side by side</td>
+                    </tr>
+                    <tr>
+                        <td>Vertically center karna</td>
+                        <td><span class="badge flex">Flexbox</span></td>
+                        <td>align-items: center</td>
+                    </tr>
+                    <tr>
+                        <td>Full page layout</td>
+                        <td><span class="badge">Grid</span></td>
+                        <td>Header, sidebar, content, footer</td>
+                    </tr>
+                    <tr>
+                        <td>Photo gallery</td>
+                        <td><span class="badge">Grid</span></td>
+                        <td>4-column image grid</td>
+                    </tr>
+                    <tr>
+                        <td>Dashboard</td>
+                        <td><span class="badge">Grid</span></td>
+                        <td>Widgets, charts, stats</td>
+                    </tr>
+                    <tr>
+                        <td>Complex layout</td>
+                        <td><span class="badge">Grid</span></td>
+                        <td>Rows + columns dono</td>
+                    </tr>
+                </table>
+
+                <div class="tip-box teal">
+                    <div class="tip-icon"><i class="fas fa-star" style="color:#0d9488"></i></div>
+                    <p><strong>Pro Tip:</strong> Flexbox aur Grid saath bhi use hote hain! Grid se overall page structure banao, phir us ke andar Flexbox se chote components align karo. Yahi real websites mein hota hai!</p>
+                </div>
+            </section>
+
+            <!-- STEP 7 -->
+            <section class="section-block" id="step7">
+                <div class="step-header">
+                    <div class="step-badge" style="background:linear-gradient(135deg,#16a34a,#0d9488)">7</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 07 — Final Project</div>
+                        <h2>Complete Responsive Page Banayein</h2>
+                    </div>
+                </div>
+
+                <p>Ab hum ek complete page banayenge jisme <strong>Grid</strong> se overall layout aur <strong>Flexbox</strong> se navbar aur cards banayenge. Yeh ek real website jaisi hogi!</p>
+
+                <div class="project-box">
+                    <h3>🎯 Aaj ka Project: Services Page</h3>
+                    <p>Is project mein aap banayenge:</p>
+                    <div class="project-features">
+                        <span class="project-feat">✓ Navbar (Flexbox)</span>
+                        <span class="project-feat">✓ Hero Section</span>
+                        <span class="project-feat">✓ 3-Column Cards (Grid)</span>
+                        <span class="project-feat">✓ Sidebar Layout (Grid)</span>
+                        <span class="project-feat">✓ Footer (Flexbox)</span>
+                        <span class="project-feat">✓ Responsive Design</span>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fas fa-star" style="color:#fbbf24"></i> Complete Services Page — Copy & Paste Ready!</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"en"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="val">"viewport"</span> <span class="attr">content</span>=<span class="val">"width=device-width, initial-scale=1"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Meri Services<span class="tag">&lt;/title&gt;</span>
+    <span class="tag">&lt;style&gt;</span>
+        <span class="sel">* </span>{ <span class="prop">margin</span>:<span class="val">0</span>; <span class="prop">padding</span>:<span class="val">0</span>; <span class="prop">box-sizing</span>:<span class="val">border-box</span>; }
+        <span class="sel">body</span> { <span class="prop">font-family</span>:<span class="val">Arial,sans-serif</span>; <span class="prop">background</span>:<span class="val">#f8fafc</span>; <span class="prop">color</span>:<span class="val">#334155</span>; }
+
+        <span class="com">/* ===== NAVBAR — Flexbox ===== */</span>
+        <span class="sel">nav</span> {
+            <span class="prop">display</span>: <span class="val">flex</span>;
+            <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+            <span class="prop">align-items</span>: <span class="val">center</span>;
+            <span class="prop">background</span>: <span class="val">#1e3a8a</span>;
+            <span class="prop">padding</span>: <span class="val">16px 32px</span>;
+            <span class="prop">color</span>: <span class="val">white</span>;
+        }
+        <span class="sel">.nav-links</span> {
+            <span class="prop">display</span>: <span class="val">flex</span>;
+            <span class="prop">gap</span>: <span class="val">24px</span>;
+            <span class="prop">list-style</span>: <span class="val">none</span>;
+        }
+        <span class="sel">.nav-links a</span> { <span class="prop">color</span>: <span class="val">rgba(255,255,255,.85)</span>; <span class="prop">text-decoration</span>: <span class="val">none</span>; }
+
+        <span class="com">/* ===== HERO ===== */</span>
+        <span class="sel">.hero</span> {
+            <span class="prop">background</span>: <span class="val">linear-gradient(135deg, #1e3a8a, #7c3aed)</span>;
+            <span class="prop">color</span>: <span class="val">white</span>;
+            <span class="prop">text-align</span>: <span class="val">center</span>;
+            <span class="prop">padding</span>: <span class="val">64px 32px</span>;
+        }
+        <span class="sel">.hero h1</span> { <span class="prop">font-size</span>: <span class="val">2.5rem</span>; <span class="prop">margin-bottom</span>: <span class="val">16px</span>; }
+
+        <span class="com">/* ===== CARDS — CSS Grid ===== */</span>
+        <span class="sel">.cards-section</span> { <span class="prop">padding</span>: <span class="val">48px 32px</span>; }
+        <span class="sel">.cards-section h2</span> { <span class="prop">text-align</span>: <span class="val">center</span>; <span class="prop">margin-bottom</span>: <span class="val">32px</span>; <span class="prop">font-size</span>: <span class="val">1.8rem</span>; <span class="prop">color</span>: <span class="val">#1e3a8a</span>; }
+        <span class="sel">.cards-grid</span> {
+            <span class="prop">display</span>: <span class="val">grid</span>;
+            <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+            <span class="prop">gap</span>: <span class="val">24px</span>;
+        }
+        <span class="sel">.card</span> {
+            <span class="prop">background</span>: <span class="val">white</span>;
+            <span class="prop">border-radius</span>: <span class="val">12px</span>;
+            <span class="prop">padding</span>: <span class="val">28px</span>;
+            <span class="prop">box-shadow</span>: <span class="val">0 2px 12px rgba(0,0,0,.06)</span>;
+            <span class="prop">text-align</span>: <span class="val">center</span>;
+        }
+        <span class="sel">.card-icon</span> {
+            <span class="prop">font-size</span>: <span class="val">2.5rem</span>;
+            <span class="prop">margin-bottom</span>: <span class="val">16px</span>;
+            <span class="prop">display</span>: <span class="val">block</span>;
+        }
+        <span class="sel">.card h3</span> { <span class="prop">color</span>: <span class="val">#1e3a8a</span>; <span class="prop">margin-bottom</span>: <span class="val">10px</span>; }
+
+        <span class="com">/* ===== SIDEBAR LAYOUT — CSS Grid ===== */</span>
+        <span class="sel">.content-area</span> {
+            <span class="prop">display</span>: <span class="val">grid</span>;
+            <span class="prop">grid-template-columns</span>: <span class="val">1fr 300px</span>;
+            <span class="prop">gap</span>: <span class="val">32px</span>;
+            <span class="prop">padding</span>: <span class="val">0 32px 48px</span>;
+        }
+        <span class="sel">.main-content</span> { <span class="prop">background</span>: <span class="val">white</span>; <span class="prop">border-radius</span>: <span class="val">12px</span>; <span class="prop">padding</span>: <span class="val">28px</span>; }
+        <span class="sel">.sidebar-box</span> {
+            <span class="prop">background</span>: <span class="val">linear-gradient(135deg, #0d9488, #7c3aed)</span>;
+            <span class="prop">border-radius</span>: <span class="val">12px</span>;
+            <span class="prop">padding</span>: <span class="val">28px</span>;
+            <span class="prop">color</span>: <span class="val">white</span>;
+        }
+
+        <span class="com">/* ===== FOOTER — Flexbox ===== */</span>
+        <span class="sel">footer</span> {
+            <span class="prop">display</span>: <span class="val">flex</span>;
+            <span class="prop">justify-content</span>: <span class="val">space-between</span>;
+            <span class="prop">align-items</span>: <span class="val">center</span>;
+            <span class="prop">background</span>: <span class="val">#0f172a</span>;
+            <span class="prop">color</span>: <span class="val">rgba(255,255,255,.7)</span>;
+            <span class="prop">padding</span>: <span class="val">24px 32px</span>;
+            <span class="prop">font-size</span>: <span class="val">14px</span>;
+        }
+
+        <span class="com">/* ===== RESPONSIVE ===== */</span>
+        <span class="sel">@media (max-width: 768px)</span> {
+            <span class="sel">.cards-grid</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; }
+            <span class="sel">.content-area</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr</span>; }
+            <span class="sel">.nav-links</span> { <span class="prop">display</span>: <span class="val">none</span>; }
+            <span class="sel">footer</span> { <span class="prop">flex-direction</span>: <span class="val">column</span>; <span class="prop">gap</span>: <span class="val">12px</span>; }
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+<span class="com">&lt;!-- NAVBAR — Flexbox --&gt;</span>
+<span class="tag">&lt;nav&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"font-weight:bold;font-size:1.2rem"</span><span class="tag">&gt;</span>⚡ MyBrand<span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;ul</span> <span class="attr">class</span>=<span class="val">"nav-links"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;li&gt;&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span>Home<span class="tag">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="tag">&lt;li&gt;&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span>Services<span class="tag">&lt;/a&gt;&lt;/li&gt;</span>
+        <span class="tag">&lt;li&gt;&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span><span class="tag">&gt;</span>Contact<span class="tag">&lt;/a&gt;&lt;/li&gt;</span>
+    <span class="tag">&lt;/ul&gt;</span>
+<span class="tag">&lt;/nav&gt;</span>
+
+<span class="com">&lt;!-- HERO --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"hero"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h1&gt;</span>Hamari Services<span class="tag">&lt;/h1&gt;</span>
+    <span class="tag">&lt;p&gt;</span>CSS Flexbox aur Grid ke saath banaya gaya layout<span class="tag">&lt;/p&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="com">&lt;!-- 3 CARDS — CSS Grid --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"cards-section"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;h2&gt;</span>Hamaray Kaam<span class="tag">&lt;/h2&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"cards-grid"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="val">"card-icon"</span><span class="tag">&gt;</span>🌐<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;h3&gt;</span>Web Design<span class="tag">&lt;/h3&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Khoobsurat websites banate hain<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="val">"card-icon"</span><span class="tag">&gt;</span>📱<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;h3&gt;</span>Mobile Apps<span class="tag">&lt;/h3&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Android aur iOS apps develop karte hain<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="val">"card-icon"</span><span class="tag">&gt;</span>🔍<span class="tag">&lt;/span&gt;</span>
+            <span class="tag">&lt;h3&gt;</span>SEO Services<span class="tag">&lt;/h3&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Google ranking improve karte hain<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="com">&lt;!-- SIDEBAR LAYOUT — CSS Grid --&gt;</span>
+<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"content-area"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"main-content"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h2&gt;</span>Hamare Baare Mein<span class="tag">&lt;/h2&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Hum Pakistan ke best web developers hain. Grid
+        aur Flexbox dono use karke hamaray layouts
+        bilkul responsive hote hain.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"sidebar-box"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h3&gt;</span>Quick Links<span class="tag">&lt;/h3&gt;</span>
+        <span class="tag">&lt;p&gt;</span>CSS Flexbox Guide<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;p&gt;</span>CSS Grid Tutorial<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/div&gt;</span>
+
+<span class="com">&lt;!-- FOOTER — Flexbox --&gt;</span>
+<span class="tag">&lt;footer&gt;</span>
+    <span class="tag">&lt;span&gt;</span>© 2026 MyBrand. All rights reserved.<span class="tag">&lt;/span&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">style</span>=<span class="val">"display:flex;gap:20px"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span> <span class="attr">style</span>=<span class="val">"color:inherit"</span><span class="tag">&gt;</span>Privacy<span class="tag">&lt;/a&gt;</span>
+        <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="val">"#"</span> <span class="attr">style</span>=<span class="val">"color:inherit"</span><span class="tag">&gt;</span>Terms<span class="tag">&lt;/a&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+<span class="tag">&lt;/footer&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></pre>
+                </div>
+
+                <div class="tip-box">
+                    <div class="tip-icon"><i class="fas fa-trophy" style="color:#16a34a"></i></div>
+                    <p><strong>Mubarak ho! 🎉</strong> Aapne Flexbox aur Grid dono seekh liye! Yeh code <strong>services.html</strong> mein save karein aur browser mein kholein — aik poori real website dikhegi!</p>
+                </div>
+
+                <h3 style="margin-top:32px;">Agle Tutorials</h3>
+                <p>Web development series ka agle part dekhein:</p>
+                <div class="next-grid">
+                    <a href="tutorial-html-css-basics.html" class="next-card">
+                        <div class="next-card-icon" style="background:linear-gradient(135deg,#2563eb,#4f46e5)">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div>
+                            <h4>← Part 1: HTML &amp; CSS Basics</h4>
+                            <p>Dobara review karein</p>
+                        </div>
+                    </a>
+                    <a href="../tutorials.html" class="next-card">
+                        <div class="next-card-icon" style="background:linear-gradient(135deg,#f59e0b,#ea580c)">
+                            <i class="fab fa-js"></i>
+                        </div>
+                        <div>
+                            <h4>Part 3: JavaScript →</h4>
+                            <p>Website ko interactive banayein</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 <a href="../index.html">Free Tools Hub</a>. All rights reserved. Made with ♥ for Pakistani developers &amp; students.</p>
+    </div>
+</footer>
+
+<script>
+    // Progress tracking
+    const sections = document.querySelectorAll('.section-block');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const total = 7;
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                tocLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === '#' + id));
+                const ids = ['step1','step2','step3','step4','step5','step6','step7'];
+                const idx = ids.indexOf(id);
+                if (idx >= 0) {
+                    const pct = Math.round(((idx + 1) / total) * 100);
+                    progressBar.style.width = pct + '%';
+                    progressText.textContent = pct + '% Complete';
+                }
+            }
+        });
+    }, { threshold: 0.25 });
+    sections.forEach(s => observer.observe(s));
+
+    // Flexbox playground
+    function updatePlayground() {
+        const direction = document.getElementById('ctrl-direction').value;
+        const justify = document.getElementById('ctrl-justify').value;
+        const align = document.getElementById('ctrl-align').value;
+        const gap = document.getElementById('ctrl-gap').value;
+        const pg = document.getElementById('playground');
+        pg.style.flexDirection = direction;
+        pg.style.justifyContent = justify;
+        pg.style.alignItems = align;
+        pg.style.gap = gap;
+        pg.style.display = 'flex';
+        if (direction === 'column' || direction === 'column-reverse') {
+            pg.style.minHeight = '200px';
+        } else {
+            pg.style.minHeight = '120px';
+        }
+        document.getElementById('playgroundCode').textContent =
+            `.container { display: flex; flex-direction: ${direction}; justify-content: ${justify}; align-items: ${align}; gap: ${gap}; }`;
+    }
+
+    // Quiz
+    function doQuiz(el, quizId, correct) {
+        const parent = el.parentElement;
+        parent.querySelectorAll('.quiz-option').forEach(o => {
+            o.classList.add('disabled');
+            o.style.pointerEvents = 'none';
+        });
+        el.classList.add(correct ? 'correct' : 'wrong');
+        if (!correct) {
+            parent.querySelectorAll('.quiz-option').forEach(o => {
+                if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) {
+                    o.classList.add('correct');
+                }
+            });
+        }
+        const fb = document.getElementById(quizId + '-fb');
+        fb.style.display = 'block';
+        if (correct) {
+            fb.style.background = '#f0fdf4';
+            fb.style.color = '#166534';
+            fb.innerHTML = correct
+                ? (quizId === 'q1'
+                    ? '✅ <strong>Sahi!</strong> justify-content horizontal axis ko control karta hai. align-items vertical (cross axis) ko.'
+                    : '✅ <strong>Bilkul sahi!</strong> repeat(4, 1fr) matlab 4 equal columns — 1fr har column ko available space ka equal hissa deta hai.')
+                : '';
+        } else {
+            fb.style.background = '#fef2f2';
+            fb.style.color = '#b91c1c';
+            fb.innerHTML = quizId === 'q1'
+                ? '❌ Galat. Sahi jawab <strong>justify-content: center</strong> hai. Yeh items ko main axis (horizontal) par center karta hai.'
+                : '❌ Galat. Sahi jawab <strong>grid-template-columns: repeat(4, 1fr)</strong> hai. repeat() shorthand hai jisse baar baar 1fr likhna nahi padta.';
+        }
+    }
+
+    // Copy code
+    function copyCode(btn) {
+        const pre = btn.closest('.code-block').querySelector('pre');
+        navigator.clipboard.writeText(pre.innerText).then(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.color = '#22c55e';
+            setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; btn.style.color = ''; }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>

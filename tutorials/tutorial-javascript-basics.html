@@ -1,0 +1,1195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Basics 2026 — Complete Beginner Tutorial | FreeToolsHub</title>
+    <meta name="description" content="JavaScript seekhein bilkul scratch se — variables, functions, events aur DOM. Complete beginner tutorial with live code examples. FreeToolsHub par free.">
+    <link rel="canonical" href="https://freetoolshub.online/tutorials/javascript-basics-2026.html">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        :root {
+            --yellow: #f59e0b;
+            --yellow-dark: #d97706;
+            --yellow-light: #fde68a;
+            --yellow-50: #fffbeb;
+            --purple: #7c3aed;
+            --purple-50: #f5f3ff;
+            --teal: #0d9488;
+            --green: #16a34a;
+            --orange: #ea580c;
+            --blue: #2563eb;
+            --text: #0f172a;
+            --text-muted: #64748b;
+            --border: #e2e8f0;
+            --bg: #ffffff;
+            --bg-alt: #f8fafc;
+            --font-display: 'Syne', sans-serif;
+            --font-body: 'DM Sans', sans-serif;
+            --font-code: 'Courier New', Courier, monospace;
+            --radius: 16px;
+            --shadow: 0 4px 24px rgba(0,0,0,.08);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,.14);
+        }
+
+        html { scroll-behavior: smooth; }
+        body { font-family: var(--font-body); color: var(--text); background: var(--bg); line-height: 1.7; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* HEADER */
+        .site-header { position: sticky; top: 0; z-index: 100; background: rgba(255,255,255,.95); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); padding: 14px 0; }
+        .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; }
+        .site-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+        .logo-icon { width: 38px; height: 38px; background: linear-gradient(135deg, var(--purple), #6d28d9); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 16px; }
+        .logo-name { font-family: var(--font-display); font-weight: 800; font-size: 1.1rem; color: var(--text); }
+        .logo-tagline { font-size: 11px; color: var(--text-muted); display: block; }
+        .main-nav { display: flex; align-items: center; gap: 4px; }
+        .main-nav a { font-size: 14px; font-weight: 500; color: var(--text-muted); text-decoration: none; padding: 6px 14px; border-radius: 8px; transition: all .2s; }
+        .main-nav a:hover, .main-nav a.active { color: var(--purple); background: var(--purple-50); }
+        .nav-cta { background: var(--purple) !important; color: white !important; }
+        .nav-cta:hover { background: #6d28d9 !important; }
+
+        /* BREADCRUMB */
+        .breadcrumb { padding: 16px 0; font-size: 13px; color: var(--text-muted); }
+        .breadcrumb a { color: var(--purple); text-decoration: none; }
+        .breadcrumb span { margin: 0 6px; }
+
+        /* HERO */
+        .tutorial-hero { background: linear-gradient(135deg, #1c1917 0%, #292524 30%, #f59e0b 100%); padding: 64px 0 52px; position: relative; overflow: hidden; }
+        .tutorial-hero::before { content: ''; position: absolute; inset: 0; background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40zm0-40h2l-2 2V0zm0 4l4-4h2l-6 6V4zm0 4l8-8h2L40 10V8zm0 4L52 0h2L40 14v-2zm0 4L56 0h2L40 18v-2zm0 4L60 0h2L40 22v-2zm0 4L64 0h2L40 26v-2zm0 4L68 0h2L40 30v-2zm0 4L72 0h2L40 34v-2zm0 4L76 0h2L40 38v-2zm0 4L80 0v2L42 40h-2zm4 0L80 4v2L46 40h-2zm4 0L80 8v2L50 40h-2zm4 0L80 12v2L54 40h-2zm4 0L80 16v2L58 40h-2zm4 0L80 20v2L62 40h-2zm4 0L80 24v2L66 40h-2zm4 0L80 28v2L70 40h-2zm4 0L80 32v2L74 40h-2zm4 0L80 36v2L78 40h-2zm4 0L80 40v-2h-2z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .tutorial-hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 60px; background: linear-gradient(to top, var(--bg), transparent); }
+        .tutorial-hero-inner { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 20px; }
+        .hero-badge { display: inline-flex; align-items: center; gap: 8px; background: rgba(245,158,11,.25); border: 1px solid rgba(245,158,11,.5); color: var(--yellow-light); font-size: 12px; font-weight: 700; padding: 6px 14px; border-radius: 100px; letter-spacing: .5px; text-transform: uppercase; }
+        .tutorial-hero h1 { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: 800; color: white; line-height: 1.2; max-width: 720px; }
+        .tutorial-hero h1 span { color: var(--yellow); }
+        .tutorial-hero p { color: rgba(255,255,255,.8); font-size: 1.1rem; max-width: 560px; }
+        .tutorial-meta { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; justify-content: center; }
+        .meta-item { display: flex; align-items: center; gap: 6px; color: rgba(255,255,255,.75); font-size: 13px; }
+
+        /* LAYOUT */
+        .tutorial-layout { display: grid; grid-template-columns: 280px 1fr; gap: 40px; padding: 48px 0 80px; align-items: start; }
+
+        /* SIDEBAR */
+        .sidebar { position: sticky; top: 80px; display: flex; flex-direction: column; gap: 16px; }
+        .sidebar-card { background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow); }
+        .sidebar-card h3 { font-family: var(--font-display); font-size: 13px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+        .toc-list { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+        .toc-list li a { display: flex; align-items: center; gap: 10px; font-size: 14px; color: var(--text-muted); text-decoration: none; padding: 8px 10px; border-radius: 8px; transition: all .2s; }
+        .toc-list li a:hover, .toc-list li a.active { background: var(--yellow-50); color: var(--yellow-dark); font-weight: 600; }
+        .step-num { width: 22px; height: 22px; background: var(--border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; flex-shrink: 0; transition: all .2s; }
+        .toc-list li a:hover .step-num, .toc-list li a.active .step-num { background: var(--yellow); color: #1c1917; }
+        .progress-bar-wrap { background: var(--border); border-radius: 100px; height: 8px; overflow: hidden; margin: 12px 0 8px; }
+        .progress-bar { height: 100%; background: linear-gradient(90deg, var(--yellow), var(--orange)); border-radius: 100px; width: 0%; transition: width .5s ease; }
+        .progress-text { font-size: 12px; color: var(--text-muted); }
+
+        /* MAIN CONTENT */
+        .tutorial-content { min-width: 0; }
+        .section-block { margin-bottom: 60px; padding-bottom: 60px; border-bottom: 1px solid var(--border); }
+        .section-block:last-child { border-bottom: none; margin-bottom: 0; }
+
+        .step-header { display: flex; align-items: center; gap: 16px; margin-bottom: 28px; }
+        .step-badge { width: 52px; height: 52px; background: linear-gradient(135deg, #1c1917, var(--yellow-dark)); border-radius: 14px; display: flex; align-items: center; justify-content: center; color: white; font-family: var(--font-display); font-weight: 800; font-size: 1.2rem; flex-shrink: 0; box-shadow: 0 4px 16px rgba(245,158,11,.3); }
+        .step-info .step-label { font-size: 12px; font-weight: 700; color: var(--yellow-dark); text-transform: uppercase; letter-spacing: 1px; }
+        .step-info h2 { font-family: var(--font-display); font-size: 1.65rem; font-weight: 800; color: var(--text); line-height: 1.3; }
+
+        .tutorial-content p { font-size: 16px; color: #334155; margin-bottom: 16px; line-height: 1.75; }
+        .tutorial-content h3 { font-family: var(--font-display); font-size: 1.1rem; font-weight: 700; color: var(--text); margin: 32px 0 12px; display: flex; align-items: center; gap: 8px; }
+        code { background: #f1f5f9; padding: 2px 7px; border-radius: 5px; font-family: var(--font-code); font-size: 13px; color: var(--purple); border: 1px solid var(--border); }
+
+        /* CODE BLOCKS */
+        .code-block { background: #1c1917; border-radius: 12px; overflow: hidden; margin: 20px 0; box-shadow: var(--shadow-lg); border: 1px solid #292524; }
+        .code-header { display: flex; align-items: center; justify-content: space-between; padding: 11px 20px; border-bottom: 1px solid #292524; background: #141210; }
+        .code-lang { font-size: 12px; font-weight: 700; color: #78716c; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
+        .code-dots { display: flex; gap: 6px; }
+        .code-dot { width: 10px; height: 10px; border-radius: 50%; }
+        .code-dot:nth-child(1) { background: #ef4444; }
+        .code-dot:nth-child(2) { background: #f59e0b; }
+        .code-dot:nth-child(3) { background: #22c55e; }
+        .copy-btn { background: rgba(255,255,255,.07); border: none; color: #78716c; font-size: 12px; padding: 4px 10px; border-radius: 6px; cursor: pointer; transition: all .2s; display: flex; align-items: center; gap: 6px; font-family: var(--font-body); }
+        .copy-btn:hover { background: rgba(255,255,255,.14); color: #e7e5e4; }
+        pre { padding: 24px 20px; overflow-x: auto; font-family: var(--font-code); font-size: 14px; line-height: 1.9; color: #e7e5e4; }
+        .kw { color: #c084fc; font-weight: 600; }
+        .fn { color: #fbbf24; }
+        .str { color: #86efac; }
+        .num { color: #fb923c; }
+        .com { color: #57534e; font-style: italic; }
+        .op { color: #67e8f9; }
+        .var { color: #e7e5e4; }
+        .bool { color: #f97316; }
+
+        /* TIP BOXES */
+        .tip-box { display: flex; gap: 14px; border-radius: 12px; padding: 18px 20px; margin: 20px 0; }
+        .tip-box.green { background: #f0fdf4; border: 1px solid #bbf7d0; }
+        .tip-box.yellow { background: #fffbeb; border: 1px solid #fde68a; }
+        .tip-box.blue { background: #eff6ff; border: 1px solid #bfdbfe; }
+        .tip-box.red { background: #fef2f2; border: 1px solid #fecaca; }
+        .tip-icon { font-size: 20px; flex-shrink: 0; margin-top: 2px; }
+        .tip-box.green p { margin: 0; font-size: 14px; color: #166534; }
+        .tip-box.yellow p { margin: 0; font-size: 14px; color: #92400e; }
+        .tip-box.blue p { margin: 0; font-size: 14px; color: #1e40af; }
+        .tip-box.red p { margin: 0; font-size: 14px; color: #b91c1c; }
+
+        /* CONCEPT CARDS */
+        .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+        .concept-card { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+        .concept-card .c-icon { font-size: 1.8rem; margin-bottom: 10px; }
+        .concept-card h4 { font-family: var(--font-display); font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--text); }
+        .concept-card p { font-size: 13px; color: var(--text-muted); margin: 0; }
+        .concept-card code { font-size: 12px; }
+
+        /* LIVE CONSOLE */
+        .console-wrap { border-radius: 12px; overflow: hidden; margin: 20px 0; box-shadow: var(--shadow-lg); }
+        .console-bar { background: #1c1917; border-bottom: 1px solid #292524; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+        .console-title { font-size: 12px; font-weight: 600; color: #78716c; display: flex; align-items: center; gap: 8px; }
+        .console-title span { width: 8px; height: 8px; border-radius: 50%; background: #22c55e; display: inline-block; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.4} }
+        .console-editor { background: #1c1917; padding: 0; }
+        .console-editor textarea { width: 100%; background: transparent; border: none; color: #e7e5e4; font-family: var(--font-code); font-size: 14px; line-height: 1.8; padding: 20px; resize: vertical; min-height: 120px; outline: none; }
+        .console-run { background: linear-gradient(135deg, var(--yellow), var(--orange)); border: none; color: white; font-weight: 700; font-size: 13px; padding: 8px 20px; border-radius: 8px; cursor: pointer; font-family: var(--font-body); transition: all .2s; display: flex; align-items: center; gap: 8px; }
+        .console-run:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(245,158,11,.4); }
+        .console-footer { background: #141210; padding: 10px 16px; display: flex; align-items: center; gap: 12px; }
+        .console-output { background: #0c0a09; padding: 14px 20px; font-family: var(--font-code); font-size: 13px; color: #86efac; min-height: 48px; border-top: 1px solid #292524; white-space: pre-wrap; }
+        .output-label { font-size: 11px; color: #78716c; font-weight: 600; text-transform: uppercase; letter-spacing: .5px; }
+
+        /* DATA TYPE BADGES */
+        .type-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin: 20px 0; }
+        .type-card { border-radius: 10px; padding: 16px; text-align: center; }
+        .type-card .type-name { font-family: var(--font-code); font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+        .type-card .type-example { font-family: var(--font-code); font-size: 12px; opacity: .8; }
+        .type-card p { font-size: 12px; margin-top: 6px; opacity: .85; }
+
+        /* COMPARISON */
+        .var-compare { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin: 20px 0; }
+        .var-card { border-radius: 10px; padding: 16px; }
+        .var-card .vc-name { font-family: var(--font-code); font-size: 1rem; font-weight: 800; margin-bottom: 8px; }
+        .var-card ul { list-style: none; font-size: 13px; }
+        .var-card ul li { padding: 3px 0; display: flex; align-items: flex-start; gap: 6px; }
+
+        /* INTERACTIVE DEMOS */
+        .demo-box { background: var(--bg-alt); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin: 20px 0; }
+        .demo-box h4 { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; color: var(--text); }
+        .demo-input { width: 100%; border: 2px solid var(--border); border-radius: 10px; padding: 12px 16px; font-size: 15px; font-family: var(--font-body); color: var(--text); outline: none; transition: border-color .2s; margin-bottom: 10px; }
+        .demo-input:focus { border-color: var(--yellow); }
+        .demo-btn { background: linear-gradient(135deg, var(--yellow), var(--orange)); border: none; color: white; font-weight: 700; font-size: 14px; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-family: var(--font-body); transition: all .2s; }
+        .demo-btn:hover { transform: translateY(-1px); box-shadow: 0 4px 16px rgba(245,158,11,.35); }
+        .demo-btn.secondary { background: var(--purple); }
+        .demo-result { margin-top: 14px; padding: 14px 18px; border-radius: 10px; font-size: 15px; font-weight: 600; display: none; }
+        .demo-counter-display { font-family: var(--font-display); font-size: 4rem; font-weight: 800; color: var(--yellow-dark); text-align: center; padding: 20px; }
+        .demo-btn-row { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; }
+        .todo-list { list-style: none; margin-top: 12px; }
+        .todo-list li { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: white; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; font-size: 14px; animation: slideIn .3s ease; }
+        @keyframes slideIn { from { opacity:0; transform: translateX(-10px); } to { opacity:1; transform: translateX(0); } }
+        .todo-del { background: #fef2f2; border: none; color: #dc2626; width: 26px; height: 26px; border-radius: 6px; cursor: pointer; font-size: 12px; transition: all .2s; }
+        .todo-del:hover { background: #dc2626; color: white; }
+        .color-grid { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
+        .color-btn { width: 44px; height: 44px; border: none; border-radius: 10px; cursor: pointer; transition: transform .2s; font-size: 0; }
+        .color-btn:hover { transform: scale(1.15); }
+        #colorBox { width: 100%; height: 80px; border-radius: 10px; background: #f1f5f9; transition: background .4s; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: white; margin-top: 12px; text-shadow: 0 1px 3px rgba(0,0,0,.3); }
+
+        /* QUIZ */
+        .quiz-card { background: linear-gradient(135deg, var(--yellow-50), #fff7ed); border: 1px solid #fde68a; border-radius: var(--radius); padding: 28px; margin: 28px 0; }
+        .quiz-card h3 { font-family: var(--font-display); font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+        .quiz-card .q-text { font-size: 15px; color: #334155; margin-bottom: 16px; }
+        .quiz-option { background: white; border: 2px solid var(--border); border-radius: 10px; padding: 12px 16px; margin-bottom: 8px; cursor: pointer; font-size: 14px; transition: all .2s; display: flex; align-items: center; gap: 10px; }
+        .quiz-option:hover { border-color: var(--yellow); background: var(--yellow-50); }
+        .quiz-option.correct { border-color: var(--green); background: #f0fdf4; color: #166534; pointer-events: none; }
+        .quiz-option.wrong { border-color: #ef4444; background: #fef2f2; color: #b91c1c; pointer-events: none; }
+        .quiz-option.disabled { pointer-events: none; opacity: .55; }
+        .opt-letter { width: 26px; height: 26px; border-radius: 50%; background: var(--yellow-50); color: var(--yellow-dark); font-weight: 700; font-size: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+        .quiz-feedback { margin-top: 14px; padding: 12px 16px; border-radius: 8px; font-size: 14px; font-weight: 500; display: none; }
+
+        /* PROJECT BOX */
+        .project-box { background: linear-gradient(135deg, #1c1917, #292524); color: white; border-radius: var(--radius); padding: 32px; margin: 24px 0; border: 1px solid #44403c; }
+        .project-box h3 { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; margin-bottom: 10px; }
+        .project-box p { color: rgba(255,255,255,.75); font-size: 14px; }
+        .project-features { display: flex; flex-wrap: wrap; gap: 10px; margin: 16px 0; }
+        .project-feat { background: rgba(245,158,11,.18); border: 1px solid rgba(245,158,11,.4); border-radius: 100px; padding: 4px 14px; font-size: 12px; color: var(--yellow-light); }
+
+        /* NEXT */
+        .next-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 24px; }
+        .next-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-decoration: none; color: var(--text); transition: all .2s; display: flex; align-items: center; gap: 14px; }
+        .next-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-2px); border-color: var(--yellow); }
+        .next-card-icon { width: 44px; height: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 18px; flex-shrink: 0; }
+        .next-card h4 { font-family: var(--font-display); font-size: 14px; font-weight: 700; margin-bottom: 4px; }
+        .next-card p { font-size: 12px; color: var(--text-muted); margin: 0; }
+
+        /* FOOTER */
+        .site-footer { background: #0f172a; color: rgba(255,255,255,.55); padding: 40px 0; text-align: center; font-size: 14px; margin-top: 80px; }
+        .site-footer a { color: #a78bfa; text-decoration: none; }
+
+        @media (max-width: 768px) {
+            .tutorial-layout { grid-template-columns: 1fr; }
+            .sidebar { position: static; }
+            .main-nav { display: none; }
+            .concept-grid, .var-compare, .type-grid, .next-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+    <div class="container">
+        <div class="header-inner">
+            <a href="../index.html" class="site-logo">
+                <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                <div class="logo-text">
+                    <span class="logo-name">Free Tools Hub</span>
+                    <span class="logo-tagline">Tools · Blogs · Resources</span>
+                </div>
+            </a>
+            <nav class="main-nav">
+                <a href="../index.html"><i class="fas fa-home"></i> Home</a>
+                <a href="../tools.html"><i class="fas fa-tools"></i> Tools</a>
+                <a href="../blog.html"><i class="fas fa-pen-nib"></i> Blog</a>
+                <a href="../tutorials.html" class="active"><i class="fas fa-play-circle"></i> Tutorials</a>
+                <a href="../contact.html" class="nav-cta"><i class="fas fa-paper-plane"></i> Contact</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<!-- BREADCRUMB -->
+<div class="container">
+    <nav class="breadcrumb">
+        <a href="../index.html">Home</a><span>›</span>
+        <a href="../tutorials.html">Tutorials</a><span>›</span>
+        <span>JavaScript Basics 2026</span>
+    </nav>
+</div>
+
+<!-- HERO -->
+<section class="tutorial-hero">
+    <div class="container">
+        <div class="tutorial-hero-inner">
+            <div class="hero-badge"><i class="fab fa-js-square"></i> Part 3 — Web Dev Series</div>
+            <h1>JavaScript Seekhein — <span>Websites ko Zinda Karein!</span></h1>
+            <p>Variables se lekar DOM manipulation tak — ek complete beginner guide jo aapki website ko interactive aur dynamic banayegi.</p>
+            <div class="tutorial-meta">
+                <div class="meta-item"><i class="fas fa-clock"></i> 35 minute read</div>
+                <div class="meta-item"><i class="fas fa-signal"></i> Beginner Level</div>
+                <div class="meta-item"><i class="fas fa-calendar"></i> February 2026</div>
+                <div class="meta-item"><i class="fas fa-list-ol"></i> 8 Steps</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- MAIN LAYOUT -->
+<div class="container">
+    <div class="tutorial-layout">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                <ul class="toc-list">
+                    <li><a href="#step1" class="active"><span class="step-num">1</span> JS kya hai?</a></li>
+                    <li><a href="#step2"><span class="step-num">2</span> Variables</a></li>
+                    <li><a href="#step3"><span class="step-num">3</span> Data Types</a></li>
+                    <li><a href="#step4"><span class="step-num">4</span> Functions</a></li>
+                    <li><a href="#step5"><span class="step-num">5</span> Conditions (if/else)</a></li>
+                    <li><a href="#step6"><span class="step-num">6</span> Loops</a></li>
+                    <li><a href="#step7"><span class="step-num">7</span> DOM Manipulation</a></li>
+                    <li><a href="#step8"><span class="step-num">8</span> Final Project</a></li>
+                </ul>
+            </div>
+
+            <div class="sidebar-card">
+                <h3><i class="fas fa-chart-line"></i> Your Progress</h3>
+                <div class="progress-bar-wrap">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+                <p class="progress-text" id="progressText">0% Complete</p>
+            </div>
+
+            <div class="sidebar-card" style="background:linear-gradient(135deg,#1c1917,#292524);border-color:#44403c;">
+                <h3 style="color:#78716c;"><i class="fas fa-graduation-cap"></i> Tutorial Series</h3>
+                <a href="tutorial-html-css-basics.html" style="display:block;background:rgba(255,255,255,.07);border-radius:8px;padding:10px;color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;margin-bottom:8px;">
+                    <i class="fas fa-check-circle" style="color:#22c55e"></i> Part 1: HTML &amp; CSS
+                </a>
+                <a href="tutorial-css-flexbox-grid.html" style="display:block;background:rgba(255,255,255,.07);border-radius:8px;padding:10px;color:rgba(255,255,255,.6);text-decoration:none;font-size:13px;margin-bottom:8px;">
+                    <i class="fas fa-check-circle" style="color:#22c55e"></i> Part 2: Flexbox &amp; Grid
+                </a>
+                <a href="#" style="display:block;background:rgba(245,158,11,.15);border-radius:8px;padding:10px;color:var(--yellow-light);text-decoration:none;font-size:13px;border:1px solid rgba(245,158,11,.35);">
+                    <i class="fas fa-play-circle" style="color:var(--yellow)"></i> Part 3: JavaScript ← Yahan hain
+                </a>
+            </div>
+
+            <div class="sidebar-card" style="background:linear-gradient(135deg,#1e3a8a,#4f46e5);border:none;">
+                <h3 style="color:rgba(255,255,255,.7)"><i class="fas fa-tools"></i> Related Tools</h3>
+                <a href="../tools/webdev/json-formatter.html" style="display:block;background:rgba(255,255,255,.12);border-radius:8px;padding:10px;color:white;text-decoration:none;font-size:13px;margin-bottom:8px;">
+                    <i class="fas fa-code"></i> JSON Formatter
+                </a>
+                <a href="../tools/seo/seo-analyzer.html" style="display:block;background:rgba(255,255,255,.12);border-radius:8px;padding:10px;color:white;text-decoration:none;font-size:13px;">
+                    <i class="fas fa-search"></i> SEO Analyzer
+                </a>
+            </div>
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="tutorial-content">
+
+            <!-- STEP 1 -->
+            <section class="section-block" id="step1">
+                <div class="step-header">
+                    <div class="step-badge">1</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 01</div>
+                        <h2>JavaScript kya hai?</h2>
+                    </div>
+                </div>
+
+                <p>JavaScript (JS) web ki <strong>programming language</strong> hai. Agar HTML ghar ki deewarein hain aur CSS rang aur design hai, to <strong>JavaScript bijli aur paani hai</strong> — yeh sab kuch chalata hai!</p>
+
+                <div class="concept-grid">
+                    <div class="concept-card" style="border-left: 4px solid #ef4444;">
+                        <div class="c-icon">🧱</div>
+                        <h4>HTML</h4>
+                        <p>Structure — kya dikhana hai. <code>&lt;h1&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;button&gt;</code></p>
+                    </div>
+                    <div class="concept-card" style="border-left: 4px solid #3b82f6;">
+                        <div class="c-icon">🎨</div>
+                        <h4>CSS</h4>
+                        <p>Design — kaisa dikhana hai. Rang, size, layout.</p>
+                    </div>
+                    <div class="concept-card" style="border-left: 4px solid var(--yellow);">
+                        <div class="c-icon">⚡</div>
+                        <h4>JavaScript</h4>
+                        <p>Behaviour — kya karna hai. Click, animation, data fetch.</p>
+                    </div>
+                    <div class="concept-card" style="background: linear-gradient(135deg,#fffbeb,#fff7ed); border: 1px solid #fde68a;">
+                        <div class="c-icon">🌐</div>
+                        <h4>Real Examples</h4>
+                        <p>YouTube play button, Instagram likes, Google search suggestions — sab JS!</p>
+                    </div>
+                </div>
+
+                <div class="tip-box blue">
+                    <div class="tip-icon"><i class="fas fa-info-circle" style="color:#2563eb"></i></div>
+                    <p><strong>JS kaise add karein:</strong> HTML file mein <code>&lt;script&gt;</code> tag use karein — ya alag <code>.js</code> file banayein. Hum aaj dono dekhenge!</p>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> JS ko HTML mein add karna</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">&lt;!-- Method 1: HTML file ke andar --&gt;</span>
+<span class="op">&lt;script&gt;</span>
+    <span class="fn">alert</span>(<span class="str">"Hello Pakistan! JS chal rahi hai!"</span>);
+<span class="op">&lt;/script&gt;</span>
+
+<span class="com">&lt;!-- Method 2: Alag file (recommended) --&gt;</span>
+<span class="op">&lt;script</span> src=<span class="str">"script.js"</span><span class="op">&gt;&lt;/script&gt;</span>
+
+<span class="com">&lt;!-- IMPORTANT: script tag body ke bilkul end mein rakhein! --&gt;</span></pre>
+                </div>
+            </section>
+
+            <!-- STEP 2 -->
+            <section class="section-block" id="step2">
+                <div class="step-header">
+                    <div class="step-badge">2</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 02</div>
+                        <h2>Variables — Data Store Karna</h2>
+                    </div>
+                </div>
+
+                <p>Variable ek dabba hai jisme aap koi bhi data rakh sakte hain — naam, number, ya kuch bhi. JS mein teen tarike hain variable banane ke:</p>
+
+                <div class="var-compare">
+                    <div class="var-card" style="background:#fef2f2;border:1px solid #fecaca;">
+                        <div class="vc-name" style="color:#dc2626;">var</div>
+                        <ul style="color:#7f1d1d;">
+                            <li>❌ Purana tarika</li>
+                            <li>❌ Bahut loopholes</li>
+                            <li>❌ Avoid karein</li>
+                        </ul>
+                    </div>
+                    <div class="var-card" style="background:#f0fdf4;border:1px solid #bbf7d0;">
+                        <div class="vc-name" style="color:#16a34a;">let</div>
+                        <ul style="color:#14532d;">
+                            <li>✅ Modern tarika</li>
+                            <li>✅ Value badal sakte hain</li>
+                            <li>✅ Mostly use karein</li>
+                        </ul>
+                    </div>
+                    <div class="var-card" style="background:#eff6ff;border:1px solid #bfdbfe;">
+                        <div class="vc-name" style="color:#1d4ed8;">const</div>
+                        <ul style="color:#1e3a8a;">
+                            <li>✅ Constant value</li>
+                            <li>✅ Value nahi badlegi</li>
+                            <li>✅ Default use karein</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> Variables</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">// let — value badal sakti hai</span>
+<span class="kw">let</span> <span class="var">naam</span> <span class="op">=</span> <span class="str">"Ali"</span>;
+<span class="var">naam</span> <span class="op">=</span> <span class="str">"Ahmed"</span>;  <span class="com">// ✅ Theek hai</span>
+
+<span class="com">// const — value fix hai</span>
+<span class="kw">const</span> <span class="var">desh</span> <span class="op">=</span> <span class="str">"Pakistan"</span>;
+<span class="com">// desh = "India";  ❌ ERROR aayega!</span>
+
+<span class="com">// Numbers</span>
+<span class="kw">let</span> <span class="var">umar</span> <span class="op">=</span> <span class="num">22</span>;
+<span class="kw">const</span> <span class="var">PI</span> <span class="op">=</span> <span class="num">3.14</span>;
+
+<span class="com">// Boolean (true/false)</span>
+<span class="kw">let</span> <span class="var">loginHai</span> <span class="op">=</span> <span class="bool">true</span>;
+<span class="kw">let</span> <span class="var">adminHai</span> <span class="op">=</span> <span class="bool">false</span>;
+
+<span class="com">// Console mein print karein (browser DevTools mein dekho)</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Naam:"</span>, <span class="var">naam</span>);
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Umar:"</span>, <span class="var">umar</span>);</pre>
+                </div>
+
+                <div class="tip-box yellow">
+                    <div class="tip-icon"><i class="fas fa-lightbulb" style="color:var(--yellow-dark)"></i></div>
+                    <p><strong>console.log()</strong> aapka best dost hai! F12 dabayein browser mein → Console tab kholein → wahan aapka output dikhega. Debugging ke liye zaroor seekhein!</p>
+                </div>
+
+                <!-- Live Console -->
+                <div class="console-wrap">
+                    <div class="console-bar">
+                        <div class="console-title"><span></span> Live JS Console — Code likhein aur Run karein!</div>
+                        <button class="console-run" onclick="runCode('c1')"><i class="fas fa-play"></i> Run</button>
+                    </div>
+                    <div class="console-editor">
+                        <textarea id="c1-code">let naam = "Ali Khan";
+let umar = 22;
+const desh = "Pakistan";
+
+console.log("Assalam o Alaikum!");
+console.log("Naam:", naam);
+console.log("Umar:", umar, "saal");
+console.log("Desh:", desh);</textarea>
+                    </div>
+                    <div class="console-footer">
+                        <span class="output-label">Output:</span>
+                    </div>
+                    <div class="console-output" id="c1-output">▶ Run button dabayein...</div>
+                </div>
+            </section>
+
+            <!-- STEP 3 -->
+            <section class="section-block" id="step3">
+                <div class="step-header">
+                    <div class="step-badge">3</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 03</div>
+                        <h2>Data Types — Kya kya store kar sakte hain?</h2>
+                    </div>
+                </div>
+
+                <p>JavaScript mein har variable ka ek type hota hai. Inhe samajhna bahut zaroor hai!</p>
+
+                <div class="type-grid">
+                    <div class="type-card" style="background:#fffbeb;border:1px solid #fde68a;color:#92400e;">
+                        <div class="type-name">String</div>
+                        <div class="type-example">"Hello", 'Ali'</div>
+                        <p>Text — quotes mein</p>
+                    </div>
+                    <div class="type-card" style="background:#eff6ff;border:1px solid #bfdbfe;color:#1e40af;">
+                        <div class="type-name">Number</div>
+                        <div class="type-example">42, 3.14, -10</div>
+                        <p>Koi bhi number</p>
+                    </div>
+                    <div class="type-card" style="background:#f0fdf4;border:1px solid #bbf7d0;color:#14532d;">
+                        <div class="type-name">Boolean</div>
+                        <div class="type-example">true, false</div>
+                        <p>Sirf haan ya nahi</p>
+                    </div>
+                    <div class="type-card" style="background:#fdf4ff;border:1px solid #e9d5ff;color:#6b21a8;">
+                        <div class="type-name">Array</div>
+                        <div class="type-example">[1, 2, 3]</div>
+                        <p>List of values</p>
+                    </div>
+                    <div class="type-card" style="background:#fef2f2;border:1px solid #fecaca;color:#991b1b;">
+                        <div class="type-name">Object</div>
+                        <div class="type-example">{ naam: "Ali" }</div>
+                        <p>Key-value pairs</p>
+                    </div>
+                    <div class="type-card" style="background:#f8fafc;border:1px solid var(--border);color:var(--text-muted);">
+                        <div class="type-name">null / undefined</div>
+                        <div class="type-example">null, undefined</div>
+                        <p>Koi value nahi</p>
+                    </div>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> Data Types Examples</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">// String — text</span>
+<span class="kw">let</span> <span class="var">shehr</span> <span class="op">=</span> <span class="str">"Karachi"</span>;
+<span class="kw">let</span> <span class="var">msg</span> <span class="op">=</span> <span class="str">`Mera shehr ${shehr} hai`</span>; <span class="com">// Template literal</span>
+
+<span class="com">// Array — list</span>
+<span class="kw">const</span> <span class="var">cities</span> <span class="op">=</span> [<span class="str">"Karachi"</span>, <span class="str">"Lahore"</span>, <span class="str">"Islamabad"</span>];
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="var">cities</span>[<span class="num">0</span>]);  <span class="com">// "Karachi" — index 0 se shuru</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="var">cities</span>.length); <span class="com">// 3</span>
+
+<span class="com">// Object — related data</span>
+<span class="kw">const</span> <span class="var">student</span> <span class="op">=</span> {
+    <span class="var">naam</span>: <span class="str">"Ayesha"</span>,
+    <span class="var">umar</span>: <span class="num">20</span>,
+    <span class="var">city</span>: <span class="str">"Lahore"</span>,
+    <span class="var">loginHai</span>: <span class="bool">true</span>
+};
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="var">student</span>.<span class="var">naam</span>);  <span class="com">// "Ayesha"</span>
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="var">student</span>.<span class="var">city</span>);  <span class="com">// "Lahore"</span></pre>
+                </div>
+
+                <!-- Quiz 1 -->
+                <div class="quiz-card">
+                    <h3><i class="fas fa-question-circle" style="color:var(--yellow-dark)"></i> &nbsp;Quick Quiz!</h3>
+                    <p class="q-text">JavaScript mein list of items store karne ke liye kaunsa data type use hoga?</p>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',false)"><span class="opt-letter">A</span> String</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',false)"><span class="opt-letter">B</span> Boolean</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',true)"><span class="opt-letter">C</span> Array</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q1',false)"><span class="opt-letter">D</span> Number</div>
+                    <div class="quiz-feedback" id="q1-fb"></div>
+                </div>
+            </section>
+
+            <!-- STEP 4 -->
+            <section class="section-block" id="step4">
+                <div class="step-header">
+                    <div class="step-badge">4</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 04</div>
+                        <h2>Functions — Kaam Package Karein</h2>
+                    </div>
+                </div>
+
+                <p>Function ek reusable block of code hai. Ek baar likhein, baar baar use karein! Jaise microwave — ek baar set karo, button dabao, kaam ho.</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> Functions</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">// Basic function</span>
+<span class="kw">function</span> <span class="fn">salaamKaro</span>() {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Assalam o Alaikum!"</span>);
+}
+<span class="fn">salaamKaro</span>();  <span class="com">// Call karo</span>
+
+<span class="com">// Function with parameters (inputs)</span>
+<span class="kw">function</span> <span class="fn">naamSaath</span>(<span class="var">naam</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">`Assalam o Alaikum, ${naam}!`</span>);
+}
+<span class="fn">naamSaath</span>(<span class="str">"Ahmed"</span>);   <span class="com">// Assalam o Alaikum, Ahmed!</span>
+<span class="fn">naamSaath</span>(<span class="str">"Fatima"</span>);  <span class="com">// Assalam o Alaikum, Fatima!</span>
+
+<span class="com">// Function with return value</span>
+<span class="kw">function</span> <span class="fn">jodo</span>(<span class="var">a</span>, <span class="var">b</span>) {
+    <span class="kw">return</span> <span class="var">a</span> <span class="op">+</span> <span class="var">b</span>;
+}
+<span class="kw">let</span> <span class="var">jawab</span> <span class="op">=</span> <span class="fn">jodo</span>(<span class="num">10</span>, <span class="num">5</span>);
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Jod:"</span>, <span class="var">jawab</span>);  <span class="com">// 15</span>
+
+<span class="com">// Arrow function (modern shorthand)</span>
+<span class="kw">const</span> <span class="fn">zarb</span> <span class="op">=</span> (<span class="var">a</span>, <span class="var">b</span>) <span class="op">=&gt;</span> <span class="var">a</span> <span class="op">*</span> <span class="var">b</span>;
+<span class="fn">console</span>.<span class="fn">log</span>(<span class="fn">zarb</span>(<span class="num">4</span>, <span class="num">3</span>));  <span class="com">// 12</span></pre>
+                </div>
+
+                <!-- Live Console 2 -->
+                <div class="console-wrap">
+                    <div class="console-bar">
+                        <div class="console-title"><span></span> Functions Practice — Edit aur Run karein!</div>
+                        <button class="console-run" onclick="runCode('c2')"><i class="fas fa-play"></i> Run</button>
+                    </div>
+                    <div class="console-editor">
+                        <textarea id="c2-code">function bmiCalculate(weight, height) {
+    let bmi = weight / (height * height);
+    return bmi.toFixed(1);
+}
+
+let myBmi = bmiCalculate(70, 1.75);
+console.log("Aapka BMI:", myBmi);
+
+// Arrow function
+const greeting = (naam) => `Shukriya, ${naam}!`;
+console.log(greeting("Ali"));
+console.log(greeting("Sara"));</textarea>
+                    </div>
+                    <div class="console-footer"><span class="output-label">Output:</span></div>
+                    <div class="console-output" id="c2-output">▶ Run button dabayein...</div>
+                </div>
+            </section>
+
+            <!-- STEP 5 -->
+            <section class="section-block" id="step5">
+                <div class="step-header">
+                    <div class="step-badge">5</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 05</div>
+                        <h2>Conditions — if / else</h2>
+                    </div>
+                </div>
+
+                <p>Conditions se aap code ko decisions lena sikhate hain — <em>"agar yeh ho, to yeh karo, warna yeh karo."</em> Real life mein aap bhi yahi karte hain!</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> if / else if / else</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="kw">let</span> <span class="var">marks</span> <span class="op">=</span> <span class="num">75</span>;
+
+<span class="kw">if</span> (<span class="var">marks</span> <span class="op">&gt;=</span> <span class="num">80</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"A Grade — Shabaash!"</span>);
+} <span class="kw">else if</span> (<span class="var">marks</span> <span class="op">&gt;=</span> <span class="num">60</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"B Grade — Acha kiya!"</span>);
+} <span class="kw">else if</span> (<span class="var">marks</span> <span class="op">&gt;=</span> <span class="num">40</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"C Grade — Pass ho gaye!"</span>);
+} <span class="kw">else</span> {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Fail — Mehnat karo!"</span>);
+}
+
+<span class="com">// Comparison operators</span>
+<span class="com">// ===  bilkul barabar (strict)</span>
+<span class="com">// !==  barabar nahi</span>
+<span class="com">// &gt;    bada</span>
+<span class="com">// &lt;    chhota</span>
+<span class="com">// &gt;=   bada ya barabar</span>
+<span class="com">// &lt;=   chhota ya barabar</span>
+
+<span class="com">// Logical operators</span>
+<span class="kw">let</span> <span class="var">umar</span> <span class="op">=</span> <span class="num">20</span>;
+<span class="kw">let</span> <span class="var">cnicHai</span> <span class="op">=</span> <span class="bool">true</span>;
+
+<span class="kw">if</span> (<span class="var">umar</span> <span class="op">&gt;=</span> <span class="num">18</span> <span class="op">&amp;&amp;</span> <span class="var">cnicHai</span>) {    <span class="com">// && = aur</span>
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Vote de sakte hain!"</span>);
+}</pre>
+                </div>
+
+                <!-- Interactive Demo: Grade Checker -->
+                <div class="demo-box">
+                    <h4><i class="fas fa-flask" style="color:var(--yellow-dark)"></i> Live Demo — Grade Checker</h4>
+                    <input type="number" class="demo-input" id="marksInput" placeholder="Apne marks enter karein (0-100)" min="0" max="100">
+                    <button class="demo-btn" onclick="checkGrade()"><i class="fas fa-search"></i> Grade Check Karein</button>
+                    <div class="demo-result" id="gradeResult"></div>
+                </div>
+
+                <!-- Quiz 2 -->
+                <div class="quiz-card">
+                    <h3><i class="fas fa-question-circle" style="color:var(--yellow-dark)"></i> &nbsp;Quick Quiz!</h3>
+                    <p class="q-text">JS mein "aur" (both conditions true) check karne ke liye kaunsa operator use hoga?</p>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',false)"><span class="opt-letter">A</span> || (double pipe)</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',true)"><span class="opt-letter">B</span> && (double ampersand)</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',false)"><span class="opt-letter">C</span> == (double equals)</div>
+                    <div class="quiz-option" onclick="doQuiz(this,'q2',false)"><span class="opt-letter">D</span> & (single)</div>
+                    <div class="quiz-feedback" id="q2-fb"></div>
+                </div>
+            </section>
+
+            <!-- STEP 6 -->
+            <section class="section-block" id="step6">
+                <div class="step-header">
+                    <div class="step-badge">6</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 06</div>
+                        <h2>Loops — Baar Baar Kaam Karein</h2>
+                    </div>
+                </div>
+
+                <p>Loop se aap ek kaam baar baar kara sakte hain bina code repeat kiye. Sochain — 100 students ke naam print karne hain. Manually likhoge ya loop chalao ge?</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> for / while Loop</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">// for loop — jab count pata ho</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">i</span> <span class="op">=</span> <span class="num">1</span>; <span class="var">i</span> <span class="op">&lt;=</span> <span class="num">5</span>; <span class="var">i</span><span class="op">++</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">`Round ${i}`</span>);
+}
+<span class="com">// Output: Round 1, Round 2 ... Round 5</span>
+
+<span class="com">// Array par loop (sabse common)</span>
+<span class="kw">const</span> <span class="var">cities</span> <span class="op">=</span> [<span class="str">"Karachi"</span>, <span class="str">"Lahore"</span>, <span class="str">"Islamabad"</span>, <span class="str">"Peshawar"</span>];
+
+<span class="com">// Method 1: forEach</span>
+<span class="var">cities</span>.<span class="fn">forEach</span>((<span class="var">city</span>) <span class="op">=&gt;</span> {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Shaher:"</span>, <span class="var">city</span>);
+});
+
+<span class="com">// Method 2: for...of</span>
+<span class="kw">for</span> (<span class="kw">let</span> <span class="var">city</span> <span class="kw">of</span> <span class="var">cities</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="var">city</span>);
+}
+
+<span class="com">// while loop — jab count pata na ho</span>
+<span class="kw">let</span> <span class="var">paisa</span> <span class="op">=</span> <span class="num">100</span>;
+<span class="kw">while</span> (<span class="var">paisa</span> <span class="op">&gt;</span> <span class="num">0</span>) {
+    <span class="fn">console</span>.<span class="fn">log</span>(<span class="str">"Paisa bacha:"</span>, <span class="var">paisa</span>);
+    <span class="var">paisa</span> <span class="op">-=</span> <span class="num">25</span>;  <span class="com">// Har baar 25 kam karo</span>
+}</pre>
+                </div>
+
+                <!-- Live Console 3 -->
+                <div class="console-wrap">
+                    <div class="console-bar">
+                        <div class="console-title"><span></span> Loops Practice</div>
+                        <button class="console-run" onclick="runCode('c3')"><i class="fas fa-play"></i> Run</button>
+                    </div>
+                    <div class="console-editor">
+                        <textarea id="c3-code">const fruits = ["Apple", "Mango", "Banana", "Guava", "Strawberry"];
+
+// forEach loop
+fruits.forEach((fruit, index) => {
+    console.log(`${index + 1}. ${fruit}`);
+});
+
+// map — naya array banao
+const upperFruits = fruits.map(f => f.toUpperCase());
+console.log("Upper:", upperFruits);</textarea>
+                    </div>
+                    <div class="console-footer"><span class="output-label">Output:</span></div>
+                    <div class="console-output" id="c3-output">▶ Run button dabayein...</div>
+                </div>
+            </section>
+
+            <!-- STEP 7 -->
+            <section class="section-block" id="step7">
+                <div class="step-header">
+                    <div class="step-badge">7</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 07</div>
+                        <h2>DOM Manipulation — Webpage Control Karein</h2>
+                    </div>
+                </div>
+
+                <p>DOM (Document Object Model) wo tarika hai jisse JS aapke HTML ko padhti aur badal ti hai. Yeh JS ka sabse important concept hai — yahi se real magic hoti hai!</p>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fab fa-js-square" style="color:var(--yellow)"></i> DOM — Elements Select aur Change Karna</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="com">// === ELEMENTS DHUNDNA ===</span>
+
+<span class="com">// ID se (sabse tez)</span>
+<span class="kw">const</span> <span class="var">heading</span> <span class="op">=</span> document.<span class="fn">getElementById</span>(<span class="str">"myHeading"</span>);
+
+<span class="com">// CSS selector se (flexible)</span>
+<span class="kw">const</span> <span class="var">btn</span> <span class="op">=</span> document.<span class="fn">querySelector</span>(<span class="str">".myButton"</span>);
+<span class="kw">const</span> <span class="var">allCards</span> <span class="op">=</span> document.<span class="fn">querySelectorAll</span>(<span class="str">".card"</span>);
+
+<span class="com">// === CONTENT BADALNA ===</span>
+<span class="var">heading</span>.textContent <span class="op">=</span> <span class="str">"Naya Heading!"</span>;
+<span class="var">heading</span>.innerHTML <span class="op">=</span> <span class="str">"&lt;strong&gt;Bold Heading!&lt;/strong&gt;"</span>;
+
+<span class="com">// === STYLE BADALNA ===</span>
+<span class="var">heading</span>.style.color <span class="op">=</span> <span class="str">"red"</span>;
+<span class="var">heading</span>.style.fontSize <span class="op">=</span> <span class="str">"2rem"</span>;
+
+<span class="com">// === CLASS ADD/REMOVE KARNA ===</span>
+<span class="var">heading</span>.classList.<span class="fn">add</span>(<span class="str">"active"</span>);
+<span class="var">heading</span>.classList.<span class="fn">remove</span>(<span class="str">"hidden"</span>);
+<span class="var">heading</span>.classList.<span class="fn">toggle</span>(<span class="str">"dark"</span>);
+
+<span class="com">// === CLICK EVENT ===</span>
+<span class="var">btn</span>.<span class="fn">addEventListener</span>(<span class="str">"click"</span>, <span class="kw">function</span>() {
+    <span class="fn">alert</span>(<span class="str">"Button click hua!"</span>);
+});</pre>
+                </div>
+
+                <h3>🎮 Live Interactive Demos</h3>
+
+                <!-- Demo 1: Counter -->
+                <div class="demo-box">
+                    <h4><i class="fas fa-sort-numeric-up" style="color:var(--yellow-dark)"></i> Demo 1 — Counter (addEventListener)</h4>
+                    <div class="demo-counter-display" id="counterDisplay">0</div>
+                    <div class="demo-btn-row">
+                        <button class="demo-btn" onclick="changeCount(-1)" style="background:#ef4444;">− Ghatao</button>
+                        <button class="demo-btn" onclick="changeCount(0)" style="background:#64748b;">Reset</button>
+                        <button class="demo-btn" onclick="changeCount(1)">+ Barhao</button>
+                    </div>
+                </div>
+
+                <!-- Demo 2: Color Changer -->
+                <div class="demo-box">
+                    <h4><i class="fas fa-paint-brush" style="color:var(--yellow-dark)"></i> Demo 2 — Background Color Changer</h4>
+                    <div class="color-grid">
+                        <button class="color-btn" style="background:#7c3aed;" onclick="changeColor('#7c3aed','Purple')"></button>
+                        <button class="color-btn" style="background:#2563eb;" onclick="changeColor('#2563eb','Blue')"></button>
+                        <button class="color-btn" style="background:#16a34a;" onclick="changeColor('#16a34a','Green')"></button>
+                        <button class="color-btn" style="background:#dc2626;" onclick="changeColor('#dc2626','Red')"></button>
+                        <button class="color-btn" style="background:#f59e0b;" onclick="changeColor('#f59e0b','Yellow')"></button>
+                        <button class="color-btn" style="background:#0d9488;" onclick="changeColor('#0d9488','Teal')"></button>
+                        <button class="color-btn" style="background:#ec4899;" onclick="changeColor('#ec4899','Pink')"></button>
+                        <button class="color-btn" style="background:#1c1917;" onclick="changeColor('#1c1917','Dark')"></button>
+                    </div>
+                    <div id="colorBox">Rang chunein ⬆️</div>
+                </div>
+
+                <!-- Demo 3: Greeting -->
+                <div class="demo-box">
+                    <h4><i class="fas fa-user" style="color:var(--yellow-dark)"></i> Demo 3 — Personalized Greeting (Input + DOM)</h4>
+                    <input type="text" class="demo-input" id="nameInput" placeholder="Apna naam likhein...">
+                    <button class="demo-btn" onclick="showGreeting()"><i class="fas fa-hand-wave"></i> Salam Karein!</button>
+                    <div class="demo-result" id="greetingResult"></div>
+                </div>
+            </section>
+
+            <!-- STEP 8 -->
+            <section class="section-block" id="step8">
+                <div class="step-header">
+                    <div class="step-badge" style="background:linear-gradient(135deg,#16a34a,#0d9488)">8</div>
+                    <div class="step-info">
+                        <div class="step-label">Step 08 — Final Project</div>
+                        <h2>To-Do App Banayein!</h2>
+                    </div>
+                </div>
+
+                <p>Ab hum sab kuch mila kar ek <strong>complete To-Do List App</strong> banayenge — HTML, CSS, aur JavaScript sab ek saath. Yeh aapka pehla real JavaScript project hoga!</p>
+
+                <div class="project-box">
+                    <h3>🎯 Final Project: To-Do List App</h3>
+                    <p>Aaj ke project mein ye features honge:</p>
+                    <div class="project-features">
+                        <span class="project-feat">✓ Task Add Karna</span>
+                        <span class="project-feat">✓ Task Delete Karna</span>
+                        <span class="project-feat">✓ Task Complete Mark</span>
+                        <span class="project-feat">✓ Empty Check</span>
+                        <span class="project-feat">✓ Counter</span>
+                        <span class="project-feat">✓ Local Storage</span>
+                    </div>
+                </div>
+
+                <!-- Live To-Do Demo -->
+                <div class="demo-box" style="background:linear-gradient(135deg,#1c1917,#292524);border-color:#44403c;">
+                    <h4 style="color:var(--yellow-light)"><i class="fas fa-list-check" style="color:var(--yellow)"></i> Live To-Do App — Abhi Try Karein!</h4>
+                    <div style="display:flex;gap:10px;margin-bottom:4px;">
+                        <input type="text" id="todoInput" placeholder="Naya kaam likhein..." style="flex:1;border:2px solid #44403c;border-radius:10px;padding:12px 16px;font-size:15px;font-family:var(--font-body);background:#1c1917;color:#e7e5e4;outline:none;" onkeydown="if(event.key==='Enter')addTodo()">
+                        <button class="demo-btn" onclick="addTodo()"><i class="fas fa-plus"></i> Add</button>
+                    </div>
+                    <div style="font-size:12px;color:#78716c;margin-bottom:12px;" id="todoCount">0 tasks</div>
+                    <ul class="todo-list" id="todoList"></ul>
+                </div>
+
+                <div class="code-block">
+                    <div class="code-header">
+                        <div class="code-lang"><i class="fas fa-star" style="color:var(--yellow)"></i> Complete To-Do App — Copy & Save karo!</div>
+                        <div class="code-dots"><span class="code-dot"></span><span class="code-dot"></span><span class="code-dot"></span></div>
+                        <button class="copy-btn" onclick="copyCode(this)"><i class="fas fa-copy"></i> Copy</button>
+                    </div>
+                    <pre><span class="op">&lt;!DOCTYPE html&gt;</span>
+<span class="op">&lt;html</span> lang=<span class="str">"en"</span><span class="op">&gt;</span>
+<span class="op">&lt;head&gt;</span>
+    <span class="op">&lt;meta</span> charset=<span class="str">"UTF-8"</span><span class="op">&gt;</span>
+    <span class="op">&lt;title&gt;</span>Meri To-Do List<span class="op">&lt;/title&gt;</span>
+    <span class="op">&lt;style&gt;</span>
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body { font-family:Arial,sans-serif; background:#f8fafc;
+               display:flex; justify-content:center;
+               align-items:flex-start; min-height:100vh; padding:40px 20px; }
+        .app { background:white; border-radius:16px; padding:32px;
+               width:100%; max-width:500px; box-shadow:0 8px 32px rgba(0,0,0,.1); }
+        h1 { font-size:1.8rem; color:#1c1917; margin-bottom:8px; }
+        .subtitle { color:#78716c; font-size:14px; margin-bottom:24px; }
+        .input-row { display:flex; gap:10px; margin-bottom:8px; }
+        input { flex:1; border:2px solid #e2e8f0; border-radius:10px;
+                padding:12px 16px; font-size:15px; outline:none;
+                transition:border-color .2s; }
+        input:focus { border-color:#f59e0b; }
+        button.add { background:linear-gradient(135deg,#f59e0b,#ea580c);
+                     border:none; color:white; font-weight:700;
+                     padding:12px 20px; border-radius:10px; cursor:pointer; }
+        .count { font-size:12px; color:#78716c; margin-bottom:16px; }
+        ul { list-style:none; }
+        li { display:flex; align-items:center; gap:12px; padding:12px 14px;
+             background:#f8fafc; border-radius:10px; margin-bottom:8px;
+             border:1px solid #e2e8f0; }
+        li.done span.text { text-decoration:line-through; color:#a8a29e; }
+        .check { width:22px; height:22px; border-radius:6px;
+                 border:2px solid #d6d3d1; cursor:pointer;
+                 display:flex; align-items:center; justify-content:center;
+                 flex-shrink:0; transition:all .2s; }
+        .check.done { background:#16a34a; border-color:#16a34a; color:white; }
+        span.text { flex:1; font-size:15px; }
+        .del { background:#fef2f2; border:none; color:#dc2626;
+               width:28px; height:28px; border-radius:6px; cursor:pointer; }
+        .empty { text-align:center; color:#a8a29e; padding:24px; font-size:14px; }
+    <span class="op">&lt;/style&gt;</span>
+<span class="op">&lt;/head&gt;</span>
+<span class="op">&lt;body&gt;</span>
+<span class="op">&lt;div</span> class=<span class="str">"app"</span><span class="op">&gt;</span>
+    <span class="op">&lt;h1&gt;</span>✅ Meri To-Do List<span class="op">&lt;/h1&gt;</span>
+    <span class="op">&lt;p</span> class=<span class="str">"subtitle"</span><span class="op">&gt;</span>Apne kaam manage karein<span class="op">&lt;/p&gt;</span>
+    <span class="op">&lt;div</span> class=<span class="str">"input-row"</span><span class="op">&gt;</span>
+        <span class="op">&lt;input</span> id=<span class="str">"inp"</span> placeholder=<span class="str">"Naya kaam..."</span>
+               onkeydown=<span class="str">"if(event.key==='Enter')add()"</span><span class="op">&gt;</span>
+        <span class="op">&lt;button</span> class=<span class="str">"add"</span> onclick=<span class="str">"add()"</span><span class="op">&gt;</span>+ Add<span class="op">&lt;/button&gt;</span>
+    <span class="op">&lt;/div&gt;</span>
+    <span class="op">&lt;p</span> class=<span class="str">"count"</span> id=<span class="str">"cnt"</span><span class="op">&gt;</span>0 tasks<span class="op">&lt;/p&gt;</span>
+    <span class="op">&lt;ul</span> id=<span class="str">"list"</span><span class="op">&gt;&lt;/ul&gt;</span>
+<span class="op">&lt;/div&gt;</span>
+
+<span class="op">&lt;script&gt;</span>
+<span class="kw">let</span> <span class="var">tasks</span> <span class="op">=</span> JSON.<span class="fn">parse</span>(localStorage.<span class="fn">getItem</span>(<span class="str">'tasks'</span>)) <span class="op">||</span> [];
+
+<span class="kw">function</span> <span class="fn">render</span>() {
+    <span class="kw">const</span> <span class="var">list</span> <span class="op">=</span> document.<span class="fn">getElementById</span>(<span class="str">'list'</span>);
+    <span class="kw">const</span> <span class="var">cnt</span> <span class="op">=</span> document.<span class="fn">getElementById</span>(<span class="str">'cnt'</span>);
+    <span class="var">cnt</span>.textContent <span class="op">=</span> <span class="str">`${tasks.length} task${tasks.length !== 1 ? 's' : ''}`</span>;
+    <span class="kw">if</span> (<span class="var">tasks</span>.length <span class="op">===</span> <span class="num">0</span>) {
+        <span class="var">list</span>.innerHTML <span class="op">=</span> <span class="str">'&lt;li class="empty"&gt;Koi task nahi! Kuch add karein 🎉&lt;/li&gt;'</span>;
+        <span class="kw">return</span>;
+    }
+    <span class="var">list</span>.innerHTML <span class="op">=</span> <span class="var">tasks</span>.<span class="fn">map</span>((<span class="var">t</span>, <span class="var">i</span>) <span class="op">=&gt;</span> <span class="str">`
+        &lt;li class="${t.done ? 'done' : ''}"&gt;
+          &lt;div class="check ${t.done ? 'done' : ''}" onclick="toggle(${i})"&gt;${t.done ? '✓' : ''}&lt;/div&gt;
+          &lt;span class="text"&gt;${t.text}&lt;/span&gt;
+          &lt;button class="del" onclick="remove(${i})"&gt;🗑&lt;/button&gt;
+        &lt;/li&gt;`</span>).<span class="fn">join</span>(<span class="str">''</span>);
+    localStorage.<span class="fn">setItem</span>(<span class="str">'tasks'</span>, JSON.<span class="fn">stringify</span>(<span class="var">tasks</span>));
+}
+
+<span class="kw">function</span> <span class="fn">add</span>() {
+    <span class="kw">const</span> <span class="var">inp</span> <span class="op">=</span> document.<span class="fn">getElementById</span>(<span class="str">'inp'</span>);
+    <span class="kw">if</span> (!<span class="var">inp</span>.value.<span class="fn">trim</span>()) <span class="kw">return</span>;
+    <span class="var">tasks</span>.<span class="fn">push</span>({ text: <span class="var">inp</span>.value.<span class="fn">trim</span>(), done: <span class="bool">false</span> });
+    <span class="var">inp</span>.value <span class="op">=</span> <span class="str">''</span>;
+    <span class="fn">render</span>();
+}
+<span class="kw">function</span> <span class="fn">toggle</span>(<span class="var">i</span>) { <span class="var">tasks</span>[<span class="var">i</span>].done <span class="op">=</span> !<span class="var">tasks</span>[<span class="var">i</span>].done; <span class="fn">render</span>(); }
+<span class="kw">function</span> <span class="fn">remove</span>(<span class="var">i</span>) { <span class="var">tasks</span>.<span class="fn">splice</span>(<span class="var">i</span>, <span class="num">1</span>); <span class="fn">render</span>(); }
+
+<span class="fn">render</span>();
+<span class="op">&lt;/script&gt;</span>
+<span class="op">&lt;/body&gt;&lt;/html&gt;</span></pre>
+                </div>
+
+                <div class="tip-box green">
+                    <div class="tip-icon"><i class="fas fa-trophy" style="color:var(--green)"></i></div>
+                    <p><strong>Mubarak ho! 🎉🎉</strong> Aapne poori Web Dev Series complete kar li! HTML → CSS → Flexbox/Grid → JavaScript — aap ab ek real developer hain. Yeh To-Do App <strong>todo.html</strong> naam se save karein aur share karein!</p>
+                </div>
+
+                <div class="tip-box blue">
+                    <div class="tip-icon"><i class="fas fa-rocket" style="color:#2563eb"></i></div>
+                    <p><strong>Agle Steps kya hain?</strong> JavaScript ke baad seekhein: <strong>React.js</strong> (modern UI framework), <strong>Node.js</strong> (backend), aur <strong>APIs</strong> (real data fetch karna). FreeToolsHub par ye sab tutorials jald aa rahe hain!</p>
+                </div>
+
+                <h3 style="margin-top:32px;">Puri Tutorial Series</h3>
+                <div class="next-grid">
+                    <a href="tutorial-html-css-basics.html" class="next-card">
+                        <div class="next-card-icon" style="background:linear-gradient(135deg,#2563eb,#4f46e5)">
+                            <i class="fab fa-html5"></i>
+                        </div>
+                        <div>
+                            <h4>Part 1: HTML &amp; CSS</h4>
+                            <p>Website ki bunyaad</p>
+                        </div>
+                    </a>
+                    <a href="tutorial-css-flexbox-grid.html" class="next-card">
+                        <div class="next-card-icon" style="background:linear-gradient(135deg,#0d9488,#7c3aed)">
+                            <i class="fab fa-css3-alt"></i>
+                        </div>
+                        <div>
+                            <h4>Part 2: Flexbox &amp; Grid</h4>
+                            <p>Modern layouts</p>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+        </main>
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+    <div class="container">
+        <p>© 2026 <a href="../index.html">Free Tools Hub</a>. All rights reserved. Made with ♥ for Pakistani developers &amp; students.</p>
+    </div>
+</footer>
+
+<script>
+    // ===== PROGRESS TRACKER =====
+    const sections = document.querySelectorAll('.section-block');
+    const progressBar = document.getElementById('progressBar');
+    const progressText = document.getElementById('progressText');
+    const tocLinks = document.querySelectorAll('.toc-list a');
+    const ids = ['step1','step2','step3','step4','step5','step6','step7','step8'];
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const id = entry.target.id;
+                tocLinks.forEach(l => l.classList.toggle('active', l.getAttribute('href') === '#' + id));
+                const idx = ids.indexOf(id);
+                if (idx >= 0) {
+                    const pct = Math.round(((idx + 1) / 8) * 100);
+                    progressBar.style.width = pct + '%';
+                    progressText.textContent = pct + '% Complete';
+                }
+            }
+        });
+    }, { threshold: 0.2 });
+    sections.forEach(s => observer.observe(s));
+
+    // ===== LIVE CONSOLE =====
+    function runCode(id) {
+        const code = document.getElementById(id + '-code').value;
+        const output = document.getElementById(id + '-output');
+        const logs = [];
+        const origLog = console.log;
+        console.log = (...args) => {
+            logs.push(args.map(a => {
+                if (Array.isArray(a)) return '[' + a.join(', ') + ']';
+                if (typeof a === 'object' && a !== null) return JSON.stringify(a);
+                return String(a);
+            }).join(' '));
+        };
+        try {
+            eval(code);
+            output.style.color = '#86efac';
+            output.textContent = logs.length ? logs.join('\n') : '(Koi output nahi)';
+        } catch(e) {
+            output.style.color = '#fca5a5';
+            output.textContent = '❌ Error: ' + e.message;
+        }
+        console.log = origLog;
+    }
+
+    // ===== QUIZ =====
+    function doQuiz(el, qid, correct) {
+        const parent = el.parentElement;
+        parent.querySelectorAll('.quiz-option').forEach(o => {
+            o.classList.add('disabled');
+            o.style.pointerEvents = 'none';
+        });
+        el.classList.add(correct ? 'correct' : 'wrong');
+        if (!correct) {
+            parent.querySelectorAll('.quiz-option').forEach(o => {
+                if (o.getAttribute('onclick') && o.getAttribute('onclick').includes('true')) o.classList.add('correct');
+            });
+        }
+        const fb = document.getElementById(qid + '-fb');
+        fb.style.display = 'block';
+        const msgs = {
+            'q1': { c: '✅ Bilkul sahi! Array list of values store karta hai — square brackets mein: [1, 2, 3].', w: '❌ Galat. Sahi jawab Array hai — jaise const cities = ["Karachi", "Lahore"];' },
+            'q2': { c: '✅ Sahi! && (AND) dono conditions true hone par true deta hai. || (OR) koi bhi ek true ho.', w: '❌ Galat. Sahi jawab && hai — jaise if (umar >= 18 && cnicHai) {}' }
+        };
+        fb.style.background = correct ? '#f0fdf4' : '#fef2f2';
+        fb.style.color = correct ? '#166534' : '#b91c1c';
+        fb.innerHTML = correct ? msgs[qid].c : msgs[qid].w;
+    }
+
+    // ===== GRADE CHECKER =====
+    function checkGrade() {
+        const marks = parseInt(document.getElementById('marksInput').value);
+        const result = document.getElementById('gradeResult');
+        result.style.display = 'block';
+        if (isNaN(marks) || marks < 0 || marks > 100) {
+            result.style.background = '#fef2f2'; result.style.color = '#b91c1c';
+            result.textContent = '❌ Please 0 se 100 ke beech number enter karein!'; return;
+        }
+        let grade, msg, bg, clr;
+        if (marks >= 90) { grade = 'A+'; msg = 'Zabardast! 🏆'; bg = '#f0fdf4'; clr = '#166534'; }
+        else if (marks >= 80) { grade = 'A'; msg = 'Bahut Acha! 🌟'; bg = '#f0fdf4'; clr = '#166534'; }
+        else if (marks >= 70) { grade = 'B'; msg = 'Acha kiya! 👍'; bg = '#eff6ff'; clr = '#1e40af'; }
+        else if (marks >= 60) { grade = 'C'; msg = 'Theek hai, aur mehnat karo! 📚'; bg = '#fffbeb'; clr = '#92400e'; }
+        else if (marks >= 40) { grade = 'D'; msg = 'Pass ho gaye, par improvement chahiye! 💪'; bg = '#fff7ed'; clr = '#9a3412'; }
+        else { grade = 'F'; msg = 'Fail — himat rakhein, phir koshish karein! 🙏'; bg = '#fef2f2'; clr = '#b91c1c'; }
+        result.style.background = bg; result.style.color = clr;
+        result.innerHTML = `Marks: <strong>${marks}</strong> | Grade: <strong>${grade}</strong> | ${msg}`;
+    }
+
+    // ===== COUNTER =====
+    let count = 0;
+    function changeCount(action) {
+        if (action === 0) count = 0;
+        else count += action;
+        const el = document.getElementById('counterDisplay');
+        el.textContent = count;
+        el.style.color = count > 0 ? '#16a34a' : count < 0 ? '#dc2626' : '#f59e0b';
+    }
+
+    // ===== COLOR CHANGER =====
+    function changeColor(hex, name) {
+        const box = document.getElementById('colorBox');
+        box.style.background = hex;
+        box.textContent = name + ' — document.body.style.background = "' + hex + '"';
+    }
+
+    // ===== GREETING =====
+    function showGreeting() {
+        const naam = document.getElementById('nameInput').value.trim();
+        const result = document.getElementById('greetingResult');
+        result.style.display = 'block';
+        if (!naam) {
+            result.style.background = '#fef2f2'; result.style.color = '#b91c1c';
+            result.textContent = '❌ Pehle apna naam likho!'; return;
+        }
+        const hour = new Date().getHours();
+        const time = hour < 12 ? 'Subah' : hour < 17 ? 'Dopahar' : 'Sham';
+        result.style.background = '#f0fdf4'; result.style.color = '#166534';
+        result.innerHTML = `👋 ${time} Bakhair, <strong>${naam}</strong>! FreeToolsHub mein khush aamdeed! 🇵🇰`;
+    }
+
+    // ===== LIVE TO-DO =====
+    let demoTasks = [];
+    function addTodo() {
+        const inp = document.getElementById('todoInput');
+        if (!inp.value.trim()) return;
+        demoTasks.push({ text: inp.value.trim(), done: false });
+        inp.value = '';
+        renderTodo();
+    }
+    function toggleTodo(i) { demoTasks[i].done = !demoTasks[i].done; renderTodo(); }
+    function removeTodo(i) { demoTasks.splice(i, 1); renderTodo(); }
+    function renderTodo() {
+        const list = document.getElementById('todoList');
+        const cnt = document.getElementById('todoCount');
+        const done = demoTasks.filter(t => t.done).length;
+        cnt.textContent = `${demoTasks.length} tasks — ${done} complete`;
+        if (demoTasks.length === 0) { list.innerHTML = '<li style="color:#78716c;font-size:13px;list-style:none;text-align:center;padding:16px;">Koi task nahi! Add karein ⬆️</li>'; return; }
+        list.innerHTML = demoTasks.map((t, i) => `
+            <li style="background:${t.done?'#1a1a1a':'#292524'};border-color:${t.done?'#44403c':'#44403c'};">
+                <span style="color:${t.done?'#57534e':'#e7e5e4'};text-decoration:${t.done?'line-through':''};flex:1;font-size:14px;">${t.done?'✅':'⏳'} ${t.text}</span>
+                <button class="todo-del" onclick="toggleTodo(${i})" style="background:${t.done?'#1c1917':'rgba(34,197,94,.15)'};color:${t.done?'#78716c':'#22c55e'};margin-right:4px;">✓</button>
+                <button class="todo-del" onclick="removeTodo(${i})">🗑</button>
+            </li>`).join('');
+    }
+
+    // ===== COPY CODE =====
+    function copyCode(btn) {
+        const pre = btn.closest('.code-block').querySelector('pre');
+        navigator.clipboard.writeText(pre.innerText).then(() => {
+            btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+            btn.style.color = '#22c55e';
+            setTimeout(() => { btn.innerHTML = '<i class="fas fa-copy"></i> Copy'; btn.style.color = ''; }, 2000);
+        });
+    }
+</script>
+
+</body>
+</html>
