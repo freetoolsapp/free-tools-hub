@@ -570,33 +570,60 @@ function runConversion(file){
 }
 
 // ============================================================
-//  splitPages — HR → empty paragraphs → char count
+//  splitPages — HR → empty paras → real DOM height measurement
 // ============================================================
 function splitPages(html){
-    // 1. Explicit Word page-break → mammoth emits <hr>
-    var byHr = html.split(/<hr\s*\/?>/gi).map(function(s){return s.trim();}).filter(Boolean);
+    // 1. Explicit Word page-break — mammoth emits <hr>
+    var byHr = html.split(/<hr\s*\/?>/ ).map(function(s){return s.trim();}).filter(Boolean);
     if(byHr.length>1) return byHr;
 
-    // 2. 3+ consecutive empty paras → treat as page break
-    var byEmp = html.split(/(?:<p[^>]*>\s*<\/p>\s*){3,}/gi).map(function(s){return s.trim();}).filter(Boolean);
+    // 2. 3+ consecutive empty paras = manual page break
+    var byEmp = html.split(/(?:<p[^>]*>\s*<\/p>\s*){3,}/).map(function(s){return s.trim();}).filter(Boolean);
     if(byEmp.length>1) return byEmp;
 
-    // 3. Character-count bucket ~3500 chars/page
-    var LIMIT=3500;
-    var tmp=document.createElement('div');
-    tmp.innerHTML=html;
-    var kids=Array.from(tmp.childNodes);
-    var pages=[],buf='',len=0;
-    kids.forEach(function(n){
-        var h=n.nodeType===1?n.outerHTML:'';
-        var c=(n.textContent||'').length;
-        if(len+c>LIMIT && len>0){pages.push(buf);buf='';len=0;}
-        buf+=h; len+=c;
-    });
-    if(buf.trim()) pages.push(buf);
-    return pages.length?pages:[html];
-}
+    // 3. Real DOM height measurement at A4 width
+    //    Usable content height per A4 page = 1123 - 2*72 = 979px
+    var A4_CONTENT_H = 960;
+    var A4_W = 794;
+    var MARGIN = 72;
 
+    var probe = document.createElement('div');
+    probe.style.cssText = [
+        'position:fixed','left:-9999px','top:0',
+        'width:'+A4_W+'px',
+        'padding:'+MARGIN+'px',
+        'background:#fff',
+        'box-sizing:border-box',
+        'font-family:Calibri,"Times New Roman",serif',
+        'font-size:12pt','line-height:1.5','color:#000'
+    ].join(';');
+    probe.innerHTML = html;
+    document.body.appendChild(probe);
+
+    var allKids = Array.from(probe.children);
+    var pages = [], buf = '', pageUsed = 0;
+
+    allKids.forEach(function(n){
+        var h = n.outerHTML || '';
+        var nodeH = n.offsetHeight || 20;
+
+        if(nodeH > A4_CONTENT_H){
+            if(buf.trim()){ pages.push(buf); buf=''; pageUsed=0; }
+            pages.push(h);
+            return;
+        }
+        if(pageUsed + nodeH > A4_CONTENT_H && buf.trim()){
+            pages.push(buf);
+            buf = ''; pageUsed = 0;
+        }
+        buf += h;
+        pageUsed += nodeH;
+    });
+
+    document.body.removeChild(probe);
+    if(buf.trim()) pages.push(buf);
+    return pages.length ? pages : [html];
+}
 // ============================================================
 //  buildPreview — A4 pages with page numbers
 // ============================================================
@@ -707,14 +734,27 @@ function buildPDF(pages){
 
                 var imgData=out.toDataURL('image/jpeg',0.88);
                 if(idx>0) pdf.addPage();
-                pdf.addImage(imgData,'JPEG',0,0,PW,PH);
 
-                // Page number stamped as vector text
+                // Leave 10mm footer strip at bottom for page number
+                var footerH = 10;
+                pdf.addImage(imgData,'JPEG', 0, 0, PW, PH - footerH);
+
+                // White footer background
+                pdf.setFillColor(255,255,255);
+                pdf.rect(0, PH - footerH, PW, footerH, 'F');
+
+                // Separator line
+                pdf.setDrawColor(220,220,220);
+                pdf.setLineWidth(0.3);
+                pdf.line(15, PH - footerH + 1, PW - 15, PH - footerH + 1);
+
+                // Page number centered in footer
                 pdf.setFont('helvetica','normal');
-                pdf.setFontSize(8);
-                pdf.setTextColor(140,140,140);
-                var lbl='Page '+(idx+1)+' of '+pages.length;
-                pdf.text(lbl, PW-12-pdf.getTextWidth(lbl), PH-7);
+                pdf.setFontSize(9);
+                pdf.setTextColor(120,120,120);
+                var lbl = 'Page ' + (idx+1) + ' of ' + pages.length;
+                var tw  = pdf.getTextWidth(lbl);
+                pdf.text(lbl, (PW - tw) / 2, PH - 3.5);
 
                 idx++;
                 setTimeout(doPage,60);
