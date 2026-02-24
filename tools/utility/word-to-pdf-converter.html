@@ -575,18 +575,16 @@
 
     const { jsPDF } = window.jspdf;
 
-    const wrapper = document.createElement('div');
+    const wrapper = document.createElement("div");
     wrapper.style.cssText = `
         position:absolute;
         left:-9999px;
-        top:0;
-        width:794px;
         background:#ffffff;
-        padding:75px;
-        box-sizing:border-box;
-        font-family: Calibri, 'Times New Roman', serif;
+        font-family:Calibri,'Times New Roman',serif;
         font-size:12pt;
         line-height:1.6;
+        padding:40px;
+        box-sizing:border-box;
     `;
 
     wrapper.innerHTML = htmlContent;
@@ -596,49 +594,54 @@
 
     try {
 
-        const scale = 2; // 🔥 reduced for stability
-
         const canvas = await html2canvas(wrapper, {
-            scale: scale,
+            scale: 2,
             useCORS: true,
-            backgroundColor: '#ffffff'
+            backgroundColor: "#ffffff"
         });
 
-        const pdf = new jsPDF('p', 'mm', 'a4');
+        const widthPx = canvas.width;
+        const heightPx = canvas.height;
 
-        const imgWidth = 210;
-        const pageHeight = 297;
+        // Convert px → points (1px ≈ 0.75pt)
+        const pdfWidth = widthPx * 0.75;
+        const pdfHeight = heightPx * 0.75;
 
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-        let heightLeft = imgHeight;
+        const pdf = new jsPDF({
+            orientation: pdfWidth > pdfHeight ? "l" : "p",
+            unit: "pt",
+            format: [pdfWidth, pdfHeight]
+        });
 
-        const imgData = canvas.toDataURL('image/jpeg', 0.95);
+        const imgData = canvas.toDataURL("image/jpeg", 0.95);
 
-        let position = 0;
+        pdf.addImage(
+            imgData,
+            "JPEG",
+            0,
+            0,
+            pdfWidth,
+            pdfHeight
+        );
 
-        pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
+        // Optional page number (bottom)
+        pdf.setFontSize(10);
+        pdf.text("Page 1", pdfWidth / 2, pdfHeight - 20, { align: "center" });
 
-        while (heightLeft > 0) {
-            position = heightLeft - imgHeight;
-            pdf.addPage();
-            pdf.addImage(imgData, 'JPEG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pageHeight;
-        }
+        pdfBlob = pdf.output("blob");
 
-        pdfBlob = pdf.output('blob');
-        pageCount = pdf.internal.getNumberOfPages();
+        pageCount = 1;
 
-        document.getElementById('pageCount').textContent = pageCount;
-        document.getElementById('fileSize').textContent  = formatBytes(pdfBlob.size);
+        document.getElementById("pageCount").textContent = pageCount;
+        document.getElementById("fileSize").textContent = formatBytes(pdfBlob.size);
 
     } catch (err) {
-        alert("File too large. Please try smaller file.");
+        alert("Large file detected. Try smaller document.");
         console.error(err);
     } finally {
         document.body.removeChild(wrapper);
     }
-}
+} 
 
         function downloadPDF() {
             if (!pdfBlob) {
