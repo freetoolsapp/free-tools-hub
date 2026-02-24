@@ -1,0 +1,80 @@
+[
+    {
+        "id": 1,
+        "title": "HTML & CSS Basics 2026: Complete Beginner Guide to Build Your First Website",
+        "slug": "html-css-basics-2026",
+        "excerpt": "Learn HTML & CSS from absolute scratch in 2026. This beginner-friendly tutorial covers structure, tags, styling, and building your first complete webpage step-by-step. No prior experience needed!",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 24, 2026",
+        "category": "Web Development",
+        "level": "Beginner",
+        "duration": "25 min",
+        "image": "https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=800&h=400&fit=crop",
+        "file": "tutorial-html-css-basics.html"
+    },
+    {
+        "id": 2,
+        "title": "CSS Flexbox & Grid 2026: Master Modern Layouts with Live Interactive Demos",
+        "slug": "css-flexbox-grid-2026",
+        "excerpt": "Master CSS Flexbox and Grid layouts with interactive demos and real code examples. Learn when to use Flexbox vs Grid, build navbars, cards, dashboards and complete page layouts from scratch.",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 24, 2026",
+        "category": "Web Development",
+        "level": "Beginner",
+        "duration": "30 min",
+        "image": "https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop",
+        "file": "tutorial-css-flexbox-grid.html"
+    },
+    {
+        "id": 3,
+        "title": "JavaScript Basics 2026: Complete Beginner Guide — Variables to DOM Manipulation",
+        "slug": "javascript-basics-2026",
+        "excerpt": "Learn JavaScript from scratch with live code consoles, interactive demos and a real To-Do App project. Covers variables, data types, functions, loops, conditions and DOM manipulation.",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 24, 2026",
+        "category": "Web Development",
+        "level": "Beginner",
+        "duration": "35 min",
+        "image": "https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&h=400&fit=crop",
+        "file": "tutorial-javascript-basics.html"
+    },
+    {
+        "id": 4,
+        "title": "SEO Basics 2026: How to Rank #1 on Google — Complete Beginner Tutorial",
+        "slug": "seo-basics-2026",
+        "excerpt": "Learn SEO from scratch and rank higher on Google in 2026. This complete tutorial covers keyword research, on-page SEO, meta tags, backlinks, and free SEO tools to boost your website traffic.",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 24, 2026",
+        "category": "SEO",
+        "level": "Beginner",
+        "duration": "28 min",
+        "image": "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop",
+        "file": "tutorial-seo-basics-2026.html"
+    },
+    {
+        "id": 5,
+        "title": "AI Tools Mastery 2026: How to Use ChatGPT, Claude & Midjourney Like a Pro",
+        "slug": "ai-tools-mastery-2026",
+        "excerpt": "Master the best AI tools of 2026 — ChatGPT, Claude, Midjourney, and more. Learn prompt engineering, AI writing, image generation, and how to use AI to 10x your productivity.",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 24, 2026",
+        "category": "AI Tools",
+        "level": "Beginner",
+        "duration": "32 min",
+        "image": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop",
+        "file": "tutorial-ai-tools-mastery-2026.html"
+    },
+    {
+        "id": 6,
+        "title": "UI/UX Design Basics 2026: Design Beautiful Interfaces in Figma — Beginner Guide",
+        "slug": "uiux-design-basics-2026",
+        "excerpt": "Learn UI/UX design fundamentals in 2026 using Figma. This step-by-step tutorial covers design principles, color theory, typography, wireframing, prototyping and creating your first app design.",
+        "author": "Free Tools Hub Team",
+        "date": "Feb 24, 2026",
+        "category": "UI/UX Design",
+        "level": "Beginner",
+        "duration": "30 min",
+        "image": "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop",
+        "file": "tutorial-uiux-design-basics-2026.html"
+    }
+]

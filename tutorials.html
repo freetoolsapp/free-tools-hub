@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GGQGP06F0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5GGQGP06F0');
+    </script>
+
+    <!-- SEO Meta Tags -->
+    <title>Free Tutorials 2026 — Web Dev, SEO, AI & UI/UX | Free Tools Hub</title>
+    <meta name="title" content="Free Tutorials 2026 — Web Dev, SEO, AI & UI/UX | Free Tools Hub">
+    <meta name="description" content="Step-by-step free tutorials on Web Development, SEO, AI Tools, UI/UX Design and more. Beginner-friendly guides updated for 2026. No signup required.">
+    <meta name="keywords" content="free tutorials 2026, web development tutorial, HTML CSS tutorial, JavaScript beginner, SEO tutorial, AI tools guide, UI UX design tutorial, free learning">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Free Tools Hub">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolshub.online/tutorials.html">
+    <meta property="og:title" content="Free Tutorials 2026 — Web Dev, SEO, AI & UI/UX | Free Tools Hub">
+    <meta property="og:description" content="Step-by-step free tutorials on Web Development, SEO, AI Tools and more. Beginner-friendly, updated for 2026.">
+    <meta property="og:image" content="https://freetoolshub.online/og-image.jpg">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Tutorials 2026 — Free Tools Hub">
+    <meta name="twitter:description" content="Step-by-step tutorials on Web Dev, SEO, AI & UI/UX. Free, no signup.">
+
+    <!-- Canonical -->
+    <link rel="canonical" href="https://freetoolshub.online/tutorials.html">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        "name": "Free Tutorials — Free Tools Hub",
+        "url": "https://freetoolshub.online/tutorials.html",
+        "description": "Step-by-step free tutorials on Web Development, SEO, AI Tools and UI/UX Design.",
+        "publisher": { "@type": "Organization", "name": "Free Tools Hub" }
+    }
+    </script>
+
+    <!-- Fonts + Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* ── Tutorials Hero (mirrors .blog-hero exactly) ── */
+        .tutorials-hero {
+            background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 50%, var(--purple-800) 100%);
+            padding: 64px 0 48px;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .tutorials-hero::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse 55% 70% at 75% 25%, rgba(217,70,239,0.18) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .tutorials-hero::after {
+            content: '';
+            position: absolute;
+            bottom: -1px; left: 0; right: 0;
+            height: 48px;
+            background: var(--gray-50);
+            clip-path: ellipse(55% 100% at 50% 100%);
+        }
+        .tutorials-hero-inner { position: relative; z-index: 1; text-align: center; }
+
+        /* ── Breadcrumb (copy of blog.html) ── */
+        .breadcrumb { background: white; border-bottom: 1px solid var(--gray-200); padding: 12px 0; font-size: 13px; }
+        .breadcrumb-inner { display: flex; align-items: center; gap: 8px; color: var(--gray-500); }
+        .breadcrumb a { color: var(--gray-500); transition: var(--transition); display: flex; align-items: center; gap: 4px; }
+        .breadcrumb a:hover { color: var(--purple-600); }
+        .breadcrumb-sep { color: var(--gray-300); font-size: 11px; }
+        .breadcrumb-current { color: var(--gray-800); font-weight: 500; }
+
+        /* ── Filter bar (copy of blog.html) ── */
+        .filter-bar {
+            background: white; border-bottom: 1px solid var(--gray-200);
+            padding: 14px 0; position: sticky; top: 68px; z-index: 40;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+        .filter-bar-inner { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .cat-btn {
+            display: inline-flex; align-items: center; gap: 6px;
+            padding: 8px 18px; border-radius: var(--radius-full);
+            border: 1.5px solid var(--gray-200); background: white;
+            color: var(--gray-600); font-family: var(--font-body);
+            font-size: 13.5px; font-weight: 500; cursor: pointer;
+            transition: var(--transition); white-space: nowrap;
+        }
+        .cat-btn:hover { border-color: var(--purple-400); color: var(--purple-600); background: var(--purple-50); }
+        .cat-btn.active {
+            background: linear-gradient(135deg, var(--purple-600), var(--fuchsia-500));
+            border-color: transparent; color: white;
+            box-shadow: 0 4px 12px rgba(124,58,237,0.30);
+        }
+        .cat-btn i { font-size: 12px; }
+
+        /* ── Hero Search (copy of blog.html) ── */
+        .tutorials-search-wrap { position: relative; max-width: 560px; margin: 24px auto 0; }
+        .tutorials-search-wrap input {
+            width: 100%; padding: 16px 20px 16px 50px;
+            border-radius: var(--radius-full); border: none;
+            font-family: var(--font-body); font-size: 15px; color: var(--gray-800);
+            background: white; box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+            outline: none; transition: var(--transition);
+        }
+        .tutorials-search-wrap input:focus { box-shadow: 0 8px 28px rgba(0,0,0,0.18), 0 0 0 3px rgba(192,132,252,0.35); }
+        .tutorials-search-wrap input::placeholder { color: var(--gray-400); }
+        .tutorials-search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); color: var(--purple-500); font-size: 17px; pointer-events: none; }
+
+        /* ── Grid (copy of .blog-page-grid) ── */
+        .tutorials-page-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 28px; }
+
+        /* ── Card (copy of .blog-card-full) ── */
+        .tutorial-card-full {
+            background: white; border: 1.5px solid var(--gray-200);
+            border-radius: var(--radius-lg); overflow: hidden;
+            transition: var(--transition); display: flex; flex-direction: column;
+        }
+        .tutorial-card-full:hover { border-color: rgba(124,58,237,0.22); box-shadow: var(--shadow-lg); transform: translateY(-5px); }
+
+        .tutorial-card-img-wrap { position: relative; height: 200px; overflow: hidden; flex-shrink: 0; }
+        .tutorial-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+        .tutorial-card-full:hover .tutorial-card-img-wrap img { transform: scale(1.05); }
+
+        /* Level badge on image */
+        .level-badge {
+            position: absolute; top: 12px; right: 12px;
+            padding: 4px 12px; border-radius: var(--radius-full);
+            font-size: 10.5px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 0.06em; backdrop-filter: blur(8px);
+        }
+        .level-beginner     { background: rgba(22,163,74,0.88);  color: white; }
+        .level-intermediate { background: rgba(245,158,11,0.88); color: white; }
+        .level-advanced     { background: rgba(220,38,38,0.88);  color: white; }
+
+        .tutorial-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+
+        /* Category tag (copy of .blog-cat-tag) */
+        .tutorial-cat-tag {
+            display: inline-flex; align-items: center; gap: 5px;
+            font-size: 10.5px; font-weight: 700; padding: 4px 12px;
+            border-radius: var(--radius-full); text-transform: uppercase;
+            letter-spacing: 0.06em; margin-bottom: 14px;
+            background: var(--purple-100); color: var(--purple-700);
+        }
+
+        /* Title (copy of .blog-card-title) */
+        .tutorial-card-title {
+            font-family: var(--font-display); font-size: 17px; font-weight: 700;
+            color: var(--gray-900); line-height: 1.35; margin-bottom: 10px;
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+            overflow: hidden; transition: var(--transition); text-decoration: none;
+        }
+        .tutorial-card-full:hover .tutorial-card-title { color: var(--purple-600); }
+
+        /* Excerpt (copy of .blog-card-excerpt) */
+        .tutorial-card-excerpt {
+            font-size: 13.5px; color: var(--gray-500); line-height: 1.65;
+            margin-bottom: 20px; display: -webkit-box; -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical; overflow: hidden; flex: 1;
+        }
+
+        /* Meta (copy of .blog-card-meta) */
+        .tutorial-card-meta { display: flex; align-items: center; gap: 16px; font-size: 12px; color: var(--gray-400); margin-bottom: 16px; flex-wrap: wrap; }
+        .tutorial-card-meta span { display: flex; align-items: center; gap: 5px; }
+
+        /* Footer (copy of .blog-card-footer) */
+        .tutorial-card-footer { display: flex; align-items: center; justify-content: space-between; padding-top: 16px; border-top: 1px solid var(--gray-100); }
+        .tutorial-card-author { font-size: 12.5px; color: var(--gray-500); display: flex; align-items: center; gap: 6px; }
+        .tutorial-read-link { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--purple-600); transition: var(--transition); text-decoration: none; }
+        .tutorial-card-full:hover .tutorial-read-link { gap: 9px; }
+
+        /* Count bar (copy of blog.html) */
+        .count-bar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; flex-wrap: wrap; gap: 12px; }
+        .count-text { font-size: 14px; color: var(--gray-500); }
+        .count-text strong { color: var(--purple-600); font-weight: 700; }
+
+        /* No results (copy of blog.html) */
+        .no-results-box { display: none; text-align: center; padding: 80px 24px; grid-column: 1 / -1; }
+        .no-results-box.visible { display: block; }
+        .no-results-box i { font-size: 56px; color: var(--gray-300); margin-bottom: 16px; display: block; }
+        .no-results-box p { color: var(--gray-500); font-size: 17px; margin-bottom: 20px; }
+
+        /* Newsletter (copy of blog.html) */
+        .newsletter-section { background: linear-gradient(135deg, var(--purple-800), var(--purple-600)); color: white; padding: 72px 0; text-align: center; position: relative; overflow: hidden; }
+        .newsletter-section::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 25% 50%, rgba(217,70,239,0.18) 0%, transparent 60%); pointer-events: none; }
+        .newsletter-inner { position: relative; z-index: 1; }
+        .newsletter-icon { font-size: 48px; margin-bottom: 20px; display: block; opacity: 0.9; }
+        .newsletter-section h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 800; margin-bottom: 10px; letter-spacing: -0.02em; }
+        .newsletter-section p { font-size: 1rem; opacity: 0.80; margin-bottom: 32px; }
+        .newsletter-form { display: flex; gap: 12px; max-width: 460px; margin: 0 auto; flex-wrap: wrap; justify-content: center; }
+        .newsletter-input { flex: 1; min-width: 220px; padding: 14px 22px; border-radius: var(--radius-full); border: none; outline: none; font-family: var(--font-body); font-size: 15px; color: var(--gray-800); background: white; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .newsletter-input::placeholder { color: var(--gray-400); }
+        .newsletter-btn { padding: 14px 28px; border-radius: var(--radius-full); border: none; cursor: pointer; background: white; color: var(--purple-700); font-family: var(--font-body); font-size: 15px; font-weight: 700; transition: var(--transition); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .newsletter-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.20); }
+
+        @media (max-width: 768px) { .filter-bar { top: 60px; } .tutorials-page-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) { .cat-btn { padding: 7px 14px; font-size: 12.5px; } .container { padding: 0 16px; } }
+    </style>
+</head>
+<body>
+
+    <!-- ==================== HEADER ==================== -->
+    <header class="site-header" id="siteHeader">
+        <div class="container">
+            <div class="header-inner">
+                <a href="index.html" class="site-logo" aria-label="Free Tools Hub Home">
+                    <div class="logo-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                    <div class="logo-text">
+                        <span class="logo-name">Free Tools Hub</span>
+                        <span class="logo-tagline">Tools · Blogs · Resources</span>
+                    </div>
+                </a>
+                <nav class="main-nav" aria-label="Main navigation">
+                    <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i>Home</a>
+                    <a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i>All Tools</a>
+                    <a href="blog.html"><i class="fas fa-pen-nib" aria-hidden="true"></i>Blog</a>
+                    <a href="news.html"><i class="fas fa-newspaper" aria-hidden="true"></i>News</a>
+                    <a href="resources.html"><i class="fas fa-layer-group" aria-hidden="true"></i>Resources</a>
+                    <a href="tutorials.html" class="active"><i class="fas fa-play-circle" aria-hidden="true"></i>Tutorials</a>
+                    <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane" aria-hidden="true"></i>Contact</a>
+                </nav>
+                <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation" aria-expanded="false">
+                    <i class="fas fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+        </div>
+        <nav class="mobile-nav" id="mobileMenu" aria-label="Mobile navigation">
+            <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i>Home</a>
+            <a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i>All Tools</a>
+            <a href="blog.html"><i class="fas fa-pen-nib" aria-hidden="true"></i>Blog</a>
+            <a href="news.html"><i class="fas fa-newspaper" aria-hidden="true"></i>News</a>
+            <a href="resources.html"><i class="fas fa-layer-group" aria-hidden="true"></i>Resources</a>
+            <a href="tutorials.html" class="active"><i class="fas fa-play-circle" aria-hidden="true"></i>Tutorials</a>
+            <a href="contact.html" class="nav-cta"><i class="fas fa-paper-plane" aria-hidden="true"></i>Contact</a>
+        </nav>
+    </header>
+
+    <!-- ==================== BREADCRUMB ==================== -->
+    <div class="breadcrumb">
+        <div class="container">
+            <div class="breadcrumb-inner">
+                <a href="index.html"><i class="fas fa-home" aria-hidden="true"></i>Home</a>
+                <span class="breadcrumb-sep"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
+                <span class="breadcrumb-current">Tutorials</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== HERO ==================== -->
+    <section class="tutorials-hero" aria-label="Tutorials hero">
+        <div class="container tutorials-hero-inner">
+            <div class="hero-badge" style="margin-bottom: 20px;">
+                <i class="fas fa-play-circle" aria-hidden="true"></i>
+                <span>Step-by-Step Tutorials &nbsp;·&nbsp; Updated 2026</span>
+            </div>
+            <h1 style="font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; margin-bottom: 10px;">
+                Free Tutorials & Guides
+            </h1>
+            <p style="font-size: 1.05rem; opacity: 0.80; font-weight: 300; max-width: 480px; margin: 0 auto;">
+                Learn Web Development, SEO, AI Tools & UI/UX Design with beginner-friendly, step-by-step tutorials
+            </p>
+            <div class="tutorials-search-wrap" role="search">
+                <i class="fas fa-search tutorials-search-icon" aria-hidden="true"></i>
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Search tutorials by title or category..."
+                    aria-label="Search tutorials"
+                    autocomplete="off"
+                >
+            </div>
+        </div>
+    </section>
+
+    <!-- ==================== CATEGORY FILTER ==================== -->
+    <div class="filter-bar" role="navigation" aria-label="Tutorial categories">
+        <div class="container">
+            <div class="filter-bar-inner" id="categoryFilters">
+                <button class="cat-btn active" data-cat="all" aria-pressed="true">
+                    <i class="fas fa-th" aria-hidden="true"></i> All Tutorials
+                </button>
+                <!-- Dynamic category buttons injected by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== TUTORIALS GRID ==================== -->
+    <main class="section" style="background: var(--gray-50); padding-top: 48px;" id="main-content">
+        <div class="container">
+
+            <div class="count-bar">
+                <p class="count-text">
+                    Showing <strong id="tutorialCount">0</strong> tutorials
+                </p>
+            </div>
+
+            <div class="tutorials-page-grid" id="tutorialsGrid" aria-label="Tutorials list">
+                <!-- Loading state -->
+                <div style="grid-column: 1/-1; text-align:center; padding: 64px 0; color: var(--gray-400);">
+                    <i class="fas fa-spinner fa-spin" style="font-size:40px; margin-bottom:12px; display:block; color:var(--purple-400);"></i>
+                    <p style="font-size:16px;">Loading tutorials...</p>
+                </div>
+            </div>
+
+            <div class="no-results-box" id="noResults" role="alert">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <p>No tutorials found matching your search.</p>
+                <button class="btn btn-primary" onclick="resetFilters()">
+                    <i class="fas fa-redo" aria-hidden="true"></i> Show All Tutorials
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ==================== NEWSLETTER ==================== -->
+    <section class="newsletter-section" aria-label="Newsletter subscription">
+        <div class="container newsletter-inner">
+            <i class="fas fa-graduation-cap newsletter-icon" aria-hidden="true"></i>
+            <h2>Get New Tutorials in Your Inbox</h2>
+            <p>Subscribe to get notified when new tutorials, guides & free resources are published</p>
+            <form class="newsletter-form" onsubmit="handleNewsletter(event)" novalidate>
+                <input type="email" class="newsletter-input" placeholder="Enter your email address..." aria-label="Email address for newsletter" required id="newsletterEmail">
+                <button type="submit" class="newsletter-btn">
+                    <i class="fas fa-paper-plane" aria-hidden="true"></i> Subscribe
+                </button>
+            </form>
+            <p id="newsletterMsg" style="margin-top:14px; font-size:13.5px; opacity:0; transition:opacity 0.3s;"></p>
+        </div>
+    </section>
+
+    <!-- ==================== FOOTER ==================== -->
+    <footer class="site-footer" aria-label="Site footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="site-logo">
+                        <div class="logo-icon"><i class="fas fa-bolt" aria-hidden="true"></i></div>
+                        <div class="logo-text"><span class="logo-name">Free Tools Hub</span></div>
+                    </div>
+                    <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials.</p>
+                    <div class="footer-social" style="margin-top: 20px;">
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="https://github.com/freetoolsapp" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer"><i class="fab fa-github" aria-hidden="true"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+                        <a href="#" class="social-icon" aria-label="YouTube"><i class="fab fa-youtube" aria-hidden="true"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home" aria-hidden="true"></i>Home</a></li>
+                        <li><a href="tools.html"><i class="fas fa-tools" aria-hidden="true"></i>All Tools</a></li>
+                        <li><a href="blog.html"><i class="fas fa-pen-nib" aria-hidden="true"></i>Blog</a></li>
+                        <li><a href="news.html"><i class="fas fa-newspaper" aria-hidden="true"></i>News</a></li>
+                        <li><a href="tutorials.html"><i class="fas fa-play-circle" aria-hidden="true"></i>Tutorials</a></li>
+                        <li><a href="contact.html"><i class="fas fa-envelope" aria-hidden="true"></i>Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Tutorial Categories</h4>
+                    <ul>
+                        <li><a href="tutorials.html?cat=Web+Development"><i class="fas fa-code" aria-hidden="true"></i>Web Development</a></li>
+                        <li><a href="tutorials.html?cat=SEO"><i class="fas fa-chart-line" aria-hidden="true"></i>SEO</a></li>
+                        <li><a href="tutorials.html?cat=AI+Tools"><i class="fas fa-robot" aria-hidden="true"></i>AI Tools</a></li>
+                        <li><a href="tutorials.html?cat=UI%2FUX+Design"><i class="fas fa-pencil-ruler" aria-hidden="true"></i>UI/UX Design</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="privacy.html"><i class="fas fa-shield-alt" aria-hidden="true"></i>Privacy Policy</a></li>
+                        <li><a href="terms.html"><i class="fas fa-file-contract" aria-hidden="true"></i>Terms of Service</a></li>
+                        <li><a href="disclaimer.html"><i class="fas fa-exclamation-circle" aria-hidden="true"></i>Disclaimer</a></li>
+                        <li><a href="about.html"><i class="fas fa-info-circle" aria-hidden="true"></i>About Us</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 <a href="index.html">Free Tools Hub</a>. All rights reserved. Made with <span class="heart">♥</span> for developers &amp; creators.</p>
+                <div class="footer-legal">
+                    <a href="privacy.html">Privacy</a>
+                    <a href="terms.html">Terms</a>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== SCRIPTS ==================== -->
+    <script>
+        // Header scroll — identical to blog.html
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        }, { passive: true });
+
+        // Mobile menu — identical to blog.html
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const mobileMenu    = document.getElementById('mobileMenu');
+        mobileMenuBtn.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.toggle('open');
+            mobileMenuBtn.setAttribute('aria-expanded', isOpen);
+            mobileMenuBtn.innerHTML = isOpen
+                ? '<i class="fas fa-times" aria-hidden="true"></i>'
+                : '<i class="fas fa-bars"  aria-hidden="true"></i>';
+        });
+        mobileMenu.querySelectorAll('a').forEach(l => l.addEventListener('click', () => {
+            mobileMenu.classList.remove('open');
+            mobileMenuBtn.setAttribute('aria-expanded', 'false');
+            mobileMenuBtn.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+        }));
+
+        // ── Tutorials Logic (mirrors blog.html JS exactly) ──
+        let tutorialsList  = [];
+        let activeCategory = 'all';
+
+        // Category icon map — same pattern as blog.html catIconMap
+        const catIconMap = {
+            'Web Development': 'fa-code',
+            'SEO':             'fa-chart-line',
+            'AI Tools':        'fa-robot',
+            'UI/UX Design':    'fa-pencil-ruler',
+            'Productivity':    'fa-rocket',
+            'Marketing':       'fa-bullhorn',
+        };
+
+        // Category color map — same pattern as blog.html catColorMap
+        const catColorMap = {
+            'Web Development': { bg: '#dbeafe', color: '#1d4ed8' },
+            'SEO':             { bg: '#dcfce7', color: '#15803d' },
+            'AI Tools':        { bg: '#ede9fe', color: '#6d28d9' },
+            'UI/UX Design':    { bg: '#fce7f3', color: '#be185d' },
+            'Productivity':    { bg: '#fef3c7', color: '#b45309' },
+            'Marketing':       { bg: '#ffedd5', color: '#c2410c' },
+        };
+
+        // Load tutorials.json — same fetch pattern as blog.html loadBlogs
+        async function loadTutorials() {
+            try {
+                const res = await fetch('tutorials.json');
+                if (!res.ok) throw new Error('fetch failed');
+                tutorialsList = await res.json();
+                buildCategoryFilters();
+                displayTutorials(tutorialsList);
+                // Handle ?cat= URL param (same as blog.html)
+                const params = new URLSearchParams(window.location.search);
+                if (params.get('cat')) {
+                    const btn = document.querySelector(`.cat-btn[data-cat="${params.get('cat')}"]`);
+                    if (btn) filterTutorials(params.get('cat'), btn);
+                }
+            } catch(e) {
+                console.warn('tutorials.json load failed, using fallback');
+                loadFallbackTutorials();
+            }
+        }
+
+        // Fallback inline data — same pattern as blog.html loadFallbackBlogs
+        function loadFallbackTutorials() {
+            tutorialsList = [
+                { id:1, title:"HTML & CSS Basics 2026: Complete Beginner Guide to Build Your First Website",      category:"Web Development", level:"Beginner", duration:"25 min", date:"Feb 24, 2026", author:"Free Tools Hub Team", excerpt:"Learn HTML & CSS from absolute scratch in 2026. This beginner-friendly tutorial covers structure, tags, styling, and building your first complete webpage step-by-step.", image:"https://images.unsplash.com/photo-1621839673705-6617adf9e890?w=800&h=400&fit=crop", file:"tutorial-html-css-basics.html" },
+                { id:2, title:"CSS Flexbox & Grid 2026: Master Modern Layouts with Live Interactive Demos",       category:"Web Development", level:"Beginner", duration:"30 min", date:"Feb 24, 2026", author:"Free Tools Hub Team", excerpt:"Master CSS Flexbox and Grid layouts with interactive demos and real code examples. Learn when to use Flexbox vs Grid and build complete page layouts.", image:"https://images.unsplash.com/photo-1507721999472-8ed4421c4af2?w=800&h=400&fit=crop", file:"tutorial-css-flexbox-grid.html" },
+                { id:3, title:"JavaScript Basics 2026: Complete Beginner Guide — Variables to DOM Manipulation", category:"Web Development", level:"Beginner", duration:"35 min", date:"Feb 24, 2026", author:"Free Tools Hub Team", excerpt:"Learn JavaScript from scratch with live code consoles, interactive demos and a real To-Do App project. Covers variables, functions, loops and DOM manipulation.", image:"https://images.unsplash.com/photo-1579468118864-1b9ea3c0db4a?w=800&h=400&fit=crop", file:"tutorial-javascript-basics.html" },
+                { id:4, title:"SEO Basics 2026: How to Rank #1 on Google — Complete Beginner Tutorial",          category:"SEO",             level:"Beginner", duration:"28 min", date:"Feb 24, 2026", author:"Free Tools Hub Team", excerpt:"Learn SEO from scratch and rank higher on Google in 2026. Covers keyword research, on-page SEO, meta tags, backlinks, and free SEO tools.", image:"https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800&h=400&fit=crop", file:"tutorial-seo-basics-2026.html" },
+                { id:5, title:"AI Tools Mastery 2026: How to Use ChatGPT, Claude & Midjourney Like a Pro",      category:"AI Tools",        level:"Beginner", duration:"32 min", date:"Feb 24, 2026", author:"Free Tools Hub Team", excerpt:"Master the best AI tools of 2026 — ChatGPT, Claude, Midjourney and more. Learn prompt engineering and how to 10x your productivity with AI.", image:"https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=400&fit=crop", file:"tutorial-ai-tools-mastery-2026.html" },
+                { id:6, title:"UI/UX Design Basics 2026: Design Beautiful Interfaces in Figma — Beginner Guide",category:"UI/UX Design",    level:"Beginner", duration:"30 min", date:"Feb 24, 2026", author:"Free Tools Hub Team", excerpt:"Learn UI/UX design fundamentals in Figma. Covers design principles, color theory, typography, wireframing and creating your first app design.", image:"https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&h=400&fit=crop", file:"tutorial-uiux-design-basics-2026.html" },
+            ];
+            buildCategoryFilters();
+            displayTutorials(tutorialsList);
+        }
+
+        // Build category filter buttons — identical to blog.html buildCategoryFilters
+        function buildCategoryFilters() {
+            const categories = [...new Set(tutorialsList.map(t => t.category))];
+            const container  = document.getElementById('categoryFilters');
+            categories.forEach(cat => {
+                const icon = catIconMap[cat] || 'fa-tag';
+                const btn  = document.createElement('button');
+                btn.className   = 'cat-btn';
+                btn.dataset.cat = cat;
+                btn.setAttribute('aria-pressed', 'false');
+                btn.innerHTML   = `<i class="fas ${icon}" aria-hidden="true"></i> ${cat}`;
+                btn.onclick     = () => filterTutorials(cat, btn);
+                container.appendChild(btn);
+            });
+        }
+
+        // Display tutorial cards — identical structure to blog.html displayBlogs
+        function displayTutorials(posts) {
+            const grid      = document.getElementById('tutorialsGrid');
+            const noResults = document.getElementById('noResults');
+            const countEl   = document.getElementById('tutorialCount');
+
+            countEl.textContent = posts.length;
+            grid.innerHTML = '';
+
+            if (posts.length === 0) {
+                noResults.classList.add('visible');
+                return;
+            }
+            noResults.classList.remove('visible');
+
+            posts.forEach((post, i) => {
+                const colors   = catColorMap[post.category] || { bg: 'var(--purple-100)', color: 'var(--purple-700)' };
+                const icon     = catIconMap[post.category]  || 'fa-play-circle';
+                const levelCls = 'level-' + (post.level || 'Beginner').toLowerCase().split(' ')[0];
+
+                const article  = document.createElement('article');
+                article.className        = 'tutorial-card-full';
+                article.style.opacity    = '0';
+                article.style.transform  = 'translateY(20px)';
+                article.style.transition = `opacity 0.45s ease ${(i % 3) * 0.08}s, transform 0.45s ease ${(i % 3) * 0.08}s, border-color 0.25s, box-shadow 0.25s`;
+
+                article.innerHTML = `
+                    <div class="tutorial-card-img-wrap">
+                        <img
+                            src="${post.image}"
+                            alt="${post.title}"
+                            loading="lazy"
+                            width="800" height="400"
+                            onerror="this.src='https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=800&h=400&fit=crop'"
+                        >
+                        <span class="level-badge ${levelCls}">
+                            <i class="fas fa-signal" aria-hidden="true"></i> ${post.level}
+                        </span>
+                    </div>
+                    <div class="tutorial-card-body">
+                        <span class="tutorial-cat-tag" style="background:${colors.bg}; color:${colors.color};">
+                            <i class="fas ${icon}" aria-hidden="true"></i> ${post.category}
+                        </span>
+                        <a href="tutorials/${post.file}" class="tutorial-card-title" aria-label="${post.title}">
+                            ${post.title}
+                        </a>
+                        <p class="tutorial-card-excerpt">${post.excerpt}</p>
+                        <div class="tutorial-card-meta">
+                            <span><i class="far fa-calendar" aria-hidden="true"></i> ${post.date}</span>
+                            <span><i class="far fa-clock" aria-hidden="true"></i> ${post.duration}</span>
+                            <span><i class="fas fa-signal" aria-hidden="true"></i> ${post.level}</span>
+                        </div>
+                        <div class="tutorial-card-footer">
+                            <span class="tutorial-card-author">
+                                <i class="far fa-user" aria-hidden="true"></i> ${post.author}
+                            </span>
+                            <a href="tutorials/${post.file}" class="tutorial-read-link" aria-label="Start ${post.title}">
+                                Start Tutorial <i class="fas fa-arrow-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(article);
+
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        article.style.opacity   = '1';
+                        article.style.transform = 'translateY(0)';
+                    }, 30 + (i % 3) * 80);
+                });
+            });
+        }
+
+        // Filter by category — identical to blog.html filterBlogs
+        function filterTutorials(cat, btn) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-pressed', 'false');
+            });
+            if (btn) { btn.classList.add('active'); btn.setAttribute('aria-pressed', 'true'); }
+            document.getElementById('searchInput').value = '';
+            const filtered = cat === 'all' ? [...tutorialsList] : tutorialsList.filter(t => t.category === cat);
+            displayTutorials(filtered);
+        }
+
+        // Search — identical to blog.html
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const q    = e.target.value.toLowerCase().trim();
+            const base = activeCategory === 'all' ? tutorialsList : tutorialsList.filter(t => t.category === activeCategory);
+            const res  = q ? base.filter(t =>
+                t.title.toLowerCase().includes(q)    ||
+                t.excerpt.toLowerCase().includes(q)  ||
+                t.category.toLowerCase().includes(q) ||
+                (t.level && t.level.toLowerCase().includes(q))
+            ) : base;
+            displayTutorials(res);
+        });
+
+        // Reset — identical to blog.html
+        function resetFilters() {
+            activeCategory = 'all';
+            document.getElementById('searchInput').value = '';
+            document.querySelectorAll('.cat-btn').forEach((b, i) => {
+                b.classList.toggle('active', i === 0);
+                b.setAttribute('aria-pressed', i === 0 ? 'true' : 'false');
+            });
+            displayTutorials(tutorialsList);
+        }
+
+        // Newsletter — identical to blog.html
+        function handleNewsletter(e) {
+            e.preventDefault();
+            const email = document.getElementById('newsletterEmail');
+            const msgEl = document.getElementById('newsletterMsg');
+            if (!email.value || !email.value.includes('@')) {
+                msgEl.textContent = '⚠️ Please enter a valid email address.';
+                msgEl.style.opacity = '1';
+                return;
+            }
+            msgEl.textContent = '✅ Thank you! You\'ve been subscribed successfully.';
+            msgEl.style.opacity = '1';
+            email.value = '';
+            setTimeout(() => { msgEl.style.opacity = '0'; }, 4000);
+        }
+
+        // "All Tutorials" button — identical to blog.html
+        document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', function() {
+            filterTutorials('all', this);
+        });
+
+        // Init
+        loadTutorials();
+    </script>
+
+</body>
+</html>
