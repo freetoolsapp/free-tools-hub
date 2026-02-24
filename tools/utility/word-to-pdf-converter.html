@@ -3,656 +3,737 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Word to PDF Converter - Free Tools Hub</title>
-    <meta name="title" content="Word to PDF Converter - Free Tools Hub">
-    <meta name="description" content="Convert Word documents to PDF files instantly. Free online DOCX to PDF converter. No signup required. Exact layout preserved.">
-    <meta name="keywords" content="Word to PDF, DOCX to PDF, convert Word to PDF, DOC to PDF free, online converter">
-    <meta name="robots" content="index, follow">
-    <meta name="language" content="English">
+    <meta name="description" content="Convert Word documents to PDF. Make DOC and DOCX files easy to read by converting them to PDF. Free, fast, no signup.">
+    <meta name="keywords" content="Word to PDF, DOCX to PDF, DOC to PDF, free PDF converter">
     <meta name="author" content="freetoolsapp">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
-    <meta property="og:title" content="Word to PDF Converter - Free Tools Hub">
-    <meta property="og:description" content="Convert Word documents to PDF instantly. Free, fast, no signup!">
     <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-    <!-- Core libraries -->
+    <!-- Conversion libraries -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
-        .drop-zone { border: 3px dashed #667eea; transition: all 0.3s; }
-        .drop-zone.dragover { border-color: #4caf50; background: #e8f5e9 !important; transform: scale(1.02); }
-        .upload-section.dragover { background: linear-gradient(135deg,#e8f5e9,#c8e6c9) !important; }
+        * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        body { background: #fff; color: #333; }
 
+        /* ─── HEADER ─────────────────────────────── */
+        .site-header { background:#fff; border-bottom:1px solid #e8e8e8; }
+        .nav-link { font-size:13px; font-weight:500; color:#555; transition:color .2s; text-decoration:none; }
+        .nav-link:hover { color:#e2574c; }
+        .nav-link.active { color:#e2574c; font-weight:600; }
+
+        /* ─── RED BUTTON ─────────────────────────── */
+        .btn-red {
+            background:#e2574c;
+            color:#fff;
+            border:none;
+            border-radius:6px;
+            padding:12px 28px;
+            font-size:15px;
+            font-weight:600;
+            cursor:pointer;
+            transition:all .2s;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            text-decoration:none;
+        }
+        .btn-red:hover { background:#cc3f35; transform:translateY(-1px); box-shadow:0 4px 14px rgba(226,87,76,.35); }
+        .btn-red:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
+
+        /* ─── TOOL HERO SECTION ──────────────────── */
+        .tool-hero {
+            background: linear-gradient(135deg, #f8f3ff 0%, #fff5f4 100%);
+            border-bottom: 1px solid #ede8f5;
+            padding: 52px 20px 56px;
+            text-align: center;
+        }
+
+        /* ─── UPLOAD ZONE ────────────────────────── */
+        .upload-zone {
+            border: 2px dashed #d4b8f0;
+            border-radius: 14px;
+            background: #fff;
+            padding: 52px 30px;
+            cursor: pointer;
+            transition: all .25s;
+            position: relative;
+        }
+        .upload-zone:hover, .upload-zone.over {
+            border-color: #e2574c;
+            background: #fff8f7;
+        }
+        .upload-zone.over { transform: scale(1.01); }
+        #fileInput { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; z-index:5; }
+
+        /* ─── FILE LIST (ilovepdf style thumbnails) ─ */
+        .file-item {
+            background: #fff;
+            border: 1.5px solid #e8e8e8;
+            border-radius: 10px;
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            transition: box-shadow .2s;
+        }
+        .file-item:hover { box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+        .file-thumb {
+            width: 44px; height: 52px;
+            background: linear-gradient(135deg,#e3f2fd,#bbdefb);
+            border-radius: 6px;
+            display: flex; align-items: center; justify-content: center;
+            flex-shrink: 0;
+        }
+
+        /* ─── PROGRESS ───────────────────────────── */
         @keyframes spin { to { transform: rotate(360deg); } }
-        .spinner { border:4px solid #f3f3f3; border-top:4px solid #667eea; border-radius:50%; width:60px; height:60px; animation:spin 1s linear infinite; margin:0 auto; }
+        .spinner {
+            border: 3px solid #f0f0f0;
+            border-top-color: #e2574c;
+            border-radius: 50%;
+            animation: spin .8s linear infinite;
+        }
+        .prog-track { background:#ede8f5; border-radius:99px; overflow:hidden; }
+        @keyframes progShimmer { to { background-position:-200% 0; } }
+        .prog-fill {
+            height:100%;
+            background: linear-gradient(90deg,#e2574c,#c0392b,#e2574c);
+            background-size:200% 100%;
+            animation: progShimmer 1.4s linear infinite;
+            border-radius:99px;
+            transition: width .4s ease;
+        }
 
-        /* docx-preview dark stage */
-        #docxPreviewBox { background:#525659; padding:20px; min-height:150px; max-height:480px; overflow-y:auto; }
-        #docxPreviewBox .docx-wrapper { background:#525659 !important; }
-        #docxPreviewBox section.docx { box-shadow:0 4px 24px rgba(0,0,0,.5)!important; margin:0 auto 16px auto!important; }
+        /* ─── RESULT BOX ─────────────────────────── */
+        .result-box {
+            background:#fff;
+            border:1.5px solid #e8e8e8;
+            border-radius:14px;
+            overflow:hidden;
+        }
+        .result-header {
+            background:#f7f7f7;
+            border-bottom:1px solid #e8e8e8;
+            padding:12px 18px;
+            display:flex; align-items:center; justify-content:space-between;
+        }
 
-        /* Mammoth fallback */
-        #docxPreviewBox.fallback-mode { background:white; padding:32px 40px; font-family:'Times New Roman',serif; font-size:12pt; line-height:1.6; color:#000; }
-        #docxPreviewBox.fallback-mode h1{font-size:18pt;font-weight:bold;margin:.5em 0}
-        #docxPreviewBox.fallback-mode h2{font-size:15pt;font-weight:bold;margin:.4em 0}
-        #docxPreviewBox.fallback-mode h3{font-size:13pt;font-weight:bold;margin:.35em 0}
-        #docxPreviewBox.fallback-mode p{margin:.35em 0}
-        #docxPreviewBox.fallback-mode table{border-collapse:collapse;width:100%;margin:.5em 0}
-        #docxPreviewBox.fallback-mode td,#docxPreviewBox.fallback-mode th{border:1px solid #ccc;padding:4px 8px}
-        #docxPreviewBox.fallback-mode th{background:#f0f0f0;font-weight:bold}
-        #docxPreviewBox.fallback-mode ul,#docxPreviewBox.fallback-mode ol{padding-left:1.5em}
-        #docxPreviewBox.fallback-mode img{max-width:100%;height:auto}
+        /* ─── DOCX STAGE (page render) ──────────── */
+        #docxStage { background:#525659; padding:20px; min-height:120px; max-height:420px; overflow-y:auto; }
+        #docxStage .docx-wrapper { background:#525659 !important; }
+        #docxStage section.docx { margin:0 auto 14px !important; box-shadow:0 4px 20px rgba(0,0,0,.45) !important; }
 
-        /* Progress shimmer */
-        @keyframes shimmer { to { background-position: -200% 0; } }
-        .progress-shimmer { background:linear-gradient(90deg,#667eea,#764ba2,#f093fb,#667eea); background-size:200% 100%; animation:shimmer 2s linear infinite; }
+        /* ─── SUCCESS ────────────────────────────── */
+        @keyframes pop { 0%{transform:scale(0) rotate(-20deg)} 70%{transform:scale(1.12) rotate(4deg)} 100%{transform:scale(1) rotate(0)} }
+        .pop-anim { animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
 
-        /* Hero gradient animation */
-        .hero-gradient { background:linear-gradient(135deg,#667eea,#764ba2,#f093fb); background-size:200% 200%; animation:heroShift 6s ease infinite; }
-        @keyframes heroShift { 0%,100%{background-position:0% 50%} 50%{background-position:100% 50%} }
+        /* ─── GREEN DOWNLOAD BTN ─────────────────── */
+        .btn-green {
+            background: linear-gradient(135deg,#27ae60,#1e8449);
+            color:#fff; border:none; border-radius:8px;
+            padding:15px 32px; font-size:16px; font-weight:700;
+            cursor:pointer; display:inline-flex; align-items:center; gap:10px;
+            transition:all .2s; width:100%; justify-content:center;
+            box-shadow:0 4px 16px rgba(39,174,96,.3);
+        }
+        .btn-green:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(39,174,96,.4); }
 
-        /* Hover transitions */
-        .feature-card,.related-card { transition:all 0.3s; }
-        .feature-card:hover { transform:translateY(-5px); box-shadow:0 10px 30px rgba(102,126,234,.3); }
-        .related-card:hover  { transform:translateY(-3px); box-shadow:0 8px 24px rgba(0,0,0,.12); }
+        /* ─── TOOL CARDS ─────────────────────────── */
+        .tool-card { border:1.5px solid #eee; border-radius:12px; transition:all .2s; background:#fff; text-decoration:none; display:block; }
+        .tool-card:hover { border-color:#e2574c; box-shadow:0 6px 20px rgba(226,87,76,.14); transform:translateY(-3px); }
 
-        /* File chip */
-        .file-chip { background:linear-gradient(135deg,#f0fdf4,#dcfce7); border:2px solid #86efac; }
-
-        /* Check pop */
-        @keyframes checkPop { 0%{transform:scale(0) rotate(-30deg)} 70%{transform:scale(1.15) rotate(5deg)} 100%{transform:scale(1) rotate(0)} }
-        .check-pop { animation:checkPop .5s cubic-bezier(.34,1.56,.64,1) forwards; }
-
-        /* Status blink */
-        @keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
-        .status-dot { display:inline-block; width:8px; height:8px; background:#4ade80; border-radius:50%; animation:blink 1.2s ease infinite; }
+        /* ─── SCROLL ─────────────────────────────── */
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-thumb { background:#ddd; border-radius:3px; }
+        ::-webkit-scrollbar-thumb:hover { background:#e2574c; }
     </style>
 </head>
-<body class="bg-gray-50">
+<body>
 
-<!-- ═══════════════════ HEADER ═══════════════════ -->
-<header class="bg-white shadow-md sticky top-0 z-50">
-    <div class="container mx-auto px-4 py-4">
-        <div class="flex justify-between items-center">
-            <a href="../../index.html" class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                    <i class="fas fa-tools text-white text-xl"></i>
-                </div>
-                <div>
-                    <h1 class="font-bold text-xl text-gray-800">Free Tools Hub</h1>
-                    <p class="text-xs text-gray-500">Tools • Blogs • Resources</p>
-                </div>
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-header sticky top-0 z-50">
+    <div class="max-w-screen-xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
+
+        <!-- Logo -->
+        <a href="../../index.html" class="flex items-center gap-3 flex-shrink-0">
+            <div class="w-9 h-9 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
+                <i class="fas fa-tools text-white text-sm"></i>
+            </div>
+            <div>
+                <div class="font-bold text-gray-900 text-sm leading-none">Free Tools Hub</div>
+                <div class="text-gray-400 text-xs leading-none mt-0.5">Tools • Blogs • Resources</div>
+            </div>
+        </a>
+
+        <!-- Nav desktop -->
+        <nav class="hidden lg:flex items-center gap-5">
+            <a href="../../index.html" class="nav-link"><i class="fas fa-home mr-1 text-xs"></i>Home</a>
+            <a href="../../index.html#tools" class="nav-link active"><i class="fas fa-tools mr-1 text-xs"></i>Tools</a>
+            <a href="../../blog.html" class="nav-link"><i class="fas fa-blog mr-1 text-xs"></i>Blog</a>
+            <a href="../../resources.html" class="nav-link"><i class="fas fa-book mr-1 text-xs"></i>Resources</a>
+            <a href="../../tutorials.html" class="nav-link"><i class="fas fa-chalkboard-teacher mr-1 text-xs"></i>Tutorials</a>
+            <a href="../../comparisons.html" class="nav-link"><i class="fas fa-balance-scale mr-1 text-xs"></i>Compare</a>
+            <a href="../../contact.html" class="btn-red py-2 px-4 text-sm">
+                <i class="fas fa-envelope"></i>Contact
             </a>
-            <nav class="hidden md:flex items-center space-x-6">
-                <a href="../../index.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-home mr-1"></i>Home</a>
-                <a href="../../index.html#tools" class="text-blue-600 font-semibold"><i class="fas fa-tools mr-1"></i>Tools</a>
-                <a href="../../blog.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-blog mr-1"></i>Blog</a>
-                <a href="../../resources.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-book mr-1"></i>Resources</a>
-                <a href="../../tutorials.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-chalkboard-teacher mr-1"></i>Tutorials</a>
-                <a href="../../comparisons.html" class="text-gray-700 hover:text-blue-600 font-medium"><i class="fas fa-balance-scale mr-1"></i>Compare</a>
-                <a href="../../contact.html" class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2 rounded-lg hover:shadow-lg"><i class="fas fa-envelope mr-1"></i>Contact</a>
-            </nav>
-            <button id="mobileMenuBtn" class="md:hidden text-gray-700"><i class="fas fa-bars text-2xl"></i></button>
-        </div>
-        <nav id="mobileMenu" class="hidden md:hidden mt-4 space-y-2">
-            <a href="../../index.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-home mr-2"></i>Home</a>
-            <a href="../../index.html#tools" class="block py-2 text-blue-600 font-semibold"><i class="fas fa-tools mr-2"></i>Tools</a>
-            <a href="../../blog.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-blog mr-2"></i>Blog</a>
-            <a href="../../resources.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-book mr-2"></i>Resources</a>
-            <a href="../../tutorials.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a>
-            <a href="../../comparisons.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-balance-scale mr-2"></i>Compare</a>
-            <a href="../../contact.html" class="block py-2 text-gray-700 hover:text-blue-600"><i class="fas fa-envelope mr-2"></i>Contact</a>
         </nav>
+
+        <button id="mobileMenuBtn" class="lg:hidden text-gray-600 text-xl p-1">
+            <i class="fas fa-bars"></i>
+        </button>
     </div>
+
+    <!-- Mobile nav -->
+    <nav id="mobileMenu" class="hidden lg:hidden border-t border-gray-100 bg-white">
+        <div class="max-w-screen-xl mx-auto px-5 py-3 space-y-1 text-sm">
+            <a href="../../index.html" class="block py-2 nav-link"><i class="fas fa-home w-5 mr-1"></i>Home</a>
+            <a href="../../index.html#tools" class="block py-2 nav-link active"><i class="fas fa-tools w-5 mr-1"></i>Tools</a>
+            <a href="../../blog.html" class="block py-2 nav-link"><i class="fas fa-blog w-5 mr-1"></i>Blog</a>
+            <a href="../../resources.html" class="block py-2 nav-link"><i class="fas fa-book w-5 mr-1"></i>Resources</a>
+            <a href="../../tutorials.html" class="block py-2 nav-link"><i class="fas fa-chalkboard-teacher w-5 mr-1"></i>Tutorials</a>
+            <a href="../../comparisons.html" class="block py-2 nav-link"><i class="fas fa-balance-scale w-5 mr-1"></i>Compare</a>
+            <a href="../../contact.html" class="block py-2 nav-link"><i class="fas fa-envelope w-5 mr-1"></i>Contact</a>
+        </div>
+    </nav>
 </header>
 
-<!-- ═══════════════════ BREADCRUMB ═══════════════════ -->
-<div class="bg-white border-b">
-    <div class="container mx-auto px-4 py-3">
-        <div class="flex items-center text-sm text-gray-600">
-            <a href="../../index.html" class="hover:text-blue-600"><i class="fas fa-home mr-1"></i>Home</a>
-            <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-            <a href="../../index.html#tools" class="hover:text-blue-600">Tools</a>
-            <i class="fas fa-chevron-right mx-2 text-gray-400"></i>
-            <span class="text-gray-800 font-medium">Word to PDF Converter</span>
-        </div>
+<!-- ══════════════ BREADCRUMB ══════════════ -->
+<div class="bg-gray-50 border-b border-gray-100 text-xs py-2">
+    <div class="max-w-screen-xl mx-auto px-5 flex items-center gap-2 text-gray-400">
+        <a href="../../index.html" class="hover:text-red-500 transition">Home</a>
+        <i class="fas fa-chevron-right text-gray-300"></i>
+        <a href="../../index.html#tools" class="hover:text-red-500 transition">Tools</a>
+        <i class="fas fa-chevron-right text-gray-300"></i>
+        <span class="text-gray-600 font-medium">Word to PDF</span>
     </div>
 </div>
 
-<!-- ═══════════════════ HERO ═══════════════════ -->
-<section class="hero-gradient text-white py-14">
-    <div class="container mx-auto px-4 text-center">
-        <div class="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mx-auto mb-5 backdrop-blur">
-            <i class="fas fa-file-pdf text-5xl"></i>
-        </div>
-        <h2 class="text-4xl md:text-5xl font-bold mb-4">Word to PDF Converter</h2>
-        <p class="text-xl mb-3">Convert DOCX &amp; DOC to PDF with <strong>exact layout</strong> preserved</p>
-        <p class="text-sm opacity-90 mb-5">
-            <i class="fas fa-check-circle mr-1"></i>Free &nbsp;•&nbsp;
-            <i class="fas fa-check-circle mr-1"></i>No Signup &nbsp;•&nbsp;
-            <i class="fas fa-check-circle mr-1"></i>Instant Results &nbsp;•&nbsp;
-            <i class="fas fa-check-circle mr-1"></i>Preserves Formatting
-        </p>
-        <div class="inline-flex items-center gap-2 bg-white/20 backdrop-blur px-5 py-2 rounded-full text-sm font-semibold border border-white/30">
-            <span class="status-dot"></span>
-            100% Browser-Based — Your file never leaves your device
-        </div>
-    </div>
-</section>
+<!-- ══════════════ TOOL HERO ══════════════ -->
+<section class="tool-hero">
+    <div class="max-w-2xl mx-auto">
 
-<!-- ═══════════════════ MAIN ═══════════════════ -->
-<main class="py-12">
-    <div class="container mx-auto px-4 max-w-6xl">
-
-        <!-- Upload -->
-        <div id="uploadSection" class="upload-section bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl shadow-lg p-8 mb-8 transition-all duration-300">
-            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">
-                <i class="fas fa-upload text-blue-600 mr-2"></i>Upload Your Word Document
-            </h3>
-            <div id="dropZone" class="drop-zone bg-white rounded-xl p-12 text-center cursor-pointer">
-                <input type="file" id="fileInput" accept=".docx,.doc" class="hidden">
-                <i class="fas fa-file-word text-7xl text-blue-500 mb-5 block"></i>
-                <h4 class="text-xl font-bold text-gray-800 mb-2">Drag &amp; Drop or Click to Upload</h4>
-                <p class="text-gray-500 mb-5">Supports: <strong>.DOCX</strong> and <strong>.DOC</strong> &nbsp;•&nbsp; All file sizes supported</p>
-                <label for="fileInput" class="inline-block cursor-pointer">
-                    <div class="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-9 py-3 rounded-xl font-semibold hover:shadow-xl transition inline-block">
-                        <i class="fas fa-folder-open mr-2"></i>Browse Files
-                    </div>
-                </label>
+        <!-- Icon (iLovePDF uses big colorful icon) -->
+        <div class="w-24 h-24 mx-auto mb-6 relative">
+            <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-file-word text-white text-5xl"></i>
+            </div>
+            <!-- PDF badge overlay -->
+            <div class="absolute -bottom-1 -right-1 w-9 h-9 bg-red-500 rounded-lg flex items-center justify-center shadow-md">
+                <i class="fas fa-file-pdf text-white text-base"></i>
             </div>
         </div>
 
-        <!-- File Chip -->
-        <div id="fileChip" class="hidden file-chip rounded-xl p-4 mb-6 flex items-center gap-4">
-            <div class="w-12 h-12 bg-green-600 rounded-xl flex items-center justify-center flex-shrink-0">
-                <i class="fas fa-file-word text-white text-xl"></i>
-            </div>
-            <div class="flex-1 min-w-0">
-                <div id="chipName" class="font-bold text-gray-800 truncate"></div>
-                <div id="chipSize" class="text-sm text-gray-500 mt-0.5"></div>
-            </div>
-            <button id="chipRemove" class="text-gray-400 hover:text-red-500 hover:bg-red-50 p-2 rounded-lg transition"><i class="fas fa-times"></i></button>
-        </div>
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">Convert WORD to PDF</h1>
+        <p class="text-gray-500 text-lg mb-10 leading-relaxed">Make DOC and DOCX files easy to read by converting them to PDF.</p>
 
-        <!-- Error -->
-        <div id="errorBox" class="hidden bg-red-50 border-2 border-red-300 rounded-xl p-4 mb-6 flex items-start gap-3 text-red-700 font-medium">
-            <i class="fas fa-exclamation-triangle mt-0.5 flex-shrink-0"></i>
-            <span id="errorMsg"></span>
-        </div>
-
-        <!-- Processing -->
-        <div id="processing" class="hidden bg-white rounded-2xl shadow-lg p-10 mb-8">
-            <div class="text-center">
-                <div class="spinner mb-6"></div>
-                <h3 id="processingMsg" class="text-xl font-bold text-gray-800 mb-2">⚡ Rendering your document…</h3>
-                <p class="text-gray-500 mb-6">This may take a moment depending on file size</p>
-                <div class="bg-gray-200 h-8 rounded-full overflow-hidden max-w-md mx-auto">
-                    <div id="progressFill" class="progress-shimmer h-full flex items-center justify-center text-white font-bold text-sm transition-all duration-500" style="width:5%">
-                        <span id="progressPct">5%</span>
+        <!-- ── UPLOAD ZONE ── -->
+        <div id="stageUpload">
+            <div id="uploadZone" class="upload-zone mb-4">
+                <input type="file" id="fileInput" accept=".docx,.doc">
+                <div class="pointer-events-none">
+                    <i class="fas fa-cloud-upload-alt text-5xl text-purple-300 mb-4 block"></i>
+                    <p class="text-gray-500 text-base mb-5">Upload your file and transform it.</p>
+                    <div class="btn-red mx-auto w-max text-sm pointer-events-auto" style="pointer-events:auto" onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i>Select WORD files
                     </div>
-                </div>
-                <p id="progressStatus" class="text-sm text-gray-500 mt-3">Reading file…</p>
-            </div>
-        </div>
-
-        <!-- Results: Preview + Download side by side (like PDF-to-Word) -->
-        <div id="results" class="hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-
-                <!-- Preview -->
-                <div class="bg-white rounded-2xl shadow-lg p-6">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-eye text-blue-600 mr-2"></i>Preview
-                        <span id="previewBadge" class="ml-auto text-xs font-bold bg-green-100 text-green-700 px-3 py-1 rounded-full">Exact Layout</span>
-                    </h3>
-                    <div class="rounded-xl overflow-hidden border-2 border-gray-200">
-                        <div id="docxPreviewBox"></div>
-                    </div>
-                </div>
-
-                <!-- Download Panel -->
-                <div class="bg-white rounded-2xl shadow-lg p-6 flex flex-col">
-                    <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
-                        <i class="fas fa-file-pdf text-red-500 mr-2"></i>Convert &amp; Download
-                    </h3>
-
-                    <!-- File info -->
-                    <div class="bg-gray-50 rounded-xl p-4 mb-5 border border-gray-200">
-                        <div class="flex items-center gap-3">
-                            <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                                <i class="fas fa-file-word text-blue-600"></i>
-                            </div>
-                            <div class="min-w-0">
-                                <div id="resultFileName" class="font-semibold text-gray-800 text-sm truncate"></div>
-                                <div id="resultFileSize" class="text-xs text-gray-500 mt-0.5"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- What's preserved -->
-                    <div class="bg-blue-50 rounded-xl p-4 mb-5 border border-blue-100 text-sm text-blue-800 space-y-1.5">
-                        <div class="font-bold mb-2"><i class="fas fa-check-double mr-1"></i>What will be preserved:</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Fonts, sizes &amp; text styling</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Tables, borders &amp; layout</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Embedded images</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Headings &amp; paragraph spacing</div>
-                        <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Lists, indentation &amp; alignment</div>
-                    </div>
-
-                    <div class="flex flex-col gap-3 mt-auto">
-                        <button id="convertBtn"
-                            class="bg-gradient-to-r from-red-500 to-pink-600 text-white px-6 py-4 rounded-xl font-bold text-lg hover:shadow-xl transition hover:-translate-y-0.5 flex items-center justify-center gap-3">
-                            <i class="fas fa-file-pdf text-2xl"></i>Convert &amp; Download PDF
-                        </button>
-                        <button id="btnAgain"
-                            class="bg-gray-100 text-gray-700 px-6 py-3 rounded-xl font-semibold hover:bg-gray-200 transition flex items-center justify-center gap-2">
-                            <i class="fas fa-redo"></i>Convert Another File
-                        </button>
-                    </div>
+                    <p class="text-gray-400 text-xs mt-5">or drop WORD documents here</p>
                 </div>
             </div>
 
-            <!-- Success panel -->
-            <div id="successPanel" class="hidden mt-6 bg-gradient-to-br from-green-50 to-emerald-50 border-2 border-green-300 rounded-2xl p-8 text-center">
-                <div class="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-4 check-pop">
-                    <i class="fas fa-check text-white text-2xl"></i>
+            <!-- Error -->
+            <div id="errBox" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-sm flex items-center gap-2 text-left">
+                <i class="fas fa-exclamation-circle flex-shrink-0"></i>
+                <span id="errMsg"></span>
+            </div>
+        </div>
+
+        <!-- ── PROCESSING STAGE ── -->
+        <div id="stageProcess" class="hidden">
+            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm">
+                <div class="spinner w-14 h-14 mx-auto mb-6"></div>
+                <h3 id="procTitle" class="text-lg font-bold text-gray-800 mb-1">Rendering your document…</h3>
+                <p id="procSub" class="text-gray-400 text-sm mb-6">Please wait a moment</p>
+                <div class="prog-track h-2.5 mb-2">
+                    <div id="progFill" class="prog-fill" style="width:5%"></div>
                 </div>
-                <h3 class="text-xl font-bold text-green-800 mb-2">PDF Downloaded Successfully!</h3>
-                <p id="successSub" class="text-green-700 mb-5"></p>
-                <button onclick="resetAll()" class="bg-white border-2 border-green-400 text-green-700 px-8 py-3 rounded-xl font-semibold hover:bg-green-50 transition">
-                    <i class="fas fa-redo mr-2"></i>Convert Another File
+                <div class="flex justify-between text-xs text-gray-400">
+                    <span id="progStatus">Reading file…</span>
+                    <span id="progPct">5%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── PREVIEW + CONVERT STAGE ── -->
+        <div id="stagePreview" class="hidden">
+
+            <!-- File info row -->
+            <div class="file-item mb-5 text-left">
+                <div class="file-thumb">
+                    <i class="fas fa-file-word text-blue-500 text-2xl"></i>
+                </div>
+                <div class="flex-1 min-w-0">
+                    <div id="fName" class="font-semibold text-gray-800 text-sm truncate"></div>
+                    <div id="fSize" class="text-gray-400 text-xs mt-0.5"></div>
+                </div>
+                <button id="removeBtn" class="w-8 h-8 rounded-full hover:bg-red-50 text-gray-300 hover:text-red-400 transition flex items-center justify-center">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <!-- Document preview box -->
+            <div class="result-box mb-6 text-left">
+                <div class="result-header">
+                    <span class="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="fas fa-eye text-purple-400"></i>Preview
+                    </span>
+                    <span id="prevBadge" class="text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full">Exact Layout</span>
+                </div>
+                <div id="docxStage"></div>
+            </div>
+
+            <!-- CONVERT BUTTON — big, centered, red -->
+            <button id="convertBtn" class="btn-red w-full justify-center text-lg py-4 mb-3">
+                <i class="fas fa-cog text-xl"></i>
+                Convert to PDF
+            </button>
+            <p class="text-gray-400 text-xs text-center">
+                <i class="fas fa-lock mr-1"></i>Processed locally — your file never leaves your device
+            </p>
+
+            <!-- Converting mini-progress (shown during pdf generation) -->
+            <div id="convProgress" class="hidden mt-5 bg-gray-50 border border-gray-200 rounded-xl p-4 text-left">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="spinner w-6 h-6 flex-shrink-0" style="border-width:2.5px"></div>
+                    <span id="convMsg" class="text-sm text-gray-700 font-medium">Generating PDF…</span>
+                </div>
+                <div class="prog-track h-2">
+                    <div id="convFill" class="prog-fill" style="width:10%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ── SUCCESS STAGE ── -->
+        <div id="stageSuccess" class="hidden">
+            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm text-center">
+                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-5 pop-anim">
+                    <i class="fas fa-check text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Your PDF is ready!</h3>
+                <p id="sucName" class="text-gray-400 text-sm mb-8"></p>
+
+                <button id="dlBtn" class="btn-green mb-4">
+                    <i class="fas fa-download text-xl"></i>
+                    Download PDF
+                </button>
+
+                <button onclick="resetAll()"
+                    class="w-full border border-gray-200 text-gray-500 py-3 rounded-xl text-sm font-semibold hover:border-red-300 hover:text-red-500 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-redo text-xs"></i>Convert another WORD file
                 </button>
             </div>
         </div>
 
-        <!-- Features & Tips -->
-        <div class="bg-yellow-50 border-2 border-yellow-300 rounded-xl p-6 mt-8">
-            <h4 class="font-bold text-yellow-800 mb-3 flex items-center text-lg">
-                <i class="fas fa-lightbulb text-yellow-500 mr-2 text-xl"></i>Features &amp; Tips
-            </h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-yellow-900">
-                <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Runs 100% in browser — no upload to any server</div>
-                <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Supports complex tables &amp; multi-column layouts</div>
-                <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Live document preview before converting</div>
-                <div><i class="fas fa-check-circle text-green-600 mr-2"></i>High-resolution PDF output (2× quality)</div>
-                <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Images embedded from DOCX file</div>
-                <div><i class="fas fa-check-circle text-green-600 mr-2"></i>Works on any device — phone, tablet, desktop</div>
+    </div><!-- /max-w-2xl -->
+</section>
+
+<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-4xl mx-auto px-5">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-12">How to convert Word to PDF</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-purple-600">1</div>
+                <h3 class="font-bold text-gray-800 mb-2">Select WORD file</h3>
+                <p class="text-gray-500 text-sm">Click "Select WORD files" or drag &amp; drop your .DOCX or .DOC file</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-red-500">2</div>
+                <h3 class="font-bold text-gray-800 mb-2">Click CONVERT</h3>
+                <p class="text-gray-500 text-sm">Preview your document then click the Convert button — done in seconds</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-green-600">3</div>
+                <h3 class="font-bold text-gray-800 mb-2">Download PDF</h3>
+                <p class="text-gray-500 text-sm">Your PDF downloads instantly with full layout and formatting preserved</p>
             </div>
         </div>
-
-        <!-- Feature Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-12">
-            <div class="feature-card bg-white rounded-xl shadow p-6 text-center">
-                <i class="fas fa-shield-alt text-4xl text-green-600 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">100% Secure</h4>
-                <p class="text-sm text-gray-500">Files processed locally in your browser — total privacy</p>
-            </div>
-            <div class="feature-card bg-white rounded-xl shadow p-6 text-center">
-                <i class="fas fa-bolt text-4xl text-yellow-500 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">Lightning Fast</h4>
-                <p class="text-sm text-gray-500">Instant preview and rapid PDF conversion</p>
-            </div>
-            <div class="feature-card bg-white rounded-xl shadow p-6 text-center">
-                <i class="fas fa-user-slash text-4xl text-blue-600 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">No Signup</h4>
-                <p class="text-sm text-gray-500">Use instantly — no registration or account needed</p>
-            </div>
-            <div class="feature-card bg-white rounded-xl shadow p-6 text-center">
-                <i class="fas fa-magic text-4xl text-purple-600 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">Smart Rendering</h4>
-                <p class="text-sm text-gray-500">Advanced DOCX rendering with exact layout fidelity</p>
-            </div>
-        </div>
-
     </div>
-</main>
+</section>
 
-<!-- ═══════════════════ RELATED TOOLS ═══════════════════ -->
-<section class="bg-white py-12 border-t">
-    <div class="container mx-auto px-4">
-        <h3 class="text-2xl font-bold text-gray-800 mb-8 text-center">
-            <i class="fas fa-tools text-blue-600 mr-2"></i>Related Tools You Might Like
-        </h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            <a href="pdf-to-word.html" class="related-card bg-gradient-to-br from-blue-50 to-blue-100 rounded-xl shadow p-6 border-2 border-blue-200 block">
-                <i class="fas fa-file-word text-3xl text-blue-600 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">PDF to Word <span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full ml-1">HOT</span></h4>
-                <p class="text-sm text-gray-600">Convert PDF files back to editable Word documents</p>
+<!-- ══════════════ FEATURES ══════════════ -->
+<section class="py-16 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-5xl mx-auto px-5">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-10">Why use our Word to PDF converter?</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-2xl text-green-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">100% Secure</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Files processed in your browser. Never uploaded to any server.</p>
+            </div>
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-bolt text-2xl text-yellow-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">Lightning Fast</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Instant preview and fast PDF generation directly in browser.</p>
+            </div>
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-slash text-2xl text-blue-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">No Signup</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">No account needed. Free to use instantly — no limits.</p>
+            </div>
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-clone text-2xl text-purple-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">Layout Preserved</h4>
+                <p class="text-xs text-gray-500 leading-relaxed">Tables, images, fonts and page breaks all perfectly preserved.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════════════ RELATED TOOLS ══════════════ -->
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-5xl mx-auto px-5">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-10">Related Tools</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="pdf-to-word.html" class="tool-card p-5 text-center">
+                <i class="fas fa-file-word text-3xl text-blue-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">PDF to Word</div>
+                <div class="text-xs text-gray-400">Convert PDF to editable DOC</div>
+                <div class="mt-2"><span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">HOT</span></div>
             </a>
-            <a href="../utility/word-counter.html" class="related-card bg-gradient-to-br from-green-50 to-green-100 rounded-xl shadow p-6 border-2 border-green-200 block">
-                <i class="fas fa-hashtag text-3xl text-green-600 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">Word Counter</h4>
-                <p class="text-sm text-gray-600">Count words, characters, and reading time</p>
+            <a href="excel-to-pdf.html" class="tool-card p-5 text-center">
+                <i class="fas fa-file-excel text-3xl text-green-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">Excel to PDF</div>
+                <div class="text-xs text-gray-400">Convert spreadsheets to PDF</div>
             </a>
-            <a href="../utility/password-generator.html" class="related-card bg-gradient-to-br from-red-50 to-red-100 rounded-xl shadow p-6 border-2 border-red-200 block">
-                <i class="fas fa-key text-3xl text-red-600 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">Password Generator</h4>
-                <p class="text-sm text-gray-600">Generate strong secure passwords instantly</p>
+            <a href="powerpoint-to-pdf.html" class="tool-card p-5 text-center">
+                <i class="fas fa-file-powerpoint text-3xl text-orange-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">PPT to PDF</div>
+                <div class="text-xs text-gray-400">Convert presentations to PDF</div>
             </a>
-            <a href="../utility/age-calculator.html" class="related-card bg-gradient-to-br from-pink-50 to-pink-100 rounded-xl shadow p-6 border-2 border-pink-200 block">
-                <i class="fas fa-birthday-cake text-3xl text-pink-500 mb-3 block"></i>
-                <h4 class="font-bold text-gray-800 mb-2">Age Calculator</h4>
-                <p class="text-sm text-gray-600">Calculate your exact age instantly</p>
+            <a href="jpg-to-pdf.html" class="tool-card p-5 text-center">
+                <i class="fas fa-image text-3xl text-pink-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">JPG to PDF</div>
+                <div class="text-xs text-gray-400">Convert images to PDF</div>
             </a>
         </div>
     </div>
 </section>
 
-<!-- ═══════════════════ FOOTER ═══════════════════ -->
-<footer class="bg-gray-800 text-white py-12">
-    <div class="container mx-auto px-4">
-        <div class="grid grid-cols-1 md:grid-cols-5 gap-8">
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-5">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
             <div>
-                <h3 class="font-bold text-lg mb-4"><i class="fas fa-tools mr-2"></i>Free Tools Hub</h3>
-                <p class="text-gray-400 text-sm">Your complete hub for free online tools, expert blogs, and curated resources. Fast, simple, and secure.</p>
-            </div>
-            <div>
-                <h4 class="font-bold mb-4">Categories</h4>
-                <ul class="space-y-2 text-sm text-gray-400">
-                    <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-wrench mr-2"></i>Utility Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-graduation-cap mr-2"></i>Student Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-palette mr-2"></i>Design Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-chart-line mr-2"></i>SEO Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fas fa-code mr-2"></i>Web Dev Tools</a></li>
-                    <li><a href="../../index.html#tools" class="hover:text-white transition"><i class="fab fa-instagram mr-2"></i>Social Media</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-4">Resources</h4>
-                <ul class="space-y-2 text-sm text-gray-400">
-                    <li><a href="../../blog.html" class="hover:text-white transition"><i class="fas fa-blog mr-2"></i>Blog</a></li>
-                    <li><a href="../../tutorials.html" class="hover:text-white transition"><i class="fas fa-chalkboard-teacher mr-2"></i>Tutorials</a></li>
-                    <li><a href="../../resources.html" class="hover:text-white transition"><i class="fas fa-book mr-2"></i>Resources</a></li>
-                    <li><a href="../../comparisons.html" class="hover:text-white transition"><i class="fas fa-balance-scale mr-2"></i>Compare Tools</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-4">Company</h4>
-                <ul class="space-y-2 text-sm text-gray-400">
-                    <li><a href="../../about.html" class="hover:text-white transition"><i class="fas fa-info-circle mr-2"></i>About Us</a></li>
-                    <li><a href="../../contact.html" class="hover:text-white transition"><i class="fas fa-envelope mr-2"></i>Contact</a></li>
-                    <li><a href="../../privacy.html" class="hover:text-white transition"><i class="fas fa-shield-alt mr-2"></i>Privacy Policy</a></li>
-                    <li><a href="../../terms.html" class="hover:text-white transition"><i class="fas fa-file-contract mr-2"></i>Terms of Service</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="font-bold mb-4">Connect</h4>
-                <div class="flex space-x-4 text-2xl mb-4">
-                    <a href="#" class="hover:text-blue-400 transition" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-blue-600 transition" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-red-500 transition" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="hover:text-pink-500 transition" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-sm"></i>
+                    </div>
+                    <span class="font-bold text-white text-sm">Free Tools Hub</span>
                 </div>
-                <p class="text-gray-400 text-xs">by freetoolsapp</p>
+                <p class="text-gray-400 text-xs leading-relaxed">Free online PDF and document tools. Fast, simple, and always free.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Categories</h4>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Utility Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Student Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Design Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">SEO Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Web Dev Tools</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Resources</h4>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><a href="../../blog.html" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="../../tutorials.html" class="hover:text-white transition">Tutorials</a></li>
+                    <li><a href="../../resources.html" class="hover:text-white transition">Resources</a></li>
+                    <li><a href="../../comparisons.html" class="hover:text-white transition">Compare Tools</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Company</h4>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><a href="../../about.html" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="../../contact.html" class="hover:text-white transition">Contact</a></li>
+                    <li><a href="../../privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="../../terms.html" class="hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Connect</h4>
+                <div class="flex gap-3 mb-3">
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-red-500 transition text-lg"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-pink-400 transition text-lg"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="text-gray-600 text-xs">by freetoolsapp</p>
             </div>
         </div>
-        <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm text-gray-400">
-            <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500"></i> for creators and learners.</p>
+        <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-600">
+            <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500 mx-1"></i>for creators and learners.</p>
+            <div class="flex gap-5">
+                <a href="../../privacy.html" class="hover:text-gray-300 transition">Privacy</a>
+                <a href="../../terms.html" class="hover:text-gray-300 transition">Terms</a>
+                <a href="../../contact.html" class="hover:text-gray-300 transition">Contact</a>
+            </div>
         </div>
     </div>
 </footer>
 
-<!-- Back to Top -->
-<button id="backToTop" class="fixed bottom-8 right-8 bg-gradient-to-r from-blue-600 to-purple-600 text-white w-12 h-12 rounded-full shadow-lg hover:shadow-xl transition-all hidden z-50">
-    <i class="fas fa-arrow-up"></i>
+<!-- Back to top -->
+<button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg hidden z-50 transition items-center justify-center">
+    <i class="fas fa-arrow-up text-sm"></i>
 </button>
 
-<!-- docx-preview loader (multiple CDN fallback) -->
+<!-- docx-preview CDN cascade -->
 <script>
 (function(){
-    var cdns=[
-        'https://cdn.jsdelivr.net/npm/docx-preview@0.1.22/dist/docx-preview.umd.js',
-        'https://unpkg.com/docx-preview@0.1.22/dist/docx-preview.umd.js',
-        'https://cdn.jsdelivr.net/npm/docx-preview/dist/docx-preview.umd.js'
-    ], i=0;
-    function load(){
-        if(i>=cdns.length){window.__dpFailed=true;return;}
-        var s=document.createElement('script');
-        s.src=cdns[i++];
-        s.onload=function(){window.__dpReady=true;};
-        s.onerror=load;
-        document.head.appendChild(s);
-    }
-    load();
+    var c=['https://cdn.jsdelivr.net/npm/docx-preview@0.1.22/dist/docx-preview.umd.js',
+           'https://unpkg.com/docx-preview@0.1.22/dist/docx-preview.umd.js',
+           'https://cdn.jsdelivr.net/npm/docx-preview/dist/docx-preview.umd.js'],i=0;
+    function t(){if(i>=c.length){window.__dpFailed=true;return;}
+        var s=document.createElement('script');s.src=c[i++];
+        s.onload=function(){window.__dpReady=true;};s.onerror=t;
+        document.head.appendChild(s);}t();
 })();
 </script>
 
 <script>
-// ── Mobile menu ──────────────────────────────────────────────────────────────
-const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-const mobileMenu    = document.getElementById('mobileMenu');
-mobileMenuBtn.addEventListener('click', () => {
-    mobileMenu.classList.toggle('hidden');
-    const ic = mobileMenuBtn.querySelector('i');
+/* ── Mobile menu ─────────────────────────────────────── */
+const $mb  = document.getElementById('mobileMenuBtn');
+const $mm  = document.getElementById('mobileMenu');
+$mb.addEventListener('click', () => {
+    $mm.classList.toggle('hidden');
+    const ic = $mb.querySelector('i');
     ic.classList.toggle('fa-bars'); ic.classList.toggle('fa-times');
 });
 document.addEventListener('click', e => {
-    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
-        mobileMenu.classList.add('hidden');
-        const ic = mobileMenuBtn.querySelector('i');
-        ic.classList.remove('fa-times'); ic.classList.add('fa-bars');
+    if(!$mb.contains(e.target)&&!$mm.contains(e.target)){
+        $mm.classList.add('hidden');
+        const ic=$mb.querySelector('i'); ic.classList.remove('fa-times'); ic.classList.add('fa-bars');
     }
 });
 
-// ── Back to top ──────────────────────────────────────────────────────────────
-const backToTop = document.getElementById('backToTop');
-window.addEventListener('scroll', () => backToTop.classList.toggle('hidden', window.scrollY < 300));
-backToTop.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+/* ── Back to top ─────────────────────────────────────── */
+const $btt = document.getElementById('btt');
+window.addEventListener('scroll', () => {
+    $btt.style.display = window.scrollY>400 ? 'flex' : 'none';
+},{passive:true});
+$btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
 
-// ── Elements ─────────────────────────────────────────────────────────────────
-const uploadSection  = document.getElementById('uploadSection');
-const dropZone       = document.getElementById('dropZone');
-const fileInput      = document.getElementById('fileInput');
-const fileChip       = document.getElementById('fileChip');
-const chipName       = document.getElementById('chipName');
-const chipSize       = document.getElementById('chipSize');
-const chipRemove     = document.getElementById('chipRemove');
-const errorBox       = document.getElementById('errorBox');
-const errorMsg       = document.getElementById('errorMsg');
-const processing     = document.getElementById('processing');
-const processingMsg  = document.getElementById('processingMsg');
-const progressFill   = document.getElementById('progressFill');
-const progressPct    = document.getElementById('progressPct');
-const progressStatus = document.getElementById('progressStatus');
-const results        = document.getElementById('results');
-const docxPreviewBox = document.getElementById('docxPreviewBox');
-const previewBadge   = document.getElementById('previewBadge');
-const resultFileName = document.getElementById('resultFileName');
-const resultFileSize = document.getElementById('resultFileSize');
-const convertBtn     = document.getElementById('convertBtn');
-const btnAgain       = document.getElementById('btnAgain');
-const successPanel   = document.getElementById('successPanel');
-const successSub     = document.getElementById('successSub');
+/* ── DOM refs ─────────────────────────────────────────── */
+const stageUpload   = document.getElementById('stageUpload');
+const stageProcess  = document.getElementById('stageProcess');
+const stagePreview  = document.getElementById('stagePreview');
+const stageSuccess  = document.getElementById('stageSuccess');
+const uploadZone    = document.getElementById('uploadZone');
+const fileInput     = document.getElementById('fileInput');
+const errBox        = document.getElementById('errBox');
+const errMsg        = document.getElementById('errMsg');
+const procTitle     = document.getElementById('procTitle');
+const procSub       = document.getElementById('procSub');
+const progFill      = document.getElementById('progFill');
+const progStatus    = document.getElementById('progStatus');
+const progPct       = document.getElementById('progPct');
+const fName         = document.getElementById('fName');
+const fSize         = document.getElementById('fSize');
+const removeBtn     = document.getElementById('removeBtn');
+const prevBadge     = document.getElementById('prevBadge');
+const docxStage     = document.getElementById('docxStage');
+const convertBtn    = document.getElementById('convertBtn');
+const convProgress  = document.getElementById('convProgress');
+const convMsg       = document.getElementById('convMsg');
+const convFill      = document.getElementById('convFill');
+const dlBtn         = document.getElementById('dlBtn');
+const sucName       = document.getElementById('sucName');
 
-let selectedFile = null;
+let selFile = null;
 
-// ── Helpers ──────────────────────────────────────────────────────────────────
-const fmtSize = b => b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB';
-const sleep   = ms => new Promise(r=>setTimeout(r,ms));
-const setP    = (pct,msg) => { progressFill.style.width=pct+'%'; progressPct.textContent=pct+'%'; if(msg) progressStatus.textContent=msg; };
-const showErr = msg => { errorMsg.textContent=msg; errorBox.classList.remove('hidden'); };
-const hideErr = ()  => errorBox.classList.add('hidden');
+/* ── Helpers ──────────────────────────────────────────── */
+const fmt   = b => b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB';
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
 
-// ── Drag & drop ──────────────────────────────────────────────────────────────
+function show(name){
+    [stageUpload,stageProcess,stagePreview,stageSuccess].forEach(s=>s.classList.add('hidden'));
+    document.getElementById('stage'+name).classList.remove('hidden');
+}
+function setP(pct,st){ progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(st) progStatus.textContent=st; }
+function showErr(m){ errMsg.textContent=m; errBox.classList.remove('hidden'); }
+function hideErr()  { errBox.classList.add('hidden'); }
+
+/* ── Drag & drop ──────────────────────────────────────── */
 ['dragenter','dragover','dragleave','drop'].forEach(ev=>{
-    dropZone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
+    uploadZone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
     document.body.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
 });
-['dragenter','dragover'].forEach(ev=>dropZone.addEventListener(ev,()=>{
-    dropZone.classList.add('dragover'); uploadSection.classList.add('dragover');
-}));
-['dragleave','drop'].forEach(ev=>dropZone.addEventListener(ev,()=>{
-    dropZone.classList.remove('dragover'); uploadSection.classList.remove('dragover');
-}));
-dropZone.addEventListener('drop', e=>{ const f=e.dataTransfer.files[0]; if(f) pickFile(f); });
-fileInput.addEventListener('change', e=>{ if(e.target.files[0]) pickFile(e.target.files[0]); });
-chipRemove.addEventListener('click', resetAll);
-btnAgain.addEventListener('click',   resetAll);
+['dragenter','dragover'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.add('over')));
+['dragleave','drop'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.remove('over')));
+uploadZone.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)pick(f);});
+fileInput.addEventListener('change',e=>{if(e.target.files[0])pick(e.target.files[0]);});
+removeBtn.addEventListener('click',resetAll);
 
-// ── Pick file ────────────────────────────────────────────────────────────────
-function pickFile(f){
+/* ── Pick file ────────────────────────────────────────── */
+function pick(f){
     const ext=f.name.split('.').pop().toLowerCase();
-    if(!['docx','doc'].includes(ext)){ showErr('❌ Only .docx and .doc files are supported.'); return; }
-    selectedFile=f;
-    chipName.textContent=f.name; chipSize.textContent=fmtSize(f.size);
-    fileChip.classList.remove('hidden');
-    hideErr();
-    processDoc(f);
+    if(!['docx','doc'].includes(ext)){showErr('Only .docx and .doc files are supported.');return;}
+    hideErr(); selFile=f; doRender(f);
 }
 
-// ── Render preview ───────────────────────────────────────────────────────────
-async function processDoc(file){
-    processing.classList.remove('hidden');
-    results.classList.add('hidden');
-    successPanel.classList.add('hidden');
-    processingMsg.textContent='⚡ Rendering your document…';
-    setP(5,'Reading file…');
+/* ── Render preview ───────────────────────────────────── */
+async function doRender(file){
+    show('Process'); setP(5,'Reading file…');
+    procTitle.textContent='Rendering your document…';
+    procSub.textContent='Please wait a moment';
 
-    const arrayBuffer = await file.arrayBuffer();
+    const buf=await file.arrayBuffer();
     setP(20,'Parsing document…');
 
-    // Wait up to 5s for docx-preview
-    let waited=0;
-    while(!window.__dpReady && !window.__dpFailed && waited<5000){ await sleep(150); waited+=150; }
+    // Wait for docx-preview (max 5s)
+    let w=0;
+    while(!window.__dpReady&&!window.__dpFailed&&w<5000){await sleep(150);w+=150;}
 
-    const dp = window.__dpReady && window.docx && typeof window.docx.renderAsync==='function';
-
-    // Reset preview box
-    docxPreviewBox.className='';
-    docxPreviewBox.style.cssText='background:#525659;padding:20px;min-height:150px;max-height:480px;overflow-y:auto;';
-    docxPreviewBox.innerHTML='';
+    const dp=window.__dpReady&&window.docx&&typeof window.docx.renderAsync==='function';
+    docxStage.innerHTML='';
+    docxStage.style.cssText='background:#525659;padding:20px;min-height:120px;max-height:420px;overflow-y:auto;';
 
     if(dp){
         try{
             setP(40,'Rendering exact Word layout…');
-            await window.docx.renderAsync(new Uint8Array(arrayBuffer), docxPreviewBox, null,{
-                className:'docx', inWrapper:true, breakPages:true,
-                ignoreWidth:false, ignoreHeight:false, experimental:true
+            await window.docx.renderAsync(new Uint8Array(buf),docxStage,null,{
+                className:'docx',inWrapper:true,breakPages:true,
+                ignoreWidth:false,ignoreHeight:false,experimental:true
             });
-            docxPreviewBox.querySelectorAll('section.docx').forEach(pg=>{
-                pg.style.margin='0 auto 16px auto';
-                pg.style.boxShadow='0 4px 24px rgba(0,0,0,.5)';
+            docxStage.querySelectorAll('section.docx').forEach(pg=>{
+                pg.style.margin='0 auto 14px';
+                pg.style.boxShadow='0 4px 20px rgba(0,0,0,.45)';
             });
-            previewBadge.textContent='✓ Exact Layout';
-            previewBadge.className='ml-auto text-xs font-bold bg-green-100 text-green-700 px-3 py-1 rounded-full';
-            setP(80,'Preview ready!');
-        } catch(err){
-            console.warn('docx-preview error, fallback:', err);
-            await mammothFallback(arrayBuffer);
+            prevBadge.textContent='✓ Exact Layout';
+            prevBadge.className='text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full';
+        }catch(e){
+            console.warn('docx-preview err:',e);
+            await doFallback(buf);
         }
-    } else {
-        await mammothFallback(arrayBuffer);
+    }else{
+        await doFallback(buf);
     }
 
-    setP(100,'Done!');
-    await sleep(200);
-    processing.classList.add('hidden');
-    results.classList.remove('hidden');
-    resultFileName.textContent=file.name;
-    resultFileSize.textContent=fmtSize(file.size);
-    results.scrollIntoView({behavior:'smooth',block:'start'});
+    setP(100,'Done!'); await sleep(200);
+    fName.textContent=file.name; fSize.textContent=fmt(file.size);
+    show('Preview');
+    document.querySelector('.tool-hero').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
-async function mammothFallback(arrayBuffer){
-    setP(40,'Rendering content preview…');
-    docxPreviewBox.style.cssText='background:white;padding:32px 40px;max-height:480px;overflow-y:auto;font-family:"Times New Roman",serif;font-size:12pt;line-height:1.6;color:#000;';
+async function doFallback(buf){
+    setP(40,'Loading content…');
+    docxStage.style.cssText='background:#fff;padding:32px 36px;max-height:420px;overflow-y:auto;'+
+        'font-family:"Times New Roman",serif;font-size:12pt;line-height:1.6;color:#000;';
     try{
-        const r = await mammoth.convertToHtml({arrayBuffer},{ convertImage: mammoth.images.inline(el=>el.read('base64').then(b=>({src:`data:${el.contentType};base64,${b}`}))) });
-        docxPreviewBox.innerHTML=`<style>
-            #docxPreviewBox h1{font-size:18pt;font-weight:bold;margin:.5em 0}
-            #docxPreviewBox h2{font-size:15pt;font-weight:bold;margin:.4em 0}
-            #docxPreviewBox h3{font-size:13pt;font-weight:bold;margin:.35em 0}
-            #docxPreviewBox p{margin:.35em 0}
-            #docxPreviewBox table{border-collapse:collapse;width:100%;margin:.5em 0}
-            #docxPreviewBox td,#docxPreviewBox th{border:1px solid #ccc;padding:4px 8px}
-            #docxPreviewBox th{background:#f0f0f0;font-weight:bold}
-            #docxPreviewBox ul,#docxPreviewBox ol{padding-left:1.5em;margin:.3em 0}
-            #docxPreviewBox img{max-width:100%;height:auto}
-            #docxPreviewBox strong,#docxPreviewBox b{font-weight:bold}
-            #docxPreviewBox em,#docxPreviewBox i{font-style:italic}
+        const r=await mammoth.convertToHtml({arrayBuffer:buf},{
+            convertImage:mammoth.images.inline(el=>el.read('base64').then(b=>({src:`data:${el.contentType};base64,${b}`})))
+        });
+        docxStage.innerHTML=`<style>
+            #docxStage h1{font-size:18pt;font-weight:bold;margin:.5em 0}
+            #docxStage h2{font-size:15pt;font-weight:bold;margin:.4em 0}
+            #docxStage h3{font-size:13pt;font-weight:bold;margin:.35em 0}
+            #docxStage p{margin:.3em 0}
+            #docxStage table{border-collapse:collapse;width:100%;margin:.4em 0}
+            #docxStage td,#docxStage th{border:1px solid #ccc;padding:4px 8px}
+            #docxStage th{background:#f0f0f0;font-weight:bold}
+            #docxStage ul,#docxStage ol{padding-left:1.4em;margin:.25em 0}
+            #docxStage img{max-width:100%;height:auto}
+            #docxStage b,#docxStage strong{font-weight:bold}
+            #docxStage i,#docxStage em{font-style:italic}
         </style>${r.value}`;
-        previewBadge.textContent='Content Preview';
-        previewBadge.className='ml-auto text-xs font-bold bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full';
-    } catch(err){
-        docxPreviewBox.innerHTML='<p style="color:#888;padding:20px;">Preview unavailable — conversion will still work.</p>';
+        prevBadge.textContent='Preview';
+        prevBadge.className='text-xs font-bold bg-yellow-100 text-yellow-700 px-2.5 py-1 rounded-full';
+    }catch(e){
+        docxStage.innerHTML='<p style="color:#aaa;text-align:center;padding:40px 20px">Preview unavailable — conversion will still work.</p>';
     }
-    setP(80,'Preview ready!');
 }
 
-// ── Convert to PDF ───────────────────────────────────────────────────────────
-convertBtn.addEventListener('click', async () => {
-    if(!selectedFile) return;
+/* ── Convert to PDF ───────────────────────────────────── */
+convertBtn.addEventListener('click',async()=>{
+    if(!selFile)return;
     convertBtn.disabled=true;
-    convertBtn.innerHTML='<i class="fas fa-spinner fa-spin mr-2"></i>Converting…';
-    successPanel.classList.add('hidden');
-    hideErr();
+    convertBtn.innerHTML='<i class="fas fa-spinner fa-spin"></i> Converting…';
+    convProgress.classList.remove('hidden');
+    convFill.style.width='10%'; convMsg.textContent='Capturing pages…';
 
-    try {
-        const {jsPDF} = window.jspdf;
+    try{
+        const {jsPDF}=window.jspdf;
+        const dps=Array.from(docxStage.querySelectorAll('section.docx'));
+        const pages=dps.length?dps:[docxStage];
+        let pdf=null;
 
-        // Decide pages: docx-preview sections OR entire preview box
-        const dpPages = Array.from(docxPreviewBox.querySelectorAll('section.docx'));
-        const pages   = dpPages.length ? dpPages : [docxPreviewBox];
+        for(let i=0;i<pages.length;i++){
+            const pg=pages[i];
+            const wPx=Math.max(pg.scrollWidth,pg.offsetWidth,794);
+            const hPx=Math.max(pg.scrollHeight,pg.offsetHeight,200);
+            convMsg.textContent=`Rendering page ${i+1} of ${pages.length}…`;
+            convFill.style.width=Math.round(10+(i/pages.length*85))+'%';
 
-        let pdf = null;
-        for(let i=0; i<pages.length; i++){
-            const pg   = pages[i];
-            const wPx  = Math.max(pg.scrollWidth, pg.offsetWidth, 794);
-            const hPx  = Math.max(pg.scrollHeight, pg.offsetHeight, 200);
-
-            const canvas = await html2canvas(pg, {
-                scale:2, useCORS:true, allowTaint:true,
-                backgroundColor:'#ffffff', logging:false,
-                width:wPx, height:hPx, scrollX:0, scrollY:0, windowWidth:wPx
+            const cv=await html2canvas(pg,{
+                scale:2,useCORS:true,allowTaint:true,
+                backgroundColor:'#ffffff',logging:false,
+                width:wPx,height:hPx,scrollX:0,scrollY:0,windowWidth:wPx
             });
-
-            const imgData = canvas.toDataURL('image/jpeg',0.95);
-            const wMM = wPx/96*25.4;
-            const hMM = hPx/96*25.4;
-
-            if(!pdf){ pdf = new jsPDF({unit:'mm',format:[wMM,hMM],compress:true}); }
-            else     { pdf.addPage([wMM,hMM]); }
-            pdf.addImage(imgData,'JPEG',0,0,wMM,hMM,'','FAST');
+            const img=cv.toDataURL('image/jpeg',.95);
+            const wMM=wPx/96*25.4, hMM=hPx/96*25.4;
+            if(!pdf){pdf=new jsPDF({unit:'mm',format:[wMM,hMM],compress:true});}
+            else    {pdf.addPage([wMM,hMM]);}
+            pdf.addImage(img,'JPEG',0,0,wMM,hMM,'','FAST');
             await sleep(10);
         }
 
-        const outName = selectedFile.name.replace(/\.(docx|doc)$/i,'')+'.pdf';
-        pdf.save(outName);
+        convFill.style.width='100%'; convMsg.textContent='Done!'; await sleep(300);
 
-        successPanel.classList.remove('hidden');
-        successSub.textContent = outName + ' — downloaded successfully!';
-        successPanel.scrollIntoView({behavior:'smooth',block:'center'});
+        const outName=selFile.name.replace(/\.(docx|doc)$/i,'')+'.pdf';
+        const blob=pdf.output('blob');
+        const url=URL.createObjectURL(blob);
 
-    } catch(err){
-        showErr('❌ Conversion failed: '+err.message);
-        console.error(err);
+        show('Success');
+        sucName.textContent=outName+' — '+fmt(blob.size);
+        dlBtn.onclick=()=>{const a=document.createElement('a');a.href=url;a.download=outName;a.click();};
+        stageSuccess.scrollIntoView({behavior:'smooth',block:'center'});
+
+    }catch(err){
+        showErr('Conversion failed: '+err.message);
+        show('Preview');
     }
 
     convertBtn.disabled=false;
-    convertBtn.innerHTML='<i class="fas fa-file-pdf text-2xl"></i>Convert &amp; Download PDF';
+    convertBtn.innerHTML='<i class="fas fa-cog text-xl"></i> Convert to PDF';
+    convProgress.classList.add('hidden');
 });
 
-// ── Reset ─────────────────────────────────────────────────────────────────────
+/* ── Reset ────────────────────────────────────────────── */
 function resetAll(){
-    selectedFile=null; fileInput.value='';
-    fileChip.classList.add('hidden');
-    results.classList.add('hidden');
-    processing.classList.add('hidden');
-    successPanel.classList.add('hidden');
-    docxPreviewBox.innerHTML='';
-    docxPreviewBox.style.cssText='background:#525659;padding:20px;min-height:150px;max-height:480px;overflow-y:auto;';
-    hideErr();
+    selFile=null; fileInput.value='';
+    docxStage.innerHTML='';
+    docxStage.style.cssText='background:#525659;padding:20px;min-height:120px;max-height:420px;overflow-y:auto;';
+    convProgress.classList.add('hidden');
     convertBtn.disabled=false;
-    convertBtn.innerHTML='<i class="fas fa-file-pdf text-2xl"></i>Convert &amp; Download PDF';
+    convertBtn.innerHTML='<i class="fas fa-cog text-xl"></i> Convert to PDF';
+    hideErr(); show('Upload');
     window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
