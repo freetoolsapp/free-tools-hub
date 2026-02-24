@@ -537,7 +537,14 @@ function runConversion(file){
                 "p[style-name='Title']     => h1:fresh",
                 "p[style-name='List Paragraph'] => li:fresh",
                 "b => strong","i => em","u => u"
-            ]
+            ],
+            convertImage: mammoth.images.imgElement(function(image){
+                return image.read('base64').then(function(base64){
+                    return {
+                        src: 'data:' + image.contentType + ';base64,' + base64
+                    };
+                });
+            })
         }).then(function(result){
 
             var html = result.value;
