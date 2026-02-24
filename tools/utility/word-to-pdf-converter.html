@@ -572,146 +572,97 @@
         }
 
         async function convertToPDF(htmlContent, fileName) {
-            const { jsPDF } = window.jspdf;
+    const { jsPDF } = window.jspdf;
 
-            // A4 dimensions in px at 96dpi
-            const A4_WIDTH_PX  = 794;   // 210mm @ 96dpi
-            const A4_HEIGHT_PX = 1123;  // 297mm @ 96dpi
-            const MARGIN_PX    = 75;    // ~20mm margin
+    const A4_WIDTH_PX  = 794;
+    const A4_HEIGHT_PX = 1123;
+    const MARGIN_PX    = 75;
 
-            // ── Build styled wrapper ──────────────────────────────────────────
-            const wrapper = document.createElement('div');
-            wrapper.id = '__pdfWrapper';
-            wrapper.style.cssText = `
-                position: absolute;
-                left: -9999px;
-                top: 0;
-                width: ${A4_WIDTH_PX}px;
-                background: #ffffff;
-                box-sizing: border-box;
-                padding: ${MARGIN_PX}px;
-            `;
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `
+        position:absolute;
+        left:-9999px;
+        top:0;
+        width:${A4_WIDTH_PX}px;
+        background:#ffffff;
+        padding:${MARGIN_PX}px;
+        box-sizing:border-box;
+        font-family: Calibri, 'Times New Roman', serif;
+        font-size:12pt;
+        line-height:1.5;
+    `;
 
-            // ── Detect fonts used in the Word doc via mammoth style map ──────
-            // mammoth inlines font-family on spans when present
-            // We parse the htmlContent to extract inline font declarations
-            const fontMatch = htmlContent.match(/font-family\s*:\s*([^;'"<]+)/i);
-            const detectedFont = fontMatch
-                ? fontMatch[1].trim()
-                : 'Calibri, "Times New Roman", serif';
+    wrapper.innerHTML = htmlContent;
+    document.body.appendChild(wrapper);
 
-            // ── Inject base styles that mirror Word defaults ─────────────────
-            const styleTag = document.createElement('style');
-            styleTag.textContent = `
-                #__pdfWrapper {
-                    font-family: ${detectedFont};
-                    font-size: 12pt;
-                    line-height: 1.5;
-                    color: #000000;
-                    word-break: break-word;
-                }
-                #__pdfWrapper p  { margin: 0 0 8pt 0; }
-                #__pdfWrapper h1 { font-size: 20pt; font-weight: bold; margin: 14pt 0 6pt; }
-                #__pdfWrapper h2 { font-size: 16pt; font-weight: bold; margin: 12pt 0 5pt; }
-                #__pdfWrapper h3 { font-size: 13pt; font-weight: bold; margin: 10pt 0 4pt; }
-                #__pdfWrapper h4,
-                #__pdfWrapper h5,
-                #__pdfWrapper h6 { font-size: 12pt; font-weight: bold; margin: 8pt 0 4pt; }
-                #__pdfWrapper ul,
-                #__pdfWrapper ol  { margin: 0 0 8pt 24pt; padding: 0; }
-                #__pdfWrapper li  { margin-bottom: 4pt; }
-                #__pdfWrapper table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-bottom: 10pt;
-                }
-                #__pdfWrapper td,
-                #__pdfWrapper th {
-                    border: 1px solid #cccccc;
-                    padding: 4pt 6pt;
-                    font-size: 11pt;
-                }
-                #__pdfWrapper strong, #__pdfWrapper b { font-weight: bold; }
-                #__pdfWrapper em,     #__pdfWrapper i { font-style: italic; }
-                #__pdfWrapper u { text-decoration: underline; }
-                #__pdfWrapper img { max-width: 100%; height: auto; }
-            `;
-            document.head.appendChild(styleTag);
+    await new Promise(r => setTimeout(r, 500));
 
-            wrapper.innerHTML = htmlContent;
-            document.body.appendChild(wrapper);
+    try {
 
-            // ── Wait for fonts & images to settle ────────────────────────────
-            await new Promise(r => setTimeout(r, 300));
+        const scale = 3; // 🔥 increased for better quality
 
-            try {
-                // ── Render full content to one canvas at 2× scale ────────────
-                const scale  = 2;
-                const canvas = await html2canvas(wrapper, {
-                    scale,
-                    useCORS: true,
-                    logging: false,
-                    backgroundColor: '#ffffff',
-                    width:  A4_WIDTH_PX,
-                    windowWidth: A4_WIDTH_PX
-                });
+        const canvas = await html2canvas(wrapper, {
+            scale: scale,
+            useCORS: true,
+            backgroundColor: '#ffffff'
+        });
 
-                // ── Slice canvas into A4 pages ────────────────────────────────
-                const pdf = new jsPDF({
-                    orientation: 'portrait',
-                    unit: 'mm',
-                    format: 'a4'
-                });
+        const pdf = new jsPDF({
+            orientation: 'portrait',
+            unit: 'mm',
+            format: 'a4'
+        });
 
-                const PAGE_W_MM  = 210;
-                const PAGE_H_MM  = 297;
+        const PAGE_W_MM = 210;
+        const PAGE_H_MM = 297;
 
-                // canvas pixel height that maps to one A4 page
-                const pageHeightPx = (A4_HEIGHT_PX * scale);
-                const totalHeight  = canvas.height;
-                const totalPages   = Math.ceil(totalHeight / pageHeightPx);
-                pageCount = totalPages;
+        const pageHeightPx = A4_HEIGHT_PX * scale;
+        const totalHeight  = canvas.height;
+        const totalPages   = Math.ceil(totalHeight / pageHeightPx);
 
-                for (let i = 0; i < totalPages; i++) {
-                    // Create a slice canvas for this page
-                    const sliceCanvas  = document.createElement('canvas');
-                    sliceCanvas.width  = canvas.width;
-                    sliceCanvas.height = pageHeightPx;
+        pageCount = totalPages;
 
-                    const ctx = sliceCanvas.getContext('2d');
-                    ctx.fillStyle = '#ffffff';
-                    ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
+        for (let i = 0; i < totalPages; i++) {
 
-                    // Draw the relevant slice of the full canvas
-                    ctx.drawImage(
-                        canvas,
-                        0, i * pageHeightPx,          // source x, y
-                        canvas.width, pageHeightPx,   // source w, h
-                        0, 0,                         // dest x, y
-                        sliceCanvas.width, sliceCanvas.height // dest w, h
-                    );
+            const sliceCanvas = document.createElement('canvas');
+            sliceCanvas.width  = canvas.width;
+            sliceCanvas.height = pageHeightPx;
 
-                    const imgData = sliceCanvas.toDataURL('image/png');
+            const ctx = sliceCanvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, sliceCanvas.width, sliceCanvas.height);
 
-                    if (i > 0) pdf.addPage();
+            ctx.drawImage(
+                canvas,
+                0, i * pageHeightPx,
+                canvas.width, pageHeightPx,
+                0, 0,
+                sliceCanvas.width, sliceCanvas.height
+            );
 
-                    pdf.addImage(
-                        imgData, 'PNG',
-                        0, 0,          // x, y in mm
-                        PAGE_W_MM, PAGE_H_MM  // fill full A4 page
-                    );
-                }
+            const imgData = sliceCanvas.toDataURL('image/png');
 
-                // ── Save blob ─────────────────────────────────────────────────
-                pdfBlob = pdf.output('blob');
-                document.getElementById('pageCount').textContent = pageCount;
-                document.getElementById('fileSize').textContent  = formatBytes(pdfBlob.size);
+            if (i > 0) pdf.addPage();
 
-            } finally {
-                document.body.removeChild(wrapper);
-                document.head.removeChild(styleTag);
-            }
+            pdf.addImage(
+                imgData,
+                'PNG',
+                0,
+                0,
+                PAGE_W_MM,
+                PAGE_H_MM
+            );
         }
+
+        pdfBlob = pdf.output('blob');
+
+        document.getElementById('pageCount').textContent = pageCount;
+        document.getElementById('fileSize').textContent  = formatBytes(pdfBlob.size);
+
+    } finally {
+        document.body.removeChild(wrapper);
+    }
+}
 
         function downloadPDF() {
             if (!pdfBlob) {
