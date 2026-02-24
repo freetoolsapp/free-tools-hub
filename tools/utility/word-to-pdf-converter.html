@@ -1,1166 +1,777 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Word to PDF Converter - Free Tools Hub</title>
-    <meta name="description" content="Convert Word documents (DOCX, DOC) to PDF files instantly. Preserve formatting, fonts, and images. Free, fast, and no signup required!">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="freetoolsapp">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Word to PDF Converter - Free Tools Hub">
-    <meta property="og:description" content="Convert Word documents (DOCX, DOC) to PDF files instantly.">
-    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
-    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Word to PDF Converter - Free Tools Hub</title>
+<meta name="description" content="Convert Word documents to PDF instantly. Free, no signup, preserves formatting.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c}
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+/* HEADER */
+header{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:99;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.hdr{max-width:1100px;margin:auto;padding:0 20px;height:62px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
+.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,#2563eb,#7c3aed);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
+.logo-txt{font-weight:700;font-size:15px;color:#1a202c}
+.logo-sub{font-size:11px;color:#94a3b8}
+nav a{padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;color:#475569;text-decoration:none}
+nav a:hover{background:#f1f5f9;color:#2563eb}
+nav .nav-cta{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff!important;padding:7px 16px}
+#mbtn{background:none;border:none;font-size:22px;color:#64748b;cursor:pointer;display:none}
+#mmenu{display:none;background:#fff;border-top:1px solid #e2e8f0}
+#mmenu a{display:block;padding:11px 20px;font-size:14px;color:#475569;text-decoration:none;border-bottom:1px solid #f1f5f9}
+#mmenu a:hover{color:#2563eb;background:#f8fafc}
 
-    <!-- Conversion Libraries -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+/* BREADCRUMB */
+.bc{background:#fff;border-bottom:1px solid #e2e8f0;padding:9px 0}
+.bc-in{max-width:1100px;margin:auto;padding:0 20px;display:flex;align-items:center;gap:5px;font-size:12.5px;color:#94a3b8}
+.bc-in a{color:#94a3b8;text-decoration:none}.bc-in a:hover{color:#2563eb}
 
-    <style>
-        :root {
-            --brand-primary: #1a56db;
-            --brand-secondary: #7c3aed;
-            --brand-accent: #0ea5e9;
-            --brand-success: #10b981;
-            --brand-danger: #ef4444;
-            --surface-0: #f8fafc;
-            --surface-1: #ffffff;
-            --surface-2: #f1f5f9;
-            --surface-3: #e2e8f0;
-            --text-primary: #0f172a;
-            --text-secondary: #475569;
-            --text-muted: #94a3b8;
-            --shadow-sm: 0 1px 3px rgba(0,0,0,.06), 0 1px 2px rgba(0,0,0,.04);
-            --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
-            --shadow-lg: 0 12px 40px rgba(0,0,0,.10), 0 4px 8px rgba(0,0,0,.04);
-            --radius: 12px;
-            --radius-lg: 20px;
-        }
+/* HERO */
+.hero{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 60%,#0f172a 100%);padding:60px 20px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(99,102,241,.22),transparent 70%)}
+.hero-inner{position:relative;max-width:600px;margin:auto}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:100px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,.7);margin-bottom:18px}
+.hero-ic{width:76px;height:76px;background:rgba(99,102,241,.2);border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:34px;color:#fff}
+.hero h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
+.hero p{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:20px}
+.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
+.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:4px 11px;font-size:11.5px;color:rgba(255,255,255,.8)}
 
-        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* MAIN */
+main{max-width:1100px;margin:0 auto;padding:36px 20px 60px}
 
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            background: var(--surface-0);
-            color: var(--text-primary);
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
-        }
+/* CARD */
+.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:28px;margin-bottom:22px}
+.card-title{font-size:17px;font-weight:700;color:#1a202c;margin-bottom:18px;display:flex;align-items:center;gap:9px}
+.cticon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
 
-        /* ── Header ─────────────────────────────────────── */
-        header {
-            background: var(--surface-1);
-            border-bottom: 1px solid var(--surface-3);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: var(--shadow-sm);
-        }
-        .header-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            height: 64px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-        }
-        .logo-icon {
-            width: 40px; height: 40px;
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-            border-radius: 10px;
-            display: flex; align-items: center; justify-content: center;
-            color: #fff;
-            font-size: 18px;
-        }
-        .logo-text { font-weight: 700; font-size: 16px; color: var(--text-primary); }
-        .logo-sub  { font-size: 11px; color: var(--text-muted); }
+/* DROP ZONE */
+.dz{border:2px dashed #cbd5e1;border-radius:12px;padding:50px 20px;text-align:center;cursor:pointer;transition:all .2s;background:#f8fafc}
+.dz:hover,.dz.drag{border-color:#2563eb;background:#eff6ff}
+.dz-ic{width:68px;height:68px;background:linear-gradient(135deg,#eff6ff,#e0e7ff);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:30px;color:#2563eb}
+.dz h3{font-size:16px;font-weight:700;margin-bottom:5px}
+.dz p{font-size:13px;color:#94a3b8;margin-bottom:16px}
+.dz-note{font-size:11.5px;color:#94a3b8;margin-top:10px}
 
-        nav.desktop-nav { display: flex; align-items: center; gap: 4px; }
-        nav.desktop-nav a {
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 13.5px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: all .2s;
-        }
-        nav.desktop-nav a:hover { color: var(--brand-primary); background: var(--surface-2); }
-        nav.desktop-nav .cta-btn {
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-            color: #fff !important;
-            padding: 7px 18px;
-        }
-        nav.desktop-nav .cta-btn:hover { opacity: .9; background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary)); }
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:9px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
+.btn-blue{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;box-shadow:0 3px 10px rgba(37,99,235,.3)}
+.btn-blue:hover{opacity:.9;transform:translateY(-1px)}
+.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 3px 10px rgba(16,185,129,.3);width:100%;justify-content:center;padding:14px;font-size:15px}
+.btn-green:hover{opacity:.9;transform:translateY(-1px)}
+.btn-gray{background:#f1f5f9;color:#475569;width:100%;justify-content:center;margin-top:10px}
+.btn-gray:hover{background:#e2e8f0}
 
-        #mobileMenuBtn { display: none; background: none; border: none; font-size: 22px; color: var(--text-secondary); cursor: pointer; }
-        #mobileMenu {
-            display: none;
-            padding: 12px 0;
-            border-top: 1px solid var(--surface-3);
-        }
-        #mobileMenu.open { display: block; }
-        #mobileMenu a {
-            display: block;
-            padding: 10px 24px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-secondary);
-            text-decoration: none;
-        }
-        #mobileMenu a:hover { color: var(--brand-primary); background: var(--surface-2); }
+/* FILE INFO */
+#fileInfo{display:none;margin-top:14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:13px 16px;align-items:center;justify-content:space-between}
+.fi-left{display:flex;align-items:center;gap:11px}
+.fi-name{font-weight:600;font-size:14px;color:#1a202c}
+.fi-sub{font-size:12px;color:#64748b;margin-top:2px}
+.fi-del{background:none;border:none;cursor:pointer;color:#94a3b8;font-size:19px}
+.fi-del:hover{color:#ef4444}
 
-        /* ── Breadcrumb ──────────────────────────────────── */
-        .breadcrumb {
-            background: var(--surface-1);
-            border-bottom: 1px solid var(--surface-3);
-            padding: 10px 0;
-        }
-        .breadcrumb-inner {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            font-size: 12.5px;
-            color: var(--text-muted);
-        }
-        .breadcrumb-inner a { color: var(--text-muted); text-decoration: none; }
-        .breadcrumb-inner a:hover { color: var(--brand-primary); }
-        .breadcrumb-inner .sep { font-size: 10px; }
-        .breadcrumb-inner .current { color: var(--text-secondary); font-weight: 500; }
+/* PROCESSING */
+#processing{display:none}
+.proc-in{text-align:center}
+.spinner{width:54px;height:54px;border:4px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin .85s linear infinite;margin:0 auto 18px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.proc-title{font-size:19px;font-weight:700;margin-bottom:5px}
+.proc-msg{font-size:13.5px;color:#64748b;margin-bottom:18px}
+.prog-bar{background:#e2e8f0;border-radius:100px;height:10px;overflow:hidden}
+.prog-fill{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:100px;transition:width .35s ease;width:0%}
+.prog-lbl{font-size:12px;color:#94a3b8;margin-top:7px}
 
-        /* ── Hero ────────────────────────────────────────── */
-        .hero {
-            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #0f172a 100%);
-            padding: 64px 24px;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        .hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(ellipse 60% 60% at 50% 0%, rgba(99,102,241,.25) 0%, transparent 70%);
-        }
-        .hero-content { position: relative; max-width: 640px; margin: 0 auto; }
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 100px;
-            padding: 5px 14px;
-            font-size: 12px;
-            color: rgba(255,255,255,.7);
-            margin-bottom: 20px;
-            backdrop-filter: blur(4px);
-        }
-        .hero-icon {
-            width: 80px; height: 80px;
-            background: linear-gradient(135deg, rgba(99,102,241,.3), rgba(124,58,237,.3));
-            border: 1px solid rgba(255,255,255,.15);
-            border-radius: 24px;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 24px;
-            font-size: 36px;
-            color: #fff;
-        }
-        .hero h1 {
-            font-size: clamp(28px, 5vw, 48px);
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.15;
-            margin-bottom: 14px;
-            letter-spacing: -.5px;
-        }
-        .hero p {
-            font-size: 16px;
-            color: rgba(255,255,255,.65);
-            margin-bottom: 24px;
-        }
-        .hero-pills {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 8px;
-        }
-        .hero-pill {
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.12);
-            border-radius: 100px;
-            padding: 4px 12px;
-            font-size: 12px;
-            color: rgba(255,255,255,.8);
-        }
+/* RESULTS */
+#results{display:none}
+.ok-ic{width:70px;height:70px;background:#d1fae5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;color:#10b981}
+.res-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:5px}
+.res-sub{text-align:center;font-size:13.5px;color:#64748b;margin-bottom:22px}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
+.stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;text-align:center}
+.stat-ic{font-size:26px;margin-bottom:7px}
+.stat-lbl{font-size:11.5px;color:#94a3b8;margin-bottom:3px}
+.stat-val{font-size:22px;font-weight:700}
 
-        /* ── Main Layout ─────────────────────────────────── */
-        main { max-width: 1200px; margin: 0 auto; padding: 40px 24px 60px; }
+/* PREVIEW TABS */
+.prev-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
+.prev-tabs{display:flex;gap:7px}
+.ptab{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:7px;padding:6px 13px;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;color:#475569}
+.ptab:hover{background:#e2e8f0}
+.ptab.on{background:#2563eb;color:#fff;border-color:#2563eb}
 
-        /* ── Card ────────────────────────────────────────── */
-        .card {
-            background: var(--surface-1);
-            border: 1px solid var(--surface-3);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            padding: 32px;
-            margin-bottom: 24px;
-        }
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .card-title-icon {
-            width: 36px; height: 36px;
-            border-radius: 9px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px;
-        }
+/* A4 page view */
+.pages-wrap{background:#cbd5e1;border-radius:10px;padding:20px;max-height:660px;overflow-y:auto}
+.a4{width:794px;min-height:1123px;background:#fff;margin:0 auto 18px;padding:72px 75px;box-shadow:0 4px 20px rgba(0,0,0,.15);position:relative;font-family:Calibri,'Times New Roman',serif;font-size:12pt;line-height:1.5;color:#000}
+.a4:last-child{margin-bottom:0}
+.a4 h1{font-size:20pt;font-weight:bold;margin:14pt 0 6pt}
+.a4 h2{font-size:16pt;font-weight:bold;margin:12pt 0 5pt}
+.a4 h3{font-size:13pt;font-weight:bold;margin:10pt 0 4pt}
+.a4 h4,.a4 h5,.a4 h6{font-size:12pt;font-weight:bold;margin:8pt 0 4pt}
+.a4 p{margin:0 0 8pt}
+.a4 ul,.a4 ol{margin:0 0 8pt 24pt;padding:0}
+.a4 li{margin-bottom:4pt}
+.a4 table{width:100%;border-collapse:collapse;margin-bottom:10pt}
+.a4 td,.a4 th{border:1px solid #ccc;padding:4pt 6pt;font-size:11pt}
+.a4 strong,.a4 b{font-weight:bold}
+.a4 em,.a4 i{font-style:italic}
+.a4 u{text-decoration:underline}
+.a4 img{max-width:100%;height:auto}
+.pgnum{position:absolute;bottom:22px;right:28px;font-family:'Segoe UI',Arial,sans-serif;font-size:10.5px;color:#94a3b8}
 
-        /* ── Drop Zone ───────────────────────────────────── */
-        .drop-zone {
-            border: 2px dashed var(--surface-3);
-            border-radius: var(--radius);
-            padding: 56px 24px;
-            text-align: center;
-            cursor: pointer;
-            transition: all .25s;
-            background: var(--surface-0);
-        }
-        .drop-zone:hover, .drop-zone.dragover {
-            border-color: var(--brand-primary);
-            background: #eff6ff;
-        }
-        .drop-zone.dragover { transform: scale(1.01); }
-        .drop-zone-icon {
-            width: 72px; height: 72px;
-            background: linear-gradient(135deg, #eff6ff, #e0e7ff);
-            border-radius: 20px;
-            display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 18px;
-            font-size: 32px;
-            color: var(--brand-primary);
-        }
-        .drop-zone h3 { font-size: 17px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-        .drop-zone p  { font-size: 13.5px; color: var(--text-muted); margin-bottom: 18px; }
+/* Flow view */
+#flowView{display:none;max-height:600px;overflow-y:auto;padding:28px 36px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;font-family:Calibri,'Times New Roman',serif;font-size:12pt;line-height:1.5;color:#000}
+#flowView h1{font-size:20pt;font-weight:bold;margin:14pt 0 6pt}
+#flowView h2{font-size:16pt;font-weight:bold;margin:12pt 0 5pt}
+#flowView h3{font-size:13pt;font-weight:bold;margin:10pt 0 4pt}
+#flowView p{margin:0 0 8pt}
+#flowView ul,#flowView ol{margin:0 0 8pt 24pt;padding:0}
+#flowView li{margin-bottom:4pt}
+#flowView table{width:100%;border-collapse:collapse;margin-bottom:10pt}
+#flowView td,#flowView th{border:1px solid #ccc;padding:4pt 6pt}
 
-        .btn {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-family: inherit;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            border: none;
-            transition: all .2s;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, var(--brand-primary), var(--brand-secondary));
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(26,86,219,.3);
-        }
-        .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(26,86,219,.4); }
-        .btn-success {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(16,185,129,.3);
-            width: 100%;
-            justify-content: center;
-            padding: 14px;
-            font-size: 16px;
-        }
-        .btn-success:hover { transform: translateY(-1px); box-shadow: 0 6px 18px rgba(16,185,129,.4); }
-        .btn-ghost {
-            background: var(--surface-2);
-            color: var(--text-secondary);
-            width: 100%;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .btn-ghost:hover { background: var(--surface-3); color: var(--text-primary); }
+/* scale on small screens */
+@media(max-width:860px){
+  .pages-wrap{padding:10px}
+  .a4{transform:scale(.52);transform-origin:top center;margin-bottom:-490px}
+  .a4:last-child{margin-bottom:-510px}
+}
 
-        .drop-note { font-size: 11.5px; color: var(--text-muted); margin-top: 12px; }
+/* FEATURES */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}
+.feat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;text-align:center;transition:all .2s}
+.feat:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
+.feat-ic{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 12px}
+.feat h3{font-size:14.5px;font-weight:700;margin-bottom:5px}
+.feat p{font-size:12.5px;color:#64748b}
 
-        /* File info */
-        .file-info {
-            display: none;
-            margin-top: 16px;
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: var(--radius);
-            padding: 14px 16px;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .file-info.visible { display: flex; }
-        .file-info-left { display: flex; align-items: center; gap: 12px; }
-        .file-info-icon { font-size: 28px; color: var(--brand-primary); }
-        .file-info-name { font-weight: 600; font-size: 14px; color: var(--text-primary); }
-        .file-info-sub  { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
-        .file-info-del  { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 20px; transition: color .2s; }
-        .file-info-del:hover { color: var(--brand-danger); }
+/* STEPS */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.step{text-align:center;padding:18px 10px}
+.step-n{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:#fff;margin:0 auto 11px}
+.step h4{font-size:13.5px;font-weight:700;margin-bottom:5px}
+.step p{font-size:12px;color:#64748b}
 
-        /* ── Progress ────────────────────────────────────── */
-        #processing { display: none; }
-        .processing-inner { text-align: center; }
-        .spinner-wrap { margin-bottom: 20px; }
-        .spinner {
-            width: 56px; height: 56px;
-            border: 4px solid var(--surface-3);
-            border-top-color: var(--brand-primary);
-            border-radius: 50%;
-            animation: spin .9s linear infinite;
-            margin: 0 auto;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
-        .processing-title { font-size: 20px; font-weight: 700; color: var(--text-primary); margin-bottom: 6px; }
-        .processing-msg   { font-size: 14px; color: var(--text-secondary); margin-bottom: 20px; }
-        .progress-bar     { background: var(--surface-3); border-radius: 100px; height: 10px; overflow: hidden; }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--brand-primary), var(--brand-secondary));
-            border-radius: 100px;
-            transition: width .4s ease;
-            width: 0%;
-        }
-        .progress-label   { font-size: 12px; color: var(--text-muted); margin-top: 8px; font-family: 'DM Mono', monospace; }
+/* FAQ */
+.faq+.faq{border-top:1px solid #f1f5f9}
+.faq{padding:16px 0}
+.faq-q{font-size:14.5px;font-weight:600;margin-bottom:7px;display:flex;align-items:center;gap:8px}
+.faq-q i{color:#2563eb;font-size:11px}
+.faq-a{font-size:13px;color:#64748b;padding-left:20px}
 
-        /* ── Results ─────────────────────────────────────── */
-        #results { display: none; }
-        .success-badge {
-            display: flex; align-items: center; justify-content: center;
-            width: 72px; height: 72px;
-            background: linear-gradient(135deg, #d1fae5, #a7f3d0);
-            border-radius: 50%;
-            margin: 0 auto 16px;
-            font-size: 32px;
-            color: var(--brand-success);
-        }
-        .results-title { font-size: 24px; font-weight: 800; text-align: center; color: var(--text-primary); margin-bottom: 6px; }
-        .results-sub   { text-align: center; font-size: 14px; color: var(--text-secondary); margin-bottom: 24px; }
-        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
-        .stat-card {
-            background: var(--surface-0);
-            border: 1px solid var(--surface-3);
-            border-radius: var(--radius);
-            padding: 18px;
-            text-align: center;
-        }
-        .stat-icon  { font-size: 28px; margin-bottom: 8px; }
-        .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 4px; }
-        .stat-value { font-size: 24px; font-weight: 700; color: var(--text-primary); }
+/* FOOTER */
+footer{background:#0f172a;color:rgba(255,255,255,.6);padding:50px 20px 28px}
+.ft{max-width:1100px;margin:auto}
+.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
+.ft-brand p{font-size:13px;color:rgba(255,255,255,.4);margin-top:10px}
+.ft-col h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px}
+.ft-col ul{list-style:none}
+.ft-col li{margin-bottom:9px}
+.ft-col a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none}
+.ft-col a:hover{color:#fff}
+.ft-hr{border:none;border-top:1px solid rgba(255,255,255,.07);margin-bottom:20px}
+.ft-bot{text-align:center;font-size:12px;color:rgba(255,255,255,.25)}
+.socials{display:flex;gap:10px;margin-top:8px}
+.socials a{color:rgba(255,255,255,.35);font-size:17px;text-decoration:none}
+.socials a:hover{color:#fff}
 
-        /* ── Preview ─────────────────────────────────────── */
-        .preview-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 16px;
-        }
-        .preview-toolbar {
-            display: flex; gap: 8px; flex-wrap: wrap;
-        }
-        .preview-btn {
-            background: var(--surface-2);
-            border: 1px solid var(--surface-3);
-            border-radius: 8px;
-            padding: 6px 14px;
-            font-family: inherit;
-            font-size: 12.5px;
-            font-weight: 500;
-            cursor: pointer;
-            color: var(--text-secondary);
-            transition: all .2s;
-        }
-        .preview-btn:hover { background: var(--surface-3); color: var(--text-primary); }
-        .preview-btn.active { background: var(--brand-primary); color: #fff; border-color: var(--brand-primary); }
-
-        /* A4 page container */
-        .page-preview-wrap {
-            background: #e5e7eb;
-            border-radius: var(--radius);
-            padding: 24px;
-            max-height: 680px;
-            overflow-y: auto;
-        }
-        .a4-page {
-            width: 794px;
-            min-height: 1123px;
-            background: #fff;
-            margin: 0 auto 20px;
-            padding: 75px;
-            box-shadow: var(--shadow-lg);
-            position: relative;
-            font-family: Calibri, 'Times New Roman', serif;
-            font-size: 12pt;
-            line-height: 1.5;
-            color: #000;
-            box-sizing: border-box;
-            break-after: page;
-        }
-        .a4-page:last-child { margin-bottom: 0; }
-        .page-number-label {
-            position: absolute;
-            bottom: 24px;
-            right: 32px;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 11px;
-            color: #94a3b8;
-        }
-        .a4-page h1  { font-size: 20pt; font-weight: bold; margin: 14pt 0 6pt; }
-        .a4-page h2  { font-size: 16pt; font-weight: bold; margin: 12pt 0 5pt; }
-        .a4-page h3  { font-size: 13pt; font-weight: bold; margin: 10pt 0 4pt; }
-        .a4-page h4, .a4-page h5, .a4-page h6 { font-size: 12pt; font-weight: bold; margin: 8pt 0 4pt; }
-        .a4-page p   { margin: 0 0 8pt 0; }
-        .a4-page ul, .a4-page ol { margin: 0 0 8pt 24pt; padding: 0; }
-        .a4-page li  { margin-bottom: 4pt; }
-        .a4-page table { width: 100%; border-collapse: collapse; margin-bottom: 10pt; }
-        .a4-page td, .a4-page th { border: 1px solid #ccc; padding: 4pt 6pt; font-size: 11pt; }
-        .a4-page strong, .a4-page b { font-weight: bold; }
-        .a4-page em, .a4-page i    { font-style: italic; }
-        .a4-page u { text-decoration: underline; }
-        .a4-page img { max-width: 100%; height: auto; }
-
-        /* Scale preview for smaller screens */
-        @media (max-width: 900px) {
-            .page-preview-wrap { padding: 12px; }
-            .a4-page { transform: scale(0.55); transform-origin: top center; margin-bottom: -460px; }
-            .a4-page:last-child { margin-bottom: -480px; }
-        }
-
-        /* ── Features grid ───────────────────────────────── */
-        .features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px; }
-        .feature-card {
-            background: var(--surface-1);
-            border: 1px solid var(--surface-3);
-            border-radius: var(--radius);
-            padding: 24px;
-            text-align: center;
-            transition: transform .25s, box-shadow .25s;
-        }
-        .feature-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-        .feature-icon {
-            width: 56px; height: 56px;
-            border-radius: 16px;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 24px;
-            margin: 0 auto 14px;
-        }
-        .feature-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 6px; }
-        .feature-card p  { font-size: 13px; color: var(--text-secondary); }
-
-        /* ── Steps ───────────────────────────────────────── */
-        .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
-        .step-card { text-align: center; padding: 20px 12px; }
-        .step-num {
-            width: 52px; height: 52px;
-            border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 20px;
-            font-weight: 800;
-            color: #fff;
-            margin: 0 auto 12px;
-        }
-        .step-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
-        .step-card p  { font-size: 12.5px; color: var(--text-secondary); }
-
-        /* ── FAQ ─────────────────────────────────────────── */
-        .faq-item {
-            border-bottom: 1px solid var(--surface-3);
-            padding: 18px 0;
-        }
-        .faq-item:last-child { border-bottom: none; }
-        .faq-q {
-            font-size: 15px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 8px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .faq-q-icon { color: var(--brand-primary); font-size: 12px; }
-        .faq-a { font-size: 13.5px; color: var(--text-secondary); padding-left: 22px; }
-
-        /* ── Footer ──────────────────────────────────────── */
-        footer {
-            background: #0f172a;
-            color: rgba(255,255,255,.7);
-            padding: 56px 24px 32px;
-        }
-        .footer-inner { max-width: 1200px; margin: 0 auto; }
-        .footer-grid  { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 40px; margin-bottom: 40px; }
-        .footer-brand .logo { margin-bottom: 12px; }
-        .footer-brand p { font-size: 13px; color: rgba(255,255,255,.45); }
-        .footer-col h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 16px; text-transform: uppercase; letter-spacing: .5px; }
-        .footer-col ul { list-style: none; }
-        .footer-col li { margin-bottom: 10px; }
-        .footer-col a  { font-size: 13px; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
-        .footer-col a:hover { color: #fff; }
-        .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,.08); margin-bottom: 24px; }
-        .footer-bottom { text-align: center; font-size: 12.5px; color: rgba(255,255,255,.3); }
-        .social-links { display: flex; gap: 12px; margin-top: 8px; }
-        .social-links a { color: rgba(255,255,255,.4); font-size: 18px; transition: color .2s; }
-        .social-links a:hover { color: #fff; }
-
-        /* ── Responsive ──────────────────────────────────── */
-        @media (max-width: 768px) {
-            nav.desktop-nav { display: none; }
-            #mobileMenuBtn  { display: block; }
-            .features-grid  { grid-template-columns: 1fr; }
-            .steps-grid     { grid-template-columns: repeat(2, 1fr); }
-            .footer-grid    { grid-template-columns: 1fr 1fr; gap: 24px; }
-            .stats-grid     { grid-template-columns: 1fr 1fr; }
-        }
-        @media (max-width: 480px) {
-            .steps-grid  { grid-template-columns: 1fr; }
-            .footer-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+@media(max-width:768px){
+  nav{display:none}#mbtn{display:block}
+  .feat-grid{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .ft-grid{grid-template-columns:1fr 1fr;gap:20px}
+  .stats{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .steps{grid-template-columns:1fr}
+  .ft-grid{grid-template-columns:1fr}
+}
+</style>
 </head>
 <body>
 
-<!-- ── Header ──────────────────────────────────────────────── -->
+<!-- HEADER -->
 <header>
-    <div class="header-inner">
-        <a href="../../index.html" class="logo">
-            <div class="logo-icon"><i class="fas fa-tools"></i></div>
-            <div>
-                <div class="logo-text">Free Tools Hub</div>
-                <div class="logo-sub">Tools · Blogs · Resources</div>
-            </div>
-        </a>
-
-        <nav class="desktop-nav">
-            <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
-            <a href="../../index.html#tools"><i class="fas fa-tools"></i> Tools</a>
-            <a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a>
-            <a href="../../resources.html"><i class="fas fa-book"></i> Resources</a>
-            <a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher"></i> Tutorials</a>
-            <a href="../../comparisons.html"><i class="fas fa-balance-scale"></i> Compare</a>
-            <a href="../../contact.html" class="cta-btn"><i class="fas fa-envelope"></i> Contact</a>
-        </nav>
-
-        <button id="mobileMenuBtn" aria-label="Toggle menu"><i class="fas fa-bars"></i></button>
-    </div>
-    <div id="mobileMenu">
-        <a href="../../index.html"><i class="fas fa-home fa-fw mr-2"></i>Home</a>
-        <a href="../../index.html#tools"><i class="fas fa-tools fa-fw mr-2"></i>Tools</a>
-        <a href="../../blog.html"><i class="fas fa-blog fa-fw mr-2"></i>Blog</a>
-        <a href="../../resources.html"><i class="fas fa-book fa-fw mr-2"></i>Resources</a>
-        <a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher fa-fw mr-2"></i>Tutorials</a>
-        <a href="../../comparisons.html"><i class="fas fa-balance-scale fa-fw mr-2"></i>Compare</a>
-        <a href="../../contact.html"><i class="fas fa-envelope fa-fw mr-2"></i>Contact</a>
-    </div>
+  <div class="hdr">
+    <a href="../../index.html" class="logo">
+      <div class="logo-ic"><i class="fas fa-tools"></i></div>
+      <div><div class="logo-txt">Free Tools Hub</div><div class="logo-sub">Tools · Blogs · Resources</div></div>
+    </a>
+    <nav>
+      <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
+      <a href="../../index.html#tools"><i class="fas fa-tools"></i> Tools</a>
+      <a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a>
+      <a href="../../resources.html"><i class="fas fa-book"></i> Resources</a>
+      <a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher"></i> Tutorials</a>
+      <a href="../../comparisons.html"><i class="fas fa-balance-scale"></i> Compare</a>
+      <a href="../../contact.html" class="nav-cta"><i class="fas fa-envelope"></i> Contact</a>
+    </nav>
+    <button id="mbtn" onclick="document.getElementById('mmenu').style.display=document.getElementById('mmenu').style.display==='block'?'none':'block'"><i class="fas fa-bars"></i></button>
+  </div>
+  <div id="mmenu">
+    <a href="../../index.html"><i class="fas fa-home fa-fw"></i> Home</a>
+    <a href="../../index.html#tools"><i class="fas fa-tools fa-fw"></i> Tools</a>
+    <a href="../../blog.html"><i class="fas fa-blog fa-fw"></i> Blog</a>
+    <a href="../../resources.html"><i class="fas fa-book fa-fw"></i> Resources</a>
+    <a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher fa-fw"></i> Tutorials</a>
+    <a href="../../comparisons.html"><i class="fas fa-balance-scale fa-fw"></i> Compare</a>
+    <a href="../../contact.html"><i class="fas fa-envelope fa-fw"></i> Contact</a>
+  </div>
 </header>
 
-<!-- ── Breadcrumb ───────────────────────────────────────────── -->
-<div class="breadcrumb">
-    <div class="breadcrumb-inner">
-        <a href="../../index.html"><i class="fas fa-home"></i></a>
-        <span class="sep"><i class="fas fa-chevron-right"></i></span>
-        <a href="../../index.html#tools">Tools</a>
-        <span class="sep"><i class="fas fa-chevron-right"></i></span>
-        <span class="current">Word to PDF Converter</span>
-    </div>
+<!-- BREADCRUMB -->
+<div class="bc">
+  <div class="bc-in">
+    <a href="../../index.html"><i class="fas fa-home"></i></a>
+    <i class="fas fa-chevron-right" style="font-size:10px"></i>
+    <a href="../../index.html#tools">Tools</a>
+    <i class="fas fa-chevron-right" style="font-size:10px"></i>
+    <span style="color:#475569;font-weight:500">Word to PDF Converter</span>
+  </div>
 </div>
 
-<!-- ── Hero ─────────────────────────────────────────────────── -->
+<!-- HERO -->
 <section class="hero">
-    <div class="hero-content">
-        <div class="hero-badge"><i class="fas fa-shield-alt"></i> 100% Free &amp; Secure — No Upload to Server</div>
-        <div class="hero-icon"><i class="fas fa-file-pdf"></i></div>
-        <h1>Word to PDF Converter</h1>
-        <p>Convert DOCX &amp; DOC files to pixel-perfect PDFs with page layout, formatting, and numbering preserved.</p>
-        <div class="hero-pills">
-            <span class="hero-pill"><i class="fas fa-check-circle"></i> Free</span>
-            <span class="hero-pill"><i class="fas fa-check-circle"></i> No Signup</span>
-            <span class="hero-pill"><i class="fas fa-check-circle"></i> Instant</span>
-            <span class="hero-pill"><i class="fas fa-check-circle"></i> Page Breaks</span>
-            <span class="hero-pill"><i class="fas fa-check-circle"></i> Page Numbers</span>
-        </div>
+  <div class="hero-inner">
+    <div class="hero-badge"><i class="fas fa-shield-alt"></i> 100% Free &amp; Secure — Runs in Your Browser</div>
+    <div class="hero-ic"><i class="fas fa-file-pdf"></i></div>
+    <h1>Word to PDF Converter</h1>
+    <p>Convert DOCX &amp; DOC files to PDF with page layout, breaks, and numbering fully preserved.</p>
+    <div class="pills">
+      <span class="pill"><i class="fas fa-check-circle"></i> Free</span>
+      <span class="pill"><i class="fas fa-check-circle"></i> No Signup</span>
+      <span class="pill"><i class="fas fa-check-circle"></i> Instant</span>
+      <span class="pill"><i class="fas fa-check-circle"></i> Page Breaks</span>
+      <span class="pill"><i class="fas fa-check-circle"></i> Page Numbers</span>
     </div>
+  </div>
 </section>
 
-<!-- ── Main ─────────────────────────────────────────────────── -->
+<!-- MAIN -->
 <main>
 
-    <!-- Upload Section -->
-    <div class="card" id="uploadSection">
-        <div class="card-title">
-            <div class="card-title-icon" style="background:#eff6ff;color:var(--brand-primary)"><i class="fas fa-cloud-upload-alt"></i></div>
-            Upload Your Word Document
-        </div>
-
-        <div id="dropZone" class="drop-zone">
-            <div class="drop-zone-icon"><i class="fas fa-file-word"></i></div>
-            <h3>Drop your Word document here</h3>
-            <p>or click to browse your files</p>
-            <button class="btn btn-primary" type="button">
-                <i class="fas fa-folder-open"></i> Choose File
-            </button>
-            <p class="drop-note">Supported: .docx, .doc &nbsp;·&nbsp; Max size: 10 MB</p>
-        </div>
-
-        <input type="file" id="fileInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none">
-
-        <div class="file-info" id="fileInfo">
-            <div class="file-info-left">
-                <div class="file-info-icon"><i class="fas fa-file-word" style="color:var(--brand-primary)"></i></div>
-                <div>
-                    <div class="file-info-name" id="fileName">document.docx</div>
-                    <div class="file-info-sub" id="fileSize2">Ready to convert</div>
-                </div>
-            </div>
-            <button class="file-info-del" onclick="resetUpload()" title="Remove file"><i class="fas fa-times-circle"></i></button>
-        </div>
+  <!-- UPLOAD CARD -->
+  <div class="card" id="uploadCard">
+    <div class="card-title">
+      <div class="cticon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-cloud-upload-alt"></i></div>
+      Upload Your Word Document
     </div>
-
-    <!-- Processing -->
-    <div class="card" id="processing">
-        <div class="processing-inner">
-            <div class="spinner-wrap"><div class="spinner"></div></div>
-            <div class="processing-title">Converting to PDF…</div>
-            <div class="processing-msg" id="processingMsg">📄 Reading your document…</div>
-            <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
-            <div class="progress-label" id="progressLabel">0%</div>
-        </div>
+    <div id="dz" class="dz">
+      <div class="dz-ic"><i class="fas fa-file-word"></i></div>
+      <h3>Drop your Word document here</h3>
+      <p>or click to browse your files</p>
+      <button class="btn btn-blue" type="button"><i class="fas fa-folder-open"></i> Choose File</button>
+      <p class="dz-note">Supported: .docx, .doc &nbsp;·&nbsp; Max size: 10 MB</p>
     </div>
-
-    <!-- Results -->
-    <div id="results">
-        <div class="card">
-            <div class="success-badge"><i class="fas fa-check-circle"></i></div>
-            <div class="results-title">Conversion Complete!</div>
-            <div class="results-sub">Your PDF is ready — page layout, breaks, and numbering preserved</div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-icon" style="color:var(--brand-primary)"><i class="fas fa-file-alt"></i></div>
-                    <div class="stat-label">Total Pages</div>
-                    <div class="stat-value"><span id="pageCount">—</span></div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon" style="color:var(--brand-secondary)"><i class="fas fa-hdd"></i></div>
-                    <div class="stat-label">File Size</div>
-                    <div class="stat-value"><span id="fileSizeResult">—</span></div>
-                </div>
-            </div>
-
-            <button class="btn btn-success" onclick="downloadPDF()">
-                <i class="fas fa-download"></i> Download PDF
-            </button>
-            <button class="btn btn-ghost" onclick="resetUpload()">
-                <i class="fas fa-redo"></i> Convert Another File
-            </button>
+    <input type="file" id="fileInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none">
+    <div id="fileInfo">
+      <div class="fi-left">
+        <i class="fas fa-file-word" style="font-size:28px;color:#2563eb"></i>
+        <div>
+          <div class="fi-name" id="fileName">document.docx</div>
+          <div class="fi-sub" id="fileSub">Ready to convert</div>
         </div>
-
-        <!-- Preview -->
-        <div class="card">
-            <div class="preview-header">
-                <div class="card-title" style="margin-bottom:0">
-                    <div class="card-title-icon" style="background:#eff6ff;color:var(--brand-primary)"><i class="fas fa-eye"></i></div>
-                    Document Preview
-                </div>
-                <div class="preview-toolbar">
-                    <button class="preview-btn active" id="btnPageView" onclick="switchView('page')"><i class="fas fa-file"></i> Page View</button>
-                    <button class="preview-btn" id="btnFlowView" onclick="switchView('flow')"><i class="fas fa-align-left"></i> Flow View</button>
-                </div>
-            </div>
-
-            <div id="pagePreview" class="page-preview-wrap"></div>
-            <div id="flowPreview" style="display:none;max-height:600px;overflow-y:auto;padding:28px 36px;background:#fff;border:1px solid var(--surface-3);border-radius:var(--radius);font-family:Calibri,'Times New Roman',serif;font-size:12pt;line-height:1.5;color:#000"></div>
-        </div>
+      </div>
+      <button class="fi-del" onclick="resetAll()" title="Remove"><i class="fas fa-times-circle"></i></button>
     </div>
+  </div>
 
-    <!-- Features -->
-    <div class="features-grid">
-        <div class="feature-card">
-            <div class="feature-icon" style="background:#eff6ff;color:var(--brand-primary)"><i class="fas fa-lock"></i></div>
-            <h3>100% Secure</h3>
-            <p>All conversion happens in your browser. Files never leave your device.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon" style="background:#f5f3ff;color:var(--brand-secondary)"><i class="fas fa-bolt"></i></div>
-            <h3>Lightning Fast</h3>
-            <p>Convert Word to PDF in seconds with our optimized conversion engine.</p>
-        </div>
-        <div class="feature-card">
-            <div class="feature-icon" style="background:#f0fdf4;color:var(--brand-success)"><i class="fas fa-palette"></i></div>
-            <h3>Preserves Formatting</h3>
-            <p>Maintains fonts, images, tables, page breaks, and numbering.</p>
-        </div>
+  <!-- PROCESSING CARD -->
+  <div class="card" id="processing">
+    <div class="proc-in">
+      <div class="spinner"></div>
+      <div class="proc-title">Converting to PDF…</div>
+      <div class="proc-msg" id="procMsg">📄 Reading your document…</div>
+      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
+      <div class="prog-lbl" id="progLbl">0%</div>
     </div>
+  </div>
 
-    <!-- How It Works -->
+  <!-- RESULTS -->
+  <div id="results">
     <div class="card">
-        <div class="card-title">
-            <div class="card-title-icon" style="background:#fef9c3;color:#d97706"><i class="fas fa-magic"></i></div>
-            How It Works
+      <div class="ok-ic"><i class="fas fa-check-circle"></i></div>
+      <div class="res-title">Conversion Complete!</div>
+      <div class="res-sub">Your PDF is ready — layout, breaks &amp; page numbers preserved</div>
+      <div class="stats">
+        <div class="stat">
+          <div class="stat-ic" style="color:#2563eb"><i class="fas fa-file-alt"></i></div>
+          <div class="stat-lbl">Total Pages</div>
+          <div class="stat-val" id="pgCount">—</div>
         </div>
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-num" style="background:linear-gradient(135deg,var(--brand-primary),#3b82f6)">1</div>
-                <h4>Upload</h4>
-                <p>Select your Word document (.docx or .doc)</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num" style="background:linear-gradient(135deg,var(--brand-secondary),#8b5cf6)">2</div>
-                <h4>Convert</h4>
-                <p>Layout &amp; page breaks detected automatically</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">3</div>
-                <h4>Preview</h4>
-                <p>Review your PDF in paginated A4 view</p>
-            </div>
-            <div class="step-card">
-                <div class="step-num" style="background:linear-gradient(135deg,var(--brand-success),#059669)">4</div>
-                <h4>Download</h4>
-                <p>Save the final PDF with page numbers to your device</p>
-            </div>
+        <div class="stat">
+          <div class="stat-ic" style="color:#7c3aed"><i class="fas fa-hdd"></i></div>
+          <div class="stat-lbl">File Size</div>
+          <div class="stat-val" id="fSize">—</div>
         </div>
+      </div>
+      <button class="btn btn-green" onclick="doDownload()"><i class="fas fa-download"></i> Download PDF</button>
+      <button class="btn btn-gray" onclick="resetAll()"><i class="fas fa-redo"></i> Convert Another File</button>
     </div>
 
-    <!-- FAQ -->
+    <!-- PREVIEW CARD -->
     <div class="card">
-        <div class="card-title">
-            <div class="card-title-icon" style="background:#fef3c7;color:#d97706"><i class="fas fa-question-circle"></i></div>
-            Frequently Asked Questions
+      <div class="prev-hdr">
+        <div class="card-title" style="margin-bottom:0">
+          <div class="cticon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-eye"></i></div>
+          Document Preview
         </div>
-        <div class="faq-item">
-            <div class="faq-q"><i class="fas fa-chevron-right faq-q-icon"></i>Is this converter really free?</div>
-            <div class="faq-a">Yes! Our Word to PDF converter is completely free with no hidden charges or subscription required.</div>
+        <div class="prev-tabs">
+          <button class="ptab on" id="tabPage" onclick="showTab('page')"><i class="fas fa-file"></i> Page View</button>
+          <button class="ptab" id="tabFlow" onclick="showTab('flow')"><i class="fas fa-align-left"></i> Flow View</button>
         </div>
-        <div class="faq-item">
-            <div class="faq-q"><i class="fas fa-chevron-right faq-q-icon"></i>Are my files safe?</div>
-            <div class="faq-a">Absolutely! All conversions happen in your browser. Your files are never uploaded to any server.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q"><i class="fas fa-chevron-right faq-q-icon"></i>What file formats are supported?</div>
-            <div class="faq-a">We support both .docx (Word 2007+) and .doc (Word 97–2003) formats.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q"><i class="fas fa-chevron-right faq-q-icon"></i>Is there a file size limit?</div>
-            <div class="faq-a">The maximum file size is 10 MB for optimal browser-based performance.</div>
-        </div>
-        <div class="faq-item">
-            <div class="faq-q"><i class="fas fa-chevron-right faq-q-icon"></i>Are page breaks and numbers preserved?</div>
-            <div class="faq-a">Yes. Our engine detects page-break markers from your Word document and renders each page as a separate A4 sheet with page numbers at the bottom-right of every page.</div>
-        </div>
+      </div>
+      <div id="pageView" class="pages-wrap"></div>
+      <div id="flowView"></div>
     </div>
+  </div>
+
+  <!-- FEATURES -->
+  <div class="feat-grid">
+    <div class="feat">
+      <div class="feat-ic" style="background:#eff6ff;color:#2563eb"><i class="fas fa-lock"></i></div>
+      <h3>100% Secure</h3>
+      <p>All conversion happens in your browser. Files never leave your device.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-bolt"></i></div>
+      <h3>Lightning Fast</h3>
+      <p>Convert Word to PDF in seconds with our optimized engine.</p>
+    </div>
+    <div class="feat">
+      <div class="feat-ic" style="background:#f0fdf4;color:#10b981"><i class="fas fa-palette"></i></div>
+      <h3>Preserves Formatting</h3>
+      <p>Fonts, images, tables, page breaks, and numbering — all intact.</p>
+    </div>
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <div class="card">
+    <div class="card-title">
+      <div class="cticon" style="background:#fef9c3;color:#d97706"><i class="fas fa-magic"></i></div>
+      How It Works
+    </div>
+    <div class="steps">
+      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#2563eb,#3b82f6)">1</div><h4>Upload</h4><p>Select your .docx or .doc file</p></div>
+      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)">2</div><h4>Convert</h4><p>Page breaks detected automatically</p></div>
+      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">3</div><h4>Preview</h4><p>Review A4 paginated output</p></div>
+      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#10b981,#059669)">4</div><h4>Download</h4><p>Save PDF with page numbers</p></div>
+    </div>
+  </div>
+
+  <!-- FAQ -->
+  <div class="card">
+    <div class="card-title">
+      <div class="cticon" style="background:#fef3c7;color:#d97706"><i class="fas fa-question-circle"></i></div>
+      Frequently Asked Questions
+    </div>
+    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Is this converter really free?</div><div class="faq-a">Yes! Completely free, no hidden charges or subscription.</div></div>
+    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Are my files safe?</div><div class="faq-a">Absolutely. Everything runs in your browser — files are never uploaded to any server.</div></div>
+    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>What formats are supported?</div><div class="faq-a">Both .docx (Word 2007+) and .doc (Word 97–2003) formats.</div></div>
+    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Is there a file size limit?</div><div class="faq-a">Maximum 10 MB for optimal browser-based performance.</div></div>
+    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Are page breaks and numbers preserved?</div><div class="faq-a">Yes. Our engine detects page-break markers and renders each A4 page with a page number at the bottom-right.</div></div>
+  </div>
 
 </main>
 
-<!-- ── Footer ────────────────────────────────────────────────── -->
+<!-- FOOTER -->
 <footer>
-    <div class="footer-inner">
-        <div class="footer-grid">
-            <div class="footer-brand">
-                <a href="../../index.html" class="logo">
-                    <div class="logo-icon"><i class="fas fa-tools"></i></div>
-                    <div>
-                        <div class="logo-text" style="color:#fff">Free Tools Hub</div>
-                        <div class="logo-sub">Tools · Blogs · Resources</div>
-                    </div>
-                </a>
-                <p style="margin-top:10px">Your one-stop destination for free online tools, tutorials, and resources.</p>
-                <div class="social-links">
-                    <a href="#"><i class="fab fa-twitter"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-            <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="../../index.html"><i class="fas fa-home fa-fw mr-1"></i> Home</a></li>
-                    <li><a href="../../index.html#tools"><i class="fas fa-tools fa-fw mr-1"></i> All Tools</a></li>
-                    <li><a href="../../blog.html"><i class="fas fa-blog fa-fw mr-1"></i> Blog</a></li>
-                    <li><a href="../../contact.html"><i class="fas fa-envelope fa-fw mr-1"></i> Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Categories</h4>
-                <ul>
-                    <li><a href="../../index.html#tools"><i class="fas fa-file fa-fw mr-1"></i> Utility Tools</a></li>
-                    <li><a href="../../resources.html"><i class="fas fa-book fa-fw mr-1"></i> Resources</a></li>
-                    <li><a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher fa-fw mr-1"></i> Tutorials</a></li>
-                    <li><a href="../../comparisons.html"><i class="fas fa-balance-scale fa-fw mr-1"></i> Compare</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Legal</h4>
-                <ul>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms of Service</a></li>
-                    <li><a href="#">Cookie Policy</a></li>
-                </ul>
-            </div>
+  <div class="ft">
+    <div class="ft-grid">
+      <div class="ft-brand">
+        <a href="../../index.html" class="logo" style="margin-bottom:8px">
+          <div class="logo-ic"><i class="fas fa-tools"></i></div>
+          <div><div class="logo-txt" style="color:#fff">Free Tools Hub</div><div class="logo-sub">Tools · Blogs · Resources</div></div>
+        </a>
+        <p>Your one-stop destination for free online tools, tutorials, and resources.</p>
+        <div class="socials">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
         </div>
-        <hr class="footer-divider">
-        <div class="footer-bottom">&copy; 2024 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart" style="color:#ef4444"></i> for developers.</div>
+      </div>
+      <div class="ft-col"><h4>Quick Links</h4><ul>
+        <li><a href="../../index.html">Home</a></li>
+        <li><a href="../../index.html#tools">All Tools</a></li>
+        <li><a href="../../blog.html">Blog</a></li>
+        <li><a href="../../contact.html">Contact</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Categories</h4><ul>
+        <li><a href="../../index.html#tools">Utility Tools</a></li>
+        <li><a href="../../resources.html">Resources</a></li>
+        <li><a href="../../tutorials.html">Tutorials</a></li>
+        <li><a href="../../comparisons.html">Compare</a></li>
+      </ul></div>
+      <div class="ft-col"><h4>Legal</h4><ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Cookie Policy</a></li>
+      </ul></div>
     </div>
+    <hr class="ft-hr">
+    <div class="ft-bot">&copy; 2024 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart" style="color:#ef4444"></i> for developers.</div>
+  </div>
 </footer>
 
 <script>
-// ── Mobile menu
-document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-    document.getElementById('mobileMenu').classList.toggle('open');
-});
+// ============================================================
+//  STATE
+// ============================================================
+var currentFile = null;
+var pdfBlob     = null;
+var totalPages  = 0;
 
-// ── State
-let currentFile = null;
-let pdfBlob     = null;
-let pageCount   = 0;
-let rawHtml     = '';
+// ============================================================
+//  SHOW / HIDE  (pure style.display, no CSS class dependency)
+// ============================================================
+function SN(id){ document.getElementById(id).style.display='none';   }
+function SB(id){ document.getElementById(id).style.display='block';  }
+function SF(id){ document.getElementById(id).style.display='flex';   }
 
-// ── DOM helpers — simple, no class conflict
-function elShow(id) {
-    const el = document.getElementById(id);
-    if (el) el.style.display = '';
-}
-function elHide(id) {
-    const el = document.getElementById(id);
-    if (el) el.style.display = 'none';
-}
+// Initial state
+SN('processing');
+SN('results');
+SN('fileInfo');   // <-- hides the "Ready to convert" bar until a file is chosen
 
-// ── Hide results & processing on load
-window.addEventListener('DOMContentLoaded', () => {
-    elHide('processing');
-    elHide('results');
-});
+// ============================================================
+//  DROP ZONE  setup
+// ============================================================
+var dz = document.getElementById('dz');
+var fi = document.getElementById('fileInput');
 
-// ── Drop zone
-const dropZone  = document.getElementById('dropZone');
-const fileInput = document.getElementById('fileInput');
+dz.addEventListener('click', function(){ fi.click(); });
 
-dropZone.addEventListener('click', () => fileInput.click());
-dropZone.addEventListener('dragover',  e => { e.preventDefault(); dropZone.classList.add('dragover'); });
-dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
-dropZone.addEventListener('drop', e => {
+dz.addEventListener('dragover',  function(e){ e.preventDefault(); dz.classList.add('drag'); });
+dz.addEventListener('dragleave', function(){   dz.classList.remove('drag'); });
+dz.addEventListener('drop',      function(e){
     e.preventDefault();
-    dropZone.classList.remove('dragover');
-    if (e.dataTransfer.files[0]) processFile(e.dataTransfer.files[0]);
+    dz.classList.remove('drag');
+    if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
 });
-fileInput.addEventListener('change', e => {
-    if (e.target.files[0]) processFile(e.target.files[0]);
+fi.addEventListener('change', function(e){
+    if(e.target.files[0]) handleFile(e.target.files[0]);
 });
 
-// ── Reset
-function resetUpload() {
-    currentFile = pdfBlob = null;
-    pageCount = 0; rawHtml = '';
-    document.getElementById('fileInfo').style.display = 'none';
-    elHide('processing');
-    elHide('results');
-    elShow('uploadSection');
-    fileInput.value = '';
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+// ============================================================
+//  RESET
+// ============================================================
+function resetAll(){
+    currentFile = null; pdfBlob = null; totalPages = 0;
+    fi.value = '';
+    SN('fileInfo');
+    SN('processing');
+    SN('results');
+    SB('uploadCard');
+    window.scrollTo({top:0,behavior:'smooth'});
 }
 
-// ── Main process
-async function processFile(file) {
-    const validTypes = [
+// ============================================================
+//  PROGRESS helper
+// ============================================================
+function setP(pct, msg){
+    document.getElementById('progFill').style.width = pct+'%';
+    document.getElementById('progLbl').textContent  = pct+'%';
+    if(msg) document.getElementById('procMsg').textContent = msg;
+}
+
+// ============================================================
+//  STEP 1 — validate & show UI
+// ============================================================
+function handleFile(file){
+    var validTypes = [
         'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         'application/msword'
     ];
-    if (!validTypes.includes(file.type) && !file.name.match(/\.(docx|doc)$/i)) {
-        return alert('❌ Please upload a valid Word document (.docx or .doc)');
+    if(validTypes.indexOf(file.type)===-1 && !/\.(docx|doc)$/i.test(file.name)){
+        alert('Please upload a valid Word document (.docx or .doc)');
+        return;
     }
-    if (file.size > 10 * 1024 * 1024) {
-        return alert('❌ File too large! Max size is 10 MB');
+    if(file.size > 10*1024*1024){
+        alert('File too large. Maximum size is 10 MB.');
+        return;
     }
 
     currentFile = file;
 
     // Show file info bar
-    document.getElementById('fileName').textContent  = file.name;
-    document.getElementById('fileSize2').textContent = formatBytes(file.size) + ' · Ready to convert';
-    document.getElementById('fileInfo').style.display = 'flex';
+    document.getElementById('fileName').textContent = file.name;
+    document.getElementById('fileSub').textContent  = fmtBytes(file.size)+' — processing…';
+    SF('fileInfo');
 
-    // Show processing, hide results
-    elHide('results');
-    elShow('processing');
-    setProgress(10, '📄 Reading Word document…');
+    // Show processing spinner, hide results
+    SN('results');
+    SB('processing');
+    setP(5,'📄 Reading document…');
 
-    try {
-        // 1. Parse DOCX → HTML
-        const arrayBuffer = await file.arrayBuffer();
-        const result = await mammoth.convertToHtml({
-            arrayBuffer,
-            styleMap: [
+    // Yield to browser paint, then start
+    setTimeout(function(){ runConversion(file); }, 150);
+}
+
+// ============================================================
+//  STEP 2 — read file & parse with mammoth
+// ============================================================
+function runConversion(file){
+    var reader = new FileReader();
+
+    reader.onerror = function(){
+        SN('processing');
+        alert('Could not read the file. Please try again.');
+    };
+
+    reader.onload = function(e){
+        setP(20,'📄 Parsing Word document…');
+
+        mammoth.convertToHtml({
+            arrayBuffer: e.target.result,
+            styleMap:[
                 "p[style-name='Heading 1'] => h1:fresh",
                 "p[style-name='Heading 2'] => h2:fresh",
                 "p[style-name='Heading 3'] => h3:fresh",
                 "p[style-name='Heading 4'] => h4:fresh",
-                "p[style-name='Title']     => h1.doc-title:fresh",
-                "r[style-name='Strong']    => strong",
+                "p[style-name='Title']     => h1:fresh",
                 "p[style-name='List Paragraph'] => li:fresh",
-                "b => strong", "i => em", "u => u"
+                "b => strong","i => em","u => u"
             ]
+        }).then(function(result){
+
+            var html = result.value;
+            if(!html || html.trim()===''){
+                throw new Error('No readable content found in the document.');
+            }
+
+            setP(40,'🔍 Splitting into pages…');
+
+            var pages = splitPages(html);
+            totalPages = pages.length;
+
+            // Build preview
+            buildPreview(pages);
+            document.getElementById('flowView').innerHTML = html;
+
+            setP(55,'🖨️ Rendering PDF…');
+
+            // Small pause so preview renders, then build PDF
+            setTimeout(function(){ buildPDF(pages); }, 200);
+
+        }).catch(function(err){
+            console.error('mammoth error',err);
+            SN('processing');
+            alert('Conversion error:\n'+err.message);
         });
+    };
 
-        rawHtml = result.value;
-        if (!rawHtml || rawHtml.trim() === '') throw new Error('No content extracted from document.');
-
-        setProgress(35, '🔍 Detecting page breaks…');
-        await tick();
-
-        // 2. Build page preview
-        buildPagePreview(rawHtml);
-        document.getElementById('flowPreview').innerHTML = rawHtml;
-
-        setProgress(55, '🖨️ Rendering PDF…');
-        await tick();
-
-        // 3. Convert to PDF
-        await convertToPDF(rawHtml);
-
-        setProgress(100, '✅ Done!');
-        await new Promise(r => setTimeout(r, 400));
-
-        // 4. Show results
-        elHide('processing');
-        elShow('results');
-        document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-
-    } catch (err) {
-        console.error('Conversion error:', err);
-        elHide('processing');
-        alert('❌ Conversion failed:\n' + err.message + '\n\nPlease try another file.');
-    }
+    reader.readAsArrayBuffer(file);
 }
 
-// ── Split HTML into pages
-function splitIntoPages(html) {
-    // 1) mammoth emits <hr> for Word page breaks
-    let parts = html.split(/<hr\s*\/?>/gi).map(p => p.trim()).filter(Boolean);
-    if (parts.length > 1) return parts;
+// ============================================================
+//  splitPages — HR → empty paragraphs → char count
+// ============================================================
+function splitPages(html){
+    // 1. Explicit Word page-break → mammoth emits <hr>
+    var byHr = html.split(/<hr\s*\/?>/gi).map(function(s){return s.trim();}).filter(Boolean);
+    if(byHr.length>1) return byHr;
 
-    // 2) Three or more consecutive empty paragraphs → page break
-    parts = html.split(/(?:<p[^>]*>\s*<\/p>\s*){3,}/gi).map(p => p.trim()).filter(Boolean);
-    if (parts.length > 1) return parts;
+    // 2. 3+ consecutive empty paras → treat as page break
+    var byEmp = html.split(/(?:<p[^>]*>\s*<\/p>\s*){3,}/gi).map(function(s){return s.trim();}).filter(Boolean);
+    if(byEmp.length>1) return byEmp;
 
-    // 3) Fallback: split by ~3500 text characters per page
-    const CHARS = 3500;
-    const div = document.createElement('div');
-    div.innerHTML = html;
-    const nodes = Array.from(div.childNodes);
-    const pages = [];
-    let buf = '', len = 0;
-
-    for (const node of nodes) {
-        const html_  = node.nodeType === 1 ? node.outerHTML : '';
-        const chars  = node.textContent ? node.textContent.length : 0;
-        if (len + chars > CHARS && len > 0) {
-            pages.push(buf);
-            buf = ''; len = 0;
-        }
-        buf += html_;
-        len += chars;
-    }
-    if (buf.trim()) pages.push(buf);
-    return pages.length ? pages : [html];
-}
-
-// ── Build A4 page preview
-function buildPagePreview(html) {
-    const pages = splitIntoPages(html);
-    pageCount = pages.length;
-    document.getElementById('pageCount').textContent = pageCount + (pageCount === 1 ? ' page' : ' pages');
-
-    const container = document.getElementById('pagePreview');
-    container.innerHTML = '';
-
-    pages.forEach((content, i) => {
-        const page = document.createElement('div');
-        page.className = 'a4-page';
-        page.innerHTML = content;
-
-        const numEl = document.createElement('div');
-        numEl.className = 'page-number-label';
-        numEl.textContent = `Page ${i + 1} of ${pages.length}`;
-        page.appendChild(numEl);
-        container.appendChild(page);
+    // 3. Character-count bucket ~3500 chars/page
+    var LIMIT=3500;
+    var tmp=document.createElement('div');
+    tmp.innerHTML=html;
+    var kids=Array.from(tmp.childNodes);
+    var pages=[],buf='',len=0;
+    kids.forEach(function(n){
+        var h=n.nodeType===1?n.outerHTML:'';
+        var c=(n.textContent||'').length;
+        if(len+c>LIMIT && len>0){pages.push(buf);buf='';len=0;}
+        buf+=h; len+=c;
     });
+    if(buf.trim()) pages.push(buf);
+    return pages.length?pages:[html];
 }
 
-// ── Convert to PDF
-async function convertToPDF(html) {
-    const { jsPDF } = window.jspdf;
+// ============================================================
+//  buildPreview — A4 pages with page numbers
+// ============================================================
+function buildPreview(pages){
+    var wrap=document.getElementById('pageView');
+    wrap.innerHTML='';
+    pages.forEach(function(content,i){
+        var pg=document.createElement('div');
+        pg.className='a4';
+        pg.innerHTML=content;
+        var num=document.createElement('div');
+        num.className='pgnum';
+        num.textContent='Page '+(i+1)+' of '+pages.length;
+        pg.appendChild(num);
+        wrap.appendChild(pg);
+    });
+    document.getElementById('pgCount').textContent=pages.length;
+}
 
-    const A4_W_PX = 794;
-    const A4_H_PX = 1123;
-    const MARGIN  = 75;
-    const SCALE   = 2;
-    const PW_MM   = 210;
-    const PH_MM   = 297;
+// ============================================================
+//  buildPDF — renders each page with html2canvas → jsPDF
+// ============================================================
+function buildPDF(pages){
+    var jsPDF=window.jspdf.jsPDF;
+    var A4W=794,A4H=1123,MARGIN=72,SCALE=2,PW=210,PH=297;
 
-    // Inject styles for off-screen render
-    const styleEl = document.createElement('style');
-    styleEl.id = '__pdfStyles';
-    styleEl.textContent = `
-        #__pdfPage {
-            font-family: Calibri, 'Times New Roman', serif;
-            font-size: 12pt; line-height: 1.5; color: #000;
-            word-break: break-word;
+    var pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
+
+    // Inject document styles
+    var sty=document.createElement('style');
+    sty.id='__ps';
+    sty.textContent=[
+        '#__pg{font-family:Calibri,"Times New Roman",serif;font-size:12pt;line-height:1.5;color:#000;word-break:break-word}',
+        '#__pg p{margin:0 0 8pt}',
+        '#__pg h1{font-size:20pt;font-weight:bold;margin:14pt 0 6pt}',
+        '#__pg h2{font-size:16pt;font-weight:bold;margin:12pt 0 5pt}',
+        '#__pg h3{font-size:13pt;font-weight:bold;margin:10pt 0 4pt}',
+        '#__pg h4,#__pg h5,#__pg h6{font-size:12pt;font-weight:bold;margin:8pt 0 4pt}',
+        '#__pg ul,#__pg ol{margin:0 0 8pt 24pt;padding:0}',
+        '#__pg li{margin-bottom:4pt}',
+        '#__pg table{width:100%;border-collapse:collapse;margin-bottom:10pt}',
+        '#__pg td,#__pg th{border:1px solid #ccc;padding:4pt 6pt;font-size:11pt}',
+        '#__pg strong,#__pg b{font-weight:bold}',
+        '#__pg em,#__pg i{font-style:italic}',
+        '#__pg u{text-decoration:underline}',
+        '#__pg img{max-width:100%;height:auto}'
+    ].join('');
+    document.head.appendChild(sty);
+
+    var idx=0;
+
+    function doPage(){
+        if(idx>=pages.length){
+            // ---- ALL DONE ----
+            document.head.removeChild(sty);
+            pdfBlob=pdf.output('blob');
+            document.getElementById('pgCount').textContent=pages.length;
+            document.getElementById('fSize').textContent=fmtBytes(pdfBlob.size);
+            setP(100,'✅ Done!');
+            setTimeout(function(){
+                SN('processing');
+                SB('results');
+                document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
+            },400);
+            return;
         }
-        #__pdfPage p   { margin: 0 0 8pt; }
-        #__pdfPage h1  { font-size: 20pt; font-weight: bold; margin: 14pt 0 6pt; }
-        #__pdfPage h2  { font-size: 16pt; font-weight: bold; margin: 12pt 0 5pt; }
-        #__pdfPage h3  { font-size: 13pt; font-weight: bold; margin: 10pt 0 4pt; }
-        #__pdfPage h4, #__pdfPage h5, #__pdfPage h6
-                       { font-size: 12pt; font-weight: bold; margin: 8pt 0 4pt; }
-        #__pdfPage ul, #__pdfPage ol { margin: 0 0 8pt 24pt; padding: 0; }
-        #__pdfPage li  { margin-bottom: 4pt; }
-        #__pdfPage table { width: 100%; border-collapse: collapse; margin-bottom: 10pt; }
-        #__pdfPage td,
-        #__pdfPage th  { border: 1px solid #ccc; padding: 4pt 6pt; font-size: 11pt; }
-        #__pdfPage strong, #__pdfPage b { font-weight: bold; }
-        #__pdfPage em,     #__pdfPage i { font-style: italic; }
-        #__pdfPage u       { text-decoration: underline; }
-        #__pdfPage img     { max-width: 100%; height: auto; }
-    `;
-    document.head.appendChild(styleEl);
 
-    const pages = splitIntoPages(html);
-    pageCount   = pages.length;
-    document.getElementById('pageCount').textContent = pageCount + (pageCount === 1 ? ' page' : ' pages');
+        var pct=55+Math.round(((idx+1)/pages.length)*43);
+        setP(pct,'🖨️ Rendering page '+(idx+1)+' of '+pages.length+'…');
 
-    const pdf = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
-
-    for (let i = 0; i < pages.length; i++) {
-        const pct = 55 + Math.round(((i + 1) / pages.length) * 40);
-        setProgress(pct, `🖨️ Rendering page ${i + 1} of ${pages.length}…`);
-
-        // Create off-screen page div
-        const div = document.createElement('div');
-        div.id = '__pdfPage';
-        div.style.cssText = [
+        // Off-screen render div
+        var div=document.createElement('div');
+        div.id='__pg';
+        div.style.cssText=[
             'position:fixed',
             'left:-9999px',
             'top:0',
-            `width:${A4_W_PX}px`,
-            `min-height:${A4_H_PX}px`,
+            'width:'+A4W+'px',
+            'min-height:'+A4H+'px',
             'background:#fff',
             'box-sizing:border-box',
-            `padding:${MARGIN}px`
+            'padding:'+MARGIN+'px'
         ].join(';');
-        div.innerHTML = pages[i];
+        div.innerHTML=pages[idx];
         document.body.appendChild(div);
 
-        // Small wait for paint
-        await tick(100);
+        setTimeout(function(){
+            html2canvas(div,{
+                scale:SCALE,
+                useCORS:true,
+                allowTaint:true,
+                logging:false,
+                backgroundColor:'#ffffff',
+                width:A4W,
+                height:A4H,
+                windowWidth:A4W
+            }).then(function(canvas){
+                if(document.body.contains(div)) document.body.removeChild(div);
 
-        let canvas;
-        try {
-            canvas = await html2canvas(div, {
-                scale: SCALE,
-                useCORS: true,
-                allowTaint: true,
-                logging: false,
-                backgroundColor: '#ffffff',
-                width:  A4_W_PX,
-                height: A4_H_PX,
-                windowWidth: A4_W_PX
+                // Crop to exact A4 height
+                var out=document.createElement('canvas');
+                out.width=canvas.width;
+                out.height=A4H*SCALE;
+                var ctx=out.getContext('2d');
+                ctx.fillStyle='#fff';
+                ctx.fillRect(0,0,out.width,out.height);
+                ctx.drawImage(canvas,0,0);
+
+                var imgData=out.toDataURL('image/jpeg',0.88);
+                if(idx>0) pdf.addPage();
+                pdf.addImage(imgData,'JPEG',0,0,PW,PH);
+
+                // Page number stamped as vector text
+                pdf.setFont('helvetica','normal');
+                pdf.setFontSize(8);
+                pdf.setTextColor(140,140,140);
+                var lbl='Page '+(idx+1)+' of '+pages.length;
+                pdf.text(lbl, PW-12-pdf.getTextWidth(lbl), PH-7);
+
+                idx++;
+                setTimeout(doPage,60);
+
+            }).catch(function(err){
+                if(document.body.contains(div)) document.body.removeChild(div);
+                if(document.head.contains(sty)) document.head.removeChild(sty);
+                SN('processing');
+                console.error(err);
+                alert('PDF render error on page '+(idx+1)+':\n'+err.message);
             });
-        } finally {
-            document.body.removeChild(div);
-        }
-
-        // Crop canvas to exact A4 height
-        const out  = document.createElement('canvas');
-        out.width  = canvas.width;
-        out.height = A4_H_PX * SCALE;
-        const ctx  = out.getContext('2d');
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, out.width, out.height);
-        ctx.drawImage(canvas, 0, 0);
-
-        const imgData = out.toDataURL('image/jpeg', 0.90);
-
-        if (i > 0) pdf.addPage();
-        pdf.addImage(imgData, 'JPEG', 0, 0, PW_MM, PH_MM);
-
-        // Page number (vector — crisp)
-        pdf.setFont('helvetica', 'normal');
-        pdf.setFontSize(8);
-        pdf.setTextColor(140);
-        const label = `Page ${i + 1} of ${pages.length}`;
-        pdf.text(label, PW_MM - 12 - pdf.getTextWidth(label), PH_MM - 7);
+        },100);
     }
 
-    document.head.removeChild(styleEl);
-
-    pdfBlob = pdf.output('blob');
-    document.getElementById('fileSizeResult').textContent = formatBytes(pdfBlob.size);
+    doPage();
 }
 
-// ── Download PDF
-function downloadPDF() {
-    if (!pdfBlob) return alert('❌ No PDF ready. Please convert a file first.');
-    const url  = URL.createObjectURL(pdfBlob);
-    const a    = document.createElement('a');
-    a.href     = url;
-    a.download = currentFile.name.replace(/\.(docx|doc)$/i, '') + '.pdf';
+// ============================================================
+//  DOWNLOAD
+// ============================================================
+function doDownload(){
+    if(!pdfBlob){alert('No PDF ready.');return;}
+    var url=URL.createObjectURL(pdfBlob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download=currentFile.name.replace(/\.(docx|doc)$/i,'')+'.pdf';
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    setTimeout(function(){URL.revokeObjectURL(url);},1500);
 }
 
-// ── Preview tab switch
-function switchView(mode) {
-    const pg = document.getElementById('pagePreview');
-    const fl = document.getElementById('flowPreview');
-    const bp = document.getElementById('btnPageView');
-    const bf = document.getElementById('btnFlowView');
-    if (mode === 'page') {
-        pg.style.display = ''; fl.style.display = 'none';
-        bp.classList.add('active'); bf.classList.remove('active');
+// ============================================================
+//  PREVIEW TAB SWITCH
+// ============================================================
+function showTab(t){
+    var pv=document.getElementById('pageView');
+    var fv=document.getElementById('flowView');
+    var tp=document.getElementById('tabPage');
+    var tf=document.getElementById('tabFlow');
+    if(t==='page'){
+        pv.style.display=''; fv.style.display='none';
+        tp.classList.add('on'); tf.classList.remove('on');
     } else {
-        pg.style.display = 'none'; fl.style.display = '';
-        bf.classList.add('active'); bp.classList.remove('active');
+        pv.style.display='none'; fv.style.display='';
+        tf.classList.add('on'); tp.classList.remove('on');
     }
 }
 
-// ── Utilities
-function setProgress(pct, msg) {
-    document.getElementById('progressFill').style.width = pct + '%';
-    document.getElementById('progressLabel').textContent = pct + '%';
-    if (msg) document.getElementById('processingMsg').textContent = msg;
-}
-function tick(ms = 50) { return new Promise(r => setTimeout(r, ms)); }
-function formatBytes(b) {
-    if (!b) return '0 B';
-    const k = 1024, u = ['B','KB','MB','GB'];
-    const i = Math.floor(Math.log(b) / Math.log(k));
-    return (b / Math.pow(k, i)).toFixed(2) + ' ' + u[i];
+// ============================================================
+//  UTILS
+// ============================================================
+function fmtBytes(b){
+    if(!b) return '0 B';
+    var k=1024,u=['B','KB','MB','GB'];
+    var i=Math.floor(Math.log(b)/Math.log(k));
+    return (b/Math.pow(k,i)).toFixed(2)+' '+u[i];
 }
 </script>
 </body>
