@@ -120,6 +120,10 @@
         @keyframes pop { 0%{transform:scale(0) rotate(-20deg)} 70%{transform:scale(1.12) rotate(4deg)} 100%{transform:scale(1) rotate(0)} }
         .pop-anim { animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
 
+        /* Page size selector */
+        .page-size-btn { cursor:pointer; text-align:center; }
+        .page-size-btn:hover { border-color:#e2574c !important; }
+
         ::-webkit-scrollbar { width:5px; }
         ::-webkit-scrollbar-thumb { background:#ddd; border-radius:3px; }
         ::-webkit-scrollbar-thumb:hover { background:#e2574c; }
@@ -247,6 +251,35 @@
                     <span id="prevBadge" class="text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full">✓ Numbering Preserved</span>
                 </div>
                 <div id="docxStage"></div>
+            </div>
+
+            <!-- PAGE SIZE SELECTOR -->
+            <div class="bg-gray-50 border border-gray-200 rounded-xl p-4 mb-4 text-left">
+                <label class="text-sm font-semibold text-gray-700 flex items-center gap-2 mb-3">
+                    <i class="fas fa-file-alt text-red-400"></i>Output Page Size
+                    <span id="autoDetectBadge" class="text-xs font-normal bg-blue-100 text-blue-600 px-2 py-0.5 rounded-full ml-1">Auto-detected</span>
+                </label>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="pageSizeBtns">
+                    <button onclick="selectPageSize('auto')" id="btn-auto"
+                        class="page-size-btn active-size text-xs py-2.5 px-3 rounded-lg border-2 border-red-400 bg-red-50 text-red-600 font-semibold transition">
+                        <i class="fas fa-magic block text-base mb-1"></i>Auto Detect
+                    </button>
+                    <button onclick="selectPageSize('a4')" id="btn-a4"
+                        class="page-size-btn text-xs py-2.5 px-3 rounded-lg border-2 border-gray-200 bg-white text-gray-600 font-semibold transition hover:border-red-300">
+                        <i class="fas fa-file block text-base mb-1"></i>A4<br><span class="font-normal text-gray-400">210×297mm</span>
+                    </button>
+                    <button onclick="selectPageSize('letter')" id="btn-letter"
+                        class="page-size-btn text-xs py-2.5 px-3 rounded-lg border-2 border-gray-200 bg-white text-gray-600 font-semibold transition hover:border-red-300">
+                        <i class="fas fa-file block text-base mb-1"></i>Letter<br><span class="font-normal text-gray-400">216×279mm</span>
+                    </button>
+                    <button onclick="selectPageSize('legal')" id="btn-legal"
+                        class="page-size-btn text-xs py-2.5 px-3 rounded-lg border-2 border-gray-200 bg-white text-gray-600 font-semibold transition hover:border-red-300">
+                        <i class="fas fa-file block text-base mb-1"></i>Legal<br><span class="font-normal text-gray-400">216×356mm</span>
+                    </button>
+                </div>
+                <p id="selectedSizeInfo" class="text-xs text-gray-400 mt-2">
+                    <i class="fas fa-info-circle mr-1"></i>Using auto-detected size from your document
+                </p>
             </div>
 
             <button id="convertBtn" class="btn-red w-full justify-center text-lg py-4 mb-3">
@@ -492,9 +525,47 @@ const convFill     = document.getElementById('convFill');
 const dlBtn        = document.getElementById('dlBtn');
 const sucName      = document.getElementById('sucName');
 
-let selFile   = null;
-let parsedHtml = '';
-let pageSize  = { wPx:794, hPx:1123, wMM:210, hMM:297, name:'A4' };
+let selFile          = null;
+let parsedHtml       = '';
+let pageSize         = { wPx:794, hPx:1123, wMM:210, hMM:297, name:'A4' };
+let selectedOutputSize = 'auto'; // 'auto', 'a4', 'letter', 'legal'
+
+const PAGE_SIZES = {
+    auto:   null, // filled at runtime from pageSize
+    a4:     { wPx:794,  hPx:1123, wMM:210,   hMM:297,   name:'A4' },
+    letter: { wPx:816,  hPx:1056, wMM:215.9, hMM:279.4, name:'Letter' },
+    legal:  { wPx:816,  hPx:1344, wMM:215.9, hMM:355.6, name:'Legal'  },
+};
+
+function selectPageSize(size) {
+    selectedOutputSize = size;
+    // Update button styles
+    document.querySelectorAll('.page-size-btn').forEach(b => {
+        b.classList.remove('active-size','border-red-400','bg-red-50','text-red-600');
+        b.classList.add('border-gray-200','bg-white','text-gray-600');
+    });
+    const active = document.getElementById('btn-' + size);
+    if(active) {
+        active.classList.add('active-size','border-red-400','bg-red-50','text-red-600');
+        active.classList.remove('border-gray-200','bg-white','text-gray-600');
+    }
+    // Update info text
+    const info = document.getElementById('selectedSizeInfo');
+    const badge = document.getElementById('autoDetectBadge');
+    if(size === 'auto') {
+        info.innerHTML = '<i class="fas fa-info-circle mr-1"></i>Using auto-detected size from your document';
+        badge.classList.remove('hidden');
+    } else {
+        const s = PAGE_SIZES[size];
+        info.innerHTML = `<i class="fas fa-check-circle mr-1 text-green-500"></i>Output will be <strong>${s.name}</strong> (${s.wMM}×${s.hMM}mm)`;
+        badge.classList.add('hidden');
+    }
+}
+
+function getOutputPageSize() {
+    if(selectedOutputSize === 'auto') return pageSize;
+    return PAGE_SIZES[selectedOutputSize];
+}
 
 /* ── Helpers ── */
 const fmt   = b => b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB';
@@ -853,10 +924,11 @@ convertBtn.addEventListener('click', async () => {
         const {jsPDF} = window.jspdf;
 
         const SCALE   = 2;
-        const PGW     = pageSize.wPx;   // page width  px (from DOCX)
-        const PGH     = pageSize.hPx;   // page height px (from DOCX)
-        const PGW_MM  = pageSize.wMM;   // mm for jsPDF
-        const PGH_MM  = pageSize.hMM;
+        const outSize = getOutputPageSize();   // user selected or auto-detected
+        const PGW     = outSize.wPx;
+        const PGH     = outSize.hPx;
+        const PGW_MM  = outSize.wMM;
+        const PGH_MM  = outSize.hMM;
         const PAD_TOP = Math.round(PGH * 0.064);   // ~72px on A4
         const PAD_SIDE= Math.round(PGW * 0.101);   // ~80px on A4
 
@@ -970,6 +1042,8 @@ convertBtn.addEventListener('click', async () => {
 /* ── Reset ── */
 function resetAll() {
     selFile = null; parsedHtml = ''; fileInput.value = '';
+    selectedOutputSize = 'auto';
+    selectPageSize('auto');
     docxStage.innerHTML = '';
     convProgress.classList.add('hidden');
     convertBtn.disabled = false;
