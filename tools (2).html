@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5GGQGP06F0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date()); gtag('config', 'G-5GGQGP06F0');
+    </script>
+    <title>100+ Free Online Tools 2026 — No Signup Required | Free Tools Hub</title>
+    <meta name="description" content="100+ free online tools — PDF, SEO, Design, Student, Web Dev & Productivity tools. No signup, no login, always free.">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Free Tools Hub">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://freetoolshub.online/tools.html">
+    <meta property="og:title" content="100+ Free Online Tools 2026 | Free Tools Hub">
+    <meta property="og:image" content="https://freetoolshub.online/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="https://freetoolshub.online/tools.html">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="header-new.css">
+    <style>
+        .tools-hero { background: linear-gradient(135deg, var(--purple-900) 0%, var(--purple-700) 50%, var(--purple-800) 100%); padding: 60px 0 44px; color: white; position: relative; overflow: hidden; }
+        .tools-hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 55% 70% at 75% 25%, rgba(217,70,239,0.18) 0%, transparent 60%); pointer-events:none; }
+        .tools-hero::after { content:''; position:absolute; bottom:-1px; left:0; right:0; height:48px; background:var(--gray-50); clip-path:ellipse(55% 100% at 50% 100%); }
+        .tools-hero-inner { position:relative; z-index:1; text-align:center; }
+        .tools-search-wrap { position:relative; max-width:560px; margin:24px auto 0; }
+        .tools-search-wrap input { width:100%; padding:16px 54px 16px 50px; border-radius:var(--radius-full); border:none; font-family:var(--font-body); font-size:15px; color:var(--gray-800); background:white; box-shadow:0 8px 28px rgba(0,0,0,0.18); outline:none; transition:var(--transition); }
+        .tools-search-wrap input:focus { box-shadow:0 8px 28px rgba(0,0,0,0.18), 0 0 0 3px rgba(192,132,252,0.35); }
+        .tools-search-wrap input::placeholder { color:var(--gray-400); }
+        .tools-search-icon { position:absolute; left:18px; top:50%; transform:translateY(-50%); color:var(--purple-500); font-size:17px; pointer-events:none; }
+        .tools-search-btn { position:absolute; right:8px; top:50%; transform:translateY(-50%); background:linear-gradient(135deg,var(--purple-600),#d946ef); color:#fff; border:none; cursor:pointer; width:36px; height:36px; border-radius:50%; font-size:13px; display:flex; align-items:center; justify-content:center; transition:all 0.2s; }
+        .tools-search-btn:hover { box-shadow:0 4px 12px rgba(124,58,237,.4); transform:translateY(-50%) scale(1.05); }
+        .breadcrumb { background:white; border-bottom:1px solid var(--gray-200); padding:12px 0; font-size:13px; }
+        .breadcrumb-inner { display:flex; align-items:center; gap:8px; color:var(--gray-500); }
+        .breadcrumb a { color:var(--gray-500); text-decoration:none; transition:color 0.2s; display:flex; align-items:center; gap:4px; }
+        .breadcrumb a:hover { color:var(--purple-600); }
+        .breadcrumb-sep { color:var(--gray-300); font-size:11px; }
+        .breadcrumb-current { color:var(--gray-800); font-weight:500; }
+        .filter-bar { background:white; border-bottom:1px solid var(--gray-200); padding:14px 0; position:sticky; top:46px; z-index:40; box-shadow:0 2px 8px rgba(0,0,0,0.04); }
+        .filter-bar-inner { display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+        .cat-btn { display:inline-flex; align-items:center; gap:6px; padding:8px 18px; border-radius:var(--radius-full); border:1.5px solid var(--gray-200); background:white; color:var(--gray-600); font-family:var(--font-body); font-size:13.5px; font-weight:500; cursor:pointer; transition:all 0.2s; white-space:nowrap; }
+        .cat-btn:hover { border-color:var(--purple-400); color:var(--purple-600); background:var(--purple-50); }
+        .cat-btn.active { background:linear-gradient(135deg,var(--purple-600),#d946ef); border-color:transparent; color:white; box-shadow:0 4px 12px rgba(124,58,237,0.30); }
+        .tools-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:20px; }
+        .tool-card { background:white; border:1.5px solid var(--gray-200); border-radius:var(--radius-lg); padding:24px 20px; display:flex; flex-direction:column; align-items:flex-start; transition:all 0.25s; text-decoration:none; position:relative; overflow:hidden; }
+        .tool-card:hover { border-color:rgba(124,58,237,0.25); box-shadow:0 8px 32px rgba(92,33,182,0.12); transform:translateY(-4px); }
+        .tool-icon-wrap { width:52px; height:52px; border-radius:14px; display:flex; align-items:center; justify-content:center; font-size:22px; margin-bottom:14px; flex-shrink:0; }
+        .tool-badge { position:absolute; top:14px; right:14px; font-size:9px; font-weight:700; padding:3px 8px; border-radius:9999px; text-transform:uppercase; letter-spacing:0.05em; }
+        .badge-hot { background:#fee2e2; color:#dc2626; }
+        .badge-new { background:#dcfce7; color:#16a34a; }
+        .badge-popular { background:#ede9fe; color:#6d28d9; }
+        .tool-name { font-family:var(--font-display); font-size:15px; font-weight:700; color:var(--gray-900); margin-bottom:6px; line-height:1.3; }
+        .tool-desc { font-size:13px; color:var(--gray-500); line-height:1.55; flex:1; }
+        .tool-link-arrow { margin-top:16px; display:inline-flex; align-items:center; gap:5px; font-size:12.5px; font-weight:600; color:var(--purple-600); transition:gap 0.2s; }
+        .tool-card:hover .tool-link-arrow { gap:9px; }
+        .count-bar { display:flex; align-items:center; justify-content:space-between; margin-bottom:24px; flex-wrap:wrap; gap:10px; }
+        .count-text { font-size:14px; color:var(--gray-500); }
+        .count-text strong { color:var(--purple-600); font-weight:700; }
+        .no-results-box { display:none; text-align:center; padding:80px 24px; grid-column:1/-1; }
+        .no-results-box.visible { display:block; }
+        .no-results-box i { font-size:56px; color:var(--gray-300); margin-bottom:16px; display:block; }
+        .no-results-box p { color:var(--gray-500); font-size:17px; margin-bottom:20px; }
+        /* Color themes */
+        .icon-blue { background:#dbeafe; color:#1d4ed8; }
+        .icon-green { background:#dcfce7; color:#15803d; }
+        .icon-red { background:#fee2e2; color:#dc2626; }
+        .icon-orange { background:#ffedd5; color:#c2410c; }
+        .icon-purple { background:#ede9fe; color:#6d28d9; }
+        .icon-pink { background:#fce7f3; color:#be185d; }
+        .icon-teal { background:#ccfbf1; color:#0f766e; }
+        .icon-indigo { background:#e0e7ff; color:#4338ca; }
+        @media(max-width:768px){ .tools-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));} .filter-bar{top:0;} }
+        @media(max-width:480px){ .tools-grid{grid-template-columns:1fr 1fr;} }
+    </style>
+</head>
+<body>
+
+<!-- ================================================
+     FREE TOOLS HUB — COMPLETE HEADER
+     Apni index.html mein purane <header> ki jagah
+     yeh poora block paste karen (line 1 se akhir tak)
+     Saath mein header-new.css bhi link karen
+================================================ -->
+
+<!-- TOP BAR -->
+<div class="fth-topbar">
+    <div class="fth-wrap">
+        <div class="fth-tb-left">
+            <span><i class="fas fa-fire"></i> 100+ Free Tools — No Signup Needed</span>
+            <span class="fth-sep">|</span>
+            <span><i class="fas fa-tag"></i> Coupons &amp; Deals Updated Daily!</span>
+        </div>
+        <div class="fth-tb-right">
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+            <a href="privacy.html">Privacy</a>
+        </div>
+    </div>
+</div>
+
+<!-- ROW 1: Logo + Search + Actions -->
+<div class="fth-row1">
+    <div class="fth-wrap">
+        <a href="index.html" class="fth-logo">
+            <div class="fth-logo-icon"><i class="fas fa-bolt"></i></div>
+            <div class="fth-logo-text">
+                <span class="fth-logo-name">Free Tools Hub</span>
+                <span class="fth-logo-tag">Tools · Blogs · Resources</span>
+            </div>
+        </a>
+        <div class="fth-search">
+            <i class="fas fa-search fth-search-ico"></i>
+            <input type="search" id="fthSearch" placeholder="Search tools, blogs, resources..." autocomplete="off">
+            <button class="fth-search-btn" id="fthSearchBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+        </div>
+        <div class="fth-actions">
+            <a href="store.html" class="fth-btn-outline"><i class="fas fa-store"></i> Store</a>
+            <a href="contact.html" class="fth-btn-primary"><i class="fas fa-paper-plane"></i> <span>Contact Us</span></a>
+            <button class="fth-mob-btn" id="fthMobBtn" aria-label="Menu"><i class="fas fa-bars"></i></button>
+        </div>
+    </div>
+</div>
+
+<!-- ROW 2: Navigation (sticky, dark purple) -->
+<div class="fth-row2">
+    <div class="fth-wrap">
+
+        <div class="fth-ni">
+            <a href="index.html" class="fth-nl"><i class="fas fa-home fth-i"></i> Home</a>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl fth-active"><i class="fas fa-tools fth-i"></i> Free Tools <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-mega fth-mega3">
+                <div class="fth-mbanner">
+                    <div class="fth-mbanner-txt">
+                        <h4><i class="fas fa-star"></i> 100+ Free Tools — No Signup Required</h4>
+                        <p>PDF, AI, SEO, Design, Student &amp; Web Dev tools — always free</p>
+                    </div>
+                    <a href="tools.html" class="fth-mbanner-btn">Browse All Tools →</a>
+                </div>
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-file-pdf"></i> PDF Tools</div>
+                    <a href="tools/utility/pdf-to-word.html" class="fth-ddi"><i class="fas fa-exchange-alt"></i> PDF to Word <span class="fth-badge fth-hot">HOT</span></a>
+                    <a href="tools/utility/pdf-pages-delete.html" class="fth-ddi"><i class="fas fa-file-minus"></i> Delete PDF Pages</a>
+                    <a href="tools/utility/word-to-pdf-converter.html" class="fth-ddi"><i class="fas fa-file-export"></i> Word to PDF</a>
+                    <a href="tools/utility/bmi-calculator.html" class="fth-ddi"><i class="fas fa-heartbeat"></i> BMI Calculator</a>
+                </div>
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-chart-line"></i> SEO &amp; Design</div>
+                    <a href="tools/seo/meta-description-generator.html" class="fth-ddi"><i class="fas fa-tags"></i> Meta Description <span class="fth-badge fth-new">NEW</span></a>
+                    <a href="tools/seo/seo-analyzer.html" class="fth-ddi"><i class="fas fa-search"></i> SEO Analyzer</a>
+                    <a href="tools/design/image-resizer.html" class="fth-ddi"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a>
+                    <a href="tools/design/youtube-thumbnail-downloader.html" class="fth-ddi"><i class="fab fa-youtube"></i> Thumbnail Downloader</a>
+                </div>
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-code"></i> Student &amp; Dev</div>
+                    <a href="tools/student/gpa-calculator.html" class="fth-ddi"><i class="fas fa-calculator"></i> GPA Calculator <span class="fth-badge fth-hot">HOT</span></a>
+                    <a href="tools/student/plagiarism-checker.html" class="fth-ddi"><i class="fas fa-shield-alt"></i> Plagiarism Checker</a>
+                    <a href="tools/webdev/json-formatter.html" class="fth-ddi"><i class="fas fa-code"></i> JSON Formatter</a>
+                    <a href="tools.html" class="fth-dda"><i class="fas fa-arrow-right"></i> View All 100+ Tools</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl"><i class="fas fa-pen-nib fth-i"></i> Blog <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-drop">
+                <a href="blogs/ai-tools-guide-2026.html" class="fth-ddi"><i class="fas fa-robot"></i> AI Tools Guide 2026 <span class="fth-badge fth-new">NEW</span></a>
+                <a href="blogs/productivity-hacks-2026.html" class="fth-ddi"><i class="fas fa-rocket"></i> Productivity Hacks 2026</a>
+                <a href="blogs/best-free-seo-tools-2026.html" class="fth-ddi"><i class="fas fa-chart-line"></i> Best Free SEO Tools</a>
+                <div class="fth-sep"></div>
+                <a href="blog.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Blog Posts</a>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl"><i class="fas fa-graduation-cap fth-i"></i> Education <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-mega fth-mega4 fth-mega-center">
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-book-open"></i> School</div>
+                    <a href="matric.html" class="fth-ddi"><i class="fas fa-book-open"></i> Matric (Class 9-10)</a>
+                    <a href="fsc.html" class="fth-ddi"><i class="fas fa-graduation-cap"></i> FSc / ICS (11-12)</a>
+                    <a href="past-papers.html" class="fth-ddi"><i class="fas fa-file-pdf"></i> Past Papers</a>
+                </div>
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-award"></i> Competitive</div>
+                    <a href="css.html" class="fth-ddi"><i class="fas fa-award"></i> CSS Preparation</a>
+                    <a href="pms.html" class="fth-ddi"><i class="fas fa-trophy"></i> PMS Preparation</a>
+                    <a href="fpsc.html" class="fth-ddi"><i class="fas fa-briefcase"></i> FPSC Materials</a>
+                </div>
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-university"></i> University</div>
+                    <a href="education.html" class="fth-ddi"><i class="fas fa-flask"></i> MDCAT / ECAT</a>
+                    <a href="education.html" class="fth-ddi"><i class="fas fa-laptop-code"></i> IT Resources</a>
+                    <a href="education.html" class="fth-ddi"><i class="fas fa-calculator"></i> Math / Science</a>
+                </div>
+                <div>
+                    <div class="fth-mcol-title"><i class="fas fa-tools"></i> Study Tools</div>
+                    <a href="tools/student/gpa-calculator.html" class="fth-ddi"><i class="fas fa-calculator"></i> GPA Calculator</a>
+                    <a href="tools/student/plagiarism-checker.html" class="fth-ddi"><i class="fas fa-shield-alt"></i> Plagiarism Checker</a>
+                    <a href="education.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Materials</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl"><i class="fas fa-layer-group fth-i"></i> Resources <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-drop">
+                <div class="fth-dhead">Developer</div>
+                <a href="resources.html" class="fth-ddi"><i class="fas fa-plug"></i> Free APIs</a>
+                <a href="resources.html" class="fth-ddi"><i class="fas fa-icons"></i> Icon Libraries</a>
+                <a href="resources.html" class="fth-ddi"><i class="fas fa-palette"></i> Color Palettes</a>
+                <a href="resources.html" class="fth-ddi"><i class="fas fa-layer-group"></i> CSS Frameworks</a>
+                <div class="fth-sep"></div>
+                <div class="fth-dhead">Design</div>
+                <a href="resources/free-stock-photos-2026.html" class="fth-ddi"><i class="fas fa-images"></i> Stock Photos</a>
+                <a href="resources.html" class="fth-ddi"><i class="fas fa-object-group"></i> UI Kits</a>
+                <a href="resources.html" class="fth-ddi"><i class="fas fa-puzzle-piece"></i> Figma Plugins</a>
+                <div class="fth-sep"></div>
+                <a href="resources.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Resources</a>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl"><i class="fas fa-play-circle fth-i"></i> Tutorials <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-drop">
+                <a href="tutorials.html" class="fth-ddi"><i class="fas fa-robot"></i> AI Tools Mastery</a>
+                <a href="tutorials.html" class="fth-ddi"><i class="fas fa-search"></i> SEO Basics</a>
+                <a href="tutorials.html" class="fth-ddi"><i class="fas fa-code"></i> Web Development</a>
+                <a href="tutorials.html" class="fth-ddi"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a>
+                <div class="fth-sep"></div>
+                <a href="tutorials.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Tutorials</a>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl fth-nl-hl"><i class="fas fa-tag fth-i"></i> Coupons <span class="fth-pill"><i class="fas fa-fire"></i> HOT</span> <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-drop">
+                <div class="fth-dhead">Today's Best Deals</div>
+                <a href="coupons.html" class="fth-ddi"><i class="fas fa-percent"></i> All Coupons &amp; Deals <span class="fth-badge fth-new">NEW</span></a>
+                <a href="coupons/software-deals.html" class="fth-ddi"><i class="fas fa-laptop"></i> Software Deals</a>
+                <a href="coupons/hosting-deals.html" class="fth-ddi"><i class="fas fa-server"></i> Hosting Discounts</a>
+                <a href="coupons/ai-tools-deals.html" class="fth-ddi"><i class="fas fa-robot"></i> AI Tools Discounts</a>
+                <a href="coupons/educational-deals.html" class="fth-ddi"><i class="fas fa-graduation-cap"></i> Education Deals</a>
+                <div class="fth-sep"></div>
+                <a href="coupons/free-trials.html" class="fth-ddi"><i class="fas fa-gift"></i> Free Trials <span class="fth-badge fth-save">SAVE</span></a>
+                <a href="coupons.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Deals</a>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <span class="fth-nl fth-nl-hl"><i class="fas fa-shopping-bag fth-i"></i> Store <span class="fth-pill">NEW</span> <i class="fas fa-chevron-down fth-ch"></i></span>
+            <div class="fth-drop">
+                <div class="fth-dhead">Our Online Store</div>
+                <a href="store.html" class="fth-ddi"><i class="fas fa-store"></i> All Products <span class="fth-badge fth-new">NEW</span></a>
+                <a href="store/digital-tools.html" class="fth-ddi"><i class="fas fa-download"></i> Digital Products</a>
+                <a href="store/premium-templates.html" class="fth-ddi"><i class="fas fa-paint-brush"></i> Premium Templates</a>
+                <a href="store/ebooks.html" class="fth-ddi"><i class="fas fa-book"></i> eBooks &amp; Guides</a>
+                <a href="store/seo-packages.html" class="fth-ddi"><i class="fas fa-chart-line"></i> SEO Packages</a>
+                <div class="fth-sep"></div>
+                <a href="store.html" class="fth-dda"><i class="fas fa-arrow-right"></i> Visit Store</a>
+            </div>
+        </div>
+
+        <div class="fth-ni">
+            <a href="news.html" class="fth-nl"><i class="fas fa-newspaper fth-i"></i> News</a>
+        </div>
+
+    </div>
+</div>
+
+<!-- MOBILE NAV -->
+<nav class="fth-mobnav" id="fthMobNav">
+    <div class="fth-mni"><a href="index.html" class="fth-mnl"><span class="fth-mni-in"><i class="fas fa-home fth-i"></i> Home</span></a></div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-tools fth-i"></i> Free Tools</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="tools/utility/pdf-to-word.html"><i class="fas fa-exchange-alt"></i> PDF to Word</a>
+            <a href="tools/utility/pdf-pages-delete.html"><i class="fas fa-file-minus"></i> Delete PDF Pages</a>
+            <a href="tools/utility/word-to-pdf-converter.html"><i class="fas fa-file-export"></i> Word to PDF</a>
+            <a href="tools/seo/meta-description-generator.html"><i class="fas fa-tags"></i> Meta Description</a>
+            <a href="tools/seo/seo-analyzer.html"><i class="fas fa-search"></i> SEO Analyzer</a>
+            <a href="tools/design/image-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a>
+            <a href="tools/student/gpa-calculator.html"><i class="fas fa-calculator"></i> GPA Calculator</a>
+            <a href="tools/student/plagiarism-checker.html"><i class="fas fa-shield-alt"></i> Plagiarism Checker</a>
+            <a href="tools/webdev/json-formatter.html"><i class="fas fa-code"></i> JSON Formatter</a>
+            <a href="tools.html"><i class="fas fa-arrow-right"></i> All 100+ Tools</a>
+        </div>
+    </div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-pen-nib fth-i"></i> Blog</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="blogs/ai-tools-guide-2026.html"><i class="fas fa-robot"></i> AI Tools Guide 2026</a>
+            <a href="blogs/productivity-hacks-2026.html"><i class="fas fa-rocket"></i> Productivity Hacks</a>
+            <a href="blogs/best-free-seo-tools-2026.html"><i class="fas fa-chart-line"></i> Best Free SEO Tools</a>
+            <a href="blog.html"><i class="fas fa-arrow-right"></i> All Blogs</a>
+        </div>
+    </div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-graduation-cap fth-i"></i> Education</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="matric.html"><i class="fas fa-book-open"></i> Matric (Class 9-10)</a>
+            <a href="fsc.html"><i class="fas fa-graduation-cap"></i> FSc / ICS (11-12)</a>
+            <a href="css.html"><i class="fas fa-award"></i> CSS Preparation</a>
+            <a href="pms.html"><i class="fas fa-trophy"></i> PMS Preparation</a>
+            <a href="fpsc.html"><i class="fas fa-briefcase"></i> FPSC Materials</a>
+            <a href="past-papers.html"><i class="fas fa-file-pdf"></i> Past Papers</a>
+            <a href="education.html"><i class="fas fa-arrow-right"></i> All Materials</a>
+        </div>
+    </div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-layer-group fth-i"></i> Resources</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="resources.html"><i class="fas fa-plug"></i> Free APIs</a>
+            <a href="resources.html"><i class="fas fa-icons"></i> Icon Libraries</a>
+            <a href="resources/free-stock-photos-2026.html"><i class="fas fa-images"></i> Stock Photos</a>
+            <a href="resources.html"><i class="fas fa-arrow-right"></i> All Resources</a>
+        </div>
+    </div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-play-circle fth-i"></i> Tutorials</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="tutorials.html"><i class="fas fa-robot"></i> AI Tools Mastery</a>
+            <a href="tutorials.html"><i class="fas fa-search"></i> SEO Basics</a>
+            <a href="tutorials.html"><i class="fas fa-code"></i> Web Development</a>
+            <a href="tutorials.html"><i class="fas fa-pencil-ruler"></i> UI/UX Design</a>
+        </div>
+    </div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-tag fth-i"></i> Coupons &amp; Deals</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="coupons.html"><i class="fas fa-percent"></i> All Coupons</a>
+            <a href="coupons/software-deals.html"><i class="fas fa-laptop"></i> Software Deals</a>
+            <a href="coupons/hosting-deals.html"><i class="fas fa-server"></i> Hosting Discounts</a>
+            <a href="coupons/ai-tools-deals.html"><i class="fas fa-robot"></i> AI Tools Deals</a>
+            <a href="coupons/free-trials.html"><i class="fas fa-gift"></i> Free Trials</a>
+        </div>
+    </div>
+    <div class="fth-mni">
+        <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-store fth-i"></i> Online Store</span><i class="fas fa-chevron-down fth-mch"></i></button>
+        <div class="fth-msub">
+            <a href="store.html"><i class="fas fa-store"></i> All Products</a>
+            <a href="store/digital-tools.html"><i class="fas fa-download"></i> Digital Products</a>
+            <a href="store/premium-templates.html"><i class="fas fa-paint-brush"></i> Premium Templates</a>
+            <a href="store/ebooks.html"><i class="fas fa-book"></i> eBooks &amp; Guides</a>
+            <a href="store/seo-packages.html"><i class="fas fa-chart-line"></i> SEO Packages</a>
+        </div>
+    </div>
+    <div class="fth-mni"><a href="news.html" class="fth-mnl"><span class="fth-mni-in"><i class="fas fa-newspaper fth-i"></i> News</span></a></div>
+    <div class="fth-mni"><a href="contact.html" class="fth-mnl" style="color:#7c3aed;font-weight:600;"><span class="fth-mni-in"><i class="fas fa-paper-plane fth-i"></i> Contact Us</span></a></div>
+</nav>
+
+<!-- HEADER SCRIPT -->
+<script>
+(function(){
+    var btn = document.getElementById('fthMobBtn');
+    var nav = document.getElementById('fthMobNav');
+    if(btn && nav){
+        btn.addEventListener('click', function(){
+            var open = nav.classList.toggle('fth-open');
+            btn.innerHTML = open ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+        });
+    }
+    var ss = document.getElementById('fthSearch');
+    var sbtn = document.getElementById('fthSearchBtn');
+    function doSearch(){
+        var q = ss ? ss.value.trim() : '';
+        if(q) window.location.href='tools.html?q='+encodeURIComponent(q);
+    }
+    if(ss){
+        ss.addEventListener('keydown', function(e){
+            if(e.key==='Enter') doSearch();
+        });
+    }
+    if(sbtn){
+        sbtn.addEventListener('click', doSearch);
+    }
+})();
+function fthToggle(btn){
+    var item = btn.closest('.fth-mni');
+    var isOpen = item.classList.contains('fth-open');
+    document.querySelectorAll('.fth-mni.fth-open').forEach(function(el){el.classList.remove('fth-open');});
+    if(!isOpen) item.classList.add('fth-open');
+}
+</script>
+
+
+<div class="breadcrumb">
+    <div class="container">
+        <div class="breadcrumb-inner">
+            <a href="index.html"><i class="fas fa-home"></i> Home</a>
+            <span class="breadcrumb-sep"><i class="fas fa-chevron-right"></i></span>
+            <span class="breadcrumb-current">All Tools</span>
+        </div>
+    </div>
+</div>
+
+<section class="tools-hero">
+    <div class="container tools-hero-inner">
+        <div class="hero-badge" style="margin-bottom:20px;">
+            <i class="fas fa-tools"></i>
+            <span>100+ Free Tools &nbsp;·&nbsp; No Signup Required</span>
+        </div>
+        <h1 style="font-size:clamp(2rem,4vw,3rem);font-weight:800;letter-spacing:-0.03em;margin-bottom:10px;">All Free Online Tools</h1>
+        <p style="font-size:1.05rem;opacity:0.80;font-weight:300;max-width:480px;margin:0 auto;">PDF, SEO, Design, Student, Web Dev & Productivity tools — always free, no login needed</p>
+        <div class="tools-search-wrap">
+            <i class="fas fa-search tools-search-icon"></i>
+            <input type="search" id="searchTools" placeholder="Search tools..." autocomplete="off">
+            <button class="tools-search-btn" id="searchToolsBtn" aria-label="Search"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+</section>
+
+<div class="filter-bar">
+    <div class="container">
+        <div class="filter-bar-inner" id="categoryFilters">
+            <button class="cat-btn active" data-cat="all"><i class="fas fa-th"></i> All Tools</button>
+        </div>
+    </div>
+</div>
+
+<main class="section" style="background:var(--gray-50);padding-top:44px;">
+    <div class="container">
+        <div class="count-bar">
+            <p class="count-text">Showing <strong id="toolCount">0</strong> tools</p>
+        </div>
+        <div class="tools-grid" id="toolsGrid">
+            <div style="grid-column:1/-1;text-align:center;padding:64px 0;color:var(--gray-400);">
+                <i class="fas fa-spinner fa-spin" style="font-size:40px;margin-bottom:12px;display:block;color:var(--purple-400);"></i>
+                <p style="font-size:16px;">Loading tools...</p>
+            </div>
+        </div>
+        <div class="no-results-box" id="noResults">
+            <i class="fas fa-search"></i>
+            <p>No tools found matching your search.</p>
+            <button class="btn btn-primary" onclick="resetFilters()"><i class="fas fa-redo"></i> Show All Tools</button>
+        </div>
+    </div>
+</main>
+
+<footer class="site-footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="site-logo">
+                    <div class="logo-icon"><i class="fas fa-bolt"></i></div>
+                    <div class="logo-text"><span class="logo-name">Free Tools Hub</span></div>
+                </div>
+                <p>Your complete hub for free tools, expert blogs, tech news, curated resources, and tutorials.</p>
+                <div class="footer-social" style="margin-top:20px;">
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="https://github.com/freetoolsapp" class="social-icon" target="_blank" rel="noopener noreferrer"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-home"></i>Home</a></li>
+                    <li><a href="tools.html"><i class="fas fa-tools"></i>All Tools</a></li>
+                    <li><a href="blog.html"><i class="fas fa-pen-nib"></i>Blog</a></li>
+                    <li><a href="tutorials.html"><i class="fas fa-play-circle"></i>Tutorials</a></li>
+                    <li><a href="contact.html"><i class="fas fa-envelope"></i>Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Tool Categories</h4>
+                <ul>
+                    <li><a href="tools.html?cat=utility"><i class="fas fa-file-pdf"></i>PDF & Utility</a></li>
+                    <li><a href="tools.html?cat=seo"><i class="fas fa-chart-line"></i>SEO Tools</a></li>
+                    <li><a href="tools.html?cat=design"><i class="fas fa-paint-brush"></i>Design Tools</a></li>
+                    <li><a href="tools.html?cat=student"><i class="fas fa-graduation-cap"></i>Student Tools</a></li>
+                    <li><a href="tools.html?cat=webdev"><i class="fas fa-code"></i>Web Dev Tools</a></li>
+                    <li><a href="tools.html?cat=productivity"><i class="fas fa-rocket"></i>Productivity</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a href="privacy.html"><i class="fas fa-shield-alt"></i>Privacy Policy</a></li>
+                    <li><a href="terms.html"><i class="fas fa-file-contract"></i>Terms of Service</a></li>
+                    <li><a href="about.html"><i class="fas fa-info-circle"></i>About Us</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 <a href="index.html">Free Tools Hub</a>. All rights reserved. Made with <span class="heart">&#9829;</span> for developers &amp; creators.</p>
+            <div class="footer-legal">
+                <a href="privacy.html">Privacy</a>
+                <a href="terms.html">Terms</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+let allTools = [];
+let currentFilter = 'all';
+
+const catLabels = { utility:'PDF & Utility', seo:'SEO Tools', design:'Design Tools', student:'Student Tools', webdev:'Web Dev', productivity:'Productivity' };
+const catIcons  = { utility:'fa-file-alt', seo:'fa-chart-line', design:'fa-paint-brush', student:'fa-graduation-cap', webdev:'fa-code', productivity:'fa-rocket' };
+
+async function loadTools() {
+    try {
+        const res = await fetch('tools.json');
+        if (!res.ok) throw new Error('failed');
+        const data = await res.json();
+        allTools = data.tools || data;
+        buildFilters(); renderTools(allTools);
+        const params = new URLSearchParams(window.location.search);
+        const q = params.get('q'), cat = params.get('cat');
+        if (cat) { filterByCat(cat); }
+        else if (q) { document.getElementById('searchTools').value = q; filterBySearch(q); }
+    } catch(e) { console.warn('tools.json failed'); }
+}
+
+function buildFilters() {
+    const cats = [...new Set(allTools.map(t => t.category))];
+    const container = document.getElementById('categoryFilters');
+    cats.forEach(cat => {
+        const btn = document.createElement('button');
+        btn.className = 'cat-btn'; btn.dataset.cat = cat;
+        btn.innerHTML = `<i class="fas ${catIcons[cat]||'fa-tag'}"></i> ${catLabels[cat]||cat}`;
+        btn.onclick = () => filterByCat(cat, btn);
+        container.appendChild(btn);
+    });
+}
+
+function renderTools(tools) {
+    const grid = document.getElementById('toolsGrid');
+    const noResults = document.getElementById('noResults');
+    document.getElementById('toolCount').textContent = tools.length;
+    grid.innerHTML = '';
+    if (tools.length === 0) { noResults.classList.add('visible'); return; }
+    noResults.classList.remove('visible');
+    tools.forEach((tool, i) => {
+        const badgeCls = tool.badge === 'HOT' ? 'badge-hot' : tool.badge === 'NEW' ? 'badge-new' : 'badge-popular';
+        const card = document.createElement('a');
+        card.href = tool.file; card.className = 'tool-card';
+        card.style.cssText = `opacity:0;transform:translateY(16px);transition:opacity 0.4s ease ${(i%4)*0.06}s,transform 0.4s ease ${(i%4)*0.06}s,border-color 0.25s,box-shadow 0.25s`;
+        card.innerHTML = `
+            <div class="tool-icon-wrap icon-${tool.color||'purple'}"><i class="fas ${tool.icon}"></i></div>
+            ${tool.badge ? `<span class="tool-badge ${badgeCls}">${tool.badge}</span>` : ''}
+            <div class="tool-name">${tool.name}</div>
+            <p class="tool-desc">${tool.description}</p>
+            <span class="tool-link-arrow">Use Tool <i class="fas fa-arrow-right"></i></span>
+        `;
+        grid.appendChild(card);
+        requestAnimationFrame(() => setTimeout(() => { card.style.opacity='1'; card.style.transform='translateY(0)'; }, 30+(i%4)*60));
+    });
+}
+
+function filterByCat(cat, btn) {
+    currentFilter = cat;
+    document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+    if (btn) { btn.classList.add('active'); }
+    else { const b = document.querySelector(`.cat-btn[data-cat="${cat}"]`); if(b) b.classList.add('active'); }
+    document.getElementById('searchTools').value = '';
+    renderTools(cat === 'all' ? [...allTools] : allTools.filter(t => t.category === cat));
+}
+
+function filterBySearch(q) {
+    const base = currentFilter === 'all' ? allTools : allTools.filter(t => t.category === currentFilter);
+    renderTools(q ? base.filter(t =>
+        t.name.toLowerCase().includes(q.toLowerCase()) ||
+        (t.description && t.description.toLowerCase().includes(q.toLowerCase())) ||
+        t.category.toLowerCase().includes(q.toLowerCase())
+    ) : base);
+}
+
+function resetFilters() {
+    currentFilter = 'all';
+    document.getElementById('searchTools').value = '';
+    document.querySelectorAll('.cat-btn').forEach((b,i) => b.classList.toggle('active', i===0));
+    renderTools(allTools);
+}
+
+document.getElementById('searchTools').addEventListener('input', e => filterBySearch(e.target.value.trim()));
+document.getElementById('searchToolsBtn').addEventListener('click', () => filterBySearch(document.getElementById('searchTools').value.trim()));
+document.querySelector('.cat-btn[data-cat="all"]').addEventListener('click', function(){ filterByCat('all', this); });
+
+loadTools();
+</script>
+</body>
+</html>
