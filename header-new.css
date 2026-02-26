@@ -377,3 +377,42 @@
     .fth-topbar { display: none; }
     .fth-search { max-width: none; }
 }
+
+/* ================================================
+   MOBILE FIX — hamburger button visible karna
+================================================ */
+@media (max-width: 768px) {
+    .fth-btn-outline { display: none; }
+    .fth-btn-primary span { display: none; }
+
+    .fth-row1 .fth-wrap {
+        flex-wrap: nowrap;
+        overflow: visible;
+        gap: 10px;
+        padding: 0 12px;
+    }
+    .fth-search {
+        flex: 1;
+        min-width: 0;
+        max-width: none;
+    }
+    .fth-actions {
+        flex-shrink: 0;
+        margin-left: 0;
+        gap: 6px;
+    }
+    .fth-logo-tag { display: none; }
+}
+
+@media (max-width: 480px) {
+    .fth-logo-name { font-size: 14px; }
+    .fth-logo-icon { width: 36px; height: 36px; font-size: 15px; }
+    .fth-logo { gap: 8px; }
+    .fth-search input { font-size: 13px; padding: 9px 12px 9px 36px; }
+    .fth-search-ico { font-size: 13px; left: 11px; }
+    .fth-mob-btn { padding: 7px 9px; font-size: 16px; flex-shrink: 0; }
+    .fth-row1 .fth-wrap { gap: 8px; }
+}
+
+/* tagline mobile mein show karein */
+.fth-logo-tag { display: block !important; }
