@@ -562,6 +562,7 @@ function fthToggle(btn){
                         autocomplete="off"
                     >
                     <button id="heroSearchBtn" style="position:absolute;right:8px;top:50%;transform:translateY(-50%);background:linear-gradient(135deg,#5b21b6,#d946ef);color:#fff;border:none;cursor:pointer;width:36px;height:36px;border-radius:50%;font-size:14px;" aria-label="Search"><i class="fas fa-search"></i></button>
+                    
                 </div>
 
                 <div class="hero-stats" aria-label="Site statistics">
@@ -1306,12 +1307,14 @@ function fthToggle(btn){
 
         // Hero search — redirect to tools page with query
         const heroSearch = document.getElementById('heroSearch');
-        heroSearch.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' && heroSearch.value.trim()) {
-                window.location.href = `tools.html?q=${encodeURIComponent(heroSearch.value.trim())}`;
-            }
-        });
-
+        const heroSearchBtn = document.getElementById('heroSearchBtn');
+        function doHeroSearch() {
+            const q = heroSearch.value.trim();
+            if (q) window.location.href = 'tools.html?q=' + encodeURIComponent(q);
+        }
+        heroSearch.addEventListener('keydown', (e) => { if (e.key === 'Enter') doHeroSearch(); });
+        if (heroSearchBtn) heroSearchBtn.addEventListener('click', doHeroSearch);
+        
         // Animate elements on scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
