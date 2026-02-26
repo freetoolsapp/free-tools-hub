@@ -826,53 +826,88 @@ convertBtn.addEventListener('click', async () => {
     try {
         const {jsPDF} = window.jspdf;
 
-        // Create hidden full-size render div
-        const A4W = 794, A4H = 1123;
+        const SCALE = 2;          // render at 2x for sharpness
+        const A4W   = 794;        // px at 96dpi = 210mm
+        const A4H   = 1123;       // px at 96dpi = 297mm
+        const PAD_TOP = 72, PAD_SIDE = 80; // page margins in px
+
+        // ── Step 1: Render full document into hidden div ──
         const renderDiv = document.createElement('div');
         renderDiv.style.cssText = `
-            position:fixed; top:-99999px; left:-99999px;
+            position:fixed; top:-9999999px; left:0;
             width:${A4W}px;
             font-family:'Times New Roman',Georgia,serif;
             font-size:12pt; line-height:1.6; color:#000;
-            background:#fff; padding:72px 80px; box-sizing:border-box;
+            background:#fff;
+            padding:${PAD_TOP}px ${PAD_SIDE}px;
+            box-sizing:border-box;
         `;
         renderDiv.innerHTML = parsedHtml;
         document.body.appendChild(renderDiv);
-        await sleep(300);
+        await sleep(500); // let fonts/images settle
 
-        const totalH  = renderDiv.scrollHeight;
+        const totalH   = renderDiv.scrollHeight;
         const numPages = Math.max(1, Math.ceil(totalH / A4H));
-        const pdf = new jsPDF({unit:'mm', format:'a4', compress:true});
 
-        convMsg.textContent = `Converting ${numPages} page(s)…`;
+        convMsg.textContent = `Capturing document (${numPages} pages)…`;
+        convFill.style.width = '15%';
 
-        for(let i = 0; i < numPages; i++) {
-            convFill.style.width = Math.round(5 + (i/numPages)*90) + '%';
-            convMsg.textContent  = `Rendering page ${i+1} of ${numPages}…`;
-
-            // Clip to this page's content
-            const clipTop = i * A4H;
-            const canvas = await html2canvas(renderDiv, {
-                scale: 2,
-                useCORS: true,
-                allowTaint: true,
-                backgroundColor: '#ffffff',
-                logging: false,
-                width: A4W,
-                height: A4H,
-                scrollX: 0,
-                scrollY: clipTop,
-                windowWidth: A4W,
-                windowHeight: A4H
-            });
-
-            const imgData = canvas.toDataURL('image/jpeg', 0.92);
-            if(i > 0) pdf.addPage();
-            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, '', 'FAST');
-            await sleep(20);
-        }
+        // ── Step 2: Capture ENTIRE document as one big canvas ──
+        const fullCanvas = await html2canvas(renderDiv, {
+            scale: SCALE,
+            useCORS: true,
+            allowTaint: true,
+            backgroundColor: '#ffffff',
+            logging: false,
+            width: A4W,
+            height: totalH,
+            scrollX: 0,
+            scrollY: 0,
+            windowWidth: A4W,
+            windowHeight: totalH
+        });
 
         renderDiv.remove();
+        convFill.style.width = '60%';
+
+        // ── Step 3: Slice canvas into A4 pages & add to PDF ──
+        const pdf        = new jsPDF({unit:'mm', format:'a4', compress:true});
+        const sliceH     = A4H * SCALE;   // height of one A4 page in canvas pixels
+        const canvasW    = fullCanvas.width;
+        const canvasH    = fullCanvas.height;
+
+        for(let i = 0; i < numPages; i++) {
+            convFill.style.width = Math.round(60 + (i/numPages)*35) + '%';
+            convMsg.textContent  = `Building page ${i+1} of ${numPages}…`;
+
+            // Create a temporary canvas for this one page slice
+            const pageCanvas = document.createElement('canvas');
+            pageCanvas.width  = canvasW;
+            pageCanvas.height = sliceH;
+
+            const ctx   = pageCanvas.getContext('2d');
+            ctx.fillStyle = '#ffffff';
+            ctx.fillRect(0, 0, canvasW, sliceH);
+
+            // Draw the correct slice from fullCanvas
+            const srcY      = i * sliceH;
+            const srcHeight = Math.min(sliceH, canvasH - srcY); // last page may be shorter
+
+            if(srcHeight > 0) {
+                ctx.drawImage(
+                    fullCanvas,
+                    0, srcY,          // source x, y
+                    canvasW, srcHeight, // source w, h
+                    0, 0,             // dest x, y
+                    canvasW, srcHeight  // dest w, h
+                );
+            }
+
+            const imgData = pageCanvas.toDataURL('image/jpeg', 0.92);
+            if(i > 0) pdf.addPage();
+            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, '', 'FAST');
+            await sleep(10);
+        }
 
         convFill.style.width = '100%';
         convMsg.textContent = 'Done!';
