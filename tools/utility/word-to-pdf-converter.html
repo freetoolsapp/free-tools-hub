@@ -1,824 +1,915 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Word to PDF Converter - Free Tools Hub</title>
-<meta name="description" content="Convert Word documents to PDF instantly. Free, no signup, preserves formatting.">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Segoe UI',Arial,sans-serif;background:#f0f4f8;color:#1a202c}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word to PDF Converter - Free Tools Hub</title>
+    <meta name="description" content="Convert Word documents to PDF. Free DOCX to PDF converter. Numbering and layout preserved.">
+    <meta name="keywords" content="Word to PDF, DOCX to PDF, DOC to PDF, free PDF converter">
+    <meta name="author" content="freetoolsapp">
+    <link rel="canonical" href="https://freetoolsapp.github.io/free-tools-hub/tools/utility/word-to-pdf-converter.html">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
 
-/* HEADER */
-header{background:#fff;border-bottom:1px solid #e2e8f0;position:sticky;top:0;z-index:99;box-shadow:0 1px 4px rgba(0,0,0,.06)}
-.hdr{max-width:1100px;margin:auto;padding:0 20px;height:62px;display:flex;align-items:center;justify-content:space-between}
-.logo{display:flex;align-items:center;gap:10px;text-decoration:none}
-.logo-ic{width:38px;height:38px;background:linear-gradient(135deg,#2563eb,#7c3aed);border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:16px}
-.logo-txt{font-weight:700;font-size:15px;color:#1a202c}
-.logo-sub{font-size:11px;color:#94a3b8}
-nav a{padding:6px 12px;border-radius:7px;font-size:13px;font-weight:500;color:#475569;text-decoration:none}
-nav a:hover{background:#f1f5f9;color:#2563eb}
-nav .nav-cta{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff!important;padding:7px 16px}
-#mbtn{background:none;border:none;font-size:22px;color:#64748b;cursor:pointer;display:none}
-#mmenu{display:none;background:#fff;border-top:1px solid #e2e8f0}
-#mmenu a{display:block;padding:11px 20px;font-size:14px;color:#475569;text-decoration:none;border-bottom:1px solid #f1f5f9}
-#mmenu a:hover{color:#2563eb;background:#f8fafc}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-/* BREADCRUMB */
-.bc{background:#fff;border-bottom:1px solid #e2e8f0;padding:9px 0}
-.bc-in{max-width:1100px;margin:auto;padding:0 20px;display:flex;align-items:center;gap:5px;font-size:12.5px;color:#94a3b8}
-.bc-in a{color:#94a3b8;text-decoration:none}.bc-in a:hover{color:#2563eb}
+    <!-- Libraries -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
-/* HERO */
-.hero{background:linear-gradient(135deg,#0f172a 0%,#1e1b4b 60%,#0f172a 100%);padding:60px 20px;text-align:center;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 0%,rgba(99,102,241,.22),transparent 70%)}
-.hero-inner{position:relative;max-width:600px;margin:auto}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:100px;padding:5px 14px;font-size:12px;color:rgba(255,255,255,.7);margin-bottom:18px}
-.hero-ic{width:76px;height:76px;background:rgba(99,102,241,.2);border:1px solid rgba(255,255,255,.13);border-radius:22px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:34px;color:#fff}
-.hero h1{font-size:clamp(26px,5vw,46px);font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px}
-.hero p{font-size:15px;color:rgba(255,255,255,.6);margin-bottom:20px}
-.pills{display:flex;flex-wrap:wrap;justify-content:center;gap:7px}
-.pill{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:100px;padding:4px 11px;font-size:11.5px;color:rgba(255,255,255,.8)}
+    <style>
+        * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
+        body { background: #fff; color: #333; }
 
-/* MAIN */
-main{max-width:1100px;margin:0 auto;padding:36px 20px 60px}
+        .site-header { background:#fff; border-bottom:1px solid #e8e8e8; }
+        .nav-link { font-size:13px; font-weight:500; color:#555; transition:color .2s; text-decoration:none; }
+        .nav-link:hover { color:#e2574c; }
+        .nav-link.active { color:#e2574c; font-weight:600; }
 
-/* CARD */
-.card{background:#fff;border:1px solid #e2e8f0;border-radius:16px;box-shadow:0 2px 12px rgba(0,0,0,.06);padding:28px;margin-bottom:22px}
-.card-title{font-size:17px;font-weight:700;color:#1a202c;margin-bottom:18px;display:flex;align-items:center;gap:9px}
-.cticon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+        .btn-red {
+            background:#e2574c; color:#fff; border:none; border-radius:6px;
+            padding:12px 28px; font-size:15px; font-weight:600; cursor:pointer;
+            transition:all .2s; display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+        }
+        .btn-red:hover { background:#cc3f35; transform:translateY(-1px); box-shadow:0 4px 14px rgba(226,87,76,.35); }
+        .btn-red:disabled { opacity:.55; cursor:not-allowed; transform:none; box-shadow:none; }
 
-/* DROP ZONE */
-.dz{border:2px dashed #cbd5e1;border-radius:12px;padding:50px 20px;text-align:center;cursor:pointer;transition:all .2s;background:#f8fafc}
-.dz:hover,.dz.drag{border-color:#2563eb;background:#eff6ff}
-.dz-ic{width:68px;height:68px;background:linear-gradient(135deg,#eff6ff,#e0e7ff);border-radius:18px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;font-size:30px;color:#2563eb}
-.dz h3{font-size:16px;font-weight:700;margin-bottom:5px}
-.dz p{font-size:13px;color:#94a3b8;margin-bottom:16px}
-.dz-note{font-size:11.5px;color:#94a3b8;margin-top:10px}
+        .btn-green {
+            background:linear-gradient(135deg,#27ae60,#1e8449); color:#fff; border:none;
+            border-radius:8px; padding:15px 32px; font-size:16px; font-weight:700;
+            cursor:pointer; display:inline-flex; align-items:center; gap:10px;
+            transition:all .2s; width:100%; justify-content:center; box-shadow:0 4px 16px rgba(39,174,96,.3);
+        }
+        .btn-green:hover { transform:translateY(-2px); box-shadow:0 8px 24px rgba(39,174,96,.4); }
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 20px;border-radius:9px;font-family:inherit;font-size:14px;font-weight:600;cursor:pointer;border:none;transition:all .2s}
-.btn-blue{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;box-shadow:0 3px 10px rgba(37,99,235,.3)}
-.btn-blue:hover{opacity:.9;transform:translateY(-1px)}
-.btn-green{background:linear-gradient(135deg,#10b981,#059669);color:#fff;box-shadow:0 3px 10px rgba(16,185,129,.3);width:100%;justify-content:center;padding:14px;font-size:15px}
-.btn-green:hover{opacity:.9;transform:translateY(-1px)}
-.btn-gray{background:#f1f5f9;color:#475569;width:100%;justify-content:center;margin-top:10px}
-.btn-gray:hover{background:#e2e8f0}
+        .tool-hero {
+            background:linear-gradient(135deg,#f8f3ff 0%,#fff5f4 100%);
+            border-bottom:1px solid #ede8f5; padding:52px 20px 56px; text-align:center;
+        }
 
-/* FILE INFO */
-#fileInfo{display:none;margin-top:14px;background:#eff6ff;border:1px solid #bfdbfe;border-radius:10px;padding:13px 16px;align-items:center;justify-content:space-between}
-.fi-left{display:flex;align-items:center;gap:11px}
-.fi-name{font-weight:600;font-size:14px;color:#1a202c}
-.fi-sub{font-size:12px;color:#64748b;margin-top:2px}
-.fi-del{background:none;border:none;cursor:pointer;color:#94a3b8;font-size:19px}
-.fi-del:hover{color:#ef4444}
+        .upload-zone {
+            border:2px dashed #d4b8f0; border-radius:14px; background:#fff;
+            padding:52px 30px; cursor:pointer; transition:all .25s; position:relative;
+        }
+        .upload-zone:hover, .upload-zone.over { border-color:#e2574c; background:#fff8f7; }
+        .upload-zone.over { transform:scale(1.01); }
+        #fileInput { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; z-index:5; }
 
-/* PROCESSING */
-#processing{display:none}
-.proc-in{text-align:center}
-.spinner{width:54px;height:54px;border:4px solid #e2e8f0;border-top-color:#2563eb;border-radius:50%;animation:spin .85s linear infinite;margin:0 auto 18px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.proc-title{font-size:19px;font-weight:700;margin-bottom:5px}
-.proc-msg{font-size:13.5px;color:#64748b;margin-bottom:18px}
-.prog-bar{background:#e2e8f0;border-radius:100px;height:10px;overflow:hidden}
-.prog-fill{height:100%;background:linear-gradient(90deg,#2563eb,#7c3aed);border-radius:100px;transition:width .35s ease;width:0%}
-.prog-lbl{font-size:12px;color:#94a3b8;margin-top:7px}
+        .file-item {
+            background:#fff; border:1.5px solid #e8e8e8; border-radius:10px;
+            padding:14px 18px; display:flex; align-items:center; gap:14px;
+        }
+        .file-thumb {
+            width:44px; height:52px; background:linear-gradient(135deg,#e3f2fd,#bbdefb);
+            border-radius:6px; display:flex; align-items:center; justify-content:center; flex-shrink:0;
+        }
 
-/* RESULTS */
-#results{display:none}
-.ok-ic{width:70px;height:70px;background:#d1fae5;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 14px;font-size:30px;color:#10b981}
-.res-title{font-size:22px;font-weight:800;text-align:center;margin-bottom:5px}
-.res-sub{text-align:center;font-size:13.5px;color:#64748b;margin-bottom:22px}
-.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:22px}
-.stat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:10px;padding:16px;text-align:center}
-.stat-ic{font-size:26px;margin-bottom:7px}
-.stat-lbl{font-size:11.5px;color:#94a3b8;margin-bottom:3px}
-.stat-val{font-size:22px;font-weight:700}
+        @keyframes spin { to { transform:rotate(360deg); } }
+        .spinner { border:3px solid #f0f0f0; border-top-color:#e2574c; border-radius:50%; animation:spin .8s linear infinite; }
+        .prog-track { background:#ede8f5; border-radius:99px; overflow:hidden; }
+        @keyframes progShimmer { to { background-position:-200% 0; } }
+        .prog-fill {
+            height:100%; background:linear-gradient(90deg,#e2574c,#c0392b,#e2574c);
+            background-size:200% 100%; animation:progShimmer 1.4s linear infinite;
+            border-radius:99px; transition:width .4s ease;
+        }
 
-/* PREVIEW TABS */
-.prev-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px}
-.prev-tabs{display:flex;gap:7px}
-.ptab{background:#f1f5f9;border:1px solid #e2e8f0;border-radius:7px;padding:6px 13px;font-family:inherit;font-size:12.5px;font-weight:500;cursor:pointer;color:#475569}
-.ptab:hover{background:#e2e8f0}
-.ptab.on{background:#2563eb;color:#fff;border-color:#2563eb}
+        .result-box { background:#fff; border:1.5px solid #e8e8e8; border-radius:14px; overflow:hidden; }
+        .result-header {
+            background:#f7f7f7; border-bottom:1px solid #e8e8e8; padding:12px 18px;
+            display:flex; align-items:center; justify-content:space-between;
+        }
 
-/* A4 page view */
-.pages-wrap{background:#cbd5e1;border-radius:10px;padding:20px;max-height:660px;overflow-y:auto}
-.a4{width:794px;min-height:1123px;background:#fff;margin:0 auto 18px;padding:72px 75px;box-shadow:0 4px 20px rgba(0,0,0,.15);position:relative;font-family:Calibri,'Times New Roman',serif;font-size:12pt;line-height:1.5;color:#000}
-.a4:last-child{margin-bottom:0}
-.a4 h1{font-size:20pt;font-weight:bold;margin:14pt 0 6pt}
-.a4 h2{font-size:16pt;font-weight:bold;margin:12pt 0 5pt}
-.a4 h3{font-size:13pt;font-weight:bold;margin:10pt 0 4pt}
-.a4 h4,.a4 h5,.a4 h6{font-size:12pt;font-weight:bold;margin:8pt 0 4pt}
-.a4 p{margin:0 0 8pt}
-.a4 ul,.a4 ol{margin:0 0 8pt 24pt;padding:0}
-.a4 li{margin-bottom:4pt}
-.a4 table{width:100%;border-collapse:collapse;margin-bottom:10pt}
-.a4 td,.a4 th{border:1px solid #ccc;padding:4pt 6pt;font-size:11pt}
-.a4 strong,.a4 b{font-weight:bold}
-.a4 em,.a4 i{font-style:italic}
-.a4 u{text-decoration:underline}
-.a4 img{max-width:100%;height:auto}
-.pgnum{position:absolute;bottom:22px;right:28px;font-family:'Segoe UI',Arial,sans-serif;font-size:10.5px;color:#94a3b8}
+        /* DOCX preview area */
+        #docxStage {
+            background:#525659; padding:20px;
+            min-height:120px; max-height:500px; overflow-y:auto;
+        }
 
-/* Flow view */
-#flowView{display:none;max-height:600px;overflow-y:auto;padding:28px 36px;background:#fff;border:1px solid #e2e8f0;border-radius:10px;font-family:Calibri,'Times New Roman',serif;font-size:12pt;line-height:1.5;color:#000}
-#flowView h1{font-size:20pt;font-weight:bold;margin:14pt 0 6pt}
-#flowView h2{font-size:16pt;font-weight:bold;margin:12pt 0 5pt}
-#flowView h3{font-size:13pt;font-weight:bold;margin:10pt 0 4pt}
-#flowView p{margin:0 0 8pt}
-#flowView ul,#flowView ol{margin:0 0 8pt 24pt;padding:0}
-#flowView li{margin-bottom:4pt}
-#flowView table{width:100%;border-collapse:collapse;margin-bottom:10pt}
-#flowView td,#flowView th{border:1px solid #ccc;padding:4pt 6pt}
+        /* A4 page style inside preview */
+        .a4-page {
+            width:794px;
+            min-height:1123px;
+            background:#fff;
+            margin:0 auto 16px;
+            padding:72px 80px;
+            box-shadow:0 4px 20px rgba(0,0,0,.45);
+            box-sizing:border-box;
+            font-family:'Times New Roman', Georgia, serif;
+            font-size:12pt;
+            line-height:1.6;
+            color:#000;
+            transform:scale(0.5);
+            transform-origin:top left;
+        }
 
-/* scale on small screens */
-@media(max-width:860px){
-  .pages-wrap{padding:10px}
-  .a4{transform:scale(.52);transform-origin:top center;margin-bottom:-490px}
-  .a4:last-child{margin-bottom:-510px}
-}
+        /* Wrapper to handle scaled height */
+        .a4-wrapper {
+            width:397px;   /* 794 * 0.5 */
+            height:562px;  /* 1123 * 0.5 */
+            overflow:hidden;
+            margin:0 auto 10px;
+            position:relative;
+        }
 
-/* FEATURES */
-.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:22px}
-.feat{background:#fff;border:1px solid #e2e8f0;border-radius:12px;padding:22px;text-align:center;transition:all .2s}
-.feat:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.08)}
-.feat-ic{width:54px;height:54px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;margin:0 auto 12px}
-.feat h3{font-size:14.5px;font-weight:700;margin-bottom:5px}
-.feat p{font-size:12.5px;color:#64748b}
+        .tool-card { border:1.5px solid #eee; border-radius:12px; transition:all .2s; background:#fff; text-decoration:none; display:block; }
+        .tool-card:hover { border-color:#e2574c; box-shadow:0 6px 20px rgba(226,87,76,.14); transform:translateY(-3px); }
 
-/* STEPS */
-.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.step{text-align:center;padding:18px 10px}
-.step-n{width:50px;height:50px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:800;color:#fff;margin:0 auto 11px}
-.step h4{font-size:13.5px;font-weight:700;margin-bottom:5px}
-.step p{font-size:12px;color:#64748b}
+        @keyframes pop { 0%{transform:scale(0) rotate(-20deg)} 70%{transform:scale(1.12) rotate(4deg)} 100%{transform:scale(1) rotate(0)} }
+        .pop-anim { animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
 
-/* FAQ */
-.faq+.faq{border-top:1px solid #f1f5f9}
-.faq{padding:16px 0}
-.faq-q{font-size:14.5px;font-weight:600;margin-bottom:7px;display:flex;align-items:center;gap:8px}
-.faq-q i{color:#2563eb;font-size:11px}
-.faq-a{font-size:13px;color:#64748b;padding-left:20px}
-
-/* FOOTER */
-footer{background:#0f172a;color:rgba(255,255,255,.6);padding:50px 20px 28px}
-.ft{max-width:1100px;margin:auto}
-.ft-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:36px;margin-bottom:36px}
-.ft-brand p{font-size:13px;color:rgba(255,255,255,.4);margin-top:10px}
-.ft-col h4{font-size:12px;font-weight:700;color:#fff;margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px}
-.ft-col ul{list-style:none}
-.ft-col li{margin-bottom:9px}
-.ft-col a{font-size:13px;color:rgba(255,255,255,.45);text-decoration:none}
-.ft-col a:hover{color:#fff}
-.ft-hr{border:none;border-top:1px solid rgba(255,255,255,.07);margin-bottom:20px}
-.ft-bot{text-align:center;font-size:12px;color:rgba(255,255,255,.25)}
-.socials{display:flex;gap:10px;margin-top:8px}
-.socials a{color:rgba(255,255,255,.35);font-size:17px;text-decoration:none}
-.socials a:hover{color:#fff}
-
-@media(max-width:768px){
-  nav{display:none}#mbtn{display:block}
-  .feat-grid{grid-template-columns:1fr}
-  .steps{grid-template-columns:1fr 1fr}
-  .ft-grid{grid-template-columns:1fr 1fr;gap:20px}
-  .stats{grid-template-columns:1fr 1fr}
-}
-@media(max-width:480px){
-  .steps{grid-template-columns:1fr}
-  .ft-grid{grid-template-columns:1fr}
-}
-</style>
+        ::-webkit-scrollbar { width:5px; }
+        ::-webkit-scrollbar-thumb { background:#ddd; border-radius:3px; }
+        ::-webkit-scrollbar-thumb:hover { background:#e2574c; }
+    </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="hdr">
-    <a href="../../index.html" class="logo">
-      <div class="logo-ic"><i class="fas fa-tools"></i></div>
-      <div><div class="logo-txt">Free Tools Hub</div><div class="logo-sub">Tools · Blogs · Resources</div></div>
-    </a>
-    <nav>
-      <a href="../../index.html"><i class="fas fa-home"></i> Home</a>
-      <a href="../../index.html#tools"><i class="fas fa-tools"></i> Tools</a>
-      <a href="../../blog.html"><i class="fas fa-blog"></i> Blog</a>
-      <a href="../../resources.html"><i class="fas fa-book"></i> Resources</a>
-      <a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher"></i> Tutorials</a>
-      <a href="../../comparisons.html"><i class="fas fa-balance-scale"></i> Compare</a>
-      <a href="../../contact.html" class="nav-cta"><i class="fas fa-envelope"></i> Contact</a>
+<!-- ══════════════ HEADER ══════════════ -->
+<header class="site-header sticky top-0 z-50">
+    <div class="max-w-screen-xl mx-auto px-5 py-3.5 flex items-center justify-between gap-4">
+        <a href="../../index.html" class="flex items-center gap-3 flex-shrink-0">
+            <div class="w-9 h-9 bg-gradient-to-br from-red-500 to-red-700 rounded-lg flex items-center justify-center">
+                <i class="fas fa-tools text-white text-sm"></i>
+            </div>
+            <div>
+                <div class="font-bold text-gray-900 text-sm leading-none">Free Tools Hub</div>
+                <div class="text-gray-400 text-xs leading-none mt-0.5">Tools • Blogs • Resources</div>
+            </div>
+        </a>
+        <nav class="hidden lg:flex items-center gap-5">
+            <a href="../../index.html" class="nav-link"><i class="fas fa-home mr-1 text-xs"></i>Home</a>
+            <a href="../../index.html#tools" class="nav-link active"><i class="fas fa-tools mr-1 text-xs"></i>Tools</a>
+            <a href="../../blog.html" class="nav-link"><i class="fas fa-blog mr-1 text-xs"></i>Blog</a>
+            <a href="../../resources.html" class="nav-link"><i class="fas fa-book mr-1 text-xs"></i>Resources</a>
+            <a href="../../tutorials.html" class="nav-link"><i class="fas fa-chalkboard-teacher mr-1 text-xs"></i>Tutorials</a>
+            <a href="../../comparisons.html" class="nav-link"><i class="fas fa-balance-scale mr-1 text-xs"></i>Compare</a>
+            <a href="../../contact.html" class="btn-red py-2 px-4 text-sm"><i class="fas fa-envelope"></i>Contact</a>
+        </nav>
+        <button id="mobileMenuBtn" class="lg:hidden text-gray-600 text-xl p-1"><i class="fas fa-bars"></i></button>
+    </div>
+    <nav id="mobileMenu" class="hidden lg:hidden border-t border-gray-100 bg-white">
+        <div class="max-w-screen-xl mx-auto px-5 py-3 space-y-1 text-sm">
+            <a href="../../index.html" class="block py-2 nav-link"><i class="fas fa-home w-5 mr-1"></i>Home</a>
+            <a href="../../index.html#tools" class="block py-2 nav-link active"><i class="fas fa-tools w-5 mr-1"></i>Tools</a>
+            <a href="../../blog.html" class="block py-2 nav-link"><i class="fas fa-blog w-5 mr-1"></i>Blog</a>
+            <a href="../../resources.html" class="block py-2 nav-link"><i class="fas fa-book w-5 mr-1"></i>Resources</a>
+            <a href="../../tutorials.html" class="block py-2 nav-link"><i class="fas fa-chalkboard-teacher w-5 mr-1"></i>Tutorials</a>
+            <a href="../../comparisons.html" class="block py-2 nav-link"><i class="fas fa-balance-scale w-5 mr-1"></i>Compare</a>
+            <a href="../../contact.html" class="block py-2 nav-link"><i class="fas fa-envelope w-5 mr-1"></i>Contact</a>
+        </div>
     </nav>
-    <button id="mbtn" onclick="document.getElementById('mmenu').style.display=document.getElementById('mmenu').style.display==='block'?'none':'block'"><i class="fas fa-bars"></i></button>
-  </div>
-  <div id="mmenu">
-    <a href="../../index.html"><i class="fas fa-home fa-fw"></i> Home</a>
-    <a href="../../index.html#tools"><i class="fas fa-tools fa-fw"></i> Tools</a>
-    <a href="../../blog.html"><i class="fas fa-blog fa-fw"></i> Blog</a>
-    <a href="../../resources.html"><i class="fas fa-book fa-fw"></i> Resources</a>
-    <a href="../../tutorials.html"><i class="fas fa-chalkboard-teacher fa-fw"></i> Tutorials</a>
-    <a href="../../comparisons.html"><i class="fas fa-balance-scale fa-fw"></i> Compare</a>
-    <a href="../../contact.html"><i class="fas fa-envelope fa-fw"></i> Contact</a>
-  </div>
 </header>
 
-<!-- BREADCRUMB -->
-<div class="bc">
-  <div class="bc-in">
-    <a href="../../index.html"><i class="fas fa-home"></i></a>
-    <i class="fas fa-chevron-right" style="font-size:10px"></i>
-    <a href="../../index.html#tools">Tools</a>
-    <i class="fas fa-chevron-right" style="font-size:10px"></i>
-    <span style="color:#475569;font-weight:500">Word to PDF Converter</span>
-  </div>
+<!-- ══════════════ BREADCRUMB ══════════════ -->
+<div class="bg-gray-50 border-b border-gray-100 text-xs py-2">
+    <div class="max-w-screen-xl mx-auto px-5 flex items-center gap-2 text-gray-400">
+        <a href="../../index.html" class="hover:text-red-500 transition">Home</a>
+        <i class="fas fa-chevron-right text-gray-300"></i>
+        <a href="../../index.html#tools" class="hover:text-red-500 transition">Tools</a>
+        <i class="fas fa-chevron-right text-gray-300"></i>
+        <span class="text-gray-600 font-medium">Word to PDF</span>
+    </div>
 </div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-inner">
-    <div class="hero-badge"><i class="fas fa-shield-alt"></i> 100% Free &amp; Secure — Runs in Your Browser</div>
-    <div class="hero-ic"><i class="fas fa-file-pdf"></i></div>
-    <h1>Word to PDF Converter</h1>
-    <p>Convert DOCX &amp; DOC files to PDF with page layout, breaks, and numbering fully preserved.</p>
-    <div class="pills">
-      <span class="pill"><i class="fas fa-check-circle"></i> Free</span>
-      <span class="pill"><i class="fas fa-check-circle"></i> No Signup</span>
-      <span class="pill"><i class="fas fa-check-circle"></i> Instant</span>
-      <span class="pill"><i class="fas fa-check-circle"></i> Page Breaks</span>
-      <span class="pill"><i class="fas fa-check-circle"></i> Page Numbers</span>
+<!-- ══════════════ HERO ══════════════ -->
+<section class="tool-hero">
+    <div class="max-w-2xl mx-auto">
+
+        <div class="w-24 h-24 mx-auto mb-6 relative">
+            <div class="w-24 h-24 bg-gradient-to-br from-blue-400 to-blue-600 rounded-2xl flex items-center justify-center shadow-lg">
+                <i class="fas fa-file-word text-white text-5xl"></i>
+            </div>
+            <div class="absolute -bottom-1 -right-1 w-9 h-9 bg-red-500 rounded-lg flex items-center justify-center shadow-md">
+                <i class="fas fa-file-pdf text-white text-base"></i>
+            </div>
+        </div>
+
+        <h1 class="text-3xl md:text-4xl font-extrabold text-gray-900 mb-3">Convert WORD to PDF</h1>
+        <p class="text-gray-500 text-lg mb-10 leading-relaxed">Make DOC and DOCX files easy to read by converting them to PDF.</p>
+
+        <!-- STAGE: UPLOAD -->
+        <div id="stageUpload">
+            <div id="uploadZone" class="upload-zone mb-4">
+                <input type="file" id="fileInput" accept=".docx,.doc">
+                <div class="pointer-events-none">
+                    <i class="fas fa-cloud-upload-alt text-5xl text-purple-300 mb-4 block"></i>
+                    <p class="text-gray-500 text-base mb-5">Upload your file and transform it.</p>
+                    <div class="btn-red mx-auto w-max text-sm" style="pointer-events:auto"
+                        onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
+                        <i class="fas fa-folder-open"></i>Select WORD files
+                    </div>
+                    <p class="text-gray-400 text-xs mt-5">or drop WORD documents here</p>
+                </div>
+            </div>
+            <div id="errBox" class="hidden bg-red-50 border border-red-200 rounded-lg p-3 text-red-600 text-sm flex items-center gap-2 text-left">
+                <i class="fas fa-exclamation-circle flex-shrink-0"></i>
+                <span id="errMsg"></span>
+            </div>
+        </div>
+
+        <!-- STAGE: PROCESSING -->
+        <div id="stageProcess" class="hidden">
+            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm">
+                <div class="spinner w-14 h-14 mx-auto mb-6"></div>
+                <h3 id="procTitle" class="text-lg font-bold text-gray-800 mb-1">Converting your document…</h3>
+                <p id="procSub" class="text-gray-400 text-sm mb-6">Please wait a moment</p>
+                <div class="prog-track h-2.5 mb-2">
+                    <div id="progFill" class="prog-fill" style="width:5%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-gray-400">
+                    <span id="progStatus">Reading file…</span>
+                    <span id="progPct">5%</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE: PREVIEW -->
+        <div id="stagePreview" class="hidden">
+            <div class="file-item mb-5 text-left">
+                <div class="file-thumb"><i class="fas fa-file-word text-blue-500 text-2xl"></i></div>
+                <div class="flex-1 min-w-0">
+                    <div id="fName" class="font-semibold text-gray-800 text-sm truncate"></div>
+                    <div id="fSize" class="text-gray-400 text-xs mt-0.5"></div>
+                </div>
+                <button id="removeBtn" class="w-8 h-8 rounded-full hover:bg-red-50 text-gray-300 hover:text-red-400 transition flex items-center justify-center">
+                    <i class="fas fa-times text-sm"></i>
+                </button>
+            </div>
+
+            <div class="result-box mb-6 text-left">
+                <div class="result-header">
+                    <span class="text-sm font-semibold text-gray-700 flex items-center gap-2">
+                        <i class="fas fa-eye text-purple-400"></i>Preview
+                    </span>
+                    <span id="prevBadge" class="text-xs font-bold bg-green-100 text-green-700 px-2.5 py-1 rounded-full">✓ Numbering Preserved</span>
+                </div>
+                <div id="docxStage"></div>
+            </div>
+
+            <button id="convertBtn" class="btn-red w-full justify-center text-lg py-4 mb-3">
+                <i class="fas fa-file-pdf text-xl"></i>Convert to PDF
+            </button>
+            <p class="text-gray-400 text-xs text-center mb-4">
+                <i class="fas fa-lock mr-1"></i>Processed locally — your file never leaves your device
+            </p>
+
+            <div id="convProgress" class="hidden bg-gray-50 border border-gray-200 rounded-xl p-4 text-left">
+                <div class="flex items-center gap-3 mb-3">
+                    <div class="spinner w-6 h-6 flex-shrink-0" style="border-width:2.5px"></div>
+                    <span id="convMsg" class="text-sm text-gray-700 font-medium">Generating PDF…</span>
+                </div>
+                <div class="prog-track h-2">
+                    <div id="convFill" class="prog-fill" style="width:10%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- STAGE: SUCCESS -->
+        <div id="stageSuccess" class="hidden">
+            <div class="bg-white border border-gray-200 rounded-2xl p-10 shadow-sm text-center">
+                <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-5 pop-anim">
+                    <i class="fas fa-check text-white text-3xl"></i>
+                </div>
+                <h3 class="text-2xl font-extrabold text-gray-900 mb-2">Your PDF is ready!</h3>
+                <p id="sucName" class="text-gray-400 text-sm mb-8"></p>
+                <button id="dlBtn" class="btn-green mb-4">
+                    <i class="fas fa-download text-xl"></i>Download PDF
+                </button>
+                <button onclick="resetAll()"
+                    class="w-full border border-gray-200 text-gray-500 py-3 rounded-xl text-sm font-semibold hover:border-red-300 hover:text-red-500 transition flex items-center justify-center gap-2">
+                    <i class="fas fa-redo text-xs"></i>Convert another WORD file
+                </button>
+            </div>
+        </div>
+
     </div>
-  </div>
 </section>
 
-<!-- MAIN -->
-<main>
-
-  <!-- UPLOAD CARD -->
-  <div class="card" id="uploadCard">
-    <div class="card-title">
-      <div class="cticon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-cloud-upload-alt"></i></div>
-      Upload Your Word Document
-    </div>
-    <div id="dz" class="dz">
-      <div class="dz-ic"><i class="fas fa-file-word"></i></div>
-      <h3>Drop your Word document here</h3>
-      <p>or click to browse your files</p>
-      <button class="btn btn-blue" type="button"><i class="fas fa-folder-open"></i> Choose File</button>
-      <p class="dz-note">Supported: .docx, .doc &nbsp;·&nbsp; Max size: 10 MB</p>
-    </div>
-    <input type="file" id="fileInput" accept=".doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document" style="display:none">
-    <div id="fileInfo">
-      <div class="fi-left">
-        <i class="fas fa-file-word" style="font-size:28px;color:#2563eb"></i>
-        <div>
-          <div class="fi-name" id="fileName">document.docx</div>
-          <div class="fi-sub" id="fileSub">Ready to convert</div>
+<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-4xl mx-auto px-5">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-12">How to convert Word to PDF</h2>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="text-center">
+                <div class="w-16 h-16 bg-purple-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-purple-600">1</div>
+                <h3 class="font-bold text-gray-800 mb-2">Select WORD file</h3>
+                <p class="text-gray-500 text-sm">Click or drag &amp; drop your .DOCX or .DOC file</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-red-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-red-500">2</div>
+                <h3 class="font-bold text-gray-800 mb-2">Preview</h3>
+                <p class="text-gray-500 text-sm">See your document with numbering and formatting preserved</p>
+            </div>
+            <div class="text-center">
+                <div class="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center mx-auto mb-4 text-2xl font-black text-green-600">3</div>
+                <h3 class="font-bold text-gray-800 mb-2">Download PDF</h3>
+                <p class="text-gray-500 text-sm">Click Convert and your PDF downloads instantly</p>
+            </div>
         </div>
-      </div>
-      <button class="fi-del" onclick="resetAll()" title="Remove"><i class="fas fa-times-circle"></i></button>
     </div>
-  </div>
+</section>
 
-  <!-- PROCESSING CARD -->
-  <div class="card" id="processing">
-    <div class="proc-in">
-      <div class="spinner"></div>
-      <div class="proc-title">Converting to PDF…</div>
-      <div class="proc-msg" id="procMsg">📄 Reading your document…</div>
-      <div class="prog-bar"><div class="prog-fill" id="progFill"></div></div>
-      <div class="prog-lbl" id="progLbl">0%</div>
-    </div>
-  </div>
-
-  <!-- RESULTS -->
-  <div id="results">
-    <div class="card">
-      <div class="ok-ic"><i class="fas fa-check-circle"></i></div>
-      <div class="res-title">Conversion Complete!</div>
-      <div class="res-sub">Your PDF is ready — layout, breaks &amp; page numbers preserved</div>
-      <div class="stats">
-        <div class="stat">
-          <div class="stat-ic" style="color:#2563eb"><i class="fas fa-file-alt"></i></div>
-          <div class="stat-lbl">Total Pages</div>
-          <div class="stat-val" id="pgCount">—</div>
+<!-- ══════════════ FEATURES ══════════════ -->
+<section class="py-16 bg-gray-50 border-t border-gray-100">
+    <div class="max-w-5xl mx-auto px-5">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-shield-alt text-2xl text-green-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">100% Secure</h4>
+                <p class="text-xs text-gray-500">Files processed locally. Never uploaded to any server.</p>
+            </div>
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-list-ol text-2xl text-blue-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">Numbering Preserved</h4>
+                <p class="text-xs text-gray-500">Roman numerals, decimals, letters — all maintained correctly.</p>
+            </div>
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-bolt text-2xl text-yellow-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">Lightning Fast</h4>
+                <p class="text-xs text-gray-500">Instant conversion directly in your browser.</p>
+            </div>
+            <div class="tool-card p-6 text-center">
+                <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center mx-auto mb-4">
+                    <i class="fas fa-user-slash text-2xl text-purple-500"></i>
+                </div>
+                <h4 class="font-bold text-gray-800 mb-2 text-sm">No Signup</h4>
+                <p class="text-xs text-gray-500">No account needed. Free to use instantly.</p>
+            </div>
         </div>
-        <div class="stat">
-          <div class="stat-ic" style="color:#7c3aed"><i class="fas fa-hdd"></i></div>
-          <div class="stat-lbl">File Size</div>
-          <div class="stat-val" id="fSize">—</div>
+    </div>
+</section>
+
+<!-- ══════════════ RELATED TOOLS ══════════════ -->
+<section class="py-16 bg-white border-t border-gray-100">
+    <div class="max-w-5xl mx-auto px-5">
+        <h2 class="text-2xl font-bold text-gray-900 text-center mb-10"><i class="fas fa-tools text-red-500 mr-2"></i>Related PDF Tools</h2>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <a href="pdf-to-word.html" class="tool-card p-5 text-center">
+                <i class="fas fa-file-word text-3xl text-blue-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">PDF to Word</div>
+                <div class="text-xs text-gray-400">Convert PDF to editable DOC</div>
+                <div class="mt-2"><span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded-full font-bold">HOT</span></div>
+            </a>
+            <a href="excel-to-pdf.html" class="tool-card p-5 text-center">
+                <i class="fas fa-file-excel text-3xl text-green-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">Excel to PDF</div>
+                <div class="text-xs text-gray-400">Convert spreadsheets to PDF</div>
+            </a>
+            <a href="powerpoint-to-pdf.html" class="tool-card p-5 text-center">
+                <i class="fas fa-file-powerpoint text-3xl text-orange-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">PPT to PDF</div>
+                <div class="text-xs text-gray-400">Convert presentations to PDF</div>
+            </a>
+            <a href="jpg-to-pdf.html" class="tool-card p-5 text-center">
+                <i class="fas fa-image text-3xl text-pink-500 mb-3 block"></i>
+                <div class="font-semibold text-gray-800 text-sm mb-0.5">JPG to PDF</div>
+                <div class="text-xs text-gray-400">Convert images to PDF</div>
+            </a>
         </div>
-      </div>
-      <button class="btn btn-green" onclick="doDownload()"><i class="fas fa-download"></i> Download PDF</button>
-      <button class="btn btn-gray" onclick="resetAll()"><i class="fas fa-redo"></i> Convert Another File</button>
     </div>
+</section>
 
-    <!-- PREVIEW CARD -->
-    <div class="card">
-      <div class="prev-hdr">
-        <div class="card-title" style="margin-bottom:0">
-          <div class="cticon" style="background:#eff6ff;color:#2563eb"><i class="fas fa-eye"></i></div>
-          Document Preview
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
+    <div class="max-w-6xl mx-auto px-5">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
+            <div>
+                <div class="flex items-center gap-2 mb-3">
+                    <div class="w-8 h-8 bg-red-600 rounded-lg flex items-center justify-center">
+                        <i class="fas fa-tools text-white text-sm"></i>
+                    </div>
+                    <span class="font-bold text-white text-sm">Free Tools Hub</span>
+                </div>
+                <p class="text-gray-400 text-xs leading-relaxed">Free online PDF and document tools. Fast, simple, and always free.</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Categories</h4>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Utility Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Student Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Design Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">SEO Tools</a></li>
+                    <li><a href="../../index.html#tools" class="hover:text-white transition">Web Dev Tools</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Resources</h4>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><a href="../../blog.html" class="hover:text-white transition">Blog</a></li>
+                    <li><a href="../../tutorials.html" class="hover:text-white transition">Tutorials</a></li>
+                    <li><a href="../../resources.html" class="hover:text-white transition">Resources</a></li>
+                    <li><a href="../../comparisons.html" class="hover:text-white transition">Compare Tools</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Company</h4>
+                <ul class="space-y-2 text-xs text-gray-500">
+                    <li><a href="../../about.html" class="hover:text-white transition">About Us</a></li>
+                    <li><a href="../../contact.html" class="hover:text-white transition">Contact</a></li>
+                    <li><a href="../../privacy.html" class="hover:text-white transition">Privacy Policy</a></li>
+                    <li><a href="../../terms.html" class="hover:text-white transition">Terms of Service</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-xs text-gray-300 mb-4 uppercase tracking-wider">Connect</h4>
+                <div class="flex gap-3 mb-3">
+                    <a href="#" class="text-gray-500 hover:text-blue-400 transition text-lg"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-blue-600 transition text-lg"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-red-500 transition text-lg"><i class="fab fa-youtube"></i></a>
+                    <a href="#" class="text-gray-500 hover:text-pink-400 transition text-lg"><i class="fab fa-instagram"></i></a>
+                </div>
+                <p class="text-gray-600 text-xs">by freetoolsapp</p>
+            </div>
         </div>
-        <div class="prev-tabs">
-          <button class="ptab on" id="tabPage" onclick="showTab('page')"><i class="fas fa-file"></i> Page View</button>
-          <button class="ptab" id="tabFlow" onclick="showTab('flow')"><i class="fas fa-align-left"></i> Flow View</button>
+        <div class="border-t border-gray-800 pt-6 flex flex-col md:flex-row items-center justify-between gap-3 text-xs text-gray-600">
+            <p>&copy; 2025 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart text-red-500 mx-1"></i>for creators and learners.</p>
+            <div class="flex gap-5">
+                <a href="../../privacy.html" class="hover:text-gray-300 transition">Privacy</a>
+                <a href="../../terms.html" class="hover:text-gray-300 transition">Terms</a>
+                <a href="../../contact.html" class="hover:text-gray-300 transition">Contact</a>
+            </div>
         </div>
-      </div>
-      <div id="pageView" class="pages-wrap"></div>
-      <div id="flowView"></div>
     </div>
-  </div>
-
-  <!-- FEATURES -->
-  <div class="feat-grid">
-    <div class="feat">
-      <div class="feat-ic" style="background:#eff6ff;color:#2563eb"><i class="fas fa-lock"></i></div>
-      <h3>100% Secure</h3>
-      <p>All conversion happens in your browser. Files never leave your device.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-ic" style="background:#f5f3ff;color:#7c3aed"><i class="fas fa-bolt"></i></div>
-      <h3>Lightning Fast</h3>
-      <p>Convert Word to PDF in seconds with our optimized engine.</p>
-    </div>
-    <div class="feat">
-      <div class="feat-ic" style="background:#f0fdf4;color:#10b981"><i class="fas fa-palette"></i></div>
-      <h3>Preserves Formatting</h3>
-      <p>Fonts, images, tables, page breaks, and numbering — all intact.</p>
-    </div>
-  </div>
-
-  <!-- HOW IT WORKS -->
-  <div class="card">
-    <div class="card-title">
-      <div class="cticon" style="background:#fef9c3;color:#d97706"><i class="fas fa-magic"></i></div>
-      How It Works
-    </div>
-    <div class="steps">
-      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#2563eb,#3b82f6)">1</div><h4>Upload</h4><p>Select your .docx or .doc file</p></div>
-      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#7c3aed,#8b5cf6)">2</div><h4>Convert</h4><p>Page breaks detected automatically</p></div>
-      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#f59e0b,#ef4444)">3</div><h4>Preview</h4><p>Review A4 paginated output</p></div>
-      <div class="step"><div class="step-n" style="background:linear-gradient(135deg,#10b981,#059669)">4</div><h4>Download</h4><p>Save PDF with page numbers</p></div>
-    </div>
-  </div>
-
-  <!-- FAQ -->
-  <div class="card">
-    <div class="card-title">
-      <div class="cticon" style="background:#fef3c7;color:#d97706"><i class="fas fa-question-circle"></i></div>
-      Frequently Asked Questions
-    </div>
-    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Is this converter really free?</div><div class="faq-a">Yes! Completely free, no hidden charges or subscription.</div></div>
-    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Are my files safe?</div><div class="faq-a">Absolutely. Everything runs in your browser — files are never uploaded to any server.</div></div>
-    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>What formats are supported?</div><div class="faq-a">Both .docx (Word 2007+) and .doc (Word 97–2003) formats.</div></div>
-    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Is there a file size limit?</div><div class="faq-a">Maximum 10 MB for optimal browser-based performance.</div></div>
-    <div class="faq"><div class="faq-q"><i class="fas fa-chevron-right"></i>Are page breaks and numbers preserved?</div><div class="faq-a">Yes. Our engine detects page-break markers and renders each A4 page with a page number at the bottom-right.</div></div>
-  </div>
-
-</main>
-
-<!-- FOOTER -->
-<footer>
-  <div class="ft">
-    <div class="ft-grid">
-      <div class="ft-brand">
-        <a href="../../index.html" class="logo" style="margin-bottom:8px">
-          <div class="logo-ic"><i class="fas fa-tools"></i></div>
-          <div><div class="logo-txt" style="color:#fff">Free Tools Hub</div><div class="logo-sub">Tools · Blogs · Resources</div></div>
-        </a>
-        <p>Your one-stop destination for free online tools, tutorials, and resources.</p>
-        <div class="socials">
-          <a href="#"><i class="fab fa-twitter"></i></a>
-          <a href="#"><i class="fab fa-github"></i></a>
-          <a href="#"><i class="fab fa-linkedin"></i></a>
-        </div>
-      </div>
-      <div class="ft-col"><h4>Quick Links</h4><ul>
-        <li><a href="../../index.html">Home</a></li>
-        <li><a href="../../index.html#tools">All Tools</a></li>
-        <li><a href="../../blog.html">Blog</a></li>
-        <li><a href="../../contact.html">Contact</a></li>
-      </ul></div>
-      <div class="ft-col"><h4>Categories</h4><ul>
-        <li><a href="../../index.html#tools">Utility Tools</a></li>
-        <li><a href="../../resources.html">Resources</a></li>
-        <li><a href="../../tutorials.html">Tutorials</a></li>
-        <li><a href="../../comparisons.html">Compare</a></li>
-      </ul></div>
-      <div class="ft-col"><h4>Legal</h4><ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Cookie Policy</a></li>
-      </ul></div>
-    </div>
-    <hr class="ft-hr">
-    <div class="ft-bot">&copy; 2024 Free Tools Hub. All rights reserved. Made with <i class="fas fa-heart" style="color:#ef4444"></i> for developers.</div>
-  </div>
 </footer>
 
+<button id="btt" class="fixed bottom-6 right-6 w-10 h-10 bg-red-500 hover:bg-red-600 text-white rounded-full shadow-lg z-50 transition items-center justify-center" style="display:none">
+    <i class="fas fa-arrow-up text-sm"></i>
+</button>
+
 <script>
-// ============================================================
-//  STATE
-// ============================================================
-var currentFile = null;
-var pdfBlob     = null;
-var totalPages  = 0;
-
-// ============================================================
-//  SHOW / HIDE  (pure style.display, no CSS class dependency)
-// ============================================================
-function SN(id){ document.getElementById(id).style.display='none';   }
-function SB(id){ document.getElementById(id).style.display='block';  }
-function SF(id){ document.getElementById(id).style.display='flex';   }
-
-// Initial state
-SN('processing');
-SN('results');
-SN('fileInfo');   // <-- hides the "Ready to convert" bar until a file is chosen
-
-// ============================================================
-//  DROP ZONE  setup
-// ============================================================
-var dz = document.getElementById('dz');
-var fi = document.getElementById('fileInput');
-
-dz.addEventListener('click', function(){ fi.click(); });
-
-dz.addEventListener('dragover',  function(e){ e.preventDefault(); dz.classList.add('drag'); });
-dz.addEventListener('dragleave', function(){   dz.classList.remove('drag'); });
-dz.addEventListener('drop',      function(e){
-    e.preventDefault();
-    dz.classList.remove('drag');
-    if(e.dataTransfer.files[0]) handleFile(e.dataTransfer.files[0]);
+/* ── Mobile menu ── */
+const $mb = document.getElementById('mobileMenuBtn');
+const $mm = document.getElementById('mobileMenu');
+$mb.addEventListener('click', () => {
+    $mm.classList.toggle('hidden');
+    const ic = $mb.querySelector('i');
+    ic.classList.toggle('fa-bars'); ic.classList.toggle('fa-times');
 });
-fi.addEventListener('change', function(e){
-    if(e.target.files[0]) handleFile(e.target.files[0]);
+document.addEventListener('click', e => {
+    if (!$mb.contains(e.target) && !$mm.contains(e.target)) {
+        $mm.classList.add('hidden');
+        const ic = $mb.querySelector('i');
+        ic.classList.remove('fa-times'); ic.classList.add('fa-bars');
+    }
 });
 
-// ============================================================
-//  RESET
-// ============================================================
-function resetAll(){
-    currentFile = null; pdfBlob = null; totalPages = 0;
-    fi.value = '';
-    SN('fileInfo');
-    SN('processing');
-    SN('results');
-    SB('uploadCard');
-    window.scrollTo({top:0,behavior:'smooth'});
+/* ── Back to top ── */
+const $btt = document.getElementById('btt');
+window.addEventListener('scroll', () => { $btt.style.display = window.scrollY > 400 ? 'flex' : 'none'; }, {passive:true});
+$btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ── DOM refs ── */
+const stageUpload  = document.getElementById('stageUpload');
+const stageProcess = document.getElementById('stageProcess');
+const stagePreview = document.getElementById('stagePreview');
+const stageSuccess = document.getElementById('stageSuccess');
+const uploadZone   = document.getElementById('uploadZone');
+const fileInput    = document.getElementById('fileInput');
+const errBox       = document.getElementById('errBox');
+const errMsg       = document.getElementById('errMsg');
+const procTitle    = document.getElementById('procTitle');
+const procSub      = document.getElementById('procSub');
+const progFill     = document.getElementById('progFill');
+const progStatus   = document.getElementById('progStatus');
+const progPct      = document.getElementById('progPct');
+const fName        = document.getElementById('fName');
+const fSize        = document.getElementById('fSize');
+const removeBtn    = document.getElementById('removeBtn');
+const docxStage    = document.getElementById('docxStage');
+const convertBtn   = document.getElementById('convertBtn');
+const convProgress = document.getElementById('convProgress');
+const convMsg      = document.getElementById('convMsg');
+const convFill     = document.getElementById('convFill');
+const dlBtn        = document.getElementById('dlBtn');
+const sucName      = document.getElementById('sucName');
+
+let selFile   = null;
+let parsedHtml = '';
+
+/* ── Helpers ── */
+const fmt   = b => b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB';
+const sleep = ms => new Promise(r=>setTimeout(r,ms));
+
+function show(name) {
+    [stageUpload,stageProcess,stagePreview,stageSuccess].forEach(s=>s.classList.add('hidden'));
+    document.getElementById('stage'+name).classList.remove('hidden');
+}
+function setP(pct,st){ progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(st) progStatus.textContent=st; }
+function showErr(m){ errMsg.textContent=m; errBox.classList.remove('hidden'); }
+function hideErr()  { errBox.classList.add('hidden'); }
+
+/* ── Drag & drop ── */
+['dragenter','dragover','dragleave','drop'].forEach(ev=>{
+    uploadZone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
+    document.body.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
+});
+['dragenter','dragover'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.add('over')));
+['dragleave','drop'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.remove('over')));
+uploadZone.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)pick(f);});
+fileInput.addEventListener('change',e=>{if(e.target.files[0])pick(e.target.files[0]);});
+removeBtn.addEventListener('click',resetAll);
+
+function pick(f){
+    const ext=f.name.split('.').pop().toLowerCase();
+    if(!['docx','doc'].includes(ext)){showErr('Only .docx and .doc files are supported.');return;}
+    hideErr(); selFile=f; doConvert(f);
 }
 
-// ============================================================
-//  PROGRESS helper
-// ============================================================
-function setP(pct, msg){
-    document.getElementById('progFill').style.width = pct+'%';
-    document.getElementById('progLbl').textContent  = pct+'%';
-    if(msg) document.getElementById('procMsg').textContent = msg;
-}
+/* ══════════════════════════════════════════════════════
+   CUSTOM DOCX PARSER — handles numbering properly
+   Uses JSZip to read XML directly from the DOCX
+══════════════════════════════════════════════════════ */
 
-// ============================================================
-//  STEP 1 — validate & show UI
-// ============================================================
-function handleFile(file){
-    var validTypes = [
-        'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-        'application/msword'
-    ];
-    if(validTypes.indexOf(file.type)===-1 && !/\.(docx|doc)$/i.test(file.name)){
-        alert('Please upload a valid Word document (.docx or .doc)');
-        return;
+// Convert number to roman numeral
+function toRoman(num) {
+    if(num <= 0) return '';
+    const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+    const syms = ['m','cm','d','cd','c','xc','l','xl','x','ix','v','iv','i'];
+    let result = '';
+    for(let i=0;i<vals.length;i++){
+        while(num>=vals[i]){ result+=syms[i]; num-=vals[i]; }
     }
-    if(file.size > 10*1024*1024){
-        alert('File too large. Maximum size is 10 MB.');
-        return;
+    return result;
+}
+
+function toLetter(num) {
+    if(num <= 0) return '';
+    return String.fromCharCode(96 + ((num-1) % 26) + 1);
+}
+
+// Format number — uses lvlText template from Word e.g. "%1." => "i."
+function formatNum(num, fmt, lvlText) {
+    let numStr = '';
+    switch(fmt) {
+        case 'lowerRoman':  numStr = toRoman(num); break;
+        case 'upperRoman':  numStr = toRoman(num).toUpperCase(); break;
+        case 'lowerLetter': numStr = toLetter(num); break;
+        case 'upperLetter': numStr = toLetter(num).toUpperCase(); break;
+        case 'decimal':     numStr = String(num); break;
+        default:            numStr = String(num);
     }
-
-    currentFile = file;
-
-    // Show file info bar
-    document.getElementById('fileName').textContent = file.name;
-    document.getElementById('fileSub').textContent  = fmtBytes(file.size)+' — processing…';
-    SF('fileInfo');
-
-    // Show processing spinner, hide results
-    SN('results');
-    SB('processing');
-    setP(5,'📄 Reading document…');
-
-    // Yield to browser paint, then start
-    setTimeout(function(){ runConversion(file); }, 150);
+    if(lvlText && lvlText.includes('%')) {
+        return lvlText.replace(/%\d/g, numStr);
+    }
+    return numStr + '.';
 }
 
-// ============================================================
-//  STEP 2 — read file & parse with mammoth
-// ============================================================
-function runConversion(file){
-    var reader = new FileReader();
+async function doConvert(file) {
+    show('Process');
+    procTitle.textContent = 'Reading your document…';
+    procSub.textContent   = 'Please wait a moment';
+    setP(5, 'Loading file…');
 
-    reader.onerror = function(){
-        SN('processing');
-        alert('Could not read the file. Please try again.');
-    };
+    try {
+        const zip = await JSZip.loadAsync(await file.arrayBuffer());
+        setP(15, 'Parsing XML…');
 
-    reader.onload = function(e){
-        setP(20,'📄 Parsing Word document…');
+        /* ── Read XML files ── */
+        const docXml  = await zip.file('word/document.xml').async('string');
+        const numXml  = zip.file('word/numbering.xml') ? await zip.file('word/numbering.xml').async('string') : null;
+        const relXml  = zip.file('word/_rels/document.xml.rels') ? await zip.file('word/_rels/document.xml.rels').async('string') : null;
+        const stylesXml = zip.file('word/styles.xml') ? await zip.file('word/styles.xml').async('string') : null;
 
-        mammoth.convertToHtml({
-            arrayBuffer: e.target.result,
-            styleMap:[
-                "p[style-name='Heading 1'] => h1:fresh",
-                "p[style-name='Heading 2'] => h2:fresh",
-                "p[style-name='Heading 3'] => h3:fresh",
-                "p[style-name='Heading 4'] => h4:fresh",
-                "p[style-name='Title']     => h1:fresh",
-                "p[style-name='List Paragraph'] => li:fresh",
-                "b => strong","i => em","u => u"
-            ],
-            convertImage: mammoth.images.imgElement(function(image){
-                return image.read('base64').then(function(base64){
-                    return {
-                        src: 'data:' + image.contentType + ';base64,' + base64
-                    };
-                });
-            })
-        }).then(function(result){
+        setP(30, 'Processing numbering…');
 
-            var html = result.value;
-            if(!html || html.trim()===''){
-                throw new Error('No readable content found in the document.');
-            }
+        /* ── Parse numbering ── */
+        const numMap = {}; // numId -> { fmt, lvlText, start }
+        const counters = {}; // numId -> current count
 
-            setP(40,'🔍 Splitting into pages…');
+        if(numXml) {
+            const numParser = new DOMParser();
+            const numDoc = numParser.parseFromString(numXml, 'application/xml');
+            const W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
 
-            var pages = splitPages(html);
-            totalPages = pages.length;
-
-            // Build preview
-            buildPreview(pages);
-            document.getElementById('flowView').innerHTML = html;
-
-            setP(55,'🖨️ Rendering PDF…');
-
-            // Small pause so preview renders, then build PDF
-            setTimeout(function(){ buildPDF(pages); }, 200);
-
-        }).catch(function(err){
-            console.error('mammoth error',err);
-            SN('processing');
-            alert('Conversion error:\n'+err.message);
-        });
-    };
-
-    reader.readAsArrayBuffer(file);
-}
-
-// ============================================================
-//  splitPages — HR → empty paras → real DOM height measurement
-// ============================================================
-function splitPages(html){
-    // 1. Explicit Word page-break — mammoth emits <hr>
-    var byHr = html.split(/<hr\s*\/?>/ ).map(function(s){return s.trim();}).filter(Boolean);
-    if(byHr.length>1) return byHr;
-
-    // 2. 3+ consecutive empty paras = manual page break
-    var byEmp = html.split(/(?:<p[^>]*>\s*<\/p>\s*){3,}/).map(function(s){return s.trim();}).filter(Boolean);
-    if(byEmp.length>1) return byEmp;
-
-    // 3. Real DOM height measurement at A4 width
-    //    Usable content height per A4 page = 1123 - 2*72 = 979px
-    var A4_CONTENT_H = 960;
-    var A4_W = 794;
-    var MARGIN = 72;
-
-    var probe = document.createElement('div');
-    probe.style.cssText = [
-        'position:fixed','left:-9999px','top:0',
-        'width:'+A4_W+'px',
-        'padding:'+MARGIN+'px',
-        'background:#fff',
-        'box-sizing:border-box',
-        'font-family:Calibri,"Times New Roman",serif',
-        'font-size:12pt','line-height:1.5','color:#000'
-    ].join(';');
-    probe.innerHTML = html;
-    document.body.appendChild(probe);
-
-    var allKids = Array.from(probe.children);
-    var pages = [], buf = '', pageUsed = 0;
-
-    allKids.forEach(function(n){
-        var h = n.outerHTML || '';
-        var nodeH = n.offsetHeight || 20;
-
-        if(nodeH > A4_CONTENT_H){
-            if(buf.trim()){ pages.push(buf); buf=''; pageUsed=0; }
-            pages.push(h);
-            return;
-        }
-        if(pageUsed + nodeH > A4_CONTENT_H && buf.trim()){
-            pages.push(buf);
-            buf = ''; pageUsed = 0;
-        }
-        buf += h;
-        pageUsed += nodeH;
-    });
-
-    document.body.removeChild(probe);
-    if(buf.trim()) pages.push(buf);
-    return pages.length ? pages : [html];
-}
-// ============================================================
-//  buildPreview — A4 pages with page numbers
-// ============================================================
-function buildPreview(pages){
-    var wrap=document.getElementById('pageView');
-    wrap.innerHTML='';
-    pages.forEach(function(content,i){
-        var pg=document.createElement('div');
-        pg.className='a4';
-        pg.innerHTML=content;
-        var num=document.createElement('div');
-        num.className='pgnum';
-        num.textContent='Page '+(i+1)+' of '+pages.length;
-        pg.appendChild(num);
-        wrap.appendChild(pg);
-    });
-    document.getElementById('pgCount').textContent=pages.length;
-}
-
-// ============================================================
-//  buildPDF — renders each page with html2canvas → jsPDF
-// ============================================================
-function buildPDF(pages){
-    var jsPDF=window.jspdf.jsPDF;
-    var A4W=794,A4H=1123,MARGIN=72,SCALE=2,PW=210,PH=297;
-
-    var pdf=new jsPDF({orientation:'portrait',unit:'mm',format:'a4'});
-
-    // Inject document styles
-    var sty=document.createElement('style');
-    sty.id='__ps';
-    sty.textContent=[
-        '#__pg{font-family:Calibri,"Times New Roman",serif;font-size:12pt;line-height:1.5;color:#000;word-break:break-word}',
-        '#__pg p{margin:0 0 8pt}',
-        '#__pg h1{font-size:20pt;font-weight:bold;margin:14pt 0 6pt}',
-        '#__pg h2{font-size:16pt;font-weight:bold;margin:12pt 0 5pt}',
-        '#__pg h3{font-size:13pt;font-weight:bold;margin:10pt 0 4pt}',
-        '#__pg h4,#__pg h5,#__pg h6{font-size:12pt;font-weight:bold;margin:8pt 0 4pt}',
-        '#__pg ul,#__pg ol{margin:0 0 8pt 24pt;padding:0}',
-        '#__pg li{margin-bottom:4pt}',
-        '#__pg table{width:100%;border-collapse:collapse;margin-bottom:10pt}',
-        '#__pg td,#__pg th{border:1px solid #ccc;padding:4pt 6pt;font-size:11pt}',
-        '#__pg strong,#__pg b{font-weight:bold}',
-        '#__pg em,#__pg i{font-style:italic}',
-        '#__pg u{text-decoration:underline}',
-        '#__pg img{max-width:100%;height:auto}'
-    ].join('');
-    document.head.appendChild(sty);
-
-    var idx=0;
-
-    function doPage(){
-        if(idx>=pages.length){
-            // ---- ALL DONE ----
-            document.head.removeChild(sty);
-            pdfBlob=pdf.output('blob');
-            document.getElementById('pgCount').textContent=pages.length;
-            document.getElementById('fSize').textContent=fmtBytes(pdfBlob.size);
-            setP(100,'✅ Done!');
-            setTimeout(function(){
-                SN('processing');
-                SB('results');
-                document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
-            },400);
-            return;
-        }
-
-        var pct=55+Math.round(((idx+1)/pages.length)*43);
-        setP(pct,'🖨️ Rendering page '+(idx+1)+' of '+pages.length+'…');
-
-        // Off-screen render div
-        var div=document.createElement('div');
-        div.id='__pg';
-        div.style.cssText=[
-            'position:fixed',
-            'left:-9999px',
-            'top:0',
-            'width:'+A4W+'px',
-            'min-height:'+A4H+'px',
-            'background:#fff',
-            'box-sizing:border-box',
-            'padding:'+MARGIN+'px'
-        ].join(';');
-        div.innerHTML=pages[idx];
-        document.body.appendChild(div);
-
-        setTimeout(function(){
-            html2canvas(div,{
-                scale:SCALE,
-                useCORS:true,
-                allowTaint:true,
-                logging:false,
-                backgroundColor:'#ffffff',
-                width:A4W,
-                height:A4H,
-                windowWidth:A4W
-            }).then(function(canvas){
-                if(document.body.contains(div)) document.body.removeChild(div);
-
-                // Crop to exact A4 height
-                var out=document.createElement('canvas');
-                out.width=canvas.width;
-                out.height=A4H*SCALE;
-                var ctx=out.getContext('2d');
-                ctx.fillStyle='#fff';
-                ctx.fillRect(0,0,out.width,out.height);
-                ctx.drawImage(canvas,0,0);
-
-                var imgData=out.toDataURL('image/jpeg',0.88);
-                if(idx>0) pdf.addPage();
-
-                // Leave 10mm footer strip at bottom for page number
-                var footerH = 10;
-                pdf.addImage(imgData,'JPEG', 0, 0, PW, PH - footerH);
-
-                // White footer background
-                pdf.setFillColor(255,255,255);
-                pdf.rect(0, PH - footerH, PW, footerH, 'F');
-
-                // Separator line
-                pdf.setDrawColor(220,220,220);
-                pdf.setLineWidth(0.3);
-                pdf.line(15, PH - footerH + 1, PW - 15, PH - footerH + 1);
-
-                // Page number centered in footer
-                pdf.setFont('helvetica','normal');
-                pdf.setFontSize(9);
-                pdf.setTextColor(120,120,120);
-                var lbl = 'Page ' + (idx+1) + ' of ' + pages.length;
-                var tw  = pdf.getTextWidth(lbl);
-                pdf.text(lbl, (PW - tw) / 2, PH - 3.5);
-
-                idx++;
-                setTimeout(doPage,60);
-
-            }).catch(function(err){
-                if(document.body.contains(div)) document.body.removeChild(div);
-                if(document.head.contains(sty)) document.head.removeChild(sty);
-                SN('processing');
-                console.error(err);
-                alert('PDF render error on page '+(idx+1)+':\n'+err.message);
+            // Build abstractNum map
+            const abstractNums = {};
+            numDoc.querySelectorAll('abstractNum').forEach(an => {
+                const id = an.getAttribute('w:abstractNumId');
+                const lvl0 = an.querySelector('lvl[w\\:ilvl="0"]') || an.querySelector('lvl');
+                if(lvl0) {
+                    const fmt = lvl0.querySelector('numFmt')?.getAttribute('w:val') || 'decimal';
+                    const start = parseInt(lvl0.querySelector('start')?.getAttribute('w:val') || '1');
+                    const lvlText = lvl0.querySelector("lvlText")?.getAttribute("w:val") || "%1.";
+                    abstractNums[id] = { fmt, start, lvlText };
+                }
             });
-        },100);
+
+            // Map numId to abstractNumId
+            numDoc.querySelectorAll('num').forEach(n => {
+                const numId = n.getAttribute('w:numId');
+                const absId = n.querySelector('abstractNumId')?.getAttribute('w:val');
+                if(absId && abstractNums[absId]) {
+                    numMap[numId] = { ...abstractNums[absId] };
+                    counters[numId] = abstractNums[absId].start - 1;
+                }
+            });
+        }
+
+        setP(45, 'Reading images…');
+
+        /* ── Read images as base64 ── */
+        const images = {};
+        if(relXml) {
+            const relParser = new DOMParser();
+            const relDoc = relParser.parseFromString(relXml, 'application/xml');
+            const rels = relDoc.querySelectorAll('Relationship');
+            for(const rel of rels) {
+                const type = rel.getAttribute('Type') || '';
+                if(type.includes('image')) {
+                    const rId     = rel.getAttribute('Id');
+                    const target  = rel.getAttribute('Target');
+                    const imgPath = target.startsWith('/') ? target.slice(1) : 'word/' + target;
+                    const imgFile = zip.file(imgPath) || zip.file(imgPath.replace('word/',''));
+                    if(imgFile) {
+                        const b64 = await imgFile.async('base64');
+                        const ext = imgPath.split('.').pop().toLowerCase();
+                        const mime = ext==='png'?'image/png':ext==='gif'?'image/gif':'image/jpeg';
+                        images[rId] = `data:${mime};base64,${b64}`;
+                    }
+                }
+            }
+        }
+
+        setP(60, 'Building document…');
+
+        /* ── Parse document XML ── */
+        const docParser = new DOMParser();
+        const docDoc = docParser.parseFromString(docXml, 'application/xml');
+        const body = docDoc.querySelector('body');
+        const paragraphs = Array.from(body.children);
+
+        let html = '';
+
+        for(const node of paragraphs) {
+            const tag = node.localName;
+
+            if(tag === 'p') {
+                html += parseParagraph(node, numMap, counters, images);
+            } else if(tag === 'tbl') {
+                html += parseTable(node, numMap, counters, images);
+            } else if(tag === 'sectPr') {
+                // Page section — ignore for now
+            }
+        }
+
+        parsedHtml = html;
+        setP(85, 'Rendering preview…');
+
+        /* ── Show preview ── */
+        buildPreview(parsedHtml);
+        await sleep(200);
+
+        setP(100, 'Done!');
+        await sleep(150);
+
+        fName.textContent = file.name;
+        fSize.textContent = fmt(file.size);
+        show('Preview');
+        document.querySelector('.tool-hero').scrollIntoView({behavior:'smooth', block:'start'});
+
+    } catch(err) {
+        console.error(err);
+        showErr('Could not read this file: ' + err.message);
+        show('Upload');
+    }
+}
+
+/* ── Parse a single paragraph ── */
+function parseParagraph(pNode, numMap, counters, images) {
+    // Check for numbering
+    const numPr   = pNode.querySelector('numPr');
+    const numId   = numPr?.querySelector('numId')?.getAttribute('w:val');
+    const ilvl    = numPr?.querySelector('ilvl')?.getAttribute('w:val') || '0';
+
+    // Check bold (heading detection)
+    const rPr    = pNode.querySelector('pPr > pStyle');
+    const styleId = rPr?.getAttribute('w:val') || '';
+
+    // Get paragraph properties for indent
+    const pPrEl  = pNode.querySelector('pPr');
+    const indEl  = pPrEl?.querySelector('ind');
+    const leftInd = parseInt(indEl?.getAttribute('w:left') || '0');
+
+    // Get runs text + formatting
+    let innerHtml = '';
+    const runs = pNode.querySelectorAll('r, hyperlink');
+
+    for(const run of runs) {
+        if(run.localName === 'hyperlink') {
+            // Handle hyperlinks
+            let linkText = '';
+            run.querySelectorAll('t').forEach(t => { linkText += t.textContent; });
+            innerHtml += `<a href="#" style="color:#1a56db">${esc(linkText)}</a>`;
+            continue;
+        }
+
+        // Drawing / image
+        const drawing = run.querySelector('drawing');
+        if(drawing) {
+            const blip = drawing.querySelector('blip');
+            const rId  = blip?.getAttribute('r:embed') || blip?.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','embed');
+            if(rId && images[rId]) {
+                innerHtml += `<img src="${images[rId]}" style="max-width:100%;height:auto;display:block;margin:4px 0">`;
+            }
+            continue;
+        }
+
+        // Text runs
+        const rPrEl = run.querySelector('rPr');
+        const bold   = rPrEl?.querySelector('b') ? 'font-weight:bold;' : '';
+        const italic = rPrEl?.querySelector('i') ? 'font-style:italic;' : '';
+        const under  = rPrEl?.querySelector('u') ? 'text-decoration:underline;' : '';
+        const szEl   = rPrEl?.querySelector('sz');
+        const fontSize = szEl ? `font-size:${parseInt(szEl.getAttribute('w:val'))/2}pt;` : '';
+
+        let txt = '';
+        run.querySelectorAll('t').forEach(t => {
+            const space = t.getAttribute('xml:space') === 'preserve' ? true : false;
+            txt += space ? t.textContent : t.textContent.trim();
+        });
+
+        // Handle line breaks
+        run.querySelectorAll('br').forEach(() => { txt += '\n'; });
+
+        if(txt) {
+            const style = bold + italic + under + fontSize;
+            txt = esc(txt).replace(/\n/g, '<br>');
+            innerHtml += style ? `<span style="${style}">${txt}</span>` : txt;
+        }
     }
 
-    doPage();
-}
+    // Empty paragraph = line break
+    if(!innerHtml.trim()) return '<div style="height:6pt"></div>';
 
-// ============================================================
-//  DOWNLOAD
-// ============================================================
-function doDownload(){
-    if(!pdfBlob){alert('No PDF ready.');return;}
-    var url=URL.createObjectURL(pdfBlob);
-    var a=document.createElement('a');
-    a.href=url;
-    a.download=currentFile.name.replace(/\.(docx|doc)$/i,'')+'.pdf';
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    setTimeout(function(){URL.revokeObjectURL(url);},1500);
-}
-
-// ============================================================
-//  PREVIEW TAB SWITCH
-// ============================================================
-function showTab(t){
-    var pv=document.getElementById('pageView');
-    var fv=document.getElementById('flowView');
-    var tp=document.getElementById('tabPage');
-    var tf=document.getElementById('tabFlow');
-    if(t==='page'){
-        pv.style.display=''; fv.style.display='none';
-        tp.classList.add('on'); tf.classList.remove('on');
-    } else {
-        pv.style.display='none'; fv.style.display='';
-        tf.classList.add('on'); tp.classList.remove('on');
+    // Build numbering prefix
+    let prefix = '';
+    if(numId && numMap[numId]) {
+        if(counters[numId] === undefined) counters[numId] = numMap[numId].start - 1;
+        counters[numId]++;
+        const formatted = formatNum(counters[numId], numMap[numId].fmt, numMap[numId].lvlText);
+        prefix = `<span style="display:inline-block;min-width:28px;margin-right:6px;font-weight:normal">${formatted}</span>`;
     }
+
+    // Determine style based on content
+    const text = pNode.textContent.trim();
+    const isBold = pNode.querySelector('r > rPr > b') !== null;
+    const isHeading = styleId.toLowerCase().includes('heading') || (isBold && text.length < 120 && !numId);
+
+    let paraStyle = `margin:0 0 4pt 0; padding:0;`;
+    if(leftInd > 0) paraStyle += `padding-left:${Math.round(leftInd/20)}pt;`;
+    if(isHeading && !numId) paraStyle += `font-weight:bold;`;
+
+    return `<div style="${paraStyle}">${prefix}${innerHtml}</div>`;
 }
 
-// ============================================================
-//  UTILS
-// ============================================================
-function fmtBytes(b){
-    if(!b) return '0 B';
-    var k=1024,u=['B','KB','MB','GB'];
-    var i=Math.floor(Math.log(b)/Math.log(k));
-    return (b/Math.pow(k,i)).toFixed(2)+' '+u[i];
+/* ── Parse a table ── */
+function parseTable(tblNode, numMap, counters, images) {
+    let html = '<table style="border-collapse:collapse;width:100%;margin:6pt 0;font-size:11pt">';
+    tblNode.querySelectorAll('tr').forEach(tr => {
+        html += '<tr>';
+        tr.querySelectorAll('tc').forEach(tc => {
+            let cellHtml = '';
+            tc.querySelectorAll('p').forEach(p => {
+                cellHtml += parseParagraph(p, numMap, counters, images);
+            });
+            html += `<td style="border:1px solid #999;padding:4pt 6pt;vertical-align:top">${cellHtml}</td>`;
+        });
+        html += '</tr>';
+    });
+    html += '</table>';
+    return html;
+}
+
+/* ── Escape HTML ── */
+function esc(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+}
+
+/* ── Build preview in docxStage ── */
+function buildPreview(html) {
+    docxStage.style.cssText = 'background:#525659;padding:20px;min-height:120px;max-height:500px;overflow-y:auto;';
+    docxStage.innerHTML = '';
+
+    // Show as single A4-like page in preview (scaled)
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `
+        width:397px; margin:0 auto;
+        background:#fff;
+        box-shadow:0 4px 20px rgba(0,0,0,.5);
+        padding:36px 40px;
+        font-family:'Times New Roman',Georgia,serif;
+        font-size:12pt; line-height:1.6; color:#000;
+        min-height:562px;
+    `;
+    wrapper.innerHTML = html;
+    docxStage.appendChild(wrapper);
+}
+
+/* ── Convert to PDF ── */
+convertBtn.addEventListener('click', async () => {
+    if(!selFile || !parsedHtml) return;
+    convertBtn.disabled = true;
+    convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting…';
+    convProgress.classList.remove('hidden');
+    convFill.style.width = '5%';
+    convMsg.textContent = 'Preparing pages…';
+
+    try {
+        const {jsPDF} = window.jspdf;
+
+        // Create hidden full-size render div
+        const A4W = 794, A4H = 1123;
+        const renderDiv = document.createElement('div');
+        renderDiv.style.cssText = `
+            position:fixed; top:-99999px; left:-99999px;
+            width:${A4W}px;
+            font-family:'Times New Roman',Georgia,serif;
+            font-size:12pt; line-height:1.6; color:#000;
+            background:#fff; padding:72px 80px; box-sizing:border-box;
+        `;
+        renderDiv.innerHTML = parsedHtml;
+        document.body.appendChild(renderDiv);
+        await sleep(300);
+
+        const totalH  = renderDiv.scrollHeight;
+        const numPages = Math.max(1, Math.ceil(totalH / A4H));
+        const pdf = new jsPDF({unit:'mm', format:'a4', compress:true});
+
+        convMsg.textContent = `Converting ${numPages} page(s)…`;
+
+        for(let i = 0; i < numPages; i++) {
+            convFill.style.width = Math.round(5 + (i/numPages)*90) + '%';
+            convMsg.textContent  = `Rendering page ${i+1} of ${numPages}…`;
+
+            // Clip to this page's content
+            const clipTop = i * A4H;
+            const canvas = await html2canvas(renderDiv, {
+                scale: 2,
+                useCORS: true,
+                allowTaint: true,
+                backgroundColor: '#ffffff',
+                logging: false,
+                width: A4W,
+                height: A4H,
+                scrollX: 0,
+                scrollY: clipTop,
+                windowWidth: A4W,
+                windowHeight: A4H
+            });
+
+            const imgData = canvas.toDataURL('image/jpeg', 0.92);
+            if(i > 0) pdf.addPage();
+            pdf.addImage(imgData, 'JPEG', 0, 0, 210, 297, '', 'FAST');
+            await sleep(20);
+        }
+
+        renderDiv.remove();
+
+        convFill.style.width = '100%';
+        convMsg.textContent = 'Done!';
+        await sleep(300);
+
+        const outName = selFile.name.replace(/\.(docx|doc)$/i,'') + '.pdf';
+        const blob    = pdf.output('blob');
+        const url     = URL.createObjectURL(blob);
+
+        show('Success');
+        sucName.textContent = outName + ' — ' + fmt(blob.size);
+        dlBtn.onclick = () => {
+            const a = document.createElement('a');
+            a.href = url; a.download = outName; a.click();
+        };
+        stageSuccess.scrollIntoView({behavior:'smooth', block:'center'});
+
+    } catch(err) {
+        console.error(err);
+        showErr('Conversion failed: ' + err.message);
+        show('Preview');
+    }
+
+    convertBtn.disabled = false;
+    convertBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i> Convert to PDF';
+    convProgress.classList.add('hidden');
+});
+
+/* ── Reset ── */
+function resetAll() {
+    selFile = null; parsedHtml = ''; fileInput.value = '';
+    docxStage.innerHTML = '';
+    convProgress.classList.add('hidden');
+    convertBtn.disabled = false;
+    convertBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i> Convert to PDF';
+    hideErr(); show('Upload');
+    window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
 </body>
