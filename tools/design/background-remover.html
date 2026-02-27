@@ -145,6 +145,14 @@
         @keyframes spin{to{transform:rotate(360deg);}}
     </style>
     <link rel="stylesheet" href="../../header-new.css">
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#5b21b6">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Free Tools Hub">
+    <link rel="apple-touch-icon" href="/icon-192.png">
 </head>
 <body>
 
@@ -541,6 +549,16 @@
             document.getElementById('previewCard').classList.remove('active');
             document.getElementById('processingOverlay').classList.remove('active');
         }
+    </script>
+    <!-- Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(reg) { console.log('SW registered'); })
+            .catch(function(err) { console.log('SW error:', err); });
+        });
+      }
     </script>
 </body>
 </html>

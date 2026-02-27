@@ -74,6 +74,14 @@
         @media(max-width:900px){.contact-layout{grid-template-columns:1fr;}}
         @media(max-width:480px){.contact-form-card{padding:24px;}}
     </style>
+    <!-- PWA -->
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#5b21b6">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Free Tools Hub">
+    <link rel="apple-touch-icon" href="/icon-192.png">
 </head>
 <body>
 
@@ -244,6 +252,16 @@
             this.style.display = 'none';
             document.getElementById('successMsg').classList.add('show');
         });
+    </script>
+    <!-- Service Worker -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/sw.js')
+            .then(function(reg) { console.log('SW registered'); })
+            .catch(function(err) { console.log('SW error:', err); });
+        });
+      }
     </script>
 </body>
 </html>
