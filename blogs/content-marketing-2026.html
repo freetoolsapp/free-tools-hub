@@ -63,94 +63,13 @@
         .prose a:hover { color: #1d4ed8; }
         .prose strong { color: #1f2937; font-weight: 600; }
     </style>
+    <link rel="stylesheet" href="../header-new.css">
 </head>
 <body class="bg-gray-50">
     
     <!-- Header - Same as Index -->
-    <header class="bg-gradient-to-r from-blue-600 to-purple-600 text-white">
-        <div class="bg-blue-700 py-2">
-            <div class="container mx-auto px-4">
-                <div class="flex justify-between items-center text-sm">
-                    <div class="flex items-center space-x-4">
-                        <a href="mailto:support@freetoolshub.com" class="hover:text-blue-200 transition">
-                            <i class="fas fa-envelope mr-1"></i> support@freetoolshub.com
-                        </a>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="hover:text-blue-200 transition"><i class="fab fa-youtube"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <nav class="bg-white shadow-md sticky top-0 z-50">
-            <div class="container mx-auto px-4">
-                <div class="flex justify-between items-center py-4">
-                    <a href="../index.html" class="text-2xl font-bold text-blue-600 flex items-center">
-                        <i class="fas fa-tools mr-2"></i>
-                        Free Tools Hub
-                    </a>
-
-                    <div class="hidden lg:flex items-center space-x-8">
-                        <a href="../index.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
-                            <i class="fas fa-home mr-1"></i> Home
-                        </a>
-                        <div class="relative group">
-                            <a href="../index.html#tools" class="text-gray-700 hover:text-blue-600 transition font-medium flex items-center">
-                                <i class="fas fa-toolbox mr-1"></i> Tools
-                                <i class="fas fa-chevron-down ml-1 text-xs"></i>
-                            </a>
-                            <div class="absolute hidden group-hover:block bg-white shadow-lg rounded-lg mt-2 py-2 w-48">
-                                <a href="../index.html#tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">All Tools</a>
-                                <a href="../index.html#seo-tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">SEO Tools</a>
-                                <a href="../index.html#student-tools" class="block px-4 py-2 hover:bg-blue-50 text-gray-700">Student Tools</a>
-                            </div>
-                        </div>
-                        <a href="../blog.html" class="text-blue-600 font-bold transition">
-                            <i class="fas fa-blog mr-1"></i> Blog
-                        </a>
-                        <a href="../resources.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
-                            <i class="fas fa-book mr-1"></i> Resources
-                        </a>
-                        <a href="../about.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
-                            <i class="fas fa-info-circle mr-1"></i> About
-                        </a>
-                        <a href="../contact.html" class="text-gray-700 hover:text-blue-600 transition font-medium">
-                            <i class="fas fa-envelope mr-1"></i> Contact
-                        </a>
-                    </div>
-
-                    <button class="lg:hidden text-gray-700" onclick="toggleMobileMenu()">
-                        <i class="fas fa-bars text-2xl"></i>
-                    </button>
-                </div>
-
-                <div id="mobile-menu" class="hidden lg:hidden pb-4">
-                    <a href="../index.html" class="block py-2 text-gray-700 hover:text-blue-600">
-                        <i class="fas fa-home mr-2"></i> Home
-                    </a>
-                    <a href="../index.html#tools" class="block py-2 text-gray-700 hover:text-blue-600">
-                        <i class="fas fa-toolbox mr-2"></i> Tools
-                    </a>
-                    <a href="../blog.html" class="block py-2 text-blue-600 font-bold">
-                        <i class="fas fa-blog mr-2"></i> Blog
-                    </a>
-                    <a href="../resources.html" class="block py-2 text-gray-700 hover:text-blue-600">
-                        <i class="fas fa-book mr-2"></i> Resources
-                    </a>
-                    <a href="../about.html" class="block py-2 text-gray-700 hover:text-blue-600">
-                        <i class="fas fa-info-circle mr-2"></i> About
-                    </a>
-                    <a href="../contact.html" class="block py-2 text-gray-700 hover:text-blue-600">
-                        <i class="fas fa-envelope mr-2"></i> Contact
-                    </a>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <div id="site-header"></div>
+<script src="../header.js"></script>
 
     <!-- Breadcrumb -->
     <div class="bg-gray-100 py-3">
