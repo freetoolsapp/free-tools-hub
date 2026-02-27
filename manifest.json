@@ -1,0 +1,43 @@
+{
+  "name": "Free Tools Hub",
+  "short_name": "FreeTools",
+  "description": "100+ Free Online Tools — PDF, SEO, Design, Student & More. No Signup Required.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1e0a3c",
+  "theme_color": "#5b21b6",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["utilities", "productivity", "education"],
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "All Tools",
+      "short_name": "Tools",
+      "description": "Browse all free tools",
+      "url": "/tools.html",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Blog",
+      "short_name": "Blog",
+      "description": "Read our latest blogs",
+      "url": "/blog.html",
+      "icons": [{ "src": "/icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
