@@ -416,3 +416,23 @@
 
 /* tagline mobile mein show karein */
 .fth-logo-tag { display: block !important; }
+
+/* Search button style */
+.fth-search-btn {
+    position: absolute;
+    right: 6px; top: 50%;
+    transform: translateY(-50%);
+    background: linear-gradient(135deg, var(--fth-p600), var(--fth-fx));
+    color: #fff;
+    border: none; cursor: pointer;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px;
+    transition: var(--fth-tr);
+}
+.fth-search-btn:hover {
+    box-shadow: 0 4px 12px rgba(124,58,237,.40);
+    transform: translateY(-50%) scale(1.05);
+}
+.fth-search input { padding-right: 44px; }
