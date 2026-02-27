@@ -436,3 +436,13 @@
     transform: translateY(-50%) scale(1.05);
 }
 .fth-search input { padding-right: 44px; }
+
+/* ================================================
+   MOBILE SEARCH FIX — header search hide on mobile
+   (page ka apna search box kaam karega)
+================================================ */
+@media (max-width: 768px) {
+    .fth-search {
+        display: none;
+    }
+}
