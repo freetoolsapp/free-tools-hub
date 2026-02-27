@@ -1,47 +1,48 @@
 // ================================================
-// FREE TOOLS HUB — Universal Header Loader
-// Sirf ek baar update karo, sab pages update!
+// FREE TOOLS HUB — Universal Header Loader v2
 // ================================================
 
 (function() {
 
-// ── Active link auto-detect ──
+// ── Base path calculate karo ──
+function getBasePath() {
+    const path = window.location.pathname;
+    const parts = path.split('/').filter(Boolean);
+    
+    // Root pages: index.html, about.html, tools.html etc.
+    if (parts.length <= 1) return '';
+    
+    // 1 folder deep: blogs/post.html, tools/tool.html
+    if (parts.length === 2) return '../';
+    
+    // 2 folders deep: tools/utility/pdf-to-word.html
+    if (parts.length === 3) return '../../';
+    
+    return '../../';
+}
+
+// ── Active page detect ──
 function getActivePage() {
-    const path = window.location.pathname.split('/').pop() || 'index.html';
-    if (path === 'index.html' || path === '')         return 'home';
-    if (path === 'tools.html')                         return 'tools';
-    if (path === 'blog.html')                          return 'blog';
-    if (path === 'tutorials.html')                     return 'tutorials';
-    if (path === 'resources.html')                     return 'resources';
-    if (path === 'coupons.html')                       return 'coupons';
-    if (path === 'store.html')                         return 'store';
-    if (path === 'news.html')                          return 'news';
-    // Tool pages inside subfolders
-    if (window.location.pathname.includes('/tools/')) return 'tools';
-    if (window.location.pathname.includes('/blogs/'))  return 'blog';
-    if (window.location.pathname.includes('/tutorials/')) return 'tutorials';
+    const path = window.location.pathname;
+    if (path.includes('/tools/') || path.endsWith('tools.html')) return 'tools';
+    if (path.includes('/blogs/') || path.endsWith('blog.html'))  return 'blog';
+    if (path.includes('/tutorials/') || path.endsWith('tutorials.html')) return 'tutorials';
+    if (path.includes('/resources/') || path.endsWith('resources.html')) return 'resources';
+    if (path.endsWith('coupons.html')) return 'coupons';
+    if (path.endsWith('store.html'))   return 'store';
+    if (path.endsWith('news.html'))    return 'news';
+    if (path.endsWith('index.html') || path === '/' || path === '') return 'home';
     return '';
 }
 
-// ── Header HTML ──
+const base = getBasePath();
 const activePage = getActivePage();
 
-function navLink(page, icon, label, href, extraClass) {
-    const isActive = activePage === page ? ' fth-active' : '';
-    return `<a href="${href}" class="fth-nl${isActive}${extraClass ? ' '+extraClass : ''}"><i class="fas ${icon} fth-i"></i> ${label}</a>`;
+function isActive(page) {
+    return activePage === page ? ' fth-active' : '';
 }
-
-function navSpan(page, icon, label, extraClass) {
-    const isActive = activePage === page ? ' fth-active' : '';
-    return `<span class="fth-nl${isActive}${extraClass ? ' '+extraClass : ''}"><i class="fas ${icon} fth-i"></i> ${label} <i class="fas fa-chevron-down fth-ch"></i></span>`;
-}
-
-// Determine base path (for pages inside subfolders like tools/utility/)
-const depth = window.location.pathname.split('/').length - 2;
-const base = depth > 1 ? '../'.repeat(depth - 1) : '';
 
 const headerHTML = `
-<!-- TOP BAR -->
 <div class="fth-topbar">
     <div class="fth-wrap">
         <div class="fth-tb-left">
@@ -57,7 +58,6 @@ const headerHTML = `
     </div>
 </div>
 
-<!-- ROW 1 -->
 <div class="fth-row1">
     <div class="fth-wrap">
         <a href="${base}index.html" class="fth-logo">
@@ -80,14 +80,15 @@ const headerHTML = `
     </div>
 </div>
 
-<!-- ROW 2 -->
 <div class="fth-row2">
     <div class="fth-wrap">
+
         <div class="fth-ni">
-            ${navLink('home','fa-home','Home', base+'index.html')}
+            <a href="${base}index.html" class="fth-nl${isActive('home')}"><i class="fas fa-home fth-i"></i> Home</a>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('tools','fa-tools','Free Tools')}
+            <span class="fth-nl${isActive('tools')}"><i class="fas fa-tools fth-i"></i> Free Tools <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-mega fth-mega3">
                 <div class="fth-mbanner">
                     <div class="fth-mbanner-txt">
@@ -119,8 +120,9 @@ const headerHTML = `
                 </div>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('blog','fa-pen-nib','Blog')}
+            <span class="fth-nl${isActive('blog')}"><i class="fas fa-pen-nib fth-i"></i> Blog <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-drop">
                 <a href="${base}blogs/ai-tools-guide-2026.html" class="fth-ddi"><i class="fas fa-robot"></i> AI Tools Guide 2026 <span class="fth-badge fth-new">NEW</span></a>
                 <a href="${base}blogs/productivity-hacks-2026.html" class="fth-ddi"><i class="fas fa-rocket"></i> Productivity Hacks</a>
@@ -129,8 +131,9 @@ const headerHTML = `
                 <a href="${base}blog.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Blog Posts</a>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('education','fa-graduation-cap','Education')}
+            <span class="fth-nl"><i class="fas fa-graduation-cap fth-i"></i> Education <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-mega fth-mega4 fth-mega-center">
                 <div>
                     <div class="fth-mcol-title"><i class="fas fa-book-open"></i> School</div>
@@ -158,8 +161,9 @@ const headerHTML = `
                 </div>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('resources','fa-layer-group','Resources')}
+            <span class="fth-nl${isActive('resources')}"><i class="fas fa-layer-group fth-i"></i> Resources <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-drop">
                 <div class="fth-dhead">Developer</div>
                 <a href="${base}resources.html" class="fth-ddi"><i class="fas fa-plug"></i> Free APIs</a>
@@ -173,8 +177,9 @@ const headerHTML = `
                 <a href="${base}resources.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Resources</a>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('tutorials','fa-play-circle','Tutorials')}
+            <span class="fth-nl${isActive('tutorials')}"><i class="fas fa-play-circle fth-i"></i> Tutorials <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-drop">
                 <a href="${base}tutorials.html" class="fth-ddi"><i class="fas fa-robot"></i> AI Tools Mastery</a>
                 <a href="${base}tutorials.html" class="fth-ddi"><i class="fas fa-search"></i> SEO Basics</a>
@@ -184,8 +189,9 @@ const headerHTML = `
                 <a href="${base}tutorials.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Tutorials</a>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('coupons','fa-tag','Coupons','fth-nl-hl')} 
+            <span class="fth-nl${isActive('coupons')} fth-nl-hl"><i class="fas fa-tag fth-i"></i> Coupons <span class="fth-pill"><i class="fas fa-fire"></i> HOT</span> <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-drop">
                 <div class="fth-dhead">Today's Best Deals</div>
                 <a href="${base}coupons.html" class="fth-ddi"><i class="fas fa-percent"></i> All Coupons <span class="fth-badge fth-new">NEW</span></a>
@@ -196,8 +202,9 @@ const headerHTML = `
                 <a href="${base}coupons.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Deals</a>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navSpan('store','fa-shopping-bag','Store','fth-nl-hl')}
+            <span class="fth-nl${isActive('store')} fth-nl-hl"><i class="fas fa-shopping-bag fth-i"></i> Store <span class="fth-pill">NEW</span> <i class="fas fa-chevron-down fth-ch"></i></span>
             <div class="fth-drop">
                 <a href="${base}store.html" class="fth-ddi"><i class="fas fa-store"></i> All Products <span class="fth-badge fth-new">NEW</span></a>
                 <a href="${base}store/digital-tools.html" class="fth-ddi"><i class="fas fa-download"></i> Digital Products</a>
@@ -207,9 +214,11 @@ const headerHTML = `
                 <a href="${base}store.html" class="fth-dda"><i class="fas fa-arrow-right"></i> Visit Store</a>
             </div>
         </div>
+
         <div class="fth-ni">
-            ${navLink('news','fa-newspaper','News', base+'news.html')}
+            <a href="${base}news.html" class="fth-nl${isActive('news')}"><i class="fas fa-newspaper fth-i"></i> News</a>
         </div>
+
     </div>
 </div>
 
@@ -259,7 +268,6 @@ const headerHTML = `
         <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-tag fth-i"></i> Coupons</span><i class="fas fa-chevron-down fth-mch"></i></button>
         <div class="fth-msub">
             <a href="${base}coupons.html"><i class="fas fa-percent"></i> All Coupons</a>
-            <a href="${base}coupons/software-deals.html"><i class="fas fa-laptop"></i> Software Deals</a>
         </div>
     </div>
     <div class="fth-mni">
@@ -273,13 +281,11 @@ const headerHTML = `
 </nav>
 `;
 
-// ── Inject header ──
+// Inject
 const container = document.getElementById('site-header');
-if (container) {
-    container.innerHTML = headerHTML;
-}
+if (container) container.innerHTML = headerHTML;
 
-// ── Scripts ──
+// Mobile button
 const btn = document.getElementById('fthMobBtn');
 const nav = document.getElementById('fthMobNav');
 if (btn && nav) {
@@ -290,13 +296,13 @@ if (btn && nav) {
 }
 
 // Search
-const ss = document.getElementById('fthSearch');
+const ss   = document.getElementById('fthSearch');
 const sbtn = document.getElementById('fthSearchBtn');
 function doSearch() {
     const q = ss ? ss.value.trim() : '';
     if (q) window.location.href = base + 'tools.html?q=' + encodeURIComponent(q);
 }
-if (ss) ss.addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
+if (ss)   ss.addEventListener('keydown', function(e) { if (e.key === 'Enter') doSearch(); });
 if (sbtn) sbtn.addEventListener('click', doSearch);
 
 })();
