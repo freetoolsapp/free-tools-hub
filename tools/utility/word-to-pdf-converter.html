@@ -31,11 +31,6 @@
         * { font-family: 'Inter', sans-serif; box-sizing: border-box; }
         body { background: #fff; color: #333; }
 
-        .site-header { background:#fff; border-bottom:1px solid #e8e8e8; }
-        .nav-link { font-size:13px; font-weight:500; color:#555; transition:color .2s; text-decoration:none; }
-        .nav-link:hover { color:#e2574c; }
-        .nav-link.active { color:#e2574c; font-weight:600; }
-
         .btn-red {
             background:#e2574c; color:#fff; border:none; border-radius:6px;
             padding:12px 28px; font-size:15px; font-weight:600; cursor:pointer;
@@ -63,7 +58,11 @@
         }
         .upload-zone:hover, .upload-zone.over { border-color:#e2574c; background:#fff8f7; }
         .upload-zone.over { transform:scale(1.01); }
-        #fileInput { position:absolute; inset:0; opacity:0; cursor:pointer; width:100%; height:100%; z-index:5; }
+        /* Full-area file input for mobile */
+        #fileInput {
+            position:absolute; inset:0; opacity:0; cursor:pointer;
+            width:100%; height:100%; z-index:5; font-size:16px;
+        }
 
         .file-item {
             background:#fff; border:1.5px solid #e8e8e8; border-radius:10px;
@@ -90,36 +89,9 @@
             display:flex; align-items:center; justify-content:space-between;
         }
 
-        /* DOCX preview area */
         #docxStage {
             background:#525659; padding:20px;
             min-height:120px; max-height:500px; overflow-y:auto;
-        }
-
-        /* A4 page style inside preview */
-        .a4-page {
-            width:794px;
-            min-height:1123px;
-            background:#fff;
-            margin:0 auto 16px;
-            padding:72px 80px;
-            box-shadow:0 4px 20px rgba(0,0,0,.45);
-            box-sizing:border-box;
-            font-family:'Times New Roman', Georgia, serif;
-            font-size:12pt;
-            line-height:1.6;
-            color:#000;
-            transform:scale(0.5);
-            transform-origin:top left;
-        }
-
-        /* Wrapper to handle scaled height */
-        .a4-wrapper {
-            width:397px;   /* 794 * 0.5 */
-            height:562px;  /* 1123 * 0.5 */
-            overflow:hidden;
-            margin:0 auto 10px;
-            position:relative;
         }
 
         .tool-card { border:1.5px solid #eee; border-radius:12px; transition:all .2s; background:#fff; text-decoration:none; display:block; }
@@ -128,7 +100,6 @@
         @keyframes pop { 0%{transform:scale(0) rotate(-20deg)} 70%{transform:scale(1.12) rotate(4deg)} 100%{transform:scale(1) rotate(0)} }
         .pop-anim { animation:pop .4s cubic-bezier(.34,1.56,.64,1) forwards; }
 
-        /* Page size selector */
         .page-size-btn { cursor:pointer; text-align:center; }
         .page-size-btn:hover { border-color:#e2574c !important; }
 
@@ -148,11 +119,11 @@
 </head>
 <body>
 
-<!-- ══════════════ HEADER ══════════════ -->
+<!-- HEADER -->
 <div id="site-header"></div>
 <script src="../../header.js"></script>
 
-<!-- ══════════════ BREADCRUMB ══════════════ -->
+<!-- BREADCRUMB -->
 <div class="bg-gray-50 border-b border-gray-100 text-xs py-2">
     <div class="max-w-screen-xl mx-auto px-5 flex items-center gap-2 text-gray-400">
         <a href="../../index.html" class="hover:text-red-500 transition">Home</a>
@@ -163,7 +134,7 @@
     </div>
 </div>
 
-<!-- ══════════════ HERO ══════════════ -->
+<!-- HERO -->
 <section class="tool-hero">
     <div class="max-w-2xl mx-auto">
 
@@ -182,12 +153,11 @@
         <!-- STAGE: UPLOAD -->
         <div id="stageUpload">
             <div id="uploadZone" class="upload-zone mb-4">
-                <input type="file" id="fileInput" accept=".docx,.doc">
+                <input type="file" id="fileInput" accept=".docx,.doc,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document">
                 <div class="pointer-events-none">
                     <i class="fas fa-cloud-upload-alt text-5xl text-purple-300 mb-4 block"></i>
                     <p class="text-gray-500 text-base mb-5">Upload your file and transform it.</p>
-                    <div class="btn-red mx-auto w-max text-sm" style="pointer-events:auto"
-                        onclick="event.stopPropagation(); document.getElementById('fileInput').click()">
+                    <div class="btn-red mx-auto w-max text-sm" style="pointer-events:none">
                         <i class="fas fa-folder-open"></i>Select WORD files
                     </div>
                     <p class="text-gray-400 text-xs mt-5">or drop WORD documents here</p>
@@ -246,7 +216,7 @@
                 </label>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2" id="pageSizeBtns">
                     <button onclick="selectPageSize('auto')" id="btn-auto"
-                        class="page-size-btn active-size text-xs py-2.5 px-3 rounded-lg border-2 border-red-400 bg-red-50 text-red-600 font-semibold transition">
+                        class="page-size-btn text-xs py-2.5 px-3 rounded-lg border-2 border-red-400 bg-red-50 text-red-600 font-semibold transition">
                         <i class="fas fa-magic block text-base mb-1"></i>Auto Detect
                     </button>
                     <button onclick="selectPageSize('a4')" id="btn-a4"
@@ -306,7 +276,7 @@
     </div>
 </section>
 
-<!-- ══════════════ HOW IT WORKS ══════════════ -->
+<!-- HOW IT WORKS -->
 <section class="py-16 bg-white border-t border-gray-100">
     <div class="max-w-4xl mx-auto px-5">
         <h2 class="text-2xl font-bold text-gray-900 text-center mb-12">How to convert Word to PDF</h2>
@@ -330,7 +300,7 @@
     </div>
 </section>
 
-<!-- ══════════════ FEATURES ══════════════ -->
+<!-- FEATURES -->
 <section class="py-16 bg-gray-50 border-t border-gray-100">
     <div class="max-w-5xl mx-auto px-5">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
@@ -366,7 +336,7 @@
     </div>
 </section>
 
-<!-- ══════════════ RELATED TOOLS ══════════════ -->
+<!-- RELATED TOOLS -->
 <section class="py-16 bg-white border-t border-gray-100">
     <div class="max-w-5xl mx-auto px-5">
         <h2 class="text-2xl font-bold text-gray-900 text-center mb-10"><i class="fas fa-tools text-red-500 mr-2"></i>Related PDF Tools</h2>
@@ -396,7 +366,7 @@
     </div>
 </section>
 
-<!-- ══════════════ FOOTER ══════════════ -->
+<!-- FOOTER -->
 <footer class="bg-gray-900 text-white py-12 border-t border-gray-800">
     <div class="max-w-6xl mx-auto px-5">
         <div class="grid grid-cols-1 md:grid-cols-5 gap-8 mb-8">
@@ -464,159 +434,183 @@
 </button>
 
 <script>
-/* ── Mobile menu ── */
-const $mb = document.getElementById('mobileMenuBtn');
-const $mm = document.getElementById('mobileMenu');
-$mb.addEventListener('click', () => {
-    $mm.classList.toggle('hidden');
-    const ic = $mb.querySelector('i');
-    ic.classList.toggle('fa-bars'); ic.classList.toggle('fa-times');
-});
-document.addEventListener('click', e => {
-    if (!$mb.contains(e.target) && !$mm.contains(e.target)) {
-        $mm.classList.add('hidden');
-        const ic = $mb.querySelector('i');
-        ic.classList.remove('fa-times'); ic.classList.add('fa-bars');
-    }
-});
+/* ── Safe mobile menu (header.js loads async) ── */
+function initMobileMenu() {
+    var btn  = document.getElementById('mobileMenuBtn');
+    var menu = document.getElementById('mobileMenu');
+    if (!btn || !menu || btn._ready) return;
+    btn._ready = true;
+    btn.addEventListener('click', function() {
+        menu.classList.toggle('hidden');
+        var ic = btn.querySelector('i');
+        if (ic) { ic.classList.toggle('fa-bars'); ic.classList.toggle('fa-times'); }
+    });
+    document.addEventListener('click', function(e) {
+        if (!btn.contains(e.target) && !menu.contains(e.target)) {
+            menu.classList.add('hidden');
+            var ic = btn.querySelector('i');
+            if (ic) { ic.classList.remove('fa-times'); ic.classList.add('fa-bars'); }
+        }
+    });
+}
+initMobileMenu();
+setTimeout(initMobileMenu, 300);
+setTimeout(initMobileMenu, 1000);
+setTimeout(initMobileMenu, 2500);
 
 /* ── Back to top ── */
-const $btt = document.getElementById('btt');
-window.addEventListener('scroll', () => { $btt.style.display = window.scrollY > 400 ? 'flex' : 'none'; }, {passive:true});
-$btt.addEventListener('click', () => window.scrollTo({top:0,behavior:'smooth'}));
+var $btt = document.getElementById('btt');
+window.addEventListener('scroll', function() {
+    $btt.style.display = window.scrollY > 400 ? 'flex' : 'none';
+}, {passive:true});
+$btt.addEventListener('click', function() { window.scrollTo({top:0,behavior:'smooth'}); });
 
 /* ── DOM refs ── */
-const stageUpload  = document.getElementById('stageUpload');
-const stageProcess = document.getElementById('stageProcess');
-const stagePreview = document.getElementById('stagePreview');
-const stageSuccess = document.getElementById('stageSuccess');
-const uploadZone   = document.getElementById('uploadZone');
-const fileInput    = document.getElementById('fileInput');
-const errBox       = document.getElementById('errBox');
-const errMsg       = document.getElementById('errMsg');
-const procTitle    = document.getElementById('procTitle');
-const procSub      = document.getElementById('procSub');
-const progFill     = document.getElementById('progFill');
-const progStatus   = document.getElementById('progStatus');
-const progPct      = document.getElementById('progPct');
-const fName        = document.getElementById('fName');
-const fSize        = document.getElementById('fSize');
-const removeBtn    = document.getElementById('removeBtn');
-const docxStage    = document.getElementById('docxStage');
-const convertBtn   = document.getElementById('convertBtn');
-const convProgress = document.getElementById('convProgress');
-const convMsg      = document.getElementById('convMsg');
-const convFill     = document.getElementById('convFill');
-const dlBtn        = document.getElementById('dlBtn');
-const sucName      = document.getElementById('sucName');
+var stageUpload  = document.getElementById('stageUpload');
+var stageProcess = document.getElementById('stageProcess');
+var stagePreview = document.getElementById('stagePreview');
+var stageSuccess = document.getElementById('stageSuccess');
+var uploadZone   = document.getElementById('uploadZone');
+var fileInput    = document.getElementById('fileInput');
+var errBox       = document.getElementById('errBox');
+var errMsg       = document.getElementById('errMsg');
+var procTitle    = document.getElementById('procTitle');
+var procSub      = document.getElementById('procSub');
+var progFill     = document.getElementById('progFill');
+var progStatus   = document.getElementById('progStatus');
+var progPct      = document.getElementById('progPct');
+var fName        = document.getElementById('fName');
+var fSize        = document.getElementById('fSize');
+var removeBtn    = document.getElementById('removeBtn');
+var docxStage    = document.getElementById('docxStage');
+var convertBtn   = document.getElementById('convertBtn');
+var convProgress = document.getElementById('convProgress');
+var convMsg      = document.getElementById('convMsg');
+var convFill     = document.getElementById('convFill');
+var dlBtn        = document.getElementById('dlBtn');
+var sucName      = document.getElementById('sucName');
 
-let selFile          = null;
-let parsedHtml       = '';
-let pageSize         = { wPx:794, hPx:1123, wMM:210, hMM:297, name:'A4' };
-let selectedOutputSize = 'auto'; // 'auto', 'a4', 'letter', 'legal'
+var selFile            = null;
+var parsedHtml         = '';
+var pageSize           = { wPx:794, hPx:1123, wMM:210, hMM:297, name:'A4' };
+var selectedOutputSize = 'auto';
 
-const PAGE_SIZES = {
-    auto:   null, // filled at runtime from pageSize
+var PAGE_SIZES = {
     a4:     { wPx:794,  hPx:1123, wMM:210,   hMM:297,   name:'A4' },
     letter: { wPx:816,  hPx:1056, wMM:215.9, hMM:279.4, name:'Letter' },
-    legal:  { wPx:816,  hPx:1344, wMM:215.9, hMM:355.6, name:'Legal'  },
+    legal:  { wPx:816,  hPx:1344, wMM:215.9, hMM:355.6, name:'Legal'  }
 };
 
 function selectPageSize(size) {
     selectedOutputSize = size;
-    // Update button styles
-    document.querySelectorAll('.page-size-btn').forEach(b => {
-        b.classList.remove('active-size','border-red-400','bg-red-50','text-red-600');
+    document.querySelectorAll('.page-size-btn').forEach(function(b) {
+        b.classList.remove('border-red-400','bg-red-50','text-red-600');
         b.classList.add('border-gray-200','bg-white','text-gray-600');
     });
-    const active = document.getElementById('btn-' + size);
-    if(active) {
-        active.classList.add('active-size','border-red-400','bg-red-50','text-red-600');
+    var active = document.getElementById('btn-' + size);
+    if (active) {
+        active.classList.add('border-red-400','bg-red-50','text-red-600');
         active.classList.remove('border-gray-200','bg-white','text-gray-600');
     }
-    // Update info text
-    const info = document.getElementById('selectedSizeInfo');
-    const badge = document.getElementById('autoDetectBadge');
-    if(size === 'auto') {
+    var info  = document.getElementById('selectedSizeInfo');
+    var badge = document.getElementById('autoDetectBadge');
+    if (size === 'auto') {
         info.innerHTML = '<i class="fas fa-info-circle mr-1"></i>Using auto-detected size from your document';
         badge.classList.remove('hidden');
     } else {
-        const s = PAGE_SIZES[size];
-        info.innerHTML = `<i class="fas fa-check-circle mr-1 text-green-500"></i>Output will be <strong>${s.name}</strong> (${s.wMM}×${s.hMM}mm)`;
+        var s = PAGE_SIZES[size];
+        info.innerHTML = '<i class="fas fa-check-circle mr-1 text-green-500"></i>Output will be <strong>' + s.name + '</strong> (' + s.wMM + '×' + s.hMM + 'mm)';
         badge.classList.add('hidden');
     }
 }
 
 function getOutputPageSize() {
-    if(selectedOutputSize === 'auto') return pageSize;
+    if (selectedOutputSize === 'auto') return pageSize;
     return PAGE_SIZES[selectedOutputSize];
 }
 
-/* ── Helpers ── */
-const fmt   = b => b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB';
-const sleep = ms => new Promise(r=>setTimeout(r,ms));
+var fmt   = function(b) { return b<1024?b+' B':b<1048576?(b/1024).toFixed(1)+' KB':(b/1048576).toFixed(2)+' MB'; };
+var sleep = function(ms) { return new Promise(function(r){setTimeout(r,ms);}); };
 
 function show(name) {
-    [stageUpload,stageProcess,stagePreview,stageSuccess].forEach(s=>s.classList.add('hidden'));
+    [stageUpload,stageProcess,stagePreview,stageSuccess].forEach(function(s){ s.classList.add('hidden'); });
     document.getElementById('stage'+name).classList.remove('hidden');
 }
-function setP(pct,st){ progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(st) progStatus.textContent=st; }
-function showErr(m){ errMsg.textContent=m; errBox.classList.remove('hidden'); }
-function hideErr()  { errBox.classList.add('hidden'); }
+function setP(pct,st) { progFill.style.width=pct+'%'; progPct.textContent=pct+'%'; if(st) progStatus.textContent=st; }
+function showErr(m)   { errMsg.textContent=m; errBox.classList.remove('hidden'); }
+function hideErr()    { errBox.classList.add('hidden'); }
 
 /* ── Drag & drop ── */
-['dragenter','dragover','dragleave','drop'].forEach(ev=>{
-    uploadZone.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
-    document.body.addEventListener(ev,e=>{e.preventDefault();e.stopPropagation();});
+['dragenter','dragover','dragleave','drop'].forEach(function(ev) {
+    uploadZone.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); });
+    document.body.addEventListener(ev, function(e){ e.preventDefault(); e.stopPropagation(); });
 });
-['dragenter','dragover'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.add('over')));
-['dragleave','drop'].forEach(ev=>uploadZone.addEventListener(ev,()=>uploadZone.classList.remove('over')));
-uploadZone.addEventListener('drop',e=>{const f=e.dataTransfer.files[0];if(f)pick(f);});
-fileInput.addEventListener('change',e=>{if(e.target.files[0])pick(e.target.files[0]);});
-removeBtn.addEventListener('click',resetAll);
+['dragenter','dragover'].forEach(function(ev) { uploadZone.addEventListener(ev, function(){ uploadZone.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev)     { uploadZone.addEventListener(ev, function(){ uploadZone.classList.remove('over'); }); });
+uploadZone.addEventListener('drop', function(e) {
+    var f = e.dataTransfer && e.dataTransfer.files[0];
+    if (f) pick(f);
+});
 
-function pick(f){
-    const ext=f.name.split('.').pop().toLowerCase();
-    if(!['docx','doc'].includes(ext)){showErr('Only .docx and .doc files are supported.');return;}
-    hideErr(); selFile=f; doConvert(f);
+/* ── File input (main mobile trigger) ── */
+fileInput.addEventListener('change', function(e) {
+    var f = e.target.files && e.target.files[0];
+    if (f) {
+        pick(f);
+        try { fileInput.value = ''; } catch(ex){}
+    }
+});
+
+removeBtn.addEventListener('click', resetAll);
+
+function pick(f) {
+    var name = f.name || '';
+    var ext  = name.split('.').pop().toLowerCase();
+    // Accept by extension OR by MIME type
+    var validExt  = ['docx','doc'].includes(ext);
+    var validMime = f.type === 'application/msword' ||
+                    f.type === 'application/vnd.openxmlformats-officedocument.wordprocessingml.document';
+    if (!validExt && !validMime) {
+        showErr('Only .docx and .doc files are supported.');
+        return;
+    }
+    if (f.size > 50 * 1024 * 1024) {
+        showErr('File too large. Maximum size is 50MB.');
+        return;
+    }
+    hideErr();
+    selFile = f;
+    doConvert(f);
 }
 
 /* ══════════════════════════════════════════════════════
-   CUSTOM DOCX PARSER — handles numbering properly
-   Uses JSZip to read XML directly from the DOCX
+   CUSTOM DOCX PARSER
 ══════════════════════════════════════════════════════ */
 
-// Convert number to roman numeral
 function toRoman(num) {
-    if(num <= 0) return '';
-    const vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
-    const syms = ['m','cm','d','cd','c','xc','l','xl','x','ix','v','iv','i'];
-    let result = '';
-    for(let i=0;i<vals.length;i++){
-        while(num>=vals[i]){ result+=syms[i]; num-=vals[i]; }
-    }
+    if (num <= 0) return '';
+    var vals = [1000,900,500,400,100,90,50,40,10,9,5,4,1];
+    var syms = ['m','cm','d','cd','c','xc','l','xl','x','ix','v','iv','i'];
+    var result = '';
+    for (var i=0;i<vals.length;i++) { while(num>=vals[i]){ result+=syms[i]; num-=vals[i]; } }
     return result;
 }
 
 function toLetter(num) {
-    if(num <= 0) return '';
+    if (num <= 0) return '';
     return String.fromCharCode(96 + ((num-1) % 26) + 1);
 }
 
-// Format number — uses lvlText template from Word e.g. "%1." => "i."
 function formatNum(num, fmt, lvlText) {
-    let numStr = '';
+    var numStr = '';
     switch(fmt) {
         case 'lowerRoman':  numStr = toRoman(num); break;
         case 'upperRoman':  numStr = toRoman(num).toUpperCase(); break;
         case 'lowerLetter': numStr = toLetter(num); break;
         case 'upperLetter': numStr = toLetter(num).toUpperCase(); break;
-        case 'decimal':     numStr = String(num); break;
         default:            numStr = String(num);
     }
-    if(lvlText && lvlText.includes('%')) {
-        return lvlText.replace(/%\d/g, numStr);
-    }
+    if (lvlText && lvlText.includes('%')) return lvlText.replace(/%\d/g, numStr);
     return numStr + '.';
 }
 
@@ -627,45 +621,41 @@ async function doConvert(file) {
     setP(5, 'Loading file…');
 
     try {
-        const zip = await JSZip.loadAsync(await file.arrayBuffer());
+        var buf = await file.arrayBuffer();
+        var zip = await JSZip.loadAsync(buf);
         setP(15, 'Parsing XML…');
 
-        /* ── Read XML files ── */
-        const docXml  = await zip.file('word/document.xml').async('string');
-        const numXml  = zip.file('word/numbering.xml') ? await zip.file('word/numbering.xml').async('string') : null;
-        const relXml  = zip.file('word/_rels/document.xml.rels') ? await zip.file('word/_rels/document.xml.rels').async('string') : null;
-        const stylesXml = zip.file('word/styles.xml') ? await zip.file('word/styles.xml').async('string') : null;
+        var docXml    = await zip.file('word/document.xml').async('string');
+        var numXml    = zip.file('word/numbering.xml')  ? await zip.file('word/numbering.xml').async('string')  : null;
+        var relXml    = zip.file('word/_rels/document.xml.rels') ? await zip.file('word/_rels/document.xml.rels').async('string') : null;
 
         setP(30, 'Processing numbering…');
 
-        /* ── Parse numbering ── */
-        const numMap = {}; // numId -> { fmt, lvlText, start }
-        const counters = {}; // numId -> current count
+        var numMap   = {};
+        var counters = {};
 
-        if(numXml) {
-            const numParser = new DOMParser();
-            const numDoc = numParser.parseFromString(numXml, 'application/xml');
-            const W = 'http://schemas.openxmlformats.org/wordprocessingml/2006/main';
+        if (numXml) {
+            var numParser = new DOMParser();
+            var numDoc    = numParser.parseFromString(numXml, 'application/xml');
 
-            // Build abstractNum map
-            const abstractNums = {};
-            numDoc.querySelectorAll('abstractNum').forEach(an => {
-                const id = an.getAttribute('w:abstractNumId');
-                const lvl0 = an.querySelector('lvl[w\\:ilvl="0"]') || an.querySelector('lvl');
-                if(lvl0) {
-                    const fmt = lvl0.querySelector('numFmt')?.getAttribute('w:val') || 'decimal';
-                    const start = parseInt(lvl0.querySelector('start')?.getAttribute('w:val') || '1');
-                    const lvlText = lvl0.querySelector("lvlText")?.getAttribute("w:val") || "%1.";
-                    abstractNums[id] = { fmt, start, lvlText };
+            var abstractNums = {};
+            numDoc.querySelectorAll('abstractNum').forEach(function(an) {
+                var id   = an.getAttribute('w:abstractNumId');
+                var lvl0 = an.querySelector('lvl[w\\:ilvl="0"]') || an.querySelector('lvl');
+                if (lvl0) {
+                    var fmt      = (lvl0.querySelector('numFmt') && lvl0.querySelector('numFmt').getAttribute('w:val')) || 'decimal';
+                    var start    = parseInt((lvl0.querySelector('start') && lvl0.querySelector('start').getAttribute('w:val')) || '1');
+                    var lvlText  = (lvl0.querySelector('lvlText') && lvl0.querySelector('lvlText').getAttribute('w:val')) || '%1.';
+                    abstractNums[id] = { fmt:fmt, start:start, lvlText:lvlText };
                 }
             });
 
-            // Map numId to abstractNumId
-            numDoc.querySelectorAll('num').forEach(n => {
-                const numId = n.getAttribute('w:numId');
-                const absId = n.querySelector('abstractNumId')?.getAttribute('w:val');
-                if(absId && abstractNums[absId]) {
-                    numMap[numId] = { ...abstractNums[absId] };
+            numDoc.querySelectorAll('num').forEach(function(n) {
+                var numId = n.getAttribute('w:numId');
+                var absEl = n.querySelector('abstractNumId');
+                var absId = absEl && absEl.getAttribute('w:val');
+                if (absId && abstractNums[absId]) {
+                    numMap[numId]   = Object.assign({}, abstractNums[absId]);
                     counters[numId] = abstractNums[absId].start - 1;
                 }
             });
@@ -673,24 +663,24 @@ async function doConvert(file) {
 
         setP(45, 'Reading images…');
 
-        /* ── Read images as base64 ── */
-        const images = {};
-        if(relXml) {
-            const relParser = new DOMParser();
-            const relDoc = relParser.parseFromString(relXml, 'application/xml');
-            const rels = relDoc.querySelectorAll('Relationship');
-            for(const rel of rels) {
-                const type = rel.getAttribute('Type') || '';
-                if(type.includes('image')) {
-                    const rId     = rel.getAttribute('Id');
-                    const target  = rel.getAttribute('Target');
-                    const imgPath = target.startsWith('/') ? target.slice(1) : 'word/' + target;
-                    const imgFile = zip.file(imgPath) || zip.file(imgPath.replace('word/',''));
-                    if(imgFile) {
-                        const b64 = await imgFile.async('base64');
-                        const ext = imgPath.split('.').pop().toLowerCase();
-                        const mime = ext==='png'?'image/png':ext==='gif'?'image/gif':'image/jpeg';
-                        images[rId] = `data:${mime};base64,${b64}`;
+        var images = {};
+        if (relXml) {
+            var relParser = new DOMParser();
+            var relDoc    = relParser.parseFromString(relXml, 'application/xml');
+            var rels      = relDoc.querySelectorAll('Relationship');
+            for (var ri = 0; ri < rels.length; ri++) {
+                var rel  = rels[ri];
+                var type = rel.getAttribute('Type') || '';
+                if (type.includes('image')) {
+                    var rId     = rel.getAttribute('Id');
+                    var target  = rel.getAttribute('Target');
+                    var imgPath = target.startsWith('/') ? target.slice(1) : 'word/' + target;
+                    var imgFile = zip.file(imgPath) || zip.file(imgPath.replace('word/',''));
+                    if (imgFile) {
+                        var b64  = await imgFile.async('base64');
+                        var ext  = imgPath.split('.').pop().toLowerCase();
+                        var mime = ext==='png'?'image/png':ext==='gif'?'image/gif':'image/jpeg';
+                        images[rId] = 'data:' + mime + ';base64,' + b64;
                     }
                 }
             }
@@ -698,55 +688,44 @@ async function doConvert(file) {
 
         setP(60, 'Building document…');
 
-        /* ── Parse document XML ── */
-        const docParser = new DOMParser();
-        const docDoc = docParser.parseFromString(docXml, 'application/xml');
-        const body = docDoc.querySelector('body');
-        const paragraphs = Array.from(body.children);
+        var docParser = new DOMParser();
+        var docDoc    = docParser.parseFromString(docXml, 'application/xml');
+        var body      = docDoc.querySelector('body');
+        var nodes     = Array.from(body.children);
+        var html      = '';
 
-        let html = '';
-
-        for(const node of paragraphs) {
-            const tag = node.localName;
-
-            if(tag === 'p') {
-                html += parseParagraph(node, numMap, counters, images);
-            } else if(tag === 'tbl') {
-                html += parseTable(node, numMap, counters, images);
-            } else if(tag === 'sectPr') {
-                // Page section — ignore for now
-            }
-        }
+        nodes.forEach(function(node) {
+            var tag = node.localName;
+            if      (tag === 'p')   html += parseParagraph(node, numMap, counters, images);
+            else if (tag === 'tbl') html += parseTable(node, numMap, counters, images);
+        });
 
         parsedHtml = html;
 
-        /* ── Detect page size from sectPr ── */
+        /* Detect page size */
         pageSize = { wPx:794, hPx:1123, wMM:210, hMM:297, name:'A4' };
-        const sectPr = docDoc.querySelector('sectPr');
-        if(sectPr) {
-            const pgSz = sectPr.querySelector('pgSz');
-            if(pgSz) {
-                const twW = parseInt(pgSz.getAttribute('w:w') || '11906');
-                const twH = parseInt(pgSz.getAttribute('w:h') || '16838');
-                const wPx = Math.round(twW / 1440 * 96);
-                const hPx = Math.round(twH / 1440 * 96);
-                const wMM = Math.round(twW / 1440 * 25.4 * 10) / 10;
-                const hMM = Math.round(twH / 1440 * 25.4 * 10) / 10;
-                let name = 'Custom';
-                if(Math.abs(wPx-794)<5 && Math.abs(hPx-1123)<5)  name = 'A4';
-                else if(Math.abs(wPx-816)<5 && Math.abs(hPx-1056)<5) name = 'Letter';
-                else if(Math.abs(wPx-816)<5 && Math.abs(hPx-1344)<5) name = 'Legal';
-                else if(Math.abs(wPx-1008)<5 && Math.abs(hPx-1296)<5) name = 'Tabloid';
-                const orient = pgSz.getAttribute('w:orient') || '';
-                if(orient === 'landscape') name += ' Landscape';
-                pageSize = { wPx, hPx, wMM, hMM, name };
+        var sectPr = docDoc.querySelector('sectPr');
+        if (sectPr) {
+            var pgSz = sectPr.querySelector('pgSz');
+            if (pgSz) {
+                var twW  = parseInt(pgSz.getAttribute('w:w') || '11906');
+                var twH  = parseInt(pgSz.getAttribute('w:h') || '16838');
+                var wPx  = Math.round(twW / 1440 * 96);
+                var hPx  = Math.round(twH / 1440 * 96);
+                var wMM  = Math.round(twW / 1440 * 25.4 * 10) / 10;
+                var hMM  = Math.round(twH / 1440 * 25.4 * 10) / 10;
+                var pname = 'Custom';
+                if      (Math.abs(wPx-794)<5 && Math.abs(hPx-1123)<5)  pname = 'A4';
+                else if (Math.abs(wPx-816)<5 && Math.abs(hPx-1056)<5)  pname = 'Letter';
+                else if (Math.abs(wPx-816)<5 && Math.abs(hPx-1344)<5)  pname = 'Legal';
+                var orient = pgSz.getAttribute('w:orient') || '';
+                if (orient === 'landscape') pname += ' Landscape';
+                pageSize = { wPx:wPx, hPx:hPx, wMM:wMM, hMM:hMM, name:pname };
             }
         }
         document.getElementById('prevBadge').textContent = '✓ ' + pageSize.name;
 
         setP(85, 'Rendering preview…');
-
-        /* ── Show preview ── */
         buildPreview(parsedHtml);
         await sleep(200);
 
@@ -765,105 +744,88 @@ async function doConvert(file) {
     }
 }
 
-/* ── Parse a single paragraph ── */
 function parseParagraph(pNode, numMap, counters, images) {
-    // Check for numbering
-    const numPr   = pNode.querySelector('numPr');
-    const numId   = numPr?.querySelector('numId')?.getAttribute('w:val');
-    const ilvl    = numPr?.querySelector('ilvl')?.getAttribute('w:val') || '0';
+    var numPr  = pNode.querySelector('numPr');
+    var numId  = numPr && numPr.querySelector('numId') ? numPr.querySelector('numId').getAttribute('w:val') : null;
 
-    // Check bold (heading detection)
-    const rPr    = pNode.querySelector('pPr > pStyle');
-    const styleId = rPr?.getAttribute('w:val') || '';
+    var pPrEl  = pNode.querySelector('pPr');
+    var indEl  = pPrEl && pPrEl.querySelector('ind');
+    var leftInd = parseInt((indEl && indEl.getAttribute('w:left')) || '0');
 
-    // Get paragraph properties for indent
-    const pPrEl  = pNode.querySelector('pPr');
-    const indEl  = pPrEl?.querySelector('ind');
-    const leftInd = parseInt(indEl?.getAttribute('w:left') || '0');
+    var innerHtml = '';
+    var runs      = pNode.querySelectorAll('r, hyperlink');
 
-    // Get runs text + formatting
-    let innerHtml = '';
-    const runs = pNode.querySelectorAll('r, hyperlink');
-
-    for(const run of runs) {
-        if(run.localName === 'hyperlink') {
-            // Handle hyperlinks
-            let linkText = '';
-            run.querySelectorAll('t').forEach(t => { linkText += t.textContent; });
-            innerHtml += `<a href="#" style="color:#1a56db">${esc(linkText)}</a>`;
-            continue;
+    runs.forEach(function(run) {
+        if (run.localName === 'hyperlink') {
+            var linkText = '';
+            run.querySelectorAll('t').forEach(function(t){ linkText += t.textContent; });
+            innerHtml += '<a href="#" style="color:#1a56db">' + esc(linkText) + '</a>';
+            return;
         }
 
-        // Drawing / image
-        const drawing = run.querySelector('drawing');
-        if(drawing) {
-            const blip = drawing.querySelector('blip');
-            const rId  = blip?.getAttribute('r:embed') || blip?.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','embed');
-            if(rId && images[rId]) {
-                innerHtml += `<img src="${images[rId]}" style="max-width:100%;height:auto;display:block;margin:4px 0">`;
+        var drawing = run.querySelector('drawing');
+        if (drawing) {
+            var blip = drawing.querySelector('blip');
+            var rId  = blip && (blip.getAttribute('r:embed') || blip.getAttributeNS('http://schemas.openxmlformats.org/officeDocument/2006/relationships','embed'));
+            if (rId && images[rId]) {
+                innerHtml += '<img src="' + images[rId] + '" style="max-width:100%;height:auto;display:block;margin:4px 0">';
             }
-            continue;
+            return;
         }
 
-        // Text runs
-        const rPrEl = run.querySelector('rPr');
-        const bold   = rPrEl?.querySelector('b') ? 'font-weight:bold;' : '';
-        const italic = rPrEl?.querySelector('i') ? 'font-style:italic;' : '';
-        const under  = rPrEl?.querySelector('u') ? 'text-decoration:underline;' : '';
-        const szEl   = rPrEl?.querySelector('sz');
-        const fontSize = szEl ? `font-size:${parseInt(szEl.getAttribute('w:val'))/2}pt;` : '';
+        var rPrEl  = run.querySelector('rPr');
+        var bold   = (rPrEl && rPrEl.querySelector('b')) ? 'font-weight:bold;' : '';
+        var italic = (rPrEl && rPrEl.querySelector('i')) ? 'font-style:italic;' : '';
+        var under  = (rPrEl && rPrEl.querySelector('u')) ? 'text-decoration:underline;' : '';
+        var szEl   = rPrEl && rPrEl.querySelector('sz');
+        var fontSize = szEl ? 'font-size:' + (parseInt(szEl.getAttribute('w:val'))/2) + 'pt;' : '';
 
-        let txt = '';
-        run.querySelectorAll('t').forEach(t => {
-            const space = t.getAttribute('xml:space') === 'preserve' ? true : false;
-            txt += space ? t.textContent : t.textContent.trim();
+        var txt = '';
+        run.querySelectorAll('t').forEach(function(t) {
+            txt += (t.getAttribute('xml:space') === 'preserve') ? t.textContent : t.textContent.trim();
         });
+        run.querySelectorAll('br').forEach(function() { txt += '\n'; });
 
-        // Handle line breaks
-        run.querySelectorAll('br').forEach(() => { txt += '\n'; });
-
-        if(txt) {
-            const style = bold + italic + under + fontSize;
+        if (txt) {
+            var style = bold + italic + under + fontSize;
             txt = esc(txt).replace(/\n/g, '<br>');
-            innerHtml += style ? `<span style="${style}">${txt}</span>` : txt;
+            innerHtml += style ? '<span style="' + style + '">' + txt + '</span>' : txt;
         }
-    }
+    });
 
-    // Empty paragraph = line break
-    if(!innerHtml.trim()) return '<div style="height:6pt"></div>';
+    if (!innerHtml.trim()) return '<div style="height:6pt"></div>';
 
-    // Build numbering prefix
-    let prefix = '';
-    if(numId && numMap[numId]) {
-        if(counters[numId] === undefined) counters[numId] = numMap[numId].start - 1;
+    var prefix = '';
+    if (numId && numMap[numId]) {
+        if (counters[numId] === undefined) counters[numId] = numMap[numId].start - 1;
         counters[numId]++;
-        const formatted = formatNum(counters[numId], numMap[numId].fmt, numMap[numId].lvlText);
-        prefix = `<span style="display:inline-block;min-width:28px;margin-right:6px;font-weight:normal">${formatted}</span>`;
+        var formatted = formatNum(counters[numId], numMap[numId].fmt, numMap[numId].lvlText);
+        prefix = '<span style="display:inline-block;min-width:28px;margin-right:6px;font-weight:normal">' + formatted + '</span>';
     }
 
-    // Determine style based on content
-    const text = pNode.textContent.trim();
-    const isBold = pNode.querySelector('r > rPr > b') !== null;
-    const isHeading = styleId.toLowerCase().includes('heading') || (isBold && text.length < 120 && !numId);
+    var isBold = pNode.querySelector('r > rPr > b') !== null;
+    var text   = pNode.textContent.trim();
+    var pStyle = pPrEl && pPrEl.querySelector('pStyle');
+    var styleId = (pStyle && pStyle.getAttribute('w:val')) || '';
+    var isHeading = styleId.toLowerCase().includes('heading') || (isBold && text.length < 120 && !numId);
 
-    let paraStyle = `margin:0 0 4pt 0; padding:0;`;
-    if(leftInd > 0) paraStyle += `padding-left:${Math.round(leftInd/20)}pt;`;
-    if(isHeading && !numId) paraStyle += `font-weight:bold;`;
+    var paraStyle = 'margin:0 0 4pt 0;padding:0;';
+    if (leftInd > 0) paraStyle += 'padding-left:' + Math.round(leftInd/20) + 'pt;';
+    if (isHeading && !numId) paraStyle += 'font-weight:bold;';
 
-    return `<div style="${paraStyle}">${prefix}${innerHtml}</div>`;
+    return '<div style="' + paraStyle + '">' + prefix + innerHtml + '</div>';
 }
 
-/* ── Parse a table ── */
 function parseTable(tblNode, numMap, counters, images) {
-    let html = '<table style="border-collapse:collapse;width:100%;margin:6pt 0;font-size:11pt">';
-    tblNode.querySelectorAll('tr').forEach(tr => {
+    var html = '<table style="border-collapse:collapse;width:100%;margin:6pt 0;font-size:11pt">';
+    tblNode.querySelectorAll('tr').forEach(function(tr) {
         html += '<tr>';
-        tr.querySelectorAll('tc').forEach(tc => {
-            let cellHtml = '';
-            tc.querySelectorAll('p').forEach(p => {
+        tr.querySelectorAll('tc').forEach(function(tc) {
+            var cellHtml = '';
+            tc.querySelectorAll('p').forEach(function(p) {
                 cellHtml += parseParagraph(p, numMap, counters, images);
             });
-            html += `<td style="border:1px solid #999;padding:4pt 6pt;vertical-align:top">${cellHtml}</td>`;
+            html += '<td style="border:1px solid #999;padding:4pt 6pt;vertical-align:top">' + cellHtml + '</td>';
         });
         html += '</tr>';
     });
@@ -871,145 +833,113 @@ function parseTable(tblNode, numMap, counters, images) {
     return html;
 }
 
-/* ── Escape HTML ── */
 function esc(str) {
     return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 }
 
-/* ── Build preview in docxStage ── */
 function buildPreview(html) {
     docxStage.style.cssText = 'background:#525659;padding:20px;min-height:120px;max-height:500px;overflow-y:auto;';
     docxStage.innerHTML = '';
-
-    // Show as single A4-like page in preview (scaled)
-    const wrapper = document.createElement('div');
-    wrapper.style.cssText = `
-        width:397px; margin:0 auto;
-        background:#fff;
-        box-shadow:0 4px 20px rgba(0,0,0,.5);
-        padding:36px 40px;
-        font-family:'Times New Roman',Georgia,serif;
-        font-size:12pt; line-height:1.6; color:#000;
-        min-height:562px;
-    `;
+    var wrapper = document.createElement('div');
+    wrapper.style.cssText = 'width:397px;margin:0 auto;background:#fff;box-shadow:0 4px 20px rgba(0,0,0,.5);padding:36px 40px;font-family:"Times New Roman",Georgia,serif;font-size:12pt;line-height:1.6;color:#000;min-height:562px;';
     wrapper.innerHTML = html;
     docxStage.appendChild(wrapper);
 }
 
 /* ── Convert to PDF ── */
-convertBtn.addEventListener('click', async () => {
-    if(!selFile || !parsedHtml) return;
+convertBtn.addEventListener('click', async function() {
+    if (!selFile || !parsedHtml) return;
     convertBtn.disabled = true;
     convertBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Converting…';
     convProgress.classList.remove('hidden');
     convFill.style.width = '5%';
-    convMsg.textContent = 'Preparing pages…';
+    convMsg.textContent  = 'Preparing pages…';
 
     try {
-        const {jsPDF} = window.jspdf;
+        var jsPDF    = window.jspdf.jsPDF;
+        var SCALE    = 2;
+        var outSize  = getOutputPageSize();
+        var PGW      = outSize.wPx;
+        var PGH      = outSize.hPx;
+        var PGW_MM   = outSize.wMM;
+        var PGH_MM   = outSize.hMM;
+        var PAD_TOP  = Math.round(PGH * 0.064);
+        var PAD_SIDE = Math.round(PGW * 0.101);
 
-        const SCALE   = 2;
-        const outSize = getOutputPageSize();   // user selected or auto-detected
-        const PGW     = outSize.wPx;
-        const PGH     = outSize.hPx;
-        const PGW_MM  = outSize.wMM;
-        const PGH_MM  = outSize.hMM;
-        const PAD_TOP = Math.round(PGH * 0.064);   // ~72px on A4
-        const PAD_SIDE= Math.round(PGW * 0.101);   // ~80px on A4
+        convMsg.textContent = 'Detected: ' + pageSize.name + ' (' + PGW_MM + '×' + PGH_MM + 'mm)';
 
-        convMsg.textContent = `Detected: ${pageSize.name} (${PGW_MM}×${PGH_MM}mm)`;
-
-        // ── Step 1: Render full document into hidden div ──
-        const renderDiv = document.createElement('div');
-        renderDiv.style.cssText = `
-            position:fixed; top:-9999999px; left:0;
-            width:${PGW}px;
-            font-family:'Times New Roman',Georgia,serif;
-            font-size:12pt; line-height:1.6; color:#000;
-            background:#fff;
-            padding:${PAD_TOP}px ${PAD_SIDE}px;
-            box-sizing:border-box;
-        `;
+        var renderDiv = document.createElement('div');
+        renderDiv.style.cssText =
+            'position:fixed;top:-9999999px;left:0;' +
+            'width:' + PGW + 'px;' +
+            'font-family:"Times New Roman",Georgia,serif;' +
+            'font-size:12pt;line-height:1.6;color:#000;background:#fff;' +
+            'padding:' + PAD_TOP + 'px ' + PAD_SIDE + 'px;' +
+            'box-sizing:border-box;';
         renderDiv.innerHTML = parsedHtml;
         document.body.appendChild(renderDiv);
-        await sleep(500); // let fonts/images settle
+        await sleep(500);
 
-        const totalH   = renderDiv.scrollHeight;
-        const numPages = Math.max(1, Math.ceil(totalH / PGH));
+        var totalH   = renderDiv.scrollHeight;
+        var numPages = Math.max(1, Math.ceil(totalH / PGH));
 
-        convMsg.textContent = `Capturing document (${numPages} pages)…`;
+        convMsg.textContent  = 'Capturing document (' + numPages + ' pages)…';
         convFill.style.width = '15%';
 
-        // ── Step 2: Capture ENTIRE document as one big canvas ──
-        const fullCanvas = await html2canvas(renderDiv, {
-            scale: SCALE,
-            useCORS: true,
-            allowTaint: true,
-            backgroundColor: '#ffffff',
-            logging: false,
-            width: PGW,
-            height: totalH,
-            scrollX: 0,
-            scrollY: 0,
-            windowWidth: PGW,
-            windowHeight: totalH
+        var fullCanvas = await html2canvas(renderDiv, {
+            scale: SCALE, useCORS: true, allowTaint: true,
+            backgroundColor: '#ffffff', logging: false,
+            width: PGW, height: totalH,
+            scrollX: 0, scrollY: 0,
+            windowWidth: PGW, windowHeight: totalH
         });
-
         renderDiv.remove();
         convFill.style.width = '60%';
 
-        // ── Step 3: Slice canvas into A4 pages & add to PDF ──
-        const pdf        = new jsPDF({unit:'mm', format:[PGW_MM, PGH_MM], compress:true});
-        const sliceH     = PGH * SCALE;   // height of one page in canvas pixels
-        const canvasW    = fullCanvas.width;
-        const canvasH    = fullCanvas.height;
+        var pdf      = new jsPDF({unit:'mm', format:[PGW_MM, PGH_MM], compress:true});
+        var sliceH   = PGH * SCALE;
+        var canvasW  = fullCanvas.width;
+        var canvasH  = fullCanvas.height;
 
-        for(let i = 0; i < numPages; i++) {
+        for (var i = 0; i < numPages; i++) {
             convFill.style.width = Math.round(60 + (i/numPages)*35) + '%';
-            convMsg.textContent  = `Building page ${i+1} of ${numPages}…`;
+            convMsg.textContent  = 'Building page ' + (i+1) + ' of ' + numPages + '…';
 
-            // Create a temporary canvas for this one page slice
-            const pageCanvas = document.createElement('canvas');
-            pageCanvas.width  = canvasW;
-            pageCanvas.height = sliceH;
-
-            const ctx   = pageCanvas.getContext('2d');
-            ctx.fillStyle = '#ffffff';
+            var pageCanvas      = document.createElement('canvas');
+            pageCanvas.width    = canvasW;
+            pageCanvas.height   = sliceH;
+            var ctx             = pageCanvas.getContext('2d');
+            ctx.fillStyle       = '#ffffff';
             ctx.fillRect(0, 0, canvasW, sliceH);
 
-            // Draw the correct slice from fullCanvas
-            const srcY      = i * sliceH;
-            const srcHeight = Math.min(sliceH, canvasH - srcY); // last page may be shorter
-
-            if(srcHeight > 0) {
-                ctx.drawImage(
-                    fullCanvas,
-                    0, srcY,          // source x, y
-                    canvasW, srcHeight, // source w, h
-                    0, 0,             // dest x, y
-                    canvasW, srcHeight  // dest w, h
-                );
+            var srcY      = i * sliceH;
+            var srcHeight = Math.min(sliceH, canvasH - srcY);
+            if (srcHeight > 0) {
+                ctx.drawImage(fullCanvas, 0, srcY, canvasW, srcHeight, 0, 0, canvasW, srcHeight);
             }
 
-            const imgData = pageCanvas.toDataURL('image/jpeg', 0.92);
-            if(i > 0) pdf.addPage();
+            var imgData = pageCanvas.toDataURL('image/jpeg', 0.92);
+            if (i > 0) pdf.addPage();
             pdf.addImage(imgData, 'JPEG', 0, 0, PGW_MM, PGH_MM, '', 'FAST');
             await sleep(10);
         }
 
         convFill.style.width = '100%';
-        convMsg.textContent = 'Done!';
+        convMsg.textContent  = 'Done!';
         await sleep(300);
 
-        const outName = selFile.name.replace(/\.(docx|doc)$/i,'') + '.pdf';
-        const blob    = pdf.output('blob');
-        const url     = URL.createObjectURL(blob);
+        var outName = selFile.name.replace(/\.(docx|doc)$/i,'') + '.pdf';
+        var blob    = pdf.output('blob');
+        var url     = URL.createObjectURL(blob);
 
         show('Success');
         sucName.textContent = outName + ' — ' + fmt(blob.size);
-        dlBtn.onclick = () => {
-            const a = document.createElement('a');
-            a.href = url; a.download = outName; a.click();
+        dlBtn.onclick = function() {
+            var a = document.createElement('a');
+            a.href = url; a.download = outName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
         };
         stageSuccess.scrollIntoView({behavior:'smooth', block:'center'});
 
@@ -1026,26 +956,29 @@ convertBtn.addEventListener('click', async () => {
 
 /* ── Reset ── */
 function resetAll() {
-    selFile = null; parsedHtml = ''; fileInput.value = '';
+    selFile = null; parsedHtml = '';
+    try { fileInput.value = ''; } catch(ex){}
     selectedOutputSize = 'auto';
     selectPageSize('auto');
     docxStage.innerHTML = '';
     convProgress.classList.add('hidden');
     convertBtn.disabled = false;
     convertBtn.innerHTML = '<i class="fas fa-file-pdf text-xl"></i> Convert to PDF';
-    hideErr(); show('Upload');
+    hideErr();
+    show('Upload');
     window.scrollTo({top:0,behavior:'smooth'});
 }
 </script>
-    <!-- Service Worker -->
-    <script>
-      if ('serviceWorker' in navigator) {
+
+<!-- Service Worker -->
+<script>
+    if ('serviceWorker' in navigator) {
         window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js')
-            .then(function(reg) { console.log('SW registered'); })
-            .catch(function(err) { console.log('SW error:', err); });
+            navigator.serviceWorker.register('/sw.js')
+                .then(function() { console.log('SW registered'); })
+                .catch(function(err) { console.log('SW error:', err); });
         });
-      }
-    </script>
+    }
+</script>
 </body>
 </html>
