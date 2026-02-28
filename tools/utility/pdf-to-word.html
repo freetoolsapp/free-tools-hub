@@ -177,8 +177,8 @@
                             <i class="fas fa-eye text-blue-600 mr-2"></i>
                             Preview
                         </h3>
-                        <div class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 max-h-96 overflow-auto">
-                            <img id="previewImg" class="max-w-full rounded-lg mx-auto" alt="Preview">
+                        <div class="bg-gray-50 rounded-lg p-4 border-2 border-gray-200 max-h-96 overflow-auto" id="previewContainer">
+                            <!-- preview inserted here dynamically -->
                         </div>
                     </div>
 
@@ -382,9 +382,9 @@
         });
 
         // ── File upload ──
-        var dropZone     = document.getElementById('dropZone');
-        var uploadSection= document.getElementById('uploadSection');
-        var fileInput    = document.getElementById('fileInput');
+        var dropZone      = document.getElementById('dropZone');
+        var uploadSection = document.getElementById('uploadSection');
+        var fileInput     = document.getElementById('fileInput');
 
         // Prevent default drag behaviors
         ['dragenter','dragover','dragleave','drop'].forEach(function(ev) {
@@ -408,18 +408,16 @@
         });
 
         // Drop
-        function handleDrop(e) {
+        dropZone.addEventListener('drop', function(e) {
             var files = e.dataTransfer && e.dataTransfer.files;
-            if (files && files.length > 0) processFile(files[0], files[0].name);
-        }
-        dropZone.addEventListener('drop', handleDrop);
-        document.body.addEventListener('drop', handleDrop);
+            if (files && files.length > 0) processFile(files[0]);
+        });
 
-        // ── FILE INPUT CHANGE — main mobile trigger ──
+        // ── FILE INPUT CHANGE — main trigger ──
         fileInput.addEventListener('change', function(e) {
             var file = e.target.files && e.target.files[0];
             if (file) {
-                processFile(file, file.name);
+                processFile(file);
                 try { fileInput.value = ''; } catch(ex) {}
             }
         });
@@ -432,60 +430,100 @@
                 if (items[i].type.indexOf('image') !== -1) {
                     e.preventDefault();
                     var blob = items[i].getAsFile();
-                    var fn   = 'Pasted_Image_' + new Date().toLocaleTimeString().replace(/:/g,'-') + '.png';
-                    processFile(blob, fn);
+                    processFile(blob);
                     return;
                 }
             }
         });
 
-        async function processFile(file, fileName) {
-            // Validate file
-            if (!file.type.includes('pdf') && !file.type.includes('image')) {
+        // ── Detect file type robustly (name extension fallback) ──
+        function getFileType(file) {
+            if (file.type === 'application/pdf') return 'pdf';
+            if (file.type && file.type.startsWith('image/')) return 'image';
+            // Fallback to extension
+            var name = (file.name || '').toLowerCase();
+            if (name.endsWith('.pdf')) return 'pdf';
+            if (name.endsWith('.jpg') || name.endsWith('.jpeg') ||
+                name.endsWith('.png') || name.endsWith('.gif') ||
+                name.endsWith('.bmp') || name.endsWith('.webp')) return 'image';
+            return null;
+        }
+
+        async function processFile(file) {
+            var fileType = getFileType(file);
+
+            if (!fileType) {
                 alert('❌ Please upload a PDF or image file (JPG, PNG, JPEG)');
                 return;
             }
 
-            // Check file size (max 100MB)
             if (file.size > 100 * 1024 * 1024) {
                 alert('❌ File too large! Please upload a file smaller than 100MB');
                 return;
             }
 
-            // Show file info
-            document.getElementById('fileName').textContent = fileName;
+            // Show file name
+            document.getElementById('fileName').textContent = file.name || 'Uploaded File';
             document.getElementById('fileInfo').classList.remove('hidden');
-            
-            // Show processing
+
+            // Show processing, hide results
             document.getElementById('processing').classList.remove('hidden');
             document.getElementById('results').classList.add('hidden');
+            updateProgress(0);
 
-            // Show preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('previewImg').src = e.target.result;
-            };
-            reader.readAsDataURL(file);
-            
+            // ── Show preview ──
+            var previewContainer = document.getElementById('previewContainer');
+            previewContainer.innerHTML = ''; // clear old preview
+
             try {
                 let text = '';
-                
-                if (file.type === 'application/pdf') {
+
+                if (fileType === 'pdf') {
                     document.getElementById('processingMsg').textContent = '📄 Extracting PDF with formatting...';
-                    text = await extractFromPDF(file);
-                } else if (file.type.startsWith('image/')) {
+
+                    // For PDF preview: render page 1 to canvas → image
+                    var arrayBuffer = await file.arrayBuffer();
+                    var pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+
+                    // Render page 1 preview
+                    var page1 = await pdf.getPage(1);
+                    var viewport = page1.getViewport({scale: 1.0});
+                    var canvas = document.createElement('canvas');
+                    canvas.width  = viewport.width;
+                    canvas.height = viewport.height;
+                    canvas.style.maxWidth = '100%';
+                    canvas.style.borderRadius = '8px';
+                    await page1.render({canvasContext: canvas.getContext('2d'), viewport: viewport}).promise;
+                    previewContainer.appendChild(canvas);
+
+                    // Extract text from all pages
+                    text = await extractTextFromPDF(pdf);
+
+                } else {
                     document.getElementById('processingMsg').textContent = '🔍 Performing OCR with structure detection...';
+
+                    // Show image preview
+                    var img = document.createElement('img');
+                    img.style.maxWidth = '100%';
+                    img.style.borderRadius = '8px';
+                    img.style.display = 'block';
+                    img.style.margin = '0 auto';
+                    var imgURL = URL.createObjectURL(file);
+                    img.src = imgURL;
+                    previewContainer.appendChild(img);
+
                     text = await extractFromImage(file);
+                    URL.revokeObjectURL(imgURL);
                 }
-                
+
                 currentText = text;
                 document.getElementById('extractedText').value = text;
                 document.getElementById('processing').classList.add('hidden');
                 document.getElementById('results').classList.remove('hidden');
-                
-                // Scroll to results
+                updateProgress(100);
+
                 document.getElementById('results').scrollIntoView({ behavior: 'smooth', block: 'start' });
-                
+
             } catch (error) {
                 alert('❌ Error: ' + error.message + '\n\nPlease try again with a different file.');
                 document.getElementById('processing').classList.add('hidden');
@@ -493,56 +531,96 @@
             }
         }
 
+        // ── Extract text from already-loaded PDF object ──
+        async function extractTextFromPDF(pdf) {
+            let fullText = '';
+
+            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                const page = await pdf.getPage(pageNum);
+                const textContent = await page.getTextContent();
+                const lines = {};
+
+                textContent.items.forEach(function(item) {
+                    var y = Math.round(item.transform[5]);
+                    if (!lines[y]) lines[y] = [];
+                    lines[y].push({ text: item.str, x: item.transform[4] });
+                });
+
+                var sortedY = Object.keys(lines).sort(function(a, b) { return b - a; });
+                var lastY = null;
+                var pageText = '';
+
+                sortedY.forEach(function(y) {
+                    lines[y].sort(function(a, b) { return a.x - b.x; });
+                    var lineText = lines[y].map(function(i) { return i.text; }).join(' ').trim();
+                    if (lineText) {
+                        if (lastY !== null && (lastY - y) > 20) {
+                            pageText += '\n\n';
+                        }
+                        pageText += lineText + '\n';
+                        lastY = parseInt(y);
+                    }
+                });
+
+                fullText += pageText;
+                if (pageNum < pdf.numPages) {
+                    fullText += '\n\n--- Page ' + (pageNum + 1) + ' ---\n\n';
+                }
+
+                updateProgress(Math.round((pageNum / pdf.numPages) * 100));
+            }
+
+            return fullText;
+        }
+
+        // ── Image OCR ──
         async function extractFromImage(file) {
-            return new Promise((resolve, reject) => {
-                const img = new Image();
-                const reader = new FileReader();
-                
+            return new Promise(function(resolve, reject) {
+                var img = new Image();
+                var reader = new FileReader();
+
                 reader.onload = function(e) {
                     img.src = e.target.result;
                     img.onload = async function() {
                         try {
-                            const canvas = document.createElement('canvas');
-                            const ctx = canvas.getContext('2d');
-                            
-                            let width = img.width;
-                            let height = img.height;
-                            const maxWidth = 2400;
-                            
+                            var canvas = document.createElement('canvas');
+                            var ctx = canvas.getContext('2d');
+                            var width = img.width;
+                            var height = img.height;
+                            var maxWidth = 2400;
+
                             if (width > maxWidth) {
-                                height = (height * maxWidth) / width;
+                                height = Math.round((height * maxWidth) / width);
                                 width = maxWidth;
                             }
-                            
-                            canvas.width = width;
+
+                            canvas.width  = width;
                             canvas.height = height;
                             ctx.filter = 'contrast(1.3) brightness(1.1)';
                             ctx.drawImage(img, 0, 0, width, height);
-                            
+
                             updateProgress(10);
-                            
-                            const result = await Tesseract.recognize(
+
+                            var result = await Tesseract.recognize(
                                 canvas,
                                 'eng',
                                 {
                                     logger: function(m) {
                                         if (m.status === 'recognizing text') {
-                                            const progress = 10 + Math.round(m.progress * 90);
-                                            updateProgress(progress);
+                                            updateProgress(10 + Math.round(m.progress * 85));
                                         }
-                                    },
-                                    tessedit_pageseg_mode: Tesseract.PSM.AUTO
+                                    }
                                 }
                             );
-                            
-                            const lines = result.data.lines;
-                            let formattedText = '';
-                            let lastY = 0;
-                            
-                            lines.forEach((line, index) => {
-                                const lineText = line.text.trim();
+
+                            var lines = result.data.lines;
+                            var formattedText = '';
+                            var lastY = 0;
+
+                            lines.forEach(function(line, index) {
+                                var lineText = line.text.trim();
                                 if (lineText) {
-                                    const currentY = line.bbox.y0;
+                                    var currentY = line.bbox.y0;
                                     if (index > 0 && (currentY - lastY) > 50) {
                                         formattedText += '\n\n';
                                     }
@@ -550,163 +628,89 @@
                                     lastY = line.bbox.y1;
                                 }
                             });
-                            
+
                             resolve(formattedText);
-                        } catch (error) {
-                            reject(error);
+                        } catch (err) {
+                            reject(err);
                         }
                     };
+                    img.onerror = function() { reject(new Error('Image load failed')); };
                 };
-                
+                reader.onerror = function() { reject(new Error('File read failed')); };
                 reader.readAsDataURL(file);
             });
         }
 
-        async function extractFromPDF(file) {
-            const arrayBuffer = await file.arrayBuffer();
-            const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
-            let fullText = '';
-            
-            for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
-                const page = await pdf.getPage(pageNum);
-                const textContent = await page.getTextContent();
-                const lines = {};
-                
-                textContent.items.forEach(item => {
-                    const y = Math.round(item.transform[5]);
-                    if (!lines[y]) {
-                        lines[y] = [];
-                    }
-                    lines[y].push({
-                        text: item.str,
-                        x: item.transform[4]
-                    });
-                });
-                
-                const sortedY = Object.keys(lines).sort((a, b) => b - a);
-                let lastY = null;
-                let pageText = '';
-                
-                sortedY.forEach(y => {
-                    lines[y].sort((a, b) => a.x - b.x);
-                    const lineText = lines[y].map(item => item.text).join(' ').trim();
-                    
-                    if (lineText) {
-                        if (lastY && (lastY - y) > 20) {
-                            pageText += '\n\n';
-                        }
-                        pageText += lineText + '\n';
-                        lastY = y;
-                    }
-                });
-                
-                fullText += pageText;
-                
-                if (pageNum < pdf.numPages) {
-                    fullText += '\n\n--- Page ' + (pageNum + 1) + ' ---\n\n';
-                }
-                
-                const progress = Math.round((pageNum / pdf.numPages) * 100);
-                updateProgress(progress);
-            }
-            
-            return fullText;
-        }
-
         function updateProgress(percent) {
-            const fill = document.getElementById('progressFill');
+            var fill = document.getElementById('progressFill');
             fill.style.width = percent + '%';
             fill.textContent = percent + '%';
         }
 
         function copyText() {
-            const text = document.getElementById('extractedText').value;
+            var text = document.getElementById('extractedText').value;
+            if (!text.trim()) { alert('❌ No text to copy!'); return; }
             navigator.clipboard.writeText(text).then(function() {
-                alert('✅ Text copied successfully!\n\n📋 Formatting preserved - Paste in Word with Ctrl+V');
-            }).catch(function(err) {
-                alert('❌ Failed to copy text. Please select and copy manually.');
+                alert('✅ Text copied successfully!\n\n📋 Paste in Word with Ctrl+V');
+            }).catch(function() {
+                // Fallback for older browsers
+                var ta = document.getElementById('extractedText');
+                ta.select();
+                document.execCommand('copy');
+                alert('✅ Text copied!');
             });
         }
 
         function downloadWordDoc() {
-            const text = document.getElementById('extractedText').value;
-            
-            if (!text.trim()) {
-                alert('❌ No text to download!');
-                return;
-            }
-            
-            const paragraphs = text.split('\n\n').map(para => {
-                const lines = para.split('\n').filter(line => line.trim());
-                return lines.map(line => `<p>${escapeHtml(line.trim())}</p>`).join('\n');
+            var text = document.getElementById('extractedText').value;
+            if (!text.trim()) { alert('❌ No text to download!'); return; }
+
+            var paragraphs = text.split('\n\n').map(function(para) {
+                var lines = para.split('\n').filter(function(l) { return l.trim(); });
+                return lines.map(function(line) {
+                    return '<p>' + escapeHtml(line.trim()) + '</p>';
+                }).join('\n');
             }).join('\n');
-            
-            const htmlContent = `
-<html xmlns:o='urn:schemas-microsoft-com:office:office' 
-      xmlns:w='urn:schemas-microsoft-com:office:word' 
-      xmlns='http://www.w3.org/TR/REC-html40'>
-<head>
-    <meta charset='utf-8'>
-    <title>Extracted Text</title>
-    <!--[if gte mso 9]>
-    <xml>
-        <w:WordDocument>
-            <w:View>Print</w:View>
-            <w:Zoom>100</w:Zoom>
-            <w:DoNotOptimizeForBrowser/>
-        </w:WordDocument>
-    </xml>
-    <![endif]-->
-    <style>
-        body {
-            font-family: 'Calibri', 'Arial', sans-serif;
-            font-size: 11pt;
-            line-height: 1.5;
-            margin: 1in;
-        }
-        p {
-            margin: 0 0 10pt 0;
-            text-align: justify;
-        }
-    </style>
-</head>
-<body>
-${paragraphs}
-    <!-- Service Worker -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', function() {
-          navigator.serviceWorker.register('/sw.js')
-            .then(function(reg) { console.log('SW registered'); })
-            .catch(function(err) { console.log('SW error:', err); });
-        });
-      }
-    </script>
-</body>
-</html>`;
-            
-            const blob = new Blob(['\ufeff', htmlContent], {
-                type: 'application/msword'
-            });
-            
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement('a');
+
+            var htmlContent = "<!DOCTYPE html>\n" +
+"<html xmlns:o='urn:schemas-microsoft-com:office:office'\n" +
+"      xmlns:w='urn:schemas-microsoft-com:office:word'\n" +
+"      xmlns='http://www.w3.org/TR/REC-html40'>\n" +
+"<head><meta charset='utf-8'><title>Extracted Text</title>\n" +
+"<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View>" +
+"<w:Zoom>100</w:Zoom><w:DoNotOptimizeForBrowser/></w:WordDocument></xml><![endif]-->\n" +
+"<style>body{font-family:'Calibri','Arial',sans-serif;font-size:11pt;line-height:1.5;margin:1in;}" +
+"p{margin:0 0 10pt 0;text-align:justify;}</style></head>\n" +
+"<body>\n" + paragraphs + "\n</body></html>";
+
+            var blob = new Blob(['\ufeff', htmlContent], { type: 'application/msword' });
+            var url  = URL.createObjectURL(blob);
+            var link = document.createElement('a');
             link.href = url;
-            link.download = 'extracted_formatted_' + new Date().getTime() + '.doc';
+            link.download = 'extracted_' + Date.now() + '.doc';
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
             URL.revokeObjectURL(url);
-            
-            setTimeout(() => {
-                alert('✅ Word Document downloaded!\n\n📝 Formatting preserved:\n• Paragraphs intact\n• Line breaks maintained\n• Numbers & structure preserved\n\n💡 Open with Microsoft Word for best results');
+
+            setTimeout(function() {
+                alert('✅ Word Document downloaded!\n\n💡 Open with Microsoft Word for best results');
             }, 500);
         }
 
         function escapeHtml(text) {
-            const div = document.createElement('div');
+            var div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
+        }
+
+        // Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(function() { console.log('SW registered'); })
+                    .catch(function(err) { console.log('SW error:', err); });
+            });
         }
     </script>
 </body>
