@@ -129,31 +129,10 @@ const headerHTML = `
 
         <div class="fth-ni">
             <span class="fth-nl"><i class="fas fa-graduation-cap fth-i"></i> Education <i class="fas fa-chevron-down fth-ch"></i></span>
-            <div class="fth-mega fth-mega4 fth-mega-center">
-                <div>
-                    <div class="fth-mcol-title"><i class="fas fa-book-open"></i> School</div>
-                    <a href="${base}matric.html" class="fth-ddi"><i class="fas fa-book-open"></i> Matric (Class 9-10)</a>
-                    <a href="${base}fsc.html" class="fth-ddi"><i class="fas fa-graduation-cap"></i> FSc / ICS (11-12)</a>
-                    <a href="${base}past-papers.html" class="fth-ddi"><i class="fas fa-file-pdf"></i> Past Papers</a>
-                </div>
-                <div>
-                    <div class="fth-mcol-title"><i class="fas fa-award"></i> Competitive</div>
-                    <a href="${base}css.html" class="fth-ddi"><i class="fas fa-award"></i> CSS Preparation</a>
-                    <a href="${base}pms.html" class="fth-ddi"><i class="fas fa-trophy"></i> PMS Preparation</a>
-                    <a href="${base}fpsc.html" class="fth-ddi"><i class="fas fa-briefcase"></i> FPSC Materials</a>
-                </div>
-                <div>
-                    <div class="fth-mcol-title"><i class="fas fa-university"></i> University</div>
-                    <a href="${base}education.html" class="fth-ddi"><i class="fas fa-flask"></i> MDCAT / ECAT</a>
-                    <a href="${base}education.html" class="fth-ddi"><i class="fas fa-laptop-code"></i> IT Resources</a>
-                    <a href="${base}education.html" class="fth-ddi"><i class="fas fa-calculator"></i> Math / Science</a>
-                </div>
-                <div>
-                    <div class="fth-mcol-title"><i class="fas fa-tools"></i> Study Tools</div>
-                    <a href="${base}tools/student/gpa-calculator.html" class="fth-ddi"><i class="fas fa-calculator"></i> GPA Calculator</a>
-                    <a href="${base}tools/student/plagiarism-checker.html" class="fth-ddi"><i class="fas fa-shield-alt"></i> Plagiarism Checker</a>
-                    <a href="${base}education.html" class="fth-dda"><i class="fas fa-arrow-right"></i> All Materials</a>
-                </div>
+            <div class="fth-drop">
+                <a href="${base}ppsc.html" class="fth-ddi"><i class="fas fa-book-open"></i> PPSC Study Material <span class="fth-badge fth-new">NEW</span></a>
+                <div class="fth-sep"></div>
+                <a href="${base}ppsc.html" class="fth-dda"><i class="fas fa-arrow-right"></i> View All Materials</a>
             </div>
         </div>
 
@@ -214,11 +193,7 @@ const headerHTML = `
     <div class="fth-mni">
         <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-graduation-cap fth-i"></i> Education</span><i class="fas fa-chevron-down fth-mch"></i></button>
         <div class="fth-msub">
-            <a href="${base}matric.html"><i class="fas fa-book-open"></i> Matric</a>
-            <a href="${base}fsc.html"><i class="fas fa-graduation-cap"></i> FSc / ICS</a>
-            <a href="${base}css.html"><i class="fas fa-award"></i> CSS Prep</a>
-            <a href="${base}past-papers.html"><i class="fas fa-file-pdf"></i> Past Papers</a>
-            <a href="${base}education.html"><i class="fas fa-arrow-right"></i> All Materials</a>
+            <a href="${base}ppsc.html"><i class="fas fa-book-open"></i> PPSC Study Material</a>
         </div>
     </div>
     <div class="fth-mni">
