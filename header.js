@@ -96,7 +96,6 @@ const headerHTML = `
                     <div class="fth-mcol-title"><i class="fas fa-file-pdf"></i> PDF Tools</div>
                     <a href="${base}tools/utility/pdf-to-word.html" class="fth-ddi"><i class="fas fa-exchange-alt"></i> PDF to Word <span class="fth-badge fth-hot">HOT</span></a>
                     <a href="${base}tools/utility/pdf-pages-delete.html" class="fth-ddi"><i class="fas fa-file-minus"></i> Delete PDF Pages</a>
-                    <a href="${base}tools/utility/word-to-pdf-converter.html" class="fth-ddi"><i class="fas fa-file-export"></i> Word to PDF</a>
                     <a href="${base}tools/utility/bmi-calculator.html" class="fth-ddi"><i class="fas fa-heartbeat"></i> BMI Calculator</a>
                 </div>
                 <div>
@@ -177,7 +176,6 @@ const headerHTML = `
         <button class="fth-mnl" onclick="fthToggle(this)"><span class="fth-mni-in"><i class="fas fa-tools fth-i"></i> Free Tools</span><i class="fas fa-chevron-down fth-mch"></i></button>
         <div class="fth-msub">
             <a href="${base}tools/utility/pdf-to-word.html"><i class="fas fa-exchange-alt"></i> PDF to Word</a>
-            <a href="${base}tools/utility/word-to-pdf-converter.html"><i class="fas fa-file-export"></i> Word to PDF</a>
             <a href="${base}tools/seo/meta-description-generator.html"><i class="fas fa-tags"></i> Meta Description</a>
             <a href="${base}tools/design/image-resizer.html"><i class="fas fa-expand-arrows-alt"></i> Image Resizer</a>
             <a href="${base}tools/student/gpa-calculator.html"><i class="fas fa-calculator"></i> GPA Calculator</a>
