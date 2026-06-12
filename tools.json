@@ -10,24 +10,6 @@
       "description": "Convert PDF files and IMAGES to editable Word documents"
     },
     {
-      "name": "Word to PDF Converter",
-      "icon": "fa-file-pdf",
-      "color": "blue",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/word-to-pdf-converter.html",
-      "description": "Convert WORD files and Documents to PDF documents"
-    },
-    {
-      "name": "Duplicate PDF Pages",
-      "icon": "fa-copy",
-      "color": "green",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/pdf-duplicate.html",
-      "description": "Make duplicate of your PDF pages"
-    },
-    {
       "name": "Delete PDF Pages",
       "icon": "fa-trash-alt",
       "color": "red",
@@ -37,105 +19,6 @@
       "description": "Delete any page in your PDF documents"
     },
     {
-      "name": "PDF Crop",
-      "icon": "fa-crop",
-      "color": "orange",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/crop-pdf-pages.html",
-      "description": "Crop any part or page of your PDF documents"
-    },
-    {
-      "name": "Re-arrange PDF Pages",
-      "icon": "fa-sort",
-      "color": "purple",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/reorder-pdf-pages.html",
-      "description": "Re-arrange or reorder pages in your PDF documents"
-    },
-    {
-      "name": "Rotate PDF Pages",
-      "icon": "fa-sync-alt",
-      "color": "blue",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/rotate-pdf-pages.html",
-      "description": "Rotate pages in your PDF documents"
-    },
-    {
-      "name": "JPG/PNG to PDF",
-      "icon": "fa-file-pdf",
-      "color": "blue",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/jpg-to-pdf.html",
-      "description": "Convert any images to PDF documents"
-    },
-    {
-      "name": "PDF to JPG Converter",
-      "icon": "fa-file-image",
-      "color": "orange",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/pdf-to-jpg.html",
-      "description": "Convert PDF documents to images"
-    },
-    {
-      "name": "Website to PDF",
-      "icon": "fa-globe",
-      "color": "purple",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/website-to-pdf.html",
-      "description": "Convert any website to PDF"
-    },
-    {
-      "name": "Excel to PDF",
-      "icon": "fa-file-excel",
-      "color": "green",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/excel-to-pdf.html",
-      "description": "Convert Excel files to PDF"
-    },
-    {
-      "name": "PowerPoint to PDF",
-      "icon": "fa-file-powerpoint",
-      "color": "red",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/powerpoint-to-pdf.html",
-      "description": "Convert PowerPoint to PDF"
-    },
-    {
-      "name": "Resume Builder",
-      "icon": "fa-file-alt",
-      "color": "indigo",
-      "category": "utility",
-      "badge": "POPULAR",
-      "file": "tools/utility/resume-builder.html",
-      "description": "Create professional ATS-friendly resumes"
-    },
-    {
-      "name": "Word Counter",
-      "icon": "fa-hashtag",
-      "color": "blue",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/word-counter.html",
-      "description": "Count words, characters, sentences instantly"
-    },
-    {
-      "name": "Age Calculator",
-      "icon": "fa-birthday-cake",
-      "color": "pink",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/age-calculator.html",
-      "description": "Calculate your exact age"
-    },
-    {
       "name": "BMI Calculator",
       "icon": "fa-weight",
       "color": "green",
@@ -143,24 +26,6 @@
       "badge": "NEW",
       "file": "tools/utility/bmi-calculator.html",
       "description": "Calculate your Body Mass Index"
-    },
-    {
-      "name": "QR Code Generator",
-      "icon": "fa-qrcode",
-      "color": "blue",
-      "category": "utility",
-      "badge": "HOT",
-      "file": "tools/utility/qrcode-generator.html",
-      "description": "Create QR codes instantly"
-    },
-    {
-      "name": "Password Generator",
-      "icon": "fa-key",
-      "color": "red",
-      "category": "utility",
-      "badge": "NEW",
-      "file": "tools/utility/password-generator.html",
-      "description": "Generate strong passwords"
     },
     {
       "name": "GPA Calculator",
@@ -181,24 +46,6 @@
       "description": "Check for plagiarism"
     },
     {
-      "name": "Citation Generator",
-      "icon": "fa-quote-right",
-      "color": "indigo",
-      "category": "student",
-      "badge": "NEW",
-      "file": "tools/student/citation-generator.html",
-      "description": "Generate citations in APA, MLA, Chicago"
-    },
-    {
-      "name": "Study Planner",
-      "icon": "fa-calendar-check",
-      "color": "green",
-      "category": "student",
-      "badge": "NEW",
-      "file": "tools/student/study-planner.html",
-      "description": "Plan your study schedule"
-    },
-    {
       "name": "Meta Description Generator",
       "icon": "fa-code",
       "color": "indigo",
@@ -208,22 +55,13 @@
       "description": "Create compelling meta descriptions"
     },
     {
-      "name": "Keyword Density Checker",
-      "icon": "fa-chart-bar",
+      "name": "SEO Analyzer",
+      "icon": "fa-chart-line",
       "color": "blue",
       "category": "seo",
-      "badge": "HOT",
-      "file": "tools/seo/keyword-density-checker.html",
-      "description": "Analyze keyword density"
-    },
-    {
-      "name": "Backlink Checker",
-      "icon": "fa-link",
-      "color": "teal",
-      "category": "seo",
-      "badge": "POPULAR",
-      "file": "tools/seo/backlink-checker.html",
-      "description": "Check backlinks"
+      "badge": "NEW",
+      "file": "tools/seo/seo-analyzer.html",
+      "description": "Check your website SEO score instantly"
     },
     {
       "name": "Image Resizer",
@@ -235,22 +73,13 @@
       "description": "Resize images easily"
     },
     {
-      "name": "HTML Minifier",
-      "icon": "fa-compress-arrows-alt",
-      "color": "orange",
-      "category": "webdev",
+      "name": "YouTube Thumbnail Downloader",
+      "icon": "fa-youtube",
+      "color": "red",
+      "category": "design",
       "badge": "HOT",
-      "file": "tools/webdev/html-minifier.html",
-      "description": "Minify HTML code"
-    },
-    {
-      "name": "CSS Minifier",
-      "icon": "fa-file-code",
-      "color": "blue",
-      "category": "webdev",
-      "badge": "NEW",
-      "file": "tools/webdev/css-minifier.html",
-      "description": "Compress CSS code"
+      "file": "tools/design/youtube-thumbnail-downloader.html",
+      "description": "Download YouTube thumbnails in HD free"
     },
     {
       "name": "JSON Formatter",
@@ -260,33 +89,6 @@
       "badge": "NEW",
       "file": "tools/webdev/json-formatter.html",
       "description": "Format and validate JSON"
-    },
-    {
-      "name": "Weekly Goal Tracker",
-      "icon": "fa-calendar-check",
-      "color": "purple",
-      "category": "productivity",
-      "badge": "NEW",
-      "file": "tools/productivity/weekly-goal-tracker.html",
-      "description": "Track your weekly goals"
-    },
-    {
-      "name": "Daily Task Planner",
-      "icon": "fa-tasks",
-      "color": "blue",
-      "category": "productivity",
-      "badge": "NEW",
-      "file": "tools/productivity/daily-task-planner.html",
-      "description": "Plan your daily tasks"
-    },
-    {
-      "name": "Pomodoro Timer",
-      "icon": "fa-clock",
-      "color": "red",
-      "category": "productivity",
-      "badge": "HOT",
-      "file": "tools/productivity/pomodoro-timer.html",
-      "description": "Focus with Pomodoro technique"
     }
   ]
 }
